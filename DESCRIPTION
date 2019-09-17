@@ -13,3 +13,8 @@ Encoding: UTF-8
 LazyData: true
 URL: https://github.com/DavisVaughan/almanac4
 BugReports: https://github.com/DavisVaughan/almanac4/issues
+Imports: 
+    lubridate,
+    vctrs,
+    rlang
+RoxygenNote: 6.1.1
