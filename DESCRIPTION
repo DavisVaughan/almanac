@@ -16,5 +16,7 @@ BugReports: https://github.com/DavisVaughan/almanac4/issues
 Imports: 
     lubridate,
     vctrs,
-    rlang
+    rlang,
+    V8,
+    glue
 RoxygenNote: 6.1.1
