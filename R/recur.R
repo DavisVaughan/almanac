@@ -2,6 +2,10 @@ daily <- function(since = "1970-01-01") {
   rrule(since, frequency = "daily")
 }
 
+weekly <- function(since = "1970-01-01") {
+  rrule(since, frequency = "weekly")
+}
+
 monthly <- function(since = "1970-01-01") {
   rrule(since, frequency = "monthly")
 }
