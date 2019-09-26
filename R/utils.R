@@ -33,3 +33,61 @@ get_rule <- function(x, rule) {
 is_already_set <- function(x, rule) {
   !is.null(get_rule(x, rule))
 }
+
+# ------------------------------------------------------------------------------
+
+wday_normalize <- function(x) {
+  if (!is.character(x)) {
+    return(x)
+  }
+
+  x <- tolower(x)
+
+  where <- wday_match(x)
+
+  misses <- is.na(where)
+
+  if (any(misses)) {
+    abort("A character `x` must be a weekday name or abbreviation.")
+  }
+
+  out <- weekday_int()[where]
+
+  out <- unique(out)
+
+  out
+}
+
+wday_match <- function(x) {
+  vec_match(x, weekday_name())
+}
+
+weekday_name <- function() {
+  c(
+    c("monday", "mon"),
+    c("tuesday", "tues", "tu", "tue"),
+    c("wednesday", "wed"),
+    c("thursday", "thurs", "thur", "thu", "th"),
+    c("friday", "fri"),
+    c("saturday", "sat"),
+    c("sunday", "sun")
+  )
+}
+
+# rrule.js wants Monday to be 0, Sunday to be 6.
+# We convert to that at the last minute, but otherwise use 1 based integers
+weekday_int <- function() {
+  c(
+    rep(1L, 2L),
+    rep(2L, 4L),
+    rep(3L, 2L),
+    rep(4L, 5L),
+    rep(5L, 2L),
+    rep(6L, 2L),
+    rep(7L, 2L)
+  )
+}
+
+weekday_print <- function() {
+  c("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday")
+}
