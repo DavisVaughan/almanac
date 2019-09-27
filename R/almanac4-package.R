@@ -20,3 +20,6 @@
 #' @importFrom vctrs maybe_lossy_cast
 ## usethis namespace: end
 NULL
+
+#' @export
+lubridate::days
