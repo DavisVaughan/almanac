@@ -1,5 +1,5 @@
 #' @export
-times <- function(x, n) {
+rr_times <- function(x, n) {
   validate_rrule(x)
 
   if (is_already_set(x, "times")) {

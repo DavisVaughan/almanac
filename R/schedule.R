@@ -4,7 +4,7 @@ schedule <- function() {
 }
 
 #' @export
-add_rrule <- function(x, rrule) {
+sch_add_rrule <- function(x, rrule) {
   validate_schedule(x)
   validate_rrule(rrule, arg = "`rrule`")
   x$recurrences$rrules <- c(x$recurrences$rrules, list(rrule))
@@ -12,7 +12,7 @@ add_rrule <- function(x, rrule) {
 }
 
 #' @export
-add_rdate <- function(x, rdate) {
+sch_add_rdate <- function(x, rdate) {
   validate_schedule(x)
   rdate <- vec_cast_date(rdate, "rdate")
   x$recurrences$rdates <- c(x$recurrences$rdates, list(rdate))
@@ -20,7 +20,7 @@ add_rdate <- function(x, rdate) {
 }
 
 #' @export
-add_exdate <- function(x, exdate) {
+sch_add_exdate <- function(x, exdate) {
   validate_schedule(x)
   exdate <- vec_cast_date(exdate, "exdate")
   x$recurrences$exdates <- c(x$recurrences$exdates, list(exdate))
@@ -28,7 +28,7 @@ add_exdate <- function(x, exdate) {
 }
 
 #' @export
-add_schedule <- function(x, schedule) {
+sch_add_schedule <- function(x, schedule) {
   validate_schedule(x)
   validate_schedule(schedule, "`schedule`")
 

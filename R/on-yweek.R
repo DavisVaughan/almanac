@@ -1,5 +1,5 @@
 #' @export
-on_yweek <- function(x, n) {
+rr_on_yweek <- function(x, n) {
   validate_rrule(x)
 
   old <- get_rule(x, "yweek")

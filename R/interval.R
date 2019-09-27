@@ -1,5 +1,5 @@
 #' @export
-on_interval <- function(x, n) {
+rr_on_interval <- function(x, n) {
   validate_rrule(x)
 
   if (is_already_set(x, "interval")) {

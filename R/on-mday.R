@@ -1,5 +1,5 @@
 #' @export
-on_mday <- function(x, n) {
+rr_on_mday <- function(x, n) {
   validate_rrule(x)
 
   old <- get_rule(x, "mday")

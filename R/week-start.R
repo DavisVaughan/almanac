@@ -1,5 +1,5 @@
 #' @export
-week_start <- function(x, wday) {
+rr_week_start <- function(x, wday) {
   validate_rrule(x)
 
   wday <- wday_normalize(wday)

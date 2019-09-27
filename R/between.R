@@ -1,5 +1,5 @@
 #' @export
-alma_between <- function(start, end, schedule, inclusive = TRUE) {
+sch_between <- function(start, end, schedule, inclusive = TRUE) {
   start <- vec_cast_date(start)
   end <- vec_cast_date(end)
   schedule <- as_schedule(schedule)
@@ -17,7 +17,7 @@ alma_between <- function(start, end, schedule, inclusive = TRUE) {
 }
 
 #' @export
-alma_after <- function(x, schedule, inclusive = FALSE) {
+sch_after <- function(x, schedule, inclusive = FALSE) {
   x <- vec_cast_date(x)
   schedule <- as_schedule(schedule)
   vec_assert(inclusive, logical(), 1L)
@@ -33,7 +33,7 @@ alma_after <- function(x, schedule, inclusive = FALSE) {
 }
 
 #' @export
-alma_before <- function(x, schedule, inclusive = FALSE) {
+sch_before <- function(x, schedule, inclusive = FALSE) {
   x <- vec_cast_date(x)
   schedule <- as_schedule(schedule)
   vec_assert(inclusive, logical(), 1L)
