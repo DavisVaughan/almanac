@@ -2,6 +2,10 @@
 sch_between <- function(start, end, schedule, inclusive = TRUE) {
   start <- vec_cast_date(start)
   end <- vec_cast_date(end)
+
+  vec_assert(start, size = 1L)
+  vec_assert(end, size = 1L)
+
   schedule <- as_schedule(schedule)
   vec_assert(inclusive, logical(), 1L)
 
