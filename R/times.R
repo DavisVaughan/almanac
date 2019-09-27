@@ -1,4 +1,7 @@
+#' @export
 times <- function(x, n) {
+  validate_rrule(x)
+
   if (is_already_set(x, "times")) {
     abort("`times` has already been set for this rrule.")
   }

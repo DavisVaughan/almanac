@@ -12,6 +12,10 @@ vec_cast_date_character <- function(x, x_arg) {
   maybe_lossy_cast(out, x, to, lossy = is.na(out) & !is.na(x))
 }
 
+glubort <- function (..., .sep = "", .envir = parent.frame()) {
+  abort(glue::glue(..., .sep = .sep, .envir = .envir))
+}
+
 parse_js_date <- function(x) {
   if (length(x) == 0L) {
     return(new_date())
@@ -21,17 +25,16 @@ parse_js_date <- function(x) {
   as.Date(x)
 }
 
-as_js_from_date <- function(x) {
-  x <- as.POSIXlt(x)
-  glue("new Date(Date.UTC({year(x)}, {month(x) - 1L}, {day(x)}))")
-}
-
 get_rule <- function(x, rule) {
   x[["rules"]][[rule]]
 }
 
 is_already_set <- function(x, rule) {
   !is.null(get_rule(x, rule))
+}
+
+glue2 <- function(..., .envir = parent.frame()) {
+  glue(..., .envir = .envir, .open = "[[", .close = "]]")
 }
 
 # ------------------------------------------------------------------------------

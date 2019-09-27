@@ -1,4 +1,7 @@
+#' @export
 on_mday <- function(x, n) {
+  validate_rrule(x)
+
   old <- get_rule(x, "mday")
   new <- vec_cast(n, integer(), x_arg = "n")
 

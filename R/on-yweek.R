@@ -1,4 +1,7 @@
+#' @export
 on_yweek <- function(x, n) {
+  validate_rrule(x)
+
   old <- get_rule(x, "yweek")
   new <- vec_cast(n, integer(), x_arg = "n")
 

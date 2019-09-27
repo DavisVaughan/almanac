@@ -1,4 +1,11 @@
-as_js_rrule <- function(x) {
+as_js_from_date <- function(x) {
+  x <- as.POSIXlt(x)
+  glue("new Date(Date.UTC({year(x)}, {month(x) - 1L}, {day(x)}))")
+}
+
+# ------------------------------------------------------------------------------
+
+as_js_from_rrule <- function(x, context) {
   rules <- c(
     get_dtstart(x),
     get_frequency(x),
@@ -6,8 +13,8 @@ as_js_rrule <- function(x) {
     get_times(x),
     get_interval(x),
     get_week_start(x),
-    get_yweek(x),
-    get_mday(x)
+    get_yweek(x, context),
+    get_mday(x, context)
   )
 
   rules <- glue::glue_collapse(rules, sep = ",\n  ")
@@ -65,24 +72,20 @@ get_week_start <- function(x) {
   glue("wkst: {week_start}")
 }
 
-get_mday <- function(x) {
+get_mday <- function(x, context) {
   if (is.null(x$rules$mday)) {
     return(NULL)
   }
-
-  context <- get_context(x)
 
   v8_assign(context, "mday", x$rules$mday)
 
   glue("bymonthday: mday")
 }
 
-get_yweek <- function(x) {
+get_yweek <- function(x, context) {
   if (is.null(x$rules$yweek)) {
     return(NULL)
   }
-
-  context <- get_context(x)
 
   v8_assign(context, "yweek", x$rules$yweek)
 

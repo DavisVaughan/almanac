@@ -1,15 +1,19 @@
+#' @export
 daily <- function(since = "1970-01-01") {
   rrule(since, frequency = "daily")
 }
 
+#' @export
 weekly <- function(since = "1970-01-01") {
   rrule(since, frequency = "weekly")
 }
 
+#' @export
 monthly <- function(since = "1970-01-01") {
   rrule(since, frequency = "monthly")
 }
 
+#' @export
 yearly <- function(since = "1970-01-01") {
   rrule(since, frequency = "yearly")
 }
@@ -23,6 +27,8 @@ rrule <- function(since = "1970-01-01", frequency = "yearly") {
   )
 }
 
+# ------------------------------------------------------------------------------
+
 new_rrule <- function(since = as.Date("1970-01-01"),
                       frequency = "yearly",
                       until = NULL,
@@ -35,7 +41,6 @@ new_rrule <- function(since = as.Date("1970-01-01"),
                       mday = NULL,
                       wday = NULL,
                       set_pos = NULL) {
-
   env <- new.env(parent = emptyenv())
 
   rules <- list(
@@ -61,50 +66,16 @@ new_rrule <- function(since = as.Date("1970-01-01"),
   structure(data, class = "rrule")
 }
 
-init_rrule <- function(x) {
-  # Only initialize once
-  if (!is.null(get_context(x))) {
-    return()
+# ------------------------------------------------------------------------------
+
+is_rrule <- function(x) {
+  inherits(x, "rrule")
+}
+
+validate_rrule <- function(x, arg = "`x`") {
+  if (!is_rrule(x)) {
+    glubort("{arg} must be an rrule.")
   }
 
-  init_context(x)
-
-  context <- get_context(x)
-  rrule <- as_js_rrule(x)
-
-  v8_eval(context, "var rule = [[rrule]]")
-}
-
-init_context <- function(x) {
-  context <- V8::v8()
-
-  source_rrule_js(context)
-
-  x[["env"]][["context"]] <- context
-
   invisible(x)
-}
-
-get_context <- function(x) {
-  x[["env"]][["context"]]
-}
-
-v8_eval <- function(x, ..., .envir = parent.frame()) {
-  x$eval(glue2(..., .envir = .envir))
-}
-
-v8_assign <- function(x, name, value) {
-  x$assign(name, value)
-}
-
-v8_get <- function(x, ..., .envir = parent.frame()) {
-  x$get(glue2(..., .envir = .envir))
-}
-
-source_rrule_js <- function(x) {
-  x$source(rrule_js_path)
-}
-
-glue2 <- function(..., .envir = parent.frame()) {
-  glue(..., .envir = .envir, .open = "[[", .close = "]]")
 }

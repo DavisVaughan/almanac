@@ -1,4 +1,7 @@
+#' @export
 week_start <- function(x, wday) {
+  validate_rrule(x)
+
   wday <- wday_normalize(wday)
 
   wday <- vec_cast(wday, integer(), x_arg = "wday")
