@@ -15,6 +15,7 @@ as_js_from_rrule <- function(x, context) {
     get_week_start(x),
     get_ymonth(x, context),
     get_yweek(x, context),
+    get_yday(x, context),
     get_mday(x, context)
   )
 
@@ -101,4 +102,14 @@ get_yweek <- function(x, context) {
   v8_assign(context, "yweek", x$rules$yweek)
 
   glue("byweekno: yweek")
+}
+
+get_yday <- function(x, context) {
+  if (is.null(x$rules$yday)) {
+    return(NULL)
+  }
+
+  v8_assign(context, "yday", x$rules$yday)
+
+  glue("byyearday: yday")
 }
