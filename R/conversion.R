@@ -17,7 +17,8 @@ as_js_from_rrule <- function(x, context) {
     get_yweek(x, context),
     get_yday(x, context),
     get_mday(x, context),
-    get_wday(x)
+    get_wday(x),
+    get_position(x, context)
   )
 
   rules <- glue::glue_collapse(rules, sep = ",\n  ")
@@ -161,4 +162,14 @@ get_js_wday_base <- function(wday) {
   )
 
   glue("rrule.RRule.{suffix}")
+}
+
+get_position <- function(x, context) {
+  if (is.null(x$rules$position)) {
+    return(NULL)
+  }
+
+  v8_assign(context, "position", x$rules$position)
+
+  glue("bysetpos: position")
 }
