@@ -79,3 +79,12 @@ validate_rrule <- function(x, arg = "`x`") {
 
   invisible(x)
 }
+
+# ------------------------------------------------------------------------------
+
+tweak_rrule <- function(x, ...) {
+  new <- list2(...)
+  old <- x$rules
+  old[names(new)] <- new
+  exec(new_rrule, !!!old)
+}
