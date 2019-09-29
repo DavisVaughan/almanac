@@ -16,6 +16,8 @@ sch_adjust <- function(x, schedule, adjustment = days(1)) {
   x
 }
 
+# ------------------------------------------------------------------------------
+
 make_adjuster <- function(adjustment) {
   # Already a function?
   if (is_function(adjustment)) {
@@ -63,6 +65,8 @@ make_adjuster <- function(adjustment) {
 is_subdaily <- function(x) {
   sum(abs(hour(x)), abs(minute(x)), abs(second(x))) != 0L
 }
+
+# ------------------------------------------------------------------------------
 
 adj_period_factory <- function(period) {
   adj_period <- function(x, schedule) {
