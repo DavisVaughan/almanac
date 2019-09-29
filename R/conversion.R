@@ -16,7 +16,8 @@ as_js_from_rrule <- function(x, context) {
     get_ymonth(x, context),
     get_yweek(x, context),
     get_yday(x, context),
-    get_mday(x, context)
+    get_mday(x, context),
+    get_wday(x)
   )
 
   rules <- glue::glue_collapse(rules, sep = ",\n  ")
@@ -112,4 +113,52 @@ get_yday <- function(x, context) {
   v8_assign(context, "yday", x$rules$yday)
 
   glue("byyearday: yday")
+}
+
+get_wday <- function(x) {
+  if (is.null(x$rules$wday)) {
+    return(NULL)
+  }
+
+  wdays <- x$rules$wday
+  wday_strings <- character()
+
+  for (i in seq_along(wdays)) {
+    wday <- wdays[[i]]
+
+    if (is.null(wday)) {
+      next
+    }
+
+    wday_base <- get_js_wday_base(i)
+
+    if (identical(wday, "all")) {
+      wday_strings <- c(wday_strings, wday_base)
+      next
+    }
+
+    wday <- glue::glue_collapse(wday, sep = ", ")
+    wday_nth <- glue("{wday_base}.nth({wday})")
+
+    wday_strings <- c(wday_strings, wday_nth)
+  }
+
+  wday_strings <- glue::glue_collapse(wday_strings, sep = ", ")
+
+  glue("byweekday: [{wday_strings}]")
+}
+
+get_js_wday_base <- function(wday) {
+  suffix <- switch(
+    wday,
+    `1` = "MO",
+    `2` = "TU",
+    `3` = "WE",
+    `4` = "TH",
+    `5` = "FR",
+    `6` = "SA",
+    `7` = "SU"
+  )
+
+  glue("rrule.RRule.{suffix}")
 }
