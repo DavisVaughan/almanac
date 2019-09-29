@@ -92,7 +92,7 @@ weekday_int <- function() {
 }
 
 weekday_print <- function() {
-  c("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday")
+  c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")
 }
 
 # ------------------------------------------------------------------------------
