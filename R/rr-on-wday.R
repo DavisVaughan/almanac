@@ -1,3 +1,5 @@
+# `nth` is applied to all `wday`'s
+
 #' @export
 rr_on_wday <- function(x, wday, nth = NULL) {
   validate_rrule(x)
@@ -10,15 +12,16 @@ rr_on_wday <- function(x, wday, nth = NULL) {
 
   wday <- wday_normalize(wday)
   wday <- vec_cast(wday, integer(), x_arg = "wday")
-  vec_assert(wday, size = 1L)
 
-  if (wday < 1L || wday > 7L) {
+  if (any(wday < 1L | wday > 7L)) {
     abort("`wday` must be in [1, 7].")
   }
 
   # Early exit for all weekdays
   if (is.null(nth)) {
-    old[[wday]] <- "all"
+    for (day in wday) {
+      old[[day]] <- "all"
+    }
     x <- tweak_rrule(x, wday = old)
     return(x)
   }
@@ -30,18 +33,19 @@ rr_on_wday <- function(x, wday, nth = NULL) {
     abort("`nth` can only take values in [-5, -1] and [1, 5].")
   }
 
-  old_nth <- old[[wday]]
+  for (day in wday) {
+    old_nth <- old[[day]]
 
-  # The union of "all" and any other nth is "all"
-  if (identical(old_nth, "all")) {
-    return(x)
+    # The union of "all" and any other nth is "all"
+    if (identical(old_nth, "all")) {
+      return(x)
+    }
+
+    new_nth <- union(old_nth, new_nth)
+    new_nth <- unique(new_nth)
+
+    old[[day]] <- new_nth
   }
-
-  new_nth <- union(old_nth, new_nth)
-  new_nth <- unique(new_nth)
-  new_nth <- sort(new_nth)
-
-  old[[wday]] <- new_nth
 
   tweak_rrule(x, wday = old)
 }
