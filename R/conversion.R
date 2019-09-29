@@ -13,6 +13,7 @@ as_js_from_rrule <- function(x, context) {
     get_times(x),
     get_interval(x),
     get_week_start(x),
+    get_ymonth(x, context),
     get_yweek(x, context),
     get_mday(x, context)
   )
@@ -80,6 +81,16 @@ get_mday <- function(x, context) {
   v8_assign(context, "mday", x$rules$mday)
 
   glue("bymonthday: mday")
+}
+
+get_ymonth <- function(x, context) {
+  if (is.null(x$rules$ymonth)) {
+    return(NULL)
+  }
+
+  v8_assign(context, "ymonth", x$rules$ymonth)
+
+  glue("bymonth: ymonth")
 }
 
 get_yweek <- function(x, context) {

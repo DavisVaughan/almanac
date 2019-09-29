@@ -94,3 +94,49 @@ weekday_int <- function() {
 weekday_print <- function() {
   c("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday")
 }
+
+# ------------------------------------------------------------------------------
+
+month_normalize <- function(x) {
+  if (!is.character(x)) {
+    return(x)
+  }
+
+  x <- tolower(x)
+
+  where <- month_match(x)
+
+  misses <- is.na(where)
+
+  if (any(misses)) {
+    abort("A character `x` must be a month name or abbreviation.")
+  }
+
+  out <- month_int()[where]
+
+  out <- unique(out)
+
+  out
+}
+
+month_match <- function(x) {
+  vec_match(x, month_name())
+}
+
+month_name <- function() {
+  c(
+    tolower(month.name),
+    tolower(month.abb)
+  )
+}
+
+month_int <- function() {
+  c(
+    1:12,
+    1:12
+  )
+}
+
+month_print <- function() {
+  month.name
+}
