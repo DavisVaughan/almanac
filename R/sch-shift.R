@@ -12,6 +12,10 @@
 #'   This has different results from `sch_jump()` with a jump of `days(n)`, and
 #'   is more appropriate for shifting by "n business days".
 #'
+#' _The performance of `sch_step()` in particular is highly dependent on the
+#' `since` date used in the schedule's recurrence rules. Choosing a date that
+#' is close to the start of `x` can dramatically improve performance._
+#'
 #' @details
 #'
 #' For shifting by "n business days", `sch_step()` is often more appropriate.

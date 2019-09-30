@@ -53,6 +53,10 @@ After each step, \code{\link[=sch_adjust]{sch_adjust()}} is called with an adjus
 This has different results from \code{sch_jump()} with a jump of \code{days(n)}, and
 is more appropriate for shifting by "n business days".
 }
+
+\emph{The performance of \code{sch_step()} in particular is highly dependent on the
+\code{since} date used in the schedule's recurrence rules. Choosing a date that
+is close to the start of \code{x} can dramatically improve performance.}
 }
 \details{
 For shifting by "n business days", \code{sch_step()} is often more appropriate.
