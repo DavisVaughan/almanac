@@ -50,6 +50,7 @@
 #'
 #' @examples
 #' library(lubridate, warn.conflicts = FALSE)
+#' library(magrittr)
 #'
 #' on_easter <- yearly() %>%
 #'   rr_on_easter()

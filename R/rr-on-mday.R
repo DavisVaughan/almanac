@@ -50,7 +50,7 @@
 #' # could use something like this, which checks if the end of the month
 #' # is also a Friday.
 #' on_last_of_month_that_is_also_friday <- on_last_of_month %>% rr_on_wday("Friday")
-#' sch_seq(start, end, on_last_friday)
+#' sch_seq(start, end, on_last_of_month_that_is_also_friday)
 #'
 #' # But you probably wanted this, which takes the last friday of the month,
 #' # on whatever day that lands on
