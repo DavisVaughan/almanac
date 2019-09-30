@@ -1,8 +1,4 @@
-# `n` is an offset around easter as long as the day still falls in the same year
-# Meaning that if you set `n = -103` it won't roll back to the previous year in
-# some cases. You just won't get a value.
-
-#' Schedule a recurrence on easter
+#' Recur on easter
 #'
 #' `rr_on_easter()` is a special helper to recur on Easter. Easter is
 #' particularly difficult to construct a recurrence rule for. Using `offset`,

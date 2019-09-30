@@ -2,7 +2,7 @@
 % Please edit documentation in R/rr-interval.R
 \name{rr_on_interval}
 \alias{rr_on_interval}
-\title{Schedule a recurrence on an interval}
+\title{Recur on an interval}
 \usage{
 rr_on_interval(x, n)
 }

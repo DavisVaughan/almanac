@@ -2,7 +2,7 @@
 % Please edit documentation in R/rr-on-easter.R
 \name{rr_on_easter}
 \alias{rr_on_easter}
-\title{Schedule a recurrence on easter}
+\title{Recur on easter}
 \usage{
 rr_on_easter(x, offset = 0L)
 }

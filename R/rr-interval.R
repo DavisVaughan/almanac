@@ -1,4 +1,4 @@
-#' Schedule a recurrence on an interval
+#' Recur on an interval
 #'
 #' `rr_on_interval()` adjusts the interval of the base frequency of the
 #' recurrence rule. For example, a [monthly()] rule with an interval of 2 would
