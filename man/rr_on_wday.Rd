@@ -13,7 +13,7 @@ A recurrence rule.}
 
 \item{wday}{\code{[integer / character]}
 
-Days of the week recur on. Integer values must be from \code{1} to \code{7}, with
+Days of the week to recur on. Integer values must be from \code{1} to \code{7}, with
 \code{1 = Monday} and \code{7 = Sunday}. This is also allowed to be a full weekday
 string like \code{"Tuesday"}, or an abbreviation like \code{"Tues"}.}
 

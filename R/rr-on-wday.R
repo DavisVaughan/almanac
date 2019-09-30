@@ -1,5 +1,3 @@
-# `nth` is applied to all `wday`'s
-
 #' Recur on a day of the week
 #'
 #' `rr_on_wday()` recurs on a specific day of the week.
@@ -24,7 +22,7 @@
 #'
 #' @param wday `[integer / character]`
 #'
-#'    Days of the week recur on. Integer values must be from `1` to `7`, with
+#'    Days of the week to recur on. Integer values must be from `1` to `7`, with
 #'    `1 = Monday` and `7 = Sunday`. This is also allowed to be a full weekday
 #'    string like `"Tuesday"`, or an abbreviation like `"Tues"`.
 #'
