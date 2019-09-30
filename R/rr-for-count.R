@@ -1,9 +1,9 @@
 #' @export
-rr_times <- function(x, n) {
+rr_for_count <- function(x, n) {
   validate_rrule(x)
 
-  if (is_already_set(x, "times")) {
-    abort("`times` has already been set for this rrule.")
+  if (is_already_set(x, "count")) {
+    abort("`count` has already been set for this rrule.")
   }
 
   n <- vec_cast(n, integer(), x_arg = "n")
@@ -13,5 +13,5 @@ rr_times <- function(x, n) {
     abort("`n` must be greater than 0.")
   }
 
-  tweak_rrule(x, times = n)
+  tweak_rrule(x, count = n)
 }

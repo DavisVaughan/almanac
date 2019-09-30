@@ -10,7 +10,7 @@ as_js_from_rrule <- function(x, context) {
     get_dtstart(x),
     get_frequency(x),
     get_until(x),
-    get_times(x),
+    get_count(x),
     get_interval(x),
     get_week_start(x),
     get_ymonth(x, context),
@@ -49,12 +49,12 @@ get_until <- function(x) {
   glue("until: {as_js_from_date(x$rules$until)}")
 }
 
-get_times <- function(x) {
-  if (is.null(x$rules$times)) {
+get_count <- function(x) {
+  if (is.null(x$rules$count)) {
     return(NULL)
   }
 
-  glue("count: {x$rules$times}")
+  glue("count: {x$rules$count}")
 }
 
 get_interval <- function(x) {
