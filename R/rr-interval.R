@@ -1,3 +1,37 @@
+#' Schedule a recurrence on an interval
+#'
+#' `rr_on_interval()` adjusts the interval of the base frequency of the
+#' recurrence rule. For example, a [monthly()] rule with an interval of 2 would
+#' become "every other month".
+#'
+#' @param x `[rrule]`
+#'
+#'    A recurrence rule.
+#'
+#' @param n `[positive integer(1)]`
+#'
+#'    The interval on which to recur.
+#'
+#' @examples
+#' library(magrittr)
+#'
+#' # The default interval is 1
+#' on_monthly <- monthly(since = "1999-01-01")
+#'
+#' sch_seq("1999-01-01", "1999-06-01", on_monthly)
+#'
+#' # Adjust to every other month
+#' on_every_other_month <- on_monthly %>% rr_on_interval(2)
+#'
+#' sch_seq("1999-01-01", "1999-06-01", on_every_other_month)
+#'
+#' # Note that the frequency is limited to "every other month", but you
+#' # can still have multiple events inside a single month
+#' on_every_other_month_on_mday_25_or_26 <- on_every_other_month %>%
+#'   rr_on_mday(25:26)
+#'
+#' sch_seq("1999-01-01", "1999-06-01", on_every_other_month_on_mday_25_or_26)
+#'
 #' @export
 rr_on_interval <- function(x, n) {
   validate_rrule(x)
