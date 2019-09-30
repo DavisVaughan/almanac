@@ -1,5 +1,5 @@
 #' @export
-sch_between <- function(start, end, schedule, inclusive = TRUE) {
+sch_seq <- function(start, end, schedule, inclusive = TRUE) {
   start <- vec_cast_date(start)
   end <- vec_cast_date(end)
 
@@ -21,7 +21,7 @@ sch_between <- function(start, end, schedule, inclusive = TRUE) {
 }
 
 #' @export
-sch_after <- function(x, schedule, inclusive = FALSE) {
+sch_next <- function(x, schedule, inclusive = FALSE) {
   x <- vec_cast_date(x)
   schedule <- as_schedule(schedule)
   vec_assert(inclusive, logical(), 1L)
@@ -37,7 +37,7 @@ sch_after <- function(x, schedule, inclusive = FALSE) {
 }
 
 #' @export
-sch_before <- function(x, schedule, inclusive = FALSE) {
+sch_previous <- function(x, schedule, inclusive = FALSE) {
   x <- vec_cast_date(x)
   schedule <- as_schedule(schedule)
   vec_assert(inclusive, logical(), 1L)
