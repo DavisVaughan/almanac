@@ -7,7 +7,7 @@
 #' Weekly rules are implemented according to the ISO-8601 standard. This
 #' requires that the first week of a year is the first one containing at least
 #' 4 days of the new year. Additionally, the week will start on the week day
-#' specified by `rr_week_start()`, which defaults to Monday.
+#' specified by [rr_week_start()], which defaults to Monday.
 #'
 #' @param x `[rrule]`
 #'
