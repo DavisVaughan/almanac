@@ -2,21 +2,61 @@
 # Meaning that if you set `n = -103` it won't roll back to the previous year in
 # some cases. You just won't get a value.
 
+#' Schedule a recurrence on easter
+#'
+#' `rr_on_easter()` is a special helper to recur on Easter. Easter is
+#' particularly difficult to construct a recurrence rule for. Using `offset`,
+#' this can also be used to generate a recurrence on Easter Monday or
+#' Good Friday.
+#'
+#' @param x `[rrule]`
+#'
+#'    A recurrence rule.
+#'
+#' @param offset `[integer(1)]`
+#'
+#'    An offset in terms of a number of days on either side of Easter to recur
+#'    on. This offset must still fall within the same year, otherwise the date
+#'    will be silently ignored.
+#'
+#' @examples
+#' library(magrittr)
+#'
+#' on_easter <- yearly() %>% rr_on_easter()
+#' on_easter_monday <- yearly() %>% rr_on_easter(-1)
+#'
+#' sch_seq("1999-01-01", "2001-01-01", on_easter)
+#'
+#' sch <- schedule() %>%
+#'   sch_add_rrule(on_easter) %>%
+#'   sch_add_rrule(on_easter_monday)
+#'
+#' sch_seq("1999-01-01", "2001-01-01", sch)
+#'
+#'
+#' # Note that `offset` must land within the same year, otherwise the date
+#' # is ignored
+#' on_easter_back_93_days <- yearly() %>% rr_on_easter(-93)
+#' on_easter_back_94_days <- yearly() %>% rr_on_easter(-94)
+#'
+#' sch_seq("1999-01-01", "2001-01-01", on_easter_back_93_days)
+#' sch_seq("1999-01-01", "2001-01-01", on_easter_back_94_days)
+#'
 #' @export
-rr_on_easter <- function(x, n = 0L) {
+rr_on_easter <- function(x, offset = 0L) {
   validate_rrule(x)
 
   if (is_already_set(x, "easter")) {
     abort("The `easter` rule has already been set.")
   }
 
-  n <- vec_cast(n, integer(), x_arg = "n")
-  vec_assert(n, size = 1L, arg = "n")
+  offset <- vec_cast(offset, integer(), x_arg = "offset")
+  vec_assert(offset, size = 1L, arg = "offset")
 
-  abs_n <- abs(n)
-  if (abs_n > 366) {
-    abort("`n` can only take values in [-366, 366].")
+  abs_offset <- abs(offset)
+  if (abs_offset > 366) {
+    abort("`offset` can only take values in [-366, 366].")
   }
 
-  tweak_rrule(x, easter = n)
+  tweak_rrule(x, easter = offset)
 }
