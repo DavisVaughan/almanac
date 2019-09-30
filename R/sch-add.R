@@ -53,15 +53,15 @@
 #' library(magrittr)
 #'
 #' on_easter <- yearly() %>%
-#'   rr_on_easter()
+#'   recur_on_easter()
 #'
 #' on_christmas <- yearly() %>%
-#'   rr_on_mday(25) %>%
-#'   rr_on_ymonth("Dec")
+#'   recur_on_mday(25) %>%
+#'   recur_on_ymonth("Dec")
 #'
 #' on_labor_day <- monthly() %>%
-#'   rr_on_ymonth("Sep") %>%
-#'   rr_on_wday("Mon", 1)
+#'   recur_on_ymonth("Sep") %>%
+#'   recur_on_wday("Mon", 1)
 #'
 #' sch <- schedule() %>%
 #'   sch_add_rrule(on_easter) %>%

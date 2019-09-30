@@ -1,6 +1,6 @@
 #' Recur on a position within a frequency
 #'
-#' `rr_on_position()` let's you have fine tuned control over which element
+#' `recur_on_position()` let's you have fine tuned control over which element
 #' of the set to select _within_ the base frequency.
 #'
 #' @param x `[rrule]`
@@ -23,21 +23,21 @@
 #' # Sunday or a Monday, but you don't want to return both.
 #' # This would return both:
 #' on_last_monday_and_sunday <- monthly() %>%
-#'   rr_on_wday(c("Monday", "Sunday"), -1)
+#'   recur_on_wday(c("Monday", "Sunday"), -1)
 #'
 #' sch_seq(start, end, on_last_monday_and_sunday)
 #'
 #' # To return just the last one, you would select the last value in
 #' # the set, which is computed on a per month basis
 #' on_very_last_monday_or_sunday <- on_last_monday_and_sunday %>%
-#'   rr_on_position(-1)
+#'   recur_on_position(-1)
 #'
 #' sch_seq(start, end, on_very_last_monday_or_sunday)
 #'
 #' wday(sch_seq(start, end, on_very_last_monday_or_sunday), label = TRUE)
 #'
 #' @export
-rr_on_position <- function(x, n) {
+recur_on_position <- function(x, n) {
   validate_rrule(x)
 
   if (is_already_set(x, "position")) {

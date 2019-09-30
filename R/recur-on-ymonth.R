@@ -1,6 +1,6 @@
 #' Recur on a month of the year
 #'
-#' `rr_on_ymonth()` recurs on a specific month of the year.
+#' `recur_on_ymonth()` recurs on a specific month of the year.
 #'
 #' @param x `[rrule]`
 #'
@@ -19,10 +19,10 @@
 #' # or `monthly()` frequency, and a `daily()` frequency.
 #'
 #' # Limit from every day to every day in February
-#' on_feb_daily <- daily() %>% rr_on_ymonth("Feb")
+#' on_feb_daily <- daily() %>% recur_on_ymonth("Feb")
 #'
 #' # Limit from 1 day per month to 1 day in February
-#' on_feb_monthly <- monthly() %>% rr_on_ymonth("Feb")
+#' on_feb_monthly <- monthly() %>% recur_on_ymonth("Feb")
 #'
 #' start <- "1999-01-01"
 #' end <- "2001-01-01"
@@ -32,7 +32,7 @@
 #' sch_seq(start, end, on_feb_monthly)
 #'
 #' @export
-rr_on_ymonth <- function(x, ymonth) {
+recur_on_ymonth <- function(x, ymonth) {
   validate_rrule(x)
   ymonth <- month_normalize(ymonth)
 

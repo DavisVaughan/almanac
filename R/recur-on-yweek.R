@@ -1,13 +1,13 @@
 #' Recur on a week of the year
 #'
-#' `rr_on_yweek()` recurs on a specific week of the year.
+#' `recur_on_yweek()` recurs on a specific week of the year.
 #'
 #' @details
 #'
 #' Weekly rules are implemented according to the ISO-8601 standard. This
 #' requires that the first week of a year is the first one containing at least
 #' 4 days of the new year. Additionally, the week will start on the week day
-#' specified by [rr_with_week_start()], which defaults to Monday.
+#' specified by [recur_with_week_start()], which defaults to Monday.
 #'
 #' @param x `[rrule]`
 #'
@@ -24,8 +24,8 @@
 #' # Weekly rules are a bit tricky because they are implemented to comply
 #' # with ISO-8601 standards, which require that the first week of the year
 #' # is when there are at least 4 days in that year, and the week starts on
-#' # the week day specified by `rr_with_week_start()` (Monday by default).
-#' on_first_week <- yearly() %>% rr_on_yweek(1)
+#' # the week day specified by `recur_with_week_start()` (Monday by default).
+#' on_first_week <- yearly() %>% recur_on_yweek(1)
 #'
 #' # In 2017:
 #' # - Look at dates 1-4
@@ -46,13 +46,13 @@
 #' # - Look at dates 1-4
 #' # - One of these is a Sunday, so start the first week here
 #' on_first_week_sun <- yearly() %>%
-#'   rr_on_yweek(1) %>%
-#'   rr_with_week_start("Sunday")
+#'   recur_on_yweek(1) %>%
+#'   recur_with_week_start("Sunday")
 #'
 #' sch_seq("2014-12-25", "2015-01-25", on_first_week_sun)
 #'
 #' @export
-rr_on_yweek <- function(x, yweek) {
+recur_on_yweek <- function(x, yweek) {
   validate_rrule(x)
 
   old <- get_rule(x, "yweek")

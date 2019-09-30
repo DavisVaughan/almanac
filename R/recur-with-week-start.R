@@ -2,9 +2,9 @@
 #'
 #' @description
 #'
-#' `rr_with_week_start()` controls the week day that represents the start of the
-#' week. This is important for rules that use [rr_on_yweek()]. See that page
-#' for examples.
+#' `recur_with_week_start()` controls the week day that represents the start of
+#' the week. This is important for rules that use [recur_on_yweek()]. See that
+#' page for examples.
 #'
 #' _The default day of the week to start on is Monday._
 #'
@@ -19,7 +19,7 @@
 #'    a full weekday string like `"Tuesday"`, or an abbreviation like `"Tues"`.
 #'
 #' @export
-rr_with_week_start <- function(x, wday) {
+recur_with_week_start <- function(x, wday) {
   validate_rrule(x)
 
   wday <- wday_normalize(wday)

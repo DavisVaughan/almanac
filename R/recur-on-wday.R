@@ -2,16 +2,16 @@
 #'
 #' @description
 #'
-#' - `rr_on_wday()` recurs on a specific day of the week.
+#' - `recur_on_wday()` recurs on a specific day of the week.
 #'
-#' - `rr_on_weekends()` and `rr_on_weekdays()` are helpers for recurring on
-#'   weekends and weekdays.
+#' - `recur_on_weekends()` and `recur_on_weekdays()` are helpers for
+#'   recurring on weekends and weekdays.
 #'
 #' @details
 #'
 #' Multiple week day values are allowed, and `nth` will be applied to
 #' all of them. If you want to apply different `nth` values to different
-#' days of the week, call `rr_on_wday()` twice with different `wday` values.
+#' days of the week, call `recur_on_wday()` twice with different `wday` values.
 #'
 #' It is particularly important to pay attention to the `since` date when using
 #' weekly rules. The day of the week to use comes from the `since` date, which,
@@ -49,34 +49,35 @@
 #' on_weekly_fridays <- weekly(since = start)
 #' sch_seq(start, end, on_weekly_fridays)
 #'
-#' # Alternatively, we could use `rr_on_wday()` and force a recurrence on Friday
-#' on_wday_friday <- on_weekly_thursdays %>% rr_on_wday("Friday")
+#' # Alternatively, we could use `recur_on_wday()` and force a recurrence on
+#' # Friday
+#' on_wday_friday <- on_weekly_thursdays %>% recur_on_wday("Friday")
 #' sch_seq(start, end, on_wday_friday)
 #'
 #' # At monthly frequencies, you can use n-th values to look for particular
 #' # week day occurrences
-#' on_first_friday_in_month <- monthly() %>% rr_on_wday("Fri", 1)
+#' on_first_friday_in_month <- monthly() %>% recur_on_wday("Fri", 1)
 #' sch_seq(start, end, on_first_friday_in_month)
 #'
 #' # Negative values let you look from the back
-#' on_last_friday_in_month <- monthly() %>% rr_on_wday("Fri", -1)
+#' on_last_friday_in_month <- monthly() %>% recur_on_wday("Fri", -1)
 #' sch_seq(start, end, on_last_friday_in_month)
 #'
 #' # At yearly frequencies, this looks for the first sunday of the year
-#' on_first_sunday_in_year <- yearly() %>% rr_on_wday("Sunday", 1)
+#' on_first_sunday_in_year <- yearly() %>% recur_on_wday("Sunday", 1)
 #' sch_seq(start, end, on_first_sunday_in_year)
 #'
 #' # Last week day of the month
 #' last_weekday_of_month <- monthly() %>%
 #'   # Last occurence of each weekday in the month
-#'   rr_on_wday(c("Mon", "Tue", "Wed", "Thu", "Fri"), -1) %>%
+#'   recur_on_wday(c("Mon", "Tue", "Wed", "Thu", "Fri"), -1) %>%
 #'   # Now choose the last one of those in each month
-#'   rr_on_position(-1)
+#'   recur_on_position(-1)
 #'
 #' sch_seq(start, end, last_weekday_of_month)
 #'
 #' @export
-rr_on_wday <- function(x, wday, nth = NULL) {
+recur_on_wday <- function(x, wday, nth = NULL) {
   validate_rrule(x)
 
   old <- get_rule(x, "wday")
@@ -125,14 +126,14 @@ rr_on_wday <- function(x, wday, nth = NULL) {
   tweak_rrule(x, wday = old)
 }
 
-#' @rdname rr_on_wday
+#' @rdname recur_on_wday
 #' @export
-rr_on_weekdays <- function(x) {
-  rr_on_wday(x, 1:5)
+recur_on_weekdays <- function(x) {
+  recur_on_wday(x, 1:5)
 }
 
-#' @rdname rr_on_wday
+#' @rdname recur_on_wday
 #' @export
-rr_on_weekends <- function(x) {
-  rr_on_wday(x, 6:7)
+recur_on_weekends <- function(x) {
+  recur_on_wday(x, 6:7)
 }

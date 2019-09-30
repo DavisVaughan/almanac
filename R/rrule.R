@@ -4,7 +4,7 @@
 #'
 #' These functions allow you to create a recurrence rule with a specified
 #' frequency. They are the base elements for all recurrence rules. To add
-#' to them, use one of the `rr_*()` functions.
+#' to them, use one of the `recur_*()` functions.
 #'
 #' - `daily()` Recur on a daily frequency.
 #'
@@ -41,7 +41,7 @@
 #' @examples
 #' library(magrittr)
 #'
-#' rrule <- monthly() %>% rr_on_mday(25)
+#' rrule <- monthly() %>% recur_on_mday(25)
 #'
 #' sch_seq("1970-01-01", "1971-01-01", rrule)
 #'
@@ -49,7 +49,7 @@
 #' sch_seq("1969-01-01", "1970-01-01", rrule)
 #'
 #' # Adjust the `since` date to get access to these dates
-#' rrule_pre_1970 <- monthly(since = "1969-01-01") %>% rr_on_mday(25)
+#' rrule_pre_1970 <- monthly(since = "1969-01-01") %>% recur_on_mday(25)
 #' sch_seq("1969-01-01", "1970-01-01", rrule_pre_1970)
 #'
 #' @name rrule

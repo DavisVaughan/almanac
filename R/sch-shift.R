@@ -51,7 +51,7 @@
 #'
 #' # Make a rrule for weekends, and adjust the `since` date to be closer
 #' # to our relevant dates in question
-#' on_weekends <- daily("2019-09-01") %>% rr_on_weekends()
+#' on_weekends <- daily("2019-09-01") %>% recur_on_weekends()
 #'
 #' # Note that here we "jump" to Sunday, then adjust, leaving us on Monday
 #' sch_jump("2019-09-13", days(2), on_weekends)

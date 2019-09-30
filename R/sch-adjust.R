@@ -45,7 +45,7 @@
 #'
 #' # The first of the month is an "event" so we have to adjust
 #' # our current date to avoid that.
-#' on_first_of_month <- monthly() %>% rr_on_mday(1)
+#' on_first_of_month <- monthly() %>% recur_on_mday(1)
 #' sch_adjust("2019-01-01", on_first_of_month)
 #'
 #' # The adjustment could also be backwards
@@ -54,7 +54,7 @@
 #' # Period adjustments are applied repeatedly until the next non-event can
 #' # be found. Here, 2019-01-01 is an event, so we move to 2019-01-02, but
 #' # that is an event too, so we move to 2019-01-03.
-#' on_first_or_second_of_month <- monthly() %>% rr_on_mday(1:2)
+#' on_first_or_second_of_month <- monthly() %>% recur_on_mday(1:2)
 #' sch_adjust("2019-01-01", on_first_or_second_of_month)
 #'
 #' # ---------------------------------------------------------------------------
@@ -65,16 +65,16 @@
 #' # will use an adjustment of `+days(1)`, unless making that adjustment would
 #' # place you past the last day in the month, in which case an adjustment of
 #' # `-days(1)` is made instead.
-#' on_31st <- monthly() %>% rr_on_mday(31)
+#' on_31st <- monthly() %>% recur_on_mday(31)
 #' sch_adjust("2019-01-31", on_31st, adj_modified_following)
 #'
 #' # `adj_nearest()` looks to the closest non-event date. Here, the 13th
 #' # is closer than the 18th, so it is chosen as the adjustment date.
-#' on_offset_middle_of_month <- monthly() %>% rr_on_mday(14:17)
+#' on_offset_middle_of_month <- monthly() %>% recur_on_mday(14:17)
 #' sch_adjust("2019-01-15", on_offset_middle_of_month, adj_nearest)
 #'
 #' # When the distance is the same, the following date is chosen
-#' on_balanced_middle_of_month <- monthly() %>% rr_on_mday(14:16)
+#' on_balanced_middle_of_month <- monthly() %>% recur_on_mday(14:16)
 #' sch_adjust("2019-01-15", on_balanced_middle_of_month, adj_nearest)
 #'
 #' @export

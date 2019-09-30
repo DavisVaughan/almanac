@@ -2,9 +2,9 @@
 #'
 #' @description
 #'
-#' `rr_until()` controls the final date of the recurrence set. If not set, the
-#' recurrence will continue indefinitely. `rr_until()`
-#' is mutually exclusive with [rr_for_count()].
+#' `recur_until()` controls the final date of the recurrence set. If not set,
+#' the recurrence will continue indefinitely. `recur_until()`
+#' is mutually exclusive with [recur_for_count()].
 #'
 #' @details
 #'
@@ -26,17 +26,18 @@
 #' library(magrittr)
 #'
 #' # Using the default `since` date
-#' daily_since_epoch_limited <- daily() %>% rr_until("1970-01-05")
+#' daily_since_epoch_limited <- daily() %>% recur_until("1970-01-05")
 #'
 #' sch_seq("1969-12-31", "1970-01-25", daily_since_epoch_limited)
 #'
 #' # Changing the `since` date
-#' daily_since_2019_limited <- daily(since = "2019-01-01") %>% rr_until("2019-01-05")
+#' daily_since_2019_limited <- daily(since = "2019-01-01") %>%
+#'   recur_until("2019-01-05")
 #'
 #' sch_seq("2018-12-31", "2019-01-25", daily_since_2019_limited)
 #'
 #' @export
-rr_until <- function(x, until) {
+recur_until <- function(x, until) {
   validate_rrule(x)
 
   if (is_already_set(x, "until")) {

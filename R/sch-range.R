@@ -17,8 +17,8 @@
 #' @examples
 #' library(magrittr)
 #'
-#' on_12th <- monthly() %>% rr_on_mday(12)
-#' on_monday <- weekly() %>% rr_on_wday("Monday")
+#' on_12th <- monthly() %>% recur_on_mday(12)
+#' on_monday <- weekly() %>% recur_on_wday("Monday")
 #'
 #' # On the 12th of the month, or on Mondays
 #' sch <- schedule() %>%
@@ -66,8 +66,8 @@ sch_seq <- function(from, to, schedule, inclusive = TRUE) {
 #' @examples
 #' library(magrittr)
 #'
-#' on_12th <- monthly() %>% rr_on_mday(12)
-#' on_monday <- weekly() %>% rr_on_wday("Monday")
+#' on_12th <- monthly() %>% recur_on_mday(12)
+#' on_monday <- weekly() %>% recur_on_wday("Monday")
 #'
 #' # On the 12th of the month, or on Mondays
 #' sch <- schedule() %>%

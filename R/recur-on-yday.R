@@ -1,6 +1,6 @@
 #' Recur on a day of the year
 #'
-#' `rr_on_yday()` recurs on a specific day of the year.
+#' `recur_on_yday()` recurs on a specific day of the year.
 #'
 #' @param x `[rrule]`
 #'
@@ -15,26 +15,26 @@
 #' library(lubridate, warn.conflicts = FALSE)
 #' library(magrittr)
 #'
-#' on_5th_day_of_year <- yearly() %>% rr_on_yday(5)
+#' on_5th_day_of_year <- yearly() %>% recur_on_yday(5)
 #'
 #' sch_seq("1999-01-01", "2000-12-31", on_5th_day_of_year)
 #'
 #' # Notice that if you use a `since` date that has a day of the year
 #' # after the specified one, it rolls to the next year
-#' on_5th_day_of_year2 <- yearly(since = "1999-01-06") %>% rr_on_yday(5)
+#' on_5th_day_of_year2 <- yearly(since = "1999-01-06") %>% recur_on_yday(5)
 #' sch_seq("1999-01-01", "2000-12-31", on_5th_day_of_year2)
 #'
 #' # Negative values select from the back, which is useful in leap years
 #' leap_year(as.Date("2000-01-01"))
 #'
-#' last_day_of_year <- yearly() %>% rr_on_yday(-1)
-#' last_day_of_year_bad <- yearly() %>% rr_on_yday(365)
+#' last_day_of_year <- yearly() %>% recur_on_yday(-1)
+#' last_day_of_year_bad <- yearly() %>% recur_on_yday(365)
 #'
 #' sch_seq("1999-01-01", "2000-12-31", last_day_of_year)
 #' sch_seq("1999-01-01", "2000-12-31", last_day_of_year_bad)
 #'
 #' @export
-rr_on_yday <- function(x, yday) {
+recur_on_yday <- function(x, yday) {
   validate_rrule(x)
 
   old <- get_rule(x, "yday")

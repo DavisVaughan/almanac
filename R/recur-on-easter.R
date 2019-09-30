@@ -1,6 +1,6 @@
 #' Recur on easter
 #'
-#' `rr_on_easter()` is a special helper to recur on Easter. Easter is
+#' `recur_on_easter()` is a special helper to recur on Easter. Easter is
 #' particularly difficult to construct a recurrence rule for. Using `offset`,
 #' this can also be used to generate a recurrence on Easter Monday or
 #' Good Friday.
@@ -18,8 +18,8 @@
 #' @examples
 #' library(magrittr)
 #'
-#' on_easter <- yearly() %>% rr_on_easter()
-#' on_easter_monday <- yearly() %>% rr_on_easter(-1)
+#' on_easter <- yearly() %>% recur_on_easter()
+#' on_easter_monday <- yearly() %>% recur_on_easter(-1)
 #'
 #' sch_seq("1999-01-01", "2001-01-01", on_easter)
 #'
@@ -32,14 +32,14 @@
 #'
 #' # Note that `offset` must land within the same year, otherwise the date
 #' # is ignored
-#' on_easter_back_93_days <- yearly() %>% rr_on_easter(-93)
-#' on_easter_back_94_days <- yearly() %>% rr_on_easter(-94)
+#' on_easter_back_93_days <- yearly() %>% recur_on_easter(-93)
+#' on_easter_back_94_days <- yearly() %>% recur_on_easter(-94)
 #'
 #' sch_seq("1999-01-01", "2001-01-01", on_easter_back_93_days)
 #' sch_seq("1999-01-01", "2001-01-01", on_easter_back_94_days)
 #'
 #' @export
-rr_on_easter <- function(x, offset = 0L) {
+recur_on_easter <- function(x, offset = 0L) {
   validate_rrule(x)
 
   if (is_already_set(x, "easter")) {

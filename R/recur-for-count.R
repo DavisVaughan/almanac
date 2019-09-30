@@ -2,9 +2,9 @@
 #'
 #' @description
 #'
-#' `rr_for_count()` controls the number of times that a recurrence will recur
-#' for. If not set, the recurrence will continue indefinitely. `rr_for_count()`
-#' is mutually exclusive with [rr_until()].
+#' `recur_for_count()` controls the number of times that a recurrence will recur
+#' for. If not set, the recurrence will continue indefinitely.
+#' `recur_for_count()` is mutually exclusive with [recur_until()].
 #'
 #' @details
 #'
@@ -23,12 +23,12 @@
 #' library(magrittr)
 #'
 #' # Using the default `since` date
-#' daily_since_epoch_for_5 <- daily() %>% rr_for_count(5)
+#' daily_since_epoch_for_5 <- daily() %>% recur_for_count(5)
 #'
 #' sch_seq("1969-12-31", "1970-01-25", daily_since_epoch_for_5)
 #'
 #' # Changing the `since` date
-#' daily_since_2019_for_5 <- daily(since = "2019-01-01") %>% rr_for_count(5)
+#' daily_since_2019_for_5 <- daily(since = "2019-01-01") %>% recur_for_count(5)
 #'
 #' sch_seq("2018-12-31", "2019-01-25", daily_since_2019_for_5)
 #'
@@ -36,13 +36,13 @@
 #' # example below, they are not added to the total count. Only true event
 #' # dates are counted.
 #' on_31_for_5 <- monthly(since = "2019-01-01") %>%
-#'   rr_on_mday(31) %>%
-#'   rr_for_count(5)
+#'   recur_on_mday(31) %>%
+#'   recur_for_count(5)
 #'
 #' sch_seq("2019-01-01", "2020-01-01", on_31_for_5)
 #'
 #' @export
-rr_for_count <- function(x, n) {
+recur_for_count <- function(x, n) {
   validate_rrule(x)
 
   if (is_already_set(x, "count")) {
