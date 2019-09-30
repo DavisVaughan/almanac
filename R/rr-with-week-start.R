@@ -2,7 +2,7 @@
 #'
 #' @description
 #'
-#' `rr_week_start()` controls the week day that represents the start of the
+#' `rr_with_week_start()` controls the week day that represents the start of the
 #' week. This is important for rules that use [rr_on_yweek()]. See that page
 #' for examples.
 #'
@@ -19,7 +19,7 @@
 #'    a full weekday string like `"Tuesday"`, or an abbreviation like `"Tues"`.
 #'
 #' @export
-rr_week_start <- function(x, wday) {
+rr_with_week_start <- function(x, wday) {
   validate_rrule(x)
 
   wday <- wday_normalize(wday)
