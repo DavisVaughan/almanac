@@ -3,6 +3,11 @@
 language: R
 cache: packages
 
+addons:
+  apt:
+    packages:
+      - libv8-dev
+
 matrix:
   include:
   - r: devel
