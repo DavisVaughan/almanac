@@ -8,10 +8,6 @@
 #' all of them. If you want to apply different `nth` values to different
 #' days of the week, call `rr_on_wday()` twice with different `wday` values.
 #'
-#' Weekly rules are implemented according to the ISO-8601 standard. This
-#' requires that the first week of a year is the first one containing at least
-#' 4 days of the new year.
-#'
 #' It is particularly important to pay attention to the `since` date when using
 #' weekly rules. The day of the week to use comes from the `since` date, which,
 #' by default, is a Thursday (`1970-01-01`).

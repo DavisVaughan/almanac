@@ -31,10 +31,6 @@ Multiple week day values are allowed, and \code{nth} will be applied to
 all of them. If you want to apply different \code{nth} values to different
 days of the week, call \code{rr_on_wday()} twice with different \code{wday} values.
 
-Weekly rules are implemented according to the ISO-8601 standard. This
-requires that the first week of a year is the first one containing at least
-4 days of the new year.
-
 It is particularly important to pay attention to the \code{since} date when using
 weekly rules. The day of the week to use comes from the \code{since} date, which,
 by default, is a Thursday (\code{1970-01-01}).
