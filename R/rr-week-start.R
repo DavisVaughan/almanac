@@ -1,3 +1,23 @@
+#' Control the start of the week
+#'
+#' @description
+#'
+#' `rr_week_start()` controls the week day that represents the start of the
+#' week. This is important for rules that use [rr_on_yweek()]. See that page
+#' for examples.
+#'
+#' _The default day of the week to start on is Monday._
+#'
+#' @param x `[rrule]`
+#'
+#'    A recurrence rule.
+#'
+#' @param wday `[integer(1) / character(1)]`
+#'
+#'    Day of the week to start the week on. Must be an integer value in
+#'    `[1, 7]`, with `1 = Monday` and `7 = Sunday`. This is also allowed to be
+#'    a full weekday string like `"Tuesday"`, or an abbreviation like `"Tues"`.
+#'
 #' @export
 rr_week_start <- function(x, wday) {
   validate_rrule(x)
