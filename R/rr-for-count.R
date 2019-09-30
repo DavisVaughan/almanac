@@ -49,6 +49,10 @@ rr_for_count <- function(x, n) {
     abort("`count` has already been set for this rrule.")
   }
 
+  if (is_already_set(x, "until")) {
+    abort("`count` is mututally exclusive with `until`, and `until` has already been set.")
+  }
+
   n <- vec_cast(n, integer(), x_arg = "n")
   vec_assert(n, size = 1L)
 
