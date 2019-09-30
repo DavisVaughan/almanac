@@ -66,7 +66,7 @@
 #'   # Last occurence of each weekday in the month
 #'   rr_on_wday(c("Mon", "Tue", "Wed", "Thu", "Fri"), -1) %>%
 #'   # Now choose the last one of those in each month
-#'   rr_position(-1)
+#'   rr_on_position(-1)
 #'
 #' sch_seq(start, end, last_weekday_of_month)
 #'
