@@ -28,6 +28,26 @@
 #' `weekly() %>% on_wday("Tuesday")` would translate to "the 5th day of the
 #' month or any Tuesday".
 #'
+#' @param x `[schedule]`
+#'
+#'   A schedule.
+#'
+#' @param rrule `[rrule]`
+#'
+#'   An rrule to add to the schedule.
+#'
+#' @param rdate `[Date]`
+#'
+#'   Dates to forcibly include in the schedule.
+#'
+#' @param exdate `[Date]`
+#'
+#'   Dates to forcibly exclude from the schedule.
+#'
+#' @param schedule `[schedule]`
+#'
+#'   A schedule to merge with `x`.
+#'
 #' @examples
 #' library(lubridate, warn.conflicts = FALSE)
 #'

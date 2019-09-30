@@ -16,6 +16,27 @@ sch_add_exdate(x, exdate)
 
 sch_add_schedule(x, schedule)
 }
+\arguments{
+\item{x}{\code{[schedule]}
+
+A schedule.}
+
+\item{rrule}{\code{[rrule]}
+
+An rrule to add to the schedule.}
+
+\item{rdate}{\code{[Date]}
+
+Dates to forcibly include in the schedule.}
+
+\item{exdate}{\code{[Date]}
+
+Dates to forcibly exclude from the schedule.}
+
+\item{schedule}{\code{[schedule]}
+
+A schedule to merge with \code{x}.}
+}
 \description{
 \itemize{
 \item \code{sch_add_rrule()} adds a \code{rrule} to a schedule.
