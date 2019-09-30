@@ -69,9 +69,9 @@ get_interval <- function(x) {
 
 get_week_start <- function(x) {
   if (is.null(x$rules$week_start)) {
-    week_start <- 1L # Monday, same as rrule.js
+    week_start <- 0L # Monday, same as rrule.js
   } else {
-    week_start <- x$rules$week_start
+    week_start <- x$rules$week_start - 1L
   }
 
   glue("wkst: {week_start}")
