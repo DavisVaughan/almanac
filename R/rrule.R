@@ -40,7 +40,8 @@ new_rrule <- function(since = as.Date("1970-01-01"),
                       yday = NULL,
                       mday = NULL,
                       wday = NULL,
-                      position = NULL) {
+                      position = NULL,
+                      easter = NULL) {
   env <- new.env(parent = emptyenv())
 
   rules <- list(
@@ -55,7 +56,8 @@ new_rrule <- function(since = as.Date("1970-01-01"),
     yday = yday,
     mday = mday,
     wday = wday,
-    position = position
+    position = position,
+    easter = easter
   )
 
   data <- list(

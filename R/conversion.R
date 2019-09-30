@@ -18,7 +18,8 @@ as_js_from_rrule <- function(x, context) {
     get_yday(x, context),
     get_mday(x, context),
     get_wday(x),
-    get_position(x, context)
+    get_position(x, context),
+    get_easter(x)
   )
 
   rules <- glue::glue_collapse(rules, sep = ",\n  ")
@@ -172,4 +173,12 @@ get_position <- function(x, context) {
   v8_assign(context, "position", x$rules$position)
 
   glue("bysetpos: position")
+}
+
+get_easter <- function(x) {
+  if (is.null(x$rules$easter)) {
+    return(NULL)
+  }
+
+  glue("byeaster: {x$rules$easter}")
 }
