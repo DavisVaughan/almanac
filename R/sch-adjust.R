@@ -1,6 +1,85 @@
-# TODO - Add other adjustment rules from original almanac
 # TODO - Add sch_jump() and sch_step()
 
+#' Adjust a vector of dates
+#'
+#' `sch_adjust()` takes an existing vector of dates and shifts it by applying
+#' an `adjustment` whenever a date in `x` is also an event defined by
+#' the `schedule`.
+#'
+#' @details
+#'
+#' Internally, a period / integer `adjustment` is applied repeatedly until the
+#' next non-event date is found. Be careful! This can result in infinite loops
+#' with improperly defined schedules, which are impossible for us to guard
+#' against for you.
+#'
+#' A custom `adjustment` function should expect to accept the dates
+#' requiring adjustment, and should _completely_ adjust them to the next
+#' non-event date. It is the responsibility of the `adjustment` function to
+#' ensure that the date resulting from the adjustment is not also an
+#' event date.
+#'
+#' @param x `[Date]`
+#'
+#'   A vector of dates.
+#'
+#' @param schedule `[schedule / event]`
+#'
+#'   A schedule or event.
+#'
+#' @param adjustment `[Period(1) / integer(1) / function / formula]`
+#'
+#'   An adjustment to make whenever a date falls on an event.
+#'
+#'   If this is a lubridate period object, such as [lubridate::days()],
+#'   or an integer, then the adjustment is repeatedly applied as
+#'   `x + adjustment` until the next non-event date is found.
+#'
+#'   If this is a function or formula (i.e., a lambda function), then it
+#'   should accept 2 arguments, the dates to adjust and the original `schedule`,
+#'   and should return a `Date` vector of the same size as the original input
+#'   containing the adjusted dates. See the functions on the help page for
+#'   [adj_following()] for some examples.
+#'
+#' @examples
+#' library(lubridate, warn.conflicts = FALSE)
+#' library(magrittr)
+#'
+#' # The first of the month is an "event" so we have to adjust
+#' # our current date to avoid that.
+#' on_first_of_month <- monthly() %>% rr_on_mday(1)
+#' sch_adjust("2019-01-01", on_first_of_month)
+#'
+#' # The adjustment could also be backwards
+#' sch_adjust("2019-01-01", on_first_of_month, adjustment = -days(1))
+#'
+#' # Period adjustments are applied repeatedly until the next non-event can
+#' # be found. Here, 2019-01-01 is an event, so we move to 2019-01-02, but
+#' # that is an event too, so we move to 2019-01-03.
+#' on_first_or_second_of_month <- monthly() %>% rr_on_mday(1:2)
+#' sch_adjust("2019-01-01", on_first_or_second_of_month)
+#'
+#' # ---------------------------------------------------------------------------
+#' # Custom adjustments
+#'
+#' # Financial business logic might require special rules, a few of which are
+#' # encoded in the `adj_*()` functions. For example, `adj_modified_following()`
+#' # will use an adjustment of `+days(1)`, unless making that adjustment would
+#' # place you past the last day in the month, in which case an adjustment of
+#' # `-days(1)` is made instead.
+#' on_31st <- monthly() %>% rr_on_mday(31)
+#' sch_adjust("2019-01-31", on_31st, adj_modified_following)
+#'
+#' # `adj_nearest()` looks to the closest non-event date. Here, the 13th
+#' # is closer than the 18th, so it is chosen as the adjustment date.
+#' on_offset_middle_of_month <- monthly() %>% rr_on_mday(14:17)
+#' sch_adjust("2019-01-15", on_offset_middle_of_month, adj_nearest)
+#'
+#' # When the distance is the same, the following date is chosen
+#' on_balanced_middle_of_month <- monthly() %>% rr_on_mday(14:16)
+#' sch_adjust("2019-01-15", on_balanced_middle_of_month, adj_nearest)
+#'
+#' @export
 sch_adjust <- function(x, schedule, adjustment = days(1)) {
   x <- vec_cast_date(x)
   schedule <- as_schedule(schedule)
@@ -64,33 +143,4 @@ make_adjuster <- function(adjustment) {
 
 is_subdaily <- function(x) {
   sum(abs(hour(x)), abs(minute(x)), abs(second(x))) != 0L
-}
-
-# ------------------------------------------------------------------------------
-
-adj_period_factory <- function(period) {
-  adj_period <- function(x, schedule) {
-    # Everything is an event to start with
-    problem_pos <- seq_along(x)
-
-    # While there are still some events, apply `x + period` and recheck
-    while(length(problem_pos) != 0L) {
-      # Apply adjustment
-      problems <- x[problem_pos]
-      adjusted <- problems + period
-
-      # Overwrite existing problems (use `vec_slice<-` for type/size stability)
-      vec_slice(x, problem_pos) <- adjusted
-
-      # Recheck
-      problem_loc <- sch_in(adjusted, schedule)
-
-      # Update location of problems
-      problem_pos <- problem_pos[problem_loc]
-    }
-
-    x
-  }
-
-  adj_period
 }

@@ -20,3 +20,6 @@ Imports:
     V8,
     glue
 RoxygenNote: 6.1.1
+Roxygen: list(markdown = TRUE)
+Suggests: 
+    magrittr
