@@ -1,22 +1,85 @@
+#' Create a recurrence rule
+#'
+#' @description
+#'
+#' These functions allow you to create a recurrence rule with a specified
+#' frequency. They are the base elements for all recurrence rules. To add
+#' to them, use one of the `rr_*()` functions.
+#'
+#' - `daily()` Recur on a daily frequency.
+#'
+#' - `weekly()` Recur on a weekly frequency.
+#'
+#' - `monthly()` Recur on a monthly frequency.
+#'
+#' - `yearly()` Recur on a yearly frequency.
+#'
+#' @details
+#'
+#' The `since` argument is _very_ important for both practical use, and speed.
+#' The default is set to the Unix epoch time, but there is no hard and fast
+#' rule for doing this. Remember that this is the first possible event date,
+#' so you may need to move this date backwards in time if you need to generate
+#' dates before `1970-01-01`.
+#'
+#' In terms of speed, it is more efficient if you adjust the `since` date to
+#' be closer to the first date in the sequence of dates that you are working
+#' with. For example, if you are working with dates in the range of 2019 and
+#' forward, adjust the `since` date to be `2019-01-01` for a significant speed
+#' boost.
+#'
+#' As the anchor date, recurrences are often calculated _relative to_ this
+#' date. As an example, a recurrence of "on Monday, every other week" would use
+#' the `since` date to find the first Monday to start the recurrence from.
+#'
+#' @param since `[Date(1)]`
+#'
+#'    The initial date to anchor the recurrence from. Depending on the final
+#'    recurrence rule, pieces of information from this anchor date might be used
+#'    to generate the event dates.
+#'
+#' @examples
+#' library(magrittr)
+#'
+#' rrule <- monthly() %>% rr_on_mday(25)
+#'
+#' sch_seq("1970-01-01", "1971-01-01", rrule)
+#'
+#' # Notice that dates before 1970-01-01 are never generated with the defaults!
+#' sch_seq("1969-01-01", "1970-01-01", rrule)
+#'
+#' # Adjust the `since` date to get access to these dates
+#' rrule_pre_1970 <- monthly(since = "1969-01-01") %>% rr_on_mday(25)
+#' sch_seq("1969-01-01", "1970-01-01", rrule_pre_1970)
+#'
+#' @name rrule
+NULL
+
+#' @rdname rrule
 #' @export
 daily <- function(since = "1970-01-01") {
   rrule(since, frequency = "daily")
 }
 
+#' @rdname rrule
 #' @export
 weekly <- function(since = "1970-01-01") {
   rrule(since, frequency = "weekly")
 }
 
+#' @rdname rrule
 #' @export
 monthly <- function(since = "1970-01-01") {
   rrule(since, frequency = "monthly")
 }
 
+#' @rdname rrule
 #' @export
 yearly <- function(since = "1970-01-01") {
   rrule(since, frequency = "yearly")
 }
+
+# ------------------------------------------------------------------------------
 
 rrule <- function(since = "1970-01-01", frequency = "yearly") {
   since <- vec_cast_date(since, "since")
@@ -26,8 +89,6 @@ rrule <- function(since = "1970-01-01", frequency = "yearly") {
     frequency = frequency
   )
 }
-
-# ------------------------------------------------------------------------------
 
 new_rrule <- function(since = as.Date("1970-01-01"),
                       frequency = "yearly",
