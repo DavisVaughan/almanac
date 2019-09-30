@@ -1,10 +1,10 @@
 #' @export
-sch_seq <- function(start, end, schedule, inclusive = TRUE) {
-  start <- vec_cast_date(start)
-  end <- vec_cast_date(end)
+sch_seq <- function(from, to, schedule, inclusive = TRUE) {
+  from <- vec_cast_date(from)
+  to <- vec_cast_date(to)
 
-  vec_assert(start, size = 1L)
-  vec_assert(end, size = 1L)
+  vec_assert(from, size = 1L)
+  vec_assert(to, size = 1L)
 
   schedule <- as_schedule(schedule)
   vec_assert(inclusive, logical(), 1L)
@@ -12,11 +12,11 @@ sch_seq <- function(start, end, schedule, inclusive = TRUE) {
   init_schedule(schedule)
   context <- get_context(schedule)
 
-  v8_eval(context, "var start = [[as_js_from_date(start)]]")
-  v8_eval(context, "var end = [[as_js_from_date(end)]]")
+  v8_eval(context, "var from = [[as_js_from_date(from)]]")
+  v8_eval(context, "var to = [[as_js_from_date(to)]]")
   v8_assign(context, "inclusive", inclusive)
 
-  out <- v8_get(context, "ruleset.between(start, end, inc = inclusive)")
+  out <- v8_get(context, "ruleset.between(from, to, inc = inclusive)")
   parse_js_date(out)
 }
 
