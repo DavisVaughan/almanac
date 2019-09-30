@@ -1,3 +1,20 @@
+#' Create a new schedule
+#'
+#' @description
+#'
+#' Often, a single recurrence rule created from a base rule like `monthly()`
+#' will be sufficient. However, more complex rules can be constructed
+#' by combining simple rules into a _schedule_.
+#'
+#' `schedule()` creates a new empty schedule. Add rules to the schedule with
+#' [sch_add_rrule()].
+#'
+#' @examples
+#' schedule()
+#'
+#' sch_add_rrule(schedule(), monthly())
+#'
+#' @seealso [sch_add_rrule()]
 #' @export
 schedule <- function() {
   new_schedule()
