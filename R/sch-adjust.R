@@ -1,5 +1,3 @@
-# TODO - Add sch_jump() and sch_step()
-
 #' Adjust a vector of dates
 #'
 #' `sch_adjust()` takes an existing vector of dates and shifts it by applying

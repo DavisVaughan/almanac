@@ -2,9 +2,15 @@
 % Please edit documentation in R/rr-on-wday.R
 \name{rr_on_wday}
 \alias{rr_on_wday}
+\alias{rr_on_weekdays}
+\alias{rr_on_weekends}
 \title{Recur on a day of the week}
 \usage{
 rr_on_wday(x, wday, nth = NULL)
+
+rr_on_weekdays(x)
+
+rr_on_weekends(x)
 }
 \arguments{
 \item{x}{\code{[rrule]}
@@ -24,7 +30,11 @@ example, in a monthly frequency, using \code{nth = -1} would limit to the
 last \code{wday} in the month. The default of \code{NULL} chooses all occurences.}
 }
 \description{
-\code{rr_on_wday()} recurs on a specific day of the week.
+\itemize{
+\item \code{rr_on_wday()} recurs on a specific day of the week.
+\item \code{rr_on_weekends()} and \code{rr_on_weekdays()} are helpers for recurring on
+weekends and weekdays.
+}
 }
 \details{
 Multiple week day values are allowed, and \code{nth} will be applied to

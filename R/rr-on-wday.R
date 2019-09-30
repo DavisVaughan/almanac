@@ -1,6 +1,11 @@
 #' Recur on a day of the week
 #'
-#' `rr_on_wday()` recurs on a specific day of the week.
+#' @description
+#'
+#' - `rr_on_wday()` recurs on a specific day of the week.
+#'
+#' - `rr_on_weekends()` and `rr_on_weekdays()` are helpers for recurring on
+#'   weekends and weekdays.
 #'
 #' @details
 #'
@@ -118,4 +123,16 @@ rr_on_wday <- function(x, wday, nth = NULL) {
   }
 
   tweak_rrule(x, wday = old)
+}
+
+#' @rdname rr_on_wday
+#' @export
+rr_on_weekdays <- function(x) {
+  rr_on_wday(x, 1:5)
+}
+
+#' @rdname rr_on_wday
+#' @export
+rr_on_weekends <- function(x) {
+  rr_on_wday(x, 6:7)
 }
