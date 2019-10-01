@@ -50,6 +50,12 @@ boost.
 As the anchor date, recurrences are often calculated \emph{relative to} this
 date. As an example, a recurrence of "on Monday, every other week" would use
 the \code{since} date to find the first Monday to start the recurrence from.
+
+There is no \code{quarterly()} recurrence frequency, but this can be accomplished
+with \code{monthly() \%>\% recur_on_interval(3)}. The month to start the quarterly
+interval from will be pulled from the \code{since} date inside \code{monthly()}. The
+default will use a quarterly schedule starting in January since the default
+\code{since} date is \code{1970-01-01}. See the examples.
 }
 \examples{
 library(magrittr)
@@ -64,5 +70,20 @@ sch_seq("1969-01-01", "1970-01-01", rrule)
 # Adjust the `since` date to get access to these dates
 rrule_pre_1970 <- monthly(since = "1969-01-01") \%>\% recur_on_mday(25)
 sch_seq("1969-01-01", "1970-01-01", rrule_pre_1970)
+
+# A quarterly recurrence rule can be built from
+# `monthly()` and `recur_on_interval()`
+on_first_of_the_quarter <- monthly() \%>\%
+  recur_on_interval(3) \%>\%
+  recur_on_mday(1)
+
+sch_seq("1999-01-01", "2000-04-01", on_first_of_the_quarter)
+
+# Alter the starting quarter by altering the `since` date
+on_first_of_the_quarter_starting_in_feb <- monthly(since = "1998-02-01") \%>\%
+  recur_on_interval(3) \%>\%
+  recur_on_mday(1)
+
+sch_seq("1999-01-01", "2000-04-01", on_first_of_the_quarter_starting_in_feb)
 
 }
