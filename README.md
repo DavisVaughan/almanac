@@ -11,16 +11,49 @@ status](https://travis-ci.org/DavisVaughan/almanac.svg?branch=master)](https://t
 coverage](https://codecov.io/gh/DavisVaughan/almanac/branch/master/graph/badge.svg)](https://codecov.io/gh/DavisVaughan/almanac?branch=master)
 <!-- badges: end -->
 
+``` r
+library(almanac)
+library(magrittr)
+```
+
 almanac implements a *grammar of schedules*, providing the fundamental
-building blocks to construct schedules that identify “events” such as
-weekends or holidays. After constructing a schedule, it can be used to:
+building blocks to construct recurrence rules that identify “events”
+such as weekends or holidays. Constructing recurrence rules looks a
+little like this:
 
-  - Generate dates that fall in the schedule.
+``` r
+# Thanksgiving = "The fourth Thursday in November"
+on_thanksgiving <- yearly() %>% 
+  recur_on_ymonth("November") %>%
+  recur_on_wday("Thursday", nth = 4)
+```
 
-  - Determine if a date is in the schedule or not.
+After constructing a recurrence rule, it can be used to generate dates
+that are in the “recurrence set”.
 
-  - Shift a sequence of dates, stepping over dates that fall in the
-    schedule.
+``` r
+sch_seq("2000-01-01", "2006-01-01", on_thanksgiving)
+#> [1] "2000-11-23" "2001-11-22" "2002-11-28" "2003-11-27" "2004-11-25"
+#> [6] "2005-11-24"
+```
+
+Or determine if a particular date is a part of the recurrence set.
+
+``` r
+sch_in(c("2000-01-01", "2000-11-23"), on_thanksgiving)
+#> [1] FALSE  TRUE
+```
+
+It also allows you to shift an existing sequence of dates, “stepping
+over” dates that are in the recurrence set.
+
+``` r
+wednesday_before_thanksgiving <- "2000-11-22"
+
+# Step forward 2 non-event days, stepping over thanksgiving
+sch_step(wednesday_before_thanksgiving, n = 2, on_thanksgiving)
+#> [1] "2000-11-25"
+```
 
 ## Installation
 
