@@ -25,7 +25,6 @@ knitr::opts_chunk$set(
 
 ```{r}
 library(almanac)
-library(magrittr)
 ```
 
 almanac implements a _grammar of schedules_, providing the fundamental building blocks to construct recurrence rules that identify "events" such as weekends or holidays. Constructing recurrence rules looks a little like this:

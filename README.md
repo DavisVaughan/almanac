@@ -13,7 +13,6 @@ coverage](https://codecov.io/gh/DavisVaughan/almanac/branch/master/graph/badge.s
 
 ``` r
 library(almanac)
-library(magrittr)
 ```
 
 almanac implements a *grammar of schedules*, providing the fundamental
