@@ -19,11 +19,11 @@ Imports:
     vctrs,
     rlang,
     V8,
-    glue
+    glue,
+    magrittr
 RoxygenNote: 6.1.1
 Roxygen: list(markdown = TRUE)
 Suggests: 
-    magrittr,
     covr
 Depends: 
     R (>= 3.2)
