@@ -38,23 +38,26 @@ sch_seq <- function(from, to, schedule, inclusive = TRUE) {
   schedule <- as_schedule(schedule)
   vec_assert(inclusive, logical(), 1L)
 
-  init_schedule(schedule)
-  context <- get_context(schedule)
-
   cache <- cache_get(schedule, from, to, inclusive)
 
   if (!is.null(cache)) {
     return(cache)
   }
 
-  v8_eval(context, "var from = [[as_js_from_date(from)]]")
-  v8_eval(context, "var to = [[as_js_from_date(to)]]")
-  v8_assign(context, "inclusive", inclusive)
+  init_schedule(schedule)
 
-  out <- v8_get(context, "ruleset.between(from, to, inc = inclusive)")
+  v8_eval("var from = [[as_js_from_date(from)]]")
+  v8_eval("var to = [[as_js_from_date(to)]]")
+
+  # Always set cache with inclusive dates!
+  out <- v8_get("ruleset.between(from, to, inc = true)")
   out <- parse_js_date(out)
 
-  cache_set(schedule, from, to, inclusive, out)
+  cache_set(schedule, from, to, out)
+
+  if (!inclusive) {
+    out <- out[out > from & out < to]
+  }
 
   out
 }
@@ -95,12 +98,11 @@ sch_next <- function(x, schedule, inclusive = FALSE) {
   vec_assert(inclusive, logical(), 1L)
 
   init_schedule(schedule)
-  context <- get_context(schedule)
 
-  v8_eval(context, "var x = [[as_js_from_date(x)]]")
-  v8_assign(context, "inclusive", inclusive)
+  v8_eval("var x = [[as_js_from_date(x)]]")
+  v8_assign("inclusive", inclusive)
 
-  out <- v8_get(context, "ruleset.after(x, inc = inclusive)")
+  out <- v8_get("ruleset.after(x, inc = inclusive)")
   parse_js_date(out)
 }
 
@@ -112,11 +114,10 @@ sch_previous <- function(x, schedule, inclusive = FALSE) {
   vec_assert(inclusive, logical(), 1L)
 
   init_schedule(schedule)
-  context <- get_context(schedule)
 
-  v8_eval(context, "var x = [[as_js_from_date(x)]]")
-  v8_assign(context, "inclusive", inclusive)
+  v8_eval("var x = [[as_js_from_date(x)]]")
+  v8_assign("inclusive", inclusive)
 
-  out <- v8_get(context, "ruleset.before(x, inc = inclusive)")
+  out <- v8_get("ruleset.before(x, inc = inclusive)")
   parse_js_date(out)
 }

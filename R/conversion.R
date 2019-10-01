@@ -5,7 +5,7 @@ as_js_from_date <- function(x) {
 
 # ------------------------------------------------------------------------------
 
-as_js_from_rrule <- function(x, context) {
+as_js_from_rrule <- function(x) {
   rules <- c(
     get_dtstart(x),
     get_frequency(x),
@@ -13,12 +13,12 @@ as_js_from_rrule <- function(x, context) {
     get_count(x),
     get_interval(x),
     get_week_start(x),
-    get_ymonth(x, context),
-    get_yweek(x, context),
-    get_yday(x, context),
-    get_mday(x, context),
+    get_ymonth(x),
+    get_yweek(x),
+    get_yday(x),
+    get_mday(x),
     get_wday(x),
-    get_position(x, context),
+    get_position(x),
     get_easter(x)
   )
 
@@ -77,42 +77,42 @@ get_week_start <- function(x) {
   glue("wkst: {week_start}")
 }
 
-get_mday <- function(x, context) {
+get_mday <- function(x) {
   if (is.null(x$rules$mday)) {
     return(NULL)
   }
 
-  v8_assign(context, "mday", x$rules$mday)
+  v8_assign("mday", x$rules$mday)
 
   glue("bymonthday: mday")
 }
 
-get_ymonth <- function(x, context) {
+get_ymonth <- function(x) {
   if (is.null(x$rules$ymonth)) {
     return(NULL)
   }
 
-  v8_assign(context, "ymonth", x$rules$ymonth)
+  v8_assign("ymonth", x$rules$ymonth)
 
   glue("bymonth: ymonth")
 }
 
-get_yweek <- function(x, context) {
+get_yweek <- function(x) {
   if (is.null(x$rules$yweek)) {
     return(NULL)
   }
 
-  v8_assign(context, "yweek", x$rules$yweek)
+  v8_assign("yweek", x$rules$yweek)
 
   glue("byweekno: yweek")
 }
 
-get_yday <- function(x, context) {
+get_yday <- function(x) {
   if (is.null(x$rules$yday)) {
     return(NULL)
   }
 
-  v8_assign(context, "yday", x$rules$yday)
+  v8_assign("yday", x$rules$yday)
 
   glue("byyearday: yday")
 }
@@ -165,12 +165,12 @@ get_js_wday_base <- function(wday) {
   glue("rrule.RRule.{suffix}")
 }
 
-get_position <- function(x, context) {
+get_position <- function(x) {
   if (is.null(x$rules$position)) {
     return(NULL)
   }
 
-  v8_assign(context, "position", x$rules$position)
+  v8_assign("position", x$rules$position)
 
   glue("bysetpos: position")
 }
