@@ -104,9 +104,17 @@ recur_on_wday <- function(x, wday, nth = NULL) {
 
   new_nth <- vec_cast(nth, integer(), x_arg = "nth")
 
+  is_yearly <- x$rules$frequency == "yearly"
   abs_nth <- abs(new_nth)
-  if (any(abs_nth > 5 | abs_nth < 1)) {
-    abort("`nth` can only take values in [-5, -1] and [1, 5].")
+
+  if (is_yearly) {
+    if (any(abs_nth > 53 | abs_nth < 1)) {
+      abort("`nth` can only take values in [-53, -1] and [1, 53] when the frequency is yearly.")
+    }
+  } else {
+    if (any(abs_nth > 5 | abs_nth < 1)) {
+      abort("`nth` can only take values in [-5, -1] and [1, 5].")
+    }
   }
 
   for (day in wday) {
