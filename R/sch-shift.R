@@ -90,15 +90,7 @@ sch_step <- function(x, n, schedule) {
 
   one_day_adjuster <- make_adjuster(one_day)
 
-  # TODO - Pre load the cache with a wide range
-  # x_min <- min(x)
-  # x_max <- max(x)
-  # cache_range <- c(x_min, x_max) + n
-  # cache_min <- min(cache_range, x_min)
-  # cache_max <- max(cache_range, x_max)
-  # n_extra <- length(sch_seq(cache_min, cache_max, schedule))
-  # cache_max <- cache_max + n - n_extra
-  # sch_seq(cache_min, cache_max, schedule)
+  cache_preload(x, n, schedule)
 
   n <- abs(n)
 
@@ -108,6 +100,41 @@ sch_step <- function(x, n, schedule) {
   }
 
   x
+}
+
+# Pre load the cache with the full range of [x, x + n] (or the reverse if n is
+# negative) and an additional amount past that as well to account for
+# the adjustments. This significantly speeds up the `sch_adjust()` calls.
+
+cache_preload <- function(x, n, schedule) {
+  x_min <- min(x)
+  x_max <- max(x)
+
+  if (n >= 0L) {
+    x_max <- x_max + n
+  } else {
+    x_min <- x_min + n
+  }
+
+  # Cache the range of [x_min, x_max + n] (or [x_min + n, x_max] if n < 0)
+  n_events <- length(sch_seq(x_min, x_max, schedule))
+
+  if (n_events == 0L) {
+    return()
+  }
+
+  if (n >= 0L) {
+    x_max <- x_max + (n_events * 2)
+  } else {
+    x_min <- x_min - (n_events * 2)
+  }
+
+  # Perform a secondary extended cache based on the number of events in the
+  # original sequence. This is sort of ad hoc and assumes a uniform event
+  # sequence, but captures most cases well
+  sch_seq(x_min, x_max, schedule)
+
+  invisible(schedule)
 }
 
 # ------------------------------------------------------------------------------
