@@ -29,8 +29,6 @@ If \code{from} or \code{to} are events, should they be included?}
 }
 }
 \examples{
-library(magrittr)
-
 on_12th <- monthly() \%>\% recur_on_mday(12)
 on_monday <- weekly() \%>\% recur_on_wday("Monday")
 

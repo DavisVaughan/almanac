@@ -13,8 +13,6 @@
 #'    abbreviation like `"Nov"`.
 #'
 #' @examples
-#' library(magrittr)
-#'
 #' # There is a big difference between adding this rule to a `yearly()`
 #' # or `monthly()` frequency, and a `daily()` frequency.
 #'

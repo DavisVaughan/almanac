@@ -16,8 +16,6 @@
 #'    will be silently ignored.
 #'
 #' @examples
-#' library(magrittr)
-#'
 #' on_easter <- yearly() %>% recur_on_easter()
 #' on_easter_monday <- yearly() %>% recur_on_easter(-1)
 #'

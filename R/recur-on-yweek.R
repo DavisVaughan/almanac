@@ -19,8 +19,6 @@
 #'    `[1, 53]` or `[-53, -1]`.
 #'
 #' @examples
-#' library(magrittr)
-#'
 #' # Weekly rules are a bit tricky because they are implemented to comply
 #' # with ISO-8601 standards, which require that the first week of the year
 #' # is when there are at least 4 days in that year, and the week starts on

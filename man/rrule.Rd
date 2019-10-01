@@ -58,8 +58,6 @@ default will use a quarterly schedule starting in January since the default
 \code{since} date is \code{1970-01-01}. See the examples.
 }
 \examples{
-library(magrittr)
-
 rrule <- monthly() \%>\% recur_on_mday(25)
 
 sch_seq("1970-01-01", "1971-01-01", rrule)

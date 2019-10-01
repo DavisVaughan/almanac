@@ -21,7 +21,6 @@ Days of the year to recur on. Values must be from \code{[-366, -1]} and
 }
 \examples{
 library(lubridate, warn.conflicts = FALSE)
-library(magrittr)
 
 on_5th_day_of_year <- yearly() \%>\% recur_on_yday(5)
 

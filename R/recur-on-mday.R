@@ -18,8 +18,6 @@
 #'    which specify n days from the end of the month.
 #'
 #' @examples
-#' library(magrittr)
-#'
 #' # When used with a yearly or monthly frequency, `recur_on_mday()` expands the
 #' # number of days in the recurrence set.
 #' on_yearly <- yearly()

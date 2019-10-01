@@ -21,8 +21,6 @@ abbreviation like \code{"Nov"}.}
 \code{recur_on_ymonth()} recurs on a specific month of the year.
 }
 \examples{
-library(magrittr)
-
 # There is a big difference between adding this rule to a `yearly()`
 # or `monthly()` frequency, and a `daily()` frequency.
 

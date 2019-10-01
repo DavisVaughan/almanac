@@ -25,8 +25,6 @@ Remember that the number of times the occurrance has occurred is counted
 from the \code{since} date! Adjust it as necessary to get your desired results.
 }
 \examples{
-library(magrittr)
-
 # Using the default `since` date
 daily_since_epoch_for_5 <- daily() \%>\% recur_for_count(5)
 

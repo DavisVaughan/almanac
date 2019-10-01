@@ -20,8 +20,6 @@
 #'    The number of times to recur for.
 #'
 #' @examples
-#' library(magrittr)
-#'
 #' # Using the default `since` date
 #' daily_since_epoch_for_5 <- daily() %>% recur_for_count(5)
 #'

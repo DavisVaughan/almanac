@@ -23,8 +23,6 @@ If \code{from} or \code{to} are events, should they be included?}
 \code{sch_seq()} generates all events in a schedule from \code{from} to \code{to}.
 }
 \examples{
-library(magrittr)
-
 on_12th <- monthly() \%>\% recur_on_mday(12)
 on_monday <- weekly() \%>\% recur_on_wday("Monday")
 

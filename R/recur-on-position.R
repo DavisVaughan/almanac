@@ -14,7 +14,6 @@
 #'
 #' @examples
 #' library(lubridate, warn.conflicts = FALSE)
-#' library(magrittr)
 #'
 #' start <- "1999-01-01"
 #' end <- "1999-05-01"

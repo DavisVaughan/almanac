@@ -24,8 +24,6 @@ this can also be used to generate a recurrence on Easter Monday or
 Good Friday.
 }
 \examples{
-library(magrittr)
-
 on_easter <- yearly() \%>\% recur_on_easter()
 on_easter_monday <- yearly() \%>\% recur_on_easter(-1)
 

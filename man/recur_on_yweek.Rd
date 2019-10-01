@@ -26,8 +26,6 @@ requires that the first week of a year is the first one containing at least
 specified by \code{\link[=recur_with_week_start]{recur_with_week_start()}}, which defaults to Monday.
 }
 \examples{
-library(magrittr)
-
 # Weekly rules are a bit tricky because they are implemented to comply
 # with ISO-8601 standards, which require that the first week of the year
 # is when there are at least 4 days in that year, and the week starts on

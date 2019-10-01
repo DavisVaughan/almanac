@@ -25,8 +25,6 @@ is ignored. For example, if \code{recur_on_mday(30)} is set, then it will never
 generate an event in February.
 }
 \examples{
-library(magrittr)
-
 # When used with a yearly or monthly frequency, `recur_on_mday()` expands the
 # number of days in the recurrence set.
 on_yearly <- yearly()

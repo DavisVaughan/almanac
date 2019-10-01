@@ -74,8 +74,6 @@ The second option more naturally lends itself to business logic. Two business
 days from Friday is Tuesday.
 }
 \examples{
-library(magrittr)
-
 # 2019-09-13 is a Friday
 
 # Make a rrule for weekends, and adjust the `since` date to be closer

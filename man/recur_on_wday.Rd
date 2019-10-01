@@ -46,8 +46,6 @@ weekly rules. The day of the week to use comes from the \code{since} date, which
 by default, is a Thursday (\code{1970-01-01}).
 }
 \examples{
-library(magrittr)
-
 # Using default `since` (1970-01-01, a Thursday)
 on_weekly_thursdays <- weekly()
 

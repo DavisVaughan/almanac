@@ -21,8 +21,6 @@ recurrence rule. For example, a \code{\link[=monthly]{monthly()}} rule with an i
 become "every other month".
 }
 \examples{
-library(magrittr)
-
 # The default interval is 1
 on_monthly <- monthly(since = "1999-01-01")
 

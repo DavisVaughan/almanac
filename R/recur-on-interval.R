@@ -13,8 +13,6 @@
 #'    The interval on which to recur.
 #'
 #' @examples
-#' library(magrittr)
-#'
 #' # The default interval is 1
 #' on_monthly <- monthly(since = "1999-01-01")
 #'

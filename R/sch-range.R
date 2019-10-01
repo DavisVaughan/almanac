@@ -15,8 +15,6 @@
 #'    If `from` or `to` are events, should they be included?
 #'
 #' @examples
-#' library(magrittr)
-#'
 #' on_12th <- monthly() %>% recur_on_mday(12)
 #' on_monday <- weekly() %>% recur_on_wday("Monday")
 #'
@@ -81,8 +79,6 @@ sch_seq_impl <- function(from, to, schedule, inclusive = TRUE) {
 #'    The date to start the search from.
 #'
 #' @examples
-#' library(magrittr)
-#'
 #' on_12th <- monthly() %>% recur_on_mday(12)
 #' on_monday <- weekly() %>% recur_on_wday("Monday")
 #'

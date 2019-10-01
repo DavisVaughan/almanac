@@ -48,7 +48,6 @@ event date.
 }
 \examples{
 library(lubridate, warn.conflicts = FALSE)
-library(magrittr)
 
 # The first of the month is an "event" so we have to adjust
 # our current date to avoid that.

@@ -23,8 +23,6 @@
 #'    The final date boundary of the recurrence.
 #'
 #' @examples
-#' library(magrittr)
-#'
 #' # Using the default `since` date
 #' daily_since_epoch_limited <- daily() %>% recur_until("1970-01-05")
 #'

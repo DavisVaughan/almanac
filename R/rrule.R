@@ -45,8 +45,6 @@
 #'    to generate the event dates.
 #'
 #' @examples
-#' library(magrittr)
-#'
 #' rrule <- monthly() %>% recur_on_mday(25)
 #'
 #' sch_seq("1970-01-01", "1971-01-01", rrule)

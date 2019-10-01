@@ -34,8 +34,6 @@
 #'    last `wday` in the month. The default of `NULL` chooses all occurences.
 #'
 #' @examples
-#' library(magrittr)
-#'
 #' # Using default `since` (1970-01-01, a Thursday)
 #' on_weekly_thursdays <- weekly()
 #'
