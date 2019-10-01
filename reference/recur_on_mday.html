@@ -139,9 +139,7 @@ is ignored. For example, if <code>recur_on_mday(30)</code> is set, then it will 
 generate an event in February.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>magrittr</span>)
-
-<span class='co'># When used with a yearly or monthly frequency, `recur_on_mday()` expands the</span>
+    <pre class="examples"><div class='input'><span class='co'># When used with a yearly or monthly frequency, `recur_on_mday()` expands the</span>
 <span class='co'># number of days in the recurrence set.</span>
 <span class='no'>on_yearly</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rrule.html'>yearly</a></span>()
 <span class='no'>on_yearly_mday_1_to_2</span> <span class='kw'>&lt;-</span> <span class='no'>on_yearly</span> <span class='kw'>%&gt;%</span> <span class='fu'>recur_on_mday</span>(<span class='fl'>1</span>:<span class='fl'>2</span>)

@@ -141,9 +141,7 @@ for. If not set, the recurrence will continue indefinitely.
 from the <code>since</code> date! Adjust it as necessary to get your desired results.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>magrittr</span>)
-
-<span class='co'># Using the default `since` date</span>
+    <pre class="examples"><div class='input'><span class='co'># Using the default `since` date</span>
 <span class='no'>daily_since_epoch_for_5</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rrule.html'>daily</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'>recur_for_count</span>(<span class='fl'>5</span>)
 
 <span class='fu'><a href='sch_seq.html'>sch_seq</a></span>(<span class='st'>"1969-12-31"</span>, <span class='st'>"1970-01-25"</span>, <span class='no'>daily_since_epoch_for_5</span>)</div><div class='output co'>#&gt; [1] "1970-01-01" "1970-01-02" "1970-01-03" "1970-01-04" "1970-01-05"</div><div class='input'>

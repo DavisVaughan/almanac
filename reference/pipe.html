@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Recur on easter — recur_on_easter • almanac</title>
+<title>Pipe operator — %&gt;% • almanac</title>
 
 
 <!-- jquery -->
@@ -35,11 +35,8 @@
 
 
 
-<meta property="og:title" content="Recur on easter — recur_on_easter" />
-<meta property="og:description" content="recur_on_easter() is a special helper to recur on Easter. Easter is
-particularly difficult to construct a recurrence rule for. Using offset,
-this can also be used to generate a recurrence on Easter Monday or
-Good Friday." />
+<meta property="og:title" content="Pipe operator — %&gt;%" />
+<meta property="og:description" content="See magrittr::%&amp;gt;% for details." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -108,62 +105,23 @@ Good Friday." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Recur on easter</h1>
-    <small class="dont-index">Source: <a href='https://github.com/DavisVaughan/almanac/blob/master/R/recur-on-easter.R'><code>R/recur-on-easter.R</code></a></small>
-    <div class="hidden name"><code>recur_on_easter.Rd</code></div>
+    <h1>Pipe operator</h1>
+    <small class="dont-index">Source: <a href='https://github.com/DavisVaughan/almanac/blob/master/R/utils-pipe.R'><code>R/utils-pipe.R</code></a></small>
+    <div class="hidden name"><code>pipe.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><code>recur_on_easter()</code> is a special helper to recur on Easter. Easter is
-particularly difficult to construct a recurrence rule for. Using <code>offset</code>,
-this can also be used to generate a recurrence on Easter Monday or
-Good Friday.</p>
+    <p>See <code>magrittr::%&gt;%</code> for details.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>recur_on_easter</span>(<span class='no'>x</span>, <span class='kw'>offset</span> <span class='kw'>=</span> <span class='fl'>0L</span>)</pre>
-
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>x</th>
-      <td><p><code>[rrule]</code></p>
-<p>A recurrence rule.</p></td>
-    </tr>
-    <tr>
-      <th>offset</th>
-      <td><p><code>[integer(1)]</code></p>
-<p>An offset in terms of a number of days on either side of Easter to recur
-on. This offset must still fall within the same year, otherwise the date
-will be silently ignored.</p></td>
-    </tr>
-    </table>
+    <pre class="usage"><span class='no'>lhs</span> <span class='kw'>%&gt;%</span> <span class='no'>rhs</span></pre>
 
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>on_easter</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rrule.html'>yearly</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'>recur_on_easter</span>()
-<span class='no'>on_easter_monday</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rrule.html'>yearly</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'>recur_on_easter</span>(-<span class='fl'>1</span>)
 
-<span class='fu'><a href='sch_seq.html'>sch_seq</a></span>(<span class='st'>"1999-01-01"</span>, <span class='st'>"2001-01-01"</span>, <span class='no'>on_easter</span>)</div><div class='output co'>#&gt; [1] "1999-04-04" "2000-04-23"</div><div class='input'>
-<span class='no'>sch</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='schedule.html'>schedule</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='sch-add.html'>sch_add_rrule</a></span>(<span class='no'>on_easter</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='sch-add.html'>sch_add_rrule</a></span>(<span class='no'>on_easter_monday</span>)
-
-<span class='fu'><a href='sch_seq.html'>sch_seq</a></span>(<span class='st'>"1999-01-01"</span>, <span class='st'>"2001-01-01"</span>, <span class='no'>sch</span>)</div><div class='output co'>#&gt; [1] "1999-04-03" "1999-04-04" "2000-04-22" "2000-04-23"</div><div class='input'>
-
-<span class='co'># Note that `offset` must land within the same year, otherwise the date</span>
-<span class='co'># is ignored</span>
-<span class='no'>on_easter_back_93_days</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rrule.html'>yearly</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'>recur_on_easter</span>(-<span class='fl'>93</span>)
-<span class='no'>on_easter_back_94_days</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rrule.html'>yearly</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'>recur_on_easter</span>(-<span class='fl'>94</span>)
-
-<span class='fu'><a href='sch_seq.html'>sch_seq</a></span>(<span class='st'>"1999-01-01"</span>, <span class='st'>"2001-01-01"</span>, <span class='no'>on_easter_back_93_days</span>)</div><div class='output co'>#&gt; [1] "1999-01-01" "2000-01-21"</div><div class='input'><span class='fu'><a href='sch_seq.html'>sch_seq</a></span>(<span class='st'>"1999-01-01"</span>, <span class='st'>"2001-01-01"</span>, <span class='no'>on_easter_back_94_days</span>)</div><div class='output co'>#&gt; [1] "2000-01-20"</div><div class='input'>
-</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>

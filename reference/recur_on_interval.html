@@ -137,9 +137,7 @@ become "every other month".</p>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>magrittr</span>)
-
-<span class='co'># The default interval is 1</span>
+    <pre class="examples"><div class='input'><span class='co'># The default interval is 1</span>
 <span class='no'>on_monthly</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rrule.html'>monthly</a></span>(<span class='kw'>since</span> <span class='kw'>=</span> <span class='st'>"1999-01-01"</span>)
 
 <span class='fu'><a href='sch_seq.html'>sch_seq</a></span>(<span class='st'>"1999-01-01"</span>, <span class='st'>"1999-06-01"</span>, <span class='no'>on_monthly</span>)</div><div class='output co'>#&gt; [1] "1999-01-01" "1999-02-01" "1999-03-01" "1999-04-01" "1999-05-01"

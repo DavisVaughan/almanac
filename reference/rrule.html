@@ -165,11 +165,14 @@ boost.</p>
 <p>As the anchor date, recurrences are often calculated <em>relative to</em> this
 date. As an example, a recurrence of "on Monday, every other week" would use
 the <code>since</code> date to find the first Monday to start the recurrence from.</p>
+<p>There is no <code>quarterly()</code> recurrence frequency, but this can be accomplished
+with <code>monthly() %&gt;% recur_on_interval(3)</code>. The month to start the quarterly
+interval from will be pulled from the <code>since</code> date inside <code>monthly()</code>. The
+default will use a quarterly schedule starting in January since the default
+<code>since</code> date is <code>1970-01-01</code>. See the examples.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>magrittr</span>)
-
-<span class='no'>rrule</span> <span class='kw'>&lt;-</span> <span class='fu'>monthly</span>() <span class='kw'>%&gt;%</span> <span class='fu'><a href='recur_on_mday.html'>recur_on_mday</a></span>(<span class='fl'>25</span>)
+    <pre class="examples"><div class='input'><span class='no'>rrule</span> <span class='kw'>&lt;-</span> <span class='fu'>monthly</span>() <span class='kw'>%&gt;%</span> <span class='fu'><a href='recur_on_mday.html'>recur_on_mday</a></span>(<span class='fl'>25</span>)
 
 <span class='fu'><a href='sch_seq.html'>sch_seq</a></span>(<span class='st'>"1970-01-01"</span>, <span class='st'>"1971-01-01"</span>, <span class='no'>rrule</span>)</div><div class='output co'>#&gt;  [1] "1970-01-25" "1970-02-25" "1970-03-25" "1970-04-25" "1970-05-25"
 #&gt;  [6] "1970-06-25" "1970-07-25" "1970-08-25" "1970-09-25" "1970-10-25"
@@ -181,6 +184,20 @@ the <code>since</code> date to find the first Monday to start the recurrence fro
 <span class='fu'><a href='sch_seq.html'>sch_seq</a></span>(<span class='st'>"1969-01-01"</span>, <span class='st'>"1970-01-01"</span>, <span class='no'>rrule_pre_1970</span>)</div><div class='output co'>#&gt;  [1] "1969-01-25" "1969-02-25" "1969-03-25" "1969-04-25" "1969-05-25"
 #&gt;  [6] "1969-06-25" "1969-07-25" "1969-08-25" "1969-09-25" "1969-10-25"
 #&gt; [11] "1969-11-25" "1969-12-25"</div><div class='input'>
+<span class='co'># A quarterly recurrence rule can be built from</span>
+<span class='co'># `monthly()` and `recur_on_interval()`</span>
+<span class='no'>on_first_of_the_quarter</span> <span class='kw'>&lt;-</span> <span class='fu'>monthly</span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='recur_on_interval.html'>recur_on_interval</a></span>(<span class='fl'>3</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='recur_on_mday.html'>recur_on_mday</a></span>(<span class='fl'>1</span>)
+
+<span class='fu'><a href='sch_seq.html'>sch_seq</a></span>(<span class='st'>"1999-01-01"</span>, <span class='st'>"2000-04-01"</span>, <span class='no'>on_first_of_the_quarter</span>)</div><div class='output co'>#&gt; [1] "1999-01-01" "1999-04-01" "1999-07-01" "1999-10-01" "2000-01-01"
+#&gt; [6] "2000-04-01"</div><div class='input'>
+<span class='co'># Alter the starting quarter by altering the `since` date</span>
+<span class='no'>on_first_of_the_quarter_starting_in_feb</span> <span class='kw'>&lt;-</span> <span class='fu'>monthly</span>(<span class='kw'>since</span> <span class='kw'>=</span> <span class='st'>"1998-02-01"</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='recur_on_interval.html'>recur_on_interval</a></span>(<span class='fl'>3</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='recur_on_mday.html'>recur_on_mday</a></span>(<span class='fl'>1</span>)
+
+<span class='fu'><a href='sch_seq.html'>sch_seq</a></span>(<span class='st'>"1999-01-01"</span>, <span class='st'>"2000-04-01"</span>, <span class='no'>on_first_of_the_quarter_starting_in_feb</span>)</div><div class='output co'>#&gt; [1] "1999-02-01" "1999-05-01" "1999-08-01" "1999-11-01" "2000-02-01"</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
