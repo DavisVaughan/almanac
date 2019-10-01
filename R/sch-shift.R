@@ -90,6 +90,16 @@ sch_step <- function(x, n, schedule) {
 
   one_day_adjuster <- make_adjuster(one_day)
 
+  # TODO - Pre load the cache with a wide range
+  # x_min <- min(x)
+  # x_max <- max(x)
+  # cache_range <- c(x_min, x_max) + n
+  # cache_min <- min(cache_range, x_min)
+  # cache_max <- max(cache_range, x_max)
+  # n_extra <- length(sch_seq(cache_min, cache_max, schedule))
+  # cache_max <- cache_max + n - n_extra
+  # sch_seq(cache_min, cache_max, schedule)
+
   n <- abs(n)
 
   for (i in seq_len(n)) {

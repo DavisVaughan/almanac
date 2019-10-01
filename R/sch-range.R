@@ -41,12 +41,22 @@ sch_seq <- function(from, to, schedule, inclusive = TRUE) {
   init_schedule(schedule)
   context <- get_context(schedule)
 
+  cache <- cache_get(schedule, from, to, inclusive)
+
+  if (!is.null(cache)) {
+    return(cache)
+  }
+
   v8_eval(context, "var from = [[as_js_from_date(from)]]")
   v8_eval(context, "var to = [[as_js_from_date(to)]]")
   v8_assign(context, "inclusive", inclusive)
 
   out <- v8_get(context, "ruleset.between(from, to, inc = inclusive)")
-  parse_js_date(out)
+  out <- parse_js_date(out)
+
+  cache_set(schedule, from, to, inclusive, out)
+
+  out
 }
 
 #' Generate the next or previous event

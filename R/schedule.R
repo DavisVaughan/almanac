@@ -75,6 +75,51 @@ validate_schedule <- function(x, arg = "`x`") {
 
 # ------------------------------------------------------------------------------
 
+cache_set <- function(schedule, from, to, inclusive, events) {
+  env <- schedule[["env"]]
+
+  env[["from"]] <- from
+  env[["to"]] <- to
+  env[["inclusive"]] <- inclusive
+  env[["events"]] <- events
+
+  invisible(schedule)
+}
+
+cache_get <- function(schedule, from, to, inclusive) {
+  env <- schedule[["env"]]
+  events <- env[["events"]]
+
+  if (is.null(events)) {
+    return(NULL)
+  }
+
+  env_from <- env[["from"]]
+  if (env_from > from) {
+    return(NULL)
+  }
+
+  env_to <- env[["to"]]
+  if (env[["to"]] < to) {
+    return(NULL)
+  }
+
+  # It wasn't inclusive before, but is now, and we are using the same boundaries
+  if (!env[["inclusive"]] && inclusive && (env_from == from || env_to == to)) {
+    return(NULL)
+  }
+
+  if (inclusive) {
+    events <- events[events >= from & events <= to]
+  } else {
+    events <- events[events > from & events < to]
+  }
+
+  events
+}
+
+# ------------------------------------------------------------------------------
+
 init_schedule <- function(x) {
   # Only initialize once
   if (!is.null(get_context(x))) {
