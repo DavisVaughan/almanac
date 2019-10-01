@@ -38,6 +38,10 @@ sch_seq <- function(from, to, schedule, inclusive = TRUE) {
   schedule <- as_schedule(schedule)
   vec_assert(inclusive, logical(), 1L)
 
+  sch_seq_impl(from, to, schedule, inclusive)
+}
+
+sch_seq_impl <- function(from, to, schedule, inclusive = TRUE) {
   cache <- cache_get(schedule, from, to, inclusive)
 
   if (!is.null(cache)) {

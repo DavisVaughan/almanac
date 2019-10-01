@@ -17,7 +17,7 @@ sch_in <- function(x, schedule) {
   min <- min(x)
   max <- max(x)
 
-  events <- sch_seq(min, max, schedule)
+  events <- sch_seq_impl(min, max, schedule)
 
   vec_in(x, events)
 }
