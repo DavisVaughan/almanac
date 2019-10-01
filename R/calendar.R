@@ -1,3 +1,31 @@
+#' Calendars
+#'
+#' The following generate `schedule` objects corresponding to calendars. A
+#' calendar is composed of multiple holiday schedules generated from the
+#' `hldy_*()` functions.
+#'
+#' @param since `[Date(1)]`
+#'
+#'    The initial date to start the schedule from.
+#'
+#' @examples
+#' on_us_holidays <- calendar_usa_federal()
+#'
+#' # Locate holidays
+#' sch_seq("2000-01-01", "2001-01-01", on_us_holidays)
+#'
+#' # Adjust dates relative to holidays
+#' on_weekends <- recur_on_weekends(weekly())
+#' on_us_holidays_and_weekends <- sch_add_rrule(on_us_holidays, on_weekends)
+#'
+#' x <- as.Date("2019-08-30")
+#' sch_step(x, 1, sch_add_rrule(on_us_holidays, on_weekends))
+#'
+#' @name calendars
+NULL
+
+#' @rdname calendars
+#' @export
 calendar_usa_federal <- function(since = "1970-01-01") {
   since <- vec_cast_date(since, "since")
 
@@ -18,12 +46,33 @@ calendar_usa_federal <- function(since = "1970-01-01") {
 }
 
 # ------------------------------------------------------------------------------
+
+#' Holidays
+#'
+#' The following generate `schedule` objects corresponding to commonly used
+#' holidays.
+#'
+#' @param since `[Date(1)]`
+#'
+#'    The initial date to start the schedule from.
+#'
+#' @examples
+#' on_thanksgiving <- hldy_thanksgiving()
+#'
+#' sch_seq("2000-01-01", "2019-01-01", on_thanksgiving)
+#'
+#' @name holidays
+NULL
+
+# ------------------------------------------------------------------------------
 # >= 1971 = Third Monday in February
 # <  1971 = - Feb 22nd if weekday
 #           - Feb 23 if that was Monday
 #           - Feb 21 if that was Friday
 
-hldy_washington_birthday <- function(since) {
+#' @rdname holidays
+#' @export
+hldy_washington_birthday <- function(since = "1970-01-01") {
   since <- vec_cast_date(since)
 
   if (since >= as.Date("1971-01-01")) {
@@ -82,7 +131,9 @@ hldy_washington_birthday_post_1971 <- function(since = as.Date("1971-01-01")) {
 #           - May 31 if that was Monday
 #           - Feb 29 if that was Friday
 
-hldy_memorial_day <- function(since) {
+#' @rdname holidays
+#' @export
+hldy_memorial_day <- function(since = "1970-01-01") {
   since <- vec_cast_date(since)
 
   if (since >= as.Date("1971-01-01")) {
@@ -138,7 +189,9 @@ hldy_memorial_day_post_1971 <- function(since = as.Date("1971-01-01")) {
 # ------------------------------------------------------------------------------
 # On first Monday in September
 
-hldy_labor_day <- function(since) {
+#' @rdname holidays
+#' @export
+hldy_labor_day <- function(since = "1970-01-01") {
   since <- vec_cast_date(since)
 
   rrule <- yearly(since)
@@ -153,7 +206,9 @@ hldy_labor_day <- function(since) {
 #           - Oct 13 if Oct 12 was Sunday
 #           - Oct 11 if Oct 12 was Saturday
 
-hldy_columbus_day <- function(since) {
+#' @rdname holidays
+#' @export
+hldy_columbus_day <- function(since = "1970-01-01") {
   since <- vec_cast_date(since)
 
   if (since >= as.Date("1971-01-01")) {
@@ -212,7 +267,9 @@ hldy_columbus_day_post_1971 <- function(since = as.Date("1971-01-01")) {
 
 # 1971 - 1977 = Fourth Monday in October
 
-hldy_veterans_day <- function(since) {
+#' @rdname holidays
+#' @export
+hldy_veterans_day <- function(since = "1970-01-01") {
   since <- vec_cast_date(since)
 
   if (since >= as.Date("1978-01-01")) {
@@ -306,7 +363,9 @@ hldy_veterans_day_post_1978 <- function(since = as.Date("1978-01-01")) {
 # - Jan 2 if Jan 1 was Sunday
 # - Dec 31 if Jan 1 was Saturday
 
-hldy_new_years_day <- function(since) {
+#' @rdname holidays
+#' @export
+hldy_new_years_day <- function(since = "1970-01-01") {
   since <- vec_cast_date(since)
 
   # On Jan 1 that is a weekday
@@ -346,7 +405,9 @@ hldy_new_years_day <- function(since) {
 
 # ^ Using 1986 start date
 
-hldy_martin_luther_king_jr_day <- function(since) {
+#' @rdname holidays
+#' @export
+hldy_martin_luther_king_jr_day <- function(since = "1970-01-01") {
   since <- vec_cast_date(since)
 
   hldy_start <- as.Date("1986-01-01")
@@ -365,7 +426,9 @@ hldy_martin_luther_king_jr_day <- function(since) {
 # - July 5 if July 4 was Sunday
 # - July 3 if July 4 was Saturday
 
-hldy_independence_day <- function(since) {
+#' @rdname holidays
+#' @export
+hldy_independence_day <- function(since = "1970-01-01") {
   since <- vec_cast_date(since)
 
   # On July 4 that is a weekday
@@ -401,7 +464,9 @@ hldy_independence_day <- function(since) {
 
 # https://www.archives.gov/legislative/features/thanksgiving
 
-hldy_thanksgiving <- function(since) {
+#' @rdname holidays
+#' @export
+hldy_thanksgiving <- function(since = "1970-01-01") {
   since <- vec_cast_date(since)
 
   if (since >= as.Date("1942-01-01")) {
@@ -454,7 +519,9 @@ hldy_thanksgiving_post_1942 <- function(since = as.Date("1942-01-01")) {
 # - Dec 26 if Dec 25 was Sunday
 # - Dec 24 if Dec 25 was Saturday
 
-hldy_christmas <- function(since) {
+#' @rdname holidays
+#' @export
+hldy_christmas <- function(since = "1970-01-01") {
   since <- vec_cast_date(since)
 
   # On July 4 that is a weekday
