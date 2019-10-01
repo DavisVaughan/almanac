@@ -73,20 +73,34 @@
 <a href="#almanac" class="anchor"></a>almanac</h1></div>
 <!-- badges: start -->
 
-<p>almanac implements a <em>grammar of schedules</em>, providing the fundamental building blocks to construct schedules that identify “events” such as weekends or holidays. After constructing a schedule, it can be used to:</p>
-<ul>
-<li><p>Generate dates that fall in the schedule.</p></li>
-<li><p>Determine if a date is in the schedule or not.</p></li>
-<li><p>Shift a sequence of dates, stepping over dates that fall in the schedule.</p></li>
-</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(almanac)</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(magrittr)</a></code></pre></div>
+<p>almanac implements a <em>grammar of schedules</em>, providing the fundamental building blocks to construct recurrence rules that identify “events” such as weekends or holidays. Constructing recurrence rules looks a little like this:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co"># Thanksgiving = "The fourth Thursday in November"</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">on_thanksgiving &lt;-<span class="st"> </span><span class="kw"><a href="reference/rrule.html">yearly</a></span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="reference/recur_on_ymonth.html">recur_on_ymonth</a></span>(<span class="st">"November"</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="reference/recur_on_wday.html">recur_on_wday</a></span>(<span class="st">"Thursday"</span>, <span class="dt">nth =</span> <span class="dv">4</span>)</a></code></pre></div>
+<p>After constructing a recurrence rule, it can be used to generate dates that are in the “recurrence set”.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="reference/sch_seq.html">sch_seq</a></span>(<span class="st">"2000-01-01"</span>, <span class="st">"2006-01-01"</span>, on_thanksgiving)</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="co">#&gt; [1] "2000-11-23" "2001-11-22" "2002-11-28" "2003-11-27" "2004-11-25"</span></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co">#&gt; [6] "2005-11-24"</span></a></code></pre></div>
+<p>Or determine if a particular date is a part of the recurrence set.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="reference/sch_in.html">sch_in</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"2000-01-01"</span>, <span class="st">"2000-11-23"</span>), on_thanksgiving)</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="co">#&gt; [1] FALSE  TRUE</span></a></code></pre></div>
+<p>It also allows you to shift an existing sequence of dates, “stepping over” dates that are in the recurrence set.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">wednesday_before_thanksgiving &lt;-<span class="st"> "2000-11-22"</span></a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="co"># Step forward 2 non-event days, stepping over thanksgiving</span></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="kw"><a href="reference/sch_jump.html">sch_step</a></span>(wednesday_before_thanksgiving, <span class="dt">n =</span> <span class="dv">2</span>, on_thanksgiving)</a>
+<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="co">#&gt; [1] "2000-11-25"</span></a></code></pre></div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>You can NOT install the released version of almanac from <a href="https://CRAN.R-project.org">CRAN</a> with:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># NO! install.packages("almanac")</span></a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="co"># NO! install.packages("almanac")</span></a></code></pre></div>
 <p>And the development version from <a href="https://github.com/">GitHub</a> with:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co"># install.packages("devtools")</span></a>
-<a class="sourceLine" id="cb2-2" data-line-number="2">devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">"DavisVaughan/almanac"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="co"># install.packages("devtools")</span></a>
+<a class="sourceLine" id="cb7-2" data-line-number="2">devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">"DavisVaughan/almanac"</span>)</a></code></pre></div>
 </div>
 </div>
   </div>
