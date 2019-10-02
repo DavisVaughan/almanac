@@ -81,46 +81,26 @@ validate_schedule <- function(x, arg = "`x`") {
 cache_set <- function(schedule, to, events) {
   env <- schedule[["env"]]
 
-  numeric_to <- as.numeric(to)
-
   # No previous cache
   if (is.null(env[["events"]])) {
     env[["to"]] <- to
     env[["events"]] <- events
-    env[["numeric_to"]] <- numeric_to
-    env[["numeric_events"]] <- as.numeric(events)
     return(invisible(schedule))
   }
 
-  old_numeric_to <- env[["numeric_to"]]
-  old_numeric_events <- env[["numeric_events"]]
+  numeric_to <- unclass(to)
+  old_numeric_to <- unclass(env[["to"]])
 
   needs_new_events <- FALSE
 
   if (old_numeric_to < numeric_to) {
-    new_to <- to
-    new_numeric_to <- numeric_to
+    env[["to"]] <- to
     needs_new_events <- TRUE
-  } else {
-    new_to <- env[["to"]]
-    new_numeric_to <- old_numeric_to
   }
 
   if (needs_new_events) {
-    numeric_events <- as.numeric(events)
-    new_numeric_events <- sort(unique(c(old_numeric_events, numeric_events)))
-    new_events <- new_numeric_events
-    class(new_events) <- "Date"
-  } else {
-    new_numeric_events <- old_numeric_events
-    new_events <- env[["events"]]
+    env[["events"]] <- events
   }
-
-  env[["to"]] <- new_to
-  env[["events"]] <- new_events
-
-  env[["numeric_to"]] <- new_numeric_to
-  env[["numeric_events"]] <- new_numeric_events
 
   invisible(schedule)
 }
@@ -134,16 +114,16 @@ cache_get <- function(schedule, from, to, inclusive) {
     return(NULL)
   }
 
-  numeric_from <- as.numeric(from)
-  numeric_to <- as.numeric(to)
-  env_numeric_to <- env[["numeric_to"]]
+  numeric_to <- unclass(to)
+  env_numeric_to <- unclass(env[["to"]])
 
   # After end of cache
   if (env_numeric_to < numeric_to) {
     return(NULL)
   }
 
-  numeric_events <- env[["numeric_events"]]
+  numeric_from <- unclass(from)
+  numeric_events <- unclass(env[["events"]])
 
   # Cache is always stored inclusively, so these events exist
   if (inclusive) {
