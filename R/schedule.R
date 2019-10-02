@@ -107,7 +107,7 @@ cache_set <- function(schedule, to, events) {
 
   if (needs_new_events) {
     numeric_events <- as.numeric(events)
-    new_numeric_events <- unique(sort(c(old_numeric_events, numeric_events)))
+    new_numeric_events <- sort(unique(c(old_numeric_events, numeric_events)))
     new_events <- new_numeric_events
     class(new_events) <- "Date"
   } else {
