@@ -48,16 +48,20 @@ sch_seq_impl <- function(from, to, schedule, inclusive = TRUE) {
 
   init_schedule(schedule)
 
-  v8_eval("var from = [[as_js_from_date(from)]]")
+  since <- get_schedule_since(schedule)
+
+  v8_eval("var from = [[as_js_from_date(since)]]")
   v8_eval("var to = [[as_js_from_date(to)]]")
 
   # Always set cache with inclusive dates!
   out <- v8_get("ruleset.between(from, to, inc = true)")
   out <- parse_js_date(out)
 
-  cache_set(schedule, from, to, out)
+  cache_set(schedule, to, out)
 
-  if (!inclusive) {
+  if (inclusive) {
+    out <- out[out >= from & out <= to]
+  } else {
     out <- out[out > from & out < to]
   }
 
