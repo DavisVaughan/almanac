@@ -94,7 +94,7 @@ sch_step <- function(x, n, schedule) {
 
   for (i in seq_len(n)) {
     x <- x + one_day
-    x <- sch_adjust(x, schedule, one_day_adjuster)
+    x <- sch_adjust_impl(x, schedule, one_day_adjuster)
   }
 
   x

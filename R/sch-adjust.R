@@ -82,6 +82,10 @@ sch_adjust <- function(x, schedule, adjustment = days(1)) {
   schedule <- as_schedule(schedule)
   adjuster <- make_adjuster(adjustment)
 
+  sch_adjust_impl(x, schedule, adjuster)
+}
+
+sch_adjust_impl <- function(x, schedule, adjuster) {
   # Find initial set of events
   problem_loc <- sch_in(x, schedule)
 

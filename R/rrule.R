@@ -136,6 +136,7 @@ new_rrule <- function(since = as.Date("1970-01-01"),
                       position = NULL,
                       easter = NULL) {
   env <- new.env(parent = emptyenv())
+  env[["initialized"]] <- FALSE
 
   rules <- list(
     since = since,

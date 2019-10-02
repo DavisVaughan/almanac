@@ -22,7 +22,7 @@ schedule <- function() {
 
 # ------------------------------------------------------------------------------
 
-new_schedule <- function(rrules = list(), rdates = list(), exdates = list(), env = NULL) {
+new_schedule <- function(rrules = list(), rdates = new_date(), exdates = new_date(), env = NULL) {
   recurrences <- list(
     rrules = rrules,
     rdates = rdates,
@@ -31,6 +31,7 @@ new_schedule <- function(rrules = list(), rdates = list(), exdates = list(), env
 
   if (is.null(env)) {
     env <- new.env(parent = emptyenv())
+    env[["initialized"]] <- FALSE
   }
 
   data <- list(
@@ -77,64 +78,29 @@ validate_schedule <- function(x, arg = "`x`") {
 
 # cache is always set with dates generated from an inclusive between
 
-cache_set <- function(schedule, from, to, events) {
+cache_set <- function(schedule, to, events) {
   env <- schedule[["env"]]
-
-  numeric_from <- as.numeric(from)
-  numeric_to <- as.numeric(to)
 
   # No previous cache
   if (is.null(env[["events"]])) {
-    env[["from"]] <- from
     env[["to"]] <- to
     env[["events"]] <- events
-    env[["numeric_from"]] <- numeric_from
-    env[["numeric_to"]] <- numeric_to
-    env[["numeric_events"]] <- as.numeric(events)
     return(invisible(schedule))
   }
 
-  old_numeric_from <- env[["numeric_from"]]
-  old_numeric_to <- env[["numeric_to"]]
-  old_numeric_events <- env[["numeric_events"]]
+  numeric_to <- unclass(to)
+  old_numeric_to <- unclass(env[["to"]])
 
   needs_new_events <- FALSE
 
-  if (old_numeric_from > numeric_from) {
-    new_from <- from
-    new_numeric_from <- numeric_from
-    needs_new_events <- TRUE
-  } else {
-    new_from <- env[["from"]]
-    new_numeric_from <- old_numeric_from
-  }
-
   if (old_numeric_to < numeric_to) {
-    new_to <- to
-    new_numeric_to <- numeric_to
+    env[["to"]] <- to
     needs_new_events <- TRUE
-  } else {
-    new_to <- env[["to"]]
-    new_numeric_to <- old_numeric_to
   }
 
   if (needs_new_events) {
-    numeric_events <- as.numeric(events)
-    new_numeric_events <- unique(sort(c(old_numeric_events, numeric_events)))
-    new_events <- new_numeric_events
-    class(new_events) <- "Date"
-  } else {
-    new_numeric_events <- old_numeric_events
-    new_events <- env[["events"]]
+    env[["events"]] <- events
   }
-
-  env[["from"]] <- new_from
-  env[["to"]] <- new_to
-  env[["events"]] <- new_events
-
-  env[["numeric_from"]] <- new_numeric_from
-  env[["numeric_to"]] <- new_numeric_to
-  env[["numeric_events"]] <- new_numeric_events
 
   invisible(schedule)
 }
@@ -148,23 +114,16 @@ cache_get <- function(schedule, from, to, inclusive) {
     return(NULL)
   }
 
-  numeric_from <- as.numeric(from)
-  env_numeric_from <- env[["numeric_from"]]
-
-  # Before start of cache
-  if (env_numeric_from > numeric_from) {
-    return(NULL)
-  }
-
-  numeric_to <- as.numeric(to)
-  env_numeric_to <- env[["numeric_to"]]
+  numeric_to <- unclass(to)
+  env_numeric_to <- unclass(env[["to"]])
 
   # After end of cache
   if (env_numeric_to < numeric_to) {
     return(NULL)
   }
 
-  numeric_events <- env[["numeric_events"]]
+  numeric_from <- unclass(from)
+  numeric_events <- unclass(env[["events"]])
 
   # Cache is always stored inclusively, so these events exist
   if (inclusive) {
@@ -180,7 +139,53 @@ cache_get <- function(schedule, from, to, inclusive) {
 
 # ------------------------------------------------------------------------------
 
+get_schedule_since <- function(x) {
+  pull_since <- function(x) {
+    x$rules$since
+  }
+
+  since <- get_rrules_since(x)
+
+  rdates <- x$recurrences$rdates
+
+  if (length(rdates) == 0L) {
+    return(since)
+  }
+
+  since <- min(rdates, since)
+
+  since
+}
+
+# Minimum `since` date of all rules
+get_rrules_since <- function(x) {
+  rrules <- x$recurrences$rrules
+
+  if (length(rrules) == 0L) {
+    return(new_date())
+  }
+
+  pull_since <- function(x) {
+    x$rules$since
+  }
+
+  since <- min(vapply(rrules, pull_since, numeric(1)))
+  class(since) <- "Date"
+
+  since
+}
+
+sch_since <- function(x) {
+  x[["env"]][["since"]]
+}
+
+# ------------------------------------------------------------------------------
+
 init_schedule <- function(x) {
+  if (x$env$initialized) {
+    return()
+  }
+
   recurrences <- x$recurrences
 
   v8_eval("var ruleset = new rrule.RRuleSet()")
@@ -190,15 +195,22 @@ init_schedule <- function(x) {
     v8_eval("ruleset.rrule([[rrule]])")
   }
 
-  for(rdate in recurrences$rdates) {
-    rdate <- as_js_from_date(rdate)
+  rdates <- recurrences$rdates
+
+  for(i in seq_along(rdates)) {
+    rdate <- as_js_from_date(rdates[i])
     v8_eval("ruleset.rdate([[rdate]])")
   }
 
-  for(exdate in recurrences$exdates) {
-    exdate <- as_js_from_date(exdate)
+  exdates <- recurrences$exdates
+
+  for(i in seq_along(exdates)) {
+    exdate <- as_js_from_date(exdates[i])
     v8_eval("ruleset.exdate([[exdate]])")
   }
+
+  x$env[["initialized"]] <- TRUE
+  x$env[["since"]] <- get_schedule_since(x)
 
   invisible(x)
 }

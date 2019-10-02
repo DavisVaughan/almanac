@@ -2,7 +2,7 @@ vec_cast_date <- function(x, x_arg = "x") {
   if (is.character(x)) {
     vec_cast_date_character(x, x_arg)
   } else {
-    vec_cast(x, new_date(), x_arg = x_arg)
+    vec_cast(x, global_empty_date, x_arg = x_arg)
   }
 }
 
