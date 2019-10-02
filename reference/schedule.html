@@ -145,39 +145,8 @@ by combining simple rules into a <em>schedule</em>.</p>
     <div class='dont-index'><p><code><a href='sch-add.html'>sch_add_rrule()</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>schedule</span>()</div><div class='output co'>#&gt; $recurrences
-#&gt; $recurrences$rrules
-#&gt; list()
-#&gt; 
-#&gt; $recurrences$rdates
-#&gt; Date of length 0
-#&gt; 
-#&gt; $recurrences$exdates
-#&gt; Date of length 0
-#&gt; 
-#&gt; 
-#&gt; $env
-#&gt; &lt;environment: 0x1d76a08&gt;
-#&gt; 
-#&gt; attr(,"class")
-#&gt; [1] "schedule"</div><div class='input'>
-<span class='fu'><a href='sch-add.html'>sch_add_rrule</a></span>(<span class='fu'>schedule</span>(), <span class='fu'><a href='rrule.html'>monthly</a></span>())</div><div class='output co'>#&gt; $recurrences
-#&gt; $recurrences$rrules
-#&gt; $recurrences$rrules[[1]]
-#&gt; rrule: monthly
-#&gt; 
-#&gt; $recurrences$rdates
-#&gt; Date of length 0
-#&gt; 
-#&gt; $recurrences$exdates
-#&gt; Date of length 0
-#&gt; 
-#&gt; 
-#&gt; $env
-#&gt; &lt;environment: 0x1399fd8&gt;
-#&gt; 
-#&gt; attr(,"class")
-#&gt; [1] "schedule"</div><div class='input'>
+    <pre class="examples"><div class='input'><span class='fu'>schedule</span>()</div><div class='output co'>#&gt; schedule: 0 rrules / 0 rdates / 0 exdates</div><div class='input'>
+<span class='fu'><a href='sch-add.html'>sch_add_rrule</a></span>(<span class='fu'>schedule</span>(), <span class='fu'><a href='rrule.html'>monthly</a></span>())</div><div class='output co'>#&gt; schedule: 1 rrules / 0 rdates / 0 exdates</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
