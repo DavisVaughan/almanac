@@ -80,3 +80,12 @@ And the development version from [GitHub](https://github.com/) with:
 devtools::install_github("DavisVaughan/almanac")
 ```
 
+## Acknowledgements
+
+almanac has developed as a composite of ideas from multiple different libraries.
+
+First off, it directly embeds the _amazing_ JavaScript library [rrule](https://github.com/jakubroztocil/rrule) for the core recurrence set calculations.
+
+The date shifting / adjusting functions are modeled after similar functions in [QuantLib](https://github.com/lballabio/QuantLib).
+
+The author of [gs](https://github.com/jameslairdsmith/gs), James Laird-Smith, has been a great collaborator as we have bounced ideas off of each other. gs attempts to solve a similar problem, but with a slightly different implementation. The hope is that gs and almanac will merge, as they currently overlap a large amount.
