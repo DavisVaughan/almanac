@@ -45,7 +45,23 @@ recur_on_position <- function(x, n) {
 
   n <- vec_cast(n, integer(), x_arg = "n")
 
-  # TODO - Limit range of `n`? 366 max?
+  validate_frequency_position(x$rules$frequency, n)
 
   tweak_rrule(x, position = n)
+}
+
+validate_frequency_position <- function(frequency, n) {
+  n <- abs(n)
+
+  max <- switch(
+    frequency,
+    daily = 1L,
+    weekly = 7L,
+    monthly = 31L,
+    yearly = 366L
+  )
+
+  if (any(n > max)) {
+    glubort("For a '{frequency}' frequency, the absolute value of `n` cannot be larger than {max}.")
+  }
 }
