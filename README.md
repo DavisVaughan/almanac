@@ -54,6 +54,14 @@ sch_step(wednesday_before_thanksgiving, n = 2, on_thanksgiving)
 #> [1] "2000-11-25"
 ```
 
+## Learning More
+
+View the vignettes on [the
+website](https://davisvaughan.github.io/almanac/index.html) to learn
+more about how to use almanac.
+
+  - `vignette("almanac")`
+
 ## Installation
 
 You can NOT install the released version of almanac from
