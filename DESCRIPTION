@@ -24,6 +24,7 @@ Imports:
 RoxygenNote: 6.1.1
 Roxygen: list(markdown = TRUE)
 Suggests: 
-    covr
+    covr,
+    testthat (>= 2.1.0)
 Depends: 
     R (>= 3.2)
