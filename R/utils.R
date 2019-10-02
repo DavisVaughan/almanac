@@ -126,14 +126,16 @@ month_match <- function(x) {
 month_name <- function() {
   c(
     tolower(month.name),
-    tolower(month.abb)
+    tolower(month.abb),
+    "sept" # special case
   )
 }
 
 month_int <- function() {
   c(
     1:12,
-    1:12
+    1:12,
+    9L
   )
 }
 
