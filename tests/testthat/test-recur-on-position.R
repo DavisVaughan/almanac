@@ -80,6 +80,15 @@ test_that("can select multiple positions", {
 
 # ------------------------------------------------------------------------------
 
+test_that("cannot set the position twice", {
+  expect_error(
+    daily() %>% recur_on_position(1) %>% recur_on_position(1),
+    "`position` has already been set"
+  )
+})
+
+# ------------------------------------------------------------------------------
+
 test_that("position is validated depending on the frequency", {
   expect_error(daily() %>% recur_on_position(2), "cannot be larger than 1")
   expect_error(daily() %>% recur_on_position(-2), "cannot be larger than 1")
