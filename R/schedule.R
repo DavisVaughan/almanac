@@ -31,6 +31,7 @@ new_schedule <- function(rrules = list(), rdates = new_date(), exdates = new_dat
 
   if (is.null(env)) {
     env <- new.env(parent = emptyenv())
+    env[["initialized"]] <- FALSE
   }
 
   data <- list(
@@ -156,6 +157,8 @@ cache_get <- function(schedule, from, to, inclusive) {
   events
 }
 
+# ------------------------------------------------------------------------------
+
 get_schedule_since <- function(x) {
   pull_since <- function(x) {
     x$rules$since
@@ -192,9 +195,17 @@ get_rrules_since <- function(x) {
   since
 }
 
+sch_since <- function(x) {
+  x[["env"]][["since"]]
+}
+
 # ------------------------------------------------------------------------------
 
 init_schedule <- function(x) {
+  if (x$env$initialized) {
+    return()
+  }
+
   recurrences <- x$recurrences
 
   v8_eval("var ruleset = new rrule.RRuleSet()")
@@ -217,6 +228,9 @@ init_schedule <- function(x) {
     exdate <- as_js_from_date(exdates[i])
     v8_eval("ruleset.exdate([[exdate]])")
   }
+
+  x$env[["initialized"]] <- TRUE
+  x$env[["since"]] <- get_schedule_since(x)
 
   invisible(x)
 }

@@ -47,8 +47,7 @@ sch_seq_impl <- function(from, to, schedule, inclusive = TRUE) {
   }
 
   init_schedule(schedule)
-
-  since <- get_schedule_since(schedule)
+  since <- sch_since(schedule)
 
   v8_eval("var from = [[as_js_from_date(since)]]")
   v8_eval("var to = [[as_js_from_date(to)]]")
