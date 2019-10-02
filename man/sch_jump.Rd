@@ -14,11 +14,12 @@ sch_step(x, n, schedule)
 
 A vector of dates.}
 
-\item{jump}{\code{[Period(1) / character(1)]}
+\item{jump}{\code{[Period(1) / character(1) / integer(1)]}
 
 A lubridate period object, such as \code{\link[lubridate:days]{lubridate::days()}} or
 \code{\link[lubridate:years]{lubridate::years()}}. This can also be a character string parsable
-by \code{\link[lubridate:period]{lubridate::period()}}. Sub-daily periods are not allowed.}
+by \code{\link[lubridate:period]{lubridate::period()}}, or an integer value for the number of days to
+jump. Sub-daily periods are not allowed.}
 
 \item{schedule}{\code{[schedule / event]}
 

@@ -32,11 +32,12 @@
 #' The second option more naturally lends itself to business logic. Two business
 #' days from Friday is Tuesday.
 #'
-#' @param jump `[Period(1) / character(1)]`
+#' @param jump `[Period(1) / character(1) / integer(1)]`
 #'
 #'   A lubridate period object, such as [lubridate::days()] or
 #'   [lubridate::years()]. This can also be a character string parsable
-#'   by [lubridate::period()]. Sub-daily periods are not allowed.
+#'   by [lubridate::period()], or an integer value for the number of days to
+#'   jump. Sub-daily periods are not allowed.
 #'
 #' @param n `[integer(1)]`
 #'
