@@ -107,6 +107,29 @@
 <a class="sourceLine" id="cb5-3" data-line-number="3"><span class="co"># Step forward 2 non-event days, stepping over thanksgiving</span></a>
 <a class="sourceLine" id="cb5-4" data-line-number="4"><span class="kw"><a href="reference/sch_jump.html">sch_step</a></span>(wednesday_before_thanksgiving, <span class="dt">n =</span> <span class="dv">2</span>, on_thanksgiving)</a>
 <a class="sourceLine" id="cb5-5" data-line-number="5"><span class="co">#&gt; [1] "2000-11-25"</span></a></code></pre></div>
+<p>By combining multiple recurrence rules together, you can create larger “schedules” that form a collection of holidays, or events such as weekends. almanac comes with a prebuilt <code><a href="reference/calendars.html">calendar_usa_federal()</a></code> schedule that includes recurrence rules for the US holidays. Combining this with a recurrence rule of “on weekends” constructs a business calendar, which we can use to shift dates by, for example, “2 business days”.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">on_weekends &lt;-<span class="st"> </span><span class="kw"><a href="reference/rrule.html">weekly</a></span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="reference/recur_on_wday.html">recur_on_weekends</a></span>()</a>
+<a class="sourceLine" id="cb6-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb6-4" data-line-number="4">on_us_holidays_and_weekends &lt;-<span class="st"> </span><span class="kw"><a href="reference/calendars.html">calendar_usa_federal</a></span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="reference/sch-add.html">sch_add_rrule</a></span>(on_weekends)</a>
+<a class="sourceLine" id="cb6-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb6-7" data-line-number="7">thursday_and_friday_before_labor_day &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"2019-08-29"</span>, <span class="st">"2019-08-30"</span>)</a>
+<a class="sourceLine" id="cb6-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb6-9" data-line-number="9"><span class="co"># Steps over Saturday, Sunday, and Labor Day to the following Tuesday</span></a>
+<a class="sourceLine" id="cb6-10" data-line-number="10"><span class="co"># and Wednesday, aka "two business days" from now!</span></a>
+<a class="sourceLine" id="cb6-11" data-line-number="11">two_business_days_forward &lt;-<span class="st"> </span><span class="kw"><a href="reference/sch_jump.html">sch_step</a></span>(</a>
+<a class="sourceLine" id="cb6-12" data-line-number="12">  thursday_and_friday_before_labor_day, </a>
+<a class="sourceLine" id="cb6-13" data-line-number="13">  <span class="dt">n =</span> <span class="dv">2</span>,</a>
+<a class="sourceLine" id="cb6-14" data-line-number="14">  <span class="dt">schedule =</span> on_us_holidays_and_weekends</a>
+<a class="sourceLine" id="cb6-15" data-line-number="15">)</a>
+<a class="sourceLine" id="cb6-16" data-line-number="16"></a>
+<a class="sourceLine" id="cb6-17" data-line-number="17">two_business_days_forward</a>
+<a class="sourceLine" id="cb6-18" data-line-number="18"><span class="co">#&gt; [1] "2019-09-03" "2019-09-04"</span></a>
+<a class="sourceLine" id="cb6-19" data-line-number="19"></a>
+<a class="sourceLine" id="cb6-20" data-line-number="20">lubridate<span class="op">::</span><span class="kw"><a href="http://lubridate.tidyverse.org/reference/day.html">wday</a></span>(two_business_days_forward, <span class="dt">label =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb6-21" data-line-number="21"><span class="co">#&gt; [1] Tue Wed</span></a>
+<a class="sourceLine" id="cb6-22" data-line-number="22"><span class="co">#&gt; Levels: Sun &lt; Mon &lt; Tue &lt; Wed &lt; Thu &lt; Fri &lt; Sat</span></a></code></pre></div>
 <div id="learning-more" class="section level2">
 <h2 class="hasAnchor">
 <a href="#learning-more" class="anchor"></a>Learning More</h2>
@@ -120,10 +143,10 @@
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>You can NOT install the released version of almanac from <a href="https://CRAN.R-project.org">CRAN</a> with:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="co"># NO! install.packages("almanac")</span></a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="co"># NO! install.packages("almanac")</span></a></code></pre></div>
 <p>And the development version from <a href="https://github.com/">GitHub</a> with:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="co"># install.packages("devtools")</span></a>
-<a class="sourceLine" id="cb7-2" data-line-number="2">devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">"DavisVaughan/almanac"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="co"># install.packages("devtools")</span></a>
+<a class="sourceLine" id="cb8-2" data-line-number="2">devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">"DavisVaughan/almanac"</span>)</a></code></pre></div>
 </div>
 <div id="acknowledgements" class="section level2">
 <h2 class="hasAnchor">
@@ -165,6 +188,7 @@
 <ul class="list-unstyled">
 <li><a href="https://travis-ci.org/DavisVaughan/almanac"><img src="https://travis-ci.org/DavisVaughan/almanac.svg?branch=master" alt="Travis build status"></a></li>
 <li><a href="https://codecov.io/gh/DavisVaughan/almanac?branch=master"><img src="https://codecov.io/gh/DavisVaughan/almanac/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
+<li><a href="https://www.tidyverse.org/lifecycle/#experimental"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
 </ul>
 </div>
 </div>
