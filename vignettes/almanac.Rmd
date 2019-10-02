@@ -67,7 +67,7 @@ sch_seq("1988-01-01", "1995-12-31", on_yearly_jan_5)
 
 ## Recurrence Set
 
-Each recurrence rule comes with its own unique _recurrence set_. A recurrence set is the set of all event dates that are included in that rule. In the previous example, we used `sch_seq()` to extract a subset of dates from the recurrence set that were between `from` and `to`. You can also check if a date is included in a recurrence rule's set with `sch_in()`.
+Each recurrence rule comes with its own unique _recurrence set_. A recurrence set is the set of all event dates that are included in that rule. In the previous example, we used `sch_seq()` to extract a subset of dates from the recurrence set that were between `from` and `to`. You can also check if an existing date is included in a recurrence rule's set with `sch_in()`.
 
 ```{r}
 on_monthly <- monthly(since = "1990-01-10")
@@ -81,3 +81,61 @@ x_in_set
 x[x_in_set]
 ```
 
+### Caching
+
+{almanac} makes an attempt to be smart by caching dates in the recurrence set that it has "seen". This means that repeated access to the same schedule can often speed up substantially between the first access and subsequent accesses.
+
+```{r}
+start_date <- "1990-01-01"
+on_daily <- daily(since = start_date)
+
+# The first time is "slow"
+system.time(sch_seq(start_date, "2000-01-01", on_daily))
+
+# Repeated access to the same location is fast
+system.time(sch_seq(start_date, "2000-01-01", on_daily))
+
+# Dates are cached from `[since, to]`, so if you back up `to`, its still fast
+system.time(sch_seq(start_date, "1900-05-01", on_daily))
+
+# But when you extend `to` forward in time, it will have to generate all dates
+# between `since` and `to` again
+system.time(sch_seq(start_date, "2000-05-01", on_daily))
+```
+
+## Recurrence Conditions
+
+So far we have worked with the base recurrence rules. Things get _much_ more interesting when we start adding extra conditions to these rules. Conditions are a way to _limit_ or _expand_ a given recurrence rule to hone in on recurring dates that you are particularly interested in. All condition functions in {almanac} start with `recur_*()`. For example, let's take a monthly rule, which defaults to give us 1 day per month, and _expand_ it to give us every 4th and 16th day of the month.
+
+```{r}
+on_4th_and_16th <- monthly(since = "2000-01-01") %>%
+  recur_on_mday(c(4, 16))
+
+sch_seq("2000-01-01", "2000-06-01", on_4th_and_16th)
+```
+
+An important thing to note here is that even though our `since` date is on the first of the month, we are "overriding" that with the recurrence condition, so that information is not used.
+
+Recurrence rules can continually be added to further refine your rule. When you add a condition to a rule, you get another rule back. Let's try creating a rule for the recurring holiday, Labor Day. This recurs on the first Monday of September, yearly. To do this, we will:
+
+- Use a `yearly()` base since this happens 1 time per year.
+- Use `recur_on_ymonth()` to hone in on September.
+- Use `recur_on_wday()` to hone in on the first Monday of the month.
+
+```{r}
+on_labor_day <- yearly(since = "2000-01-01") %>%
+  recur_on_ymonth("Sep") %>%
+  recur_on_wday("Monday", nth = 1)
+
+sch_seq("2000-01-01", "2005-01-01", on_labor_day)
+```
+
+The `nth` argument of `recur_on_wday()` is especially useful for selecting from the end of the month. If we wanted the _last_ Monday in September instead, we could do:
+
+```{r}
+on_last_monday_in_sept <- yearly(since = "2000-01-01") %>%
+  recur_on_ymonth("Sep") %>%
+  recur_on_wday("Monday", nth = -1)
+
+sch_seq("2000-01-01", "2005-01-01", on_last_monday_in_sept)
+```
