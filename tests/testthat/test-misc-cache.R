@@ -20,3 +20,38 @@ test_that("cache can handle disjoint repeated calls (#6)", {
 
   expect_equal(sch_seq("2000-05-01", "2000-06-01", rrule), expect)
 })
+
+test_that("cache is faster on repeated calls", {
+  rrule <- daily()
+
+  from <- as.Date("2000-01-01")
+  to <- as.Date("2000-01-02")
+
+  start <- proc.time()
+  sch_seq(from, to, rrule)
+  t1 <- proc.time() - start
+
+  start <- proc.time()
+  sch_seq(from, to, rrule)
+  t2 <- proc.time() - start
+
+  expect_lt(t2[3], t1[3])
+})
+
+test_that("adjusting `since` results in significant speed ups", {
+  rrule1 <- daily()
+  rrule2 <- daily(since = "2000-01-01")
+
+  from <- as.Date("2000-01-01")
+  to <- as.Date("2000-01-02")
+
+  start <- proc.time()
+  sch_seq(from, to, rrule1)
+  t1 <- proc.time() - start
+
+  start <- proc.time()
+  sch_seq(from, to, rrule2)
+  t2 <- proc.time() - start
+
+  expect_lt(t2[3], t1[3])
+})
