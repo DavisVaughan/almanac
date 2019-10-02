@@ -139,9 +139,7 @@ get_wday <- function(x) {
       next
     }
 
-    wday <- glue::glue_collapse(wday, sep = ", ")
     wday_nth <- glue("{wday_base}.nth({wday})")
-
     wday_strings <- c(wday_strings, wday_nth)
   }
 
