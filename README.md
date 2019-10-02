@@ -62,6 +62,8 @@ more about how to use almanac.
 
   - `vignette("almanac")`
 
+  - `vignette("adjust-and-shift")`
+
 ## Installation
 
 You can NOT install the released version of almanac from
