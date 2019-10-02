@@ -29,8 +29,11 @@ A _recurrence rule_ is a structured object that determines if a date should be c
 To build a recurrence rule, you start with a base recurrence frequency. There are 4 frequencies to choose from:
 
 - `daily()`
+
 - `weekly()`
+
 - `monthly()`
+
 - `yearly()`
 
 Take the `yearly()` frequency, for example. By default, this will declare that 1 value per year is an event.
@@ -119,7 +122,9 @@ An important thing to note here is that even though our `since` date is on the f
 Recurrence rules can continually be added to further refine your rule. When you add a condition to a rule, you get another rule back. Let's try creating a rule for the recurring holiday, Labor Day. This recurs on the first Monday of September, yearly. To do this, we will:
 
 - Use a `yearly()` base since this happens 1 time per year.
+
 - Use `recur_on_ymonth()` to hone in on September.
+
 - Use `recur_on_wday()` to hone in on the first Monday of the month.
 
 ```{r}
