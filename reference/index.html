@@ -132,28 +132,16 @@
     <tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
+          <h2 id="section-recurrence-rules" class="hasAnchor"><a href="#section-recurrence-rules" class="anchor"></a>Recurrence rules</h2>
           <p class="section-desc"></p>
         </th>
       </tr>
       <tr>
         
         <td>
-          <p><code><a href="adjustments.html">adj_following()</a></code> <code><a href="adjustments.html">adj_preceding()</a></code> <code><a href="adjustments.html">adj_modified_following()</a></code> <code><a href="adjustments.html">adj_modified_preceding()</a></code> <code><a href="adjustments.html">adj_nearest()</a></code> </p>
+          <p><code><a href="rrule.html">daily()</a></code> <code><a href="rrule.html">weekly()</a></code> <code><a href="rrule.html">monthly()</a></code> <code><a href="rrule.html">yearly()</a></code> </p>
         </td>
-        <td><p>Common adjustments</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="calendars.html">calendar_usa_federal()</a></code> </p>
-        </td>
-        <td><p>Calendars</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="holidays.html">hldy_washington_birthday()</a></code> <code><a href="holidays.html">hldy_memorial_day()</a></code> <code><a href="holidays.html">hldy_labor_day()</a></code> <code><a href="holidays.html">hldy_columbus_day()</a></code> <code><a href="holidays.html">hldy_veterans_day()</a></code> <code><a href="holidays.html">hldy_new_years_day()</a></code> <code><a href="holidays.html">hldy_martin_luther_king_jr_day()</a></code> <code><a href="holidays.html">hldy_independence_day()</a></code> <code><a href="holidays.html">hldy_thanksgiving()</a></code> <code><a href="holidays.html">hldy_christmas()</a></code> </p>
-        </td>
-        <td><p>Holidays</p></td>
+        <td><p>Create a recurrence rule</p></td>
       </tr><tr>
         
         <td>
@@ -220,42 +208,40 @@
           <p><code><a href="recur_with_week_start.html">recur_with_week_start()</a></code> </p>
         </td>
         <td><p>Control the start of the week</p></td>
-      </tr><tr>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-schedule-construction" class="hasAnchor"><a href="#section-schedule-construction" class="anchor"></a>Schedule construction</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
         
         <td>
-          <p><code><a href="rrule.html">daily()</a></code> <code><a href="rrule.html">weekly()</a></code> <code><a href="rrule.html">monthly()</a></code> <code><a href="rrule.html">yearly()</a></code> </p>
+          <p><code><a href="schedule.html">schedule()</a></code> </p>
         </td>
-        <td><p>Create a recurrence rule</p></td>
+        <td><p>Create a new schedule</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="sch-add.html">sch_add_rrule()</a></code> <code><a href="sch-add.html">sch_add_rdate()</a></code> <code><a href="sch-add.html">sch_add_exdate()</a></code> <code><a href="sch-add.html">sch_add_schedule()</a></code> </p>
         </td>
         <td><p>Add to a schedule</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="sch_adjust.html">sch_adjust()</a></code> </p>
-        </td>
-        <td><p>Adjust a vector of dates</p></td>
-      </tr><tr>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-schedule-sets" class="hasAnchor"><a href="#section-schedule-sets" class="anchor"></a>Schedule sets</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
         
         <td>
           <p><code><a href="sch_in.html">sch_in()</a></code> </p>
         </td>
         <td><p>Is <code>x</code> in the schedule?</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="sch_jump.html">sch_jump()</a></code> <code><a href="sch_jump.html">sch_step()</a></code> </p>
-        </td>
-        <td><p>Shift dates relative to a schedule</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="sch_next.html">sch_next()</a></code> <code><a href="sch_next.html">sch_previous()</a></code> </p>
-        </td>
-        <td><p>Generate the next or previous event</p></td>
       </tr><tr>
         
         <td>
@@ -265,9 +251,63 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="schedule.html">schedule()</a></code> </p>
+          <p><code><a href="sch_next.html">sch_next()</a></code> <code><a href="sch_next.html">sch_previous()</a></code> </p>
         </td>
-        <td><p>Create a new schedule</p></td>
+        <td><p>Generate the next or previous event</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-schedule-adjustments" class="hasAnchor"><a href="#section-schedule-adjustments" class="anchor"></a>Schedule adjustments</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="sch_adjust.html">sch_adjust()</a></code> </p>
+        </td>
+        <td><p>Adjust a vector of dates</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="sch_jump.html">sch_jump()</a></code> <code><a href="sch_jump.html">sch_step()</a></code> </p>
+        </td>
+        <td><p>Shift dates relative to a schedule</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-adjustments" class="hasAnchor"><a href="#section-adjustments" class="anchor"></a>Adjustments</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="adjustments.html">adj_following()</a></code> <code><a href="adjustments.html">adj_preceding()</a></code> <code><a href="adjustments.html">adj_modified_following()</a></code> <code><a href="adjustments.html">adj_modified_preceding()</a></code> <code><a href="adjustments.html">adj_nearest()</a></code> </p>
+        </td>
+        <td><p>Common adjustments</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-holidays-and-calendars" class="hasAnchor"><a href="#section-holidays-and-calendars" class="anchor"></a>Holidays and Calendars</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="holidays.html">hldy_washington_birthday()</a></code> <code><a href="holidays.html">hldy_memorial_day()</a></code> <code><a href="holidays.html">hldy_labor_day()</a></code> <code><a href="holidays.html">hldy_columbus_day()</a></code> <code><a href="holidays.html">hldy_veterans_day()</a></code> <code><a href="holidays.html">hldy_new_years_day()</a></code> <code><a href="holidays.html">hldy_martin_luther_king_jr_day()</a></code> <code><a href="holidays.html">hldy_independence_day()</a></code> <code><a href="holidays.html">hldy_thanksgiving()</a></code> <code><a href="holidays.html">hldy_christmas()</a></code> </p>
+        </td>
+        <td><p>Holidays</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="calendars.html">calendar_usa_federal()</a></code> </p>
+        </td>
+        <td><p>Calendars</p></td>
       </tr>
     </tbody>
     </table>
@@ -276,7 +316,12 @@
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-all-functions">All functions</a></li>
+      <li><a href="#section-recurrence-rules">Recurrence rules</a></li>
+      <li><a href="#section-schedule-construction">Schedule construction</a></li>
+      <li><a href="#section-schedule-sets">Schedule sets</a></li>
+      <li><a href="#section-schedule-adjustments">Schedule adjustments</a></li>
+      <li><a href="#section-adjustments">Adjustments</a></li>
+      <li><a href="#section-holidays-and-calendars">Holidays and Calendars</a></li>
     </ul>
   </div>
 </div>
