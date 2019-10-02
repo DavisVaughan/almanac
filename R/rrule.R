@@ -100,6 +100,19 @@ yearly <- function(since = "1970-01-01") {
 
 # ------------------------------------------------------------------------------
 
+#' @export
+print.rrule <- function(x, ...) {
+  cat(format(x))
+  invisible(x)
+}
+
+#' @export
+format.rrule <- function(x, ...) {
+  glue("rrule: {x$rules$frequency}")
+}
+
+# ------------------------------------------------------------------------------
+
 rrule <- function(since = "1970-01-01", frequency = "yearly") {
   since <- vec_cast_date(since, "since")
 
