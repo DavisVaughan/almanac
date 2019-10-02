@@ -139,3 +139,41 @@ on_last_monday_in_sept <- yearly(since = "2000-01-01") %>%
 
 sch_seq("2000-01-01", "2005-01-01", on_last_monday_in_sept)
 ```
+
+## Schedules
+
+Recurrence rules are powerful tools on their own, but they aren't enough to solve every task. Say you want to construct a rule that includes both Christmas and Labor Day as events. It would be impossible to construct this kind of recurrence set using a single rule, but if you could join _multiple_ rules together, one for Christmas and one for Labor Day, then it would be possible.
+
+A _schedule_ is a collection of recurrence rules. The recurrence set of a schedule is the union of the recurrence sets of every underlying rule. It can also contain specialized dates that you want to forcibly include in the recurrence set, called `rdate`s, and ones that you want to forcibly exclude, called `exdate`s.
+
+```{r}
+on_christmas <- yearly(since = "2000-01-01") %>%
+  recur_on_ymonth("Dec") %>%
+  recur_on_mday(25)
+
+sch_christmas_or_labor_day <- schedule() %>%
+  sch_add_rrule(on_christmas) %>%
+  sch_add_rrule(on_labor_day)
+
+sch_seq("2000-01-01", "2002-01-01", sch_christmas_or_labor_day)
+
+sch_christmas_or_labor_day_except_2000_labor_day <- sch_christmas_or_labor_day %>%
+  sch_add_exdate("2000-09-04")
+
+sch_seq("2000-01-01", "2002-01-01", sch_christmas_or_labor_day_except_2000_labor_day)
+```
+
+Schedules are powerful because they allow us to begin to build up more complicated recurrence sets from simpler pieces. All of the `hldy_*()` holiday functions are schedules built up from simpler rules. As an example of how complex this can get, take a quick look at `hldy_thanksgiving()`. In present time, Thanksgiving takes place on the 4th Thursday of November, but it wasn't always this simple. The date that Thanksgiving occurs on has changed twice, which you can read about [here](https://www.archives.gov/legislative/features/thanksgiving) if you are interested, creating the following disjoint set of rules:
+
+- Pre 1939: Last Thursday in November
+
+- After 1939 but before 1942: Next to last Thursday in November
+
+- Post 1942: The 4th Thursday in November
+
+Here is the implementation of `hldy_thanksgiving()`, which combines these pieces into a larger schedule.
+
+```{r}
+hldy_thanksgiving
+```
+
