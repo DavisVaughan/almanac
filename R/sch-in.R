@@ -13,6 +13,7 @@
 #' @export
 sch_in <- function(x, schedule) {
   x <- vec_cast_date(x)
+  schedule <- as_schedule(schedule)
 
   min <- min(x)
   max <- max(x)
