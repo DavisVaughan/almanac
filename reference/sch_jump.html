@@ -171,10 +171,11 @@ is close to the start of <code>x</code> can dramatically improve performance.</e
     </tr>
     <tr>
       <th>jump</th>
-      <td><p><code>[Period(1) / character(1)]</code></p>
+      <td><p><code>[Period(1) / character(1) / integer(1)]</code></p>
 <p>A lubridate period object, such as <code><a href='http://lubridate.tidyverse.org/reference/period.html'>lubridate::days()</a></code> or
 <code><a href='http://lubridate.tidyverse.org/reference/period.html'>lubridate::years()</a></code>. This can also be a character string parsable
-by <code><a href='http://lubridate.tidyverse.org/reference/period.html'>lubridate::period()</a></code>. Sub-daily periods are not allowed.</p></td>
+by <code><a href='http://lubridate.tidyverse.org/reference/period.html'>lubridate::period()</a></code>, or an integer value for the number of days to
+jump. Sub-daily periods are not allowed.</p></td>
     </tr>
     <tr>
       <th>schedule</th>

@@ -100,10 +100,10 @@
 <p>A <em>recurrence rule</em> is a structured object that determines if a date should be counted as an <em>event</em> or not. At the most basic level, the job of a recurrence rule is to return <code>TRUE</code> if a particular date is an <em>event</em>, and <code>FALSE</code> otherwise.</p>
 <p>To build a recurrence rule, you start with a base recurrence frequency. There are 4 frequencies to choose from:</p>
 <ul>
-<li><code><a href="../reference/rrule.html">daily()</a></code></li>
-<li><code><a href="../reference/rrule.html">weekly()</a></code></li>
-<li><code><a href="../reference/rrule.html">monthly()</a></code></li>
-<li><code><a href="../reference/rrule.html">yearly()</a></code></li>
+<li><p><code><a href="../reference/rrule.html">daily()</a></code></p></li>
+<li><p><code><a href="../reference/rrule.html">weekly()</a></code></p></li>
+<li><p><code><a href="../reference/rrule.html">monthly()</a></code></p></li>
+<li><p><code><a href="../reference/rrule.html">yearly()</a></code></p></li>
 </ul>
 <p>Take the <code><a href="../reference/rrule.html">yearly()</a></code> frequency, for example. By default, this will declare that 1 value per year is an event.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">on_yearly &lt;-<span class="st"> </span><span class="kw"><a href="../reference/rrule.html">yearly</a></span>()</a>
@@ -154,23 +154,23 @@
 <a class="sourceLine" id="cb7-4" data-line-number="4"><span class="co"># The first time is "slow"</span></a>
 <a class="sourceLine" id="cb7-5" data-line-number="5"><span class="kw"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>(<span class="kw"><a href="../reference/sch_seq.html">sch_seq</a></span>(start_date, <span class="st">"2000-01-01"</span>, on_daily))</a>
 <a class="sourceLine" id="cb7-6" data-line-number="6"><span class="co">#&gt;    user  system elapsed </span></a>
-<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="co">#&gt;   0.097   0.004   0.100</span></a>
+<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="co">#&gt;   0.113   0.004   0.115</span></a>
 <a class="sourceLine" id="cb7-8" data-line-number="8"></a>
 <a class="sourceLine" id="cb7-9" data-line-number="9"><span class="co"># Repeated access to the same location is fast</span></a>
 <a class="sourceLine" id="cb7-10" data-line-number="10"><span class="kw"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>(<span class="kw"><a href="../reference/sch_seq.html">sch_seq</a></span>(start_date, <span class="st">"2000-01-01"</span>, on_daily))</a>
 <a class="sourceLine" id="cb7-11" data-line-number="11"><span class="co">#&gt;    user  system elapsed </span></a>
-<a class="sourceLine" id="cb7-12" data-line-number="12"><span class="co">#&gt;   0.001   0.000   0.001</span></a>
+<a class="sourceLine" id="cb7-12" data-line-number="12"><span class="co">#&gt;   0.000   0.000   0.001</span></a>
 <a class="sourceLine" id="cb7-13" data-line-number="13"></a>
 <a class="sourceLine" id="cb7-14" data-line-number="14"><span class="co"># Dates are cached from `[since, to]`, so if you back up `to`, its still fast</span></a>
 <a class="sourceLine" id="cb7-15" data-line-number="15"><span class="kw"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>(<span class="kw"><a href="../reference/sch_seq.html">sch_seq</a></span>(start_date, <span class="st">"1900-05-01"</span>, on_daily))</a>
 <a class="sourceLine" id="cb7-16" data-line-number="16"><span class="co">#&gt;    user  system elapsed </span></a>
-<a class="sourceLine" id="cb7-17" data-line-number="17"><span class="co">#&gt;       0       0       0</span></a>
+<a class="sourceLine" id="cb7-17" data-line-number="17"><span class="co">#&gt;   0.000   0.000   0.001</span></a>
 <a class="sourceLine" id="cb7-18" data-line-number="18"></a>
 <a class="sourceLine" id="cb7-19" data-line-number="19"><span class="co"># But when you extend `to` forward in time, it will have to generate all dates</span></a>
 <a class="sourceLine" id="cb7-20" data-line-number="20"><span class="co"># between `since` and `to` again</span></a>
 <a class="sourceLine" id="cb7-21" data-line-number="21"><span class="kw"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>(<span class="kw"><a href="../reference/sch_seq.html">sch_seq</a></span>(start_date, <span class="st">"2000-05-01"</span>, on_daily))</a>
 <a class="sourceLine" id="cb7-22" data-line-number="22"><span class="co">#&gt;    user  system elapsed </span></a>
-<a class="sourceLine" id="cb7-23" data-line-number="23"><span class="co">#&gt;   0.067   0.004   0.070</span></a></code></pre></div>
+<a class="sourceLine" id="cb7-23" data-line-number="23"><span class="co">#&gt;   0.094   0.000   0.092</span></a></code></pre></div>
 </div>
 </div>
 <div id="recurrence-conditions" class="section level2">
@@ -186,9 +186,9 @@
 <p>An important thing to note here is that even though our <code>since</code> date is on the first of the month, we are “overriding” that with the recurrence condition, so that information is not used.</p>
 <p>Recurrence rules can continually be added to further refine your rule. When you add a condition to a rule, you get another rule back. Let’s try creating a rule for the recurring holiday, Labor Day. This recurs on the first Monday of September, yearly. To do this, we will:</p>
 <ul>
-<li>Use a <code><a href="../reference/rrule.html">yearly()</a></code> base since this happens 1 time per year.</li>
-<li>Use <code><a href="../reference/recur_on_ymonth.html">recur_on_ymonth()</a></code> to hone in on September.</li>
-<li>Use <code><a href="../reference/recur_on_wday.html">recur_on_wday()</a></code> to hone in on the first Monday of the month.</li>
+<li><p>Use a <code><a href="../reference/rrule.html">yearly()</a></code> base since this happens 1 time per year.</p></li>
+<li><p>Use <code><a href="../reference/recur_on_ymonth.html">recur_on_ymonth()</a></code> to hone in on September.</p></li>
+<li><p>Use <code><a href="../reference/recur_on_wday.html">recur_on_wday()</a></code> to hone in on the first Monday of the month.</p></li>
 </ul>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">on_labor_day &lt;-<span class="st"> </span><span class="kw"><a href="../reference/rrule.html">yearly</a></span>(<span class="dt">since =</span> <span class="st">"2000-01-01"</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb9-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/recur_on_ymonth.html">recur_on_ymonth</a></span>(<span class="st">"Sep"</span>) <span class="op">%&gt;%</span></a>
@@ -251,7 +251,7 @@
 <a class="sourceLine" id="cb12-17" data-line-number="17"><span class="co">#&gt;     sch &lt;- sch_add_schedule(sch, hldy_thanksgiving_post_1942())</span></a>
 <a class="sourceLine" id="cb12-18" data-line-number="18"><span class="co">#&gt;     return(sch)</span></a>
 <a class="sourceLine" id="cb12-19" data-line-number="19"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb12-20" data-line-number="20"><span class="co">#&gt; &lt;bytecode: 0x7275198&gt;</span></a>
+<a class="sourceLine" id="cb12-20" data-line-number="20"><span class="co">#&gt; &lt;bytecode: 0x4f544e0&gt;</span></a>
 <a class="sourceLine" id="cb12-21" data-line-number="21"><span class="co">#&gt; &lt;environment: namespace:almanac&gt;</span></a></code></pre></div>
 </div>
   </div>
