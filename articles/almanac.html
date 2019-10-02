@@ -142,23 +142,23 @@
 <a class="sourceLine" id="cb7-4" data-line-number="4"><span class="co"># The first time is "slow"</span></a>
 <a class="sourceLine" id="cb7-5" data-line-number="5"><span class="kw"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>(<span class="kw"><a href="../reference/sch_seq.html">sch_seq</a></span>(start_date, <span class="st">"2000-01-01"</span>, on_daily))</a>
 <a class="sourceLine" id="cb7-6" data-line-number="6"><span class="co">#&gt;    user  system elapsed </span></a>
-<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="co">#&gt;   0.105   0.007   0.111</span></a>
+<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="co">#&gt;   0.099   0.008   0.105</span></a>
 <a class="sourceLine" id="cb7-8" data-line-number="8"></a>
 <a class="sourceLine" id="cb7-9" data-line-number="9"><span class="co"># Repeated access to the same location is fast</span></a>
 <a class="sourceLine" id="cb7-10" data-line-number="10"><span class="kw"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>(<span class="kw"><a href="../reference/sch_seq.html">sch_seq</a></span>(start_date, <span class="st">"2000-01-01"</span>, on_daily))</a>
 <a class="sourceLine" id="cb7-11" data-line-number="11"><span class="co">#&gt;    user  system elapsed </span></a>
-<a class="sourceLine" id="cb7-12" data-line-number="12"><span class="co">#&gt;   0.001   0.001   0.001</span></a>
+<a class="sourceLine" id="cb7-12" data-line-number="12"><span class="co">#&gt;   0.000   0.000   0.001</span></a>
 <a class="sourceLine" id="cb7-13" data-line-number="13"></a>
 <a class="sourceLine" id="cb7-14" data-line-number="14"><span class="co"># Dates are cached from `[since, to]`, so if you back up `to`, its still fast</span></a>
 <a class="sourceLine" id="cb7-15" data-line-number="15"><span class="kw"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>(<span class="kw"><a href="../reference/sch_seq.html">sch_seq</a></span>(start_date, <span class="st">"1900-05-01"</span>, on_daily))</a>
 <a class="sourceLine" id="cb7-16" data-line-number="16"><span class="co">#&gt;    user  system elapsed </span></a>
-<a class="sourceLine" id="cb7-17" data-line-number="17"><span class="co">#&gt;   0.000   0.000   0.001</span></a>
+<a class="sourceLine" id="cb7-17" data-line-number="17"><span class="co">#&gt;       0       0       0</span></a>
 <a class="sourceLine" id="cb7-18" data-line-number="18"></a>
 <a class="sourceLine" id="cb7-19" data-line-number="19"><span class="co"># But when you extend `to` forward in time, it will have to generate all dates</span></a>
 <a class="sourceLine" id="cb7-20" data-line-number="20"><span class="co"># between `since` and `to` again</span></a>
 <a class="sourceLine" id="cb7-21" data-line-number="21"><span class="kw"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>(<span class="kw"><a href="../reference/sch_seq.html">sch_seq</a></span>(start_date, <span class="st">"2000-05-01"</span>, on_daily))</a>
 <a class="sourceLine" id="cb7-22" data-line-number="22"><span class="co">#&gt;    user  system elapsed </span></a>
-<a class="sourceLine" id="cb7-23" data-line-number="23"><span class="co">#&gt;   0.089   0.003   0.092</span></a></code></pre></div>
+<a class="sourceLine" id="cb7-23" data-line-number="23"><span class="co">#&gt;   0.077   0.004   0.080</span></a></code></pre></div>
 </div>
 </div>
 <div id="recurrence-conditions" class="section level2">
@@ -192,6 +192,56 @@
 <a class="sourceLine" id="cb10-5" data-line-number="5"><span class="kw"><a href="../reference/sch_seq.html">sch_seq</a></span>(<span class="st">"2000-01-01"</span>, <span class="st">"2005-01-01"</span>, on_last_monday_in_sept)</a>
 <a class="sourceLine" id="cb10-6" data-line-number="6"><span class="co">#&gt; [1] "2000-09-25" "2001-09-24" "2002-09-30" "2003-09-29" "2004-09-27"</span></a></code></pre></div>
 </div>
+<div id="schedules" class="section level2">
+<h2 class="hasAnchor">
+<a href="#schedules" class="anchor"></a>Schedules</h2>
+<p>Recurrence rules are powerful tools on their own, but they aren’t enough to solve every task. Say you want to construct a rule that includes both Christmas and Labor Day as events. It would be impossible to construct this kind of recurrence set using a single rule, but if you could join <em>multiple</em> rules together, one for Christmas and one for Labor Day, then it would be possible.</p>
+<p>A <em>schedule</em> is a collection of recurrence rules. The recurrence set of a schedule is the union of the recurrence sets of every underlying rule. It can also contain specialized dates that you want to forcibly include in the recurrence set, called <code>rdate</code>s, and ones that you want to forcibly exclude, called <code>exdate</code>s.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">on_christmas &lt;-<span class="st"> </span><span class="kw"><a href="../reference/rrule.html">yearly</a></span>(<span class="dt">since =</span> <span class="st">"2000-01-01"</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb11-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/recur_on_ymonth.html">recur_on_ymonth</a></span>(<span class="st">"Dec"</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb11-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="../reference/recur_on_mday.html">recur_on_mday</a></span>(<span class="dv">25</span>)</a>
+<a class="sourceLine" id="cb11-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb11-5" data-line-number="5">sch_christmas_or_labor_day &lt;-<span class="st"> </span><span class="kw"><a href="../reference/schedule.html">schedule</a></span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb11-6" data-line-number="6"><span class="st">  </span><span class="kw"><a href="../reference/sch-add.html">sch_add_rrule</a></span>(on_christmas) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb11-7" data-line-number="7"><span class="st">  </span><span class="kw"><a href="../reference/sch-add.html">sch_add_rrule</a></span>(on_labor_day)</a>
+<a class="sourceLine" id="cb11-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb11-9" data-line-number="9"><span class="kw"><a href="../reference/sch_seq.html">sch_seq</a></span>(<span class="st">"2000-01-01"</span>, <span class="st">"2002-01-01"</span>, sch_christmas_or_labor_day)</a>
+<a class="sourceLine" id="cb11-10" data-line-number="10"><span class="co">#&gt; [1] "2000-09-04" "2000-12-25" "2001-09-03" "2001-12-25"</span></a>
+<a class="sourceLine" id="cb11-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb11-12" data-line-number="12">sch_christmas_or_labor_day_except_<span class="dv">2000</span>_labor_day &lt;-<span class="st"> </span>sch_christmas_or_labor_day <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb11-13" data-line-number="13"><span class="st">  </span><span class="kw"><a href="../reference/sch-add.html">sch_add_exdate</a></span>(<span class="st">"2000-09-04"</span>)</a>
+<a class="sourceLine" id="cb11-14" data-line-number="14"></a>
+<a class="sourceLine" id="cb11-15" data-line-number="15"><span class="kw"><a href="../reference/sch_seq.html">sch_seq</a></span>(<span class="st">"2000-01-01"</span>, <span class="st">"2002-01-01"</span>, sch_christmas_or_labor_day_except_<span class="dv">2000</span>_labor_day)</a>
+<a class="sourceLine" id="cb11-16" data-line-number="16"><span class="co">#&gt; [1] "2000-12-25" "2001-09-03" "2001-12-25"</span></a></code></pre></div>
+<p>Schedules are powerful because they allow us to begin to build up more complicated recurrence sets from simpler pieces. All of the <code>hldy_*()</code> holiday functions are schedules built up from simpler rules. As an example of how complex this can get, take a quick look at <code><a href="../reference/holidays.html">hldy_thanksgiving()</a></code>. In present time, Thanksgiving takes place on the 4th Thursday of November, but it wasn’t always this simple. The date that Thanksgiving occurs on has changed twice, which you can read about <a href="https://www.archives.gov/legislative/features/thanksgiving">here</a> if you are interested, creating the following disjoint set of rules:</p>
+<ul>
+<li><p>Pre 1939: Last Thursday in November</p></li>
+<li><p>After 1939 but before 1942: Next to last Thursday in November</p></li>
+<li><p>Post 1942: The 4th Thursday in November</p></li>
+</ul>
+<p>Here is the implementation of <code><a href="../reference/holidays.html">hldy_thanksgiving()</a></code>, which combines these pieces into a larger schedule.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">hldy_thanksgiving</a>
+<a class="sourceLine" id="cb12-2" data-line-number="2"><span class="co">#&gt; function (since = "1970-01-01") </span></a>
+<a class="sourceLine" id="cb12-3" data-line-number="3"><span class="co">#&gt; {</span></a>
+<a class="sourceLine" id="cb12-4" data-line-number="4"><span class="co">#&gt;     since &lt;- vec_cast_date(since)</span></a>
+<a class="sourceLine" id="cb12-5" data-line-number="5"><span class="co">#&gt;     if (since &gt;= as.Date("1942-01-01")) {</span></a>
+<a class="sourceLine" id="cb12-6" data-line-number="6"><span class="co">#&gt;         return(hldy_thanksgiving_post_1942(since))</span></a>
+<a class="sourceLine" id="cb12-7" data-line-number="7"><span class="co">#&gt;     }</span></a>
+<a class="sourceLine" id="cb12-8" data-line-number="8"><span class="co">#&gt;     if (since &gt;= as.Date("1939-01-01")) {</span></a>
+<a class="sourceLine" id="cb12-9" data-line-number="9"><span class="co">#&gt;         sch &lt;- schedule()</span></a>
+<a class="sourceLine" id="cb12-10" data-line-number="10"><span class="co">#&gt;         sch &lt;- sch_add_schedule(sch, hldy_thanksgiving_post_1939_pre_1942(since))</span></a>
+<a class="sourceLine" id="cb12-11" data-line-number="11"><span class="co">#&gt;         sch &lt;- sch_add_schedule(sch, hldy_thanksgiving_post_1942())</span></a>
+<a class="sourceLine" id="cb12-12" data-line-number="12"><span class="co">#&gt;         return(sch)</span></a>
+<a class="sourceLine" id="cb12-13" data-line-number="13"><span class="co">#&gt;     }</span></a>
+<a class="sourceLine" id="cb12-14" data-line-number="14"><span class="co">#&gt;     sch &lt;- schedule()</span></a>
+<a class="sourceLine" id="cb12-15" data-line-number="15"><span class="co">#&gt;     sch &lt;- sch_add_schedule(sch, hldy_thanksgiving_pre_1939(since))</span></a>
+<a class="sourceLine" id="cb12-16" data-line-number="16"><span class="co">#&gt;     sch &lt;- sch_add_schedule(sch, hldy_thanksgiving_post_1939_pre_1942())</span></a>
+<a class="sourceLine" id="cb12-17" data-line-number="17"><span class="co">#&gt;     sch &lt;- sch_add_schedule(sch, hldy_thanksgiving_post_1942())</span></a>
+<a class="sourceLine" id="cb12-18" data-line-number="18"><span class="co">#&gt;     return(sch)</span></a>
+<a class="sourceLine" id="cb12-19" data-line-number="19"><span class="co">#&gt; }</span></a>
+<a class="sourceLine" id="cb12-20" data-line-number="20"><span class="co">#&gt; &lt;bytecode: 0x61daf18&gt;</span></a>
+<a class="sourceLine" id="cb12-21" data-line-number="21"><span class="co">#&gt; &lt;environment: namespace:almanac&gt;</span></a></code></pre></div>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -203,6 +253,7 @@
 <li><a href="#recurrence-rules">Recurrence Rules</a></li>
       <li><a href="#recurrence-set">Recurrence Set</a></li>
       <li><a href="#recurrence-conditions">Recurrence Conditions</a></li>
+      <li><a href="#schedules">Schedules</a></li>
       </ul>
 </div>
       </div>
