@@ -3,8 +3,10 @@ title: "Adjusting and Shifting Dates"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Adjusting and Shifting Dates}
-  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r, include = FALSE}
@@ -14,6 +16,144 @@ knitr::opts_chunk$set(
 )
 ```
 
+If you have read the introduction vignette, `vignette("almanac")`, then you've seen recurrence rules, schedules, and the functions `sch_seq()` and `sch_in()`. Additionally included in {almanac} are a set of functions for adjusting and shifting an existing set of dates, _relative to a schedule_. They will be the topic of this vignette. The three functions are:
+
+- `sch_adjust()`
+
+- `sch_jump()`
+
+- `sch_step()`
+
 ```{r setup}
 library(almanac)
+library(lubridate, warn.conflicts = FALSE)
 ```
+
+## Adjusting
+
+To talk about either `sch_jump()` or `sch_step()`, we first have to cover `sch_adjust()`, as it powers both of the others. `sch_adjust()` will "adjust" an existing set of dates to ensure that no dates currently fall on an "event", as defined by a provided schedule or recurrence rule. For example, let's construct a recurrence rule that includes all weekends in its recurrence set.
+
+```{r}
+on_weekends <- weekly(since = "2000-01-01") %>% 
+  recur_on_weekends()
+
+sch_seq("2000-01-01", "2000-01-16", on_weekends)
+```
+
+Now, imagine you have an existing set of dates, `x`. The dates in `x` might be weekdays or weekends, but you have to ensure that any weekend dates are rolled forward to their next available non-weekend date. To do this, you can use `sch_adjust()`, which will apply an `adjustment` repeatedly until your dates are no longer on an event date. The default `adjustment` is the lubridate function `days(1)`, to shift forward 1 day.
+
+```{r}
+x <- as.Date("2000-04-28") + 0:8
+
+# Any Saturday / Sunday should be rolled forward to a Monday
+wday(x, TRUE)
+
+x_adjusted <- sch_adjust(x, on_weekends)
+
+wday(x_adjusted, TRUE)
+```
+
+You could have also rolled the dates backwards to the previous Friday using `adjustment = -1`.
+
+```{r}
+wday(sch_adjust(x, on_weekends, adjustment = -1), TRUE)
+```
+
+## Adjustment Functions
+
+The `adjustment` parameter is pretty flexible. It can be a single integer to adjust by a number of days, a lubridate period function like `days()`, `years()`, and `weeks()`, or a function. The function adjustments are particularly useful when your specific adjustment depends on the date in question.
+
+To show this, we'll pull an example from finance. When traders enter agreements with each other, they often construct a schedule of dates of when one trader should pay the other. There are common conventions that are used to construct these schedules, one of which is to use a _modified following_ rule. This rule states that if a normal payment date is a non-business day (perhaps a weekend or holiday), then it should be adjusted forward to the next available business day _unless_ that date is in the next month, in which case it should instead be adjusted backwards to the next business day.
+
+Take a look at our existing dates, `x`. The second and third dates are weekends, but they are also right at the end of the month. Adjusting forward would land you in May immediately, so these should be adjusted backwards to `2000-04-28`. The last date is also a weekend, but the next available business day does not cross into a new month, so the normal adjustment forward should be applied.
+
+```{r}
+x
+
+wday(x, label = TRUE)
+```
+
+Rather than having to think about how to tackle this, almanac provides a number of `adj_*()` functions to help out, one of which is `adj_modified_following()`.
+
+```{r}
+sch_adjust(x, on_weekends, adj_modified_following)
+```
+
+`adj_modified_following()` is an example of a custom `adjustment` function, all of which should expect to take the problematic dates as their first argument, and the schedule as their second argument. The adjustment function is responsible for _completely_ adjusting the dates to the next available business day. It will not be called multiple times.
+
+## Jumping
+
+To build on `sch_adjust()`, let's assume that rather than just adjusting existing dates, you actually want to _shift_ the dates first, _then_ perform an adjustment to ensure that you have not landed on an event date. There are two natural ways to perform this shift, captured in `sch_jump()` and `sch_step()`.
+
+`sch_jump()` takes a vector of dates, a schedule, and a `jump`, which can be a lubridate Period object, a character string, or an integer number of days to jump. It performs the "jump" all at once, which is essentially equivalent to calling `x + days(n)`, if you are familiar with lubridate syntax. After the jump has been performed, it calls `sch_adjust()` on the resulting dates to ensure that the dates that you landed on are non-event dates.
+
+As an example, let's "jump" forward 1 day with `x`, providing `on_weekends` as our schedule to adjust with. Notice how jumping forward 1 day from Friday lands on Saturday, which is then adjusted to Monday.
+
+```{r}
+jump <- sch_jump(x, days(1), on_weekends)
+
+data.frame(
+  x = x,
+  x_wday = wday(x, label = TRUE),
+  jump = jump,
+  jump_wday = wday(jump, label = TRUE)
+)
+```
+
+Consider what happens when we "jump" forward 2 days.
+
+```{r}
+jump <- sch_jump(x, days(2), on_weekends)
+
+data.frame(
+  x = x,
+  x_wday = wday(x, label = TRUE),
+  jump = jump,
+  jump_wday = wday(jump, label = TRUE)
+)
+```
+
+In particular, take a look at what happens with Friday. The jump is applied all at once, landing us on Sunday, and then the adjustment is applied, which moves us to Monday. While this is consistent with what `sch_jump()` is trying to do, it might not always be what you want. If you want to move forward "2 business days", for example, then really Friday should be shifted forward to Tuesday, not Monday. To solve this problem, we turn to `sch_step()`.
+
+## Stepping
+
+`sch_step()` is a specialized version of shifting dates that is only applicable when shifting by a set number of days (as opposed to weeks or months). Rather than taking the `sch_jump()` approach by applying the jump all at once, `sch_step()` instead "steps" 1 day at a time, _and applies `sch_adjust()` at every step_. This will result in correct "business logic" of stepping forward by "2 business days" that `sch_jump()` couldn't provide.
+
+```{r}
+step <- sch_step(x, 2, on_weekends)
+
+data.frame(
+  x = x,
+  x_wday = wday(x, label = TRUE),
+  step = step,
+  step_wday = wday(step, label = TRUE)
+)
+```
+
+To break this down, take a look at just that first Friday.
+
+- Start on `2000-04-28`, a Friday
+
+- Step forward 1 day, to `2000-04-29`, a Saturday
+
+- Adjust, moving to `2000-05-01`, a Monday
+
+- Step forward 1 day, to `2000-05-02`, a Tuesday
+
+- Adjust, but no adjustment is required
+
+- Done, landed on `2000-05-02`
+
+```{r}
+friday <- x[1]
+friday
+
+sch_step(friday, 2, on_weekends)
+```
+
+
+
+
+
+
+
