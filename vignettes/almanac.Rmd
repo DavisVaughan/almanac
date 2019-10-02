@@ -1,0 +1,83 @@
+---
+title: "Introduction to almanac"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{almanac}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+This vignette is designed to introduce some of the common terminology used in {almanac} to get you up to speed on how to use the package. Along the way, we will see example usage of a number of the building blocks that will allow you to construct more complex schedules.
+
+```{r setup}
+library(almanac)
+```
+
+## Recurrence Rules
+
+A _recurrence rule_ is a structured object that determines if a date should be counted as an _event_ or not. At the most basic level, the job of a recurrence rule is to return `TRUE` if a particular date is an _event_, and `FALSE` otherwise.
+
+To build a recurrence rule, you start with a base recurrence frequency. There are 4 frequencies to choose from:
+
+- `daily()`
+- `weekly()`
+- `monthly()`
+- `yearly()`
+
+Take the `yearly()` frequency, for example. By default, this will declare that 1 value per year is an event.
+
+```{r}
+on_yearly <- yearly()
+on_yearly
+```
+
+The return value of `yearly()` is a _rrule_ object, short for "recurrence rule". This base object is all you need to start doing something useful. For example, you can provide `sch_seq()` this recurrence rule along with a `from` and `to` date, and it will return the events that it finds in the date range.
+
+```{r}
+sch_seq("1990-01-01", "1995-12-31", on_yearly)
+```
+
+What if we want a yearly value, but we want it on January 5th every year, rather than on the 1st? `yearly()` has a _very_ important argument called `since` that controls two things: the start date of the recurrence rule, and information such as the month, or the day of the month to use for the event dates if no other conditions have been specified to override those.
+
+The default of `since` is set to `1970-01-01`, the Unix epoch, but this is arbitrary. It is because of this default that in the above example with `sch_seq()` we get values on January 1st. Let's change that.
+
+```{r}
+on_yearly_jan_5 <- yearly(since = "1990-01-05")
+
+sch_seq("1990-01-01", "1995-12-31", on_yearly_jan_5)
+```
+
+__Notice that we also set the `since` date to be closer to our range of interest. This can dramatically improve performance in some cases.__
+
+Now that the `since` date has been set to 1990, if we try and find yearly dates before 1990, they will not be included.
+
+```{r}
+# same as above, because the 1988 and 1989 dates are not included. 
+sch_seq("1988-01-01", "1995-12-31", on_yearly_jan_5)
+```
+
+## Recurrence Set
+
+Each recurrence rule comes with its own unique _recurrence set_. A recurrence set is the set of all event dates that are included in that rule. In the previous example, we used `sch_seq()` to extract a subset of dates from the recurrence set that were between `from` and `to`. You can also check if a date is included in a recurrence rule's set with `sch_in()`.
+
+```{r}
+on_monthly <- monthly(since = "1990-01-10")
+
+x <- as.Date("2000-01-08") + 0:5
+x
+
+x_in_set <- sch_in(x, on_monthly)
+x_in_set
+
+x[x_in_set]
+```
+
