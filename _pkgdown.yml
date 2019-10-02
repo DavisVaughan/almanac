@@ -1,1 +1,34 @@
 destination: docs
+
+reference:
+- title: Recurrence rules
+  contents:
+  - daily
+  - starts_with("recur_")
+
+- title: Schedule construction
+  contents:
+  - schedule
+  - starts_with("sch_add_")
+
+- title: Schedule sets
+  contents:
+  - sch_in
+  - sch_seq
+  - sch_next
+  - sch_previous
+
+- title: Schedule adjustments
+  contents:
+  - sch_adjust
+  - sch_jump
+  - sch_step
+
+- title: Adjustments
+  contents:
+  - starts_with("adj_")
+
+- title: Holidays and Calendars
+  contents:
+  - starts_with("hldy_")
+  - starts_with("calendar_")
