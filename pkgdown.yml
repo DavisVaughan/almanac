@@ -2,5 +2,6 @@ pandoc: '2.2'
 pkgdown: 1.4.1
 pkgdown_sha: ~
 articles:
+  adjust-and-shift: adjust-and-shift.html
   almanac: almanac.html
 
