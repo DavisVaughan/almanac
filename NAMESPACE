@@ -2,6 +2,7 @@
 
 S3method(format,rrule)
 S3method(print,rrule)
+S3method(print,schedule)
 export("%>%")
 export(adj_following)
 export(adj_modified_following)

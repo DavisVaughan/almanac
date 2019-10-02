@@ -22,6 +22,19 @@ schedule <- function() {
 
 # ------------------------------------------------------------------------------
 
+#' @export
+print.schedule <- function(x, ...) {
+  recurrences <- x$recurrences
+  n_rrules <- length(recurrences$rrules)
+  n_rdates <- length(recurrences$rdates)
+  n_exdates <-length(recurrences$exdates)
+
+  cat(glue("schedule: {n_rrules} rrules / {n_rdates} rdates / {n_exdates} exdates"))
+  invisible(x)
+}
+
+# ------------------------------------------------------------------------------
+
 new_schedule <- function(rrules = list(), rdates = new_date(), exdates = new_date(), env = NULL) {
   recurrences <- list(
     rrules = rrules,
