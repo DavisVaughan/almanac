@@ -3,9 +3,12 @@
 \name{calendars}
 \alias{calendars}
 \alias{calendar_usa_federal}
+\alias{calendar_usa_nyse}
 \title{Calendars}
 \usage{
 calendar_usa_federal(since = "1970-01-01")
+
+calendar_usa_nyse(since = "1970-01-01")
 }
 \arguments{
 \item{since}{\code{[Date(1)]}

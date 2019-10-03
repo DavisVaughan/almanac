@@ -16,6 +16,8 @@
 \alias{hldy_good_friday}
 \alias{hldy_easter_monday}
 \alias{hldy_july_fourth}
+\alias{hldy_lincoln_birthday}
+\alias{hldy_election_day}
 \title{Holidays}
 \usage{
 hldy_washington_birthday(since = "1970-01-01")
@@ -24,7 +26,7 @@ hldy_memorial_day(since = "1970-01-01")
 
 hldy_labor_day(since = "1970-01-01")
 
-hldy_columbus_day(since = "1970-01-01")
+hldy_columbus_day(since = "1970-01-01", until = NULL)
 
 hldy_veterans_day(since = "1970-01-01")
 
@@ -38,13 +40,17 @@ hldy_thanksgiving(since = "1970-01-01")
 
 hldy_christmas(since = "1970-01-01")
 
-hldy_easter(since = "1970-01-01")
+hldy_easter(since = "1970-01-01", until = NULL)
 
-hldy_good_friday(since = "1970-01-01")
+hldy_good_friday(since = "1970-01-01", until = NULL)
 
-hldy_easter_monday(since = "1970-01-01")
+hldy_easter_monday(since = "1970-01-01", until = NULL)
 
 hldy_july_fourth(since = "1970-01-01")
+
+hldy_lincoln_birthday(since = "1970-01-01", until = NULL)
+
+hldy_election_day(since = "1970-01-01", until = NULL)
 }
 \arguments{
 \item{since}{\code{[Date(1)]}
