@@ -40,6 +40,10 @@ sch_seq <- function(from, to, schedule, inclusive = TRUE) {
 }
 
 sch_seq_impl <- function(from, to, schedule, inclusive = TRUE) {
+  if (is.na(from) || is.na(to)) {
+    return(global_empty_date)
+  }
+
   cache <- cache_get(schedule, from, to, inclusive)
 
   if (!is.null(cache)) {

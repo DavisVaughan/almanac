@@ -15,8 +15,19 @@ sch_in <- function(x, schedule) {
   x <- vec_cast_date(x)
   schedule <- as_schedule(schedule)
 
-  min <- min(x)
-  max <- max(x)
+  # May return corrupt NA values: .Date(Inf) or .Date(-Inf)
+  # min(.Date(NA_real_), na.rm = TRUE) == Inf
+
+  min <- min(x, na.rm = TRUE)
+  max <- max(x, na.rm = TRUE)
+
+  if (identical(min, global_inf_date)) {
+    min <- global_na_date
+  }
+
+  if (identical(max, global_neg_inf_date)) {
+    max <- global_na_date
+  }
 
   events <- sch_seq_impl(min, max, schedule)
 
