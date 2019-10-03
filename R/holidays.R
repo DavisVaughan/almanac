@@ -7,6 +7,12 @@
 #'
 #'    The initial date to start the schedule from.
 #'
+#' @param until `[NULL / Date(1)]`
+#'
+#'    An optional end date for the holiday schedule. Useful when constructing
+#'    larger calendars, such as one for the NYSE, where holidays are
+#'    occasionally only celebrated for a set number of years.
+#'
 #' @examples
 #' on_thanksgiving <- hldy_thanksgiving()
 #'

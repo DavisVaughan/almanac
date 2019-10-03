@@ -56,6 +56,12 @@ hldy_election_day(since = "1970-01-01", until = NULL)
 \item{since}{\code{[Date(1)]}
 
 The initial date to start the schedule from.}
+
+\item{until}{\code{[NULL / Date(1)]}
+
+An optional end date for the holiday schedule. Useful when constructing
+larger calendars, such as one for the NYSE, where holidays are
+occasionally only celebrated for a set number of years.}
 }
 \description{
 The following generate \code{schedule} objects corresponding to commonly used
