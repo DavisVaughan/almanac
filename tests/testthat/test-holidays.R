@@ -1,3 +1,6 @@
+# ------------------------------------------------------------------------------
+# hldy_easter()
+
 # Ripped from:
 # http://tlarsen2.tripod.com/thomaslarsen/easterdates.html
 
@@ -26,62 +29,26 @@ easters <- c(
 
 easters <- as.Date(easters)
 
-test_that("can recur on easter", {
-  rrule <- yearly(since = "1900-01-01") %>% recur_on_easter()
+test_that("can locate easter", {
+  sch <- hldy_easter(since = "1900-01-01")
 
-  x <- sch_seq("1900-01-01", "1999-12-31", rrule)
+  x <- sch_seq("1900-01-01", "1999-12-31", sch)
 
   expect_equal(x, easters)
 })
 
 test_that("can recur on easter monday", {
-  rrule <- yearly(since = "1900-01-01") %>% recur_on_easter(offset = 1)
+  sch <- hldy_easter_monday(since = "1900-01-01")
 
-  x <- sch_seq("1900-01-01", "1999-12-31", rrule)
+  x <- sch_seq("1900-01-01", "1999-12-31", sch)
 
   expect_equal(x, easters + 1)
 })
 
 test_that("can recur on good friday", {
-  rrule <- yearly(since = "1900-01-01") %>% recur_on_easter(offset = -2)
+  sch <- hldy_good_friday(since = "1900-01-01")
 
-  x <- sch_seq("1900-01-01", "1999-12-31", rrule)
+  x <- sch_seq("1900-01-01", "1999-12-31", sch)
 
   expect_equal(x, easters - 2)
-})
-
-# TODO - Is this is a rrule bug?
-test_that("if offset sends you into another year, the date is not included", {
-  on_easter_back_93_days <- yearly() %>% recur_on_easter(-93)
-  on_easter_back_94_days <- yearly() %>% recur_on_easter(-94)
-
-  x <- sch_seq("1998-01-01", "2001-01-01", on_easter_back_93_days)
-  y <- sch_seq("1998-01-01", "2001-01-01", on_easter_back_94_days)
-
-  expect <- as.Date(c("1998-01-09", "1999-01-01", "2000-01-21"))
-
-  expect_equal(x, expect)
-
-  # no date in 1999, as that sent us over the year border
-  expect_equal(y, expect[-2] - 1)
-})
-
-test_that("easter rule cannot be set twice", {
-  expect_error(
-    yearly() %>% recur_on_easter() %>% recur_on_easter(),
-    "has already been set"
-  )
-})
-
-test_that("offset must be integerish", {
-  expect_error(yearly() %>% recur_on_easter(93.5), class = "vctrs_error_cast_lossy")
-})
-
-test_that("offset must be length 1", {
-  expect_error(yearly() %>% recur_on_easter(c(1, 2)), class = "vctrs_error_assert_size")
-})
-
-test_that("cannot have `offset > 366` or `offset < -366`", {
-  expect_error(yearly() %>% recur_on_easter(367), "can only take values")
-  expect_error(yearly() %>% recur_on_easter(-367), "can only take values")
 })

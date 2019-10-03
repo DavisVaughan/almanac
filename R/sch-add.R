@@ -51,8 +51,9 @@
 #' @examples
 #' library(lubridate, warn.conflicts = FALSE)
 #'
-#' on_easter <- yearly() %>%
-#'   recur_on_easter()
+#' on_thanksgiving <- yearly() %>%
+#'   recur_on_wday("Thurs", 4) %>%
+#'   recur_on_ymonth("Nov")
 #'
 #' on_christmas <- yearly() %>%
 #'   recur_on_mday(25) %>%
@@ -63,11 +64,11 @@
 #'   recur_on_wday("Mon", 1)
 #'
 #' sch <- schedule() %>%
-#'   sch_add_rrule(on_easter) %>%
+#'   sch_add_rrule(on_thanksgiving) %>%
 #'   sch_add_rrule(on_christmas) %>%
 #'   sch_add_rrule(on_labor_day)
 #'
-#' # Christmas, Easter, or Labor Day
+#' # Thanksgiving, Christmas, or Labor Day
 #' sch_seq("2019-01-01", "2021-01-01", sch)
 #'
 #' # Except Labor Day in 2019

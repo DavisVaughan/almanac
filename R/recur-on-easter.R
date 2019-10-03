@@ -36,7 +36,11 @@
 #' sch_seq("1999-01-01", "2001-01-01", on_easter_back_93_days)
 #' sch_seq("1999-01-01", "2001-01-01", on_easter_back_94_days)
 #'
-#' @export
+#' @noRd
+NULL
+
+# `recur_on_easter()` is exposed through `hldy_on_easter()`
+
 recur_on_easter <- function(x, offset = 0L) {
   validate_rrule(x)
 
