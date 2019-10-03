@@ -1,0 +1,238 @@
+---
+title: "Quarterly Rules"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{quarterly}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+Quarterly rules are the "hardest" to create in almanac because the specification that it is built on top of, the [RFC-5545 iCalendar Spec](https://tools.ietf.org/html/rfc5545) does not include quarterly as a frequency. The rationale for this is that it can always be built from a combination of monthly or yearly rules, if a bit clunky. The goal of this vignette is just to show a few examples of quarterly rules.
+
+```{r setup}
+library(almanac)
+library(lubridate, warn.conflicts = FALSE)
+```
+
+## First day of the quarter
+
+This one is particularly easy, but the reason is a bit misleading. Let's show it first:
+
+```{r}
+on_first_day_of_quarter <- monthly(since = "2000-01-01") %>%
+  recur_on_interval(3) %>%
+  recur_on_mday(1)
+
+sch_seq("2000-01-01", "2002-01-01", on_first_day_of_quarter)
+```
+
+Whenever you need the "first" event per quarter, there is a good chance that that event will fall in the first month of the quarter, as is the case here. Whenever you have a guarantee that your event falls in the first month of the quarter, and can be computed from the start of that month, you can probably just use `monthly() %>% recur_on_interval(3)` to get your quarterly values.
+
+## Altering the fiscal year start
+
+Before moving on to more complex examples, I want to show the general way to change the start of the fiscal year. This means that rather than starting the quarter on January, we could start it on March. Remember that the `since` date is used as an anchor date for things like `recur_on_interval()`, so if we chose a `since` date in March, then we could recur with a different fiscal calendar.
+
+```{r}
+on_first_day_of_quarter_march_start <- monthly(since = "2000-03-01") %>%
+  recur_on_interval(3) %>%
+  recur_on_mday(1)
+
+sch_seq("2000-01-01", "2002-01-01", on_first_day_of_quarter_march_start)
+```
+
+## N-th day of the quarter
+
+As a more general case of the first example, what happens if we want to compute the n-th day of the quarter, from either the front or the back? Unlike the first example, we no longer have the guarantee that the date will be in the first month, and if we count from the back we really need the entire set of 3 months that make up the quarter to count correctly.
+
+The secret here is to break the rule into 4 smaller rules, one per quarter, which you can then combine into 1 larger quarterly schedule. Let's start with a concrete example in Q1, the 60th day of the quarter.
+
+```{r}
+on_60th_day_of_q1 <- yearly(since = "2000-01-01") %>%
+  recur_on_ymonth(1:3) %>%
+  recur_on_mday(1:31) %>%
+  recur_on_position(60)
+
+sch_seq("2000-01-01", "2002-01-01", on_60th_day_of_q1)
+```
+
+This breaks down as follows:
+
+- Use a `yearly()` frequency rather than a `monthly()` one.
+
+- Recur on the 3 months in the first quarter.
+
+- Recur on all days of the month (if a month doesn't have mday 30 or 31 it is ignored)
+
+- This gives us ~90 days (depending on the quarter), now take the `nth` day of that set.
+
+Using `yearly()` rather than `monthly()` is required for `recur_on_position()` to work correctly. `recur_on_position()` takes the `n-th` position of the set, _within the frequency_. So if we had chosen monthly it would try and take the 60th position within the monthly set, which isn't what we wanted.
+
+The rest of the quarterly rules are straightforward from here. We just change the ymonth values. To make this more usable, I'll also wrap it in a parameterized function, and go ahead and construct the combined schedule object from the four pieces.
+
+```{r}
+make_on_nth_day_of_the_quarter <- function(since = "1970-01-01", nth = 1L) {
+  all_days <- 1:31
+  
+  on_nth_day_of_q1 <- yearly(since = since) %>%
+    recur_on_ymonth(1:3) %>%
+    recur_on_mday(all_days) %>%
+    recur_on_position(nth)
+  
+  on_nth_day_of_q2 <- yearly(since = since) %>%
+    recur_on_ymonth(4:6) %>%
+    recur_on_mday(all_days) %>%
+    recur_on_position(nth)
+  
+  on_nth_day_of_q3 <- yearly(since = since) %>%
+    recur_on_ymonth(7:9) %>%
+    recur_on_mday(all_days) %>%
+    recur_on_position(nth)
+    
+  on_nth_day_of_q4 <- yearly(since = since) %>%
+    recur_on_ymonth(10:12) %>%
+    recur_on_mday(all_days) %>%
+    recur_on_position(nth)
+  
+  on_nth_day_of_the_quarter <- schedule() %>%
+    sch_add_rrule(on_nth_day_of_q1) %>%
+    sch_add_rrule(on_nth_day_of_q2) %>%
+    sch_add_rrule(on_nth_day_of_q3) %>%
+    sch_add_rrule(on_nth_day_of_q4)
+  
+  on_nth_day_of_the_quarter
+}
+```
+
+Let's give it a whirl.
+
+```{r}
+on_60th_day_of_the_quarter <- make_on_nth_day_of_the_quarter(
+  since = "2000-01-01", 
+  nth = 60
+)
+
+sch_seq("2000-01-01", "2002-01-01", on_60th_day_of_the_quarter)
+```
+
+It can also select days from the end of the quarter, for example, the last day in the quarter.
+
+```{r}
+on_last_day_of_the_quarter <- make_on_nth_day_of_the_quarter(
+  since = "2000-01-01", 
+  nth = -1
+)
+
+sch_seq("2000-01-01", "2002-01-01", on_last_day_of_the_quarter)
+```
+
+This general strategy of using a base rule of `yearly() %>% recur_on_ymonth()`, plus some usage of `recur_on_position()` is how I have solved most of the quarterly problems I can think of.
+
+## N-th week day of the quarter
+
+To showcase this strategy again, let's figure out how to get the nth week day of the quarter. Again, start with Q1 first, this time computing the 6th Monday of Q1.
+
+```{r}
+since <- "2000-01-01"
+wday <- "Monday"
+nth <- 6
+
+on_6th_monday_of_q1 <- yearly(since = since) %>%
+  recur_on_ymonth(1:3) %>%
+  recur_on_wday(wday) %>%
+  recur_on_position(nth)
+
+sch_seq("2000-01-01", "2002-01-01", on_6th_monday_of_q1)
+```
+
+Multiple week days can be used here.
+
+```{r}
+since <- "2000-01-01"
+wday <- c("Monday", "Tuesday")
+nth <- 19
+
+on_19th_monday_or_tuesday_of_q1 <- yearly(since = since) %>%
+  recur_on_ymonth(1:3) %>%
+  recur_on_wday(wday) %>%
+  recur_on_position(nth)
+
+sch_seq("2000-01-01", "2002-01-01", on_19th_monday_or_tuesday_of_q1)
+```
+
+Now generalize:
+
+```{r}
+make_on_nth_wday_of_the_quarter <- function(since = "1970-01-01", wday = "Monday", nth = 1L) {
+  on_nth_wday_of_q1 <- yearly(since = since) %>%
+    recur_on_ymonth(1:3) %>%
+    recur_on_wday(wday) %>%
+    recur_on_position(nth)
+  
+  on_nth_wday_of_q2 <- yearly(since = since) %>%
+    recur_on_ymonth(4:6) %>%
+    recur_on_wday(wday) %>%
+    recur_on_position(nth)
+  
+  on_nth_wday_of_q3 <- yearly(since = since) %>%
+    recur_on_ymonth(7:9) %>%
+    recur_on_wday(wday) %>%
+    recur_on_position(nth)
+    
+  on_nth_wday_of_q4 <- yearly(since = since) %>%
+    recur_on_ymonth(10:12) %>%
+    recur_on_wday(wday) %>%
+    recur_on_position(nth)
+  
+  on_nth_wday_of_the_quarter <- schedule() %>%
+    sch_add_rrule(on_nth_wday_of_q1) %>%
+    sch_add_rrule(on_nth_wday_of_q2) %>%
+    sch_add_rrule(on_nth_wday_of_q3) %>%
+    sch_add_rrule(on_nth_wday_of_q4)
+  
+  on_nth_wday_of_the_quarter
+}
+```
+
+```{r}
+on_last_friday_of_the_quarter <- make_on_nth_wday_of_the_quarter(
+  since = "2000-01-01", 
+  wday = "Friday", 
+  nth = -1
+)
+
+fridays <- sch_seq("2000-01-01", "2002-01-01", on_last_friday_of_the_quarter)
+fridays
+
+wday(fridays, label = TRUE)
+```
+
+## Combining with other rules
+
+Remember that each of these results are just schedules that can be combined with other rules if you need to create more complex quarterly strategies. For example, let's take the "last Friday of the quarter" schedule and combine it with a rule for "on every Wednesday".
+
+```{r}
+on_wednesdays <- weekly(since = "2000-01-01") %>%
+  recur_on_wday("Wednesday")
+
+on_last_friday_of_quarter_or_wednesdays <- on_last_friday_of_the_quarter %>%
+  sch_add_rrule(on_wednesdays)
+
+last_friday_or_wednesdays <- sch_seq(
+  "2000-01-01", "2002-01-01", 
+  on_last_friday_of_quarter_or_wednesdays
+)
+
+last_friday_or_wednesdays[1:15]
+
+wday(last_friday_or_wednesdays[1:15], label = TRUE)
+```
+
