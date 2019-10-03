@@ -11,6 +11,8 @@ status](https://travis-ci.org/DavisVaughan/almanac.svg?branch=master)](https://t
 coverage](https://codecov.io/gh/DavisVaughan/almanac/branch/master/graph/badge.svg)](https://codecov.io/gh/DavisVaughan/almanac?branch=master)
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![AppVeyor build
+status](https://ci.appveyor.com/api/projects/status/github/DavisVaughan/almanac?branch=master&svg=true)](https://ci.appveyor.com/project/DavisVaughan/almanac)
 <!-- badges: end -->
 
 ``` r
