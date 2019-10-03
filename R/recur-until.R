@@ -49,7 +49,9 @@ recur_until <- function(x, until) {
   until <- vec_cast_date(until, "until")
   vec_assert(until, size = 1L)
 
-  x$rules$since
+  if (is.na(until)) {
+    abort("`until` cannot be `NA`.")
+  }
 
   if (until < x$rules$since) {
     abort("`until` must be greater than `since`.")

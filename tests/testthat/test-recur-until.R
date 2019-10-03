@@ -29,3 +29,7 @@ test_that("`until` must be a single Date", {
   expect_error(daily() %>% recur_until("a"), class = "vctrs_error_cast_lossy")
   expect_error(daily() %>% recur_until(c("2019-01-01", "2019-01-02")), class = "vctrs_error_assert_size")
 })
+
+test_that("`until` cannot be `NA`", {
+  expect_error(daily() %>% recur_until(as.Date(NA)), "cannot be `NA`")
+})
