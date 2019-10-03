@@ -1,0 +1,179 @@
+---
+title: "iCalendar Specification"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{iCalendar Specification}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+The Internet Engineering Task Force (IETF) has released an _exhaustive_ guide about how to design a calendar application. It is known as the [iCalendar specification guide, RFC-5545](https://tools.ietf.org/html/rfc5545). Recurrence rules are a small subsection of this, and the JavaScript library underlying almanac was built to comply with the specification guide. To show that almanac also complies with (pretty much all) of the guide as well, this vignette will go through the large list of examples that the guide provides to ensure that your application is doing the right thing. This will also serve as a way to show how flexible almanac is to construct a wide range of recurrence rules.
+
+The specific section of the iCalendar guide that mentions recurrence rules is [3.3.10](https://tools.ietf.org/html/rfc5545#section-3.3.10), and the section with all of the examples is [3.8.5.3](https://tools.ietf.org/html/rfc5545#section-3.8.5.3).
+
+For whatever reason, most examples use a start date of `1997-09-02`. To show the results, for terminating recurrence rules (those that have a limited count or an until date) I will use `sch_seq()` with `since` as the `from` date and a `to` date far enough in the future to show useful results. For non-terminating rules, I will choose a `to` date that shows enough to be informative, without being overwhelming.
+
+```{r setup}
+library(almanac)
+library(lubridate, warn.conflicts = FALSE)
+
+since <- as.Date("1997-09-02")
+to <- as.Date("2010-01-01")
+```
+
+## Daily for 10 occurrences
+
+```{r}
+rrule <- daily(since) %>%
+  recur_for_count(10)
+
+sch_seq(since, to, rrule)
+```
+
+## Daily until 1997-12-24
+
+```{r}
+rrule <- daily(since) %>%
+  recur_until("1997-12-24")
+
+sch_seq(since, to, rrule)
+```
+
+## Every other day, forever
+
+```{r}
+rrule <- daily(since) %>%
+  recur_on_interval(2)
+
+sch_seq(since, "1997-10-01", rrule)
+```
+
+## Every 10 days, 5 occurrences
+
+```{r}
+rrule <- daily(since) %>%
+  recur_on_interval(10) %>%
+  recur_for_count(5)
+
+sch_seq(since, to, rrule)
+```
+
+## Every day in January, for 3 years
+
+```{r}
+rrule <- daily("1998-01-01") %>%
+  recur_on_ymonth("January") %>%
+  recur_until("2000-01-31")
+
+sch_seq(since, to, rrule)
+```
+
+## Weekly for 10 occurrences
+
+```{r}
+rrule <- weekly(since) %>%
+  recur_for_count(10)
+
+sch_seq(since, to, rrule)
+```
+
+## Weekly until December 24, 1997
+
+```{r}
+rrule <- weekly(since) %>%
+  recur_until("1997-12-24")
+
+sch_seq(since, to, rrule)
+```
+
+## Every other week - forever
+
+```{r}
+rrule <- weekly(since) %>%
+  recur_on_interval(2)
+
+sch_seq(since, "1997-11-01", rrule)
+```
+
+## Weekly on Tuesday and Thursday for five weeks
+
+```{r}
+rrule <- weekly(since) %>%
+  recur_on_wday(c("Tue", "Thur")) %>%
+  recur_for_count(10)
+
+sch_seq(since, to, rrule)
+```
+
+## Every other week on Monday, Wednesday, and Friday until December 24, 1997, starting on Monday, September 1, 1997
+
+```{r}
+rrule <- weekly("1997-09-01") %>%
+  recur_on_wday(c("Mon", "Wed", "Fri")) %>%
+  recur_on_interval(2) %>%
+  recur_until("1997-12-24")
+
+sch_seq("1997-09-01", to, rrule)
+```
+
+## Every other week on Tuesday and Thursday, for 8 occurrences
+
+```{r}
+rrule <- weekly(since) %>%
+  recur_on_wday(c("Tue", "Thu")) %>%
+  recur_on_interval(2) %>%
+  recur_for_count(8)
+
+sch_seq(since, to, rrule)
+```
+
+## Monthly on the first Friday for 10 occurrences
+
+```{r}
+rrule <- monthly("1997-09-05") %>%
+  recur_on_wday("Fri", nth = 1) %>%
+  recur_for_count(10)
+
+sch_seq(since, to, rrule)
+```
+
+## Monthly on the first Friday until December 24, 1997
+
+```{r}
+rrule <- monthly("1997-09-05") %>%
+  recur_on_wday("Fri", nth = 1) %>%
+  recur_until("1997-12-24")
+
+sch_seq(since, to, rrule)
+```
+
+## Every other month on the first and last Sunday of the month for 10 occurrences
+
+```{r}
+rrule <- monthly("1997-09-07") %>%
+  recur_on_wday("Sun", nth = c(1, -1)) %>%
+  recur_on_interval(2) %>%
+  recur_for_count(10)
+
+sch_seq(since, to, rrule)
+```
+
+## Monthly on the second-to-last Monday of the month for 6 months
+
+```{r}
+rrule <- monthly("1997-09-22") %>%
+  recur_on_wday("Mon", nth = -2) %>%
+  recur_for_count(6)
+
+sch_seq(since, to, rrule)
+```
+
