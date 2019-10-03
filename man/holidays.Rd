@@ -15,6 +15,7 @@
 \alias{hldy_easter}
 \alias{hldy_good_friday}
 \alias{hldy_easter_monday}
+\alias{hldy_july_fourth}
 \title{Holidays}
 \usage{
 hldy_washington_birthday(since = "1970-01-01")
@@ -42,6 +43,8 @@ hldy_easter(since = "1970-01-01")
 hldy_good_friday(since = "1970-01-01")
 
 hldy_easter_monday(since = "1970-01-01")
+
+hldy_july_fourth(since = "1970-01-01")
 }
 \arguments{
 \item{since}{\code{[Date(1)]}

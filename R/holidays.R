@@ -534,3 +534,25 @@ hldy_good_friday <- function(since = "1970-01-01") {
 hldy_easter_monday <- function(since = "1970-01-01") {
   hldy_easter_impl(since = since, offset = 1L)
 }
+
+# ------------------------------------------------------------------------------
+# Since 1870
+
+#' @rdname holidays
+#' @export
+hldy_july_fourth <- function(since = "1970-01-01") {
+  since <- vec_cast_date(since, "since")
+
+  hldy_start <- as.Date("1870-07-04")
+  if (since < hldy_start) {
+    since <- hldy_start
+  }
+
+  rrule <- yearly(since)
+  rrule <- recur_on_ymonth(rrule, 7L)
+  rrule <- recur_on_mday(rrule, 4L)
+
+  sch <- as_schedule(rrule)
+
+  sch
+}
