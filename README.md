@@ -124,7 +124,8 @@ libraries.
 
 First off, it directly embeds the *amazing* JavaScript library
 [rrule](https://github.com/jakubroztocil/rrule) for the core recurrence
-set calculations.
+set calculations. To do this, it uses the equally awesome R package,
+[V8](https://github.com/jeroen/V8), from Jeroen Ooms.
 
 The date shifting / adjusting functions are modeled after similar
 functions in [QuantLib](https://github.com/lballabio/QuantLib).
