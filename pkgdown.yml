@@ -4,5 +4,6 @@ pkgdown_sha: ~
 articles:
   adjust-and-shift: adjust-and-shift.html
   almanac: almanac.html
+  icalendar: icalendar.html
   quarterly: quarterly.html
 
