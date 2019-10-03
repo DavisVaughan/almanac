@@ -25,3 +25,7 @@ test_that("can pass along a `since` date to all bases", {
   expect_equal(monthly(since = x)$rules$since, x)
   expect_equal(yearly(since = x)$rules$since, x)
 })
+
+test_that("`since` cannot be `NA`", {
+  expect_error(rrule(since = as.Date(NA)), "cannot be `NA`.")
+})
