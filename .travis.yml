@@ -25,6 +25,6 @@ matrix:
   - os: osx
   - dist: xenial
     - r: oldrel
-    addons:
+    - addons:
       apt:
         packages: libnode-dev
