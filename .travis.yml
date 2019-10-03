@@ -21,9 +21,9 @@ matrix:
       skip_cleanup: true
   - r: oldrel
     dist: xenial
-      addons:
-        apt:
-          packages: libnode-dev
+    addons:
+      apt:
+        packages: libnode-dev
   - r: 3.4
   - r: 3.3
   - r: 3.2
