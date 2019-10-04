@@ -106,9 +106,9 @@
 <a class="sourceLine" id="cb1-3" data-line-number="3"></a>
 <a class="sourceLine" id="cb1-4" data-line-number="4">since &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span>(<span class="st">"1997-09-02"</span>)</a>
 <a class="sourceLine" id="cb1-5" data-line-number="5">to &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span>(<span class="st">"2010-01-01"</span>)</a></code></pre></div>
-<div id="daily-for-10-occurrences" class="section level2">
-<h2 class="hasAnchor">
-<a href="#daily-for-10-occurrences" class="anchor"></a>Daily for 10 occurrences</h2>
+<div id="daily-for-10-occurrences" class="section level3">
+<h3 class="hasAnchor">
+<a href="#daily-for-10-occurrences" class="anchor"></a>Daily for 10 occurrences</h3>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">rrule &lt;-<span class="st"> </span><span class="kw"><a href="../reference/rrule.html">daily</a></span>(since) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb2-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/recur_for_count.html">recur_for_count</a></span>(<span class="dv">10</span>)</a>
 <a class="sourceLine" id="cb2-3" data-line-number="3"></a>
@@ -116,9 +116,9 @@
 <a class="sourceLine" id="cb2-5" data-line-number="5"><span class="co">#&gt;  [1] "1997-09-02" "1997-09-03" "1997-09-04" "1997-09-05" "1997-09-06"</span></a>
 <a class="sourceLine" id="cb2-6" data-line-number="6"><span class="co">#&gt;  [6] "1997-09-07" "1997-09-08" "1997-09-09" "1997-09-10" "1997-09-11"</span></a></code></pre></div>
 </div>
-<div id="daily-until-1997-12-24" class="section level2">
-<h2 class="hasAnchor">
-<a href="#daily-until-1997-12-24" class="anchor"></a>Daily until 1997-12-24</h2>
+<div id="daily-until-1997-12-24" class="section level3">
+<h3 class="hasAnchor">
+<a href="#daily-until-1997-12-24" class="anchor"></a>Daily until 1997-12-24</h3>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">rrule &lt;-<span class="st"> </span><span class="kw"><a href="../reference/rrule.html">daily</a></span>(since) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb3-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/recur_until.html">recur_until</a></span>(<span class="st">"1997-12-24"</span>)</a>
 <a class="sourceLine" id="cb3-3" data-line-number="3"></a>
@@ -147,9 +147,9 @@
 <a class="sourceLine" id="cb3-26" data-line-number="26"><span class="co">#&gt; [106] "1997-12-16" "1997-12-17" "1997-12-18" "1997-12-19" "1997-12-20"</span></a>
 <a class="sourceLine" id="cb3-27" data-line-number="27"><span class="co">#&gt; [111] "1997-12-21" "1997-12-22" "1997-12-23" "1997-12-24"</span></a></code></pre></div>
 </div>
-<div id="every-other-day-forever" class="section level2">
-<h2 class="hasAnchor">
-<a href="#every-other-day-forever" class="anchor"></a>Every other day, forever</h2>
+<div id="every-other-day-forever" class="section level3">
+<h3 class="hasAnchor">
+<a href="#every-other-day-forever" class="anchor"></a>Every other day, forever</h3>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">rrule &lt;-<span class="st"> </span><span class="kw"><a href="../reference/rrule.html">daily</a></span>(since) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb4-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/recur_on_interval.html">recur_on_interval</a></span>(<span class="dv">2</span>)</a>
 <a class="sourceLine" id="cb4-3" data-line-number="3"></a>
@@ -158,9 +158,9 @@
 <a class="sourceLine" id="cb4-6" data-line-number="6"><span class="co">#&gt;  [6] "1997-09-12" "1997-09-14" "1997-09-16" "1997-09-18" "1997-09-20"</span></a>
 <a class="sourceLine" id="cb4-7" data-line-number="7"><span class="co">#&gt; [11] "1997-09-22" "1997-09-24" "1997-09-26" "1997-09-28" "1997-09-30"</span></a></code></pre></div>
 </div>
-<div id="every-10-days-5-occurrences" class="section level2">
-<h2 class="hasAnchor">
-<a href="#every-10-days-5-occurrences" class="anchor"></a>Every 10 days, 5 occurrences</h2>
+<div id="every-10-days-5-occurrences" class="section level3">
+<h3 class="hasAnchor">
+<a href="#every-10-days-5-occurrences" class="anchor"></a>Every 10 days, 5 occurrences</h3>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">rrule &lt;-<span class="st"> </span><span class="kw"><a href="../reference/rrule.html">daily</a></span>(since) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb5-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/recur_on_interval.html">recur_on_interval</a></span>(<span class="dv">10</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb5-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="../reference/recur_for_count.html">recur_for_count</a></span>(<span class="dv">5</span>)</a>
@@ -168,9 +168,9 @@
 <a class="sourceLine" id="cb5-5" data-line-number="5"><span class="kw"><a href="../reference/sch_seq.html">sch_seq</a></span>(since, to, rrule)</a>
 <a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co">#&gt; [1] "1997-09-02" "1997-09-12" "1997-09-22" "1997-10-02" "1997-10-12"</span></a></code></pre></div>
 </div>
-<div id="every-day-in-january-for-3-years" class="section level2">
-<h2 class="hasAnchor">
-<a href="#every-day-in-january-for-3-years" class="anchor"></a>Every day in January, for 3 years</h2>
+<div id="every-day-in-january-for-3-years" class="section level3">
+<h3 class="hasAnchor">
+<a href="#every-day-in-january-for-3-years" class="anchor"></a>Every day in January, for 3 years</h3>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">rrule &lt;-<span class="st"> </span><span class="kw"><a href="../reference/rrule.html">daily</a></span>(<span class="st">"1998-01-01"</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb6-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/recur_on_ymonth.html">recur_on_ymonth</a></span>(<span class="st">"January"</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb6-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="../reference/recur_until.html">recur_until</a></span>(<span class="st">"2000-01-31"</span>)</a>
@@ -196,9 +196,9 @@
 <a class="sourceLine" id="cb6-23" data-line-number="23"><span class="co">#&gt; [86] "2000-01-24" "2000-01-25" "2000-01-26" "2000-01-27" "2000-01-28"</span></a>
 <a class="sourceLine" id="cb6-24" data-line-number="24"><span class="co">#&gt; [91] "2000-01-29" "2000-01-30" "2000-01-31"</span></a></code></pre></div>
 </div>
-<div id="weekly-for-10-occurrences" class="section level2">
-<h2 class="hasAnchor">
-<a href="#weekly-for-10-occurrences" class="anchor"></a>Weekly for 10 occurrences</h2>
+<div id="weekly-for-10-occurrences" class="section level3">
+<h3 class="hasAnchor">
+<a href="#weekly-for-10-occurrences" class="anchor"></a>Weekly for 10 occurrences</h3>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">rrule &lt;-<span class="st"> </span><span class="kw"><a href="../reference/rrule.html">weekly</a></span>(since) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb7-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/recur_for_count.html">recur_for_count</a></span>(<span class="dv">10</span>)</a>
 <a class="sourceLine" id="cb7-3" data-line-number="3"></a>
@@ -206,9 +206,9 @@
 <a class="sourceLine" id="cb7-5" data-line-number="5"><span class="co">#&gt;  [1] "1997-09-02" "1997-09-09" "1997-09-16" "1997-09-23" "1997-09-30"</span></a>
 <a class="sourceLine" id="cb7-6" data-line-number="6"><span class="co">#&gt;  [6] "1997-10-07" "1997-10-14" "1997-10-21" "1997-10-28" "1997-11-04"</span></a></code></pre></div>
 </div>
-<div id="weekly-until-december-24-1997" class="section level2">
-<h2 class="hasAnchor">
-<a href="#weekly-until-december-24-1997" class="anchor"></a>Weekly until December 24, 1997</h2>
+<div id="weekly-until-december-24-1997" class="section level3">
+<h3 class="hasAnchor">
+<a href="#weekly-until-december-24-1997" class="anchor"></a>Weekly until December 24, 1997</h3>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">rrule &lt;-<span class="st"> </span><span class="kw"><a href="../reference/rrule.html">weekly</a></span>(since) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb8-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/recur_until.html">recur_until</a></span>(<span class="st">"1997-12-24"</span>)</a>
 <a class="sourceLine" id="cb8-3" data-line-number="3"></a>
@@ -218,18 +218,18 @@
 <a class="sourceLine" id="cb8-7" data-line-number="7"><span class="co">#&gt; [11] "1997-11-11" "1997-11-18" "1997-11-25" "1997-12-02" "1997-12-09"</span></a>
 <a class="sourceLine" id="cb8-8" data-line-number="8"><span class="co">#&gt; [16] "1997-12-16" "1997-12-23"</span></a></code></pre></div>
 </div>
-<div id="every-other-week---forever" class="section level2">
-<h2 class="hasAnchor">
-<a href="#every-other-week---forever" class="anchor"></a>Every other week - forever</h2>
+<div id="every-other-week---forever" class="section level3">
+<h3 class="hasAnchor">
+<a href="#every-other-week---forever" class="anchor"></a>Every other week - forever</h3>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">rrule &lt;-<span class="st"> </span><span class="kw"><a href="../reference/rrule.html">weekly</a></span>(since) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb9-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/recur_on_interval.html">recur_on_interval</a></span>(<span class="dv">2</span>)</a>
 <a class="sourceLine" id="cb9-3" data-line-number="3"></a>
 <a class="sourceLine" id="cb9-4" data-line-number="4"><span class="kw"><a href="../reference/sch_seq.html">sch_seq</a></span>(since, <span class="st">"1997-11-01"</span>, rrule)</a>
 <a class="sourceLine" id="cb9-5" data-line-number="5"><span class="co">#&gt; [1] "1997-09-02" "1997-09-16" "1997-09-30" "1997-10-14" "1997-10-28"</span></a></code></pre></div>
 </div>
-<div id="weekly-on-tuesday-and-thursday-for-five-weeks" class="section level2">
-<h2 class="hasAnchor">
-<a href="#weekly-on-tuesday-and-thursday-for-five-weeks" class="anchor"></a>Weekly on Tuesday and Thursday for five weeks</h2>
+<div id="weekly-on-tuesday-and-thursday-for-five-weeks" class="section level3">
+<h3 class="hasAnchor">
+<a href="#weekly-on-tuesday-and-thursday-for-five-weeks" class="anchor"></a>Weekly on Tuesday and Thursday for five weeks</h3>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">rrule &lt;-<span class="st"> </span><span class="kw"><a href="../reference/rrule.html">weekly</a></span>(since) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb10-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/recur_on_wday.html">recur_on_wday</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Tue"</span>, <span class="st">"Thur"</span>)) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb10-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="../reference/recur_for_count.html">recur_for_count</a></span>(<span class="dv">10</span>)</a>
@@ -238,9 +238,9 @@
 <a class="sourceLine" id="cb10-6" data-line-number="6"><span class="co">#&gt;  [1] "1997-09-02" "1997-09-04" "1997-09-09" "1997-09-11" "1997-09-16"</span></a>
 <a class="sourceLine" id="cb10-7" data-line-number="7"><span class="co">#&gt;  [6] "1997-09-18" "1997-09-23" "1997-09-25" "1997-09-30" "1997-10-02"</span></a></code></pre></div>
 </div>
-<div id="every-other-week-on-monday-wednesday-and-friday-until-december-24-1997-starting-on-monday-september-1-1997" class="section level2">
-<h2 class="hasAnchor">
-<a href="#every-other-week-on-monday-wednesday-and-friday-until-december-24-1997-starting-on-monday-september-1-1997" class="anchor"></a>Every other week on Monday, Wednesday, and Friday until December 24, 1997, starting on Monday, September 1, 1997</h2>
+<div id="every-other-week-on-monday-wednesday-and-friday-until-december-24-1997-starting-on-monday-september-1-1997" class="section level3">
+<h3 class="hasAnchor">
+<a href="#every-other-week-on-monday-wednesday-and-friday-until-december-24-1997-starting-on-monday-september-1-1997" class="anchor"></a>Every other week on Monday, Wednesday, and Friday until December 24, 1997, starting on Monday, September 1, 1997</h3>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">rrule &lt;-<span class="st"> </span><span class="kw"><a href="../reference/rrule.html">weekly</a></span>(<span class="st">"1997-09-01"</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb11-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/recur_on_wday.html">recur_on_wday</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Mon"</span>, <span class="st">"Wed"</span>, <span class="st">"Fri"</span>)) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb11-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="../reference/recur_on_interval.html">recur_on_interval</a></span>(<span class="dv">2</span>) <span class="op">%&gt;%</span></a>
@@ -254,9 +254,9 @@
 <a class="sourceLine" id="cb11-11" data-line-number="11"><span class="co">#&gt; [21] "1997-11-28" "1997-12-08" "1997-12-10" "1997-12-12" "1997-12-22"</span></a>
 <a class="sourceLine" id="cb11-12" data-line-number="12"><span class="co">#&gt; [26] "1997-12-24"</span></a></code></pre></div>
 </div>
-<div id="every-other-week-on-tuesday-and-thursday-for-8-occurrences" class="section level2">
-<h2 class="hasAnchor">
-<a href="#every-other-week-on-tuesday-and-thursday-for-8-occurrences" class="anchor"></a>Every other week on Tuesday and Thursday, for 8 occurrences</h2>
+<div id="every-other-week-on-tuesday-and-thursday-for-8-occurrences" class="section level3">
+<h3 class="hasAnchor">
+<a href="#every-other-week-on-tuesday-and-thursday-for-8-occurrences" class="anchor"></a>Every other week on Tuesday and Thursday, for 8 occurrences</h3>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">rrule &lt;-<span class="st"> </span><span class="kw"><a href="../reference/rrule.html">weekly</a></span>(since) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb12-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/recur_on_wday.html">recur_on_wday</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Tue"</span>, <span class="st">"Thu"</span>)) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb12-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="../reference/recur_on_interval.html">recur_on_interval</a></span>(<span class="dv">2</span>) <span class="op">%&gt;%</span></a>
@@ -266,9 +266,9 @@
 <a class="sourceLine" id="cb12-7" data-line-number="7"><span class="co">#&gt; [1] "1997-09-02" "1997-09-04" "1997-09-16" "1997-09-18" "1997-09-30"</span></a>
 <a class="sourceLine" id="cb12-8" data-line-number="8"><span class="co">#&gt; [6] "1997-10-02" "1997-10-14" "1997-10-16"</span></a></code></pre></div>
 </div>
-<div id="monthly-on-the-first-friday-for-10-occurrences" class="section level2">
-<h2 class="hasAnchor">
-<a href="#monthly-on-the-first-friday-for-10-occurrences" class="anchor"></a>Monthly on the first Friday for 10 occurrences</h2>
+<div id="monthly-on-the-first-friday-for-10-occurrences" class="section level3">
+<h3 class="hasAnchor">
+<a href="#monthly-on-the-first-friday-for-10-occurrences" class="anchor"></a>Monthly on the first Friday for 10 occurrences</h3>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">rrule &lt;-<span class="st"> </span><span class="kw"><a href="../reference/rrule.html">monthly</a></span>(<span class="st">"1997-09-05"</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb13-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/recur_on_wday.html">recur_on_wday</a></span>(<span class="st">"Fri"</span>, <span class="dt">nth =</span> <span class="dv">1</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb13-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="../reference/recur_for_count.html">recur_for_count</a></span>(<span class="dv">10</span>)</a>
@@ -277,9 +277,9 @@
 <a class="sourceLine" id="cb13-6" data-line-number="6"><span class="co">#&gt;  [1] "1997-09-05" "1997-10-03" "1997-11-07" "1997-12-05" "1998-01-02"</span></a>
 <a class="sourceLine" id="cb13-7" data-line-number="7"><span class="co">#&gt;  [6] "1998-02-06" "1998-03-06" "1998-04-03" "1998-05-01" "1998-06-05"</span></a></code></pre></div>
 </div>
-<div id="monthly-on-the-first-friday-until-december-24-1997" class="section level2">
-<h2 class="hasAnchor">
-<a href="#monthly-on-the-first-friday-until-december-24-1997" class="anchor"></a>Monthly on the first Friday until December 24, 1997</h2>
+<div id="monthly-on-the-first-friday-until-december-24-1997" class="section level3">
+<h3 class="hasAnchor">
+<a href="#monthly-on-the-first-friday-until-december-24-1997" class="anchor"></a>Monthly on the first Friday until December 24, 1997</h3>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1">rrule &lt;-<span class="st"> </span><span class="kw"><a href="../reference/rrule.html">monthly</a></span>(<span class="st">"1997-09-05"</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb14-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/recur_on_wday.html">recur_on_wday</a></span>(<span class="st">"Fri"</span>, <span class="dt">nth =</span> <span class="dv">1</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb14-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="../reference/recur_until.html">recur_until</a></span>(<span class="st">"1997-12-24"</span>)</a>
@@ -287,9 +287,9 @@
 <a class="sourceLine" id="cb14-5" data-line-number="5"><span class="kw"><a href="../reference/sch_seq.html">sch_seq</a></span>(since, to, rrule)</a>
 <a class="sourceLine" id="cb14-6" data-line-number="6"><span class="co">#&gt; [1] "1997-09-05" "1997-10-03" "1997-11-07" "1997-12-05"</span></a></code></pre></div>
 </div>
-<div id="every-other-month-on-the-first-and-last-sunday-of-the-month-for-10-occurrences" class="section level2">
-<h2 class="hasAnchor">
-<a href="#every-other-month-on-the-first-and-last-sunday-of-the-month-for-10-occurrences" class="anchor"></a>Every other month on the first and last Sunday of the month for 10 occurrences</h2>
+<div id="every-other-month-on-the-first-and-last-sunday-of-the-month-for-10-occurrences" class="section level3">
+<h3 class="hasAnchor">
+<a href="#every-other-month-on-the-first-and-last-sunday-of-the-month-for-10-occurrences" class="anchor"></a>Every other month on the first and last Sunday of the month for 10 occurrences</h3>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1">rrule &lt;-<span class="st"> </span><span class="kw"><a href="../reference/rrule.html">monthly</a></span>(<span class="st">"1997-09-07"</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb15-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/recur_on_wday.html">recur_on_wday</a></span>(<span class="st">"Sun"</span>, <span class="dt">nth =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">1</span>, <span class="dv">-1</span>)) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb15-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="../reference/recur_on_interval.html">recur_on_interval</a></span>(<span class="dv">2</span>) <span class="op">%&gt;%</span></a>
@@ -299,9 +299,9 @@
 <a class="sourceLine" id="cb15-7" data-line-number="7"><span class="co">#&gt;  [1] "1997-09-07" "1997-09-28" "1997-11-02" "1997-11-30" "1998-01-04"</span></a>
 <a class="sourceLine" id="cb15-8" data-line-number="8"><span class="co">#&gt;  [6] "1998-01-25" "1998-03-01" "1998-03-29" "1998-05-03" "1998-05-31"</span></a></code></pre></div>
 </div>
-<div id="monthly-on-the-second-to-last-monday-of-the-month-for-6-months" class="section level2">
-<h2 class="hasAnchor">
-<a href="#monthly-on-the-second-to-last-monday-of-the-month-for-6-months" class="anchor"></a>Monthly on the second-to-last Monday of the month for 6 months</h2>
+<div id="monthly-on-the-second-to-last-monday-of-the-month-for-6-months" class="section level3">
+<h3 class="hasAnchor">
+<a href="#monthly-on-the-second-to-last-monday-of-the-month-for-6-months" class="anchor"></a>Monthly on the second-to-last Monday of the month for 6 months</h3>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1">rrule &lt;-<span class="st"> </span><span class="kw"><a href="../reference/rrule.html">monthly</a></span>(<span class="st">"1997-09-22"</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb16-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/recur_on_wday.html">recur_on_wday</a></span>(<span class="st">"Mon"</span>, <span class="dt">nth =</span> <span class="dv">-2</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb16-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="../reference/recur_for_count.html">recur_for_count</a></span>(<span class="dv">6</span>)</a>
@@ -310,31 +310,244 @@
 <a class="sourceLine" id="cb16-6" data-line-number="6"><span class="co">#&gt; [1] "1997-09-22" "1997-10-20" "1997-11-17" "1997-12-22" "1998-01-19"</span></a>
 <a class="sourceLine" id="cb16-7" data-line-number="7"><span class="co">#&gt; [6] "1998-02-16"</span></a></code></pre></div>
 </div>
+<div id="monthly-on-the-third-to-the-last-day-of-the-month-forever" class="section level3">
+<h3 class="hasAnchor">
+<a href="#monthly-on-the-third-to-the-last-day-of-the-month-forever" class="anchor"></a>Monthly on the third-to-the-last day of the month, forever</h3>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1">rrule &lt;-<span class="st"> </span><span class="kw"><a href="../reference/rrule.html">monthly</a></span>(<span class="st">"1997-09-28"</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb17-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/recur_on_mday.html">recur_on_mday</a></span>(<span class="op">-</span><span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb17-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb17-4" data-line-number="4"><span class="kw"><a href="../reference/sch_seq.html">sch_seq</a></span>(since, <span class="st">"1997-12-01"</span>, rrule)</a>
+<a class="sourceLine" id="cb17-5" data-line-number="5"><span class="co">#&gt; [1] "1997-09-28" "1997-10-29" "1997-11-28"</span></a></code></pre></div>
+</div>
+<div id="monthly-on-the-2nd-and-15th-of-the-month-for-10-occurrences" class="section level3">
+<h3 class="hasAnchor">
+<a href="#monthly-on-the-2nd-and-15th-of-the-month-for-10-occurrences" class="anchor"></a>Monthly on the 2nd and 15th of the month for 10 occurrences</h3>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1">rrule &lt;-<span class="st"> </span><span class="kw"><a href="../reference/rrule.html">monthly</a></span>(<span class="st">"1997-09-02"</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb18-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/recur_on_mday.html">recur_on_mday</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">2</span>, <span class="dv">15</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb18-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="../reference/recur_for_count.html">recur_for_count</a></span>(<span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb18-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb18-5" data-line-number="5"><span class="kw"><a href="../reference/sch_seq.html">sch_seq</a></span>(since, to, rrule)</a>
+<a class="sourceLine" id="cb18-6" data-line-number="6"><span class="co">#&gt;  [1] "1997-09-02" "1997-09-15" "1997-10-02" "1997-10-15" "1997-11-02"</span></a>
+<a class="sourceLine" id="cb18-7" data-line-number="7"><span class="co">#&gt;  [6] "1997-11-15" "1997-12-02" "1997-12-15" "1998-01-02" "1998-01-15"</span></a></code></pre></div>
+</div>
+<div id="monthly-on-the-first-and-last-day-of-the-month-for-10-occurrences" class="section level3">
+<h3 class="hasAnchor">
+<a href="#monthly-on-the-first-and-last-day-of-the-month-for-10-occurrences" class="anchor"></a>Monthly on the first and last day of the month for 10 occurrences</h3>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1">rrule &lt;-<span class="st"> </span><span class="kw"><a href="../reference/rrule.html">monthly</a></span>(<span class="st">"1997-09-30"</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb19-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/recur_on_mday.html">recur_on_mday</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">1</span>, <span class="dv">-1</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb19-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="../reference/recur_for_count.html">recur_for_count</a></span>(<span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb19-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb19-5" data-line-number="5"><span class="kw"><a href="../reference/sch_seq.html">sch_seq</a></span>(since, to, rrule)</a>
+<a class="sourceLine" id="cb19-6" data-line-number="6"><span class="co">#&gt;  [1] "1997-09-30" "1997-10-01" "1997-10-31" "1997-11-01" "1997-11-30"</span></a>
+<a class="sourceLine" id="cb19-7" data-line-number="7"><span class="co">#&gt;  [6] "1997-12-01" "1997-12-31" "1998-01-01" "1998-01-31" "1998-02-01"</span></a></code></pre></div>
+</div>
+<div id="every-18-months-on-the-10th-thru-15th-of-the-month-for-10-occurrences" class="section level3">
+<h3 class="hasAnchor">
+<a href="#every-18-months-on-the-10th-thru-15th-of-the-month-for-10-occurrences" class="anchor"></a>Every 18 months on the 10th thru 15th of the month for 10 occurrences</h3>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1">rrule &lt;-<span class="st"> </span><span class="kw"><a href="../reference/rrule.html">monthly</a></span>(<span class="st">"1997-09-10"</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb20-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/recur_on_interval.html">recur_on_interval</a></span>(<span class="dv">18</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb20-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="../reference/recur_on_mday.html">recur_on_mday</a></span>(<span class="dv">10</span><span class="op">:</span><span class="dv">15</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb20-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="../reference/recur_for_count.html">recur_for_count</a></span>(<span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb20-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb20-6" data-line-number="6"><span class="kw"><a href="../reference/sch_seq.html">sch_seq</a></span>(<span class="st">"1997-09-10"</span>, to, rrule)</a>
+<a class="sourceLine" id="cb20-7" data-line-number="7"><span class="co">#&gt;  [1] "1997-09-10" "1997-09-11" "1997-09-12" "1997-09-13" "1997-09-14"</span></a>
+<a class="sourceLine" id="cb20-8" data-line-number="8"><span class="co">#&gt;  [6] "1997-09-15" "1999-03-10" "1999-03-11" "1999-03-12" "1999-03-13"</span></a></code></pre></div>
+</div>
+<div id="every-tuesday-every-other-month" class="section level3">
+<h3 class="hasAnchor">
+<a href="#every-tuesday-every-other-month" class="anchor"></a>Every Tuesday, every other month</h3>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1">rrule &lt;-<span class="st"> </span><span class="kw"><a href="../reference/rrule.html">monthly</a></span>(since) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb21-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/recur_on_interval.html">recur_on_interval</a></span>(<span class="dv">2</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb21-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="../reference/recur_on_wday.html">recur_on_wday</a></span>(<span class="st">"Tuesday"</span>)</a>
+<a class="sourceLine" id="cb21-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb21-5" data-line-number="5"><span class="kw"><a href="../reference/sch_seq.html">sch_seq</a></span>(since, <span class="st">"1997-12-01"</span>, rrule)</a>
+<a class="sourceLine" id="cb21-6" data-line-number="6"><span class="co">#&gt; [1] "1997-09-02" "1997-09-09" "1997-09-16" "1997-09-23" "1997-09-30"</span></a>
+<a class="sourceLine" id="cb21-7" data-line-number="7"><span class="co">#&gt; [6] "1997-11-04" "1997-11-11" "1997-11-18" "1997-11-25"</span></a></code></pre></div>
+</div>
+<div id="yearly-in-june-and-july-for-10-occurrences" class="section level3">
+<h3 class="hasAnchor">
+<a href="#yearly-in-june-and-july-for-10-occurrences" class="anchor"></a>Yearly in June and July for 10 occurrences</h3>
+<p>Note that the day of the month is taken from the <code>since</code> date, since it is not otherwise specified!</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1">rrule &lt;-<span class="st"> </span><span class="kw"><a href="../reference/rrule.html">yearly</a></span>(<span class="st">"1997-06-10"</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb22-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/recur_on_ymonth.html">recur_on_ymonth</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"June"</span>, <span class="st">"July"</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb22-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="../reference/recur_for_count.html">recur_for_count</a></span>(<span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb22-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb22-5" data-line-number="5"><span class="kw"><a href="../reference/sch_seq.html">sch_seq</a></span>(<span class="st">"1997-06-10"</span>, to, rrule)</a>
+<a class="sourceLine" id="cb22-6" data-line-number="6"><span class="co">#&gt;  [1] "1997-06-10" "1997-07-10" "1998-06-10" "1998-07-10" "1999-06-10"</span></a>
+<a class="sourceLine" id="cb22-7" data-line-number="7"><span class="co">#&gt;  [6] "1999-07-10" "2000-06-10" "2000-07-10" "2001-06-10" "2001-07-10"</span></a></code></pre></div>
+</div>
+<div id="every-other-year-on-january-february-and-march-for-10-occurrences" class="section level3">
+<h3 class="hasAnchor">
+<a href="#every-other-year-on-january-february-and-march-for-10-occurrences" class="anchor"></a>Every other year on January, February, and March for 10 occurrences</h3>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1">rrule &lt;-<span class="st"> </span><span class="kw"><a href="../reference/rrule.html">yearly</a></span>(<span class="st">"1997-03-10"</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb23-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/recur_on_ymonth.html">recur_on_ymonth</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Jan"</span>, <span class="st">"Feb"</span>, <span class="st">"Mar"</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb23-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="../reference/recur_on_interval.html">recur_on_interval</a></span>(<span class="dv">2</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb23-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="../reference/recur_for_count.html">recur_for_count</a></span>(<span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb23-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb23-6" data-line-number="6"><span class="kw"><a href="../reference/sch_seq.html">sch_seq</a></span>(<span class="st">"1997-03-10"</span>, to, rrule)</a>
+<a class="sourceLine" id="cb23-7" data-line-number="7"><span class="co">#&gt;  [1] "1997-03-10" "1999-01-10" "1999-02-10" "1999-03-10" "2001-01-10"</span></a>
+<a class="sourceLine" id="cb23-8" data-line-number="8"><span class="co">#&gt;  [6] "2001-02-10" "2001-03-10" "2003-01-10" "2003-02-10" "2003-03-10"</span></a></code></pre></div>
+</div>
+<div id="every-third-year-on-the-1st-100th-and-200th-day-for-10-occurrences" class="section level3">
+<h3 class="hasAnchor">
+<a href="#every-third-year-on-the-1st-100th-and-200th-day-for-10-occurrences" class="anchor"></a>Every third year on the 1st, 100th, and 200th day for 10 occurrences</h3>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1">rrule &lt;-<span class="st"> </span><span class="kw"><a href="../reference/rrule.html">yearly</a></span>(<span class="st">"1997-01-01"</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb24-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/recur_on_yday.html">recur_on_yday</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">1</span>, <span class="dv">100</span>, <span class="dv">200</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb24-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="../reference/recur_on_interval.html">recur_on_interval</a></span>(<span class="dv">3</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb24-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="../reference/recur_for_count.html">recur_for_count</a></span>(<span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb24-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb24-6" data-line-number="6"><span class="kw"><a href="../reference/sch_seq.html">sch_seq</a></span>(<span class="st">"1997-01-01"</span>, to, rrule)</a>
+<a class="sourceLine" id="cb24-7" data-line-number="7"><span class="co">#&gt;  [1] "1997-01-01" "1997-04-10" "1997-07-19" "2000-01-01" "2000-04-09"</span></a>
+<a class="sourceLine" id="cb24-8" data-line-number="8"><span class="co">#&gt;  [6] "2000-07-18" "2003-01-01" "2003-04-10" "2003-07-19" "2006-01-01"</span></a></code></pre></div>
+</div>
+<div id="every-20th-monday-of-the-year-forever" class="section level3">
+<h3 class="hasAnchor">
+<a href="#every-20th-monday-of-the-year-forever" class="anchor"></a>Every 20th Monday of the year, forever</h3>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1">rrule &lt;-<span class="st"> </span><span class="kw"><a href="../reference/rrule.html">yearly</a></span>(<span class="st">"1997-05-19"</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb25-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/recur_on_wday.html">recur_on_wday</a></span>(<span class="st">"Monday"</span>, <span class="dt">nth =</span> <span class="dv">20</span>)</a>
+<a class="sourceLine" id="cb25-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb25-4" data-line-number="4"><span class="kw"><a href="../reference/sch_seq.html">sch_seq</a></span>(<span class="st">"1997-05-19"</span>, <span class="st">"2000-01-01"</span>, rrule)</a>
+<a class="sourceLine" id="cb25-5" data-line-number="5"><span class="co">#&gt; [1] "1997-05-19" "1998-05-18" "1999-05-17"</span></a></code></pre></div>
+</div>
+<div id="monday-of-week-number-20-where-the-default-start-of-the-week-is-monday-forever" class="section level3">
+<h3 class="hasAnchor">
+<a href="#monday-of-week-number-20-where-the-default-start-of-the-week-is-monday-forever" class="anchor"></a>Monday of week number 20 (where the default start of the week is Monday), forever</h3>
+<p>Default week start in almanac is on Monday.</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1">rrule &lt;-<span class="st"> </span><span class="kw"><a href="../reference/rrule.html">yearly</a></span>(<span class="st">"1997-05-12"</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb26-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/recur_on_yweek.html">recur_on_yweek</a></span>(<span class="dv">20</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb26-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="../reference/recur_on_wday.html">recur_on_wday</a></span>(<span class="st">"Monday"</span>)</a>
+<a class="sourceLine" id="cb26-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb26-5" data-line-number="5"><span class="kw"><a href="../reference/sch_seq.html">sch_seq</a></span>(<span class="st">"1997-05-12"</span>, <span class="st">"2000-01-01"</span>, rrule)</a>
+<a class="sourceLine" id="cb26-6" data-line-number="6"><span class="co">#&gt; [1] "1997-05-12" "1998-05-11" "1999-05-17"</span></a></code></pre></div>
+</div>
+<div id="every-thursday-in-march-forever" class="section level3">
+<h3 class="hasAnchor">
+<a href="#every-thursday-in-march-forever" class="anchor"></a>Every Thursday in March, forever</h3>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1">rrule &lt;-<span class="st"> </span><span class="kw"><a href="../reference/rrule.html">yearly</a></span>(<span class="st">"1997-03-13"</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb27-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/recur_on_wday.html">recur_on_wday</a></span>(<span class="st">"Thursday"</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb27-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="../reference/recur_on_ymonth.html">recur_on_ymonth</a></span>(<span class="st">"March"</span>)</a>
+<a class="sourceLine" id="cb27-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb27-5" data-line-number="5"><span class="kw"><a href="../reference/sch_seq.html">sch_seq</a></span>(<span class="st">"1997-03-13"</span>, <span class="st">"2000-01-01"</span>, rrule)</a>
+<a class="sourceLine" id="cb27-6" data-line-number="6"><span class="co">#&gt;  [1] "1997-03-13" "1997-03-20" "1997-03-27" "1998-03-05" "1998-03-12"</span></a>
+<a class="sourceLine" id="cb27-7" data-line-number="7"><span class="co">#&gt;  [6] "1998-03-19" "1998-03-26" "1999-03-04" "1999-03-11" "1999-03-18"</span></a>
+<a class="sourceLine" id="cb27-8" data-line-number="8"><span class="co">#&gt; [11] "1999-03-25"</span></a></code></pre></div>
+</div>
+<div id="every-thursday-but-only-during-june-july-and-august-forever" class="section level3">
+<h3 class="hasAnchor">
+<a href="#every-thursday-but-only-during-june-july-and-august-forever" class="anchor"></a>Every Thursday, but only during June, July, and August, forever</h3>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1">rrule &lt;-<span class="st"> </span><span class="kw"><a href="../reference/rrule.html">yearly</a></span>(<span class="st">"1997-06-05"</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb28-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/recur_on_wday.html">recur_on_wday</a></span>(<span class="st">"Thursday"</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb28-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="../reference/recur_on_ymonth.html">recur_on_ymonth</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Jun"</span>, <span class="st">"July"</span>, <span class="st">"Aug"</span>))</a>
+<a class="sourceLine" id="cb28-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb28-5" data-line-number="5"><span class="kw"><a href="../reference/sch_seq.html">sch_seq</a></span>(<span class="st">"1997-06-05"</span>, <span class="st">"1999-01-01"</span>, rrule)</a>
+<a class="sourceLine" id="cb28-6" data-line-number="6"><span class="co">#&gt;  [1] "1997-06-05" "1997-06-12" "1997-06-19" "1997-06-26" "1997-07-03"</span></a>
+<a class="sourceLine" id="cb28-7" data-line-number="7"><span class="co">#&gt;  [6] "1997-07-10" "1997-07-17" "1997-07-24" "1997-07-31" "1997-08-07"</span></a>
+<a class="sourceLine" id="cb28-8" data-line-number="8"><span class="co">#&gt; [11] "1997-08-14" "1997-08-21" "1997-08-28" "1998-06-04" "1998-06-11"</span></a>
+<a class="sourceLine" id="cb28-9" data-line-number="9"><span class="co">#&gt; [16] "1998-06-18" "1998-06-25" "1998-07-02" "1998-07-09" "1998-07-16"</span></a>
+<a class="sourceLine" id="cb28-10" data-line-number="10"><span class="co">#&gt; [21] "1998-07-23" "1998-07-30" "1998-08-06" "1998-08-13" "1998-08-20"</span></a>
+<a class="sourceLine" id="cb28-11" data-line-number="11"><span class="co">#&gt; [26] "1998-08-27"</span></a></code></pre></div>
+</div>
+<div id="every-friday-the-13th-forever" class="section level3">
+<h3 class="hasAnchor">
+<a href="#every-friday-the-13th-forever" class="anchor"></a>Every Friday the 13th, forever</h3>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1">rrule &lt;-<span class="st"> </span><span class="kw"><a href="../reference/rrule.html">yearly</a></span>(since) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb29-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/recur_on_wday.html">recur_on_wday</a></span>(<span class="st">"Friday"</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb29-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="../reference/recur_on_mday.html">recur_on_mday</a></span>(<span class="dv">13</span>)</a>
+<a class="sourceLine" id="cb29-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb29-5" data-line-number="5"><span class="kw"><a href="../reference/sch_seq.html">sch_seq</a></span>(since, <span class="st">"2001-01-01"</span>, rrule)</a>
+<a class="sourceLine" id="cb29-6" data-line-number="6"><span class="co">#&gt; [1] "1998-02-13" "1998-03-13" "1998-11-13" "1999-08-13" "2000-10-13"</span></a></code></pre></div>
+</div>
+<div id="the-first-saturday-that-follows-the-first-sunday-of-the-month-forever" class="section level3">
+<h3 class="hasAnchor">
+<a href="#the-first-saturday-that-follows-the-first-sunday-of-the-month-forever" class="anchor"></a>The first Saturday that follows the first Sunday of the month, forever</h3>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1">rrule &lt;-<span class="st"> </span><span class="kw"><a href="../reference/rrule.html">yearly</a></span>(<span class="st">"1997-09-13"</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb30-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/recur_on_wday.html">recur_on_wday</a></span>(<span class="st">"Saturday"</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb30-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="../reference/recur_on_mday.html">recur_on_mday</a></span>(<span class="dv">7</span><span class="op">:</span><span class="dv">13</span>)</a>
+<a class="sourceLine" id="cb30-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb30-5" data-line-number="5"><span class="kw"><a href="../reference/sch_seq.html">sch_seq</a></span>(<span class="st">"1997-09-13"</span>, <span class="st">"1998-06-01"</span>, rrule)</a>
+<a class="sourceLine" id="cb30-6" data-line-number="6"><span class="co">#&gt; [1] "1997-09-13" "1997-10-11" "1997-11-08" "1997-12-13" "1998-01-10"</span></a>
+<a class="sourceLine" id="cb30-7" data-line-number="7"><span class="co">#&gt; [6] "1998-02-07" "1998-03-07" "1998-04-11" "1998-05-09"</span></a></code></pre></div>
+</div>
+<div id="every-4-years-the-first-tuesday-after-a-monday-in-november-forever-u-s--presidential-election-day" class="section level3">
+<h3 class="hasAnchor">
+<a href="#every-4-years-the-first-tuesday-after-a-monday-in-november-forever-u-s--presidential-election-day" class="anchor"></a>Every 4 years, the first Tuesday after a Monday in November, forever (U.S. Presidential Election day)</h3>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1">rrule &lt;-<span class="st"> </span><span class="kw"><a href="../reference/rrule.html">yearly</a></span>(<span class="st">"1996-11-05"</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb31-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/recur_on_wday.html">recur_on_wday</a></span>(<span class="st">"Tuesday"</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb31-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="../reference/recur_on_mday.html">recur_on_mday</a></span>(<span class="dv">2</span><span class="op">:</span><span class="dv">8</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb31-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="../reference/recur_on_interval.html">recur_on_interval</a></span>(<span class="dv">4</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb31-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="../reference/recur_on_ymonth.html">recur_on_ymonth</a></span>(<span class="st">"November"</span>)</a>
+<a class="sourceLine" id="cb31-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb31-7" data-line-number="7"><span class="kw"><a href="../reference/sch_seq.html">sch_seq</a></span>(<span class="st">"1996-11-05"</span>, <span class="st">"2010-12-31"</span>, rrule)</a>
+<a class="sourceLine" id="cb31-8" data-line-number="8"><span class="co">#&gt; [1] "1996-11-05" "2000-11-07" "2004-11-02" "2008-11-04"</span></a></code></pre></div>
+</div>
+<div id="the-third-instance-into-the-month-of-one-of-tuesday-wednesday-or-thursday-for-the-next-3-months" class="section level3">
+<h3 class="hasAnchor">
+<a href="#the-third-instance-into-the-month-of-one-of-tuesday-wednesday-or-thursday-for-the-next-3-months" class="anchor"></a>The third instance into the month of one of Tuesday, Wednesday, or Thursday, for the next 3 months</h3>
+<p><code><a href="../reference/recur_on_position.html">recur_on_position()</a></code> is an incredibly powerful tool, allowing you to select a position <em>within the frequency</em>. So this selects the third element of each monthly set, where the monthly set contains all of the Tuesday, Wednesday, and Thursdays of the month.</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1">rrule &lt;-<span class="st"> </span><span class="kw"><a href="../reference/rrule.html">monthly</a></span>(<span class="st">"1997-09-04"</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb32-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/recur_on_wday.html">recur_on_wday</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Tue"</span>, <span class="st">"Wed"</span>, <span class="st">"Thu"</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb32-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="../reference/recur_on_position.html">recur_on_position</a></span>(<span class="dv">3</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb32-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="../reference/recur_for_count.html">recur_for_count</a></span>(<span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb32-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb32-6" data-line-number="6"><span class="kw"><a href="../reference/sch_seq.html">sch_seq</a></span>(<span class="st">"1997-09-04"</span>, to, rrule)</a>
+<a class="sourceLine" id="cb32-7" data-line-number="7"><span class="co">#&gt; [1] "1997-09-04" "1997-10-07" "1997-11-06"</span></a></code></pre></div>
+</div>
+<div id="the-second-to-last-weekday-of-the-month" class="section level3">
+<h3 class="hasAnchor">
+<a href="#the-second-to-last-weekday-of-the-month" class="anchor"></a>The second-to-last weekday of the month</h3>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" data-line-number="1">rrule &lt;-<span class="st"> </span><span class="kw"><a href="../reference/rrule.html">monthly</a></span>(<span class="st">"1997-09-29"</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb33-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/recur_on_wday.html">recur_on_wday</a></span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb33-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="../reference/recur_on_position.html">recur_on_position</a></span>(<span class="op">-</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb33-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb33-5" data-line-number="5"><span class="kw"><a href="../reference/sch_seq.html">sch_seq</a></span>(<span class="st">"1997-09-29"</span>, <span class="st">"1998-12-01"</span>, rrule)</a>
+<a class="sourceLine" id="cb33-6" data-line-number="6"><span class="co">#&gt;  [1] "1997-09-29" "1997-10-30" "1997-11-27" "1997-12-30" "1998-01-29"</span></a>
+<a class="sourceLine" id="cb33-7" data-line-number="7"><span class="co">#&gt;  [6] "1998-02-26" "1998-03-30" "1998-04-29" "1998-05-28" "1998-06-29"</span></a>
+<a class="sourceLine" id="cb33-8" data-line-number="8"><span class="co">#&gt; [11] "1998-07-30" "1998-08-28" "1998-09-29" "1998-10-29" "1998-11-27"</span></a></code></pre></div>
+</div>
+<div id="an-example-where-the-days-generated-makes-a-difference-because-of-week_start" class="section level3">
+<h3 class="hasAnchor">
+<a href="#an-example-where-the-days-generated-makes-a-difference-because-of-week_start" class="anchor"></a>An example where the days generated makes a difference because of week_start</h3>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1">rrule &lt;-<span class="st"> </span><span class="kw"><a href="../reference/rrule.html">weekly</a></span>(<span class="st">"1997-08-05"</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb34-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/recur_on_interval.html">recur_on_interval</a></span>(<span class="dv">2</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb34-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="../reference/recur_for_count.html">recur_for_count</a></span>(<span class="dv">4</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb34-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="../reference/recur_on_wday.html">recur_on_wday</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Tue"</span>, <span class="st">"Sun"</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb34-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="../reference/recur_with_week_start.html">recur_with_week_start</a></span>(<span class="st">"Monday"</span>)</a>
+<a class="sourceLine" id="cb34-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb34-7" data-line-number="7"><span class="co"># Week 1: 1997-08-04 -&gt; 1997-08-10</span></a>
+<a class="sourceLine" id="cb34-8" data-line-number="8"><span class="co"># Week 2: 1997-08-11 -&gt; 1997-08-17 (skipped)</span></a>
+<a class="sourceLine" id="cb34-9" data-line-number="9"><span class="co"># Week 3: 1997-08-18 -&gt; 1997-08-24 </span></a>
+<a class="sourceLine" id="cb34-10" data-line-number="10"><span class="kw"><a href="../reference/sch_seq.html">sch_seq</a></span>(<span class="st">"1997-08-05"</span>, <span class="st">"1998-12-01"</span>, rrule)</a>
+<a class="sourceLine" id="cb34-11" data-line-number="11"><span class="co">#&gt; [1] "1997-08-05" "1997-08-10" "1997-08-19" "1997-08-24"</span></a></code></pre></div>
+<p>Changing the week start to Sunday.</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" data-line-number="1">rrule &lt;-<span class="st"> </span><span class="kw"><a href="../reference/rrule.html">weekly</a></span>(<span class="st">"1997-08-05"</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb35-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/recur_on_interval.html">recur_on_interval</a></span>(<span class="dv">2</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb35-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="../reference/recur_for_count.html">recur_for_count</a></span>(<span class="dv">4</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb35-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="../reference/recur_on_wday.html">recur_on_wday</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Tue"</span>, <span class="st">"Sun"</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb35-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="../reference/recur_with_week_start.html">recur_with_week_start</a></span>(<span class="st">"Sunday"</span>)</a>
+<a class="sourceLine" id="cb35-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb35-7" data-line-number="7"><span class="co"># Week 1: 1997-08-03 -&gt; 1997-08-09</span></a>
+<a class="sourceLine" id="cb35-8" data-line-number="8"><span class="co"># Week 2: 1997-08-10 -&gt; 1997-08-16 (skipped)</span></a>
+<a class="sourceLine" id="cb35-9" data-line-number="9"><span class="co"># Week 3: 1997-08-17 -&gt; 1997-08-23</span></a>
+<a class="sourceLine" id="cb35-10" data-line-number="10"><span class="co"># Week 4: 1997-08-24 -&gt; 1997-08-30 (skipped)</span></a>
+<a class="sourceLine" id="cb35-11" data-line-number="11"><span class="co"># Week 5: 1997-08-31 -&gt; 1997-09-06</span></a>
+<a class="sourceLine" id="cb35-12" data-line-number="12"><span class="kw"><a href="../reference/sch_seq.html">sch_seq</a></span>(<span class="st">"1997-08-05"</span>, <span class="st">"1998-12-01"</span>, rrule)</a>
+<a class="sourceLine" id="cb35-13" data-line-number="13"><span class="co">#&gt; [1] "1997-08-05" "1997-08-17" "1997-08-19" "1997-08-31"</span></a></code></pre></div>
+</div>
+<div id="an-example-where-an-invalid-date-i-e--february-30-is-ignored" class="section level3">
+<h3 class="hasAnchor">
+<a href="#an-example-where-an-invalid-date-i-e--february-30-is-ignored" class="anchor"></a>An example where an invalid date (i.e., February 30) is ignored</h3>
+<p>Invalid dates do not decrease the total count.</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" data-line-number="1">rrule &lt;-<span class="st"> </span><span class="kw"><a href="../reference/rrule.html">weekly</a></span>(<span class="st">"2007-01-15"</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb36-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/recur_on_mday.html">recur_on_mday</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">15</span>, <span class="dv">30</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb36-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="../reference/recur_for_count.html">recur_for_count</a></span>(<span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb36-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb36-5" data-line-number="5"><span class="kw"><a href="../reference/sch_seq.html">sch_seq</a></span>(<span class="st">"2007-01-15"</span>, <span class="st">"2007-12-31"</span>, rrule)</a>
+<a class="sourceLine" id="cb36-6" data-line-number="6"><span class="co">#&gt; [1] "2007-01-15" "2007-01-30" "2007-02-15" "2007-03-15" "2007-03-30"</span></a></code></pre></div>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
 
-        <div id="tocnav">
-      <h2 class="hasAnchor">
-<a href="#tocnav" class="anchor"></a>Contents</h2>
-      <ul class="nav nav-pills nav-stacked">
-<li><a href="#daily-for-10-occurrences">Daily for 10 occurrences</a></li>
-      <li><a href="#daily-until-1997-12-24">Daily until 1997-12-24</a></li>
-      <li><a href="#every-other-day-forever">Every other day, forever</a></li>
-      <li><a href="#every-10-days-5-occurrences">Every 10 days, 5 occurrences</a></li>
-      <li><a href="#every-day-in-january-for-3-years">Every day in January, for 3 years</a></li>
-      <li><a href="#weekly-for-10-occurrences">Weekly for 10 occurrences</a></li>
-      <li><a href="#weekly-until-december-24-1997">Weekly until December 24, 1997</a></li>
-      <li><a href="#every-other-week---forever">Every other week - forever</a></li>
-      <li><a href="#weekly-on-tuesday-and-thursday-for-five-weeks">Weekly on Tuesday and Thursday for five weeks</a></li>
-      <li><a href="#every-other-week-on-monday-wednesday-and-friday-until-december-24-1997-starting-on-monday-september-1-1997">Every other week on Monday, Wednesday, and Friday until December 24, 1997, starting on Monday, September 1, 1997</a></li>
-      <li><a href="#every-other-week-on-tuesday-and-thursday-for-8-occurrences">Every other week on Tuesday and Thursday, for 8 occurrences</a></li>
-      <li><a href="#monthly-on-the-first-friday-for-10-occurrences">Monthly on the first Friday for 10 occurrences</a></li>
-      <li><a href="#monthly-on-the-first-friday-until-december-24-1997">Monthly on the first Friday until December 24, 1997</a></li>
-      <li><a href="#every-other-month-on-the-first-and-last-sunday-of-the-month-for-10-occurrences">Every other month on the first and last Sunday of the month for 10 occurrences</a></li>
-      <li><a href="#monthly-on-the-second-to-last-monday-of-the-month-for-6-months">Monthly on the second-to-last Monday of the month for 6 months</a></li>
-      </ul>
-</div>
       </div>
 
 </div>
