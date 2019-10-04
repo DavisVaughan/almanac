@@ -103,6 +103,8 @@ more about how to use almanac.
 
   - `vignette("quarterly")`
 
+  - `vignette("icalendar")`
+
 ## Installation
 
 You can NOT install the released version of almanac from

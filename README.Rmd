@@ -94,6 +94,8 @@ View the vignettes on [the website](https://davisvaughan.github.io/almanac/index
 
 - `vignette("quarterly")`
 
+- `vignette("icalendar")`
+
 ## Installation
 
 You can NOT install the released version of almanac from [CRAN](https://CRAN.R-project.org) with:
