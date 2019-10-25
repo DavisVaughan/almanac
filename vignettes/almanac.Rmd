@@ -70,7 +70,7 @@ sch_seq("1988-01-01", "1995-12-31", on_yearly_jan_5)
 
 ## Recurrence Set
 
-Each recurrence rule comes with its own unique _recurrence set_. A recurrence set is the set of all event dates that are included in that rule. In the previous example, we used `sch_seq()` to extract a subset of dates from the recurrence set that were between `from` and `to`. You can also check if an existing date is included in a recurrence rule's set with `sch_in()`.
+Each recurrence rule comes with its own unique _recurrence set_. A recurrence set is the set of all event dates that are included in that rule. In the previous example, we used `sch_seq()` to extract a subset of dates from the recurrence set that were between `from` and `to`. You can also check if an existing date is included in a recurrence rule's set with `alma_in()`.
 
 ```{r}
 on_monthly <- monthly(since = "1990-01-10")
@@ -78,7 +78,7 @@ on_monthly <- monthly(since = "1990-01-10")
 x <- as.Date("2000-01-08") + 0:5
 x
 
-x_in_set <- sch_in(x, on_monthly)
+x_in_set <- alma_in(x, on_monthly)
 x_in_set
 
 x[x_in_set]

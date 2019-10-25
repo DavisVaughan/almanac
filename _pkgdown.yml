@@ -13,7 +13,7 @@ reference:
 
 - title: Schedule sets
   contents:
-  - sch_in
+  - alma_in
   - sch_seq
   - sch_next
   - sch_previous

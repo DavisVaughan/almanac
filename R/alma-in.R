@@ -1,6 +1,6 @@
 #' Is `x` in the schedule?
 #'
-#' `sch_in()` checks if `x` is in the set of dates defined by the schedule.
+#' `alma_in()` checks if `x` is in the set of dates defined by the schedule.
 #'
 #' @param x `[Date]`
 #'
@@ -11,7 +11,7 @@
 #'    A schedule or rrule.
 #'
 #' @export
-sch_in <- function(x, schedule) {
+alma_in <- function(x, schedule) {
   x <- vec_cast_date(x)
   schedule <- as_schedule(schedule)
 

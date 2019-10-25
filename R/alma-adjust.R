@@ -87,7 +87,7 @@ alma_adjust <- function(x, schedule, adjustment = days(1)) {
 
 alma_adjust_impl <- function(x, schedule, adjuster) {
   # Find initial set of events
-  problem_loc <- sch_in(x, schedule)
+  problem_loc <- alma_in(x, schedule)
 
   if (any(problem_loc)) {
     x[problem_loc] <- adjuster(x[problem_loc], schedule)

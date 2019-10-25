@@ -43,7 +43,7 @@ sch_seq("2000-01-01", "2006-01-01", on_thanksgiving)
 Or determine if a particular date is a part of the recurrence set.
 
 ``` r
-sch_in(c("2000-01-01", "2000-11-23"), on_thanksgiving)
+alma_in(c("2000-01-01", "2000-11-23"), on_thanksgiving)
 #> [1] FALSE  TRUE
 ```
 

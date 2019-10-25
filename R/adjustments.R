@@ -125,7 +125,7 @@ adj_period_factory <- function(period) {
       vec_slice(x, problem_pos) <- adjusted
 
       # Recheck
-      problem_loc <- sch_in(adjusted, schedule)
+      problem_loc <- alma_in(adjusted, schedule)
 
       # Update location of problems
       problem_pos <- problem_pos[problem_loc]
