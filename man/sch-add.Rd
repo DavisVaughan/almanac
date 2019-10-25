@@ -4,7 +4,7 @@
 \alias{sch-add}
 \alias{sch_rrule}
 \alias{sch_rdate}
-\alias{sch_add_exdate}
+\alias{sch_exdate}
 \alias{sch_add_schedule}
 \title{Add to a schedule}
 \usage{
@@ -12,7 +12,7 @@ sch_rrule(x, rrule)
 
 sch_rdate(x, rdate)
 
-sch_add_exdate(x, exdate)
+sch_exdate(x, exdate)
 
 sch_add_schedule(x, schedule)
 }
@@ -42,7 +42,7 @@ A schedule to merge with \code{x}.}
 \item \code{sch_rrule()} adds a \code{rrule} to a schedule.
 \item \code{sch_rdate()} adds a \code{rdate} to a schedule. \code{rdate}s are singular
 special cased dates that are forcibly included in the schedule.
-\item \code{sch_add_exdate()} adds a \code{exdate} to a schedule. \code{exdate}s are singular
+\item \code{sch_exdate()} adds a \code{exdate} to a schedule. \code{exdate}s are singular
 special cased dates that are forcibly excluded from the schedule.
 \item \code{sch_add_schedule()} merges two schedules together.
 }
@@ -86,7 +86,7 @@ sch_seq("2019-01-01", "2021-01-01", sch)
 
 # Except Labor Day in 2019
 sch2 <- sch \%>\%
-  sch_add_exdate("2019-09-02")
+  sch_exdate("2019-09-02")
 
 sch_seq("2019-01-01", "2021-01-01", sch2)
 

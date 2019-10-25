@@ -163,7 +163,7 @@ sch_christmas_or_labor_day <- schedule() %>%
 sch_seq("2000-01-01", "2002-01-01", sch_christmas_or_labor_day)
 
 sch_christmas_or_labor_day_except_2000_labor_day <- sch_christmas_or_labor_day %>%
-  sch_add_exdate("2000-09-04")
+  sch_exdate("2000-09-04")
 
 sch_seq("2000-01-01", "2002-01-01", sch_christmas_or_labor_day_except_2000_labor_day)
 ```

@@ -7,7 +7,7 @@
 #' - `sch_rdate()` adds a `rdate` to a schedule. `rdate`s are singular
 #'   special cased dates that are forcibly included in the schedule.
 #'
-#' - `sch_add_exdate()` adds a `exdate` to a schedule. `exdate`s are singular
+#' - `sch_exdate()` adds a `exdate` to a schedule. `exdate`s are singular
 #'   special cased dates that are forcibly excluded from the schedule.
 #'
 #' - `sch_add_schedule()` merges two schedules together.
@@ -73,7 +73,7 @@
 #'
 #' # Except Labor Day in 2019
 #' sch2 <- sch %>%
-#'   sch_add_exdate("2019-09-02")
+#'   sch_exdate("2019-09-02")
 #'
 #' sch_seq("2019-01-01", "2021-01-01", sch2)
 #'
@@ -114,7 +114,7 @@ sch_rdate <- function(x, rdate) {
 
 #' @rdname sch-add
 #' @export
-sch_add_exdate <- function(x, exdate) {
+sch_exdate <- function(x, exdate) {
   validate_schedule(x)
   exdate <- vec_cast_date(exdate, "exdate")
 
