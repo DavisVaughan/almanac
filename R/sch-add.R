@@ -4,7 +4,7 @@
 #'
 #' - `sch_rrule()` adds a `rrule` to a schedule.
 #'
-#' - `sch_add_rdate()` adds a `rdate` to a schedule. `rdate`s are singular
+#' - `sch_rdate()` adds a `rdate` to a schedule. `rdate`s are singular
 #'   special cased dates that are forcibly included in the schedule.
 #'
 #' - `sch_add_exdate()` adds a `exdate` to a schedule. `exdate`s are singular
@@ -98,7 +98,7 @@ sch_rrule <- function(x, rrule) {
 
 #' @rdname sch-add
 #' @export
-sch_add_rdate <- function(x, rdate) {
+sch_rdate <- function(x, rdate) {
   validate_schedule(x)
   rdate <- vec_cast_date(rdate, "rdate")
 
