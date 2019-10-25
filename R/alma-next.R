@@ -2,7 +2,7 @@
 #'
 #' @description
 #'
-#' - `sch_next()` generates the next event after `x`.
+#' - `alma_next()` generates the next event after `x`.
 #'
 #' - `sch_previous()` generates the previous event before `x`.
 #'
@@ -21,12 +21,12 @@
 #'   sch_rrule(on_12th) %>%
 #'   sch_rrule(on_monday)
 #'
-#' sch_next("2019-01-01", sch)
+#' alma_next("2019-01-01", sch)
 #'
 #' sch_previous("2019-01-01", sch)
 #'
 #' @export
-sch_next <- function(x, schedule, inclusive = FALSE) {
+alma_next <- function(x, schedule, inclusive = FALSE) {
   x <- vec_cast_date(x)
   schedule <- as_schedule(schedule)
   vec_assert(inclusive, logical(), 1L)
@@ -40,7 +40,7 @@ sch_next <- function(x, schedule, inclusive = FALSE) {
   parse_js_date(out)
 }
 
-#' @rdname sch_next
+#' @rdname alma_next
 #' @export
 sch_previous <- function(x, schedule, inclusive = FALSE) {
   x <- vec_cast_date(x)

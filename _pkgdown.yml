@@ -15,7 +15,7 @@ reference:
   contents:
   - alma_in
   - alma_seq
-  - sch_next
+  - alma_next
   - sch_previous
 
 - title: Adjusting dates
