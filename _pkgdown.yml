@@ -9,7 +9,7 @@ reference:
 - title: Schedule construction
   contents:
   - schedule
-  - starts_with("sch_add_")
+  - starts_with("sch_")
 
 - title: Schedule sets
   contents:
