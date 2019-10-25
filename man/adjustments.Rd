@@ -58,5 +58,5 @@ date is chosen.
 }
 }
 \details{
-For examples, see \code{\link[=sch_adjust]{sch_adjust()}}.
+For examples, see \code{\link[=alma_adjust]{alma_adjust()}}.
 }

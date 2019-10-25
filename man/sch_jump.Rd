@@ -46,11 +46,11 @@ The number of days to step. Can be negative to step backwards.}
 \description{
 \itemize{
 \item \code{sch_jump()} shifts a sequence of dates by "jumping" from \code{x} to
-\code{x + jump}. After the jump, \code{\link[=sch_adjust]{sch_adjust()}} is called with the \code{adjustment}
+\code{x + jump}. After the jump, \code{\link[=alma_adjust]{alma_adjust()}} is called with the \code{adjustment}
 to ensure that if the new dates are events, they are adjusted to the next
 available non-event date.
 \item \code{sch_step()} steps over a sequence of dates 1 day at a time, for \code{n} days.
-After each step, \code{\link[=sch_adjust]{sch_adjust()}} is called with an adjustment of \code{days(1)}.
+After each step, \code{\link[=alma_adjust]{alma_adjust()}} is called with an adjustment of \code{days(1)}.
 This has different results from \code{sch_jump()} with a jump of \code{days(n)}, and
 is more appropriate for shifting by "n business days".
 }

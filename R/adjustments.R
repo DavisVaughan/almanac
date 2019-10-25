@@ -33,11 +33,11 @@
 #'     following non-event dates are equally far away, the following non-event
 #'     date is chosen.
 #'
-#' @inheritParams sch_adjust
+#' @inheritParams alma_adjust
 #'
 #' @details
 #'
-#' For examples, see [sch_adjust()].
+#' For examples, see [alma_adjust()].
 #'
 #' @name adjustments
 NULL
@@ -59,12 +59,12 @@ adj_preceding <- function(x, schedule) {
 #' @rdname adjustments
 #' @export
 adj_modified_following <- function(x, schedule) {
-  out <- sch_adjust(x, schedule, 1L)
+  out <- alma_adjust(x, schedule, 1L)
 
   modify <- month(out) != month(x)
 
   if (any(modify)) {
-    out[modify] <- sch_adjust(x[modify], schedule, -1L)
+    out[modify] <- alma_adjust(x[modify], schedule, -1L)
   }
 
   out
@@ -73,12 +73,12 @@ adj_modified_following <- function(x, schedule) {
 #' @rdname adjustments
 #' @export
 adj_modified_preceding <- function(x, schedule) {
-  out <- sch_adjust(x, schedule, -1L)
+  out <- alma_adjust(x, schedule, -1L)
 
   modify <- month(out) != month(x)
 
   if (any(modify)) {
-    out[modify] <- sch_adjust(x[modify], schedule, 1L)
+    out[modify] <- alma_adjust(x[modify], schedule, 1L)
   }
 
   out
@@ -87,8 +87,8 @@ adj_modified_preceding <- function(x, schedule) {
 #' @rdname adjustments
 #' @export
 adj_nearest <- function(x, schedule) {
-  following <- sch_adjust(x, schedule, 1L)
-  preceding <- sch_adjust(x, schedule, -1L)
+  following <- alma_adjust(x, schedule, 1L)
+  preceding <- alma_adjust(x, schedule, -1L)
 
   dist_following <- as.numeric(following - x)
   dist_preceding <- as.numeric(x - preceding)
@@ -102,7 +102,7 @@ adj_nearest <- function(x, schedule) {
 
 # ------------------------------------------------------------------------------
 
-# `adj_period_factory()` is used by the default `adjustment` in `sch_adjust()`
+# `adj_period_factory()` is used by the default `adjustment` in `alma_adjust()`
 # and any adjustment that uses a lubridate period object or an integer number.
 
 # It constructs a function with 2 arguments:

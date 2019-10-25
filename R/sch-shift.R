@@ -3,12 +3,12 @@
 #' @description
 #'
 #' - `sch_jump()` shifts a sequence of dates by "jumping" from `x` to
-#'   `x + jump`. After the jump, [sch_adjust()] is called with the `adjustment`
+#'   `x + jump`. After the jump, [alma_adjust()] is called with the `adjustment`
 #'   to ensure that if the new dates are events, they are adjusted to the next
 #'   available non-event date.
 #'
 #' - `sch_step()` steps over a sequence of dates 1 day at a time, for `n` days.
-#'   After each step, [sch_adjust()] is called with an adjustment of `days(1)`.
+#'   After each step, [alma_adjust()] is called with an adjustment of `days(1)`.
 #'   This has different results from `sch_jump()` with a jump of `days(n)`, and
 #'   is more appropriate for shifting by "n business days".
 #'
@@ -43,7 +43,7 @@
 #'
 #'   The number of days to step. Can be negative to step backwards.
 #'
-#' @inheritParams sch_adjust
+#' @inheritParams alma_adjust
 #'
 #' @examples
 #' # 2019-09-13 is a Friday
@@ -66,7 +66,7 @@ sch_jump <- function(x, jump, schedule, adjustment = days(1)) {
   jump <- check_jump(jump)
 
   x <- x + jump
-  x <- sch_adjust(x, schedule, adjustment)
+  x <- alma_adjust(x, schedule, adjustment)
 
   x
 }
@@ -95,7 +95,7 @@ sch_step <- function(x, n, schedule) {
 
   for (i in seq_len(n)) {
     x <- x + one_day
-    x <- sch_adjust_impl(x, schedule, one_day_adjuster)
+    x <- alma_adjust_impl(x, schedule, one_day_adjuster)
   }
 
   x
@@ -103,7 +103,7 @@ sch_step <- function(x, n, schedule) {
 
 # Pre load the cache with the full range of [x, x + n] (or the reverse if n is
 # negative) and an additional amount past that as well to account for
-# the adjustments. This significantly speeds up the `sch_adjust()` calls.
+# the adjustments. This significantly speeds up the `alma_adjust()` calls.
 
 cache_preload <- function(x, n, schedule) {
   x_min <- min(x)
