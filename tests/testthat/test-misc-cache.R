@@ -3,7 +3,7 @@ test_that("cache stores events since `since`", {
 
   x <- as.Date("1970-01-05") + 0:2
 
-  sch_step(x, 1, rrule)
+  alma_step(x, 1, rrule)
 
   expect <- as.Date(c("1970-01-03", "1970-01-04"))
 

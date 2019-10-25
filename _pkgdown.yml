@@ -22,7 +22,7 @@ reference:
   contents:
   - alma_adjust
   - alma_jump
-  - sch_step
+  - alma_step
 
 - title: Adjustments
   contents:

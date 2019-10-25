@@ -22,7 +22,7 @@ If you have read the introduction vignette, `vignette("almanac")`, then you've s
 
 - `alma_jump()`
 
-- `sch_step()`
+- `alma_step()`
 
 ```{r setup}
 library(almanac)
@@ -31,7 +31,7 @@ library(lubridate, warn.conflicts = FALSE)
 
 ## Adjusting
 
-To talk about either `alma_jump()` or `sch_step()`, we first have to cover `alma_adjust()`, as it powers both of the others. `alma_adjust()` will "adjust" an existing set of dates to ensure that no dates currently fall on an "event", as defined by a provided schedule or recurrence rule. For example, let's construct a recurrence rule that includes all weekends in its recurrence set.
+To talk about either `alma_jump()` or `alma_step()`, we first have to cover `alma_adjust()`, as it powers both of the others. `alma_adjust()` will "adjust" an existing set of dates to ensure that no dates currently fall on an "event", as defined by a provided schedule or recurrence rule. For example, let's construct a recurrence rule that includes all weekends in its recurrence set.
 
 ```{r}
 on_weekends <- weekly(since = "2000-01-01") %>% 
@@ -83,7 +83,7 @@ alma_adjust(x, on_weekends, adj_modified_following)
 
 ## Jumping
 
-To build on `alma_adjust()`, let's assume that rather than just adjusting existing dates, you actually want to _shift_ the dates first, _then_ perform an adjustment to ensure that you have not landed on an event date. There are two natural ways to perform this shift, captured in `alma_jump()` and `sch_step()`.
+To build on `alma_adjust()`, let's assume that rather than just adjusting existing dates, you actually want to _shift_ the dates first, _then_ perform an adjustment to ensure that you have not landed on an event date. There are two natural ways to perform this shift, captured in `alma_jump()` and `alma_step()`.
 
 `alma_jump()` takes a vector of dates, a schedule, and a `jump`, which can be a lubridate Period object, a character string, or an integer number of days to jump. It performs the "jump" all at once, which is essentially equivalent to calling `x + days(n)`, if you are familiar with lubridate syntax. After the jump has been performed, it calls `alma_adjust()` on the resulting dates to ensure that the dates that you landed on are non-event dates.
 
@@ -113,14 +113,14 @@ data.frame(
 )
 ```
 
-In particular, take a look at what happens with Friday. The jump is applied all at once, landing us on Sunday, and then the adjustment is applied, which moves us to Monday. While this is consistent with what `alma_jump()` is trying to do, it might not always be what you want. If you want to move forward "2 business days", for example, then really Friday should be shifted forward to Tuesday, not Monday. To solve this problem, we turn to `sch_step()`.
+In particular, take a look at what happens with Friday. The jump is applied all at once, landing us on Sunday, and then the adjustment is applied, which moves us to Monday. While this is consistent with what `alma_jump()` is trying to do, it might not always be what you want. If you want to move forward "2 business days", for example, then really Friday should be shifted forward to Tuesday, not Monday. To solve this problem, we turn to `alma_step()`.
 
 ## Stepping
 
-`sch_step()` is a specialized version of shifting dates that is only applicable when shifting by a set number of days (as opposed to weeks or months). Rather than taking the `alma_jump()` approach by applying the jump all at once, `sch_step()` instead "steps" 1 day at a time, _and applies `alma_adjust()` at every step_. This will result in correct "business logic" of stepping forward by "2 business days" that `alma_jump()` couldn't provide.
+`alma_step()` is a specialized version of shifting dates that is only applicable when shifting by a set number of days (as opposed to weeks or months). Rather than taking the `alma_jump()` approach by applying the jump all at once, `alma_step()` instead "steps" 1 day at a time, _and applies `alma_adjust()` at every step_. This will result in correct "business logic" of stepping forward by "2 business days" that `alma_jump()` couldn't provide.
 
 ```{r}
-step <- sch_step(x, 2, on_weekends)
+step <- alma_step(x, 2, on_weekends)
 
 data.frame(
   x = x,
@@ -148,7 +148,7 @@ To break this down, take a look at just that first Friday.
 friday <- x[1]
 friday
 
-sch_step(friday, 2, on_weekends)
+alma_step(friday, 2, on_weekends)
 ```
 
 

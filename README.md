@@ -54,7 +54,7 @@ over” dates that are in the recurrence set.
 wednesday_before_thanksgiving <- "2000-11-22"
 
 # Step forward 2 non-event days, stepping over thanksgiving
-sch_step(wednesday_before_thanksgiving, n = 2, on_thanksgiving)
+alma_step(wednesday_before_thanksgiving, n = 2, on_thanksgiving)
 #> [1] "2000-11-25"
 ```
 
@@ -77,7 +77,7 @@ thursday_and_friday_before_labor_day <- c("2019-08-29", "2019-08-30")
 
 # Steps over Saturday, Sunday, and Labor Day to the following Tuesday
 # and Wednesday, aka "two business days" from now!
-two_business_days_forward <- sch_step(
+two_business_days_forward <- alma_step(
   thursday_and_friday_before_labor_day, 
   n = 2,
   schedule = on_us_holidays_and_weekends

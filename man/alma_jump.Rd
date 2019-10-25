@@ -2,12 +2,12 @@
 % Please edit documentation in R/alma-shift.R
 \name{alma_jump}
 \alias{alma_jump}
-\alias{sch_step}
+\alias{alma_step}
 \title{Shift dates relative to a schedule}
 \usage{
 alma_jump(x, jump, schedule, adjustment = days(1))
 
-sch_step(x, n, schedule)
+alma_step(x, n, schedule)
 }
 \arguments{
 \item{x}{\code{[Date]}
@@ -49,24 +49,24 @@ The number of days to step. Can be negative to step backwards.}
 \code{x + jump}. After the jump, \code{\link[=alma_adjust]{alma_adjust()}} is called with the \code{adjustment}
 to ensure that if the new dates are events, they are adjusted to the next
 available non-event date.
-\item \code{sch_step()} steps over a sequence of dates 1 day at a time, for \code{n} days.
+\item \code{alma_step()} steps over a sequence of dates 1 day at a time, for \code{n} days.
 After each step, \code{\link[=alma_adjust]{alma_adjust()}} is called with an adjustment of \code{days(1)}.
 This has different results from \code{alma_jump()} with a jump of \code{days(n)}, and
 is more appropriate for shifting by "n business days".
 }
 
-\emph{The performance of \code{sch_step()} in particular is highly dependent on the
+\emph{The performance of \code{alma_step()} in particular is highly dependent on the
 \code{since} date used in the schedule's recurrence rules. Choosing a date that
 is close to the start of \code{x} can dramatically improve performance.}
 }
 \details{
-For shifting by "n business days", \code{sch_step()} is often more appropriate.
+For shifting by "n business days", \code{alma_step()} is often more appropriate.
 Imagine you are on a Friday and want to shift forward 2 days using a
 schedule that marks weekends as events. There are two options:
 \itemize{
 \item \code{alma_jump()} - Jump forward 2 days to Sunday, and apply the \code{adjustment}.
 Assuming \code{adjustment = days(1)} was used, that means the result is Monday.
-\item \code{sch_step()} - Step forward 1 day to Saturday, apply an adjustment of
+\item \code{alma_step()} - Step forward 1 day to Saturday, apply an adjustment of
 \code{days(1)}, which rolls forward to Monday. Step forward 1 day to Tuesday,
 and no further adjustment is required.
 }
@@ -86,6 +86,6 @@ alma_jump("2019-09-13", days(2), on_weekends)
 
 # Here we step 1 day to Saturday, adjust to Monday,
 # then step 1 day to Tuesday
-sch_step("2019-09-13", 2, on_weekends)
+alma_step("2019-09-13", 2, on_weekends)
 
 }
