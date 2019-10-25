@@ -167,12 +167,12 @@ set by the recurrence rule. Otherwise, it is just used as a boundary.</p>
     <pre class="examples"><div class='input'><span class='co'># Using the default `since` date</span>
 <span class='no'>daily_since_epoch_limited</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rrule.html'>daily</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'>recur_until</span>(<span class='st'>"1970-01-05"</span>)
 
-<span class='fu'><a href='sch_seq.html'>sch_seq</a></span>(<span class='st'>"1969-12-31"</span>, <span class='st'>"1970-01-25"</span>, <span class='no'>daily_since_epoch_limited</span>)</div><div class='output co'>#&gt; [1] "1970-01-01" "1970-01-02" "1970-01-03" "1970-01-04" "1970-01-05"</div><div class='input'>
+<span class='fu'><a href='alma_seq.html'>alma_seq</a></span>(<span class='st'>"1969-12-31"</span>, <span class='st'>"1970-01-25"</span>, <span class='no'>daily_since_epoch_limited</span>)</div><div class='output co'>#&gt; [1] "1970-01-01" "1970-01-02" "1970-01-03" "1970-01-04" "1970-01-05"</div><div class='input'>
 <span class='co'># Changing the `since` date</span>
 <span class='no'>daily_since_2019_limited</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rrule.html'>daily</a></span>(<span class='kw'>since</span> <span class='kw'>=</span> <span class='st'>"2019-01-01"</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'>recur_until</span>(<span class='st'>"2019-01-05"</span>)
 
-<span class='fu'><a href='sch_seq.html'>sch_seq</a></span>(<span class='st'>"2018-12-31"</span>, <span class='st'>"2019-01-25"</span>, <span class='no'>daily_since_2019_limited</span>)</div><div class='output co'>#&gt; [1] "2019-01-01" "2019-01-02" "2019-01-03" "2019-01-04" "2019-01-05"</div><div class='input'>
+<span class='fu'><a href='alma_seq.html'>alma_seq</a></span>(<span class='st'>"2018-12-31"</span>, <span class='st'>"2019-01-25"</span>, <span class='no'>daily_since_2019_limited</span>)</div><div class='output co'>#&gt; [1] "2019-01-01" "2019-01-02" "2019-01-03" "2019-01-04" "2019-01-05"</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

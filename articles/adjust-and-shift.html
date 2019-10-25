@@ -98,25 +98,25 @@
 
     
     
-<p>If you have read the introduction vignette, <code><a href="../articles/almanac.html">vignette("almanac")</a></code>, then you’ve seen recurrence rules, schedules, and the functions <code><a href="../reference/sch_seq.html">sch_seq()</a></code> and <code><a href="../reference/sch_in.html">sch_in()</a></code>. Additionally included in {almanac} are a set of functions for adjusting and shifting an existing set of dates, <em>relative to a schedule</em>. They will be the topic of this vignette. The three functions are:</p>
+<p>If you have read the introduction vignette, <code><a href="../articles/almanac.html">vignette("almanac")</a></code>, then you’ve seen recurrence rules, schedules, and the functions <code><a href="../reference/alma_seq.html">alma_seq()</a></code> and <code><a href="../reference/alma_in.html">alma_in()</a></code>. Additionally included in {almanac} are a set of functions for adjusting and shifting an existing set of dates, <em>relative to a schedule</em>. They will be the topic of this vignette. The three functions are:</p>
 <ul>
-<li><p><code><a href="../reference/sch_adjust.html">sch_adjust()</a></code></p></li>
-<li><p><code><a href="../reference/sch_jump.html">sch_jump()</a></code></p></li>
-<li><p><code><a href="../reference/sch_jump.html">sch_step()</a></code></p></li>
+<li><p><code><a href="../reference/alma_adjust.html">alma_adjust()</a></code></p></li>
+<li><p><code><a href="../reference/alma_jump.html">alma_jump()</a></code></p></li>
+<li><p><code><a href="../reference/alma_jump.html">alma_step()</a></code></p></li>
 </ul>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(almanac)</a>
 <a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(lubridate, <span class="dt">warn.conflicts =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <div id="adjusting" class="section level2">
 <h2 class="hasAnchor">
 <a href="#adjusting" class="anchor"></a>Adjusting</h2>
-<p>To talk about either <code><a href="../reference/sch_jump.html">sch_jump()</a></code> or <code><a href="../reference/sch_jump.html">sch_step()</a></code>, we first have to cover <code><a href="../reference/sch_adjust.html">sch_adjust()</a></code>, as it powers both of the others. <code><a href="../reference/sch_adjust.html">sch_adjust()</a></code> will “adjust” an existing set of dates to ensure that no dates currently fall on an “event”, as defined by a provided schedule or recurrence rule. For example, let’s construct a recurrence rule that includes all weekends in its recurrence set.</p>
+<p>To talk about either <code><a href="../reference/alma_jump.html">alma_jump()</a></code> or <code><a href="../reference/alma_jump.html">alma_step()</a></code>, we first have to cover <code><a href="../reference/alma_adjust.html">alma_adjust()</a></code>, as it powers both of the others. <code><a href="../reference/alma_adjust.html">alma_adjust()</a></code> will “adjust” an existing set of dates to ensure that no dates currently fall on an “event”, as defined by a provided schedule or recurrence rule. For example, let’s construct a recurrence rule that includes all weekends in its recurrence set.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">on_weekends &lt;-<span class="st"> </span><span class="kw"><a href="../reference/rrule.html">weekly</a></span>(<span class="dt">since =</span> <span class="st">"2000-01-01"</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb2-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/recur_on_wday.html">recur_on_weekends</a></span>()</a>
 <a class="sourceLine" id="cb2-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="kw"><a href="../reference/sch_seq.html">sch_seq</a></span>(<span class="st">"2000-01-01"</span>, <span class="st">"2000-01-16"</span>, on_weekends)</a>
+<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="kw"><a href="../reference/alma_seq.html">alma_seq</a></span>(<span class="st">"2000-01-01"</span>, <span class="st">"2000-01-16"</span>, on_weekends)</a>
 <a class="sourceLine" id="cb2-5" data-line-number="5"><span class="co">#&gt; [1] "2000-01-01" "2000-01-02" "2000-01-08" "2000-01-09" "2000-01-15"</span></a>
 <a class="sourceLine" id="cb2-6" data-line-number="6"><span class="co">#&gt; [6] "2000-01-16"</span></a></code></pre></div>
-<p>Now, imagine you have an existing set of dates, <code>x</code>. The dates in <code>x</code> might be weekdays or weekends, but you have to ensure that any weekend dates are rolled forward to their next available non-weekend date. To do this, you can use <code><a href="../reference/sch_adjust.html">sch_adjust()</a></code>, which will apply an <code>adjustment</code> repeatedly until your dates are no longer on an event date. The default <code>adjustment</code> is the lubridate function <code><a href="http://lubridate.tidyverse.org/reference/period.html">days(1)</a></code>, to shift forward 1 day.</p>
+<p>Now, imagine you have an existing set of dates, <code>x</code>. The dates in <code>x</code> might be weekdays or weekends, but you have to ensure that any weekend dates are rolled forward to their next available non-weekend date. To do this, you can use <code><a href="../reference/alma_adjust.html">alma_adjust()</a></code>, which will apply an <code>adjustment</code> repeatedly until your dates are no longer on an event date. The default <code>adjustment</code> is the lubridate function <code><a href="http://lubridate.tidyverse.org/reference/period.html">days(1)</a></code>, to shift forward 1 day.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span>(<span class="st">"2000-04-28"</span>) <span class="op">+</span><span class="st"> </span><span class="dv">0</span><span class="op">:</span><span class="dv">8</span></a>
 <a class="sourceLine" id="cb3-2" data-line-number="2"></a>
 <a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co"># Any Saturday / Sunday should be rolled forward to a Monday</span></a>
@@ -124,13 +124,13 @@
 <a class="sourceLine" id="cb3-5" data-line-number="5"><span class="co">#&gt; [1] Fri Sat Sun Mon Tue Wed Thu Fri Sat</span></a>
 <a class="sourceLine" id="cb3-6" data-line-number="6"><span class="co">#&gt; Levels: Sun &lt; Mon &lt; Tue &lt; Wed &lt; Thu &lt; Fri &lt; Sat</span></a>
 <a class="sourceLine" id="cb3-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb3-8" data-line-number="8">x_adjusted &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sch_adjust.html">sch_adjust</a></span>(x, on_weekends)</a>
+<a class="sourceLine" id="cb3-8" data-line-number="8">x_adjusted &lt;-<span class="st"> </span><span class="kw"><a href="../reference/alma_adjust.html">alma_adjust</a></span>(x, on_weekends)</a>
 <a class="sourceLine" id="cb3-9" data-line-number="9"></a>
 <a class="sourceLine" id="cb3-10" data-line-number="10"><span class="kw"><a href="http://lubridate.tidyverse.org/reference/day.html">wday</a></span>(x_adjusted, <span class="ot">TRUE</span>)</a>
 <a class="sourceLine" id="cb3-11" data-line-number="11"><span class="co">#&gt; [1] Fri Mon Mon Mon Tue Wed Thu Fri Mon</span></a>
 <a class="sourceLine" id="cb3-12" data-line-number="12"><span class="co">#&gt; Levels: Sun &lt; Mon &lt; Tue &lt; Wed &lt; Thu &lt; Fri &lt; Sat</span></a></code></pre></div>
 <p>You could have also rolled the dates backwards to the previous Friday using <code>adjustment = -1</code>.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="http://lubridate.tidyverse.org/reference/day.html">wday</a></span>(<span class="kw"><a href="../reference/sch_adjust.html">sch_adjust</a></span>(x, on_weekends, <span class="dt">adjustment =</span> <span class="dv">-1</span>), <span class="ot">TRUE</span>)</a>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="http://lubridate.tidyverse.org/reference/day.html">wday</a></span>(<span class="kw"><a href="../reference/alma_adjust.html">alma_adjust</a></span>(x, on_weekends, <span class="dt">adjustment =</span> <span class="dv">-1</span>), <span class="ot">TRUE</span>)</a>
 <a class="sourceLine" id="cb4-2" data-line-number="2"><span class="co">#&gt; [1] Fri Fri Fri Mon Tue Wed Thu Fri Fri</span></a>
 <a class="sourceLine" id="cb4-3" data-line-number="3"><span class="co">#&gt; Levels: Sun &lt; Mon &lt; Tue &lt; Wed &lt; Thu &lt; Fri &lt; Sat</span></a></code></pre></div>
 </div>
@@ -148,7 +148,7 @@
 <a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co">#&gt; [1] Fri Sat Sun Mon Tue Wed Thu Fri Sat</span></a>
 <a class="sourceLine" id="cb5-7" data-line-number="7"><span class="co">#&gt; Levels: Sun &lt; Mon &lt; Tue &lt; Wed &lt; Thu &lt; Fri &lt; Sat</span></a></code></pre></div>
 <p>Rather than having to think about how to tackle this, almanac provides a number of <code>adj_*()</code> functions to help out, one of which is <code><a href="../reference/adjustments.html">adj_modified_following()</a></code>.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw"><a href="../reference/sch_adjust.html">sch_adjust</a></span>(x, on_weekends, adj_modified_following)</a>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw"><a href="../reference/alma_adjust.html">alma_adjust</a></span>(x, on_weekends, adj_modified_following)</a>
 <a class="sourceLine" id="cb6-2" data-line-number="2"><span class="co">#&gt; [1] "2000-04-28" "2000-04-28" "2000-04-28" "2000-05-01" "2000-05-02"</span></a>
 <a class="sourceLine" id="cb6-3" data-line-number="3"><span class="co">#&gt; [6] "2000-05-03" "2000-05-04" "2000-05-05" "2000-05-08"</span></a></code></pre></div>
 <p><code><a href="../reference/adjustments.html">adj_modified_following()</a></code> is an example of a custom <code>adjustment</code> function, all of which should expect to take the problematic dates as their first argument, and the schedule as their second argument. The adjustment function is responsible for <em>completely</em> adjusting the dates to the next available business day. It will not be called multiple times.</p>
@@ -156,10 +156,10 @@
 <div id="jumping" class="section level2">
 <h2 class="hasAnchor">
 <a href="#jumping" class="anchor"></a>Jumping</h2>
-<p>To build on <code><a href="../reference/sch_adjust.html">sch_adjust()</a></code>, let’s assume that rather than just adjusting existing dates, you actually want to <em>shift</em> the dates first, <em>then</em> perform an adjustment to ensure that you have not landed on an event date. There are two natural ways to perform this shift, captured in <code><a href="../reference/sch_jump.html">sch_jump()</a></code> and <code><a href="../reference/sch_jump.html">sch_step()</a></code>.</p>
-<p><code><a href="../reference/sch_jump.html">sch_jump()</a></code> takes a vector of dates, a schedule, and a <code>jump</code>, which can be a lubridate Period object, a character string, or an integer number of days to jump. It performs the “jump” all at once, which is essentially equivalent to calling <code>x + days(n)</code>, if you are familiar with lubridate syntax. After the jump has been performed, it calls <code><a href="../reference/sch_adjust.html">sch_adjust()</a></code> on the resulting dates to ensure that the dates that you landed on are non-event dates.</p>
+<p>To build on <code><a href="../reference/alma_adjust.html">alma_adjust()</a></code>, let’s assume that rather than just adjusting existing dates, you actually want to <em>shift</em> the dates first, <em>then</em> perform an adjustment to ensure that you have not landed on an event date. There are two natural ways to perform this shift, captured in <code><a href="../reference/alma_jump.html">alma_jump()</a></code> and <code><a href="../reference/alma_jump.html">alma_step()</a></code>.</p>
+<p><code><a href="../reference/alma_jump.html">alma_jump()</a></code> takes a vector of dates, a schedule, and a <code>jump</code>, which can be a lubridate Period object, a character string, or an integer number of days to jump. It performs the “jump” all at once, which is essentially equivalent to calling <code>x + days(n)</code>, if you are familiar with lubridate syntax. After the jump has been performed, it calls <code><a href="../reference/alma_adjust.html">alma_adjust()</a></code> on the resulting dates to ensure that the dates that you landed on are non-event dates.</p>
 <p>As an example, let’s “jump” forward 1 day with <code>x</code>, providing <code>on_weekends</code> as our schedule to adjust with. Notice how jumping forward 1 day from Friday lands on Saturday, which is then adjusted to Monday.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">jump &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sch_jump.html">sch_jump</a></span>(x, <span class="kw"><a href="http://lubridate.tidyverse.org/reference/period.html">days</a></span>(<span class="dv">1</span>), on_weekends)</a>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">jump &lt;-<span class="st"> </span><span class="kw"><a href="../reference/alma_jump.html">alma_jump</a></span>(x, <span class="kw"><a href="http://lubridate.tidyverse.org/reference/period.html">days</a></span>(<span class="dv">1</span>), on_weekends)</a>
 <a class="sourceLine" id="cb7-2" data-line-number="2"></a>
 <a class="sourceLine" id="cb7-3" data-line-number="3"><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(</a>
 <a class="sourceLine" id="cb7-4" data-line-number="4">  <span class="dt">x =</span> x,</a>
@@ -178,7 +178,7 @@
 <a class="sourceLine" id="cb7-17" data-line-number="17"><span class="co">#&gt; 8 2000-05-05    Fri 2000-05-08       Mon</span></a>
 <a class="sourceLine" id="cb7-18" data-line-number="18"><span class="co">#&gt; 9 2000-05-06    Sat 2000-05-08       Mon</span></a></code></pre></div>
 <p>Consider what happens when we “jump” forward 2 days.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">jump &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sch_jump.html">sch_jump</a></span>(x, <span class="kw"><a href="http://lubridate.tidyverse.org/reference/period.html">days</a></span>(<span class="dv">2</span>), on_weekends)</a>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">jump &lt;-<span class="st"> </span><span class="kw"><a href="../reference/alma_jump.html">alma_jump</a></span>(x, <span class="kw"><a href="http://lubridate.tidyverse.org/reference/period.html">days</a></span>(<span class="dv">2</span>), on_weekends)</a>
 <a class="sourceLine" id="cb8-2" data-line-number="2"></a>
 <a class="sourceLine" id="cb8-3" data-line-number="3"><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(</a>
 <a class="sourceLine" id="cb8-4" data-line-number="4">  <span class="dt">x =</span> x,</a>
@@ -196,13 +196,13 @@
 <a class="sourceLine" id="cb8-16" data-line-number="16"><span class="co">#&gt; 7 2000-05-04    Thu 2000-05-08       Mon</span></a>
 <a class="sourceLine" id="cb8-17" data-line-number="17"><span class="co">#&gt; 8 2000-05-05    Fri 2000-05-08       Mon</span></a>
 <a class="sourceLine" id="cb8-18" data-line-number="18"><span class="co">#&gt; 9 2000-05-06    Sat 2000-05-08       Mon</span></a></code></pre></div>
-<p>In particular, take a look at what happens with Friday. The jump is applied all at once, landing us on Sunday, and then the adjustment is applied, which moves us to Monday. While this is consistent with what <code><a href="../reference/sch_jump.html">sch_jump()</a></code> is trying to do, it might not always be what you want. If you want to move forward “2 business days”, for example, then really Friday should be shifted forward to Tuesday, not Monday. To solve this problem, we turn to <code><a href="../reference/sch_jump.html">sch_step()</a></code>.</p>
+<p>In particular, take a look at what happens with Friday. The jump is applied all at once, landing us on Sunday, and then the adjustment is applied, which moves us to Monday. While this is consistent with what <code><a href="../reference/alma_jump.html">alma_jump()</a></code> is trying to do, it might not always be what you want. If you want to move forward “2 business days”, for example, then really Friday should be shifted forward to Tuesday, not Monday. To solve this problem, we turn to <code><a href="../reference/alma_jump.html">alma_step()</a></code>.</p>
 </div>
 <div id="stepping" class="section level2">
 <h2 class="hasAnchor">
 <a href="#stepping" class="anchor"></a>Stepping</h2>
-<p><code><a href="../reference/sch_jump.html">sch_step()</a></code> is a specialized version of shifting dates that is only applicable when shifting by a set number of days (as opposed to weeks or months). Rather than taking the <code><a href="../reference/sch_jump.html">sch_jump()</a></code> approach by applying the jump all at once, <code><a href="../reference/sch_jump.html">sch_step()</a></code> instead “steps” 1 day at a time, <em>and applies <code><a href="../reference/sch_adjust.html">sch_adjust()</a></code> at every step</em>. This will result in correct “business logic” of stepping forward by “2 business days” that <code><a href="../reference/sch_jump.html">sch_jump()</a></code> couldn’t provide.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">step &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sch_jump.html">sch_step</a></span>(x, <span class="dv">2</span>, on_weekends)</a>
+<p><code><a href="../reference/alma_jump.html">alma_step()</a></code> is a specialized version of shifting dates that is only applicable when shifting by a set number of days (as opposed to weeks or months). Rather than taking the <code><a href="../reference/alma_jump.html">alma_jump()</a></code> approach by applying the jump all at once, <code><a href="../reference/alma_jump.html">alma_step()</a></code> instead “steps” 1 day at a time, <em>and applies <code><a href="../reference/alma_adjust.html">alma_adjust()</a></code> at every step</em>. This will result in correct “business logic” of stepping forward by “2 business days” that <code><a href="../reference/alma_jump.html">alma_jump()</a></code> couldn’t provide.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">step &lt;-<span class="st"> </span><span class="kw"><a href="../reference/alma_jump.html">alma_step</a></span>(x, <span class="dv">2</span>, on_weekends)</a>
 <a class="sourceLine" id="cb9-2" data-line-number="2"></a>
 <a class="sourceLine" id="cb9-3" data-line-number="3"><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(</a>
 <a class="sourceLine" id="cb9-4" data-line-number="4">  <span class="dt">x =</span> x,</a>
@@ -233,7 +233,7 @@
 <a class="sourceLine" id="cb10-2" data-line-number="2">friday</a>
 <a class="sourceLine" id="cb10-3" data-line-number="3"><span class="co">#&gt; [1] "2000-04-28"</span></a>
 <a class="sourceLine" id="cb10-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb10-5" data-line-number="5"><span class="kw"><a href="../reference/sch_jump.html">sch_step</a></span>(friday, <span class="dv">2</span>, on_weekends)</a>
+<a class="sourceLine" id="cb10-5" data-line-number="5"><span class="kw"><a href="../reference/alma_jump.html">alma_step</a></span>(friday, <span class="dv">2</span>, on_weekends)</a>
 <a class="sourceLine" id="cb10-6" data-line-number="6"><span class="co">#&gt; [1] "2000-05-02"</span></a></code></pre></div>
 </div>
   </div>

@@ -194,27 +194,27 @@ by default, is a Thursday (<code>1970-01-01</code>).</p>
 <span class='no'>end</span> <span class='kw'>&lt;-</span> <span class='st'>"1999-03-01"</span>
 
 <span class='co'># This finds the first Thursday, and then continues from there</span>
-<span class='fu'><a href='sch_seq.html'>sch_seq</a></span>(<span class='no'>start</span>, <span class='no'>end</span>, <span class='no'>on_weekly_thursdays</span>)</div><div class='output co'>#&gt; [1] "1999-01-07" "1999-01-14" "1999-01-21" "1999-01-28" "1999-02-04"
+<span class='fu'><a href='alma_seq.html'>alma_seq</a></span>(<span class='no'>start</span>, <span class='no'>end</span>, <span class='no'>on_weekly_thursdays</span>)</div><div class='output co'>#&gt; [1] "1999-01-07" "1999-01-14" "1999-01-21" "1999-01-28" "1999-02-04"
 #&gt; [6] "1999-02-11" "1999-02-18" "1999-02-25"</div><div class='input'>
 <span class='co'># We start counting from a Friday here, so our `start` date counts</span>
 <span class='no'>on_weekly_fridays</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rrule.html'>weekly</a></span>(<span class='kw'>since</span> <span class='kw'>=</span> <span class='no'>start</span>)
-<span class='fu'><a href='sch_seq.html'>sch_seq</a></span>(<span class='no'>start</span>, <span class='no'>end</span>, <span class='no'>on_weekly_fridays</span>)</div><div class='output co'>#&gt; [1] "1999-01-01" "1999-01-08" "1999-01-15" "1999-01-22" "1999-01-29"
+<span class='fu'><a href='alma_seq.html'>alma_seq</a></span>(<span class='no'>start</span>, <span class='no'>end</span>, <span class='no'>on_weekly_fridays</span>)</div><div class='output co'>#&gt; [1] "1999-01-01" "1999-01-08" "1999-01-15" "1999-01-22" "1999-01-29"
 #&gt; [6] "1999-02-05" "1999-02-12" "1999-02-19" "1999-02-26"</div><div class='input'>
 <span class='co'># Alternatively, we could use `recur_on_wday()` and force a recurrence on</span>
 <span class='co'># Friday</span>
 <span class='no'>on_wday_friday</span> <span class='kw'>&lt;-</span> <span class='no'>on_weekly_thursdays</span> <span class='kw'>%&gt;%</span> <span class='fu'>recur_on_wday</span>(<span class='st'>"Friday"</span>)
-<span class='fu'><a href='sch_seq.html'>sch_seq</a></span>(<span class='no'>start</span>, <span class='no'>end</span>, <span class='no'>on_wday_friday</span>)</div><div class='output co'>#&gt; [1] "1999-01-01" "1999-01-08" "1999-01-15" "1999-01-22" "1999-01-29"
+<span class='fu'><a href='alma_seq.html'>alma_seq</a></span>(<span class='no'>start</span>, <span class='no'>end</span>, <span class='no'>on_wday_friday</span>)</div><div class='output co'>#&gt; [1] "1999-01-01" "1999-01-08" "1999-01-15" "1999-01-22" "1999-01-29"
 #&gt; [6] "1999-02-05" "1999-02-12" "1999-02-19" "1999-02-26"</div><div class='input'>
 <span class='co'># At monthly frequencies, you can use n-th values to look for particular</span>
 <span class='co'># week day occurrences</span>
 <span class='no'>on_first_friday_in_month</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rrule.html'>monthly</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'>recur_on_wday</span>(<span class='st'>"Fri"</span>, <span class='fl'>1</span>)
-<span class='fu'><a href='sch_seq.html'>sch_seq</a></span>(<span class='no'>start</span>, <span class='no'>end</span>, <span class='no'>on_first_friday_in_month</span>)</div><div class='output co'>#&gt; [1] "1999-01-01" "1999-02-05"</div><div class='input'>
+<span class='fu'><a href='alma_seq.html'>alma_seq</a></span>(<span class='no'>start</span>, <span class='no'>end</span>, <span class='no'>on_first_friday_in_month</span>)</div><div class='output co'>#&gt; [1] "1999-01-01" "1999-02-05"</div><div class='input'>
 <span class='co'># Negative values let you look from the back</span>
 <span class='no'>on_last_friday_in_month</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rrule.html'>monthly</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'>recur_on_wday</span>(<span class='st'>"Fri"</span>, -<span class='fl'>1</span>)
-<span class='fu'><a href='sch_seq.html'>sch_seq</a></span>(<span class='no'>start</span>, <span class='no'>end</span>, <span class='no'>on_last_friday_in_month</span>)</div><div class='output co'>#&gt; [1] "1999-01-29" "1999-02-26"</div><div class='input'>
+<span class='fu'><a href='alma_seq.html'>alma_seq</a></span>(<span class='no'>start</span>, <span class='no'>end</span>, <span class='no'>on_last_friday_in_month</span>)</div><div class='output co'>#&gt; [1] "1999-01-29" "1999-02-26"</div><div class='input'>
 <span class='co'># At yearly frequencies, this looks for the first sunday of the year</span>
 <span class='no'>on_first_sunday_in_year</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rrule.html'>yearly</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'>recur_on_wday</span>(<span class='st'>"Sunday"</span>, <span class='fl'>1</span>)
-<span class='fu'><a href='sch_seq.html'>sch_seq</a></span>(<span class='no'>start</span>, <span class='no'>end</span>, <span class='no'>on_first_sunday_in_year</span>)</div><div class='output co'>#&gt; [1] "1999-01-03"</div><div class='input'>
+<span class='fu'><a href='alma_seq.html'>alma_seq</a></span>(<span class='no'>start</span>, <span class='no'>end</span>, <span class='no'>on_first_sunday_in_year</span>)</div><div class='output co'>#&gt; [1] "1999-01-03"</div><div class='input'>
 <span class='co'># Last week day of the month</span>
 <span class='no'>last_weekday_of_month</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rrule.html'>monthly</a></span>() <span class='kw'>%&gt;%</span>
   <span class='co'># Last occurence of each weekday in the month</span>
@@ -222,7 +222,7 @@ by default, is a Thursday (<code>1970-01-01</code>).</p>
   <span class='co'># Now choose the last one of those in each month</span>
   <span class='fu'><a href='recur_on_position.html'>recur_on_position</a></span>(-<span class='fl'>1</span>)
 
-<span class='fu'><a href='sch_seq.html'>sch_seq</a></span>(<span class='no'>start</span>, <span class='no'>end</span>, <span class='no'>last_weekday_of_month</span>)</div><div class='output co'>#&gt; [1] "1999-01-29" "1999-02-26"</div><div class='input'>
+<span class='fu'><a href='alma_seq.html'>alma_seq</a></span>(<span class='no'>start</span>, <span class='no'>end</span>, <span class='no'>last_weekday_of_month</span>)</div><div class='output co'>#&gt; [1] "1999-01-29" "1999-02-26"</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

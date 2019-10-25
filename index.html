@@ -101,30 +101,30 @@
 <a class="sourceLine" id="cb2-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="reference/recur_on_ymonth.html">recur_on_ymonth</a></span>(<span class="st">"November"</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb2-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="reference/recur_on_wday.html">recur_on_wday</a></span>(<span class="st">"Thursday"</span>, <span class="dt">nth =</span> <span class="dv">4</span>)</a></code></pre></div>
 <p>After constructing a recurrence rule, it can be used to generate dates that are in the “recurrence set”.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="reference/sch_seq.html">sch_seq</a></span>(<span class="st">"2000-01-01"</span>, <span class="st">"2006-01-01"</span>, on_thanksgiving)</a>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="reference/alma_seq.html">alma_seq</a></span>(<span class="st">"2000-01-01"</span>, <span class="st">"2006-01-01"</span>, on_thanksgiving)</a>
 <a class="sourceLine" id="cb3-2" data-line-number="2"><span class="co">#&gt; [1] "2000-11-23" "2001-11-22" "2002-11-28" "2003-11-27" "2004-11-25"</span></a>
 <a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co">#&gt; [6] "2005-11-24"</span></a></code></pre></div>
 <p>Or determine if a particular date is a part of the recurrence set.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="reference/sch_in.html">sch_in</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"2000-01-01"</span>, <span class="st">"2000-11-23"</span>), on_thanksgiving)</a>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="reference/alma_in.html">alma_in</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"2000-01-01"</span>, <span class="st">"2000-11-23"</span>), on_thanksgiving)</a>
 <a class="sourceLine" id="cb4-2" data-line-number="2"><span class="co">#&gt; [1] FALSE  TRUE</span></a></code></pre></div>
 <p>It also allows you to shift an existing sequence of dates, “stepping over” dates that are in the recurrence set.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">wednesday_before_thanksgiving &lt;-<span class="st"> "2000-11-22"</span></a>
 <a class="sourceLine" id="cb5-2" data-line-number="2"></a>
 <a class="sourceLine" id="cb5-3" data-line-number="3"><span class="co"># Step forward 2 non-event days, stepping over thanksgiving</span></a>
-<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="kw"><a href="reference/sch_jump.html">sch_step</a></span>(wednesday_before_thanksgiving, <span class="dt">n =</span> <span class="dv">2</span>, on_thanksgiving)</a>
+<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="kw"><a href="reference/alma_jump.html">alma_step</a></span>(wednesday_before_thanksgiving, <span class="dt">n =</span> <span class="dv">2</span>, on_thanksgiving)</a>
 <a class="sourceLine" id="cb5-5" data-line-number="5"><span class="co">#&gt; [1] "2000-11-25"</span></a></code></pre></div>
 <p>By combining multiple recurrence rules together, you can create larger “schedules” that form a collection of holidays, or events such as weekends. almanac comes with a prebuilt <code><a href="reference/calendars.html">calendar_usa_federal()</a></code> schedule that includes recurrence rules for the US holidays. Combining this with a recurrence rule of “on weekends” constructs a business calendar, which we can use to shift dates by, for example, “2 business days”.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">on_weekends &lt;-<span class="st"> </span><span class="kw"><a href="reference/rrule.html">weekly</a></span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb6-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="reference/recur_on_wday.html">recur_on_weekends</a></span>()</a>
 <a class="sourceLine" id="cb6-3" data-line-number="3"></a>
 <a class="sourceLine" id="cb6-4" data-line-number="4">on_us_holidays_and_weekends &lt;-<span class="st"> </span><span class="kw"><a href="reference/calendars.html">calendar_usa_federal</a></span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="reference/sch-add.html">sch_add_rrule</a></span>(on_weekends)</a>
+<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="reference/sch-add.html">sch_rrule</a></span>(on_weekends)</a>
 <a class="sourceLine" id="cb6-6" data-line-number="6"></a>
 <a class="sourceLine" id="cb6-7" data-line-number="7">thursday_and_friday_before_labor_day &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"2019-08-29"</span>, <span class="st">"2019-08-30"</span>)</a>
 <a class="sourceLine" id="cb6-8" data-line-number="8"></a>
 <a class="sourceLine" id="cb6-9" data-line-number="9"><span class="co"># Steps over Saturday, Sunday, and Labor Day to the following Tuesday</span></a>
 <a class="sourceLine" id="cb6-10" data-line-number="10"><span class="co"># and Wednesday, aka "two business days" from now!</span></a>
-<a class="sourceLine" id="cb6-11" data-line-number="11">two_business_days_forward &lt;-<span class="st"> </span><span class="kw"><a href="reference/sch_jump.html">sch_step</a></span>(</a>
+<a class="sourceLine" id="cb6-11" data-line-number="11">two_business_days_forward &lt;-<span class="st"> </span><span class="kw"><a href="reference/alma_jump.html">alma_step</a></span>(</a>
 <a class="sourceLine" id="cb6-12" data-line-number="12">  thursday_and_friday_before_labor_day, </a>
 <a class="sourceLine" id="cb6-13" data-line-number="13">  <span class="dt">n =</span> <span class="dv">2</span>,</a>
 <a class="sourceLine" id="cb6-14" data-line-number="14">  <span class="dt">schedule =</span> on_us_holidays_and_weekends</a>

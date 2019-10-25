@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Add to a schedule — sch-add • almanac</title>
+<title>Generate the next or previous event — alma_next • almanac</title>
 
 
 <!-- jquery -->
@@ -35,15 +35,11 @@
 
 
 
-<meta property="og:title" content="Add to a schedule — sch-add" />
+<meta property="og:title" content="Generate the next or previous event — alma_next" />
 <meta property="og:description" content="
 
-sch_rrule() adds a rrule to a schedule.
-sch_rdate() adds a rdate to a schedule. rdates are singular
-special cased dates that are forcibly included in the schedule.
-sch_exdate() adds a exdate to a schedule. exdates are singular
-special cased dates that are forcibly excluded from the schedule.
-sch_merge() merges two schedules together.
+alma_next() generates the next event after x.
+alma_previous() generates the previous event before x.
 
 " />
 <meta name="twitter:card" content="summary" />
@@ -135,111 +131,62 @@ sch_merge() merges two schedules together.
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Add to a schedule</h1>
-    <small class="dont-index">Source: <a href='https://github.com/DavisVaughan/almanac/blob/master/R/sch-add.R'><code>R/sch-add.R</code></a></small>
-    <div class="hidden name"><code>sch-add.Rd</code></div>
+    <h1>Generate the next or previous event</h1>
+    <small class="dont-index">Source: <a href='https://github.com/DavisVaughan/almanac/blob/master/R/alma-next.R'><code>R/alma-next.R</code></a></small>
+    <div class="hidden name"><code>alma_next.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
 <ul>
-<li><p><code>sch_rrule()</code> adds a <code>rrule</code> to a schedule.</p></li>
-<li><p><code>sch_rdate()</code> adds a <code>rdate</code> to a schedule. <code>rdate</code>s are singular
-special cased dates that are forcibly included in the schedule.</p></li>
-<li><p><code>sch_exdate()</code> adds a <code>exdate</code> to a schedule. <code>exdate</code>s are singular
-special cased dates that are forcibly excluded from the schedule.</p></li>
-<li><p><code>sch_merge()</code> merges two schedules together.</p></li>
+<li><p><code>alma_next()</code> generates the next event after <code>x</code>.</p></li>
+<li><p><code>alma_previous()</code> generates the previous event before <code>x</code>.</p></li>
 </ul>
 
     </div>
 
-    <pre class="usage"><span class='fu'>sch_rrule</span>(<span class='no'>x</span>, <span class='no'>rrule</span>)
+    <pre class="usage"><span class='fu'>alma_next</span>(<span class='no'>x</span>, <span class='no'>schedule</span>, <span class='kw'>inclusive</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
-<span class='fu'>sch_rdate</span>(<span class='no'>x</span>, <span class='no'>rdate</span>)
-
-<span class='fu'>sch_exdate</span>(<span class='no'>x</span>, <span class='no'>exdate</span>)
-
-<span class='fu'>sch_merge</span>(<span class='no'>x</span>, <span class='no'>schedule</span>)</pre>
+<span class='fu'>alma_previous</span>(<span class='no'>x</span>, <span class='no'>schedule</span>, <span class='kw'>inclusive</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p><code>[schedule]</code></p>
-<p>A schedule.</p></td>
-    </tr>
-    <tr>
-      <th>rrule</th>
-      <td><p><code>[rrule]</code></p>
-<p>An rrule to add to the schedule.</p></td>
-    </tr>
-    <tr>
-      <th>rdate</th>
-      <td><p><code>[Date]</code></p>
-<p>Dates to forcibly include in the schedule.</p></td>
-    </tr>
-    <tr>
-      <th>exdate</th>
-      <td><p><code>[Date]</code></p>
-<p>Dates to forcibly exclude from the schedule.</p></td>
+      <td><p><code>[Date(1)]</code></p>
+<p>The date to start the search from.</p></td>
     </tr>
     <tr>
       <th>schedule</th>
-      <td><p><code>[schedule]</code></p>
-<p>A schedule to merge with <code>x</code>.</p></td>
+      <td><p><code>[schedule / rrule]</code></p>
+<p>A schedule or rrule.</p></td>
+    </tr>
+    <tr>
+      <th>inclusive</th>
+      <td><p><code>[logical(1)]</code></p>
+<p>If <code>from</code> or <code>to</code> are events, should they be included?</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>In terms of priority:</p><ul>
-<li><p>An <code>exdate</code> will never be included.</p></li>
-<li><p>A <code>rdate</code> will always be included if it is not also an <code>exdate</code>.</p></li>
-<li><p>An event generated from a <code>rrule</code> will always be included if it is not
-also an <code>exdate</code>.</p></li>
-</ul>
-
-<p>Combining two <code>rrule</code>s into the same schedule is a way of joining them using
-an "or" condition. For example, joining <code>monthly() %&gt;% on_mday(5)</code> with
-<code>weekly() %&gt;% on_wday("Tuesday")</code> would translate to "the 5th day of the
-month or any Tuesday".</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>lubridate</span>, <span class='kw'>warn.conflicts</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+    <pre class="examples"><div class='input'><span class='no'>on_12th</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rrule.html'>monthly</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'><a href='recur_on_mday.html'>recur_on_mday</a></span>(<span class='fl'>12</span>)
+<span class='no'>on_monday</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rrule.html'>weekly</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'><a href='recur_on_wday.html'>recur_on_wday</a></span>(<span class='st'>"Monday"</span>)
 
-<span class='no'>on_thanksgiving</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rrule.html'>yearly</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='recur_on_wday.html'>recur_on_wday</a></span>(<span class='st'>"Thurs"</span>, <span class='fl'>4</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='recur_on_ymonth.html'>recur_on_ymonth</a></span>(<span class='st'>"Nov"</span>)
-
-<span class='no'>on_christmas</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rrule.html'>yearly</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='recur_on_mday.html'>recur_on_mday</a></span>(<span class='fl'>25</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='recur_on_ymonth.html'>recur_on_ymonth</a></span>(<span class='st'>"Dec"</span>)
-
-<span class='no'>on_labor_day</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rrule.html'>monthly</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='recur_on_ymonth.html'>recur_on_ymonth</a></span>(<span class='st'>"Sep"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='recur_on_wday.html'>recur_on_wday</a></span>(<span class='st'>"Mon"</span>, <span class='fl'>1</span>)
-
+<span class='co'># On the 12th of the month, or on Mondays</span>
 <span class='no'>sch</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='schedule.html'>schedule</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'>sch_rrule</span>(<span class='no'>on_thanksgiving</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>sch_rrule</span>(<span class='no'>on_christmas</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>sch_rrule</span>(<span class='no'>on_labor_day</span>)
+  <span class='fu'><a href='sch-add.html'>sch_rrule</a></span>(<span class='no'>on_12th</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='sch-add.html'>sch_rrule</a></span>(<span class='no'>on_monday</span>)
 
-<span class='co'># Thanksgiving, Christmas, or Labor Day</span>
-<span class='fu'><a href='alma_seq.html'>alma_seq</a></span>(<span class='st'>"2019-01-01"</span>, <span class='st'>"2021-01-01"</span>, <span class='no'>sch</span>)</div><div class='output co'>#&gt; [1] "2019-09-02" "2019-11-28" "2019-12-25" "2020-09-07" "2020-11-26"
-#&gt; [6] "2020-12-25"</div><div class='input'>
-<span class='co'># Except Labor Day in 2019</span>
-<span class='no'>sch2</span> <span class='kw'>&lt;-</span> <span class='no'>sch</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'>sch_exdate</span>(<span class='st'>"2019-09-02"</span>)
-
-<span class='fu'><a href='alma_seq.html'>alma_seq</a></span>(<span class='st'>"2019-01-01"</span>, <span class='st'>"2021-01-01"</span>, <span class='no'>sch2</span>)</div><div class='output co'>#&gt; [1] "2019-11-28" "2019-12-25" "2020-09-07" "2020-11-26" "2020-12-25"</div><div class='input'>
+<span class='fu'>alma_next</span>(<span class='st'>"2019-01-01"</span>, <span class='no'>sch</span>)</div><div class='output co'>#&gt; [1] "2019-01-07"</div><div class='input'>
+<span class='fu'>alma_previous</span>(<span class='st'>"2019-01-01"</span>, <span class='no'>sch</span>)</div><div class='output co'>#&gt; [1] "2018-12-31"</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#details">Details</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 

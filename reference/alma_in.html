@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create a new schedule — schedule • almanac</title>
+<title>Is <code>x</code> in the schedule? — alma_in • almanac</title>
 
 
 <!-- jquery -->
@@ -35,12 +35,8 @@
 
 
 
-<meta property="og:title" content="Create a new schedule — schedule" />
-<meta property="og:description" content="Often, a single recurrence rule created from a base rule like monthly()
-will be sufficient. However, more complex rules can be constructed
-by combining simple rules into a schedule.
-schedule() creates a new empty schedule. Add rules to the schedule with
-sch_rrule()." />
+<meta property="og:title" content="Is <code>x</code> in the schedule? — alma_in" />
+<meta property="og:description" content="alma_in() checks if x is in the set of dates defined by the schedule." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -130,36 +126,38 @@ sch_rrule()." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create a new schedule</h1>
-    <small class="dont-index">Source: <a href='https://github.com/DavisVaughan/almanac/blob/master/R/schedule.R'><code>R/schedule.R</code></a></small>
-    <div class="hidden name"><code>schedule.Rd</code></div>
+    <h1>Is <code>x</code> in the schedule?</h1>
+    <small class="dont-index">Source: <a href='https://github.com/DavisVaughan/almanac/blob/master/R/alma-in.R'><code>R/alma-in.R</code></a></small>
+    <div class="hidden name"><code>alma_in.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Often, a single recurrence rule created from a base rule like <code><a href='rrule.html'>monthly()</a></code>
-will be sufficient. However, more complex rules can be constructed
-by combining simple rules into a <em>schedule</em>.</p>
-<p><code>schedule()</code> creates a new empty schedule. Add rules to the schedule with
-<code><a href='sch-add.html'>sch_rrule()</a></code>.</p>
+    <p><code>alma_in()</code> checks if <code>x</code> is in the set of dates defined by the schedule.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>schedule</span>()</pre>
+    <pre class="usage"><span class='fu'>alma_in</span>(<span class='no'>x</span>, <span class='no'>schedule</span>)</pre>
+
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>x</th>
+      <td><p><code>[Date]</code></p>
+<p>A vector of dates.</p></td>
+    </tr>
+    <tr>
+      <th>schedule</th>
+      <td><p><code>[schedule / rrule]</code></p>
+<p>A schedule or rrule.</p></td>
+    </tr>
+    </table>
 
 
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p><code><a href='sch-add.html'>sch_rrule()</a></code></p></div>
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>schedule</span>()</div><div class='output co'>#&gt; schedule: 0 rrules / 0 rdates / 0 exdates</div><div class='input'>
-<span class='fu'><a href='sch-add.html'>sch_rrule</a></span>(<span class='fu'>schedule</span>(), <span class='fu'><a href='rrule.html'>monthly</a></span>())</div><div class='output co'>#&gt; schedule: 1 rrules / 0 rdates / 0 exdates</div><div class='input'>
-</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#see-also">See also</a></li>
-      <li><a href="#examples">Examples</a></li>
+      <li><a href="#arguments">Arguments</a></li>
     </ul>
 
   </div>

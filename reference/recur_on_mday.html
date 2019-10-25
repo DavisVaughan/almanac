@@ -168,7 +168,7 @@ generate an event in February.</p>
 <span class='no'>start</span> <span class='kw'>&lt;-</span> <span class='st'>"1999-01-01"</span>
 <span class='no'>end</span> <span class='kw'>&lt;-</span> <span class='st'>"2000-06-30"</span>
 
-<span class='fu'><a href='sch_seq.html'>sch_seq</a></span>(<span class='no'>start</span>, <span class='no'>end</span>, <span class='no'>on_yearly</span>)</div><div class='output co'>#&gt; [1] "1999-01-01" "2000-01-01"</div><div class='input'><span class='fu'><a href='sch_seq.html'>sch_seq</a></span>(<span class='no'>start</span>, <span class='no'>end</span>, <span class='no'>on_yearly_mday_1_to_2</span>)</div><div class='output co'>#&gt;  [1] "1999-01-01" "1999-01-02" "1999-02-01" "1999-02-02" "1999-03-01"
+<span class='fu'><a href='alma_seq.html'>alma_seq</a></span>(<span class='no'>start</span>, <span class='no'>end</span>, <span class='no'>on_yearly</span>)</div><div class='output co'>#&gt; [1] "1999-01-01" "2000-01-01"</div><div class='input'><span class='fu'><a href='alma_seq.html'>alma_seq</a></span>(<span class='no'>start</span>, <span class='no'>end</span>, <span class='no'>on_yearly_mday_1_to_2</span>)</div><div class='output co'>#&gt;  [1] "1999-01-01" "1999-01-02" "1999-02-01" "1999-02-02" "1999-03-01"
 #&gt;  [6] "1999-03-02" "1999-04-01" "1999-04-02" "1999-05-01" "1999-05-02"
 #&gt; [11] "1999-06-01" "1999-06-02" "1999-07-01" "1999-07-02" "1999-08-01"
 #&gt; [16] "1999-08-02" "1999-09-01" "1999-09-02" "1999-10-01" "1999-10-02"
@@ -181,13 +181,13 @@ generate an event in February.</p>
 <span class='no'>on_daily</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rrule.html'>daily</a></span>()
 <span class='no'>on_daily_mday_1_to_2</span> <span class='kw'>&lt;-</span> <span class='no'>on_daily</span> <span class='kw'>%&gt;%</span> <span class='fu'>recur_on_mday</span>(<span class='fl'>1</span>:<span class='fl'>2</span>)
 
-<span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span>(<span class='fu'><a href='sch_seq.html'>sch_seq</a></span>(<span class='no'>start</span>, <span class='no'>end</span>, <span class='no'>on_daily</span>))</div><div class='output co'>#&gt; [1] 547</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span>(<span class='fu'><a href='sch_seq.html'>sch_seq</a></span>(<span class='no'>start</span>, <span class='no'>end</span>, <span class='no'>on_daily_mday_1_to_2</span>))</div><div class='output co'>#&gt; [1] 36</div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span>(<span class='fu'><a href='alma_seq.html'>alma_seq</a></span>(<span class='no'>start</span>, <span class='no'>end</span>, <span class='no'>on_daily</span>))</div><div class='output co'>#&gt; [1] 547</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span>(<span class='fu'><a href='alma_seq.html'>alma_seq</a></span>(<span class='no'>start</span>, <span class='no'>end</span>, <span class='no'>on_daily_mday_1_to_2</span>))</div><div class='output co'>#&gt; [1] 36</div><div class='input'>
 <span class='co'># Using a negative value is a powerful way to look back from the end of the</span>
 <span class='co'># month. This is particularly useful because months don't have the same</span>
 <span class='co'># number of days.</span>
 <span class='no'>on_last_of_month</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rrule.html'>monthly</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'>recur_on_mday</span>(-<span class='fl'>1</span>)
 
-<span class='fu'><a href='sch_seq.html'>sch_seq</a></span>(<span class='no'>start</span>, <span class='no'>end</span>, <span class='no'>on_last_of_month</span>)</div><div class='output co'>#&gt;  [1] "1999-01-31" "1999-02-28" "1999-03-31" "1999-04-30" "1999-05-31"
+<span class='fu'><a href='alma_seq.html'>alma_seq</a></span>(<span class='no'>start</span>, <span class='no'>end</span>, <span class='no'>on_last_of_month</span>)</div><div class='output co'>#&gt;  [1] "1999-01-31" "1999-02-28" "1999-03-31" "1999-04-30" "1999-05-31"
 #&gt;  [6] "1999-06-30" "1999-07-31" "1999-08-31" "1999-09-30" "1999-10-31"
 #&gt; [11] "1999-11-30" "1999-12-31" "2000-01-31" "2000-02-29" "2000-03-31"
 #&gt; [16] "2000-04-30" "2000-05-31" "2000-06-30"</div><div class='input'>
@@ -195,11 +195,11 @@ generate an event in February.</p>
 <span class='co'># could use something like this, which checks if the end of the month</span>
 <span class='co'># is also a Friday.</span>
 <span class='no'>on_last_of_month_that_is_also_friday</span> <span class='kw'>&lt;-</span> <span class='no'>on_last_of_month</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='recur_on_wday.html'>recur_on_wday</a></span>(<span class='st'>"Friday"</span>)
-<span class='fu'><a href='sch_seq.html'>sch_seq</a></span>(<span class='no'>start</span>, <span class='no'>end</span>, <span class='no'>on_last_of_month_that_is_also_friday</span>)</div><div class='output co'>#&gt; [1] "1999-04-30" "1999-12-31" "2000-03-31" "2000-06-30"</div><div class='input'>
+<span class='fu'><a href='alma_seq.html'>alma_seq</a></span>(<span class='no'>start</span>, <span class='no'>end</span>, <span class='no'>on_last_of_month_that_is_also_friday</span>)</div><div class='output co'>#&gt; [1] "1999-04-30" "1999-12-31" "2000-03-31" "2000-06-30"</div><div class='input'>
 <span class='co'># But you probably wanted this, which takes the last friday of the month,</span>
 <span class='co'># on whatever day that lands on</span>
 <span class='no'>on_last_friday_of_month</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rrule.html'>monthly</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'><a href='recur_on_wday.html'>recur_on_wday</a></span>(<span class='st'>"Friday"</span>, -<span class='fl'>1</span>)
-<span class='fu'><a href='sch_seq.html'>sch_seq</a></span>(<span class='no'>start</span>, <span class='no'>end</span>, <span class='no'>on_last_friday_of_month</span>)</div><div class='output co'>#&gt;  [1] "1999-01-29" "1999-02-26" "1999-03-26" "1999-04-30" "1999-05-28"
+<span class='fu'><a href='alma_seq.html'>alma_seq</a></span>(<span class='no'>start</span>, <span class='no'>end</span>, <span class='no'>on_last_friday_of_month</span>)</div><div class='output co'>#&gt;  [1] "1999-01-29" "1999-02-26" "1999-03-26" "1999-04-30" "1999-05-28"
 #&gt;  [6] "1999-06-25" "1999-07-30" "1999-08-27" "1999-09-24" "1999-10-29"
 #&gt; [11] "1999-11-26" "1999-12-31" "2000-01-28" "2000-02-25" "2000-03-31"
 #&gt; [16] "2000-04-28" "2000-05-26" "2000-06-30"</div><div class='input'>

@@ -109,7 +109,7 @@
 <a class="sourceLine" id="cb2-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/recur_on_interval.html">recur_on_interval</a></span>(<span class="dv">3</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb2-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="../reference/recur_on_mday.html">recur_on_mday</a></span>(<span class="dv">1</span>)</a>
 <a class="sourceLine" id="cb2-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="kw"><a href="../reference/sch_seq.html">sch_seq</a></span>(<span class="st">"2000-01-01"</span>, <span class="st">"2002-01-01"</span>, on_first_day_of_quarter)</a>
+<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="kw"><a href="../reference/alma_seq.html">alma_seq</a></span>(<span class="st">"2000-01-01"</span>, <span class="st">"2002-01-01"</span>, on_first_day_of_quarter)</a>
 <a class="sourceLine" id="cb2-6" data-line-number="6"><span class="co">#&gt; [1] "2000-01-01" "2000-04-01" "2000-07-01" "2000-10-01" "2001-01-01"</span></a>
 <a class="sourceLine" id="cb2-7" data-line-number="7"><span class="co">#&gt; [6] "2001-04-01" "2001-07-01" "2001-10-01" "2002-01-01"</span></a></code></pre></div>
 <p>Whenever you need the “first” event per quarter, there is a good chance that that event will fall in the first month of the quarter, as is the case here. Whenever you have a guarantee that your event falls in the first month of the quarter, and can be computed from the start of that month, you can probably just use <code>monthly() %&gt;% recur_on_interval(3)</code> to get your quarterly values.</p>
@@ -122,7 +122,7 @@
 <a class="sourceLine" id="cb3-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/recur_on_interval.html">recur_on_interval</a></span>(<span class="dv">3</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb3-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="../reference/recur_on_mday.html">recur_on_mday</a></span>(<span class="dv">1</span>)</a>
 <a class="sourceLine" id="cb3-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="kw"><a href="../reference/sch_seq.html">sch_seq</a></span>(<span class="st">"2000-01-01"</span>, <span class="st">"2002-01-01"</span>, on_first_day_of_quarter_march_start)</a>
+<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="kw"><a href="../reference/alma_seq.html">alma_seq</a></span>(<span class="st">"2000-01-01"</span>, <span class="st">"2002-01-01"</span>, on_first_day_of_quarter_march_start)</a>
 <a class="sourceLine" id="cb3-6" data-line-number="6"><span class="co">#&gt; [1] "2000-03-01" "2000-06-01" "2000-09-01" "2000-12-01" "2001-03-01"</span></a>
 <a class="sourceLine" id="cb3-7" data-line-number="7"><span class="co">#&gt; [6] "2001-06-01" "2001-09-01" "2001-12-01"</span></a></code></pre></div>
 </div>
@@ -136,7 +136,7 @@
 <a class="sourceLine" id="cb4-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="../reference/recur_on_mday.html">recur_on_mday</a></span>(<span class="dv">1</span><span class="op">:</span><span class="dv">31</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb4-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="../reference/recur_on_position.html">recur_on_position</a></span>(<span class="dv">60</span>)</a>
 <a class="sourceLine" id="cb4-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb4-6" data-line-number="6"><span class="kw"><a href="../reference/sch_seq.html">sch_seq</a></span>(<span class="st">"2000-01-01"</span>, <span class="st">"2002-01-01"</span>, on_60th_day_of_q1)</a>
+<a class="sourceLine" id="cb4-6" data-line-number="6"><span class="kw"><a href="../reference/alma_seq.html">alma_seq</a></span>(<span class="st">"2000-01-01"</span>, <span class="st">"2002-01-01"</span>, on_60th_day_of_q1)</a>
 <a class="sourceLine" id="cb4-7" data-line-number="7"><span class="co">#&gt; [1] "2000-02-29" "2001-03-01"</span></a></code></pre></div>
 <p>This breaks down as follows:</p>
 <ul>
@@ -171,10 +171,10 @@
 <a class="sourceLine" id="cb5-22" data-line-number="22"><span class="st">    </span><span class="kw"><a href="../reference/recur_on_position.html">recur_on_position</a></span>(nth)</a>
 <a class="sourceLine" id="cb5-23" data-line-number="23">  </a>
 <a class="sourceLine" id="cb5-24" data-line-number="24">  on_nth_day_of_the_quarter &lt;-<span class="st"> </span><span class="kw"><a href="../reference/schedule.html">schedule</a></span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb5-25" data-line-number="25"><span class="st">    </span><span class="kw"><a href="../reference/sch-add.html">sch_add_rrule</a></span>(on_nth_day_of_q1) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb5-26" data-line-number="26"><span class="st">    </span><span class="kw"><a href="../reference/sch-add.html">sch_add_rrule</a></span>(on_nth_day_of_q2) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb5-27" data-line-number="27"><span class="st">    </span><span class="kw"><a href="../reference/sch-add.html">sch_add_rrule</a></span>(on_nth_day_of_q3) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb5-28" data-line-number="28"><span class="st">    </span><span class="kw"><a href="../reference/sch-add.html">sch_add_rrule</a></span>(on_nth_day_of_q4)</a>
+<a class="sourceLine" id="cb5-25" data-line-number="25"><span class="st">    </span><span class="kw"><a href="../reference/sch-add.html">sch_rrule</a></span>(on_nth_day_of_q1) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb5-26" data-line-number="26"><span class="st">    </span><span class="kw"><a href="../reference/sch-add.html">sch_rrule</a></span>(on_nth_day_of_q2) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb5-27" data-line-number="27"><span class="st">    </span><span class="kw"><a href="../reference/sch-add.html">sch_rrule</a></span>(on_nth_day_of_q3) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb5-28" data-line-number="28"><span class="st">    </span><span class="kw"><a href="../reference/sch-add.html">sch_rrule</a></span>(on_nth_day_of_q4)</a>
 <a class="sourceLine" id="cb5-29" data-line-number="29">  </a>
 <a class="sourceLine" id="cb5-30" data-line-number="30">  on_nth_day_of_the_quarter</a>
 <a class="sourceLine" id="cb5-31" data-line-number="31">}</a></code></pre></div>
@@ -184,7 +184,7 @@
 <a class="sourceLine" id="cb6-3" data-line-number="3">  <span class="dt">nth =</span> <span class="dv">60</span></a>
 <a class="sourceLine" id="cb6-4" data-line-number="4">)</a>
 <a class="sourceLine" id="cb6-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="kw"><a href="../reference/sch_seq.html">sch_seq</a></span>(<span class="st">"2000-01-01"</span>, <span class="st">"2002-01-01"</span>, on_60th_day_of_the_quarter)</a>
+<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="kw"><a href="../reference/alma_seq.html">alma_seq</a></span>(<span class="st">"2000-01-01"</span>, <span class="st">"2002-01-01"</span>, on_60th_day_of_the_quarter)</a>
 <a class="sourceLine" id="cb6-7" data-line-number="7"><span class="co">#&gt; [1] "2000-02-29" "2000-05-30" "2000-08-29" "2000-11-29" "2001-03-01"</span></a>
 <a class="sourceLine" id="cb6-8" data-line-number="8"><span class="co">#&gt; [6] "2001-05-30" "2001-08-29" "2001-11-29"</span></a></code></pre></div>
 <p>It can also select days from the end of the quarter, for example, the last day in the quarter.</p>
@@ -193,7 +193,7 @@
 <a class="sourceLine" id="cb7-3" data-line-number="3">  <span class="dt">nth =</span> <span class="dv">-1</span></a>
 <a class="sourceLine" id="cb7-4" data-line-number="4">)</a>
 <a class="sourceLine" id="cb7-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb7-6" data-line-number="6"><span class="kw"><a href="../reference/sch_seq.html">sch_seq</a></span>(<span class="st">"2000-01-01"</span>, <span class="st">"2002-01-01"</span>, on_last_day_of_the_quarter)</a>
+<a class="sourceLine" id="cb7-6" data-line-number="6"><span class="kw"><a href="../reference/alma_seq.html">alma_seq</a></span>(<span class="st">"2000-01-01"</span>, <span class="st">"2002-01-01"</span>, on_last_day_of_the_quarter)</a>
 <a class="sourceLine" id="cb7-7" data-line-number="7"><span class="co">#&gt; [1] "2000-03-31" "2000-06-30" "2000-09-30" "2000-12-31" "2001-03-31"</span></a>
 <a class="sourceLine" id="cb7-8" data-line-number="8"><span class="co">#&gt; [6] "2001-06-30" "2001-09-30" "2001-12-31"</span></a></code></pre></div>
 <p>This general strategy of using a base rule of <code>yearly() %&gt;% recur_on_ymonth()</code>, plus some usage of <code><a href="../reference/recur_on_position.html">recur_on_position()</a></code> is how I have solved most of the quarterly problems I can think of.</p>
@@ -211,7 +211,7 @@
 <a class="sourceLine" id="cb8-7" data-line-number="7"><span class="st">  </span><span class="kw"><a href="../reference/recur_on_wday.html">recur_on_wday</a></span>(wday) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb8-8" data-line-number="8"><span class="st">  </span><span class="kw"><a href="../reference/recur_on_position.html">recur_on_position</a></span>(nth)</a>
 <a class="sourceLine" id="cb8-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb8-10" data-line-number="10"><span class="kw"><a href="../reference/sch_seq.html">sch_seq</a></span>(<span class="st">"2000-01-01"</span>, <span class="st">"2002-01-01"</span>, on_6th_monday_of_q1)</a>
+<a class="sourceLine" id="cb8-10" data-line-number="10"><span class="kw"><a href="../reference/alma_seq.html">alma_seq</a></span>(<span class="st">"2000-01-01"</span>, <span class="st">"2002-01-01"</span>, on_6th_monday_of_q1)</a>
 <a class="sourceLine" id="cb8-11" data-line-number="11"><span class="co">#&gt; [1] "2000-02-07" "2001-02-05"</span></a></code></pre></div>
 <p>Multiple week days can be used here.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">since &lt;-<span class="st"> "2000-01-01"</span></a>
@@ -223,7 +223,7 @@
 <a class="sourceLine" id="cb9-7" data-line-number="7"><span class="st">  </span><span class="kw"><a href="../reference/recur_on_wday.html">recur_on_wday</a></span>(wday) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb9-8" data-line-number="8"><span class="st">  </span><span class="kw"><a href="../reference/recur_on_position.html">recur_on_position</a></span>(nth)</a>
 <a class="sourceLine" id="cb9-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb9-10" data-line-number="10"><span class="kw"><a href="../reference/sch_seq.html">sch_seq</a></span>(<span class="st">"2000-01-01"</span>, <span class="st">"2002-01-01"</span>, on_19th_monday_or_tuesday_of_q1)</a>
+<a class="sourceLine" id="cb9-10" data-line-number="10"><span class="kw"><a href="../reference/alma_seq.html">alma_seq</a></span>(<span class="st">"2000-01-01"</span>, <span class="st">"2002-01-01"</span>, on_19th_monday_or_tuesday_of_q1)</a>
 <a class="sourceLine" id="cb9-11" data-line-number="11"><span class="co">#&gt; [1] "2000-03-06" "2001-03-05"</span></a></code></pre></div>
 <p>Now generalize:</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">make_on_nth_wday_of_the_quarter &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">since =</span> <span class="st">"1970-01-01"</span>, <span class="dt">wday =</span> <span class="st">"Monday"</span>, <span class="dt">nth =</span> 1L) {</a>
@@ -248,10 +248,10 @@
 <a class="sourceLine" id="cb10-20" data-line-number="20"><span class="st">    </span><span class="kw"><a href="../reference/recur_on_position.html">recur_on_position</a></span>(nth)</a>
 <a class="sourceLine" id="cb10-21" data-line-number="21">  </a>
 <a class="sourceLine" id="cb10-22" data-line-number="22">  on_nth_wday_of_the_quarter &lt;-<span class="st"> </span><span class="kw"><a href="../reference/schedule.html">schedule</a></span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb10-23" data-line-number="23"><span class="st">    </span><span class="kw"><a href="../reference/sch-add.html">sch_add_rrule</a></span>(on_nth_wday_of_q1) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb10-24" data-line-number="24"><span class="st">    </span><span class="kw"><a href="../reference/sch-add.html">sch_add_rrule</a></span>(on_nth_wday_of_q2) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb10-25" data-line-number="25"><span class="st">    </span><span class="kw"><a href="../reference/sch-add.html">sch_add_rrule</a></span>(on_nth_wday_of_q3) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb10-26" data-line-number="26"><span class="st">    </span><span class="kw"><a href="../reference/sch-add.html">sch_add_rrule</a></span>(on_nth_wday_of_q4)</a>
+<a class="sourceLine" id="cb10-23" data-line-number="23"><span class="st">    </span><span class="kw"><a href="../reference/sch-add.html">sch_rrule</a></span>(on_nth_wday_of_q1) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb10-24" data-line-number="24"><span class="st">    </span><span class="kw"><a href="../reference/sch-add.html">sch_rrule</a></span>(on_nth_wday_of_q2) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb10-25" data-line-number="25"><span class="st">    </span><span class="kw"><a href="../reference/sch-add.html">sch_rrule</a></span>(on_nth_wday_of_q3) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb10-26" data-line-number="26"><span class="st">    </span><span class="kw"><a href="../reference/sch-add.html">sch_rrule</a></span>(on_nth_wday_of_q4)</a>
 <a class="sourceLine" id="cb10-27" data-line-number="27">  </a>
 <a class="sourceLine" id="cb10-28" data-line-number="28">  on_nth_wday_of_the_quarter</a>
 <a class="sourceLine" id="cb10-29" data-line-number="29">}</a></code></pre></div>
@@ -261,7 +261,7 @@
 <a class="sourceLine" id="cb11-4" data-line-number="4">  <span class="dt">nth =</span> <span class="dv">-1</span></a>
 <a class="sourceLine" id="cb11-5" data-line-number="5">)</a>
 <a class="sourceLine" id="cb11-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb11-7" data-line-number="7">fridays &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sch_seq.html">sch_seq</a></span>(<span class="st">"2000-01-01"</span>, <span class="st">"2002-01-01"</span>, on_last_friday_of_the_quarter)</a>
+<a class="sourceLine" id="cb11-7" data-line-number="7">fridays &lt;-<span class="st"> </span><span class="kw"><a href="../reference/alma_seq.html">alma_seq</a></span>(<span class="st">"2000-01-01"</span>, <span class="st">"2002-01-01"</span>, on_last_friday_of_the_quarter)</a>
 <a class="sourceLine" id="cb11-8" data-line-number="8">fridays</a>
 <a class="sourceLine" id="cb11-9" data-line-number="9"><span class="co">#&gt; [1] "2000-03-31" "2000-06-30" "2000-09-29" "2000-12-29" "2001-03-30"</span></a>
 <a class="sourceLine" id="cb11-10" data-line-number="10"><span class="co">#&gt; [6] "2001-06-29" "2001-09-28" "2001-12-28"</span></a>
@@ -278,9 +278,9 @@
 <a class="sourceLine" id="cb12-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/recur_on_wday.html">recur_on_wday</a></span>(<span class="st">"Wednesday"</span>)</a>
 <a class="sourceLine" id="cb12-3" data-line-number="3"></a>
 <a class="sourceLine" id="cb12-4" data-line-number="4">on_last_friday_of_quarter_or_wednesdays &lt;-<span class="st"> </span>on_last_friday_of_the_quarter <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb12-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="../reference/sch-add.html">sch_add_rrule</a></span>(on_wednesdays)</a>
+<a class="sourceLine" id="cb12-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="../reference/sch-add.html">sch_rrule</a></span>(on_wednesdays)</a>
 <a class="sourceLine" id="cb12-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb12-7" data-line-number="7">last_friday_or_wednesdays &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sch_seq.html">sch_seq</a></span>(</a>
+<a class="sourceLine" id="cb12-7" data-line-number="7">last_friday_or_wednesdays &lt;-<span class="st"> </span><span class="kw"><a href="../reference/alma_seq.html">alma_seq</a></span>(</a>
 <a class="sourceLine" id="cb12-8" data-line-number="8">  <span class="st">"2000-01-01"</span>, <span class="st">"2002-01-01"</span>, </a>
 <a class="sourceLine" id="cb12-9" data-line-number="9">  on_last_friday_of_quarter_or_wednesdays</a>
 <a class="sourceLine" id="cb12-10" data-line-number="10">)</a>

@@ -165,11 +165,11 @@ from the <code>since</code> date! Adjust it as necessary to get your desired res
     <pre class="examples"><div class='input'><span class='co'># Using the default `since` date</span>
 <span class='no'>daily_since_epoch_for_5</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rrule.html'>daily</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'>recur_for_count</span>(<span class='fl'>5</span>)
 
-<span class='fu'><a href='sch_seq.html'>sch_seq</a></span>(<span class='st'>"1969-12-31"</span>, <span class='st'>"1970-01-25"</span>, <span class='no'>daily_since_epoch_for_5</span>)</div><div class='output co'>#&gt; [1] "1970-01-01" "1970-01-02" "1970-01-03" "1970-01-04" "1970-01-05"</div><div class='input'>
+<span class='fu'><a href='alma_seq.html'>alma_seq</a></span>(<span class='st'>"1969-12-31"</span>, <span class='st'>"1970-01-25"</span>, <span class='no'>daily_since_epoch_for_5</span>)</div><div class='output co'>#&gt; [1] "1970-01-01" "1970-01-02" "1970-01-03" "1970-01-04" "1970-01-05"</div><div class='input'>
 <span class='co'># Changing the `since` date</span>
 <span class='no'>daily_since_2019_for_5</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rrule.html'>daily</a></span>(<span class='kw'>since</span> <span class='kw'>=</span> <span class='st'>"2019-01-01"</span>) <span class='kw'>%&gt;%</span> <span class='fu'>recur_for_count</span>(<span class='fl'>5</span>)
 
-<span class='fu'><a href='sch_seq.html'>sch_seq</a></span>(<span class='st'>"2018-12-31"</span>, <span class='st'>"2019-01-25"</span>, <span class='no'>daily_since_2019_for_5</span>)</div><div class='output co'>#&gt; [1] "2019-01-01" "2019-01-02" "2019-01-03" "2019-01-04" "2019-01-05"</div><div class='input'>
+<span class='fu'><a href='alma_seq.html'>alma_seq</a></span>(<span class='st'>"2018-12-31"</span>, <span class='st'>"2019-01-25"</span>, <span class='no'>daily_since_2019_for_5</span>)</div><div class='output co'>#&gt; [1] "2019-01-01" "2019-01-02" "2019-01-03" "2019-01-04" "2019-01-05"</div><div class='input'>
 <span class='co'># In the case of "impossible" dates, such as 2019-02-31 and 2019-04-31 in the</span>
 <span class='co'># example below, they are not added to the total count. Only true event</span>
 <span class='co'># dates are counted.</span>
@@ -177,7 +177,7 @@ from the <code>since</code> date! Adjust it as necessary to get your desired res
   <span class='fu'><a href='recur_on_mday.html'>recur_on_mday</a></span>(<span class='fl'>31</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'>recur_for_count</span>(<span class='fl'>5</span>)
 
-<span class='fu'><a href='sch_seq.html'>sch_seq</a></span>(<span class='st'>"2019-01-01"</span>, <span class='st'>"2020-01-01"</span>, <span class='no'>on_31_for_5</span>)</div><div class='output co'>#&gt; [1] "2019-01-31" "2019-03-31" "2019-05-31" "2019-07-31" "2019-08-31"</div><div class='input'>
+<span class='fu'><a href='alma_seq.html'>alma_seq</a></span>(<span class='st'>"2019-01-01"</span>, <span class='st'>"2020-01-01"</span>, <span class='no'>on_31_for_5</span>)</div><div class='output co'>#&gt; [1] "2019-01-31" "2019-03-31" "2019-05-31" "2019-07-31" "2019-08-31"</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
