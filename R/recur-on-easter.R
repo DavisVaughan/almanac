@@ -22,8 +22,8 @@
 #' sch_seq("1999-01-01", "2001-01-01", on_easter)
 #'
 #' sch <- schedule() %>%
-#'   sch_add_rrule(on_easter) %>%
-#'   sch_add_rrule(on_easter_monday)
+#'   sch_rrule(on_easter) %>%
+#'   sch_rrule(on_easter_monday)
 #'
 #' sch_seq("1999-01-01", "2001-01-01", sch)
 #'

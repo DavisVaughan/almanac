@@ -103,10 +103,10 @@ make_on_nth_day_of_the_quarter <- function(since = "1970-01-01", nth = 1L) {
     recur_on_position(nth)
   
   on_nth_day_of_the_quarter <- schedule() %>%
-    sch_add_rrule(on_nth_day_of_q1) %>%
-    sch_add_rrule(on_nth_day_of_q2) %>%
-    sch_add_rrule(on_nth_day_of_q3) %>%
-    sch_add_rrule(on_nth_day_of_q4)
+    sch_rrule(on_nth_day_of_q1) %>%
+    sch_rrule(on_nth_day_of_q2) %>%
+    sch_rrule(on_nth_day_of_q3) %>%
+    sch_rrule(on_nth_day_of_q4)
   
   on_nth_day_of_the_quarter
 }
@@ -193,10 +193,10 @@ make_on_nth_wday_of_the_quarter <- function(since = "1970-01-01", wday = "Monday
     recur_on_position(nth)
   
   on_nth_wday_of_the_quarter <- schedule() %>%
-    sch_add_rrule(on_nth_wday_of_q1) %>%
-    sch_add_rrule(on_nth_wday_of_q2) %>%
-    sch_add_rrule(on_nth_wday_of_q3) %>%
-    sch_add_rrule(on_nth_wday_of_q4)
+    sch_rrule(on_nth_wday_of_q1) %>%
+    sch_rrule(on_nth_wday_of_q2) %>%
+    sch_rrule(on_nth_wday_of_q3) %>%
+    sch_rrule(on_nth_wday_of_q4)
   
   on_nth_wday_of_the_quarter
 }
@@ -224,7 +224,7 @@ on_wednesdays <- weekly(since = "2000-01-01") %>%
   recur_on_wday("Wednesday")
 
 on_last_friday_of_quarter_or_wednesdays <- on_last_friday_of_the_quarter %>%
-  sch_add_rrule(on_wednesdays)
+  sch_rrule(on_wednesdays)
 
 last_friday_or_wednesdays <- sch_seq(
   "2000-01-01", "2002-01-01", 

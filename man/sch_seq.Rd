@@ -28,8 +28,8 @@ on_monday <- weekly() \%>\% recur_on_wday("Monday")
 
 # On the 12th of the month, or on Mondays
 sch <- schedule() \%>\%
-  sch_add_rrule(on_12th) \%>\%
-  sch_add_rrule(on_monday)
+  sch_rrule(on_12th) \%>\%
+  sch_rrule(on_monday)
 
 sch_seq("2019-01-01", "2019-01-31", sch)
 

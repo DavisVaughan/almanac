@@ -22,10 +22,10 @@ make_nth_mday_of_the_quarter <- function(n) {
     recur_on_position(n)
 
   sch_nth_day_of_quarter <- schedule() %>%
-    sch_add_rrule(rr_nth_of_q1) %>%
-    sch_add_rrule(rr_nth_of_q2) %>%
-    sch_add_rrule(rr_nth_of_q3) %>%
-    sch_add_rrule(rr_nth_of_q4)
+    sch_rrule(rr_nth_of_q1) %>%
+    sch_rrule(rr_nth_of_q2) %>%
+    sch_rrule(rr_nth_of_q3) %>%
+    sch_rrule(rr_nth_of_q4)
 
   sch_nth_day_of_quarter
 }
@@ -85,10 +85,10 @@ make_nth_wday_of_the_quarter <- function(wday, n) {
     recur_on_position(n)
 
   sch_nth_wday_of_quarter <- schedule() %>%
-    sch_add_rrule(rr_nth_wday_of_q1) %>%
-    sch_add_rrule(rr_nth_wday_of_q2) %>%
-    sch_add_rrule(rr_nth_wday_of_q3) %>%
-    sch_add_rrule(rr_nth_wday_of_q4)
+    sch_rrule(rr_nth_wday_of_q1) %>%
+    sch_rrule(rr_nth_wday_of_q2) %>%
+    sch_rrule(rr_nth_wday_of_q3) %>%
+    sch_rrule(rr_nth_wday_of_q4)
 
   sch_nth_wday_of_quarter
 }

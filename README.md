@@ -71,7 +71,7 @@ on_weekends <- weekly() %>%
   recur_on_weekends()
 
 on_us_holidays_and_weekends <- calendar_usa_federal() %>%
-  sch_add_rrule(on_weekends)
+  sch_rrule(on_weekends)
 
 thursday_and_friday_before_labor_day <- c("2019-08-29", "2019-08-30")
 

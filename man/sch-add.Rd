@@ -2,13 +2,13 @@
 % Please edit documentation in R/sch-add.R
 \name{sch-add}
 \alias{sch-add}
-\alias{sch_add_rrule}
+\alias{sch_rrule}
 \alias{sch_add_rdate}
 \alias{sch_add_exdate}
 \alias{sch_add_schedule}
 \title{Add to a schedule}
 \usage{
-sch_add_rrule(x, rrule)
+sch_rrule(x, rrule)
 
 sch_add_rdate(x, rdate)
 
@@ -39,7 +39,7 @@ A schedule to merge with \code{x}.}
 }
 \description{
 \itemize{
-\item \code{sch_add_rrule()} adds a \code{rrule} to a schedule.
+\item \code{sch_rrule()} adds a \code{rrule} to a schedule.
 \item \code{sch_add_rdate()} adds a \code{rdate} to a schedule. \code{rdate}s are singular
 special cased dates that are forcibly included in the schedule.
 \item \code{sch_add_exdate()} adds a \code{exdate} to a schedule. \code{exdate}s are singular
@@ -77,9 +77,9 @@ on_labor_day <- monthly() \%>\%
   recur_on_wday("Mon", 1)
 
 sch <- schedule() \%>\%
-  sch_add_rrule(on_thanksgiving) \%>\%
-  sch_add_rrule(on_christmas) \%>\%
-  sch_add_rrule(on_labor_day)
+  sch_rrule(on_thanksgiving) \%>\%
+  sch_rrule(on_christmas) \%>\%
+  sch_rrule(on_labor_day)
 
 # Thanksgiving, Christmas, or Labor Day
 sch_seq("2019-01-01", "2021-01-01", sch)

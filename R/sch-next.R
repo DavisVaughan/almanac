@@ -18,8 +18,8 @@
 #'
 #' # On the 12th of the month, or on Mondays
 #' sch <- schedule() %>%
-#'   sch_add_rrule(on_12th) %>%
-#'   sch_add_rrule(on_monday)
+#'   sch_rrule(on_12th) %>%
+#'   sch_rrule(on_monday)
 #'
 #' sch_next("2019-01-01", sch)
 #'

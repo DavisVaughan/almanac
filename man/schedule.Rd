@@ -12,14 +12,14 @@ will be sufficient. However, more complex rules can be constructed
 by combining simple rules into a \emph{schedule}.
 
 \code{schedule()} creates a new empty schedule. Add rules to the schedule with
-\code{\link[=sch_add_rrule]{sch_add_rrule()}}.
+\code{\link[=sch_rrule]{sch_rrule()}}.
 }
 \examples{
 schedule()
 
-sch_add_rrule(schedule(), monthly())
+sch_rrule(schedule(), monthly())
 
 }
 \seealso{
-\code{\link[=sch_add_rrule]{sch_add_rrule()}}
+\code{\link[=sch_rrule]{sch_rrule()}}
 }

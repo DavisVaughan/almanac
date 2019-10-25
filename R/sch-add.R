@@ -2,7 +2,7 @@
 #'
 #' @description
 #'
-#' - `sch_add_rrule()` adds a `rrule` to a schedule.
+#' - `sch_rrule()` adds a `rrule` to a schedule.
 #'
 #' - `sch_add_rdate()` adds a `rdate` to a schedule. `rdate`s are singular
 #'   special cased dates that are forcibly included in the schedule.
@@ -64,9 +64,9 @@
 #'   recur_on_wday("Mon", 1)
 #'
 #' sch <- schedule() %>%
-#'   sch_add_rrule(on_thanksgiving) %>%
-#'   sch_add_rrule(on_christmas) %>%
-#'   sch_add_rrule(on_labor_day)
+#'   sch_rrule(on_thanksgiving) %>%
+#'   sch_rrule(on_christmas) %>%
+#'   sch_rrule(on_labor_day)
 #'
 #' # Thanksgiving, Christmas, or Labor Day
 #' sch_seq("2019-01-01", "2021-01-01", sch)
@@ -82,7 +82,7 @@ NULL
 
 #' @rdname sch-add
 #' @export
-sch_add_rrule <- function(x, rrule) {
+sch_rrule <- function(x, rrule) {
   validate_schedule(x)
   validate_rrule(rrule, arg = "`rrule`")
 

@@ -16,10 +16,10 @@
 #'
 #' # Adjust dates relative to holidays
 #' on_weekends <- recur_on_weekends(weekly())
-#' on_us_holidays_and_weekends <- sch_add_rrule(on_us_holidays, on_weekends)
+#' on_us_holidays_and_weekends <- sch_rrule(on_us_holidays, on_weekends)
 #'
 #' x <- as.Date("2019-08-30")
-#' sch_step(x, 1, sch_add_rrule(on_us_holidays, on_weekends))
+#' sch_step(x, 1, sch_rrule(on_us_holidays, on_weekends))
 #'
 #' @name calendars
 NULL
