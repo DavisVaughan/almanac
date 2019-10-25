@@ -2,14 +2,14 @@
 #'
 #' @description
 #'
-#' - `sch_jump()` shifts a sequence of dates by "jumping" from `x` to
+#' - `alma_jump()` shifts a sequence of dates by "jumping" from `x` to
 #'   `x + jump`. After the jump, [alma_adjust()] is called with the `adjustment`
 #'   to ensure that if the new dates are events, they are adjusted to the next
 #'   available non-event date.
 #'
 #' - `sch_step()` steps over a sequence of dates 1 day at a time, for `n` days.
 #'   After each step, [alma_adjust()] is called with an adjustment of `days(1)`.
-#'   This has different results from `sch_jump()` with a jump of `days(n)`, and
+#'   This has different results from `alma_jump()` with a jump of `days(n)`, and
 #'   is more appropriate for shifting by "n business days".
 #'
 #' _The performance of `sch_step()` in particular is highly dependent on the
@@ -22,7 +22,7 @@
 #' Imagine you are on a Friday and want to shift forward 2 days using a
 #' schedule that marks weekends as events. There are two options:
 #'
-#' - `sch_jump()` - Jump forward 2 days to Sunday, and apply the `adjustment`.
+#' - `alma_jump()` - Jump forward 2 days to Sunday, and apply the `adjustment`.
 #'   Assuming `adjustment = days(1)` was used, that means the result is Monday.
 #'
 #' - `sch_step()` - Step forward 1 day to Saturday, apply an adjustment of
@@ -53,14 +53,14 @@
 #' on_weekends <- daily("2019-09-01") %>% recur_on_weekends()
 #'
 #' # Note that here we "jump" to Sunday, then adjust, leaving us on Monday
-#' sch_jump("2019-09-13", days(2), on_weekends)
+#' alma_jump("2019-09-13", days(2), on_weekends)
 #'
 #' # Here we step 1 day to Saturday, adjust to Monday,
 #' # then step 1 day to Tuesday
 #' sch_step("2019-09-13", 2, on_weekends)
 #'
 #' @export
-sch_jump <- function(x, jump, schedule, adjustment = days(1)) {
+alma_jump <- function(x, jump, schedule, adjustment = days(1)) {
   x <- vec_cast_date(x)
   schedule <- as_schedule(schedule)
   jump <- check_jump(jump)
@@ -71,7 +71,7 @@ sch_jump <- function(x, jump, schedule, adjustment = days(1)) {
   x
 }
 
-#' @rdname sch_jump
+#' @rdname alma_jump
 #' @export
 sch_step <- function(x, n, schedule) {
   x <- vec_cast_date(x)

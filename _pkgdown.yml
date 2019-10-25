@@ -21,7 +21,7 @@ reference:
 - title: Adjusting dates
   contents:
   - alma_adjust
-  - sch_jump
+  - alma_jump
   - sch_step
 
 - title: Adjustments
