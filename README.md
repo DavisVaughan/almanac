@@ -35,7 +35,7 @@ After constructing a recurrence rule, it can be used to generate dates
 that are in the “recurrence set”.
 
 ``` r
-sch_seq("2000-01-01", "2006-01-01", on_thanksgiving)
+alma_seq("2000-01-01", "2006-01-01", on_thanksgiving)
 #> [1] "2000-11-23" "2001-11-22" "2002-11-28" "2003-11-27" "2004-11-25"
 #> [6] "2005-11-24"
 ```
@@ -43,7 +43,7 @@ sch_seq("2000-01-01", "2006-01-01", on_thanksgiving)
 Or determine if a particular date is a part of the recurrence set.
 
 ``` r
-sch_in(c("2000-01-01", "2000-11-23"), on_thanksgiving)
+alma_in(c("2000-01-01", "2000-11-23"), on_thanksgiving)
 #> [1] FALSE  TRUE
 ```
 
@@ -54,7 +54,7 @@ over” dates that are in the recurrence set.
 wednesday_before_thanksgiving <- "2000-11-22"
 
 # Step forward 2 non-event days, stepping over thanksgiving
-sch_step(wednesday_before_thanksgiving, n = 2, on_thanksgiving)
+alma_step(wednesday_before_thanksgiving, n = 2, on_thanksgiving)
 #> [1] "2000-11-25"
 ```
 
@@ -71,13 +71,13 @@ on_weekends <- weekly() %>%
   recur_on_weekends()
 
 on_us_holidays_and_weekends <- calendar_usa_federal() %>%
-  sch_add_rrule(on_weekends)
+  sch_rrule(on_weekends)
 
 thursday_and_friday_before_labor_day <- c("2019-08-29", "2019-08-30")
 
 # Steps over Saturday, Sunday, and Labor Day to the following Tuesday
 # and Wednesday, aka "two business days" from now!
-two_business_days_forward <- sch_step(
+two_business_days_forward <- alma_step(
   thursday_and_friday_before_labor_day, 
   n = 2,
   schedule = on_us_holidays_and_weekends

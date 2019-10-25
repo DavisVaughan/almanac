@@ -1,6 +1,6 @@
 #' Generate events in a schedule
 #'
-#' `sch_seq()` generates all events in a schedule from `from` to `to`.
+#' `alma_seq()` generates all events in a schedule from `from` to `to`.
 #'
 #' @param from,to `[Date(1)]`
 #'
@@ -20,13 +20,13 @@
 #'
 #' # On the 12th of the month, or on Mondays
 #' sch <- schedule() %>%
-#'   sch_add_rrule(on_12th) %>%
-#'   sch_add_rrule(on_monday)
+#'   sch_rrule(on_12th) %>%
+#'   sch_rrule(on_monday)
 #'
-#' sch_seq("2019-01-01", "2019-01-31", sch)
+#' alma_seq("2019-01-01", "2019-01-31", sch)
 #'
 #' @export
-sch_seq <- function(from, to, schedule, inclusive = TRUE) {
+alma_seq <- function(from, to, schedule, inclusive = TRUE) {
   from <- vec_cast_date(from)
   to <- vec_cast_date(to)
 
@@ -36,10 +36,10 @@ sch_seq <- function(from, to, schedule, inclusive = TRUE) {
   schedule <- as_schedule(schedule)
   vec_assert(inclusive, logical(), 1L)
 
-  sch_seq_impl(from, to, schedule, inclusive)
+  alma_seq_impl(from, to, schedule, inclusive)
 }
 
-sch_seq_impl <- function(from, to, schedule, inclusive = TRUE) {
+alma_seq_impl <- function(from, to, schedule, inclusive = TRUE) {
   if (is.na(from) || is.na(to)) {
     return(global_empty_date)
   }

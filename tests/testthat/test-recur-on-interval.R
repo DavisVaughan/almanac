@@ -10,7 +10,7 @@ test_that("daily - on a interval", {
   start <- "1990-01-01"
   stop <- "1990-01-25"
 
-  x <- sch_seq(start, stop, rrule)
+  x <- alma_seq(start, stop, rrule)
 
   expect_equal(x, expect)
 })
@@ -24,7 +24,7 @@ test_that("weekly - on a interval", {
   start <- "1990-01-01"
   stop <- "1990-01-25"
 
-  x <- sch_seq(start, stop, rrule)
+  x <- alma_seq(start, stop, rrule)
 
   expect_equal(x, expect)
 })
@@ -38,7 +38,7 @@ test_that("monthly - on a interval", {
   start <- "1990-01-01"
   stop <- "1990-03-01"
 
-  x <- sch_seq(start, stop, rrule)
+  x <- alma_seq(start, stop, rrule)
 
   expect_equal(x, expect)
 })
@@ -52,7 +52,7 @@ test_that("yearly - on a interval", {
   start <- "1990-01-01"
   stop <- "1995-01-01"
 
-  x <- sch_seq(start, stop, rrule)
+  x <- alma_seq(start, stop, rrule)
 
   expect_equal(x, expect)
 })
@@ -66,7 +66,7 @@ test_that("interval is for the frequency, not the number of events", {
 
   expect <- as.Date(c("2000-01-01", "2000-01-02", "2000-03-01", "2000-03-02"))
 
-  x <- sch_seq("2000-01-01", "2000-04-03", rrule)
+  x <- alma_seq("2000-01-01", "2000-04-03", rrule)
 
   expect_equal(x, expect)
 })
@@ -80,7 +80,7 @@ test_that("non-existant dates aren't included", {
   # Feb, Apr, Jun are skipped because they have < 31 days
   expect <- as.Date(c("2000-12-31", "2001-08-31", "2001-10-31", "2001-12-31"))
 
-  x <- sch_seq(start, stop, rrule)
+  x <- alma_seq(start, stop, rrule)
 
   expect_equal(x, expect)
 })

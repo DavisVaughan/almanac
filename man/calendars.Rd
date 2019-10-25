@@ -24,13 +24,13 @@ calendar is composed of multiple holiday schedules generated from the
 on_us_holidays <- calendar_usa_federal()
 
 # Locate holidays
-sch_seq("2000-01-01", "2001-01-01", on_us_holidays)
+alma_seq("2000-01-01", "2001-01-01", on_us_holidays)
 
 # Adjust dates relative to holidays
 on_weekends <- recur_on_weekends(weekly())
-on_us_holidays_and_weekends <- sch_add_rrule(on_us_holidays, on_weekends)
+on_us_holidays_and_weekends <- sch_rrule(on_us_holidays, on_weekends)
 
 x <- as.Date("2019-08-30")
-sch_step(x, 1, sch_add_rrule(on_us_holidays, on_weekends))
+alma_step(x, 1, sch_rrule(on_us_holidays, on_weekends))
 
 }

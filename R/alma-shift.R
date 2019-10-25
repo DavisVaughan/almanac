@@ -2,30 +2,30 @@
 #'
 #' @description
 #'
-#' - `sch_jump()` shifts a sequence of dates by "jumping" from `x` to
-#'   `x + jump`. After the jump, [sch_adjust()] is called with the `adjustment`
+#' - `alma_jump()` shifts a sequence of dates by "jumping" from `x` to
+#'   `x + jump`. After the jump, [alma_adjust()] is called with the `adjustment`
 #'   to ensure that if the new dates are events, they are adjusted to the next
 #'   available non-event date.
 #'
-#' - `sch_step()` steps over a sequence of dates 1 day at a time, for `n` days.
-#'   After each step, [sch_adjust()] is called with an adjustment of `days(1)`.
-#'   This has different results from `sch_jump()` with a jump of `days(n)`, and
+#' - `alma_step()` steps over a sequence of dates 1 day at a time, for `n` days.
+#'   After each step, [alma_adjust()] is called with an adjustment of `days(1)`.
+#'   This has different results from `alma_jump()` with a jump of `days(n)`, and
 #'   is more appropriate for shifting by "n business days".
 #'
-#' _The performance of `sch_step()` in particular is highly dependent on the
+#' _The performance of `alma_step()` in particular is highly dependent on the
 #' `since` date used in the schedule's recurrence rules. Choosing a date that
 #' is close to the start of `x` can dramatically improve performance._
 #'
 #' @details
 #'
-#' For shifting by "n business days", `sch_step()` is often more appropriate.
+#' For shifting by "n business days", `alma_step()` is often more appropriate.
 #' Imagine you are on a Friday and want to shift forward 2 days using a
 #' schedule that marks weekends as events. There are two options:
 #'
-#' - `sch_jump()` - Jump forward 2 days to Sunday, and apply the `adjustment`.
+#' - `alma_jump()` - Jump forward 2 days to Sunday, and apply the `adjustment`.
 #'   Assuming `adjustment = days(1)` was used, that means the result is Monday.
 #'
-#' - `sch_step()` - Step forward 1 day to Saturday, apply an adjustment of
+#' - `alma_step()` - Step forward 1 day to Saturday, apply an adjustment of
 #'   `days(1)`, which rolls forward to Monday. Step forward 1 day to Tuesday,
 #'   and no further adjustment is required.
 #'
@@ -43,7 +43,7 @@
 #'
 #'   The number of days to step. Can be negative to step backwards.
 #'
-#' @inheritParams sch_adjust
+#' @inheritParams alma_adjust
 #'
 #' @examples
 #' # 2019-09-13 is a Friday
@@ -53,27 +53,27 @@
 #' on_weekends <- daily("2019-09-01") %>% recur_on_weekends()
 #'
 #' # Note that here we "jump" to Sunday, then adjust, leaving us on Monday
-#' sch_jump("2019-09-13", days(2), on_weekends)
+#' alma_jump("2019-09-13", days(2), on_weekends)
 #'
 #' # Here we step 1 day to Saturday, adjust to Monday,
 #' # then step 1 day to Tuesday
-#' sch_step("2019-09-13", 2, on_weekends)
+#' alma_step("2019-09-13", 2, on_weekends)
 #'
 #' @export
-sch_jump <- function(x, jump, schedule, adjustment = days(1)) {
+alma_jump <- function(x, jump, schedule, adjustment = days(1)) {
   x <- vec_cast_date(x)
   schedule <- as_schedule(schedule)
   jump <- check_jump(jump)
 
   x <- x + jump
-  x <- sch_adjust(x, schedule, adjustment)
+  x <- alma_adjust(x, schedule, adjustment)
 
   x
 }
 
-#' @rdname sch_jump
+#' @rdname alma_jump
 #' @export
-sch_step <- function(x, n, schedule) {
+alma_step <- function(x, n, schedule) {
   x <- vec_cast_date(x)
   n <- vec_cast(n, integer(), x_arg = "n")
   vec_assert(n, size = 1L)
@@ -95,7 +95,7 @@ sch_step <- function(x, n, schedule) {
 
   for (i in seq_len(n)) {
     x <- x + one_day
-    x <- sch_adjust_impl(x, schedule, one_day_adjuster)
+    x <- alma_adjust_impl(x, schedule, one_day_adjuster)
   }
 
   x
@@ -103,7 +103,7 @@ sch_step <- function(x, n, schedule) {
 
 # Pre load the cache with the full range of [x, x + n] (or the reverse if n is
 # negative) and an additional amount past that as well to account for
-# the adjustments. This significantly speeds up the `sch_adjust()` calls.
+# the adjustments. This significantly speeds up the `alma_adjust()` calls.
 
 cache_preload <- function(x, n, schedule) {
   x_min <- min(x)
@@ -116,7 +116,7 @@ cache_preload <- function(x, n, schedule) {
   }
 
   # Cache the range of [x_min, x_max + n] (or [x_min + n, x_max] if n < 0)
-  n_events <- length(sch_seq_impl(x_min, x_max, schedule))
+  n_events <- length(alma_seq_impl(x_min, x_max, schedule))
 
   if (n_events == 0L) {
     return()
@@ -131,7 +131,7 @@ cache_preload <- function(x, n, schedule) {
   # Perform a secondary extended cache based on the number of events in the
   # original sequence. This is sort of ad hoc and assumes a uniform event
   # sequence, but captures most cases well
-  sch_seq_impl(x_min, x_max, schedule)
+  alma_seq_impl(x_min, x_max, schedule)
 
   invisible(schedule)
 }

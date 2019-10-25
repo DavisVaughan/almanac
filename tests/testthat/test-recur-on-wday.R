@@ -8,7 +8,7 @@ test_that("daily - on a wday", {
   start <- "1990-01-01"
   stop <- "1990-03-31"
 
-  x <- sch_seq(start, stop, rrule)
+  x <- alma_seq(start, stop, rrule)
 
   expect_equal(x[1], as.Date("1990-01-02"))
   expect_equal(x[length(x)], as.Date("1990-03-27"))
@@ -21,7 +21,7 @@ test_that("weekly - on a wday", {
   start <- "1990-01-01"
   stop <- "1990-03-31"
 
-  x <- sch_seq(start, stop, rrule)
+  x <- alma_seq(start, stop, rrule)
 
   expect_equal(x[1], as.Date("1990-01-02"))
   expect_equal(x[length(x)], as.Date("1990-03-27"))
@@ -34,7 +34,7 @@ test_that("monthly - on a wday", {
   start <- "1990-01-01"
   stop <- "1990-03-31"
 
-  x <- sch_seq(start, stop, rrule)
+  x <- alma_seq(start, stop, rrule)
 
   expect_equal(x[1], as.Date("1990-01-02"))
   expect_equal(x[length(x)], as.Date("1990-03-27"))
@@ -47,7 +47,7 @@ test_that("yearly - on a wday", {
   start <- "1990-01-01"
   stop <- "1990-03-31"
 
-  x <- sch_seq(start, stop, rrule)
+  x <- alma_seq(start, stop, rrule)
 
   expect_equal(x[1], as.Date("1990-01-02"))
   expect_equal(x[length(x)], as.Date("1990-03-27"))
@@ -58,7 +58,7 @@ test_that("yearly - on a wday", {
 test_that("can use n-th to select specific weekdays", {
   rrule <- monthly() %>% recur_on_wday("Tuesday", 1)
 
-  x <- sch_seq("1990-01-01", "1990-03-31", rrule)
+  x <- alma_seq("1990-01-01", "1990-03-31", rrule)
   expect <- as.Date(c("1990-01-02", "1990-02-06", "1990-03-06"))
 
   expect_equal(x, expect)
@@ -67,7 +67,7 @@ test_that("can use n-th to select specific weekdays", {
 test_that("can select multiple n-th values", {
   rrule <- daily() %>% recur_on_wday("Tuesday", c(1, 3))
 
-  x <- sch_seq("1990-01-01", "1990-03-31", rrule)
+  x <- alma_seq("1990-01-01", "1990-03-31", rrule)
 
   expect_equal(x[1], as.Date("1990-01-02"))
   expect_equal(x[2], as.Date("1990-01-09"))
@@ -77,7 +77,7 @@ test_that("can select multiple n-th values", {
 test_that("can select weekdays from the back of the month", {
   rrule <- monthly() %>% recur_on_wday("Tuesday", -1)
 
-  x <- sch_seq("1990-01-01", "1990-03-31", rrule)
+  x <- alma_seq("1990-01-01", "1990-03-31", rrule)
   expect <- as.Date(c("1990-01-30", "1990-02-27", "1990-03-27"))
 
   expect_equal(x, expect)
@@ -86,7 +86,7 @@ test_that("can select weekdays from the back of the month", {
 test_that("can select the n-th of the year", {
   rrule <- yearly() %>% recur_on_wday("Tuesday", c(10, 12))
 
-  x <- sch_seq("1990-01-01", "1990-03-31", rrule)
+  x <- alma_seq("1990-01-01", "1990-03-31", rrule)
 
   expect_equal(x, as.Date(c("1990-03-06", "1990-03-20")))
 })
@@ -96,7 +96,7 @@ test_that("when a on_ymonth rule is added to yearly, n-th selects intramonth", {
     recur_on_wday("Tuesday", c(1, 2)) %>%
     recur_on_ymonth(c("Jan", "Feb"))
 
-  x <- sch_seq("1990-01-01", "1990-03-31", rrule)
+  x <- alma_seq("1990-01-01", "1990-03-31", rrule)
 
   expect <- as.Date(c("1990-01-02", "1990-01-09", "1990-02-06", "1990-02-13"))
 
@@ -106,7 +106,7 @@ test_that("when a on_ymonth rule is added to yearly, n-th selects intramonth", {
 test_that("using multiple wdays in the same call applies the same n-th value", {
   rrule <- monthly() %>% recur_on_wday(c("mon", "tue"), 1)
 
-  x <- sch_seq("1990-01-01", "1990-03-31", rrule)
+  x <- alma_seq("1990-01-01", "1990-03-31", rrule)
 
   expect_equal(x[1], as.Date("1990-01-01"))
   expect_equal(x[2], as.Date("1990-01-02"))
@@ -118,7 +118,7 @@ test_that("can apply different n-th values to different wdays", {
     recur_on_wday("mon", 1) %>%
     recur_on_wday("tue", 2)
 
-  x <- sch_seq("1990-01-01", "1990-03-31", rrule)
+  x <- alma_seq("1990-01-01", "1990-03-31", rrule)
 
   expect_equal(x[1], as.Date("1990-01-01"))
   expect_equal(x[2], as.Date("1990-01-09"))
@@ -131,8 +131,8 @@ test_that("weekends helper works", {
   rrule1 <- monthly() %>% recur_on_weekends()
   rrule2 <- monthly() %>% recur_on_wday(6:7)
 
-  x1 <- sch_seq("1990-01-01", "1990-03-31", rrule1)
-  x2 <- sch_seq("1990-01-01", "1990-03-31", rrule2)
+  x1 <- alma_seq("1990-01-01", "1990-03-31", rrule1)
+  x2 <- alma_seq("1990-01-01", "1990-03-31", rrule2)
 
   expect_equal(x1, x2)
 })
@@ -141,8 +141,8 @@ test_that("weekdays helper works", {
   rrule1 <- monthly() %>% recur_on_weekdays()
   rrule2 <- monthly() %>% recur_on_wday(1:5)
 
-  x1 <- sch_seq("1990-01-01", "1990-03-31", rrule1)
-  x2 <- sch_seq("1990-01-01", "1990-03-31", rrule2)
+  x1 <- alma_seq("1990-01-01", "1990-03-31", rrule1)
+  x2 <- alma_seq("1990-01-01", "1990-03-31", rrule2)
 
   expect_equal(x1, x2)
 })

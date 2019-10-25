@@ -3,7 +3,7 @@ test_that("recurrences stop after `until` date", {
 
   expect <- as.Date(c("1999-12-31", "2000-01-01"))
 
-  expect_equal(sch_seq("1999-12-31", "2000-01-02", rrule), expect)
+  expect_equal(alma_seq("1999-12-31", "2000-01-02", rrule), expect)
 })
 
 test_that("`until` must be after `since`", {

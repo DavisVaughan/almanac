@@ -8,7 +8,7 @@ test_that("daily - on a ymonth", {
   start <- "1990-01-01"
   stop <- "1992-01-01"
 
-  x <- sch_seq(start, stop, rrule)
+  x <- alma_seq(start, stop, rrule)
 
   expect_equal(x[1], as.Date("1990-05-01"))
   expect_equal(x[length(x)], as.Date("1991-05-31"))
@@ -22,7 +22,7 @@ test_that("weekly - on a ymonth", {
   start <- "1990-01-01"
   stop <- "1992-01-01"
 
-  x <- sch_seq(start, stop, rrule)
+  x <- alma_seq(start, stop, rrule)
 
   expect_equal(x[1], as.Date("1990-05-03"))
   expect_equal(x[length(x)], as.Date("1991-05-30"))
@@ -36,7 +36,7 @@ test_that("monthly - on a ymonth", {
   start <- "1990-01-01"
   stop <- "1992-01-01"
 
-  x <- sch_seq(start, stop, rrule)
+  x <- alma_seq(start, stop, rrule)
 
   expect <- as.Date(c("1990-05-01", "1991-05-01"))
 
@@ -50,7 +50,7 @@ test_that("yearly - on a ymonth", {
   start <- "1990-01-01"
   stop <- "1992-01-01"
 
-  x <- sch_seq(start, stop, rrule)
+  x <- alma_seq(start, stop, rrule)
 
   expect <- as.Date(c("1990-05-01", "1991-05-01"))
 
@@ -69,10 +69,10 @@ test_that("weekly on ymonth respects `since` week day", {
   # lubridate::wday() week start is Sunday
   # so 5th day of the week is Thurs and 7th is Saturday
 
-  x <- sch_seq(start, stop, rrule_thursday)
+  x <- alma_seq(start, stop, rrule_thursday)
   expect_equal(wday(x, FALSE), rep(5L, length(x)))
 
-  x <- sch_seq(start, stop, rrule_saturday)
+  x <- alma_seq(start, stop, rrule_saturday)
   expect_equal(wday(x, FALSE), rep(7L, length(x)))
 })
 

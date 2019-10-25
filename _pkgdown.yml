@@ -6,23 +6,23 @@ reference:
   - daily
   - starts_with("recur_")
 
-- title: Schedule construction
+- title: Schedules
   contents:
   - schedule
-  - starts_with("sch_add_")
+  - starts_with("sch_")
 
-- title: Schedule sets
+- title: Sets and sequences
   contents:
-  - sch_in
-  - sch_seq
-  - sch_next
-  - sch_previous
+  - alma_in
+  - alma_seq
+  - alma_next
+  - alma_previous
 
-- title: Schedule adjustments
+- title: Adjusting dates
   contents:
-  - sch_adjust
-  - sch_jump
-  - sch_step
+  - alma_adjust
+  - alma_jump
+  - alma_step
 
 - title: Adjustments
   contents:

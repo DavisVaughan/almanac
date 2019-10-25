@@ -10,7 +10,7 @@ test_that("daily - on a mday", {
   start <- "1990-01-01"
   stop <- "1990-03-01"
 
-  x <- sch_seq(start, stop, rrule)
+  x <- alma_seq(start, stop, rrule)
 
   expect_equal(x, expect)
 })
@@ -24,7 +24,7 @@ test_that("weekly - on a mday", {
   start <- "1990-01-01"
   stop <- "1990-03-01"
 
-  x <- sch_seq(start, stop, rrule)
+  x <- alma_seq(start, stop, rrule)
 
   expect_equal(x, expect)
 })
@@ -38,7 +38,7 @@ test_that("monthly - on a mday", {
   start <- "1990-01-01"
   stop <- "1990-03-01"
 
-  x <- sch_seq(start, stop, rrule)
+  x <- alma_seq(start, stop, rrule)
 
   expect_equal(x, expect)
 })
@@ -52,7 +52,7 @@ test_that("yearly - on a mday", {
   start <- "1990-01-01"
   stop <- "1990-03-01"
 
-  x <- sch_seq(start, stop, rrule)
+  x <- alma_seq(start, stop, rrule)
 
   expect_equal(x, expect)
 })
@@ -65,7 +65,7 @@ test_that("can select multiple days of the month", {
   start <- "1990-01-01"
   stop <- "1990-01-31"
 
-  x <- sch_seq(start, stop, rrule)
+  x <- alma_seq(start, stop, rrule)
 
   expect <- as.Date(c("1990-01-01", "1990-01-03", "1990-01-05"))
 
@@ -78,7 +78,7 @@ test_that("can select from the end of the month", {
   start <- "1990-01-01"
   stop <- "1990-01-31"
 
-  x <- sch_seq(start, stop, rrule)
+  x <- alma_seq(start, stop, rrule)
 
   expect <- as.Date(c("1990-01-27", "1990-01-29", "1990-01-31"))
 

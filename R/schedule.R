@@ -7,14 +7,14 @@
 #' by combining simple rules into a _schedule_.
 #'
 #' `schedule()` creates a new empty schedule. Add rules to the schedule with
-#' [sch_add_rrule()].
+#' [sch_rrule()].
 #'
 #' @examples
 #' schedule()
 #'
-#' sch_add_rrule(schedule(), monthly())
+#' sch_rrule(schedule(), monthly())
 #'
-#' @seealso [sch_add_rrule()]
+#' @seealso [sch_rrule()]
 #' @export
 schedule <- function() {
   new_schedule()

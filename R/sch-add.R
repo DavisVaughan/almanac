@@ -2,15 +2,15 @@
 #'
 #' @description
 #'
-#' - `sch_add_rrule()` adds a `rrule` to a schedule.
+#' - `sch_rrule()` adds a `rrule` to a schedule.
 #'
-#' - `sch_add_rdate()` adds a `rdate` to a schedule. `rdate`s are singular
+#' - `sch_rdate()` adds a `rdate` to a schedule. `rdate`s are singular
 #'   special cased dates that are forcibly included in the schedule.
 #'
-#' - `sch_add_exdate()` adds a `exdate` to a schedule. `exdate`s are singular
+#' - `sch_exdate()` adds a `exdate` to a schedule. `exdate`s are singular
 #'   special cased dates that are forcibly excluded from the schedule.
 #'
-#' - `sch_add_schedule()` merges two schedules together.
+#' - `sch_merge()` merges two schedules together.
 #'
 #' @details
 #'
@@ -64,25 +64,25 @@
 #'   recur_on_wday("Mon", 1)
 #'
 #' sch <- schedule() %>%
-#'   sch_add_rrule(on_thanksgiving) %>%
-#'   sch_add_rrule(on_christmas) %>%
-#'   sch_add_rrule(on_labor_day)
+#'   sch_rrule(on_thanksgiving) %>%
+#'   sch_rrule(on_christmas) %>%
+#'   sch_rrule(on_labor_day)
 #'
 #' # Thanksgiving, Christmas, or Labor Day
-#' sch_seq("2019-01-01", "2021-01-01", sch)
+#' alma_seq("2019-01-01", "2021-01-01", sch)
 #'
 #' # Except Labor Day in 2019
 #' sch2 <- sch %>%
-#'   sch_add_exdate("2019-09-02")
+#'   sch_exdate("2019-09-02")
 #'
-#' sch_seq("2019-01-01", "2021-01-01", sch2)
+#' alma_seq("2019-01-01", "2021-01-01", sch2)
 #'
 #' @name sch-add
 NULL
 
 #' @rdname sch-add
 #' @export
-sch_add_rrule <- function(x, rrule) {
+sch_rrule <- function(x, rrule) {
   validate_schedule(x)
   validate_rrule(rrule, arg = "`rrule`")
 
@@ -98,7 +98,7 @@ sch_add_rrule <- function(x, rrule) {
 
 #' @rdname sch-add
 #' @export
-sch_add_rdate <- function(x, rdate) {
+sch_rdate <- function(x, rdate) {
   validate_schedule(x)
   rdate <- vec_cast_date(rdate, "rdate")
 
@@ -114,7 +114,7 @@ sch_add_rdate <- function(x, rdate) {
 
 #' @rdname sch-add
 #' @export
-sch_add_exdate <- function(x, exdate) {
+sch_exdate <- function(x, exdate) {
   validate_schedule(x)
   exdate <- vec_cast_date(exdate, "exdate")
 
@@ -130,7 +130,7 @@ sch_add_exdate <- function(x, exdate) {
 
 #' @rdname sch-add
 #' @export
-sch_add_schedule <- function(x, schedule) {
+sch_merge <- function(x, schedule) {
   validate_schedule(x)
   validate_schedule(schedule, "`schedule`")
 
