@@ -4,7 +4,7 @@
 #'
 #' - `alma_next()` generates the next event after `x`.
 #'
-#' - `sch_previous()` generates the previous event before `x`.
+#' - `alma_previous()` generates the previous event before `x`.
 #'
 #' @inheritParams alma_seq
 #'
@@ -23,7 +23,7 @@
 #'
 #' alma_next("2019-01-01", sch)
 #'
-#' sch_previous("2019-01-01", sch)
+#' alma_previous("2019-01-01", sch)
 #'
 #' @export
 alma_next <- function(x, schedule, inclusive = FALSE) {
@@ -42,7 +42,7 @@ alma_next <- function(x, schedule, inclusive = FALSE) {
 
 #' @rdname alma_next
 #' @export
-sch_previous <- function(x, schedule, inclusive = FALSE) {
+alma_previous <- function(x, schedule, inclusive = FALSE) {
   x <- vec_cast_date(x)
   schedule <- as_schedule(schedule)
   vec_assert(inclusive, logical(), 1L)

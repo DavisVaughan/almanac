@@ -2,12 +2,12 @@
 % Please edit documentation in R/alma-next.R
 \name{alma_next}
 \alias{alma_next}
-\alias{sch_previous}
+\alias{alma_previous}
 \title{Generate the next or previous event}
 \usage{
 alma_next(x, schedule, inclusive = FALSE)
 
-sch_previous(x, schedule, inclusive = FALSE)
+alma_previous(x, schedule, inclusive = FALSE)
 }
 \arguments{
 \item{x}{\code{[Date(1)]}
@@ -25,7 +25,7 @@ If \code{from} or \code{to} are events, should they be included?}
 \description{
 \itemize{
 \item \code{alma_next()} generates the next event after \code{x}.
-\item \code{sch_previous()} generates the previous event before \code{x}.
+\item \code{alma_previous()} generates the previous event before \code{x}.
 }
 }
 \examples{
@@ -39,6 +39,6 @@ sch <- schedule() \%>\%
 
 alma_next("2019-01-01", sch)
 
-sch_previous("2019-01-01", sch)
+alma_previous("2019-01-01", sch)
 
 }
