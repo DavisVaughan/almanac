@@ -20,7 +20,7 @@ The Internet Engineering Task Force (IETF) has released an _exhaustive_ guide ab
 
 The specific section of the iCalendar guide that mentions recurrence rules is [3.3.10](https://tools.ietf.org/html/rfc5545#section-3.3.10), and the section with all of the examples is [3.8.5.3](https://tools.ietf.org/html/rfc5545#section-3.8.5.3).
 
-For whatever reason, most examples use a start date of `1997-09-02`. To show the results, for terminating recurrence rules (those that have a limited count or an until date) I will use `sch_seq()` with `since` as the `from` date and a `to` date far enough in the future to show useful results. For non-terminating rules, I will choose a `to` date that shows enough to be informative, without being overwhelming.
+For whatever reason, most examples use a start date of `1997-09-02`. To show the results, for terminating recurrence rules (those that have a limited count or an until date) I will use `alma_seq()` with `since` as the `from` date and a `to` date far enough in the future to show useful results. For non-terminating rules, I will choose a `to` date that shows enough to be informative, without being overwhelming.
 
 ```{r setup}
 library(almanac)
@@ -36,7 +36,7 @@ to <- as.Date("2010-01-01")
 rrule <- daily(since) %>%
   recur_for_count(10)
 
-sch_seq(since, to, rrule)
+alma_seq(since, to, rrule)
 ```
 
 ### Daily until 1997-12-24
@@ -45,7 +45,7 @@ sch_seq(since, to, rrule)
 rrule <- daily(since) %>%
   recur_until("1997-12-24")
 
-sch_seq(since, to, rrule)
+alma_seq(since, to, rrule)
 ```
 
 ### Every other day, forever
@@ -54,7 +54,7 @@ sch_seq(since, to, rrule)
 rrule <- daily(since) %>%
   recur_on_interval(2)
 
-sch_seq(since, "1997-10-01", rrule)
+alma_seq(since, "1997-10-01", rrule)
 ```
 
 ### Every 10 days, 5 occurrences
@@ -64,7 +64,7 @@ rrule <- daily(since) %>%
   recur_on_interval(10) %>%
   recur_for_count(5)
 
-sch_seq(since, to, rrule)
+alma_seq(since, to, rrule)
 ```
 
 ### Every day in January, for 3 years
@@ -74,7 +74,7 @@ rrule <- daily("1998-01-01") %>%
   recur_on_ymonth("January") %>%
   recur_until("2000-01-31")
 
-sch_seq(since, to, rrule)
+alma_seq(since, to, rrule)
 ```
 
 ### Weekly for 10 occurrences
@@ -83,7 +83,7 @@ sch_seq(since, to, rrule)
 rrule <- weekly(since) %>%
   recur_for_count(10)
 
-sch_seq(since, to, rrule)
+alma_seq(since, to, rrule)
 ```
 
 ### Weekly until December 24, 1997
@@ -92,7 +92,7 @@ sch_seq(since, to, rrule)
 rrule <- weekly(since) %>%
   recur_until("1997-12-24")
 
-sch_seq(since, to, rrule)
+alma_seq(since, to, rrule)
 ```
 
 ### Every other week - forever
@@ -101,7 +101,7 @@ sch_seq(since, to, rrule)
 rrule <- weekly(since) %>%
   recur_on_interval(2)
 
-sch_seq(since, "1997-11-01", rrule)
+alma_seq(since, "1997-11-01", rrule)
 ```
 
 ### Weekly on Tuesday and Thursday for five weeks
@@ -111,7 +111,7 @@ rrule <- weekly(since) %>%
   recur_on_wday(c("Tue", "Thur")) %>%
   recur_for_count(10)
 
-sch_seq(since, to, rrule)
+alma_seq(since, to, rrule)
 ```
 
 ### Every other week on Monday, Wednesday, and Friday until December 24, 1997, starting on Monday, September 1, 1997
@@ -122,7 +122,7 @@ rrule <- weekly("1997-09-01") %>%
   recur_on_interval(2) %>%
   recur_until("1997-12-24")
 
-sch_seq("1997-09-01", to, rrule)
+alma_seq("1997-09-01", to, rrule)
 ```
 
 ### Every other week on Tuesday and Thursday, for 8 occurrences
@@ -133,7 +133,7 @@ rrule <- weekly(since) %>%
   recur_on_interval(2) %>%
   recur_for_count(8)
 
-sch_seq(since, to, rrule)
+alma_seq(since, to, rrule)
 ```
 
 ### Monthly on the first Friday for 10 occurrences
@@ -143,7 +143,7 @@ rrule <- monthly("1997-09-05") %>%
   recur_on_wday("Fri", nth = 1) %>%
   recur_for_count(10)
 
-sch_seq(since, to, rrule)
+alma_seq(since, to, rrule)
 ```
 
 ### Monthly on the first Friday until December 24, 1997
@@ -153,7 +153,7 @@ rrule <- monthly("1997-09-05") %>%
   recur_on_wday("Fri", nth = 1) %>%
   recur_until("1997-12-24")
 
-sch_seq(since, to, rrule)
+alma_seq(since, to, rrule)
 ```
 
 ### Every other month on the first and last Sunday of the month for 10 occurrences
@@ -164,7 +164,7 @@ rrule <- monthly("1997-09-07") %>%
   recur_on_interval(2) %>%
   recur_for_count(10)
 
-sch_seq(since, to, rrule)
+alma_seq(since, to, rrule)
 ```
 
 ### Monthly on the second-to-last Monday of the month for 6 months
@@ -174,7 +174,7 @@ rrule <- monthly("1997-09-22") %>%
   recur_on_wday("Mon", nth = -2) %>%
   recur_for_count(6)
 
-sch_seq(since, to, rrule)
+alma_seq(since, to, rrule)
 ```
 
 ### Monthly on the third-to-the-last day of the month, forever
@@ -183,7 +183,7 @@ sch_seq(since, to, rrule)
 rrule <- monthly("1997-09-28") %>%
   recur_on_mday(-3)
 
-sch_seq(since, "1997-12-01", rrule)
+alma_seq(since, "1997-12-01", rrule)
 ```
 
 ### Monthly on the 2nd and 15th of the month for 10 occurrences
@@ -193,7 +193,7 @@ rrule <- monthly("1997-09-02") %>%
   recur_on_mday(c(2, 15)) %>%
   recur_for_count(10)
 
-sch_seq(since, to, rrule)
+alma_seq(since, to, rrule)
 ```
 
 ### Monthly on the first and last day of the month for 10 occurrences
@@ -203,7 +203,7 @@ rrule <- monthly("1997-09-30") %>%
   recur_on_mday(c(1, -1)) %>%
   recur_for_count(10)
 
-sch_seq(since, to, rrule)
+alma_seq(since, to, rrule)
 ```
 
 ### Every 18 months on the 10th thru 15th of the month for 10 occurrences
@@ -214,7 +214,7 @@ rrule <- monthly("1997-09-10") %>%
   recur_on_mday(10:15) %>%
   recur_for_count(10)
 
-sch_seq("1997-09-10", to, rrule)
+alma_seq("1997-09-10", to, rrule)
 ```
 
 ### Every Tuesday, every other month
@@ -224,7 +224,7 @@ rrule <- monthly(since) %>%
   recur_on_interval(2) %>%
   recur_on_wday("Tuesday")
 
-sch_seq(since, "1997-12-01", rrule)
+alma_seq(since, "1997-12-01", rrule)
 ```
 
 ### Yearly in June and July for 10 occurrences
@@ -236,7 +236,7 @@ rrule <- yearly("1997-06-10") %>%
   recur_on_ymonth(c("June", "July")) %>%
   recur_for_count(10)
 
-sch_seq("1997-06-10", to, rrule)
+alma_seq("1997-06-10", to, rrule)
 ```
 
 ### Every other year on January, February, and March for 10 occurrences
@@ -247,7 +247,7 @@ rrule <- yearly("1997-03-10") %>%
   recur_on_interval(2) %>%
   recur_for_count(10)
 
-sch_seq("1997-03-10", to, rrule)
+alma_seq("1997-03-10", to, rrule)
 ```
 
 ### Every third year on the 1st, 100th, and 200th day for 10 occurrences
@@ -258,7 +258,7 @@ rrule <- yearly("1997-01-01") %>%
   recur_on_interval(3) %>%
   recur_for_count(10)
 
-sch_seq("1997-01-01", to, rrule)
+alma_seq("1997-01-01", to, rrule)
 ```
 
 ### Every 20th Monday of the year, forever
@@ -267,7 +267,7 @@ sch_seq("1997-01-01", to, rrule)
 rrule <- yearly("1997-05-19") %>%
   recur_on_wday("Monday", nth = 20)
 
-sch_seq("1997-05-19", "2000-01-01", rrule)
+alma_seq("1997-05-19", "2000-01-01", rrule)
 ```
 
 ### Monday of week number 20 (where the default start of the week is Monday), forever
@@ -279,7 +279,7 @@ rrule <- yearly("1997-05-12") %>%
   recur_on_yweek(20) %>%
   recur_on_wday("Monday")
 
-sch_seq("1997-05-12", "2000-01-01", rrule)
+alma_seq("1997-05-12", "2000-01-01", rrule)
 ```
 
 ### Every Thursday in March, forever
@@ -289,7 +289,7 @@ rrule <- yearly("1997-03-13") %>%
   recur_on_wday("Thursday") %>%
   recur_on_ymonth("March")
 
-sch_seq("1997-03-13", "2000-01-01", rrule)
+alma_seq("1997-03-13", "2000-01-01", rrule)
 ```
 
 ### Every Thursday, but only during June, July, and August, forever
@@ -299,7 +299,7 @@ rrule <- yearly("1997-06-05") %>%
   recur_on_wday("Thursday") %>%
   recur_on_ymonth(c("Jun", "July", "Aug"))
 
-sch_seq("1997-06-05", "1999-01-01", rrule)
+alma_seq("1997-06-05", "1999-01-01", rrule)
 ```
 
 ### Every Friday the 13th, forever
@@ -309,7 +309,7 @@ rrule <- yearly(since) %>%
   recur_on_wday("Friday") %>%
   recur_on_mday(13)
 
-sch_seq(since, "2001-01-01", rrule)
+alma_seq(since, "2001-01-01", rrule)
 ```
 
 ### The first Saturday that follows the first Sunday of the month, forever
@@ -319,7 +319,7 @@ rrule <- yearly("1997-09-13") %>%
   recur_on_wday("Saturday") %>%
   recur_on_mday(7:13)
 
-sch_seq("1997-09-13", "1998-06-01", rrule)
+alma_seq("1997-09-13", "1998-06-01", rrule)
 ```
 
 ### Every 4 years, the first Tuesday after a Monday in November, forever (U.S. Presidential Election day)
@@ -331,7 +331,7 @@ rrule <- yearly("1996-11-05") %>%
   recur_on_interval(4) %>%
   recur_on_ymonth("November")
 
-sch_seq("1996-11-05", "2010-12-31", rrule)
+alma_seq("1996-11-05", "2010-12-31", rrule)
 ```
 
 ### The third instance into the month of one of Tuesday, Wednesday, or Thursday, for the next 3 months
@@ -344,7 +344,7 @@ rrule <- monthly("1997-09-04") %>%
   recur_on_position(3) %>%
   recur_for_count(3)
 
-sch_seq("1997-09-04", to, rrule)
+alma_seq("1997-09-04", to, rrule)
 ```
 
 ### The second-to-last weekday of the month
@@ -354,7 +354,7 @@ rrule <- monthly("1997-09-29") %>%
   recur_on_wday(1:5) %>%
   recur_on_position(-2)
 
-sch_seq("1997-09-29", "1998-12-01", rrule)
+alma_seq("1997-09-29", "1998-12-01", rrule)
 ```
 
 ### An example where the days generated makes a difference because of week_start
@@ -369,7 +369,7 @@ rrule <- weekly("1997-08-05") %>%
 # Week 1: 1997-08-04 -> 1997-08-10
 # Week 2: 1997-08-11 -> 1997-08-17 (skipped)
 # Week 3: 1997-08-18 -> 1997-08-24 
-sch_seq("1997-08-05", "1998-12-01", rrule)
+alma_seq("1997-08-05", "1998-12-01", rrule)
 ```
 
 Changing the week start to Sunday.
@@ -386,7 +386,7 @@ rrule <- weekly("1997-08-05") %>%
 # Week 3: 1997-08-17 -> 1997-08-23
 # Week 4: 1997-08-24 -> 1997-08-30 (skipped)
 # Week 5: 1997-08-31 -> 1997-09-06
-sch_seq("1997-08-05", "1998-12-01", rrule)
+alma_seq("1997-08-05", "1998-12-01", rrule)
 ```
 
 ### An example where an invalid date (i.e., February 30) is ignored
@@ -398,5 +398,5 @@ rrule <- weekly("2007-01-15") %>%
   recur_on_mday(c(15, 30)) %>%
   recur_for_count(5)
 
-sch_seq("2007-01-15", "2007-12-31", rrule)
+alma_seq("2007-01-15", "2007-12-31", rrule)
 ```

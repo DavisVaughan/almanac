@@ -10,7 +10,7 @@ test_that("daily - on a yday", {
   start <- "1990-01-01"
   stop <- "1992-01-01"
 
-  x <- sch_seq(start, stop, rrule)
+  x <- alma_seq(start, stop, rrule)
 
   expect_equal(x, expect)
 })
@@ -24,7 +24,7 @@ test_that("weekly - on a yday", {
   start <- "1990-01-01"
   stop <- "1992-01-01"
 
-  x <- sch_seq(start, stop, rrule)
+  x <- alma_seq(start, stop, rrule)
 
   expect_equal(x, expect)
 })
@@ -38,7 +38,7 @@ test_that("monthly - on a yday", {
   start <- "1990-01-01"
   stop <- "1992-01-01"
 
-  x <- sch_seq(start, stop, rrule)
+  x <- alma_seq(start, stop, rrule)
 
   expect_equal(x, expect)
 })
@@ -52,7 +52,7 @@ test_that("yearly - on a yday", {
   start <- "1990-01-01"
   stop <- "1992-01-01"
 
-  x <- sch_seq(start, stop, rrule)
+  x <- alma_seq(start, stop, rrule)
 
   expect_equal(x, expect)
 })
@@ -68,7 +68,7 @@ test_that("leap years work correctly with yday", {
   start <- "2000-01-01"
   stop <- "2003-01-01"
 
-  x <- sch_seq(start, stop, rrule)
+  x <- alma_seq(start, stop, rrule)
 
   expect_equal(x, expect)
 })
@@ -82,7 +82,7 @@ test_that("can select from the back", {
   start <- "1990-01-01"
   stop <- "1992-01-01"
 
-  x <- sch_seq(start, stop, rrule)
+  x <- alma_seq(start, stop, rrule)
 
   expect_equal(x, expect)
 })

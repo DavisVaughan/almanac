@@ -19,13 +19,13 @@
 #' on_easter <- yearly() %>% recur_on_easter()
 #' on_easter_monday <- yearly() %>% recur_on_easter(-1)
 #'
-#' sch_seq("1999-01-01", "2001-01-01", on_easter)
+#' alma_seq("1999-01-01", "2001-01-01", on_easter)
 #'
 #' sch <- schedule() %>%
 #'   sch_rrule(on_easter) %>%
 #'   sch_rrule(on_easter_monday)
 #'
-#' sch_seq("1999-01-01", "2001-01-01", sch)
+#' alma_seq("1999-01-01", "2001-01-01", sch)
 #'
 #'
 #' # Note that `offset` must land within the same year, otherwise the date
@@ -33,8 +33,8 @@
 #' on_easter_back_93_days <- yearly() %>% recur_on_easter(-93)
 #' on_easter_back_94_days <- yearly() %>% recur_on_easter(-94)
 #'
-#' sch_seq("1999-01-01", "2001-01-01", on_easter_back_93_days)
-#' sch_seq("1999-01-01", "2001-01-01", on_easter_back_94_days)
+#' alma_seq("1999-01-01", "2001-01-01", on_easter_back_93_days)
+#' alma_seq("1999-01-01", "2001-01-01", on_easter_back_94_days)
 #'
 #' @noRd
 NULL

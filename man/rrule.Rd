@@ -60,14 +60,14 @@ default will use a quarterly schedule starting in January since the default
 \examples{
 rrule <- monthly() \%>\% recur_on_mday(25)
 
-sch_seq("1970-01-01", "1971-01-01", rrule)
+alma_seq("1970-01-01", "1971-01-01", rrule)
 
 # Notice that dates before 1970-01-01 are never generated with the defaults!
-sch_seq("1969-01-01", "1970-01-01", rrule)
+alma_seq("1969-01-01", "1970-01-01", rrule)
 
 # Adjust the `since` date to get access to these dates
 rrule_pre_1970 <- monthly(since = "1969-01-01") \%>\% recur_on_mday(25)
-sch_seq("1969-01-01", "1970-01-01", rrule_pre_1970)
+alma_seq("1969-01-01", "1970-01-01", rrule_pre_1970)
 
 # A quarterly recurrence rule can be built from
 # `monthly()` and `recur_on_interval()`
@@ -75,13 +75,13 @@ on_first_of_the_quarter <- monthly() \%>\%
   recur_on_interval(3) \%>\%
   recur_on_mday(1)
 
-sch_seq("1999-01-01", "2000-04-01", on_first_of_the_quarter)
+alma_seq("1999-01-01", "2000-04-01", on_first_of_the_quarter)
 
 # Alter the starting quarter by altering the `since` date
 on_first_of_the_quarter_starting_in_feb <- monthly(since = "1998-02-01") \%>\%
   recur_on_interval(3) \%>\%
   recur_on_mday(1)
 
-sch_seq("1999-01-01", "2000-04-01", on_first_of_the_quarter_starting_in_feb)
+alma_seq("1999-01-01", "2000-04-01", on_first_of_the_quarter_starting_in_feb)
 
 }

@@ -5,7 +5,7 @@ test_that("recurrences stop after `count` is up", {
 
   expect <- start + 0:1
 
-  x <- sch_seq(start, start + 5, rrule)
+  x <- alma_seq(start, start + 5, rrule)
 
   expect_equal(x, expect)
 })
@@ -30,7 +30,7 @@ test_that("impossible dates do not count towards the count", {
 
   rrule <- monthly(since = start) %>% recur_for_count(5)
 
-  x <- sch_seq(start, stop, rrule)
+  x <- alma_seq(start, stop, rrule)
 
   expect <- start + months(c(0, 2, 4, 6, 7))
 

@@ -116,7 +116,7 @@ cache_preload <- function(x, n, schedule) {
   }
 
   # Cache the range of [x_min, x_max + n] (or [x_min + n, x_max] if n < 0)
-  n_events <- length(sch_seq_impl(x_min, x_max, schedule))
+  n_events <- length(alma_seq_impl(x_min, x_max, schedule))
 
   if (n_events == 0L) {
     return()
@@ -131,7 +131,7 @@ cache_preload <- function(x, n, schedule) {
   # Perform a secondary extended cache based on the number of events in the
   # original sequence. This is sort of ad hoc and assumes a uniform event
   # sequence, but captures most cases well
-  sch_seq_impl(x_min, x_max, schedule)
+  alma_seq_impl(x_min, x_max, schedule)
 
   invisible(schedule)
 }

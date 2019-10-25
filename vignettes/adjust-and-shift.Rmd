@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-If you have read the introduction vignette, `vignette("almanac")`, then you've seen recurrence rules, schedules, and the functions `sch_seq()` and `alma_in()`. Additionally included in {almanac} are a set of functions for adjusting and shifting an existing set of dates, _relative to a schedule_. They will be the topic of this vignette. The three functions are:
+If you have read the introduction vignette, `vignette("almanac")`, then you've seen recurrence rules, schedules, and the functions `alma_seq()` and `alma_in()`. Additionally included in {almanac} are a set of functions for adjusting and shifting an existing set of dates, _relative to a schedule_. They will be the topic of this vignette. The three functions are:
 
 - `alma_adjust()`
 
@@ -37,7 +37,7 @@ To talk about either `sch_jump()` or `sch_step()`, we first have to cover `alma_
 on_weekends <- weekly(since = "2000-01-01") %>% 
   recur_on_weekends()
 
-sch_seq("2000-01-01", "2000-01-16", on_weekends)
+alma_seq("2000-01-01", "2000-01-16", on_weekends)
 ```
 
 Now, imagine you have an existing set of dates, `x`. The dates in `x` might be weekdays or weekends, but you have to ensure that any weekend dates are rolled forward to their next available non-weekend date. To do this, you can use `alma_adjust()`, which will apply an `adjustment` repeatedly until your dates are no longer on an event date. The default `adjustment` is the lubridate function `days(1)`, to shift forward 1 day.

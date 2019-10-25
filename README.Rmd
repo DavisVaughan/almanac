@@ -41,7 +41,7 @@ on_thanksgiving <- yearly() %>%
 After constructing a recurrence rule, it can be used to generate dates that are in the "recurrence set".
 
 ```{r}
-sch_seq("2000-01-01", "2006-01-01", on_thanksgiving)
+alma_seq("2000-01-01", "2006-01-01", on_thanksgiving)
 ```
 
 Or determine if a particular date is a part of the recurrence set.

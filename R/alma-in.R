@@ -29,7 +29,7 @@ alma_in <- function(x, schedule) {
     max <- global_na_date
   }
 
-  events <- sch_seq_impl(min, max, schedule)
+  events <- alma_seq_impl(min, max, schedule)
 
   vec_in(x, events)
 }

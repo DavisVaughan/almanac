@@ -41,7 +41,7 @@ test_that("can construct a schedule to select n-th mday of the quarter", {
   expect <- seq(start, stop, "1 day")
   expect <- expect[qday(expect) == n]
 
-  x <- sch_seq(start, stop, sch_60th_day_of_quarter)
+  x <- alma_seq(start, stop, sch_60th_day_of_quarter)
 
   expect_equal(x, expect)
 })
@@ -51,7 +51,7 @@ test_that("can select n-th mday of the quarter from the back", {
 
   sch_neg_1th_day_of_quarter <- make_nth_mday_of_the_quarter(n)
 
-  x <- sch_seq("2000-01-01", "2001-12-31", sch_neg_1th_day_of_quarter)
+  x <- alma_seq("2000-01-01", "2001-12-31", sch_neg_1th_day_of_quarter)
 
   expect <- as.Date(c(
     "2000-03-31", "2000-06-30", "2000-09-30", "2000-12-31",
@@ -101,7 +101,7 @@ test_that("can construct a schedule to select n-th wday of the quarter", {
 
   sch_6th_monday_of_quarter <- make_nth_wday_of_the_quarter(wday, n)
 
-  x <- sch_seq(start, stop, sch_6th_monday_of_quarter)
+  x <- alma_seq(start, stop, sch_6th_monday_of_quarter)
 
   expect <- as.Date(c(
     "2000-02-07", "2000-05-08", "2000-08-07", "2000-11-06",
@@ -117,7 +117,7 @@ test_that("not all quarters might have the requested position", {
 
   sch_14th_monday_of_quarter <- make_nth_wday_of_the_quarter(wday, n)
 
-  x <- sch_seq("2000-01-01", "2001-12-31", sch_14th_monday_of_quarter)
+  x <- alma_seq("2000-01-01", "2001-12-31", sch_14th_monday_of_quarter)
 
   expect <- as.Date("2001-12-31") # <- the only quarter with a 14th monday
 
@@ -130,7 +130,7 @@ test_that("can select n-th wday in the quarter from the back", {
 
   sch_neg_2nd_monday_or_tuesday_of_quarter <- make_nth_wday_of_the_quarter(wday, n)
 
-  x <- sch_seq("2000-01-01", "2001-12-31", sch_neg_2nd_monday_or_tuesday_of_quarter)
+  x <- alma_seq("2000-01-01", "2001-12-31", sch_neg_2nd_monday_or_tuesday_of_quarter)
 
   expect <- as.Date(c(
     "2000-03-27", "2000-06-26", "2000-09-25", "2000-12-25",

@@ -6,7 +6,7 @@
 #'
 #' - `sch_previous()` generates the previous event before `x`.
 #'
-#' @inheritParams sch_seq
+#' @inheritParams alma_seq
 #'
 #' @param x `[Date(1)]`
 #'

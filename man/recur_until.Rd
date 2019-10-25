@@ -31,12 +31,12 @@ set by the recurrence rule. Otherwise, it is just used as a boundary.
 # Using the default `since` date
 daily_since_epoch_limited <- daily() \%>\% recur_until("1970-01-05")
 
-sch_seq("1969-12-31", "1970-01-25", daily_since_epoch_limited)
+alma_seq("1969-12-31", "1970-01-25", daily_since_epoch_limited)
 
 # Changing the `since` date
 daily_since_2019_limited <- daily(since = "2019-01-01") \%>\%
   recur_until("2019-01-05")
 
-sch_seq("2018-12-31", "2019-01-25", daily_since_2019_limited)
+alma_seq("2018-12-31", "2019-01-25", daily_since_2019_limited)
 
 }

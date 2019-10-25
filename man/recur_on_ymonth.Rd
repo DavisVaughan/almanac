@@ -33,8 +33,8 @@ on_feb_monthly <- monthly() \%>\% recur_on_ymonth("Feb")
 start <- "1999-01-01"
 end <- "2001-01-01"
 
-sch_seq(start, end, on_feb_daily)
+alma_seq(start, end, on_feb_daily)
 
-sch_seq(start, end, on_feb_monthly)
+alma_seq(start, end, on_feb_monthly)
 
 }
