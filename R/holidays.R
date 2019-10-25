@@ -36,8 +36,8 @@ hldy_washington_birthday <- function(since = "1970-01-01") {
     hldy_washington_birthday_post_1971(since)
   } else {
     sch <- schedule()
-    sch <- sch_add_schedule(sch, hldy_washington_birthday_pre_1971(since))
-    sch <- sch_add_schedule(sch, hldy_washington_birthday_post_1971())
+    sch <- sch_merge(sch, hldy_washington_birthday_pre_1971(since))
+    sch <- sch_merge(sch, hldy_washington_birthday_post_1971())
     sch
   }
 }
@@ -97,8 +97,8 @@ hldy_memorial_day <- function(since = "1970-01-01") {
     hldy_memorial_day_post_1971(since)
   } else {
     sch <- schedule()
-    sch <- sch_add_schedule(sch, hldy_memorial_day_pre_1971(since))
-    sch <- sch_add_schedule(sch, hldy_memorial_day_post_1971())
+    sch <- sch_merge(sch, hldy_memorial_day_pre_1971(since))
+    sch <- sch_merge(sch, hldy_memorial_day_post_1971())
     sch
   }
 }
@@ -174,15 +174,15 @@ hldy_columbus_day <- function(since = "1970-01-01", until = NULL) {
 
   if (is.null(until)) {
     sch <- schedule()
-    sch <- sch_add_schedule(sch, hldy_columbus_day_pre_1971(since))
-    sch <- sch_add_schedule(sch, hldy_columbus_day_post_1971())
+    sch <- sch_merge(sch, hldy_columbus_day_pre_1971(since))
+    sch <- sch_merge(sch, hldy_columbus_day_post_1971())
     return(sch)
   }
 
   if (until >= as.Date("1971-01-01")) {
     sch <- schedule()
-    sch <- sch_add_schedule(sch, hldy_columbus_day_pre_1971(since))
-    sch <- sch_add_schedule(sch, hldy_columbus_day_post_1971(until = until))
+    sch <- sch_merge(sch, hldy_columbus_day_pre_1971(since))
+    sch <- sch_merge(sch, hldy_columbus_day_post_1971(until = until))
     return(sch)
   }
 
@@ -253,15 +253,15 @@ hldy_veterans_day <- function(since = "1970-01-01") {
 
   if (since >= as.Date("1971-01-01")) {
     sch <- schedule()
-    sch <- sch_add_schedule(sch, hldy_veterans_day_post_1971_pre_1978(since))
-    sch <- sch_add_schedule(sch, hldy_veterans_day_post_1978())
+    sch <- sch_merge(sch, hldy_veterans_day_post_1971_pre_1978(since))
+    sch <- sch_merge(sch, hldy_veterans_day_post_1978())
     return(sch)
   }
 
   sch <- schedule()
-  sch <- sch_add_schedule(sch, hldy_veterans_day_pre_1971(since))
-  sch <- sch_add_schedule(sch, hldy_veterans_day_post_1971_pre_1978())
-  sch <- sch_add_schedule(sch, hldy_veterans_day_post_1978())
+  sch <- sch_merge(sch, hldy_veterans_day_pre_1971(since))
+  sch <- sch_merge(sch, hldy_veterans_day_post_1971_pre_1978())
+  sch <- sch_merge(sch, hldy_veterans_day_post_1978())
   return(sch)
 }
 
@@ -450,15 +450,15 @@ hldy_thanksgiving <- function(since = "1970-01-01") {
 
   if (since >= as.Date("1939-01-01")) {
     sch <- schedule()
-    sch <- sch_add_schedule(sch, hldy_thanksgiving_post_1939_pre_1942(since))
-    sch <- sch_add_schedule(sch, hldy_thanksgiving_post_1942())
+    sch <- sch_merge(sch, hldy_thanksgiving_post_1939_pre_1942(since))
+    sch <- sch_merge(sch, hldy_thanksgiving_post_1942())
     return(sch)
   }
 
   sch <- schedule()
-  sch <- sch_add_schedule(sch, hldy_thanksgiving_pre_1939(since))
-  sch <- sch_add_schedule(sch, hldy_thanksgiving_post_1939_pre_1942())
-  sch <- sch_add_schedule(sch, hldy_thanksgiving_post_1942())
+  sch <- sch_merge(sch, hldy_thanksgiving_pre_1939(since))
+  sch <- sch_merge(sch, hldy_thanksgiving_post_1939_pre_1942())
+  sch <- sch_merge(sch, hldy_thanksgiving_post_1942())
   return(sch)
 }
 

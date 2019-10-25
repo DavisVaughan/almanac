@@ -10,7 +10,7 @@
 #' - `sch_exdate()` adds a `exdate` to a schedule. `exdate`s are singular
 #'   special cased dates that are forcibly excluded from the schedule.
 #'
-#' - `sch_add_schedule()` merges two schedules together.
+#' - `sch_merge()` merges two schedules together.
 #'
 #' @details
 #'
@@ -130,7 +130,7 @@ sch_exdate <- function(x, exdate) {
 
 #' @rdname sch-add
 #' @export
-sch_add_schedule <- function(x, schedule) {
+sch_merge <- function(x, schedule) {
   validate_schedule(x)
   validate_schedule(schedule, "`schedule`")
 

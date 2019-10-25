@@ -5,7 +5,7 @@
 \alias{sch_rrule}
 \alias{sch_rdate}
 \alias{sch_exdate}
-\alias{sch_add_schedule}
+\alias{sch_merge}
 \title{Add to a schedule}
 \usage{
 sch_rrule(x, rrule)
@@ -14,7 +14,7 @@ sch_rdate(x, rdate)
 
 sch_exdate(x, exdate)
 
-sch_add_schedule(x, schedule)
+sch_merge(x, schedule)
 }
 \arguments{
 \item{x}{\code{[schedule]}
@@ -44,7 +44,7 @@ A schedule to merge with \code{x}.}
 special cased dates that are forcibly included in the schedule.
 \item \code{sch_exdate()} adds a \code{exdate} to a schedule. \code{exdate}s are singular
 special cased dates that are forcibly excluded from the schedule.
-\item \code{sch_add_schedule()} merges two schedules together.
+\item \code{sch_merge()} merges two schedules together.
 }
 }
 \details{
