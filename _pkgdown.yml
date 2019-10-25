@@ -6,12 +6,12 @@ reference:
   - daily
   - starts_with("recur_")
 
-- title: Schedule construction
+- title: Schedules
   contents:
   - schedule
   - starts_with("sch_")
 
-- title: Schedule sets
+- title: Sets and sequences
   contents:
   - alma_in
   - alma_seq
