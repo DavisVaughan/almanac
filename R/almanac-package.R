@@ -16,8 +16,14 @@
 #' @importFrom vctrs vec_is
 #' @importFrom vctrs vec_init
 #' @importFrom vctrs vec_arith
+#' @importFrom vctrs vec_arith.numeric
+#' @importFrom vctrs vec_arith.Date
 #' @importFrom vctrs vec_slice<-
 #' @importFrom vctrs maybe_lossy_cast
+#' @importFrom vctrs new_vctr
+#' @importFrom vctrs vec_data
+#' @importFrom vctrs stop_incompatible_op
+#' @importFrom vctrs vec_recycle_common
 ## usethis namespace: end
 NULL
 

@@ -31,3 +31,5 @@ Suggests:
 Depends: 
     R (>= 3.2)
 VignetteBuilder: knitr
+Remotes:
+    r-lib/vctrs
