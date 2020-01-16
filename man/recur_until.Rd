@@ -7,11 +7,11 @@
 recur_until(x, until)
 }
 \arguments{
-\item{x}{\code{[rrule]}
+\item{x}{\verb{[rrule]}
 
 A recurrence rule.}
 
-\item{until}{\code{[Date(1)]}
+\item{until}{\verb{[Date(1)]}
 
 The final date boundary of the recurrence.}
 }

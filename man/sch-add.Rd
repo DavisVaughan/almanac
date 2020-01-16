@@ -17,23 +17,23 @@ sch_exdate(x, exdate)
 sch_merge(x, schedule)
 }
 \arguments{
-\item{x}{\code{[schedule]}
+\item{x}{\verb{[schedule]}
 
 A schedule.}
 
-\item{rrule}{\code{[rrule]}
+\item{rrule}{\verb{[rrule]}
 
 An rrule to add to the schedule.}
 
-\item{rdate}{\code{[Date]}
+\item{rdate}{\verb{[Date]}
 
 Dates to forcibly include in the schedule.}
 
-\item{exdate}{\code{[Date]}
+\item{exdate}{\verb{[Date]}
 
 Dates to forcibly exclude from the schedule.}
 
-\item{schedule}{\code{[schedule]}
+\item{schedule}{\verb{[schedule]}
 
 A schedule to merge with \code{x}.}
 }

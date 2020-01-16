@@ -7,11 +7,11 @@
 recur_on_mday(x, mday)
 }
 \arguments{
-\item{x}{\code{[rrule]}
+\item{x}{\verb{[rrule]}
 
 A recurrence rule.}
 
-\item{mday}{\code{[integer]}
+\item{mday}{\verb{[integer]}
 
 The days of the month on which to recur. Negative values are allowed,
 which specify n days from the end of the month.}

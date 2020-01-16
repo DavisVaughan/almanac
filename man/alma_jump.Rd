@@ -10,22 +10,22 @@ alma_jump(x, jump, schedule, adjustment = days(1))
 alma_step(x, n, schedule)
 }
 \arguments{
-\item{x}{\code{[Date]}
+\item{x}{\verb{[Date]}
 
 A vector of dates.}
 
-\item{jump}{\code{[Period(1) / character(1) / integer(1)]}
+\item{jump}{\verb{[Period(1) / character(1) / integer(1)]}
 
 A lubridate period object, such as \code{\link[lubridate:days]{lubridate::days()}} or
 \code{\link[lubridate:years]{lubridate::years()}}. This can also be a character string parsable
 by \code{\link[lubridate:period]{lubridate::period()}}, or an integer value for the number of days to
 jump. Sub-daily periods are not allowed.}
 
-\item{schedule}{\code{[schedule / event]}
+\item{schedule}{\verb{[schedule / event]}
 
 A schedule or event.}
 
-\item{adjustment}{\code{[Period(1) / integer(1) / function / formula]}
+\item{adjustment}{\verb{[Period(1) / integer(1) / function / formula]}
 
 An adjustment to make whenever a date falls on an event.
 
@@ -39,7 +39,7 @@ and should return a \code{Date} vector of the same size as the original input
 containing the adjusted dates. See the functions on the help page for
 \code{\link[=adj_following]{adj_following()}} for some examples.}
 
-\item{n}{\code{[integer(1)]}
+\item{n}{\verb{[integer(1)]}
 
 The number of days to step. Can be negative to step backwards.}
 }

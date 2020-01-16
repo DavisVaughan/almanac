@@ -11,14 +11,14 @@ calendar_usa_federal(since = "1970-01-01")
 calendar_usa_nyse(since = "1970-01-01")
 }
 \arguments{
-\item{since}{\code{[Date(1)]}
+\item{since}{\verb{[Date(1)]}
 
 The initial date to start the schedule from.}
 }
 \description{
 The following generate \code{schedule} objects corresponding to calendars. A
 calendar is composed of multiple holiday schedules generated from the
-\code{hldy_*()} functions.
+\verb{hldy_*()} functions.
 }
 \examples{
 on_us_holidays <- calendar_usa_federal()

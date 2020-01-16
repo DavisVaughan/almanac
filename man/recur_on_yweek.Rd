@@ -7,14 +7,14 @@
 recur_on_yweek(x, yweek)
 }
 \arguments{
-\item{x}{\code{[rrule]}
+\item{x}{\verb{[rrule]}
 
 A recurrence rule.}
 
-\item{yweek}{\code{[integer]}
+\item{yweek}{\verb{[integer]}
 
 Weeks of the year to recur on. Integer values must be between
-\code{[1, 53]} or \code{[-53, -1]}.}
+\verb{[1, 53]} or \verb{[-53, -1]}.}
 }
 \description{
 \code{recur_on_yweek()} recurs on a specific week of the year.

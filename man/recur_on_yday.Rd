@@ -7,14 +7,14 @@
 recur_on_yday(x, yday)
 }
 \arguments{
-\item{x}{\code{[rrule]}
+\item{x}{\verb{[rrule]}
 
 A recurrence rule.}
 
-\item{yday}{\code{[integer]}
+\item{yday}{\verb{[integer]}
 
-Days of the year to recur on. Values must be from \code{[-366, -1]} and
-\code{[1, 366]}.}
+Days of the year to recur on. Values must be from \verb{[-366, -1]} and
+\verb{[1, 366]}.}
 }
 \description{
 \code{recur_on_yday()} recurs on a specific day of the year.

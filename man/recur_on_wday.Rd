@@ -13,17 +13,17 @@ recur_on_weekdays(x)
 recur_on_weekends(x)
 }
 \arguments{
-\item{x}{\code{[rrule]}
+\item{x}{\verb{[rrule]}
 
 A recurrence rule.}
 
-\item{wday}{\code{[integer / character]}
+\item{wday}{\verb{[integer / character]}
 
 Days of the week to recur on. Integer values must be from \code{1} to \code{7}, with
 \code{1 = Monday} and \code{7 = Sunday}. This is also allowed to be a full weekday
 string like \code{"Tuesday"}, or an abbreviation like \code{"Tues"}.}
 
-\item{nth}{\code{[integer / NULL]}
+\item{nth}{\verb{[integer / NULL]}
 
 Limit to the n-th occurence of the \code{wday} in the base frequency. For
 example, in a monthly frequency, using \code{nth = -1} would limit to the

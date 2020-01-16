@@ -10,15 +10,15 @@ alma_next(x, schedule, inclusive = FALSE)
 alma_previous(x, schedule, inclusive = FALSE)
 }
 \arguments{
-\item{x}{\code{[Date(1)]}
+\item{x}{\verb{[Date(1)]}
 
 The date to start the search from.}
 
-\item{schedule}{\code{[schedule / rrule]}
+\item{schedule}{\verb{[schedule / rrule]}
 
 A schedule or rrule.}
 
-\item{inclusive}{\code{[logical(1)]}
+\item{inclusive}{\verb{[logical(1)]}
 
 If \code{from} or \code{to} are events, should they be included?}
 }

@@ -7,11 +7,11 @@
 alma_in(x, schedule)
 }
 \arguments{
-\item{x}{\code{[Date]}
+\item{x}{\verb{[Date]}
 
 A vector of dates.}
 
-\item{schedule}{\code{[schedule / rrule]}
+\item{schedule}{\verb{[schedule / rrule]}
 
 A schedule or rrule.}
 }

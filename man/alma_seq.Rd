@@ -7,15 +7,15 @@
 alma_seq(from, to, schedule, inclusive = TRUE)
 }
 \arguments{
-\item{from, to}{\code{[Date(1)]}
+\item{from, to}{\verb{[Date(1)]}
 
 Dates defining the range to look for events in the \code{schedule}.}
 
-\item{schedule}{\code{[schedule / rrule]}
+\item{schedule}{\verb{[schedule / rrule]}
 
 A schedule or rrule.}
 
-\item{inclusive}{\code{[logical(1)]}
+\item{inclusive}{\verb{[logical(1)]}
 
 If \code{from} or \code{to} are events, should they be included?}
 }

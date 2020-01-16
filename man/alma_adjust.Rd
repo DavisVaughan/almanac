@@ -7,15 +7,15 @@
 alma_adjust(x, schedule, adjustment = days(1))
 }
 \arguments{
-\item{x}{\code{[Date]}
+\item{x}{\verb{[Date]}
 
 A vector of dates.}
 
-\item{schedule}{\code{[schedule / event]}
+\item{schedule}{\verb{[schedule / event]}
 
 A schedule or event.}
 
-\item{adjustment}{\code{[Period(1) / integer(1) / function / formula]}
+\item{adjustment}{\verb{[Period(1) / integer(1) / function / formula]}
 
 An adjustment to make whenever a date falls on an event.
 
