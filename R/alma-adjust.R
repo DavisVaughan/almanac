@@ -25,20 +25,24 @@
 #'
 #'   A schedule or event.
 #'
-#' @param adjustment `[Period / integer / function / formula]`
+#' @param adjustment `[Period / integer / character / function]`
 #'
 #'   An adjustment to make whenever a date falls on an event.
 #'
-#'   If this is a lubridate period object, such as [lubridate::days()],
-#'   or an integer, then the adjustment is repeatedly applied as
-#'   `x + adjustment` until the next non-event date is found. The
-#'   adjustment is allowed to be a vector of size 1, or the same size
-#'   as `x`.
+#'   Typical usage is to adjust by an integer number of days, or a lubridate
+#'   Period object, such as [lubridate::days()]. Character strings are passed
+#'   on to [lubridate::period()] for parsing.
 #'
-#'   If this is a function or formula (i.e., a lambda function), then it
-#'   should accept 2 arguments, the dates to adjust and the original `schedule`,
-#'   and should return a `Date` vector of the same size as the original input
-#'   containing the adjusted dates. See the functions on the help page for
+#'   In the above cases, the `adjustment` is allowed to be a vector of size 1,
+#'   or the same size as `x`.
+#'
+#'   Period objects must not have any sub-daily components, as adjustments
+#'   are only made on Dates.
+#'
+#'   If this is a function, then it should accept 2 arguments, the dates to
+#'   adjust as `x`, and the original schedule as `schedule`, and should
+#'   return a `Date` vector of the same size as the original input containing
+#'   the adjusted dates. See the functions on the help page for
 #'   [adj_following()] for some examples.
 #'
 #' @examples
@@ -121,13 +125,7 @@ make_adjuster <- function(adjustment) {
     return(adjuster)
   }
 
-  # formula -> function
-  if (is_formula(adjustment, scoped = TRUE, lhs = FALSE)) {
-    adjuster <- as_function(adjustment)
-    return(adjuster)
-  }
-
-  abort("`adjustment` must be a period or a function.")
+  abort("`adjustment` must be a character, Period, integer, or a function.")
 }
 
 is_subdaily <- function(x) {
