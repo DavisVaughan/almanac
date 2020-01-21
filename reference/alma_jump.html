@@ -190,15 +190,19 @@ jump. Sub-daily periods are not allowed.</p></td>
     </tr>
     <tr>
       <th>adjustment</th>
-      <td><p><code>[Period(1) / integer(1) / function / formula]</code></p>
+      <td><p><code>[Period / integer / character / function]</code></p>
 <p>An adjustment to make whenever a date falls on an event.</p>
-<p>If this is a lubridate period object, such as <code><a href='http://lubridate.tidyverse.org/reference/period.html'>lubridate::days()</a></code>,
-or an integer, then the adjustment is repeatedly applied as
-<code>x + adjustment</code> until the next non-event date is found.</p>
-<p>If this is a function or formula (i.e., a lambda function), then it
-should accept 2 arguments, the dates to adjust and the original <code>schedule</code>,
-and should return a <code>Date</code> vector of the same size as the original input
-containing the adjusted dates. See the functions on the help page for
+<p>Typical usage is to adjust by an integer number of days, or a lubridate
+Period object, such as <code><a href='http://lubridate.tidyverse.org/reference/period.html'>lubridate::days()</a></code>. Character strings are passed
+on to <code><a href='http://lubridate.tidyverse.org/reference/period.html'>lubridate::period()</a></code> for parsing.</p>
+<p>In the above cases, the <code>adjustment</code> is allowed to be a vector of size 1,
+or the same size as <code>x</code>.</p>
+<p>Period objects must not have any sub-daily components, as adjustments
+are only made on Dates.</p>
+<p>If this is a function, then it should accept 2 arguments, the dates to
+adjust as <code>x</code>, and the original schedule as <code>schedule</code>, and should
+return a <code>Date</code> vector of the same size as the original input containing
+the adjusted dates. See the functions on the help page for
 <code><a href='adjustments.html'>adj_following()</a></code> for some examples.</p></td>
     </tr>
     <tr>
