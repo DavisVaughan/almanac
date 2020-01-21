@@ -1,3 +1,5 @@
+# nocov start
+
 global_context <- NULL
 global_empty_date <- NULL
 global_inf_date <- NULL
@@ -17,3 +19,5 @@ global_na_date <- NULL
 
   invisible()
 }
+
+# nocov end
