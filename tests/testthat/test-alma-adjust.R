@@ -133,3 +133,43 @@ test_that("adjustment function must have two arguments", {
     "must have 2 arguments"
   )
 })
+
+# ------------------------------------------------------------------------------
+
+test_that("character adjustments are allowed", {
+  x <- new_date(2)
+
+  on_weekends <- daily()
+  on_weekends <- recur_on_weekends(on_weekends)
+
+  expect_equal(
+    alma_adjust(x, on_weekends, "day"),
+    alma_adjust(x, on_weekends, days(1))
+  )
+})
+
+test_that("vectorized character adjustments are allowed", {
+  x <- new_date(2)
+
+  on_weekends <- daily()
+  on_weekends <- recur_on_weekends(on_weekends)
+
+  expect_equal(
+    alma_adjust(x, on_weekends, c("day", "3 day")),
+    alma_adjust(x, on_weekends, days(c(1, 3)))
+  )
+})
+
+# ------------------------------------------------------------------------------
+
+test_that("error with unknown adjustment", {
+  expect_error(
+    alma_adjust(new_date(), schedule(), factor()),
+    "character, Period, integer, or a function"
+  )
+
+  expect_error(
+    alma_adjust(new_date(), schedule(), ~.x),
+    "character, Period, integer, or a function"
+  )
+})
