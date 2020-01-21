@@ -1,6 +1,10 @@
 # ------------------------------------------------------------------------------
 # jump
 
+test_that("`x` and `jump` are tidy recycled", {
+  expect_error(alma_jump(new_date(c(1, 2, 3)), 1:2, schedule()), class = "vctrs_error_incompatible_size")
+})
+
 # ------------------------------------------------------------------------------
 # step
 

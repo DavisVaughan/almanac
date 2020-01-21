@@ -65,6 +65,10 @@ alma_jump <- function(x, jump, schedule, adjustment = days(1)) {
   schedule <- as_schedule(schedule)
   jump <- check_jump(jump)
 
+  args <- vec_recycle_common(x = x, jump = jump)
+  x <- args[[1]]
+  jump <- args[[2]]
+
   x <- x + jump
   x <- alma_adjust(x, schedule, adjustment)
 
