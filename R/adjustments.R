@@ -112,23 +112,37 @@ adj_nearest <- function(x, schedule) {
 
 adj_period_factory <- function(period) {
   adj_period <- function(x, schedule) {
-    # Everything is an event to start with
-    problem_pos <- seq_along(x)
+    size_period <- vec_size(period)
+    is_vectorized_period <- size_period != 1L
+    new_period <- period
+
+    # Only recycle x to period size, not period to common size
+    # (we don't want to slice `period` repeatedly if we don't have to)
+    if (is_vectorized_period) {
+      x <- vec_recycle(x, size_period)
+    }
+
+    # Locate initial problems
+    problem_loc <- which(alma_in(x, schedule))
 
     # While there are still some events, apply `x + period` and recheck
-    while(length(problem_pos) != 0L) {
-      # Apply adjustment
-      problems <- x[problem_pos]
-      adjusted <- problems + period
+    while(length(problem_loc) != 0L) {
+      if (is_vectorized_period) {
+        new_period <- period[problem_loc]
+      }
+
+      # Apply adjustment on problems
+      problems <- x[problem_loc]
+      adjusted <- problems + new_period
 
       # Overwrite existing problems (use `vec_slice<-` for type/size stability)
-      vec_slice(x, problem_pos) <- adjusted
+      vec_slice(x, problem_loc) <- adjusted
 
       # Recheck
-      problem_loc <- alma_in(adjusted, schedule)
+      still_problem_ind <- alma_in(adjusted, schedule)
 
       # Update location of problems
-      problem_pos <- problem_pos[problem_loc]
+      problem_loc <- problem_loc[still_problem_ind]
     }
 
     x

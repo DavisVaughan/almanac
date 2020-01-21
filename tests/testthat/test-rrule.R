@@ -10,13 +10,6 @@ test_that("can use a character `since` date", {
   expect_equal(daily(since = "2019-01-01")$rules$since, as.Date("2019-01-01"))
 })
 
-test_that("POSIXct dates are coerced to dates, or fail trying (using vctrs casting)", {
-  x <- as.Date("2019-01-01")
-  x_ct <- as.POSIXct(x) # will roll time to local time (somewhat confusing)
-
-  expect_equal(daily(since = x_ct)$rules$since, x)
-})
-
 test_that("can pass along a `since` date to all bases", {
   x <- as.Date("2019-01-01")
 

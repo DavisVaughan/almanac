@@ -15,6 +15,11 @@ alma_in <- function(x, schedule) {
   x <- vec_cast_date(x)
   schedule <- as_schedule(schedule)
 
+  # Avoid warning with min/max
+  if (vec_size(x) == 0L) {
+    return(logical())
+  }
+
   # May return corrupt NA values: .Date(Inf) or .Date(-Inf)
   # min(.Date(NA_real_), na.rm = TRUE) == Inf
 

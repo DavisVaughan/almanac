@@ -25,13 +25,15 @@ jump. Sub-daily periods are not allowed.}
 
 A schedule or event.}
 
-\item{adjustment}{\verb{[Period(1) / integer(1) / function / formula]}
+\item{adjustment}{\verb{[Period / integer / function / formula]}
 
 An adjustment to make whenever a date falls on an event.
 
 If this is a lubridate period object, such as \code{\link[lubridate:days]{lubridate::days()}},
 or an integer, then the adjustment is repeatedly applied as
-\code{x + adjustment} until the next non-event date is found.
+\code{x + adjustment} until the next non-event date is found. The
+adjustment is allowed to be a vector of size 1, or the same size
+as \code{x}.
 
 If this is a function or formula (i.e., a lambda function), then it
 should accept 2 arguments, the dates to adjust and the original \code{schedule},

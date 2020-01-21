@@ -24,6 +24,9 @@
 #' @importFrom vctrs vec_data
 #' @importFrom vctrs stop_incompatible_op
 #' @importFrom vctrs vec_recycle_common
+#' @importFrom vctrs MISSING
+#' @importFrom vctrs vec_size_common
+#' @importFrom vctrs vec_recycle
 ## usethis namespace: end
 NULL
 

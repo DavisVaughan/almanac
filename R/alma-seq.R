@@ -33,6 +33,10 @@ alma_seq <- function(from, to, schedule, inclusive = TRUE) {
   vec_assert(from, size = 1L)
   vec_assert(to, size = 1L)
 
+  if (is.na(from) || is.na(to)) {
+    abort("`from` and `to` cannot be `NA`")
+  }
+
   if (from > to) {
     abort("`from` cannot be after `to`")
   }

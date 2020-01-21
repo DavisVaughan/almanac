@@ -76,9 +76,16 @@ alma_jump <- function(x, jump, schedule, adjustment = days(1)) {
 alma_step <- function(x, n, schedule) {
   x <- vec_cast_date(x)
   n <- vec_cast(n, integer(), x_arg = "n")
-  vec_assert(n, size = 1L)
   schedule <- as_schedule(schedule)
 
+  if (length(n) == 1L) {
+    alma_step_one(x, n, schedule)
+  } else {
+    alma_step_multi(x, n, schedule)
+  }
+}
+
+alma_step_one <- function(x, n, schedule) {
   # Use integers rather than periods.
   # Avoids SLOW update() function from lubridate
   if (n >= 0) {
@@ -87,7 +94,7 @@ alma_step <- function(x, n, schedule) {
     one_day <- -1L # days(-1)
   }
 
-  one_day_adjuster <- make_adjuster(one_day)
+  adjuster <- make_adjuster(one_day)
 
   cache_preload(x, n, schedule)
 
@@ -95,7 +102,45 @@ alma_step <- function(x, n, schedule) {
 
   for (i in seq_len(n)) {
     x <- x + one_day
-    x <- alma_adjust_impl(x, schedule, one_day_adjuster)
+    x <- adjuster(x, schedule)
+  }
+
+  x
+}
+
+alma_step_multi <- function(x, n, schedule) {
+  args <- vec_recycle_common(x, n)
+
+  x <- args[[1]]
+  n <- args[[2]]
+
+  cache_preload(x, n, schedule)
+
+  # Maximum number of rounds of adjusting needed in either direction
+  rounds <- max(abs(n))
+
+  for (i in seq_len(rounds)) {
+    # 0 == done, 1 == +1 day, -1 == -1 day
+    signs <- sign(n)
+
+    step_loc <- signs != 0L
+
+    # The part of x that still needs to step
+    one_day <- signs[step_loc]
+    x_to_step <- x[step_loc]
+
+    # Make a vectorized adjuster for post-step adjusting
+    adjuster <- make_adjuster(one_day)
+
+    # Step and adjust
+    stepped <- x_to_step + one_day
+    adjusted <- adjuster(stepped, schedule)
+
+    # Overwrite with newly stepped values
+    vec_slice(x, step_loc) <- adjusted
+
+    # Decrement n in the correct direction
+    n <- n - signs
   }
 
   x
@@ -109,22 +154,27 @@ cache_preload <- function(x, n, schedule) {
   x_min <- min(x)
   x_max <- max(x)
 
-  if (n >= 0L) {
-    x_max <- x_max + n
-  } else {
-    x_min <- x_min + n
-  }
+  n_with_zero <- c(n, 0)
 
-  # Cache the range of [x_min, x_max + n] (or [x_min + n, x_max] if n < 0)
+  n_min <- min(n_with_zero)
+  n_max <- max(n_with_zero)
+
+  x_max <- x_max + n_max
+  x_min <- x_min + n_min
+
+  # Initial cache to get a gauge on number of events that generally occur
   n_events <- length(alma_seq_impl(x_min, x_max, schedule))
 
   if (n_events == 0L) {
     return()
   }
 
-  if (n >= 0L) {
+  if (n_min >= 0) {
     x_max <- x_max + (n_events * 2)
+  } else if (n_max <= 0) {
+    x_min <- x_min - (n_events * 2)
   } else {
+    x_max <- x_max + (n_events * 2)
     x_min <- x_min - (n_events * 2)
   }
 

@@ -1,7 +1,8 @@
 test_that("can handle NA `from` and `to` values", {
-  expect_equal(alma_seq(NA, Sys.Date(), daily()), new_date())
-  expect_equal(alma_seq(Sys.Date(), NA, daily()), new_date())
-  expect_equal(alma_seq(NA, NA, daily()), new_date())
+  na <- new_date(NA_real_)
+
+  expect_error(alma_seq(na, Sys.Date(), daily()), "cannot be `NA`")
+  expect_error(alma_seq(Sys.Date(), na, daily()), "cannot be `NA`")
 })
 
 test_that("`from` must be before `to`", {

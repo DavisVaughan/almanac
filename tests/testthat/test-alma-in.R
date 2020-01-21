@@ -32,3 +32,10 @@ test_that("`alma_in()`ness can be determined with corrupt NA values", {
   expect_equal(alma_in(global_inf_date, rrule), FALSE)
   expect_equal(alma_in(global_neg_inf_date, rrule), FALSE)
 })
+
+test_that("can handle size zero input without warnings", {
+  expect_warning(
+    expect_equal(alma_in(new_date(), schedule()), logical()),
+    NA
+  )
+})
