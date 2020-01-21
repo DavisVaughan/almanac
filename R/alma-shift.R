@@ -109,10 +109,16 @@ alma_step_one <- function(x, n, schedule) {
 }
 
 alma_step_multi <- function(x, n, schedule) {
-  args <- vec_recycle_common(x, n)
+  args <- vec_recycle_common(x = x, n = n)
 
   x <- args[[1]]
   n <- args[[2]]
+
+  # Avoid `max(numeric()) = -Inf`
+  # Return `x` after tidy recycling
+  if (vec_size(n) == 0L) {
+    return(x)
+  }
 
   cache_preload(x, n, schedule)
 
@@ -151,8 +157,8 @@ alma_step_multi <- function(x, n, schedule) {
 # the adjustments. This significantly speeds up the `alma_adjust()` calls.
 
 cache_preload <- function(x, n, schedule) {
-  x_min <- min(x)
-  x_max <- max(x)
+  x_min <- min_date(x)
+  x_max <- max_date(x)
 
   n_with_zero <- c(n, 0)
 

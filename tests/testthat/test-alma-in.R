@@ -18,12 +18,13 @@ test_that("`alma_in()`ness can be determined when NA values are present", {
   expect_equal(alma_in(x, rrule), c(FALSE, TRUE, TRUE))
 })
 
-test_that("`alma_in()`ness can be determined when all values are NA", {
+test_that("`alma_in()`ness can be silently determined when all values are NA", {
   x <- as.Date(c(NA, NA, NA))
   rrule <- daily(since = "2019-01-01")
 
   expect_warning(
-    expect_equal(alma_in(x, rrule), c(FALSE, FALSE, FALSE))
+    expect_equal(alma_in(x, rrule), c(FALSE, FALSE, FALSE)),
+    NA
   )
 })
 
