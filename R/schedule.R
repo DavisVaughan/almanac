@@ -24,13 +24,17 @@ schedule <- function() {
 
 #' @export
 print.schedule <- function(x, ...) {
+  cat(glue("schedule: {sch_summary(x)}"))
+  invisible(x)
+}
+
+sch_summary <- function(x) {
   recurrences <- x$recurrences
   n_rrules <- length(recurrences$rrules)
   n_rdates <- length(recurrences$rdates)
   n_exdates <-length(recurrences$exdates)
 
-  cat(glue("schedule: {n_rrules} rrules / {n_rdates} rdates / {n_exdates} exdates"))
-  invisible(x)
+  glue("{n_rrules} rrules / {n_rdates} rdates / {n_exdates} exdates")
 }
 
 # ------------------------------------------------------------------------------
@@ -136,7 +140,7 @@ cache_get <- function(schedule, from, to, inclusive) {
   }
 
   numeric_from <- unclass(from)
-  numeric_events <- unclass(env[["events"]])
+  numeric_events <- unclass(events)
 
   # Cache is always stored inclusively, so these events exist
   if (inclusive) {
@@ -223,9 +227,19 @@ init_schedule <- function(x) {
   }
 
   x$env[["initialized"]] <- TRUE
+
   x$env[["since"]] <- get_schedule_since(x)
 
+  x$env[["n_rrules"]] <- length(recurrences$rrules)
+  x$env[["n_rdates"]] <- length(recurrences$rdates)
+  x$env[["n_exdates"]] <- length(recurrences$exdates)
+
   invisible(x)
+}
+
+# Only for use after a schedule has been initialized
+sch_has_rrules_or_rdates <- function(x) {
+  sum(x$env[["n_rrules"]], x$env[["n_rdates"]]) != 0L
 }
 
 # ------------------------------------------------------------------------------

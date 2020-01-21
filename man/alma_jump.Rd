@@ -10,36 +10,42 @@ alma_jump(x, jump, schedule, adjustment = days(1))
 alma_step(x, n, schedule)
 }
 \arguments{
-\item{x}{\code{[Date]}
+\item{x}{\verb{[Date]}
 
 A vector of dates.}
 
-\item{jump}{\code{[Period(1) / character(1) / integer(1)]}
+\item{jump}{\verb{[Period(1) / character(1) / integer(1)]}
 
 A lubridate period object, such as \code{\link[lubridate:days]{lubridate::days()}} or
 \code{\link[lubridate:years]{lubridate::years()}}. This can also be a character string parsable
 by \code{\link[lubridate:period]{lubridate::period()}}, or an integer value for the number of days to
 jump. Sub-daily periods are not allowed.}
 
-\item{schedule}{\code{[schedule / event]}
+\item{schedule}{\verb{[schedule / event]}
 
 A schedule or event.}
 
-\item{adjustment}{\code{[Period(1) / integer(1) / function / formula]}
+\item{adjustment}{\verb{[Period / integer / character / function]}
 
 An adjustment to make whenever a date falls on an event.
 
-If this is a lubridate period object, such as \code{\link[lubridate:days]{lubridate::days()}},
-or an integer, then the adjustment is repeatedly applied as
-\code{x + adjustment} until the next non-event date is found.
+Typical usage is to adjust by an integer number of days, or a lubridate
+Period object, such as \code{\link[lubridate:days]{lubridate::days()}}. Character strings are passed
+on to \code{\link[lubridate:period]{lubridate::period()}} for parsing.
 
-If this is a function or formula (i.e., a lambda function), then it
-should accept 2 arguments, the dates to adjust and the original \code{schedule},
-and should return a \code{Date} vector of the same size as the original input
-containing the adjusted dates. See the functions on the help page for
+In the above cases, the \code{adjustment} is allowed to be a vector of size 1,
+or the same size as \code{x}.
+
+Period objects must not have any sub-daily components, as adjustments
+are only made on Dates.
+
+If this is a function, then it should accept 2 arguments, the dates to
+adjust as \code{x}, and the original schedule as \code{schedule}, and should
+return a \code{Date} vector of the same size as the original input containing
+the adjusted dates. See the functions on the help page for
 \code{\link[=adj_following]{adj_following()}} for some examples.}
 
-\item{n}{\code{[integer(1)]}
+\item{n}{\verb{[integer(1)]}
 
 The number of days to step. Can be negative to step backwards.}
 }

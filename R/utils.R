@@ -1,9 +1,19 @@
+# Allows casts of:
+# character -> date (with a fix to be lossy on failure)
+# date -> date
+# (double and integer are too flexible)
+# (POSIXct would almost always be lossy)
 vec_cast_date <- function(x, x_arg = "x") {
-  if (is.character(x)) {
-    vec_cast_date_character(x, x_arg)
-  } else {
-    vec_cast(x, global_empty_date, x_arg = x_arg)
+  if (inherits(x, "Date")) {
+    return(x)
   }
+
+  if (is.character(x)) {
+    out <- vec_cast_date_character(x, x_arg)
+    return(out)
+  }
+
+  glubort("Can't coerce `{x_arg}` to date. Only character and Date objects are allowed.")
 }
 
 vec_cast_date_character <- function(x, x_arg) {

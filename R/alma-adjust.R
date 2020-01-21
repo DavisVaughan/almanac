@@ -25,18 +25,24 @@
 #'
 #'   A schedule or event.
 #'
-#' @param adjustment `[Period(1) / integer(1) / function / formula]`
+#' @param adjustment `[Period / integer / character / function]`
 #'
 #'   An adjustment to make whenever a date falls on an event.
 #'
-#'   If this is a lubridate period object, such as [lubridate::days()],
-#'   or an integer, then the adjustment is repeatedly applied as
-#'   `x + adjustment` until the next non-event date is found.
+#'   Typical usage is to adjust by an integer number of days, or a lubridate
+#'   Period object, such as [lubridate::days()]. Character strings are passed
+#'   on to [lubridate::period()] for parsing.
 #'
-#'   If this is a function or formula (i.e., a lambda function), then it
-#'   should accept 2 arguments, the dates to adjust and the original `schedule`,
-#'   and should return a `Date` vector of the same size as the original input
-#'   containing the adjusted dates. See the functions on the help page for
+#'   In the above cases, the `adjustment` is allowed to be a vector of size 1,
+#'   or the same size as `x`.
+#'
+#'   Period objects must not have any sub-daily components, as adjustments
+#'   are only made on Dates.
+#'
+#'   If this is a function, then it should accept 2 arguments, the dates to
+#'   adjust as `x`, and the original schedule as `schedule`, and should
+#'   return a `Date` vector of the same size as the original input containing
+#'   the adjusted dates. See the functions on the help page for
 #'   [adj_following()] for some examples.
 #'
 #' @examples
@@ -82,18 +88,7 @@ alma_adjust <- function(x, schedule, adjustment = days(1)) {
   schedule <- as_schedule(schedule)
   adjuster <- make_adjuster(adjustment)
 
-  alma_adjust_impl(x, schedule, adjuster)
-}
-
-alma_adjust_impl <- function(x, schedule, adjuster) {
-  # Find initial set of events
-  problem_loc <- alma_in(x, schedule)
-
-  if (any(problem_loc)) {
-    x[problem_loc] <- adjuster(x[problem_loc], schedule)
-  }
-
-  x
+  adjuster(x, schedule)
 }
 
 # ------------------------------------------------------------------------------
@@ -114,8 +109,6 @@ make_adjuster <- function(adjustment) {
 
   # period -> function
   if (is.period(adjustment)) {
-    vec_assert(adjustment, size = 1L)
-
     if (is_subdaily(adjustment)) {
       abort("`adjustment` must not contain any sub-daily components.")
     }
@@ -127,19 +120,12 @@ make_adjuster <- function(adjustment) {
   # integer -> function
   if (is.integer(adjustment) || is.double(adjustment)) {
     adjustment <- vec_cast(adjustment, integer())
-    vec_assert(adjustment, size = 1L)
 
     adjuster <- adj_period_factory(adjustment)
     return(adjuster)
   }
 
-  # formula -> function
-  if (is_formula(adjustment, scoped = TRUE, lhs = FALSE)) {
-    adjuster <- as_function(adjustment)
-    return(adjuster)
-  }
-
-  abort("`adjustment` must be a period or a function.")
+  abort("`adjustment` must be a character, Period, integer, or a function.")
 }
 
 is_subdaily <- function(x) {

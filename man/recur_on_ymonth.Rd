@@ -7,14 +7,14 @@
 recur_on_ymonth(x, ymonth)
 }
 \arguments{
-\item{x}{\code{[rrule]}
+\item{x}{\verb{[rrule]}
 
 A recurrence rule.}
 
-\item{ymonth}{\code{[integer / character]}
+\item{ymonth}{\verb{[integer / character]}
 
 Months of the year the mark as events. Integer values must be between
-\code{[1, 12]}. This can also be a full month string like \code{"November"}, or an
+\verb{[1, 12]}. This can also be a full month string like \code{"November"}, or an
 abbreviation like \code{"Nov"}.}
 }
 \description{

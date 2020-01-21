@@ -115,6 +115,7 @@ format.rrule <- function(x, ...) {
 
 rrule <- function(since = "1970-01-01", frequency = "yearly") {
   since <- vec_cast_date(since, "since")
+  vec_assert(since, size = 1L)
 
   if (is.na(since)) {
     abort("`since` cannot be `NA`.")

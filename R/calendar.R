@@ -1,3 +1,5 @@
+# nocov start
+
 #' Calendars
 #'
 #' The following generate `schedule` objects corresponding to calendars. A
@@ -160,3 +162,5 @@ nyse_election_day <- function(since) {
 
   hldy_election_day(since = since, until = election_1968)
 }
+
+# nocov end

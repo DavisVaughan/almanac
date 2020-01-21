@@ -17,7 +17,7 @@ monthly(since = "1970-01-01")
 yearly(since = "1970-01-01")
 }
 \arguments{
-\item{since}{\code{[Date(1)]}
+\item{since}{\verb{[Date(1)]}
 
 The initial date to anchor the recurrence from. Depending on the final
 recurrence rule, pieces of information from this anchor date might be used
@@ -26,7 +26,7 @@ to generate the event dates.}
 \description{
 These functions allow you to create a recurrence rule with a specified
 frequency. They are the base elements for all recurrence rules. To add
-to them, use one of the \code{recur_*()} functions.
+to them, use one of the \verb{recur_*()} functions.
 \itemize{
 \item \code{daily()} Recur on a daily frequency.
 \item \code{weekly()} Recur on a weekly frequency.

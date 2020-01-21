@@ -99,7 +99,7 @@ system.time(alma_seq(start_date, "2000-01-01", on_daily))
 system.time(alma_seq(start_date, "2000-01-01", on_daily))
 
 # Dates are cached from `[since, to]`, so if you back up `to`, its still fast
-system.time(alma_seq(start_date, "1900-05-01", on_daily))
+system.time(alma_seq(start_date, "1990-05-01", on_daily))
 
 # But when you extend `to` forward in time, it will have to generate all dates
 # between `since` and `to` again

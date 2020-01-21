@@ -1,3 +1,5 @@
+# nocov start
+
 #' Holidays
 #'
 #' The following generate `schedule` objects corresponding to commonly used
@@ -632,3 +634,5 @@ hldy_election_day <- function(since = "1970-01-01", until = NULL) {
 
   as_schedule(rrule)
 }
+
+# nocov end

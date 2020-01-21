@@ -53,11 +53,11 @@ hldy_lincoln_birthday(since = "1970-01-01", until = NULL)
 hldy_election_day(since = "1970-01-01", until = NULL)
 }
 \arguments{
-\item{since}{\code{[Date(1)]}
+\item{since}{\verb{[Date(1)]}
 
 The initial date to start the schedule from.}
 
-\item{until}{\code{[NULL / Date(1)]}
+\item{until}{\verb{[NULL / Date(1)]}
 
 An optional end date for the holiday schedule. Useful when constructing
 larger calendars, such as one for the NYSE, where holidays are

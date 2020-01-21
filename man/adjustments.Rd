@@ -20,16 +20,16 @@ adj_modified_preceding(x, schedule)
 adj_nearest(x, schedule)
 }
 \arguments{
-\item{x}{\code{[Date]}
+\item{x}{\verb{[Date]}
 
 A vector of dates.}
 
-\item{schedule}{\code{[schedule / event]}
+\item{schedule}{\verb{[schedule / event]}
 
 A schedule or event.}
 }
 \description{
-This family of \code{adj_*()} functions encode business logic for common
+This family of \verb{adj_*()} functions encode business logic for common
 adjustments made in the financial world.
 \itemize{
 \item \code{adj_following()}

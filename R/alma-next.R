@@ -28,6 +28,7 @@
 #' @export
 alma_next <- function(x, schedule, inclusive = FALSE) {
   x <- vec_cast_date(x)
+  vec_assert(x, size = 1L)
   schedule <- as_schedule(schedule)
   vec_assert(inclusive, logical(), 1L)
 
@@ -44,6 +45,7 @@ alma_next <- function(x, schedule, inclusive = FALSE) {
 #' @export
 alma_previous <- function(x, schedule, inclusive = FALSE) {
   x <- vec_cast_date(x)
+  vec_assert(x, size = 1L)
   schedule <- as_schedule(schedule)
   vec_assert(inclusive, logical(), 1L)
 

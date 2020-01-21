@@ -7,11 +7,11 @@
 recur_on_interval(x, n)
 }
 \arguments{
-\item{x}{\code{[rrule]}
+\item{x}{\verb{[rrule]}
 
 A recurrence rule.}
 
-\item{n}{\code{[positive integer(1)]}
+\item{n}{\verb{[positive integer(1)]}
 
 The interval on which to recur.}
 }

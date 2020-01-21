@@ -7,11 +7,11 @@
 recur_on_position(x, n)
 }
 \arguments{
-\item{x}{\code{[rrule]}
+\item{x}{\verb{[rrule]}
 
 A recurrence rule.}
 
-\item{n}{\code{[integer]}
+\item{n}{\verb{[integer]}
 
 The positions to select within an intrafrequency set. Negative numbers
 select from the end of the set.}

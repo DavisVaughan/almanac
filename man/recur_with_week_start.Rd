@@ -7,14 +7,14 @@
 recur_with_week_start(x, wday)
 }
 \arguments{
-\item{x}{\code{[rrule]}
+\item{x}{\verb{[rrule]}
 
 A recurrence rule.}
 
-\item{wday}{\code{[integer(1) / character(1)]}
+\item{wday}{\verb{[integer(1) / character(1)]}
 
 Day of the week to start the week on. Must be an integer value in
-\code{[1, 7]}, with \code{1 = Monday} and \code{7 = Sunday}. This is also allowed to be
+\verb{[1, 7]}, with \code{1 = Monday} and \code{7 = Sunday}. This is also allowed to be
 a full weekday string like \code{"Tuesday"}, or an abbreviation like \code{"Tues"}.}
 }
 \description{
