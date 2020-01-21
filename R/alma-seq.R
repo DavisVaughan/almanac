@@ -33,6 +33,10 @@ alma_seq <- function(from, to, schedule, inclusive = TRUE) {
   vec_assert(from, size = 1L)
   vec_assert(to, size = 1L)
 
+  if (from > to) {
+    abort("`from` cannot be after `to`")
+  }
+
   schedule <- as_schedule(schedule)
   vec_assert(inclusive, logical(), 1L)
 
@@ -51,6 +55,12 @@ alma_seq_impl <- function(from, to, schedule, inclusive = TRUE) {
   }
 
   init_schedule(schedule)
+
+  # No recurrence rules or required dates
+  if (!sch_has_rrules_or_rdates(schedule)) {
+    return(global_empty_date)
+  }
+
   since <- sch_since(schedule)
 
   v8_eval("var from = [[as_js_from_date(since)]]")

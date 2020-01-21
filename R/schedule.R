@@ -223,9 +223,19 @@ init_schedule <- function(x) {
   }
 
   x$env[["initialized"]] <- TRUE
+
   x$env[["since"]] <- get_schedule_since(x)
 
+  x$env[["n_rrules"]] <- length(recurrences$rrules)
+  x$env[["n_rdates"]] <- length(recurrences$rdates)
+  x$env[["n_exdates"]] <- length(recurrences$exdates)
+
   invisible(x)
+}
+
+# Only for use after a schedule has been initialized
+sch_has_rrules_or_rdates <- function(x) {
+  sum(x$env[["n_rrules"]], x$env[["n_rdates"]]) != 0L
 }
 
 # ------------------------------------------------------------------------------
