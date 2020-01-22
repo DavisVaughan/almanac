@@ -20,7 +20,8 @@ Imports:
     rlang,
     V8,
     glue,
-    magrittr
+    magrittr,
+    methods
 RoxygenNote: 7.0.2
 Roxygen: list(markdown = TRUE)
 Suggests: 
