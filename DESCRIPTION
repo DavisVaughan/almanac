@@ -1,36 +1,39 @@
 Package: almanac
-Title: Tools for Adjusting and Generating Dates Using a Grammar of Schedules
+Title: Tools for Adjusting and Generating Dates Using a Grammar
+    of Schedules
 Version: 0.0.0.9000
 Authors@R: 
     person(given = "Davis",
            family = "Vaughan",
            role = c("aut", "cre"),
            email = "davis@rstudio.com")
-Description: Provides tools for defining events and schedules. These provide a 
-    system for generating dates in a schedule, adjusting them relative to a 
-    schedule, and determining if they are included in a schedule.
+Description: Provides tools for defining events and schedules.
+    These provide a system for generating dates in a schedule, adjusting
+    them relative to a schedule, and determining if they are included in a
+    schedule.
 License: GPL-3 + file LICENSE
-Encoding: UTF-8
-LazyData: true
 URL: https://github.com/DavisVaughan/almanac
 BugReports: https://github.com/DavisVaughan/almanac/issues
-Imports: 
-    lubridate,
-    vctrs (>= 0.2.99.9004),
-    rlang,
-    V8 (>= 3.0.1),
-    glue,
-    magrittr,
-    methods
-RoxygenNote: 7.0.2
-Roxygen: list(markdown = TRUE)
-Suggests: 
-    covr,
-    testthat (>= 2.1.0),
-    knitr,
-    rmarkdown
 Depends: 
     R (>= 3.2)
-VignetteBuilder: knitr
+Imports: 
+    glue,
+    lubridate,
+    magrittr,
+    methods,
+    rlang,
+    V8 (>= 3.0.1),
+    vctrs (>= 0.2.99.9004)
+Suggests: 
+    covr,
+    knitr,
+    rmarkdown,
+    testthat (>= 2.1.0)
+VignetteBuilder: 
+    knitr
 Remotes:
     r-lib/vctrs
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.0.2
