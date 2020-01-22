@@ -39,7 +39,7 @@
 #'   by [lubridate::period()], or an integer value for the number of days to
 #'   jump. Sub-daily periods are not allowed.
 #'
-#' @param n `[integer(1)]`
+#' @param n `[integer]`
 #'
 #'   The number of days to step. Can be negative to step backwards.
 #'
