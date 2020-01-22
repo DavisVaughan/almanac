@@ -45,7 +45,7 @@ return a \code{Date} vector of the same size as the original input containing
 the adjusted dates. See the functions on the help page for
 \code{\link[=adj_following]{adj_following()}} for some examples.}
 
-\item{n}{\verb{[integer(1)]}
+\item{n}{\verb{[integer]}
 
 The number of days to step. Can be negative to step backwards.}
 }

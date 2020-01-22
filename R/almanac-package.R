@@ -7,6 +7,7 @@
 #' @import rlang
 #' @import lubridate
 #' @importFrom glue glue
+#' @importFrom methods new
 #' @importFrom vctrs vec_size
 #' @importFrom vctrs vec_cast
 #' @importFrom vctrs vec_in
@@ -27,6 +28,7 @@
 #' @importFrom vctrs MISSING
 #' @importFrom vctrs vec_size_common
 #' @importFrom vctrs vec_recycle
+#' @importFrom vctrs vec_slice
 ## usethis namespace: end
 NULL
 
