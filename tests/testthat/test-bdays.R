@@ -18,6 +18,13 @@ test_that("a rrule can be used as the schedule", {
 })
 
 # ------------------------------------------------------------------------------
+# misc methods
+
+test_that("xtfrm() works", {
+  expect_identical(xtfrm(bdays(1:5, schedule())), 1:5)
+})
+
+# ------------------------------------------------------------------------------
 # vec_arith
 
 test_that("default method is thrown", {

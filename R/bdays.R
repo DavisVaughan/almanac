@@ -144,6 +144,7 @@ get_bdays_days <- function(x) {
 #' /,BDays,Period-method
 #' /,Period,BDays-method
 #' show,BDays-method
+#' xtfrm,BDays-method
 NULL
 
 # ------------------------------------------------------------------------------
@@ -173,6 +174,14 @@ format.BDays <- function(x, ...) {
 
 cat_line <- function(...) {
   cat(paste0(..., "\n", collapse = ""))
+}
+
+# ------------------------------------------------------------------------------
+# Miscellaneous methods
+
+#' @export
+xtfrm.BDays <- function(x) {
+  xtfrm(get_bdays_days(x))
 }
 
 # ------------------------------------------------------------------------------

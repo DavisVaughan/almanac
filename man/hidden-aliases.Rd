@@ -23,6 +23,7 @@
 \alias{/,BDays,Period-method}
 \alias{/,Period,BDays-method}
 \alias{show,BDays-method}
+\alias{xtfrm,BDays-method}
 \title{Internal page for hidden aliases}
 \description{
 For S4 methods that require a documentation entry but only clutter the index.
