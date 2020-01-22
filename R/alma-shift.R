@@ -90,6 +90,11 @@ alma_step <- function(x, n, schedule) {
 }
 
 alma_step_one <- function(x, n, schedule) {
+  if (is.na(n)) {
+    out <- rep(global_na_date, length(x))
+    return(out)
+  }
+
   # Use integers rather than periods.
   # Avoids SLOW update() function from lubridate
   if (n >= 0) {
@@ -124,16 +129,23 @@ alma_step_multi <- function(x, n, schedule) {
     return(x)
   }
 
+  n_are_na <- is.na(n)
+
+  if (all(n_are_na)) {
+    out <- rep(global_na_date, vec_size(x))
+    return(out)
+  }
+
   cache_preload(x, n, schedule)
 
   # Maximum number of rounds of adjusting needed in either direction
-  rounds <- max(abs(n))
+  rounds <- max(abs(n), na.rm = TRUE)
 
   for (i in seq_len(rounds)) {
-    # 0 == done, 1 == +1 day, -1 == -1 day
+    # 0 == done, 1 == +1 day, -1 == -1 day, NA = NA days
     signs <- sign(n)
 
-    step_loc <- signs != 0L
+    step_loc <- signs != 0L | n_are_na
 
     # The part of x that still needs to step
     one_day <- signs[step_loc]

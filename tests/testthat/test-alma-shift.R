@@ -111,3 +111,24 @@ test_that("can use size 0 input", {
 test_that("tidy recycling rules are used between `x` and `adjustment`", {
   expect_error(alma_step(new_date(c(1, 2)), 1:3, schedule()), class = "vctrs_error_incompatible_size")
 })
+
+test_that("can step with single `NA` `n` value", {
+  expect_equal(
+    alma_step(new_date(c(1, 2)), NA_integer_, schedule()),
+    c(global_na_date, global_na_date)
+  )
+})
+
+test_that("can step with all `NA` `n` values", {
+  expect_equal(
+    alma_step(new_date(c(1, 2)), c(NA_integer_, NA_integer_), schedule()),
+    c(global_na_date, global_na_date)
+  )
+})
+
+test_that("can step with partial `NA` `n` values", {
+  expect_equal(
+    alma_step(new_date(c(1, 2)), c(1, NA_integer_), schedule()),
+    c(as.Date("1970-01-03"), global_na_date)
+  )
+})
