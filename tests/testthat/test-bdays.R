@@ -35,6 +35,16 @@ test_that("`[` works with vec_slice()", {
   expect_error(x[6], class = "vctrs_error_subscript_oob")
 })
 
+test_that("`[[` works with vec_slice() and vec_as_location2()", {
+  sch <- schedule()
+
+  x <- bdays(1:5, sch)
+
+  expect_identical(x[[1]], bdays(1, sch))
+
+  expect_error(x[[6]], class = "vctrs_error_subscript_oob")
+})
+
 # ------------------------------------------------------------------------------
 # vec_arith
 

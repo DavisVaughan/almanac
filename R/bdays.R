@@ -146,6 +146,7 @@ get_bdays_days <- function(x) {
 #' show,BDays-method
 #' xtfrm,BDays-method
 #' [,BDays-method
+#' [[,BDays-method
 NULL
 
 # ------------------------------------------------------------------------------
@@ -195,11 +196,46 @@ setMethod(
     sch <- get_bdays_schedule(x)
 
     days <- get_bdays_days(x)
-    days <- vctrs::vec_slice(days, i)
+    days <- vec_slice(days, i)
 
     new_bdays(days, sch)
   }
 )
+
+#' @export
+setMethod(
+  "[[",
+  signature(x = "BDays"),
+  function(x, i, j, ..., exact = TRUE) {
+    sch <- get_bdays_schedule(x)
+
+    days <- get_bdays_days(x)
+
+    i <- vctrs::vec_as_location2(i, vec_size(days))
+
+    days <- vec_slice(days, i)
+
+    new_bdays(days, sch)
+  }
+)
+
+# #' @export
+# setMethod(
+#   "[<-",
+#   signature(x = "BDays", value = "ANY"),
+#   function(x, i, j, ..., value) {
+#     value <- vec_cast(value, x)
+#
+#     sch <- get_bdays_schedule(x)
+#
+#     days <- get_bdays_days(x)
+#     new_days <- get_bdays_days(value)
+#
+#     vec_slice(days, i) <- new_days
+#
+#     new_bdays(days, sch)
+#   }
+# )
 
 # ------------------------------------------------------------------------------
 # `+`
