@@ -28,3 +28,4 @@ matrix:
   - r: 3.3
   - r: 3.2
   - os: osx
+    brew_packages: v8
