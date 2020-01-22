@@ -16,9 +16,9 @@ URL: https://github.com/DavisVaughan/almanac
 BugReports: https://github.com/DavisVaughan/almanac/issues
 Imports: 
     lubridate,
-    vctrs,
+    vctrs (>= 0.2.99.9004),
     rlang,
-    V8,
+    V8 (>= 3.0.1),
     glue,
     magrittr,
     methods
@@ -33,5 +33,4 @@ Depends:
     R (>= 3.2)
 VignetteBuilder: knitr
 Remotes:
-    r-lib/vctrs,
-    jeroen/V8
+    r-lib/vctrs
