@@ -147,8 +147,8 @@ get_bdays_days <- function(x) {
 #' xtfrm,BDays-method
 #' [,BDays-method
 #' [[,BDays-method
-#' [<-,BDays-method
-#' [[<-,BDays-method
+#' [<-,BDays,ANY,ANY,ANY-method
+#' [[<-,BDays,ANY,ANY,ANY-method
 #' c,BDays-method
 #' rep,BDays-method
 NULL

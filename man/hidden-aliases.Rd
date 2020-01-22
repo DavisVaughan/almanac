@@ -26,8 +26,8 @@
 \alias{xtfrm,BDays-method}
 \alias{[,BDays-method}
 \alias{[[,BDays-method}
-\alias{[<-,BDays-method}
-\alias{[[<-,BDays-method}
+\alias{[<-,BDays,ANY,ANY,ANY-method}
+\alias{[[<-,BDays,ANY,ANY,ANY-method}
 \alias{c,BDays-method}
 \alias{rep,BDays-method}
 \title{Internal page for hidden aliases}
