@@ -145,6 +145,7 @@ get_bdays_days <- function(x) {
 #' /,Period,BDays-method
 #' show,BDays-method
 #' xtfrm,BDays-method
+#' [,BDays-method
 NULL
 
 # ------------------------------------------------------------------------------
@@ -183,6 +184,22 @@ cat_line <- function(...) {
 xtfrm.BDays <- function(x) {
   xtfrm(get_bdays_days(x))
 }
+
+# So vec_recycle() and vec_slice() work
+
+#' @export
+setMethod(
+  "[",
+  signature(x = "BDays"),
+  function(x, i, j, ..., drop = TRUE) {
+    sch <- get_bdays_schedule(x)
+
+    days <- get_bdays_days(x)
+    days <- vctrs::vec_slice(days, i)
+
+    new_bdays(days, sch)
+  }
+)
 
 # ------------------------------------------------------------------------------
 # `+`

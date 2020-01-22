@@ -24,6 +24,17 @@ test_that("xtfrm() works", {
   expect_identical(xtfrm(bdays(1:5, schedule())), 1:5)
 })
 
+test_that("`[` works with vec_slice()", {
+  sch <- schedule()
+
+  x <- bdays(1:5, sch)
+
+  expect_identical(x[1], bdays(1, sch))
+  expect_identical(vec_slice(x, 1), bdays(1, sch))
+
+  expect_error(x[6], class = "vctrs_error_subscript_oob")
+})
+
 # ------------------------------------------------------------------------------
 # vec_arith
 
