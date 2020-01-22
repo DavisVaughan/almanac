@@ -45,6 +45,49 @@ test_that("`[[` works with vec_slice() and vec_as_location2()", {
   expect_error(x[[6]], class = "vctrs_error_subscript_oob")
 })
 
+test_that("`[<-` errors until we figure out casting in vctrs", {
+  sch <- schedule()
+
+  x <- bdays(1:5, sch)
+
+  expect_error(x[1] <- 1, "Cannot currently assign")
+  expect_error(x[1] <- days(1), "Cannot currently assign")
+  expect_error(x[1] <- bdays(1, sch), "Cannot currently assign")
+})
+
+test_that("`[[<-` errors until we figure out casting in vctrs", {
+  sch <- schedule()
+
+  x <- bdays(1:5, sch)
+
+  expect_error(x[[1]] <- 1, "Cannot currently assign")
+  expect_error(x[[1]] <- days(1), "Cannot currently assign")
+  expect_error(x[[1]] <- bdays(1, sch), "Cannot currently assign")
+})
+
+test_that("`c()` errors until we figure base-inherited ptypes in vctrs", {
+  sch <- schedule()
+
+  x <- bdays(1:5, sch)
+
+  expect_error(c(x, x), "Cannot currently combine")
+  expect_error(c(x, 1), "Cannot currently combine")
+
+  # nothing we can do
+  expect_equal(c(1, x), c(1, 1:5))
+})
+
+test_that("`rep()` works", {
+  sch <- schedule()
+
+  x <- bdays(1:5, sch)
+
+  expect_equal(
+    rep(x, times = 2, each = 3),
+    new_bdays(rep(1:5, times = 2, each = 3), sch)
+  )
+})
+
 # ------------------------------------------------------------------------------
 # vec_arith
 

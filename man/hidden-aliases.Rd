@@ -26,6 +26,10 @@
 \alias{xtfrm,BDays-method}
 \alias{[,BDays-method}
 \alias{[[,BDays-method}
+\alias{[<-,BDays-method}
+\alias{[[<-,BDays-method}
+\alias{c,BDays-method}
+\alias{rep,BDays-method}
 \title{Internal page for hidden aliases}
 \description{
 For S4 methods that require a documentation entry but only clutter the index.

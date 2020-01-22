@@ -147,6 +147,10 @@ get_bdays_days <- function(x) {
 #' xtfrm,BDays-method
 #' [,BDays-method
 #' [[,BDays-method
+#' [<-,BDays-method
+#' [[<-,BDays-method
+#' c,BDays-method
+#' rep,BDays-method
 NULL
 
 # ------------------------------------------------------------------------------
@@ -188,54 +192,106 @@ xtfrm.BDays <- function(x) {
 
 # So vec_recycle() and vec_slice() work
 
+bdays_slice <- function(x, i, j, ..., drop = TRUE) {
+  sch <- get_bdays_schedule(x)
+
+  days <- get_bdays_days(x)
+  days <- vec_slice(days, i)
+
+  new_bdays(days, sch)
+}
+
 #' @export
 setMethod(
   "[",
   signature(x = "BDays"),
-  function(x, i, j, ..., drop = TRUE) {
-    sch <- get_bdays_schedule(x)
-
-    days <- get_bdays_days(x)
-    days <- vec_slice(days, i)
-
-    new_bdays(days, sch)
-  }
+  bdays_slice
 )
+
+bdays_slice2 <- function(x, i, j, ..., exact = TRUE) {
+  sch <- get_bdays_schedule(x)
+
+  days <- get_bdays_days(x)
+
+  i <- vctrs::vec_as_location2(i, vec_size(days))
+
+  days <- vec_slice(days, i)
+
+  new_bdays(days, sch)
+}
 
 #' @export
 setMethod(
   "[[",
   signature(x = "BDays"),
-  function(x, i, j, ..., exact = TRUE) {
-    sch <- get_bdays_schedule(x)
-
-    days <- get_bdays_days(x)
-
-    i <- vctrs::vec_as_location2(i, vec_size(days))
-
-    days <- vec_slice(days, i)
-
-    new_bdays(days, sch)
-  }
+  bdays_slice2
 )
 
-# #' @export
-# setMethod(
-#   "[<-",
-#   signature(x = "BDays", value = "ANY"),
-#   function(x, i, j, ..., value) {
-#     value <- vec_cast(value, x)
-#
-#     sch <- get_bdays_schedule(x)
-#
-#     days <- get_bdays_days(x)
-#     new_days <- get_bdays_days(value)
-#
-#     vec_slice(days, i) <- new_days
-#
-#     new_bdays(days, sch)
-#   }
-# )
+bdays_assign <- function(x, i, j, ..., value) {
+
+  # TODO - Postponing usage of vec_cast() until we figure it out in vctrs
+  abort("Cannot currently assign into a `BDays` object")
+
+  # value <- vec_cast(value, x)
+  #
+  # sch <- get_bdays_schedule(x)
+  #
+  # days <- get_bdays_days(x)
+  # new_days <- get_bdays_days(value)
+  #
+  # vec_slice(days, i) <- new_days
+  #
+  # new_bdays(days, sch)
+}
+
+#' @export
+setMethod(
+  "[<-",
+  signature(x = "BDays", value = "ANY"),
+  bdays_assign
+)
+
+bdays_assign2 <- function(x, i, j, ..., value) {
+  # TODO - Postponing usage of vec_cast() until we figure it out in vctrs
+  abort("Cannot currently assign into a `BDays` object")
+}
+
+#' @export
+setMethod(
+  "[[<-",
+  signature(x = "BDays", value = "ANY"),
+  bdays_assign2
+)
+
+bdays_c <- function(x, ...) {
+  # TODO - Postponing usage until we figure it out in vctrs
+  abort("Cannot currently combine with a `BDays` object")
+
+  # Not going to work until we have good ptype2 methods
+  # vec_c(x, ...)
+}
+
+#' @export
+setMethod(
+  "c",
+  signature(x = "BDays"),
+  bdays_c
+)
+
+bdays_rep <- function(x, ...) {
+  days <- get_bdays_days(x)
+
+  days <- rep(days, ...)
+
+  new_bdays(days, schedule = get_bdays_schedule(x))
+}
+
+#' @export
+setMethod(
+  "rep",
+  signature(x = "BDays"),
+  bdays_rep
+)
 
 # ------------------------------------------------------------------------------
 # `+`
