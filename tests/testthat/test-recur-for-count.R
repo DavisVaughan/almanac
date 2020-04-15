@@ -38,6 +38,6 @@ test_that("impossible dates do not count towards the count", {
 })
 
 test_that("`count` must be castable to a scalar integer", {
-  expect_error(daily() %>% recur_for_count("a"), class = "vctrs_error_cast_lossy")
+  expect_error(daily() %>% recur_for_count("a"), class = "vctrs_error_incompatible_type")
   expect_error(daily() %>% recur_for_count(c(1, 2)), class = "vctrs_error_assert_size")
 })

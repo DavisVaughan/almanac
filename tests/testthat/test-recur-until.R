@@ -26,7 +26,7 @@ test_that("`until` can only be set once", {
 })
 
 test_that("`until` must be a single Date", {
-  expect_error(daily() %>% recur_until("a"), class = "vctrs_error_cast_lossy")
+  expect_error(daily() %>% recur_until("a"), class = "almanac_error_lossy_parse")
   expect_error(daily() %>% recur_until(c("2019-01-01", "2019-01-02")), class = "vctrs_error_assert_size")
 })
 

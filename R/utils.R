@@ -1,25 +1,48 @@
-# Allows casts of:
-# character -> date (with a fix to be lossy on failure)
-# date -> date
-# (double and integer are too flexible)
-# (POSIXct would almost always be lossy)
 vec_cast_date <- function(x, x_arg = "x") {
-  if (inherits(x, "Date")) {
-    return(x)
-  }
-
   if (is.character(x)) {
-    out <- vec_cast_date_character(x, x_arg)
-    return(out)
+    vec_cast_date_from_character(x, x_arg)
+  } else {
+    vec_cast(x, global_empty_date, x_arg = x_arg)
   }
-
-  glubort("Can't coerce `{x_arg}` to date. Only character and Date objects are allowed.")
 }
 
-vec_cast_date_character <- function(x, x_arg) {
-  to <- new_date()
-  out <- vec_cast(x, to, x_arg = x_arg)
-  maybe_lossy_cast(out, x, to, lossy = is.na(out) & !is.na(x))
+vec_cast_date_from_character <- function(x, x_arg) {
+  # Gives POSIXct with no time component and UTC tz
+  out <- lubridate::fast_strptime(x, format = "%Y-%m-%d", tz = "UTC", lt = FALSE)
+
+  # Rely on fast behavior of POSIXct->Date when tz="UTC"
+  out <- as.Date.POSIXct(out, tz = "UTC")
+
+  # Check for new `NA` values, these are failed parses
+  lossy <- is.na(out) & !is.na(x)
+
+  if (any(lossy)) {
+    message <- lossy_to_message(lossy, x_arg)
+    stop_lossy_parse(message)
+  }
+
+  out
+}
+
+lossy_to_message <- function(lossy, x_arg) {
+  locations <- which(lossy)
+  locations <- as.character(locations)
+
+  if (length(locations) > 1) {
+    chr_locations <- "locations"
+  } else {
+    chr_locations <- "location"
+  }
+
+  if (length(locations) > 5) {
+    locations <- c(locations[1:5], "etc")
+  }
+
+  locations <- glue::glue_collapse(locations, sep = ", ")
+
+  locations
+
+  glue::glue("Failed to parse `{x_arg}` to Date at {chr_locations}: {locations}.")
 }
 
 glubort <- function (..., .sep = "", .envir = parent.frame()) {
