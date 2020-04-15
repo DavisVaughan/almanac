@@ -30,8 +30,8 @@ test_that("`alma_in()`ness can be silently determined when all values are NA", {
 
 test_that("`alma_in()`ness can be determined with corrupt NA values", {
   rrule <- daily()
-  expect_equal(alma_in(global_inf_date, rrule), FALSE)
-  expect_equal(alma_in(global_neg_inf_date, rrule), FALSE)
+  expect_equal(alma_in(almanac_global_inf_date, rrule), FALSE)
+  expect_equal(alma_in(almanac_global_neg_inf_date, rrule), FALSE)
 })
 
 test_that("can handle size zero input without warnings", {

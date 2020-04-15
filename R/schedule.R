@@ -245,13 +245,13 @@ sch_has_rrules_or_rdates <- function(x) {
 # ------------------------------------------------------------------------------
 
 v8_eval <- function(..., .envir = parent.frame()) {
-  global_context$eval(glue2(..., .envir = .envir))
+  almanac_global_context$eval(glue2(..., .envir = .envir))
 }
 
 v8_assign <- function(name, value) {
-  global_context$assign(name, value)
+  almanac_global_context$assign(name, value)
 }
 
 v8_get <- function(..., .envir = parent.frame()) {
-  global_context$get(glue2(..., .envir = .envir))
+  almanac_global_context$get(glue2(..., .envir = .envir))
 }

@@ -49,7 +49,7 @@ alma_seq <- function(from, to, schedule, inclusive = TRUE) {
 
 alma_seq_impl <- function(from, to, schedule, inclusive = TRUE) {
   if (is.na(from) || is.na(to)) {
-    return(global_empty_date)
+    return(almanac_global_empty_date)
   }
 
   cache <- cache_get(schedule, from, to, inclusive)
@@ -62,7 +62,7 @@ alma_seq_impl <- function(from, to, schedule, inclusive = TRUE) {
 
   # No recurrence rules or required dates
   if (!sch_has_rrules_or_rdates(schedule)) {
-    return(global_empty_date)
+    return(almanac_global_empty_date)
   }
 
   since <- sch_since(schedule)

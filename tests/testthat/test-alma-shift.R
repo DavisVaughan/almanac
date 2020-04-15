@@ -115,20 +115,20 @@ test_that("tidy recycling rules are used between `x` and `adjustment`", {
 test_that("can step with single `NA` `n` value", {
   expect_equal(
     alma_step(new_date(c(1, 2)), NA_integer_, schedule()),
-    c(global_na_date, global_na_date)
+    c(almanac_global_na_date, almanac_global_na_date)
   )
 })
 
 test_that("can step with all `NA` `n` values", {
   expect_equal(
     alma_step(new_date(c(1, 2)), c(NA_integer_, NA_integer_), schedule()),
-    c(global_na_date, global_na_date)
+    c(almanac_global_na_date, almanac_global_na_date)
   )
 })
 
 test_that("can step with partial `NA` `n` values", {
   expect_equal(
     alma_step(new_date(c(1, 2)), c(1, NA_integer_), schedule()),
-    c(as.Date("1970-01-03"), global_na_date)
+    c(as.Date("1970-01-03"), almanac_global_na_date)
   )
 })

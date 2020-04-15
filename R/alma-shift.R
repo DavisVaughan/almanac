@@ -91,7 +91,7 @@ alma_step <- function(x, n, schedule) {
 
 alma_step_one <- function(x, n, schedule) {
   if (is.na(n)) {
-    out <- rep(global_na_date, length(x))
+    out <- rep(almanac_global_na_date, length(x))
     return(out)
   }
 
@@ -132,7 +132,7 @@ alma_step_multi <- function(x, n, schedule) {
   n_are_na <- is.na(n)
 
   if (all(n_are_na)) {
-    out <- rep(global_na_date, vec_size(x))
+    out <- rep(almanac_global_na_date, vec_size(x))
     return(out)
   }
 

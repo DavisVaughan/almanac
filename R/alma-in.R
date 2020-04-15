@@ -33,8 +33,8 @@ min_date <- function(x) {
   # `min(.Date(Inf), na.rm = TRUE)`
   # or
   # `min(.Date(numeric()), na.rm = TRUE)`
-  if (identical(out, global_inf_date)) {
-    out <- global_na_date
+  if (identical(out, almanac_global_inf_date)) {
+    out <- almanac_global_na_date
   }
 
   out
@@ -49,8 +49,8 @@ max_date <- function(x) {
   # `max(.Date(Inf), na.rm = TRUE)`
   # or
   # `max(.Date(numeric()), na.rm = TRUE)`
-  if (identical(out, global_neg_inf_date)) {
-    out <- global_na_date
+  if (identical(out, almanac_global_neg_inf_date)) {
+    out <- almanac_global_na_date
   }
 
   out

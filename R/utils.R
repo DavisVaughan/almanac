@@ -1,8 +1,19 @@
+# ------------------------------------------------------------------------------
+# Global variables
+
+delayedAssign("almanac_global_context", V8::v8())
+delayedAssign("almanac_global_empty_date", vctrs::new_date())
+delayedAssign("almanac_global_inf_date", structure(Inf, class = "Date"))
+delayedAssign("almanac_global_neg_inf_date", structure(-Inf, class = "Date"))
+delayedAssign("almanac_global_na_date", structure(NA_real_, class = "Date"))
+
+# ------------------------------------------------------------------------------
+
 vec_cast_date <- function(x, x_arg = "x") {
   if (is.character(x)) {
     vec_cast_date_from_character(x, x_arg)
   } else {
-    vec_cast(x, global_empty_date, x_arg = x_arg)
+    vec_cast(x, almanac_global_empty_date, x_arg = x_arg)
   }
 }
 
