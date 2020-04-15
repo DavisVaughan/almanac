@@ -1,9 +1,10 @@
 pandoc: '2.2'
-pkgdown: 1.4.1
+pkgdown: 1.5.1
 pkgdown_sha: ~
 articles:
   adjust-and-shift: adjust-and-shift.html
   almanac: almanac.html
   icalendar: icalendar.html
   quarterly: quarterly.html
+last_built: 2020-04-15T17:48Z
 
