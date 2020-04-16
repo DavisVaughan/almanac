@@ -149,6 +149,14 @@ cache__slice_seq <- function(self, from, to, inclusive) {
 # ------------------------------------------------------------------------------
 
 cache__cache_next <- function(self, recurrences, current, inclusive) {
+  if (identical(current, almanac_global_inf_date)) {
+    stop_cache_infinite_extension()
+  }
+  if (identical(current, almanac_global_neg_inf_date)) {
+    current <- self$get_min()
+    inclusive <- TRUE
+  }
+
   call <- cache_next_call(recurrences)
 
   from <- self$get_min()
