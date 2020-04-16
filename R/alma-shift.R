@@ -155,6 +155,8 @@ alma_step_multi <- function(x, n, schedule) {
   x
 }
 
+# ------------------------------------------------------------------------------
+
 # Pre load the cache with the full range of [x, x + n] (or the reverse if n is
 # negative) and an additional amount past that as well to account for
 # the adjustments. This significantly speeds up the `alma_adjust()` calls.
