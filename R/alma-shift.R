@@ -173,19 +173,19 @@ alma_step_multi <- function(x, n, schedule) {
 # the adjustments. This significantly speeds up the `alma_adjust()` calls.
 
 cache_preload <- function(x, n, schedule) {
-  x_min <- min_date(x)
-  x_max <- max_date(x)
+  x_min <- min2(x)
+  x_max <- max2(x)
 
   n_with_zero <- c(n, 0)
 
-  n_min <- min(n_with_zero)
-  n_max <- max(n_with_zero)
+  n_min <- min2(n_with_zero)
+  n_max <- max2(n_with_zero)
 
   x_max <- x_max + n_max
   x_min <- x_min + n_min
 
   # Initial cache to get a gauge on number of events that generally occur
-  n_events <- length(alma_seq_impl(x_min, x_max, schedule))
+  n_events <- length(alma_seq_impl(x_min, x_max, schedule, inclusive = TRUE))
 
   if (n_events == 0L) {
     return()
@@ -203,7 +203,7 @@ cache_preload <- function(x, n, schedule) {
   # Perform a secondary extended cache based on the number of events in the
   # original sequence. This is sort of ad hoc and assumes a uniform event
   # sequence, but captures most cases well
-  alma_seq_impl(x_min, x_max, schedule)
+  alma_seq_impl(x_min, x_max, schedule, inclusive = TRUE)
 
   invisible(schedule)
 }

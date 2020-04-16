@@ -37,50 +37,27 @@ alma_seq <- function(from, to, schedule, inclusive = TRUE) {
     abort("`from` and `to` cannot be `NA`")
   }
 
-  if (from > to) {
-    abort("`from` cannot be after `to`")
-  }
-
   schedule <- as_schedule(schedule)
+
   vec_assert(inclusive, logical(), 1L)
+  if (is.na(inclusive)) {
+    abort("`inclusive` cannot be `NA`")
+  }
 
   alma_seq_impl(from, to, schedule, inclusive)
 }
 
-alma_seq_impl <- function(from, to, schedule, inclusive = TRUE) {
-  if (is.na(from) || is.na(to)) {
-    return(almanac_global_empty_date)
+alma_seq_impl <- function(from, to, schedule, inclusive) {
+  cache <- schedule$cache
+
+  out <- cache$slice_seq(from, to, inclusive)
+
+  if (!is.null(out)) {
+    return(out)
   }
 
-  cache <- cache_get(schedule, from, to, inclusive)
+  recurrences <- schedule$recurrences
+  cache$cache_seq(recurrences, to)
 
-  if (!is.null(cache)) {
-    return(cache)
-  }
-
-  init_schedule(schedule)
-
-  # No recurrence rules or required dates
-  if (!sch_has_rrules_or_rdates(schedule)) {
-    return(almanac_global_empty_date)
-  }
-
-  since <- sch_since(schedule)
-
-  v8_eval("var from = [[as_js_from_date(since)]]")
-  v8_eval("var to = [[as_js_from_date(to)]]")
-
-  # Always set cache with inclusive dates!
-  out <- v8_get("ruleset.between(from, to, inc = true)")
-  out <- parse_js_date(out)
-
-  cache_set(schedule, to, out)
-
-  if (inclusive) {
-    out <- out[out >= from & out <= to]
-  } else {
-    out <- out[out > from & out < to]
-  }
-
-  out
+  cache$slice_seq(from, to, inclusive)
 }

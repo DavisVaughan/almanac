@@ -7,7 +7,7 @@ test_that("cache stores events since `since`", {
 
   expect <- as.Date(c("1970-01-03", "1970-01-04"))
 
-  expect_equal(rrule$env$events, expect)
+  expect_equal(rrule$cache$get_data(), expect)
 })
 
 test_that("cache can handle disjoint repeated calls (#6)", {

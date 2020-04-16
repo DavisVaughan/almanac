@@ -140,9 +140,6 @@ new_rrule <- function(since = as.Date("1970-01-01"),
                       wday = NULL,
                       position = NULL,
                       easter = NULL) {
-  env <- new.env(parent = emptyenv())
-  env[["initialized"]] <- FALSE
-
   rules <- list(
     since = since,
     frequency = frequency,
@@ -159,9 +156,11 @@ new_rrule <- function(since = as.Date("1970-01-01"),
     easter = easter
   )
 
+  cache <- cache$new(min = since)
+
   data <- list(
     rules = rules,
-    env = env
+    cache = cache
   )
 
   structure(data, class = "rrule")

@@ -16,42 +16,18 @@ alma_in <- function(x, schedule) {
 
   schedule <- as_schedule(schedule)
 
-  min <- min_date(x)
-  max <- max_date(x)
+  min <- min2(x)
+  max <- max2(x)
 
-  events <- alma_seq_impl(min, max, schedule)
+  events <- alma_seq_impl(min, max, schedule, inclusive = TRUE)
 
   vec_in(x, events)
 }
 
-min_date <- function(x) {
-  out <- suppressWarnings(min(x, na.rm = TRUE))
-
-  # from
-  # `min(.Date(NA_real_), na.rm = TRUE)`
-  # or
-  # `min(.Date(Inf), na.rm = TRUE)`
-  # or
-  # `min(.Date(numeric()), na.rm = TRUE)`
-  if (identical(out, almanac_global_inf_date)) {
-    out <- almanac_global_na_date
-  }
-
-  out
+min2 <- function(x) {
+  suppressWarnings(min(x, na.rm = TRUE))
 }
 
-max_date <- function(x) {
-  out <- suppressWarnings(max(x, na.rm = TRUE))
-
-  # from
-  # `max(.Date(NA_real_), na.rm = TRUE)`
-  # or
-  # `max(.Date(Inf), na.rm = TRUE)`
-  # or
-  # `max(.Date(numeric()), na.rm = TRUE)`
-  if (identical(out, almanac_global_neg_inf_date)) {
-    out <- almanac_global_na_date
-  }
-
-  out
+max2 <- function(x) {
+  suppressWarnings(max(x, na.rm = TRUE))
 }
