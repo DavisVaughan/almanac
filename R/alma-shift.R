@@ -129,7 +129,7 @@ alma_step_multi <- function(x, n, schedule) {
   rounds <- max2(abs(n))
 
   for (i in seq2(1L, rounds)) {
-    # 0 == done, 1 == +1 day, -1 == -1 day, NA = NA days
+    # 0 == done, 1 == +1 day, -1 == -1 day
     signs <- sign(n)
 
     step_loc <- signs != 0L
