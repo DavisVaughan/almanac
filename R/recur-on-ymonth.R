@@ -47,3 +47,47 @@ recur_on_ymonth <- function(x, ymonth) {
 
   tweak_rrule(x, ymonth = new)
 }
+
+# ------------------------------------------------------------------------------
+
+month_normalize <- function(x) {
+  if (!is.character(x)) {
+    return(x)
+  }
+
+  x <- tolower(x)
+
+  where <- month_match(x)
+
+  misses <- is.na(where)
+
+  if (any(misses)) {
+    abort("A character `x` must be a month name or abbreviation.")
+  }
+
+  out <- month_int()[where]
+
+  out <- unique(out)
+
+  out
+}
+
+month_match <- function(x) {
+  vec_match(x, month_name())
+}
+
+month_name <- function() {
+  c(
+    tolower(month.name),
+    tolower(month.abb),
+    "sept" # special case
+  )
+}
+
+month_int <- function() {
+  c(
+    1:12,
+    1:12,
+    9L
+  )
+}

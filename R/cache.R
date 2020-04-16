@@ -418,7 +418,12 @@ is_complete_signal <- function(x) {
 
 # ------------------------------------------------------------------------------
 
-is_empty_recurrence_set <- function(recurrences) {
-  length(recurrences$rrules) == 0L &&
-    length(recurrences$rdates) == 0L
+parse_js_date <- function(x) {
+  if (length(x) == 0L) {
+    return(new_date())
+  }
+
+  x <- fast_strptime(x, format = "%Y-%m-%dT%H:%M:%OSZ", tz = "UTC", lt = FALSE)
+  as.Date(x)
 }
+
