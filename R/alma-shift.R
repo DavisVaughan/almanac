@@ -123,18 +123,12 @@ alma_step_multi <- function(x, n, schedule) {
   x <- args[[1]]
   n <- args[[2]]
 
-  # Avoid `max(numeric()) = -Inf`
-  # Return `x` after tidy recycling
-  if (vec_size(n) == 0L) {
-    return(x)
-  }
-
   cache_preload(x, n, schedule)
 
   # Maximum number of rounds of adjusting needed in either direction
-  rounds <- max(abs(n), na.rm = TRUE)
+  rounds <- max2(abs(n))
 
-  for (i in seq_len(rounds)) {
+  for (i in seq2(1L, rounds)) {
     # 0 == done, 1 == +1 day, -1 == -1 day, NA = NA days
     signs <- sign(n)
 
@@ -181,7 +175,7 @@ cache_preload <- function(x, n, schedule) {
   n_events <- length(alma_seq_impl(x_min, x_max, schedule, inclusive = TRUE))
 
   if (n_events == 0L) {
-    return()
+    return(invisible())
   }
 
   if (n_min >= 0) {
