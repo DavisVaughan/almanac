@@ -112,23 +112,27 @@ test_that("tidy recycling rules are used between `x` and `adjustment`", {
   expect_error(alma_step(new_date(c(1, 2)), 1:3, schedule()), class = "vctrs_error_incompatible_size")
 })
 
-test_that("can step with single `NA` `n` value", {
-  expect_equal(
+test_that("`NA` `n` is an error", {
+  expect_error(
     alma_step(new_date(c(1, 2)), NA_integer_, schedule()),
-    c(almanac_global_na_date, almanac_global_na_date)
+    "`n` cannot be `NA`"
   )
-})
-
-test_that("can step with all `NA` `n` values", {
-  expect_equal(
+  expect_error(
     alma_step(new_date(c(1, 2)), c(NA_integer_, NA_integer_), schedule()),
-    c(almanac_global_na_date, almanac_global_na_date)
+    "`n` cannot be `NA`"
   )
 })
 
-test_that("can step with partial `NA` `n` values", {
+test_that("can step with `NA` dates", {
   expect_equal(
-    alma_step(new_date(c(1, 2)), c(1, NA_integer_), schedule()),
+    alma_step(new_date(c(1, NA)), 1, schedule()),
     c(as.Date("1970-01-03"), almanac_global_na_date)
+  )
+})
+
+test_that("can step with all `NA` dates", {
+  expect_equal(
+    alma_step(new_date(c(NA_real_, NA_real_)), 1, schedule()),
+    c(almanac_global_na_date, almanac_global_na_date)
   )
 })
