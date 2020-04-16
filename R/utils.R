@@ -56,9 +56,23 @@ lossy_to_message <- function(lossy, x_arg) {
   glue::glue("Failed to parse `{x_arg}` to Date at {chr_locations}: {locations}.")
 }
 
+# ------------------------------------------------------------------------------
+
+min2 <- function(x) {
+  suppressWarnings(min(x, na.rm = TRUE))
+}
+
+max2 <- function(x) {
+  suppressWarnings(max(x, na.rm = TRUE))
+}
+
+# ------------------------------------------------------------------------------
+
 glubort <- function (..., .sep = "", .envir = parent.frame()) {
   abort(glue::glue(..., .sep = .sep, .envir = .envir))
 }
+
+# ------------------------------------------------------------------------------
 
 parse_js_date <- function(x) {
   if (length(x) == 0L) {
