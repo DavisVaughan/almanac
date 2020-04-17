@@ -56,18 +56,23 @@ lossy_to_message <- function(lossy, x_arg) {
   glue::glue("Failed to parse `{x_arg}` to Date at {chr_locations}: {locations}.")
 }
 
+# ------------------------------------------------------------------------------
+
+min2 <- function(x) {
+  suppressWarnings(min(x, na.rm = TRUE))
+}
+
+max2 <- function(x) {
+  suppressWarnings(max(x, na.rm = TRUE))
+}
+
+# ------------------------------------------------------------------------------
+
 glubort <- function (..., .sep = "", .envir = parent.frame()) {
   abort(glue::glue(..., .sep = .sep, .envir = .envir))
 }
 
-parse_js_date <- function(x) {
-  if (length(x) == 0L) {
-    return(new_date())
-  }
-
-  x <- fast_strptime(x, format = "%Y-%m-%dT%H:%M:%OSZ", tz = "UTC", lt = FALSE)
-  as.Date(x)
-}
+# ------------------------------------------------------------------------------
 
 get_rule <- function(x, rule) {
   x[["rules"]][[rule]]
@@ -76,6 +81,8 @@ get_rule <- function(x, rule) {
 is_already_set <- function(x, rule) {
   !is.null(get_rule(x, rule))
 }
+
+# ------------------------------------------------------------------------------
 
 glue2 <- function(..., .envir = parent.frame()) {
   glue(..., .envir = .envir, .open = "[[", .close = "]]")
@@ -137,52 +144,4 @@ weekday_int <- function() {
 
 weekday_print <- function() {
   c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")
-}
-
-# ------------------------------------------------------------------------------
-
-month_normalize <- function(x) {
-  if (!is.character(x)) {
-    return(x)
-  }
-
-  x <- tolower(x)
-
-  where <- month_match(x)
-
-  misses <- is.na(where)
-
-  if (any(misses)) {
-    abort("A character `x` must be a month name or abbreviation.")
-  }
-
-  out <- month_int()[where]
-
-  out <- unique(out)
-
-  out
-}
-
-month_match <- function(x) {
-  vec_match(x, month_name())
-}
-
-month_name <- function() {
-  c(
-    tolower(month.name),
-    tolower(month.abb),
-    "sept" # special case
-  )
-}
-
-month_int <- function() {
-  c(
-    1:12,
-    1:12,
-    9L
-  )
-}
-
-month_print <- function() {
-  month.name
 }

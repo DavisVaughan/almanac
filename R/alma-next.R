@@ -29,16 +29,34 @@
 alma_next <- function(x, schedule, inclusive = FALSE) {
   x <- vec_cast_date(x)
   vec_assert(x, size = 1L)
+
+  if (is.na(x)) {
+    abort("`x` cannot be `NA`")
+  }
+
   schedule <- as_schedule(schedule)
+
   vec_assert(inclusive, logical(), 1L)
+  if (is.na(inclusive)) {
+    abort("`inclusive` cannot be `NA`")
+  }
 
-  init_schedule(schedule)
+  alma_next_impl(x, schedule, inclusive)
+}
 
-  v8_eval("var x = [[as_js_from_date(x)]]")
-  v8_assign("inclusive", inclusive)
+alma_next_impl <- function(x, schedule, inclusive) {
+  cache <- schedule$cache
 
-  out <- v8_get("ruleset.after(x, inc = inclusive)")
-  parse_js_date(out)
+  out <- cache$slice_next(x, inclusive)
+
+  if (!is.null(out)) {
+    return(out)
+  }
+
+  recurrences <- schedule$recurrences
+  cache$cache_next(recurrences, x, inclusive)
+
+  cache$slice_next(x, inclusive)
 }
 
 #' @rdname alma_next
@@ -46,14 +64,32 @@ alma_next <- function(x, schedule, inclusive = FALSE) {
 alma_previous <- function(x, schedule, inclusive = FALSE) {
   x <- vec_cast_date(x)
   vec_assert(x, size = 1L)
+
+  if (is.na(x)) {
+    abort("`x` cannot be `NA`")
+  }
+
   schedule <- as_schedule(schedule)
+
   vec_assert(inclusive, logical(), 1L)
+  if (is.na(inclusive)) {
+    abort("`inclusive` cannot be `NA`")
+  }
 
-  init_schedule(schedule)
+  alma_previous_impl(x, schedule, inclusive)
+}
 
-  v8_eval("var x = [[as_js_from_date(x)]]")
-  v8_assign("inclusive", inclusive)
+alma_previous_impl <- function(x, schedule, inclusive) {
+  cache <- schedule$cache
 
-  out <- v8_get("ruleset.before(x, inc = inclusive)")
-  parse_js_date(out)
+  out <- cache$slice_previous(x, inclusive)
+
+  if (!is.null(out)) {
+    return(out)
+  }
+
+  recurrences <- schedule$recurrences
+  cache$cache_previous(recurrences, x, inclusive)
+
+  cache$slice_previous(x, inclusive)
 }

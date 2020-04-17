@@ -23,7 +23,8 @@ Imports:
     methods,
     rlang,
     V8 (>= 3.0.1),
-    vctrs (>= 0.2.99.9011)
+    vctrs (>= 0.2.99.9011),
+    R6
 Suggests: 
     covr,
     knitr,

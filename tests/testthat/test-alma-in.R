@@ -28,9 +28,15 @@ test_that("`alma_in()`ness can be silently determined when all values are NA", {
   )
 })
 
-test_that("`alma_in()`ness can be determined with corrupt NA values", {
+test_that("A single infinite date renders `alma_in()` uncallable", {
+  rrule <- daily(since = "1970-01-01")
+  x <- vctrs::vec_c(almanac_global_inf_date, as.Date("1970-01-01"))
+  expect_error(alma_in(x, rrule), class = "almanac_error_infinite_extension")
+})
+
+test_that("`alma_in()`ness is defined in the extreme cases", {
   rrule <- daily()
-  expect_equal(alma_in(almanac_global_inf_date, rrule), FALSE)
+  expect_error(alma_in(almanac_global_inf_date, rrule), class = "almanac_error_infinite_extension")
   expect_equal(alma_in(almanac_global_neg_inf_date, rrule), FALSE)
 })
 

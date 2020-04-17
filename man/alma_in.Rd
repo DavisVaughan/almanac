@@ -18,3 +18,23 @@ A schedule or rrule.}
 \description{
 \code{alma_in()} checks if \code{x} is in the set of dates defined by the schedule.
 }
+\examples{
+rrule <- weekly() \%>\%
+  recur_on_wday("Thursday")
+
+# A Thursday and Friday
+x <- as.Date("1970-01-01") + 0:1
+
+alma_in(x, rrule)
+
+# Every month, on the 2nd day of the month
+rrule2 <- monthly() \%>\%
+  recur_on_mday(2)
+
+# Make a larger schedule made of multiple rules
+sch <- schedule() \%>\%
+ sch_rrule(rrule) \%>\%
+ sch_rrule(rrule2)
+
+alma_in(x, sch)
+}

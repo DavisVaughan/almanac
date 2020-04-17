@@ -3,6 +3,19 @@ as_js_from_date <- function(x) {
   glue("new Date(Date.UTC({year(x)}, {month(x) - 1L}, {day(x)}))")
 }
 
+as_js_from_vector <- function(x) {
+  x <- glue::glue_collapse(x, sep = ", ")
+  glue("[{x}]")
+}
+
+as_js_from_boolean <- function(x) {
+  if (x) {
+    "true"
+  } else {
+    "false"
+  }
+}
+
 # ------------------------------------------------------------------------------
 
 as_js_from_rrule <- function(x) {
@@ -82,9 +95,9 @@ get_mday <- function(x) {
     return(NULL)
   }
 
-  v8_assign("mday", x$rules$mday)
+  mday <- as_js_from_vector(x$rules$mday)
 
-  glue("bymonthday: mday")
+  glue("bymonthday: {mday}")
 }
 
 get_ymonth <- function(x) {
@@ -92,9 +105,9 @@ get_ymonth <- function(x) {
     return(NULL)
   }
 
-  v8_assign("ymonth", x$rules$ymonth)
+  ymonth <- as_js_from_vector(x$rules$ymonth)
 
-  glue("bymonth: ymonth")
+  glue("bymonth: {ymonth}")
 }
 
 get_yweek <- function(x) {
@@ -102,9 +115,9 @@ get_yweek <- function(x) {
     return(NULL)
   }
 
-  v8_assign("yweek", x$rules$yweek)
+  yweek <- as_js_from_vector(x$rules$yweek)
 
-  glue("byweekno: yweek")
+  glue("byweekno: {yweek}")
 }
 
 get_yday <- function(x) {
@@ -112,9 +125,9 @@ get_yday <- function(x) {
     return(NULL)
   }
 
-  v8_assign("yday", x$rules$yday)
+  yday <- as_js_from_vector(x$rules$yday)
 
-  glue("byyearday: yday")
+  glue("byyearday: {yday}")
 }
 
 get_wday <- function(x) {
@@ -143,9 +156,9 @@ get_wday <- function(x) {
     wday_strings <- c(wday_strings, wday_nth)
   }
 
-  wday_strings <- glue::glue_collapse(wday_strings, sep = ", ")
+  wday_strings <- as_js_from_vector(wday_strings)
 
-  glue("byweekday: [{wday_strings}]")
+  glue("byweekday: {wday_strings}")
 }
 
 get_js_wday_base <- function(wday) {
@@ -168,9 +181,9 @@ get_position <- function(x) {
     return(NULL)
   }
 
-  v8_assign("position", x$rules$position)
+  position <- as_js_from_vector(x$rules$position)
 
-  glue("bysetpos: position")
+  glue("bysetpos: {position}")
 }
 
 get_easter <- function(x) {

@@ -79,8 +79,13 @@ alma_jump <- function(x, jump, schedule, adjustment = days(1)) {
 #' @export
 alma_step <- function(x, n, schedule) {
   x <- vec_cast_date(x)
-  n <- vec_cast(n, integer(), x_arg = "n")
   schedule <- as_schedule(schedule)
+
+  n <- vec_cast(n, integer(), x_arg = "n")
+
+  if (any(is.na(n))) {
+    abort("`n` cannot be `NA`.")
+  }
 
   if (length(n) == 1L) {
     alma_step_one(x, n, schedule)
@@ -90,11 +95,6 @@ alma_step <- function(x, n, schedule) {
 }
 
 alma_step_one <- function(x, n, schedule) {
-  if (is.na(n)) {
-    out <- rep(almanac_global_na_date, length(x))
-    return(out)
-  }
-
   # Use integers rather than periods.
   # Avoids SLOW update() function from lubridate
   if (n >= 0) {
@@ -123,29 +123,16 @@ alma_step_multi <- function(x, n, schedule) {
   x <- args[[1]]
   n <- args[[2]]
 
-  # Avoid `max(numeric()) = -Inf`
-  # Return `x` after tidy recycling
-  if (vec_size(n) == 0L) {
-    return(x)
-  }
-
-  n_are_na <- is.na(n)
-
-  if (all(n_are_na)) {
-    out <- rep(almanac_global_na_date, vec_size(x))
-    return(out)
-  }
-
   cache_preload(x, n, schedule)
 
   # Maximum number of rounds of adjusting needed in either direction
-  rounds <- max(abs(n), na.rm = TRUE)
+  rounds <- max2(abs(n))
 
-  for (i in seq_len(rounds)) {
-    # 0 == done, 1 == +1 day, -1 == -1 day, NA = NA days
+  for (i in seq2(1L, rounds)) {
+    # 0 == done, 1 == +1 day, -1 == -1 day
     signs <- sign(n)
 
-    step_loc <- signs != 0L | n_are_na
+    step_loc <- signs != 0L
 
     # The part of x that still needs to step
     one_day <- signs[step_loc]
@@ -168,27 +155,29 @@ alma_step_multi <- function(x, n, schedule) {
   x
 }
 
+# ------------------------------------------------------------------------------
+
 # Pre load the cache with the full range of [x, x + n] (or the reverse if n is
 # negative) and an additional amount past that as well to account for
 # the adjustments. This significantly speeds up the `alma_adjust()` calls.
 
 cache_preload <- function(x, n, schedule) {
-  x_min <- min_date(x)
-  x_max <- max_date(x)
+  x_min <- min2(x)
+  x_max <- max2(x)
 
   n_with_zero <- c(n, 0)
 
-  n_min <- min(n_with_zero)
-  n_max <- max(n_with_zero)
+  n_min <- min2(n_with_zero)
+  n_max <- max2(n_with_zero)
 
   x_max <- x_max + n_max
   x_min <- x_min + n_min
 
   # Initial cache to get a gauge on number of events that generally occur
-  n_events <- length(alma_seq_impl(x_min, x_max, schedule))
+  n_events <- length(alma_seq_impl(x_min, x_max, schedule, inclusive = TRUE))
 
   if (n_events == 0L) {
-    return()
+    return(invisible())
   }
 
   if (n_min >= 0) {
@@ -203,7 +192,7 @@ cache_preload <- function(x, n, schedule) {
   # Perform a secondary extended cache based on the number of events in the
   # original sequence. This is sort of ad hoc and assumes a uniform event
   # sequence, but captures most cases well
-  alma_seq_impl(x_min, x_max, schedule)
+  alma_seq_impl(x_min, x_max, schedule, inclusive = TRUE)
 
   invisible(schedule)
 }

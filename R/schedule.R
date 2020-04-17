@@ -30,6 +30,7 @@ print.schedule <- function(x, ...) {
 
 sch_summary <- function(x) {
   recurrences <- x$recurrences
+
   n_rrules <- length(recurrences$rrules)
   n_rdates <- length(recurrences$rdates)
   n_exdates <-length(recurrences$exdates)
@@ -39,21 +40,22 @@ sch_summary <- function(x) {
 
 # ------------------------------------------------------------------------------
 
-new_schedule <- function(rrules = list(), rdates = new_date(), exdates = new_date(), env = NULL) {
+new_schedule <- function(rrules = list(),
+                         rdates = new_date(),
+                         exdates = new_date()) {
   recurrences <- list(
     rrules = rrules,
     rdates = rdates,
     exdates = exdates
   )
 
-  if (is.null(env)) {
-    env <- new.env(parent = emptyenv())
-    env[["initialized"]] <- FALSE
-  }
+  since <- compute_schedule_since(recurrences)
+
+  cache <- cache$new(min = since)
 
   data <- list(
     recurrences = recurrences,
-    env = env
+    cache = cache
   )
 
   structure(data, class = "schedule")
@@ -69,8 +71,14 @@ as_schedule.default <- function(x, ...) {
   abort(glue("Cannot convert {class(x)[1]} to a schedule."))
 }
 
+# Use the same cache as the `rrule`. Generally useful
+# when a user creates a rrule then passes it into a function
+# like `alma_seq()`, which converts it to a schedule. We want
+# to update the cache of the original rrule.
 as_schedule.rrule <- function(x, ...) {
-  new_schedule(rrules = list(x), env = x$env)
+  out <- new_schedule(rrules = list(x))
+  out$cache <- x$cache
+  out
 }
 
 as_schedule.schedule <- function(x, ...) {
@@ -93,77 +101,12 @@ validate_schedule <- function(x, arg = "`x`") {
 
 # ------------------------------------------------------------------------------
 
-# cache is always set with dates generated from an inclusive between
+compute_schedule_since <- function(recurrences) {
+  rrules <- recurrences$rrules
 
-cache_set <- function(schedule, to, events) {
-  env <- schedule[["env"]]
+  since <- compute_rrules_since(rrules)
 
-  # No previous cache
-  if (is.null(env[["events"]])) {
-    env[["to"]] <- to
-    env[["events"]] <- events
-    return(invisible(schedule))
-  }
-
-  numeric_to <- unclass(to)
-  old_numeric_to <- unclass(env[["to"]])
-
-  needs_new_events <- FALSE
-
-  if (old_numeric_to < numeric_to) {
-    env[["to"]] <- to
-    needs_new_events <- TRUE
-  }
-
-  if (needs_new_events) {
-    env[["events"]] <- events
-  }
-
-  invisible(schedule)
-}
-
-cache_get <- function(schedule, from, to, inclusive) {
-  env <- schedule[["env"]]
-  events <- env[["events"]]
-
-  # No cache
-  if (is.null(events)) {
-    return(NULL)
-  }
-
-  numeric_to <- unclass(to)
-  env_numeric_to <- unclass(env[["to"]])
-
-  # After end of cache
-  if (env_numeric_to < numeric_to) {
-    return(NULL)
-  }
-
-  numeric_from <- unclass(from)
-  numeric_events <- unclass(events)
-
-  # Cache is always stored inclusively, so these events exist
-  if (inclusive) {
-    locs <- numeric_events >= numeric_from & numeric_events <= numeric_to
-  } else {
-    locs <- numeric_events > numeric_from & numeric_events < numeric_to
-  }
-
-  events <- events[locs]
-
-  events
-}
-
-# ------------------------------------------------------------------------------
-
-get_schedule_since <- function(x) {
-  pull_since <- function(x) {
-    x$rules$since
-  }
-
-  since <- get_rrules_since(x)
-
-  rdates <- x$recurrences$rdates
+  rdates <- recurrences$rdates
 
   if (length(rdates) == 0L) {
     return(since)
@@ -175,83 +118,20 @@ get_schedule_since <- function(x) {
 }
 
 # Minimum `since` date of all rules
-get_rrules_since <- function(x) {
-  rrules <- x$recurrences$rrules
-
-  if (length(rrules) == 0L) {
-    return(new_date())
+compute_rrules_since <- function(x) {
+  # Default `since` date for an empty schedule
+  if (length(x) == 0L) {
+    return(as.Date("1970-01-01"))
   }
 
-  pull_since <- function(x) {
-    x$rules$since
-  }
-
-  since <- min(vapply(rrules, pull_since, numeric(1)))
+  # `vapply()` will strip the class
+  sinces <- vapply(x, pull_since, numeric(1))
+  since <- min(sinces)
   class(since) <- "Date"
 
   since
 }
 
-sch_since <- function(x) {
-  x[["env"]][["since"]]
-}
-
-# ------------------------------------------------------------------------------
-
-init_schedule <- function(x) {
-  if (x$env$initialized) {
-    return()
-  }
-
-  recurrences <- x$recurrences
-
-  v8_eval("var ruleset = new rrule.RRuleSet()")
-
-  for(rrule in recurrences$rrules) {
-    rrule <- as_js_from_rrule(rrule)
-    v8_eval("ruleset.rrule([[rrule]])")
-  }
-
-  rdates <- recurrences$rdates
-
-  for(i in seq_along(rdates)) {
-    rdate <- as_js_from_date(rdates[i])
-    v8_eval("ruleset.rdate([[rdate]])")
-  }
-
-  exdates <- recurrences$exdates
-
-  for(i in seq_along(exdates)) {
-    exdate <- as_js_from_date(exdates[i])
-    v8_eval("ruleset.exdate([[exdate]])")
-  }
-
-  x$env[["initialized"]] <- TRUE
-
-  x$env[["since"]] <- get_schedule_since(x)
-
-  x$env[["n_rrules"]] <- length(recurrences$rrules)
-  x$env[["n_rdates"]] <- length(recurrences$rdates)
-  x$env[["n_exdates"]] <- length(recurrences$exdates)
-
-  invisible(x)
-}
-
-# Only for use after a schedule has been initialized
-sch_has_rrules_or_rdates <- function(x) {
-  sum(x$env[["n_rrules"]], x$env[["n_rdates"]]) != 0L
-}
-
-# ------------------------------------------------------------------------------
-
-v8_eval <- function(..., .envir = parent.frame()) {
-  almanac_global_context$eval(glue2(..., .envir = .envir))
-}
-
-v8_assign <- function(name, value) {
-  almanac_global_context$assign(name, value)
-}
-
-v8_get <- function(..., .envir = parent.frame()) {
-  almanac_global_context$get(glue2(..., .envir = .envir))
+pull_since <- function(x) {
+  x$rules$since
 }
