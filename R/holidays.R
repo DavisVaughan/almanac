@@ -1,3 +1,5 @@
+# TODO: All holidays need to be updated to use `until`
+
 # nocov start
 
 #' Holidays
@@ -48,22 +50,19 @@ hldy_washington_birthday_pre_1971 <- function(since) {
   until <- as.Date("1970-12-31")
 
   # On Feb 22 that is a weekday
-  rrule <- yearly(since)
-  rrule <- recur_until(rrule, until)
+  rrule <- yearly(since = since, until = until)
   rrule <- recur_on_ymonth(rrule, 2L)
   rrule <- recur_on_mday(rrule, 22L)
   rrule <- recur_on_weekdays(rrule)
 
   # On Feb 23 that is a Monday
-  rrule_adj_forward <- yearly(since)
-  rrule_adj_forward <- recur_until(rrule_adj_forward, until)
+  rrule_adj_forward <- yearly(since = since, until = until)
   rrule_adj_forward <- recur_on_ymonth(rrule_adj_forward, 2L)
   rrule_adj_forward <- recur_on_mday(rrule_adj_forward, 23L)
   rrule_adj_forward <- recur_on_wday(rrule_adj_forward, 1L)
 
   # On Feb 21 that is a Friday
-  rrule_adj_backward <- yearly(since)
-  rrule_adj_backward <- recur_until(rrule_adj_backward, until)
+  rrule_adj_backward <- yearly(since = since, until = until)
   rrule_adj_backward <- recur_on_ymonth(rrule_adj_backward, 2L)
   rrule_adj_backward <- recur_on_mday(rrule_adj_backward, 21L)
   rrule_adj_backward <- recur_on_wday(rrule_adj_backward, 5L)
@@ -109,22 +108,19 @@ hldy_memorial_day_pre_1971 <- function(since) {
   until <- as.Date("1970-12-31")
 
   # On May 30 that is a weekday
-  rrule <- yearly(since)
-  rrule <- recur_until(rrule, until)
+  rrule <- yearly(since = since, until = until)
   rrule <- recur_on_ymonth(rrule, 5L)
   rrule <- recur_on_mday(rrule, 30L)
   rrule <- recur_on_weekdays(rrule)
 
   # On May 31 that is a Monday
-  rrule_adj_forward <- yearly(since)
-  rrule_adj_forward <- recur_until(rrule_adj_forward, until)
+  rrule_adj_forward <- yearly(since = since, until = until)
   rrule_adj_forward <- recur_on_ymonth(rrule_adj_forward, 5L)
   rrule_adj_forward <- recur_on_mday(rrule_adj_forward, 31L)
   rrule_adj_forward <- recur_on_wday(rrule_adj_forward, 1L)
 
   # On May 29 that is a Friday
-  rrule_adj_backward <- yearly(since)
-  rrule_adj_backward <- recur_until(rrule_adj_backward, until)
+  rrule_adj_backward <- yearly(since = since, until = until)
   rrule_adj_backward <- recur_on_ymonth(rrule_adj_backward, 5L)
   rrule_adj_backward <- recur_on_mday(rrule_adj_backward, 29L)
   rrule_adj_backward <- recur_on_wday(rrule_adj_backward, 5L)
@@ -197,22 +193,19 @@ hldy_columbus_day_pre_1971 <- function(since, until = NULL) {
   }
 
   # On Oct 12 that is a weekday
-  rrule <- yearly(since)
-  rrule <- recur_until(rrule, until)
+  rrule <- yearly(since = since, until = until)
   rrule <- recur_on_ymonth(rrule, 10L)
   rrule <- recur_on_mday(rrule, 12L)
   rrule <- recur_on_weekdays(rrule)
 
   # On Oct 13 that is a Monday
-  rrule_adj_forward <- yearly(since)
-  rrule_adj_forward <- recur_until(rrule_adj_forward, until)
+  rrule_adj_forward <- yearly(since = since, until = until)
   rrule_adj_forward <- recur_on_ymonth(rrule_adj_forward, 10L)
   rrule_adj_forward <- recur_on_mday(rrule_adj_forward, 13L)
   rrule_adj_forward <- recur_on_wday(rrule_adj_forward, 1L)
 
   # On Oct 11 that is a Friday
-  rrule_adj_backward <- yearly(since)
-  rrule_adj_backward <- recur_until(rrule_adj_backward, until)
+  rrule_adj_backward <- yearly(since = since, until = until)
   rrule_adj_backward <- recur_on_ymonth(rrule_adj_backward, 10L)
   rrule_adj_backward <- recur_on_mday(rrule_adj_backward, 11L)
   rrule_adj_backward <- recur_on_wday(rrule_adj_backward, 5L)
@@ -225,15 +218,10 @@ hldy_columbus_day_pre_1971 <- function(since, until = NULL) {
   sch
 }
 
-hldy_columbus_day_post_1971 <- function(since = as.Date("1971-01-01"), until = NULL) {
-  rrule <- yearly(since)
+hldy_columbus_day_post_1971 <- function(since = as.Date("1971-01-01"), until = as.Date("2040-01-01")) {
+  rrule <- yearly(since = since, until = until)
   rrule <- recur_on_ymonth(rrule, 10L)
   rrule <- recur_on_wday(rrule, 1L, nth = 2L)
-
-  if (!is.null(until)) {
-    rrule <- recur_until(rrule, until)
-  }
-
   as_schedule(rrule)
 }
 
@@ -271,22 +259,19 @@ hldy_veterans_day_pre_1971 <- function(since) {
   until <- as.Date("1970-12-31")
 
   # On Nov 11 that is a weekday
-  rrule <- yearly(since)
-  rrule <- recur_until(rrule, until)
+  rrule <- yearly(since = since, until = until)
   rrule <- recur_on_ymonth(rrule, 11L)
   rrule <- recur_on_mday(rrule, 11L)
   rrule <- recur_on_weekdays(rrule)
 
   # On Nov 12 that is a Monday
-  rrule_adj_forward <- yearly(since)
-  rrule_adj_forward <- recur_until(rrule_adj_forward, until)
+  rrule_adj_forward <- yearly(since = since, until = until)
   rrule_adj_forward <- recur_on_ymonth(rrule_adj_forward, 11L)
   rrule_adj_forward <- recur_on_mday(rrule_adj_forward, 12L)
   rrule_adj_forward <- recur_on_wday(rrule_adj_forward, 1L)
 
   # On Nov 10 that is a Friday
-  rrule_adj_backward <- yearly(since)
-  rrule_adj_backward <- recur_until(rrule_adj_backward, until)
+  rrule_adj_backward <- yearly(since = since, until = until)
   rrule_adj_backward <- recur_on_ymonth(rrule_adj_backward, 11L)
   rrule_adj_backward <- recur_on_mday(rrule_adj_backward, 10L)
   rrule_adj_backward <- recur_on_wday(rrule_adj_backward, 5L)
@@ -467,8 +452,7 @@ hldy_thanksgiving <- function(since = "1970-01-01") {
 hldy_thanksgiving_pre_1939 <- function(since) {
   until <- as.Date("1938-12-31")
 
-  rrule <- yearly(since)
-  rrule <- recur_until(rrule, until)
+  rrule <- yearly(since = since, until = until)
   rrule <- recur_on_ymonth(rrule, 11L)
   rrule <- recur_on_wday(rrule, 4L, nth = -1L)
   as_schedule(rrule)
@@ -477,8 +461,7 @@ hldy_thanksgiving_pre_1939 <- function(since) {
 hldy_thanksgiving_post_1939_pre_1942 <- function(since = as.Date("1939-01-01")) {
   until <- as.Date("1941-12-31")
 
-  rrule <- yearly(since)
-  rrule <- recur_until(rrule, until)
+  rrule <- yearly(since = since, until = until)
   rrule <- recur_on_ymonth(rrule, 11L)
   rrule <- recur_on_wday(rrule, 4L, nth = -2L)
   as_schedule(rrule)
@@ -531,17 +514,13 @@ hldy_christmas <- function(since = "1970-01-01") {
 
 #' @rdname holidays
 #' @export
-hldy_easter <- function(since = "1970-01-01", until = NULL) {
+hldy_easter <- function(since = "1970-01-01", until = "2040-01-01") {
   hldy_easter_impl(since = since, until = until)
 }
 
 hldy_easter_impl <- function(since, until, offset = 0L) {
-  rrule <- yearly(since)
+  rrule <- yearly(since = since, until = until)
   rrule <- recur_on_easter(rrule, offset = offset)
-
-  if (!is.null(until)) {
-    rrule <- recur_until(rrule, until)
-  }
 
   sch <- schedule()
   sch <- sch_rrule(sch, rrule)
@@ -553,7 +532,7 @@ hldy_easter_impl <- function(since, until, offset = 0L) {
 
 #' @rdname holidays
 #' @export
-hldy_good_friday <- function(since = "1970-01-01", until = NULL) {
+hldy_good_friday <- function(since = "1970-01-01", until = "2040-01-01") {
   hldy_easter_impl(since = since, until = until, offset = -2L)
 }
 
@@ -561,7 +540,7 @@ hldy_good_friday <- function(since = "1970-01-01", until = NULL) {
 
 #' @rdname holidays
 #' @export
-hldy_easter_monday <- function(since = "1970-01-01", until = NULL) {
+hldy_easter_monday <- function(since = "1970-01-01", until = "2040-01-01") {
   hldy_easter_impl(since = since, until = until, offset = 1L)
 }
 
@@ -592,16 +571,10 @@ hldy_july_fourth <- function(since = "1970-01-01") {
 
 #' @rdname holidays
 #' @export
-hldy_lincoln_birthday <- function(since = "1970-01-01", until = NULL) {
-  since <- vec_cast_date(since, "since")
-
-  rrule <- yearly(since)
+hldy_lincoln_birthday <- function(since = "1970-01-01", until = "2040-01-01") {
+  rrule <- yearly(since = since, until = until)
   rrule <- recur_on_ymonth(rrule, 2L)
   rrule <- recur_on_mday(rrule, 12L)
-
-  if (!is.null(until)) {
-    rrule <- recur_until(rrule, until)
-  }
 
   sch <- as_schedule(rrule)
 
@@ -615,7 +588,7 @@ hldy_lincoln_birthday <- function(since = "1970-01-01", until = NULL) {
 
 #' @rdname holidays
 #' @export
-hldy_election_day <- function(since = "1970-01-01", until = NULL) {
+hldy_election_day <- function(since = "1970-01-01", until = "2040-01-01") {
   since <- vec_cast_date(since, "since")
 
   hldy_start <- as.Date("1845-01-01")
@@ -623,14 +596,10 @@ hldy_election_day <- function(since = "1970-01-01", until = NULL) {
     since <- hldy_start
   }
 
-  rrule <- yearly(since)
+  rrule <- yearly(since = since, until = until)
   rrule <- recur_on_wday(rrule, 2L)
   rrule <- recur_on_mday(rrule, 2:8)
   rrule <- recur_on_ymonth(rrule, 11L)
-
-  if (!is.null(until)) {
-    rrule <- recur_until(rrule, until)
-  }
 
   as_schedule(rrule)
 }

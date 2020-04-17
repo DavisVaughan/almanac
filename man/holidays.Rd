@@ -40,17 +40,17 @@ hldy_thanksgiving(since = "1970-01-01")
 
 hldy_christmas(since = "1970-01-01")
 
-hldy_easter(since = "1970-01-01", until = NULL)
+hldy_easter(since = "1970-01-01", until = "2040-01-01")
 
-hldy_good_friday(since = "1970-01-01", until = NULL)
+hldy_good_friday(since = "1970-01-01", until = "2040-01-01")
 
-hldy_easter_monday(since = "1970-01-01", until = NULL)
+hldy_easter_monday(since = "1970-01-01", until = "2040-01-01")
 
 hldy_july_fourth(since = "1970-01-01")
 
-hldy_lincoln_birthday(since = "1970-01-01", until = NULL)
+hldy_lincoln_birthday(since = "1970-01-01", until = "2040-01-01")
 
-hldy_election_day(since = "1970-01-01", until = NULL)
+hldy_election_day(since = "1970-01-01", until = "2040-01-01")
 }
 \arguments{
 \item{since}{\verb{[Date(1)]}
