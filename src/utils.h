@@ -1,0 +1,54 @@
+#ifndef ALMANAC_UTILS_H
+#define ALMANAC_UTILS_H
+
+#include "r.h"
+
+// -----------------------------------------------------------------------------
+
+extern sexp classes_date;
+
+// -----------------------------------------------------------------------------
+
+extern sexp syms_class;
+
+// -----------------------------------------------------------------------------
+
+static inline sexp r_new_vector(r_type type, r_ssize size) {
+  return Rf_allocVector(type, size);
+}
+
+// -----------------------------------------------------------------------------
+
+static inline double* r_dbl_deref(sexp x) {
+  return REAL(x);
+}
+
+static inline int* r_lgl_deref(sexp x) {
+  return LOGICAL(x);
+}
+
+// -----------------------------------------------------------------------------
+
+static inline double r_dbl_get(sexp x, r_ssize i) {
+  return r_dbl_deref(x)[i];
+}
+
+static inline int r_lgl_get(sexp x, r_ssize i) {
+  return r_lgl_deref(x)[i];
+}
+
+// -----------------------------------------------------------------------------
+
+static inline sexp r_poke_attr(sexp x, sexp sym, sexp value) {
+  return Rf_setAttrib(x, sym, value);
+}
+
+// -----------------------------------------------------------------------------
+
+static inline R_xlen_t r_length(sexp x) {
+  return Rf_xlength(x);
+}
+
+// -----------------------------------------------------------------------------
+
+#endif
