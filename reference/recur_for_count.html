@@ -41,8 +41,7 @@
 
 <meta property="og:title" content="Control the number of times to recur — recur_for_count" />
 <meta property="og:description" content="recur_for_count() controls the number of times that a recurrence will recur
-for. If not set, the recurrence will continue indefinitely.
-recur_for_count() is mutually exclusive with recur_until()." />
+for. Using recur_for_count() will override the until date of the rule." />
 
 
 
@@ -138,8 +137,7 @@ recur_for_count() is mutually exclusive with recur_until()." />
 
     <div class="ref-description">
     <p><code>recur_for_count()</code> controls the number of times that a recurrence will recur
-for. If not set, the recurrence will continue indefinitely.
-<code>recur_for_count()</code> is mutually exclusive with <code><a href='recur_until.html'>recur_until()</a></code>.</p>
+for. Using <code>recur_for_count()</code> will override the <code>until</code> date of the rule.</p>
     </div>
 
     <pre class="usage"><span class='fu'>recur_for_count</span>(<span class='no'>x</span>, <span class='no'>n</span>)</pre>
@@ -161,7 +159,7 @@ for. If not set, the recurrence will continue indefinitely.
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Remember that the number of times the occurrance has occurred is counted
+    <p>Remember that the number of times the occurrence has occurred is counted
 from the <code>since</code> date! Adjust it as necessary to get your desired results.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -180,8 +178,7 @@ from the <code>since</code> date! Adjust it as necessary to get your desired res
   <span class='fu'><a href='recur_on_mday.html'>recur_on_mday</a></span>(<span class='fl'>31</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'>recur_for_count</span>(<span class='fl'>5</span>)
 
-<span class='fu'><a href='alma_seq.html'>alma_seq</a></span>(<span class='st'>"2019-01-01"</span>, <span class='st'>"2020-01-01"</span>, <span class='no'>on_31_for_5</span>)</div><div class='output co'>#&gt; [1] "2019-01-31" "2019-03-31" "2019-05-31" "2019-07-31" "2019-08-31"</div><div class='input'>
-</div></pre>
+<span class='fu'><a href='alma_seq.html'>alma_seq</a></span>(<span class='st'>"2019-01-01"</span>, <span class='st'>"2020-01-01"</span>, <span class='no'>on_31_for_5</span>)</div><div class='output co'>#&gt; [1] "2019-01-31" "2019-03-31" "2019-05-31" "2019-07-31" "2019-08-31"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
