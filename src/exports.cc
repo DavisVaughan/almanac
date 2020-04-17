@@ -1,5 +1,6 @@
 #include "exports.h"
 #include "utils.h"
+#include "alma-next.h"
 #include "alma-seq.h"
 #include "initialize.h"
 
@@ -12,6 +13,11 @@ extern "C" sexp export_alma_seq_impl(sexp occurrences,
   const bool inclusive_ = r_lgl_get(inclusive, 0);
 
   return alma_seq_impl(occurrences, from_, to_, inclusive_);
+}
+
+extern "C" sexp export_alma_next_impl(sexp x, sexp occurrences, sexp inclusive) {
+  const bool inclusive_ = r_lgl_get(inclusive, 0);
+  return alma_next_impl(x, occurrences, inclusive_);
 }
 
 extern "C" sexp export_almanac_init() {

@@ -10,9 +10,9 @@ alma_next(x, schedule, inclusive = FALSE)
 alma_previous(x, schedule, inclusive = FALSE)
 }
 \arguments{
-\item{x}{\verb{[Date(1)]}
+\item{x}{\verb{[Date]}
 
-The date to start the search from.}
+A vector of dates to look forward or backwards from.}
 
 \item{schedule}{\verb{[schedule / rrule]}
 
@@ -37,8 +37,6 @@ sch <- schedule() \%>\%
   sch_rrule(on_12th) \%>\%
   sch_rrule(on_monday)
 
-alma_next("2019-01-01", sch)
-
-alma_previous("2019-01-01", sch)
-
+alma_next(c("2019-01-01", "2019-01-11"), sch)
+alma_previous(c("2019-01-01", "2019-01-11"), sch)
 }

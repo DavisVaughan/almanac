@@ -8,10 +8,11 @@
 #'
 #' @inheritParams alma_seq
 #'
-#' @param x `[Date(1)]`
+#' @param x `[Date]`
 #'
-#'    The date to start the search from.
+#'    A vector of dates to look forward or backwards from.
 #'
+#' @export
 #' @examples
 #' on_12th <- monthly() %>% recur_on_mday(12)
 #' on_monday <- weekly() %>% recur_on_wday("Monday")
@@ -21,11 +22,8 @@
 #'   sch_rrule(on_12th) %>%
 #'   sch_rrule(on_monday)
 #'
-#' alma_next("2019-01-01", sch)
-#'
-#' alma_previous("2019-01-01", sch)
-#'
-#' @export
+#' alma_next(c("2019-01-01", "2019-01-11"), sch)
+#' alma_previous(c("2019-01-01", "2019-01-11"), sch)
 alma_next <- function(x, schedule, inclusive = FALSE) {
   x <- vec_cast_date(x)
 
@@ -36,43 +34,13 @@ alma_next <- function(x, schedule, inclusive = FALSE) {
     abort("`inclusive` cannot be `NA`")
   }
 
-  alma_next_impl(x, schedule, inclusive)
-}
-
-alma_next_impl <- function(x, schedule, inclusive) {
   occurrences <- schedule$cache$get()
 
-  out <- vector("numeric", length(x))
+  alma_next_impl(x, occurrences, inclusive)
+}
 
-  # Avoid dispatch overhead
-  x <- unclass(x)
-  occurrences <- unclass(occurrences)
-
-  # TODO: Reimplement in C with a comparison loop
-  # or C++ with std::lower_bound? It would give the exact value,
-  # and if itr==end then we use NA_REAL.
-  for(i in seq_along(x)) {
-    elt <- x[[i]]
-
-    if (inclusive) {
-      where <- elt <= occurrences
-    } else {
-      where <- elt < occurrences
-    }
-
-    if (!any(where)) {
-      out[[i]] <- NA_real_
-      next
-    }
-
-    locs <- which(where)
-    loc <- locs[[1L]]
-    out[[i]] <- occurrences[[loc]]
-  }
-
-  out <- new_date(out)
-
-  out
+alma_next_impl <- function(x, occurrences, inclusive) {
+  .Call(export_alma_next_impl, x, occurrences, inclusive)
 }
 
 #' @rdname alma_next
