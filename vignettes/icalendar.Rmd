@@ -42,8 +42,7 @@ alma_seq(since, to, rrule)
 ### Daily until 1997-12-24
 
 ```{r}
-rrule <- daily(since) %>%
-  recur_until("1997-12-24")
+rrule <- daily(since, until = "1997-12-24")
 
 alma_seq(since, to, rrule)
 ```
@@ -70,9 +69,8 @@ alma_seq(since, to, rrule)
 ### Every day in January, for 3 years
 
 ```{r}
-rrule <- daily("1998-01-01") %>%
-  recur_on_ymonth("January") %>%
-  recur_until("2000-01-31")
+rrule <- daily(since = "1998-01-01", until = "2000-01-31") %>%
+  recur_on_ymonth("January")
 
 alma_seq(since, to, rrule)
 ```
@@ -89,8 +87,7 @@ alma_seq(since, to, rrule)
 ### Weekly until December 24, 1997
 
 ```{r}
-rrule <- weekly(since) %>%
-  recur_until("1997-12-24")
+rrule <- weekly(since, until = "1997-12-24")
 
 alma_seq(since, to, rrule)
 ```
@@ -117,10 +114,9 @@ alma_seq(since, to, rrule)
 ### Every other week on Monday, Wednesday, and Friday until December 24, 1997, starting on Monday, September 1, 1997
 
 ```{r}
-rrule <- weekly("1997-09-01") %>%
+rrule <- weekly(since = "1997-09-01", until = "1997-12-24") %>%
   recur_on_wday(c("Mon", "Wed", "Fri")) %>%
-  recur_on_interval(2) %>%
-  recur_until("1997-12-24")
+  recur_on_interval(2)
 
 alma_seq("1997-09-01", to, rrule)
 ```
@@ -149,9 +145,8 @@ alma_seq(since, to, rrule)
 ### Monthly on the first Friday until December 24, 1997
 
 ```{r}
-rrule <- monthly("1997-09-05") %>%
-  recur_on_wday("Fri", nth = 1) %>%
-  recur_until("1997-12-24")
+rrule <- monthly(since = "1997-09-05", until = "1997-12-24") %>%
+  recur_on_wday("Fri", nth = 1)
 
 alma_seq(since, to, rrule)
 ```

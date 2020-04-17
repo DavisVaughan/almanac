@@ -28,11 +28,6 @@
 #' @export
 alma_next <- function(x, schedule, inclusive = FALSE) {
   x <- vec_cast_date(x)
-  vec_assert(x, size = 1L)
-
-  if (is.na(x)) {
-    abort("`x` cannot be `NA`")
-  }
 
   schedule <- as_schedule(schedule)
 
@@ -45,29 +40,45 @@ alma_next <- function(x, schedule, inclusive = FALSE) {
 }
 
 alma_next_impl <- function(x, schedule, inclusive) {
-  cache <- schedule$cache
+  occurrences <- schedule$cache$get()
 
-  out <- cache$slice_next(x, inclusive)
+  out <- vector("numeric", length(x))
 
-  if (!is.null(out)) {
-    return(out)
+  # Avoid dispatch overhead
+  x <- unclass(x)
+  occurrences <- unclass(occurrences)
+
+  # TODO: Reimplement in C with a comparison loop
+  # or C++ with std::lower_bound? It would give the exact value,
+  # and if itr==end then we use NA_REAL.
+  for(i in seq_along(x)) {
+    elt <- x[[i]]
+
+    if (inclusive) {
+      where <- elt <= occurrences
+    } else {
+      where <- elt < occurrences
+    }
+
+    if (!any(where)) {
+      out[[i]] <- NA_real_
+      next
+    }
+
+    locs <- which(where)
+    loc <- locs[[1L]]
+    out[[i]] <- occurrences[[loc]]
   }
 
-  recurrences <- schedule$recurrences
-  cache$cache_next(recurrences, x, inclusive)
+  out <- new_date(out)
 
-  cache$slice_next(x, inclusive)
+  out
 }
 
 #' @rdname alma_next
 #' @export
 alma_previous <- function(x, schedule, inclusive = FALSE) {
   x <- vec_cast_date(x)
-  vec_assert(x, size = 1L)
-
-  if (is.na(x)) {
-    abort("`x` cannot be `NA`")
-  }
 
   schedule <- as_schedule(schedule)
 
@@ -80,16 +91,36 @@ alma_previous <- function(x, schedule, inclusive = FALSE) {
 }
 
 alma_previous_impl <- function(x, schedule, inclusive) {
-  cache <- schedule$cache
+  occurrences <- schedule$cache$get()
 
-  out <- cache$slice_previous(x, inclusive)
+  out <- vector("numeric", length(x))
 
-  if (!is.null(out)) {
-    return(out)
+  # Avoid dispatch overhead
+  x <- unclass(x)
+  occurrences <- unclass(occurrences)
+
+  # TODO: Reimplement in C with std::upper_bound - 1?
+  # https://stackoverflow.com/questions/9989731/algorithm-function-for-finding-last-item-less-than-or-equal-to-like-lower-bou
+  for(i in seq_along(x)) {
+    elt <- x[[i]]
+
+    if (inclusive) {
+      where <- elt >= occurrences
+    } else {
+      where <- elt > occurrences
+    }
+
+    if (!any(where)) {
+      out[[i]] <- NA_real_
+      next
+    }
+
+    locs <- which(where)
+    loc <- locs[[length(locs)]]
+    out[[i]] <- occurrences[[loc]]
   }
 
-  recurrences <- schedule$recurrences
-  cache$cache_previous(recurrences, x, inclusive)
+  out <- new_date(out)
 
-  cache$slice_previous(x, inclusive)
+  out
 }

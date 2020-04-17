@@ -34,11 +34,9 @@ alma_in <- function(x, schedule) {
   x <- vec_cast_date(x)
 
   schedule <- as_schedule(schedule)
+  cache <- schedule$cache
 
-  min <- min2(x)
-  max <- max2(x)
+  occurrences <- schedule$cache$get()
 
-  events <- alma_seq_impl(min, max, schedule, inclusive = TRUE)
-
-  vec_in(x, events)
+  vec_in(x, occurrences)
 }

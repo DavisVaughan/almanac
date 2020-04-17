@@ -1,7 +1,6 @@
 #' Create a recurrence rule
 #'
 #' @description
-#'
 #' These functions allow you to create a recurrence rule with a specified
 #' frequency. They are the base elements for all recurrence rules. To add
 #' to them, use one of the `recur_*()` functions.
@@ -15,7 +14,6 @@
 #' - `yearly()` Recur on a yearly frequency.
 #'
 #' @details
-#'
 #' The `since` argument is _very_ important for both practical use, and speed.
 #' The default is set to the Unix epoch time, but there is no hard and fast
 #' rule for doing this. Remember that this is the first possible event date,
@@ -40,9 +38,13 @@
 #'
 #' @param since `[Date(1)]`
 #'
-#'    The initial date to anchor the recurrence from. Depending on the final
+#'    The lower bound on the recurrence set. Depending on the final
 #'    recurrence rule, pieces of information from this anchor date might be used
-#'    to generate the event dates.
+#'    to generate a complete recurrence rule.
+#'
+#' @param until `[Date(1)]`
+#'
+#'    The upper bound on the recurrence set.
 #'
 #' @examples
 #' rrule <- monthly() %>% recur_on_mday(25)
@@ -76,26 +78,26 @@ NULL
 
 #' @rdname rrule
 #' @export
-daily <- function(since = "1970-01-01") {
-  rrule(since, frequency = "daily")
+daily <- function(since = "1970-01-01", until = "2040-01-01") {
+  rrule(since, until, frequency = "daily")
 }
 
 #' @rdname rrule
 #' @export
-weekly <- function(since = "1970-01-01") {
-  rrule(since, frequency = "weekly")
+weekly <- function(since = "1970-01-01", until = "2040-01-01") {
+  rrule(since, until, frequency = "weekly")
 }
 
 #' @rdname rrule
 #' @export
-monthly <- function(since = "1970-01-01") {
-  rrule(since, frequency = "monthly")
+monthly <- function(since = "1970-01-01", until = "2040-01-01") {
+  rrule(since, until, frequency = "monthly")
 }
 
 #' @rdname rrule
 #' @export
-yearly <- function(since = "1970-01-01") {
-  rrule(since, frequency = "yearly")
+yearly <- function(since = "1970-01-01", until = "2040-01-01") {
+  rrule(since, until, frequency = "yearly")
 }
 
 # ------------------------------------------------------------------------------
@@ -113,23 +115,35 @@ format.rrule <- function(x, ...) {
 
 # ------------------------------------------------------------------------------
 
-rrule <- function(since = "1970-01-01", frequency = "yearly") {
+rrule <- function(since, until, frequency) {
   since <- vec_cast_date(since, "since")
   vec_assert(since, size = 1L)
 
-  if (is.na(since)) {
-    abort("`since` cannot be `NA`.")
+  if (is_missing_or_infinite(since)) {
+    abort("`since` must be a finite date.")
+  }
+
+  until <- vec_cast_date(until, "until")
+  vec_assert(until, size = 1L)
+
+  if (is_missing_or_infinite(until)) {
+    abort("`until` must be a finite date.")
+  }
+
+  if (since > until) {
+    abort("`since` must be before `until`.")
   }
 
   new_rrule(
     since = since,
+    until = until,
     frequency = frequency
   )
 }
 
 new_rrule <- function(since = as.Date("1970-01-01"),
+                      until = as.Date("2040-01-01"),
                       frequency = "yearly",
-                      until = NULL,
                       count = NULL,
                       interval = NULL,
                       week_start = NULL,
@@ -142,8 +156,8 @@ new_rrule <- function(since = as.Date("1970-01-01"),
                       easter = NULL) {
   rules <- list(
     since = since,
-    frequency = frequency,
     until = until,
+    frequency = frequency,
     count = count,
     interval = interval,
     week_start = week_start,
@@ -156,7 +170,7 @@ new_rrule <- function(since = as.Date("1970-01-01"),
     easter = easter
   )
 
-  cache <- cache$new(min = since)
+  cache <- Cache$new()
 
   data <- list(
     rules = rules,

@@ -145,3 +145,9 @@ weekday_int <- function() {
 weekday_print <- function() {
   c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")
 }
+
+# ------------------------------------------------------------------------------
+
+is_missing_or_infinite <- function(x) {
+  !is.finite(x)
+}

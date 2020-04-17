@@ -42,16 +42,15 @@ sch_summary <- function(x) {
 
 new_schedule <- function(rrules = list(),
                          rdates = new_date(),
-                         exdates = new_date()) {
-  recurrences <- list(
+                         exdates = new_date(),
+                         cache = Cache$new()) {
+  recurrences <- new_recurrences(
     rrules = rrules,
     rdates = rdates,
     exdates = exdates
   )
 
-  since <- compute_schedule_since(recurrences)
-
-  cache <- cache$new(min = since)
+  cache$set_recurrences(recurrences)
 
   data <- list(
     recurrences = recurrences,
@@ -76,9 +75,7 @@ as_schedule.default <- function(x, ...) {
 # like `alma_seq()`, which converts it to a schedule. We want
 # to update the cache of the original rrule.
 as_schedule.rrule <- function(x, ...) {
-  out <- new_schedule(rrules = list(x))
-  out$cache <- x$cache
-  out
+  new_schedule(rrules = list(x), cache = x$cache)
 }
 
 as_schedule.schedule <- function(x, ...) {
@@ -101,37 +98,8 @@ validate_schedule <- function(x, arg = "`x`") {
 
 # ------------------------------------------------------------------------------
 
-compute_schedule_since <- function(recurrences) {
-  rrules <- recurrences$rrules
-
-  since <- compute_rrules_since(rrules)
-
-  rdates <- recurrences$rdates
-
-  if (length(rdates) == 0L) {
-    return(since)
-  }
-
-  since <- min(rdates, since)
-
-  since
-}
-
-# Minimum `since` date of all rules
-compute_rrules_since <- function(x) {
-  # Default `since` date for an empty schedule
-  if (length(x) == 0L) {
-    return(as.Date("1970-01-01"))
-  }
-
-  # `vapply()` will strip the class
-  sinces <- vapply(x, pull_since, numeric(1))
-  since <- min(sinces)
-  class(since) <- "Date"
-
-  since
-}
-
-pull_since <- function(x) {
-  x$rules$since
+new_recurrences <- function(rrules = list(),
+                            rdates = new_date(),
+                            exdates = new_date()) {
+  list(rrules = rrules, rdates = rdates, exdates = exdates)
 }

@@ -19,13 +19,6 @@ A schedule or event.}
 \code{bdays()} is similar to \code{\link[lubridate:days]{lubridate::days()}} in that it constructs an object
 that can be added to Dates to shift by a set period. It differs in the fact
 that you can provide a \code{schedule} to shift relative to.
-
-When using \code{bdays()}, remember that the \code{schedule} defines events that should
-be "stepped over". This is powerful, but should be used with some thought,
-as it is possible to get into an infinite loop. For example, using a
-\code{daily()} schedule with \code{as.Date("2019-01-01") + bdays(1, daily())} would
-define every day as an "event" to step over. Since we will never advance to
-a non-event day, we get stuck in an endless loop.
 }
 \details{
 When added to a Date, this internally calls \code{\link[=alma_step]{alma_step()}}, meaning that an
