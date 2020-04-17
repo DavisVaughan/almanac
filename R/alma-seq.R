@@ -44,21 +44,11 @@ alma_seq <- function(from, to, schedule, inclusive = TRUE) {
     abort("`inclusive` cannot be `NA`")
   }
 
-  alma_seq_impl(from, to, schedule, inclusive)
-}
-
-alma_seq_impl <- function(from, to, schedule, inclusive) {
   occurrences <- schedule$cache$get()
 
-  # TODO: Optimize with C, just get the start:end ranges
-  # since `occurrences` is sorted
-  if (inclusive) {
-    locs <- occurrences >= from & occurrences <= to
-  } else {
-    locs <- occurrences > from & occurrences < to
-  }
+  alma_seq_impl(occurrences, from, to, inclusive)
+}
 
-  occurrences <- occurrences[locs]
-
-  occurrences
+alma_seq_impl <- function(occurrences, from, to, inclusive) {
+  .Call(export_alma_seq_impl, occurrences, from, to, inclusive)
 }
