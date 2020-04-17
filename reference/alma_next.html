@@ -157,8 +157,8 @@ alma_previous() generates the previous event before x.
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p><code>[Date(1)]</code></p>
-<p>The date to start the search from.</p></td>
+      <td><p><code>[Date]</code></p>
+<p>A vector of dates to look forward or backwards from.</p></td>
     </tr>
     <tr>
       <th>schedule</th>
@@ -182,9 +182,7 @@ alma_previous() generates the previous event before x.
   <span class='fu'><a href='sch-add.html'>sch_rrule</a></span>(<span class='no'>on_12th</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='sch-add.html'>sch_rrule</a></span>(<span class='no'>on_monday</span>)
 
-<span class='fu'>alma_next</span>(<span class='st'>"2019-01-01"</span>, <span class='no'>sch</span>)</div><div class='output co'>#&gt; [1] "2019-01-07"</div><div class='input'>
-<span class='fu'>alma_previous</span>(<span class='st'>"2019-01-01"</span>, <span class='no'>sch</span>)</div><div class='output co'>#&gt; [1] "2018-12-31"</div><div class='input'>
-</div></pre>
+<span class='fu'>alma_next</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"2019-01-01"</span>, <span class='st'>"2019-01-11"</span>), <span class='no'>sch</span>)</div><div class='output co'>#&gt; [1] "2019-01-07" "2019-01-12"</div><div class='input'><span class='fu'>alma_previous</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"2019-01-01"</span>, <span class='st'>"2019-01-11"</span>), <span class='no'>sch</span>)</div><div class='output co'>#&gt; [1] "2018-12-31" "2019-01-07"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
