@@ -32,11 +32,7 @@
 #' alma_in(x, sch)
 alma_in <- function(x, schedule) {
   x <- vec_cast_date(x)
-
   schedule <- as_schedule(schedule)
-  cache <- schedule$cache
-
   occurrences <- schedule$cache$get()
-
   vec_in(x, occurrences)
 }
