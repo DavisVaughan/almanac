@@ -140,8 +140,11 @@ set calculations. To do this, it uses the equally awesome R package,
 The date shifting / adjusting functions are modeled after similar
 functions in [QuantLib](https://github.com/lballabio/QuantLib).
 
+The fast binary search based implementations of `alma_next()` and
+`alma_step()` are inspired by Pandas and the implementation of Numpy’s
+[busday\_offset()](https://docs.scipy.org/doc/numpy/reference/generated/numpy.busday_offset.html).
+
 The author of [gs](https://github.com/jameslairdsmith/gs), James
 Laird-Smith, has been a great collaborator as we have bounced ideas off
 of each other. gs attempts to solve a similar problem, but with a
-slightly different implementation. The hope is that gs and almanac will
-merge, as they currently overlap a large amount.
+slightly different implementation.
