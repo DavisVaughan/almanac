@@ -21,10 +21,10 @@ Imports:
     lubridate,
     magrittr,
     methods,
+    R6,
     rlang,
     V8 (>= 3.0.1),
-    vctrs (>= 0.2.99.9011),
-    R6
+    vctrs (>= 0.2.99.9011)
 Suggests: 
     covr,
     knitr,
