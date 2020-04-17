@@ -156,6 +156,24 @@
     </table>
 
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='no'>rrule</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rrule.html'>weekly</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='recur_on_wday.html'>recur_on_wday</a></span>(<span class='st'>"Thursday"</span>)
+
+<span class='co'># A Thursday and Friday</span>
+<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/as.Date.html'>as.Date</a></span>(<span class='st'>"1970-01-01"</span>) + <span class='fl'>0</span>:<span class='fl'>1</span>
+
+<span class='fu'>alma_in</span>(<span class='no'>x</span>, <span class='no'>rrule</span>)</div><div class='output co'>#&gt; [1]  TRUE FALSE</div><div class='input'>
+<span class='co'># Every month, on the 2nd day of the month</span>
+<span class='no'>rrule2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rrule.html'>monthly</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='recur_on_mday.html'>recur_on_mday</a></span>(<span class='fl'>2</span>)
+
+<span class='co'># Make a larger schedule made of multiple rules</span>
+<span class='no'>sch</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='schedule.html'>schedule</a></span>() <span class='kw'>%&gt;%</span>
+ <span class='fu'><a href='sch-add.html'>sch_rrule</a></span>(<span class='no'>rrule</span>) <span class='kw'>%&gt;%</span>
+ <span class='fu'><a href='sch-add.html'>sch_rrule</a></span>(<span class='no'>rrule2</span>)
+
+<span class='fu'>alma_in</span>(<span class='no'>x</span>, <span class='no'>sch</span>)</div><div class='output co'>#&gt; [1] TRUE TRUE</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
