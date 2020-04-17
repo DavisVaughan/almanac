@@ -5,14 +5,12 @@
 
 <!-- badges: start -->
 
-[![Travis build
-status](https://travis-ci.org/DavisVaughan/almanac.svg?branch=master)](https://travis-ci.org/DavisVaughan/almanac)
 [![Codecov test
 coverage](https://codecov.io/gh/DavisVaughan/almanac/branch/master/graph/badge.svg)](https://codecov.io/gh/DavisVaughan/almanac?branch=master)
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
-[![AppVeyor build
-status](https://ci.appveyor.com/api/projects/status/github/DavisVaughan/almanac?branch=master&svg=true)](https://ci.appveyor.com/project/DavisVaughan/almanac)
+[![R build
+status](https://github.com/DavisVaughan/almanac/workflows/R-CMD-check/badge.svg)](https://github.com/DavisVaughan/almanac/actions)
 <!-- badges: end -->
 
 ``` r
