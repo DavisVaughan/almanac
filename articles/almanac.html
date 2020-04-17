@@ -160,12 +160,12 @@
 <span class="co"># The first time is "slow"</span>
 <span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>(<span class="fu"><a href="../reference/alma_seq.html">alma_seq</a></span>(<span class="no">start_date</span>, <span class="st">"2000-01-01"</span>, <span class="no">on_daily</span>))
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;   0.331   0.020   0.312</span>
+<span class="co">#&gt;   0.317   0.020   0.298</span>
 
 <span class="co"># Repeated access to the same location is fast</span>
 <span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>(<span class="fu"><a href="../reference/alma_seq.html">alma_seq</a></span>(<span class="no">start_date</span>, <span class="st">"2000-01-01"</span>, <span class="no">on_daily</span>))
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;       0       0       0</span>
+<span class="co">#&gt;   0.000   0.000   0.001</span>
 
 <span class="co"># Dates are cached from `[since, to]`, so if you back up `to`, its still fast</span>
 <span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>(<span class="fu"><a href="../reference/alma_seq.html">alma_seq</a></span>(<span class="no">start_date</span>, <span class="st">"1990-05-01"</span>, <span class="no">on_daily</span>))
@@ -176,7 +176,7 @@
 <span class="co"># between `since` and `to` again</span>
 <span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>(<span class="fu"><a href="../reference/alma_seq.html">alma_seq</a></span>(<span class="no">start_date</span>, <span class="st">"2000-05-01"</span>, <span class="no">on_daily</span>))
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;       0       0       0</span></pre></body></html></div>
+<span class="co">#&gt;   0.000   0.000   0.001</span></pre></body></html></div>
 </div>
 </div>
 <div id="recurrence-conditions" class="section level2">
@@ -257,7 +257,7 @@
 <span class="co">#&gt;     sch &lt;- sch_merge(sch, hldy_thanksgiving_post_1942())</span>
 <span class="co">#&gt;     return(sch)</span>
 <span class="co">#&gt; }</span>
-<span class="co">#&gt; &lt;bytecode: 0x7fc7cfd6e218&gt;</span>
+<span class="co">#&gt; &lt;bytecode: 0x7fdef45225a0&gt;</span>
 <span class="co">#&gt; &lt;environment: namespace:almanac&gt;</span></pre></body></html></div>
 </div>
   </div>
