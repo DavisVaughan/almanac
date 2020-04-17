@@ -48,16 +48,17 @@ alma_seq <- function(from, to, schedule, inclusive = TRUE) {
 }
 
 alma_seq_impl <- function(from, to, schedule, inclusive) {
-  cache <- schedule$cache
+  occurrences <- schedule$cache$get()
 
-  out <- cache$slice_seq(from, to, inclusive)
-
-  if (!is.null(out)) {
-    return(out)
+  # TODO: Optimize with C, just get the start:end ranges
+  # since `occurrences` is sorted
+  if (inclusive) {
+    locs <- occurrences >= from & occurrences <= to
+  } else {
+    locs <- occurrences > from & occurrences < to
   }
 
-  recurrences <- schedule$recurrences
-  cache$cache_seq(recurrences, to)
+  occurrences <- occurrences[locs]
 
-  cache$slice_seq(from, to, inclusive)
+  occurrences
 }

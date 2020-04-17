@@ -8,14 +8,14 @@ test_that("can check if a date is in a schedule", {
 test_that("is vectorized", {
   rrule <- monthly(since = "2019-01-01")
 
-  expect_equal(alma_in(c("2019-01-01", "2019-01-02"), rrule), c(TRUE, FALSE))
+  expect_identical(alma_in(c("2019-01-01", "2019-01-02"), rrule), c(TRUE, FALSE))
 })
 
 test_that("`alma_in()`ness can be determined when NA values are present", {
   x <- as.Date(c(NA, "2019-01-01", "2019-01-02"))
   rrule <- daily(since = "2019-01-01")
 
-  expect_equal(alma_in(x, rrule), c(FALSE, TRUE, TRUE))
+  expect_identical(alma_in(x, rrule), c(FALSE, TRUE, TRUE))
 })
 
 test_that("`alma_in()`ness can be silently determined when all values are NA", {
@@ -23,26 +23,26 @@ test_that("`alma_in()`ness can be silently determined when all values are NA", {
   rrule <- daily(since = "2019-01-01")
 
   expect_warning(
-    expect_equal(alma_in(x, rrule), c(FALSE, FALSE, FALSE)),
+    expect_identical(alma_in(x, rrule), c(FALSE, FALSE, FALSE)),
     NA
   )
 })
 
-test_that("A single infinite date renders `alma_in()` uncallable", {
+test_that("`alma_in()` can be called even with infinite dates", {
   rrule <- daily(since = "1970-01-01")
   x <- vctrs::vec_c(almanac_global_inf_date, as.Date("1970-01-01"))
-  expect_error(alma_in(x, rrule), class = "almanac_error_infinite_extension")
+  expect_identical(alma_in(x, rrule), c(FALSE, TRUE))
 })
 
 test_that("`alma_in()`ness is defined in the extreme cases", {
   rrule <- daily()
-  expect_error(alma_in(almanac_global_inf_date, rrule), class = "almanac_error_infinite_extension")
-  expect_equal(alma_in(almanac_global_neg_inf_date, rrule), FALSE)
+  expect_identical(alma_in(almanac_global_inf_date, rrule), FALSE)
+  expect_identical(alma_in(almanac_global_neg_inf_date, rrule), FALSE)
 })
 
 test_that("can handle size zero input without warnings", {
   expect_warning(
-    expect_equal(alma_in(new_date(), schedule()), logical()),
+    expect_identical(alma_in(new_date(), schedule()), logical()),
     NA
   )
 })

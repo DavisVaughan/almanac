@@ -8,20 +8,24 @@
 \alias{yearly}
 \title{Create a recurrence rule}
 \usage{
-daily(since = "1970-01-01")
+daily(since = "1970-01-01", until = "2040-01-01")
 
-weekly(since = "1970-01-01")
+weekly(since = "1970-01-01", until = "2040-01-01")
 
-monthly(since = "1970-01-01")
+monthly(since = "1970-01-01", until = "2040-01-01")
 
-yearly(since = "1970-01-01")
+yearly(since = "1970-01-01", until = "2040-01-01")
 }
 \arguments{
 \item{since}{\verb{[Date(1)]}
 
-The initial date to anchor the recurrence from. Depending on the final
+The lower bound on the recurrence set. Depending on the final
 recurrence rule, pieces of information from this anchor date might be used
-to generate the event dates.}
+to generate a complete recurrence rule.}
+
+\item{until}{\verb{[Date(1)]}
+
+The upper bound on the recurrence set.}
 }
 \description{
 These functions allow you to create a recurrence rule with a specified
