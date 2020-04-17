@@ -166,7 +166,8 @@
 <p>almanac has developed as a composite of ideas from multiple different libraries.</p>
 <p>First off, it directly embeds the <em>amazing</em> JavaScript library <a href="https://github.com/jakubroztocil/rrule">rrule</a> for the core recurrence set calculations. To do this, it uses the equally awesome R package, <a href="https://github.com/jeroen/V8">V8</a>, from Jeroen Ooms.</p>
 <p>The date shifting / adjusting functions are modeled after similar functions in <a href="https://github.com/lballabio/QuantLib">QuantLib</a>.</p>
-<p>The author of <a href="https://github.com/jameslairdsmith/gs">gs</a>, James Laird-Smith, has been a great collaborator as we have bounced ideas off of each other. gs attempts to solve a similar problem, but with a slightly different implementation. The hope is that gs and almanac will merge, as they currently overlap a large amount.</p>
+<p>The fast binary search based implementations of <code><a href="reference/alma_next.html">alma_next()</a></code> and <code><a href="reference/alma_jump.html">alma_step()</a></code> are inspired by Pandas and the implementation of Numpy’s <a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.busday_offset.html">busday_offset()</a>.</p>
+<p>The author of <a href="https://github.com/jameslairdsmith/gs">gs</a>, James Laird-Smith, has been a great collaborator as we have bounced ideas off of each other. gs attempts to solve a similar problem, but with a slightly different implementation.</p>
 </div>
 </div>
   </div>
