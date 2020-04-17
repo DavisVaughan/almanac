@@ -10,10 +10,13 @@ test_that("recurrences stop after `count` is up", {
   expect_equal(x, expect)
 })
 
-test_that("`count` is mutually exclusive with `until`", {
-  expect_error(
-    daily() %>% recur_until("2000-01-01") %>% recur_for_count(2),
-    "mututally exclusive with `until`"
+test_that("`count` overrides `until`", {
+  rrule <- daily(since = "1970-01-01", until = "1970-01-02") %>%
+    recur_for_count(3)
+
+  expect_identical(
+    alma_seq("1970-01-01", "1970-01-05", rrule),
+    new_date(c(0, 1, 2))
   )
 })
 

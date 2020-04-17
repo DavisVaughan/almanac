@@ -1,14 +1,11 @@
 #' Control the number of times to recur
 #'
 #' @description
-#'
 #' `recur_for_count()` controls the number of times that a recurrence will recur
-#' for. If not set, the recurrence will continue indefinitely.
-#' `recur_for_count()` is mutually exclusive with [recur_until()].
+#' for. Using `recur_for_count()` will override the `until` date of the rule.
 #'
 #' @details
-#'
-#' Remember that the number of times the occurrance has occurred is counted
+#' Remember that the number of times the occurrence has occurred is counted
 #' from the `since` date! Adjust it as necessary to get your desired results.
 #'
 #' @param x `[rrule]`
@@ -19,6 +16,7 @@
 #'
 #'    The number of times to recur for.
 #'
+#' @export
 #' @examples
 #' # Using the default `since` date
 #' daily_since_epoch_for_5 <- daily() %>% recur_for_count(5)
@@ -38,17 +36,11 @@
 #'   recur_for_count(5)
 #'
 #' alma_seq("2019-01-01", "2020-01-01", on_31_for_5)
-#'
-#' @export
 recur_for_count <- function(x, n) {
   validate_rrule(x)
 
   if (is_already_set(x, "count")) {
     abort("`count` has already been set for this rrule.")
-  }
-
-  if (is_already_set(x, "until")) {
-    abort("`count` is mututally exclusive with `until`, and `until` has already been set.")
   }
 
   n <- vec_cast(n, integer(), x_arg = "n")
@@ -58,5 +50,6 @@ recur_for_count <- function(x, n) {
     abort("`n` must be greater than 0.")
   }
 
-  tweak_rrule(x, count = n)
+  # Override `until`
+  tweak_rrule(x, until = NULL, count = n)
 }

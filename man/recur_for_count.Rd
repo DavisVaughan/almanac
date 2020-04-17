@@ -17,11 +17,10 @@ The number of times to recur for.}
 }
 \description{
 \code{recur_for_count()} controls the number of times that a recurrence will recur
-for. If not set, the recurrence will continue indefinitely.
-\code{recur_for_count()} is mutually exclusive with \code{\link[=recur_until]{recur_until()}}.
+for. Using \code{recur_for_count()} will override the \code{until} date of the rule.
 }
 \details{
-Remember that the number of times the occurrance has occurred is counted
+Remember that the number of times the occurrence has occurred is counted
 from the \code{since} date! Adjust it as necessary to get your desired results.
 }
 \examples{
@@ -43,5 +42,4 @@ on_31_for_5 <- monthly(since = "2019-01-01") \%>\%
   recur_for_count(5)
 
 alma_seq("2019-01-01", "2020-01-01", on_31_for_5)
-
 }
