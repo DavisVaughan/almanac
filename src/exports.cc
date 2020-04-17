@@ -20,6 +20,11 @@ extern "C" sexp export_alma_next_impl(sexp x, sexp occurrences, sexp inclusive) 
   return alma_next_impl(x, occurrences, inclusive_);
 }
 
+extern "C" sexp export_alma_previous_impl(sexp x, sexp occurrences, sexp inclusive) {
+  const bool inclusive_ = r_lgl_get(inclusive, 0);
+  return alma_previous_impl(x, occurrences, inclusive_);
+}
+
 extern "C" sexp export_almanac_init() {
   return almanac_init();
 }

@@ -11,6 +11,7 @@ extern "C" {
                             sexp inclusive);
 
   sexp export_alma_next_impl(sexp x, sexp occurrences, sexp inclusive);
+  sexp export_alma_previous_impl(sexp x, sexp occurrences, sexp inclusive);
 
   sexp export_almanac_init();
 

@@ -74,3 +74,29 @@ test_that("previous works with infinite dates", {
   expect_identical(alma_previous(almanac_global_inf_date, rrule), until)
   expect_identical(alma_previous(almanac_global_neg_inf_date, rrule), almanac_global_na_date)
 })
+
+test_that("alma_previous() works with missing dates", {
+  expect_identical(alma_previous(almanac_global_na_date, daily()), almanac_global_na_date)
+})
+
+test_that("alma_previous() is vectorized", {
+  rrule <- weekly() %>% recur_on_wday("Friday")
+
+  x <- as.Date(c("1970-01-03", "1970-01-10"))
+  expect <- as.Date(c("1970-01-02", "1970-01-09"))
+
+  expect_identical(alma_previous(x, rrule), expect)
+})
+
+test_that("alma_previous() respects `inclusive`", {
+  rrule <- daily(since = "1970-01-01", until = "1970-01-05")
+
+  x <- as.Date("1970-01-01")
+  y <- as.Date("1970-01-05")
+
+  expect_identical(alma_previous(x, rrule, inclusive = TRUE), x)
+  expect_identical(alma_previous(x, rrule, inclusive = FALSE), almanac_global_na_date)
+
+  expect_identical(alma_previous(y, rrule, inclusive = TRUE), y)
+  expect_identical(alma_previous(y, rrule, inclusive = FALSE), y - 1)
+})

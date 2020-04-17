@@ -10,9 +10,10 @@ extern "C" {
 
 // .Call entries
 static const R_CallMethodDef CallEntries[] = {
-  {"export_alma_seq_impl",  (DL_FUNC) &export_alma_seq_impl, 4},
-  {"export_alma_next_impl", (DL_FUNC) &export_alma_next_impl, 3},
-  {"export_almanac_init",   (DL_FUNC) &export_almanac_init, 0},
+  {"export_alma_seq_impl",      (DL_FUNC) &export_alma_seq_impl, 4},
+  {"export_alma_next_impl",     (DL_FUNC) &export_alma_next_impl, 3},
+  {"export_alma_previous_impl", (DL_FUNC) &export_alma_previous_impl, 3},
+  {"export_almanac_init",       (DL_FUNC) &export_almanac_init, 0},
   {NULL, NULL, 0}
 };
 
