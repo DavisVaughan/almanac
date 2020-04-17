@@ -5,13 +5,6 @@
 #' that can be added to Dates to shift by a set period. It differs in the fact
 #' that you can provide a `schedule` to shift relative to.
 #'
-#' When using `bdays()`, remember that the `schedule` defines events that should
-#' be "stepped over". This is powerful, but should be used with some thought,
-#' as it is possible to get into an infinite loop. For example, using a
-#' `daily()` schedule with `as.Date("2019-01-01") + bdays(1, daily())` would
-#' define every day as an "event" to step over. Since we will never advance to
-#' a non-event day, we get stuck in an endless loop.
-#'
 #' @details
 #' When added to a Date, this internally calls [alma_step()], meaning that an
 #' adjustment is performed after every 1 day step. This is likely the behavior
