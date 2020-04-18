@@ -6,8 +6,8 @@ sexp alma_step_impl(sexp x, sexp n, sexp events) {
   const double* p_x = r_dbl_deref(x);
   const int* p_n = r_int_deref(n);
 
-  const double* p_events_begin = r_dbl_deref(events);
-  const double* p_events_end = p_events_begin + r_length(events);
+  double* p_events_begin = r_dbl_deref(events);
+  double* p_events_end = p_events_begin + r_length(events);
 
   const r_ssize size = r_length(x);
 

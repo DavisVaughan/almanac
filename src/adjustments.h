@@ -4,7 +4,7 @@
 #include "r.h"
 
 double adj_following_one(double x,
-                         const double* p_events_begin,
-                         const double* p_events_end);
+                         double* p_events_begin,
+                         double* p_events_end);
 
 #endif
