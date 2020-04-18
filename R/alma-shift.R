@@ -94,6 +94,25 @@ alma_step <- function(x, n, schedule) {
   }
 }
 
+alma_step2 <- function(x, n, schedule) {
+  x <- vec_cast_date(x)
+  schedule <- as_schedule(schedule)
+
+  n <- vec_cast(n, integer(), x_arg = "n")
+
+  if (any(is_missing_or_infinite(n))) {
+    abort("`n` cannot be `NA` or infinite.")
+  }
+
+  events <- schedule$cache$get()
+
+  alma_step_impl(x, n, events)
+}
+
+alma_step_impl <- function(x, n, events) {
+  .Call(export_alma_step_impl, x, n, events)
+}
+
 alma_step_one <- function(x, n, schedule) {
   # Use integers rather than periods.
   # Avoids SLOW update() function from lubridate

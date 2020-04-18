@@ -23,6 +23,10 @@ static inline double* r_dbl_deref(sexp x) {
   return REAL(x);
 }
 
+static inline int* r_int_deref(sexp x) {
+  return INTEGER(x);
+}
+
 static inline int* r_lgl_deref(sexp x) {
   return LOGICAL(x);
 }
@@ -31,6 +35,10 @@ static inline int* r_lgl_deref(sexp x) {
 
 static inline double r_dbl_get(sexp x, r_ssize i) {
   return r_dbl_deref(x)[i];
+}
+
+static inline double r_int_get(sexp x, r_ssize i) {
+  return r_int_deref(x)[i];
 }
 
 static inline int r_lgl_get(sexp x, r_ssize i) {
