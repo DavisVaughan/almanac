@@ -63,6 +63,10 @@ static inline bool r_dbl_is_missing(double x) {
   return ISNAN(x);
 }
 
+static inline bool r_int_is_missing(int x) {
+  return x == NA_INTEGER;
+}
+
 // -----------------------------------------------------------------------------
 
 #endif

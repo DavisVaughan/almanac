@@ -3,6 +3,6 @@
 
 #include "r.h"
 
-sexp alma_step_impl(sexp x, sexp n, sexp events);
+sexp alma_step_impl(sexp x, sexp n, sexp events, r_ssize size);
 
 #endif

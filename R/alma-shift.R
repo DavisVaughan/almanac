@@ -79,95 +79,19 @@ alma_jump <- function(x, jump, schedule, adjustment = days(1)) {
 #' @export
 alma_step <- function(x, n, schedule) {
   x <- vec_cast_date(x)
+  n <- vec_cast(n, integer(), x_arg = "n")
   schedule <- as_schedule(schedule)
 
-  n <- vec_cast(n, integer(), x_arg = "n")
-
-  if (any(is.na(n))) {
-    abort("`n` cannot be `NA`.")
-  }
-
-  if (length(n) == 1L) {
-    alma_step_one(x, n, schedule)
-  } else {
-    alma_step_multi(x, n, schedule)
-  }
-}
-
-alma_step2 <- function(x, n, schedule) {
-  x <- vec_cast_date(x)
-  schedule <- as_schedule(schedule)
-
-  n <- vec_cast(n, integer(), x_arg = "n")
-
-  if (any(is_missing_or_infinite(n))) {
-    abort("`n` cannot be `NA` or infinite.")
-  }
+  # Get the common size with nice errors, recycled cheaply internally
+  size <- vec_size_common(x = x, n = n)
 
   events <- schedule$cache$get()
 
-  alma_step_impl(x, n, events)
+  alma_step_impl(x, n, events, size)
 }
 
-alma_step_impl <- function(x, n, events) {
-  .Call(export_alma_step_impl, x, n, events)
-}
-
-alma_step_one <- function(x, n, schedule) {
-  # Use integers rather than periods.
-  # Avoids SLOW update() function from lubridate
-  if (n >= 0) {
-    one_day <- 1L # days(1)
-  } else {
-    one_day <- -1L # days(-1)
-  }
-
-  adjuster <- make_adjuster(one_day)
-
-  n <- abs(n)
-
-  for (i in seq_len(n)) {
-    x <- x + one_day
-    x <- adjuster(x, schedule)
-  }
-
-  x
-}
-
-alma_step_multi <- function(x, n, schedule) {
-  args <- vec_recycle_common(x = x, n = n)
-
-  x <- args[[1]]
-  n <- args[[2]]
-
-  # Maximum number of rounds of adjusting needed in either direction
-  rounds <- max2(abs(n))
-
-  for (i in seq2(1L, rounds)) {
-    # 0 == done, 1 == +1 day, -1 == -1 day
-    signs <- sign(n)
-
-    step_loc <- signs != 0L
-
-    # The part of x that still needs to step
-    one_day <- signs[step_loc]
-    x_to_step <- x[step_loc]
-
-    # Make a vectorized adjuster for post-step adjusting
-    adjuster <- make_adjuster(one_day)
-
-    # Step and adjust
-    stepped <- x_to_step + one_day
-    adjusted <- adjuster(stepped, schedule)
-
-    # Overwrite with newly stepped values
-    vec_slice(x, step_loc) <- adjusted
-
-    # Decrement n in the correct direction
-    n <- n - signs
-  }
-
-  x
+alma_step_impl <- function(x, n, events, size) {
+  .Call(export_alma_step_impl, x, n, events, size)
 }
 
 # ------------------------------------------------------------------------------

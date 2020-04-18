@@ -5,16 +5,38 @@ static double* binary_find(double* p_begin, double* p_end, double x);
 
 // -----------------------------------------------------------------------------
 
-double adj_following_one(double x,
-                         double* p_events_begin,
-                         double* p_events_end) {
+double adj_following_one(double x, double* p_begin, double* p_end) {
   // Locate `x` if it is an event
-  double* p_events_x = binary_find(p_events_begin, p_events_end, x);
+  double* p_x_loc = binary_find(p_begin, p_end, x);
 
   // Increment by 1 as long as it is still an event
-  while (p_events_x != p_events_end && x == *p_events_x) {
+  while (p_x_loc != p_end && x == *p_x_loc) {
     ++x;
-    ++p_events_x;
+    ++p_x_loc;
+  }
+
+  return x;
+}
+
+// -----------------------------------------------------------------------------
+
+double adj_previous_one(double x, double* p_begin, double* p_end) {
+  // Locate `x` if it is an event
+  double* p_x_loc = binary_find(p_begin, p_end, x);
+
+  // `x` is not an event
+  if (p_x_loc == p_end) {
+    return x;
+  }
+
+  // Continually step backwards until `x` is either no longer
+  // an event, or we step before the start of the events
+  double* p_before_begin = p_begin - 1;
+
+  // Decrement by 1 as long as it is still an event
+  while (p_x_loc != p_before_begin && x == *p_x_loc) {
+    --x;
+    --p_x_loc;
   }
 
   return x;

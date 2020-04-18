@@ -3,8 +3,7 @@
 
 #include "r.h"
 
-double adj_following_one(double x,
-                         double* p_events_begin,
-                         double* p_events_end);
+double adj_following_one(double x, double* p_begin, double* p_end);
+double adj_previous_one(double x, double* p_begin, double* p_end);
 
 #endif

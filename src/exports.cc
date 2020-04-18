@@ -26,8 +26,9 @@ extern "C" sexp export_alma_previous_impl(sexp x, sexp occurrences, sexp inclusi
   return alma_previous_impl(x, occurrences, inclusive_);
 }
 
-extern "C" sexp export_alma_step_impl(sexp x, sexp n, sexp events) {
-  return alma_step_impl(x, n, events);
+extern "C" sexp export_alma_step_impl(sexp x, sexp n, sexp events, sexp size) {
+  const r_ssize size_ = r_int_get(size, 0);
+  return alma_step_impl(x, n, events, size_);
 }
 
 extern "C" sexp export_almanac_init() {
