@@ -25,10 +25,6 @@ sexp alma_step_impl(sexp x, sexp n, sexp events, r_ssize size) {
     double elt = x_vectorized ? p_x[i] : p_x[0];
     int n_elt = n_vectorized ? p_n[i] : p_n[0];
 
-    if (r_dbl_is_missing(elt)) {
-      p_out[i] = elt;
-      continue;
-    }
     if (r_int_is_missing(n_elt)) {
       p_out[i] = NA_REAL;
       continue;
