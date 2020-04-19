@@ -1,6 +1,7 @@
 #include "alma-step.h"
 #include "adjustments.h"
 #include "utils.h"
+#include <cmath> // std::abs()
 
 static double alma_step_forward(double x, int n, double* p_begin, double* p_end);
 static double alma_step_backward(double x, int n, double* p_begin, double* p_end);
