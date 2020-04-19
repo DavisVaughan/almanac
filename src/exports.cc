@@ -2,6 +2,7 @@
 #include "utils.h"
 #include "alma-next.h"
 #include "alma-seq.h"
+#include "alma-step.h"
 #include "initialize.h"
 
 extern "C" sexp export_alma_seq_impl(sexp occurrences,
@@ -23,6 +24,11 @@ extern "C" sexp export_alma_next_impl(sexp x, sexp occurrences, sexp inclusive) 
 extern "C" sexp export_alma_previous_impl(sexp x, sexp occurrences, sexp inclusive) {
   const bool inclusive_ = r_lgl_get(inclusive, 0);
   return alma_previous_impl(x, occurrences, inclusive_);
+}
+
+extern "C" sexp export_alma_step_impl(sexp x, sexp n, sexp events, sexp size) {
+  const r_ssize size_ = r_int_get(size, 0);
+  return alma_step_impl(x, n, events, size_);
 }
 
 extern "C" sexp export_almanac_init() {
