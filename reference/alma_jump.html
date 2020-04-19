@@ -231,12 +231,11 @@ and no further adjustment is required.</p></li>
 days from Friday is Tuesday.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># 2019-09-13 is a Friday</span>
-
-<span class='co'># Make a rrule for weekends, and adjust the `since` date to be closer</span>
+    <pre class="examples"><div class='input'><span class='co'># Make a rrule for weekends, and adjust the `since` date to be closer</span>
 <span class='co'># to our relevant dates in question</span>
 <span class='no'>on_weekends</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rrule.html'>daily</a></span>(<span class='st'>"2019-09-01"</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='recur_on_wday.html'>recur_on_weekends</a></span>()
 
+<span class='co'># 2019-09-13 is a Friday</span>
 <span class='co'># Note that here we "jump" to Sunday, then adjust, leaving us on Monday</span>
 <span class='fu'>alma_jump</span>(<span class='st'>"2019-09-13"</span>, <span class='fu'><a href='http://lubridate.tidyverse.org/reference/period.html'>days</a></span>(<span class='fl'>2</span>), <span class='no'>on_weekends</span>)</div><div class='output co'>#&gt; [1] "2019-09-16"</div><div class='input'>
 <span class='co'># Here we step 1 day to Saturday, adjust to Monday,</span>
