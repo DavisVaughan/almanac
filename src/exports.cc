@@ -1,5 +1,6 @@
 #include "exports.h"
 #include "utils.h"
+#include "adjustments.h"
 #include "alma-next.h"
 #include "alma-seq.h"
 #include "alma-step.h"
@@ -29,6 +30,14 @@ extern "C" sexp export_alma_previous_impl(sexp x, sexp occurrences, sexp inclusi
 extern "C" sexp export_alma_step_impl(sexp x, sexp n, sexp events, sexp size) {
   const r_ssize size_ = r_int_get(size, 0);
   return alma_step_impl(x, n, events, size_);
+}
+
+extern "C" sexp export_adj_following_impl(sexp x, sexp events) {
+  return adj_following_impl(x, events);
+}
+
+extern "C" sexp export_adj_preceding_impl(sexp x, sexp events) {
+  return adj_preceding_impl(x, events);
 }
 
 extern "C" sexp export_almanac_init() {

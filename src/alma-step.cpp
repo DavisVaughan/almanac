@@ -64,7 +64,7 @@ static double alma_step_forward(double x, int n, double* p_begin, double* p_end)
 static double alma_step_backward(double x, int n, double* p_begin, double* p_end) {
   for (r_ssize i = 0; i < n; ++i) {
     --x;
-    x = adj_previous_one(x, p_begin, p_end);
+    x = adj_preceding_one(x, p_begin, p_end);
   }
 
   return x;

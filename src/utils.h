@@ -51,6 +51,10 @@ static inline sexp r_poke_attr(sexp x, sexp sym, sexp value) {
   return Rf_setAttrib(x, sym, value);
 }
 
+static inline sexp r_poke_class(sexp x, sexp cls) {
+  return r_poke_attr(x, syms_class, cls);
+}
+
 // -----------------------------------------------------------------------------
 
 static inline R_xlen_t r_length(sexp x) {
@@ -65,6 +69,12 @@ static inline bool r_dbl_is_missing(double x) {
 
 static inline bool r_int_is_missing(int x) {
   return x == NA_INTEGER;
+}
+
+// -----------------------------------------------------------------------------
+
+static inline void r_init_date(sexp x) {
+  r_poke_class(x, classes_date);
 }
 
 // -----------------------------------------------------------------------------

@@ -6,6 +6,7 @@ delayedAssign("almanac_global_empty_date", vctrs::new_date())
 delayedAssign("almanac_global_inf_date", structure(Inf, class = "Date"))
 delayedAssign("almanac_global_neg_inf_date", structure(-Inf, class = "Date"))
 delayedAssign("almanac_global_na_date", structure(NA_real_, class = "Date"))
+delayedAssign("almanac_global_nan_date", structure(NaN, class = "Date"))
 
 # ------------------------------------------------------------------------------
 

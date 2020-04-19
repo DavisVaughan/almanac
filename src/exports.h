@@ -15,6 +15,9 @@ extern "C" {
 
   sexp export_alma_step_impl(sexp x, sexp n, sexp events, sexp size);
 
+  sexp export_adj_following_impl(sexp x, sexp events);
+  sexp export_adj_preceding_impl(sexp x, sexp events);
+
   sexp export_almanac_init();
 
 }

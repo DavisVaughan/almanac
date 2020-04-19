@@ -45,26 +45,47 @@ NULL
 #' @rdname adjustments
 #' @export
 adj_following <- function(x, schedule) {
-  adjuster <- adj_period_factory(1L)
-  adjuster(x, schedule)
+  x <- vec_cast_date(x)
+  schedule <- as_schedule(schedule)
+
+  events <- schedule$cache$get()
+
+  adj_following_impl(x, events)
+}
+
+adj_following_impl <- function(x, events) {
+  .Call(export_adj_following_impl, x, events)
 }
 
 #' @rdname adjustments
 #' @export
 adj_preceding <- function(x, schedule) {
-  adjuster <- adj_period_factory(-1L)
-  adjuster(x, schedule)
+  x <- vec_cast_date(x)
+  schedule <- as_schedule(schedule)
+
+  events <- schedule$cache$get()
+
+  adj_preceding_impl(x, events)
+}
+
+adj_preceding_impl <- function(x, events) {
+  .Call(export_adj_preceding_impl, x, events)
 }
 
 #' @rdname adjustments
 #' @export
 adj_modified_following <- function(x, schedule) {
-  out <- alma_adjust(x, schedule, 1L)
+  x <- vec_cast_date(x)
+  schedule <- as_schedule(schedule)
+
+  events <- schedule$cache$get()
+
+  out <- adj_following_impl(x, events)
 
   modify <- month(out) != month(x)
 
-  if (any(modify)) {
-    out[modify] <- alma_adjust(x[modify], schedule, -1L)
+  if (any(modify, na.rm = TRUE)) {
+    out[modify] <- adj_preceding_impl(x[modify], events)
   }
 
   out
@@ -73,12 +94,17 @@ adj_modified_following <- function(x, schedule) {
 #' @rdname adjustments
 #' @export
 adj_modified_preceding <- function(x, schedule) {
-  out <- alma_adjust(x, schedule, -1L)
+  x <- vec_cast_date(x)
+  schedule <- as_schedule(schedule)
+
+  events <- schedule$cache$get()
+
+  out <- adj_preceding_impl(x, events)
 
   modify <- month(out) != month(x)
 
-  if (any(modify)) {
-    out[modify] <- alma_adjust(x[modify], schedule, 1L)
+  if (any(modify, na.rm = TRUE)) {
+    out[modify] <- adj_following_impl(x[modify], events)
   }
 
   out
@@ -87,8 +113,13 @@ adj_modified_preceding <- function(x, schedule) {
 #' @rdname adjustments
 #' @export
 adj_nearest <- function(x, schedule) {
-  following <- alma_adjust(x, schedule, 1L)
-  preceding <- alma_adjust(x, schedule, -1L)
+  x <- vec_cast_date(x)
+  schedule <- as_schedule(schedule)
+
+  events <- schedule$cache$get()
+
+  following <- adj_following_impl(x, events)
+  preceding <- adj_preceding_impl(x, events)
 
   dist_following <- as.numeric(following - x)
   dist_preceding <- as.numeric(x - preceding)
