@@ -33,7 +33,6 @@ double adj_previous_one(double x, double* p_begin, double* p_end) {
   // an event, or we step before the start of the events
   double* p_before_begin = p_begin - 1;
 
-  // Decrement by 1 as long as it is still an event
   while (p_x_loc != p_before_begin && x == *p_x_loc) {
     --x;
     --p_x_loc;

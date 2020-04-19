@@ -46,12 +46,11 @@
 #' @inheritParams alma_adjust
 #'
 #' @examples
-#' # 2019-09-13 is a Friday
-#'
 #' # Make a rrule for weekends, and adjust the `since` date to be closer
 #' # to our relevant dates in question
 #' on_weekends <- daily("2019-09-01") %>% recur_on_weekends()
 #'
+#' # 2019-09-13 is a Friday
 #' # Note that here we "jump" to Sunday, then adjust, leaving us on Monday
 #' alma_jump("2019-09-13", days(2), on_weekends)
 #'
