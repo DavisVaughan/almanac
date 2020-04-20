@@ -114,7 +114,7 @@
 <div class="sourceCode" id="cb5"><pre class="r"><span class="no">wednesday_before_thanksgiving</span> <span class="kw">&lt;-</span> <span class="st">"2000-11-22"</span>
 
 <span class="co"># Step forward 2 non-event days, stepping over thanksgiving</span>
-<span class="fu"><a href="reference/alma_jump.html">alma_step</a></span>(<span class="no">wednesday_before_thanksgiving</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fl">2</span>, <span class="no">on_thanksgiving</span>)
+<span class="fu"><a href="reference/alma_step.html">alma_step</a></span>(<span class="no">wednesday_before_thanksgiving</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fl">2</span>, <span class="no">on_thanksgiving</span>)
 <span class="co">#&gt; [1] "2000-11-25"</span></pre></div>
 <p>By combining multiple recurrence rules together, you can create larger “schedules” that form a collection of holidays, or events such as weekends. almanac comes with a prebuilt <code><a href="reference/calendars.html">calendar_usa_federal()</a></code> schedule that includes recurrence rules for the US holidays. Combining this with a recurrence rule of “on weekends” constructs a business calendar, which we can use to shift dates by, for example, “2 business days”.</p>
 <div class="sourceCode" id="cb6"><pre class="r"><span class="no">on_weekends</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/rrule.html">weekly</a></span>() <span class="kw">%&gt;%</span>
@@ -127,7 +127,7 @@
 
 <span class="co"># Steps over Saturday, Sunday, and Labor Day to the following Tuesday</span>
 <span class="co"># and Wednesday, aka "two business days" from now!</span>
-<span class="no">two_business_days_forward</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/alma_jump.html">alma_step</a></span>(
+<span class="no">two_business_days_forward</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/alma_step.html">alma_step</a></span>(
   <span class="no">thursday_and_friday_before_labor_day</span>,
   <span class="kw">n</span> <span class="kw">=</span> <span class="fl">2</span>,
   <span class="kw">schedule</span> <span class="kw">=</span> <span class="no">on_us_holidays_and_weekends</span>
@@ -166,7 +166,7 @@
 <p>almanac has developed as a composite of ideas from multiple different libraries.</p>
 <p>First off, it directly embeds the <em>amazing</em> JavaScript library <a href="https://github.com/jakubroztocil/rrule">rrule</a> for the core recurrence set calculations. To do this, it uses the equally awesome R package, <a href="https://github.com/jeroen/V8">V8</a>, from Jeroen Ooms.</p>
 <p>The date shifting / adjusting functions are modeled after similar functions in <a href="https://github.com/lballabio/QuantLib">QuantLib</a>.</p>
-<p>The fast binary search based implementations of <code><a href="reference/alma_next.html">alma_next()</a></code> and <code><a href="reference/alma_jump.html">alma_step()</a></code> are inspired by Pandas and the implementation of Numpy’s <a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.busday_offset.html">busday_offset()</a>.</p>
+<p>The fast binary search based implementations of <code><a href="reference/alma_next.html">alma_next()</a></code> and <code><a href="reference/alma_step.html">alma_step()</a></code> are inspired by Pandas and the implementation of Numpy’s <a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.busday_offset.html">busday_offset()</a>.</p>
 <p>The author of <a href="https://github.com/jameslairdsmith/gs">gs</a>, James Laird-Smith, has been a great collaborator as we have bounced ideas off of each other. gs attempts to solve a similar problem, but with a slightly different implementation.</p>
 </div>
 </div>

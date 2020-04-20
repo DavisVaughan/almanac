@@ -154,14 +154,14 @@ that you can provide a <code>schedule</code> to shift relative to.</p>
     </tr>
     <tr>
       <th>schedule</th>
-      <td><p><code>[schedule / event]</code></p>
-<p>A schedule or event.</p></td>
+      <td><p><code>[schedule / rrule]</code></p>
+<p>A schedule or rrule.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>When added to a Date, this internally calls <code><a href='alma_jump.html'>alma_step()</a></code>, meaning that an
+    <p>When added to a Date, this internally calls <code><a href='alma_step.html'>alma_step()</a></code>, meaning that an
 adjustment is performed after every 1 day step. This is likely the behavior
 that is desired for shifting by "n business days".</p>
 

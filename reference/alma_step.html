@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Date adjustments — adjustments • almanac</title>
+<title>Step relative to a schedule — alma_step • almanac</title>
 
 
 <!-- jquery -->
@@ -39,26 +39,15 @@
 
 
 
-<meta property="og:title" content="Date adjustments — adjustments" />
-<meta property="og:description" content="This family of adj_*() functions encode business logic for common
-date adjustments. If x falls on an event date, it is adjusted according to
-the function's adjustment rule. Otherwise it is left untouched.
-adj_following()
-Choose the first non-event date after x.
-adj_preceding()
-Choose the first non-event date before x.
-adj_modified_following()
-Choose the first non-event date after x, unless it falls in a
-different month, in which case the first non-event date before x is
-chosen instead.
-adj_modified_preceding()
-Choose the first non-event date before x, unless it falls in a
-different month, in which case the first non-event date after x is
-chosen instead.
-adj_nearest()
-Choose the nearest non-event date to x. If the closest preceding and
-following non-event dates are equally far away, the following non-event
-date is chosen.
+<meta property="og:title" content="Step relative to a schedule — alma_step" />
+<meta property="og:description" content="alma_step() is useful for shifting dates by &quot;n business days&quot;.
+alma_step() steps over a sequence of dates 1 day at a time, for n days.
+After each step, an adjustment is applied to shift to the next non-event
+date.
+If n is positive, adj_following() is called.
+If n is negative, adj_preceding() is called.
+If n is zero, it was arbitrarily decided to call adj_following() to
+roll to the next available non-event date.
 
 " />
 
@@ -149,44 +138,25 @@ date is chosen.
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Date adjustments</h1>
-    <small class="dont-index">Source: <a href='https://github.com/DavisVaughan/almanac/blob/master/R/adjustments.R'><code>R/adjustments.R</code></a></small>
-    <div class="hidden name"><code>adjustments.Rd</code></div>
+    <h1>Step relative to a schedule</h1>
+    <small class="dont-index">Source: <a href='https://github.com/DavisVaughan/almanac/blob/master/R/alma-step.R'><code>R/alma-step.R</code></a></small>
+    <div class="hidden name"><code>alma_step.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This family of <code>adj_*()</code> functions encode business logic for common
-date adjustments. If <code>x</code> falls on an event date, it is adjusted according to
-the function's adjustment rule. Otherwise it is left untouched.</p><ul>
-<li><p><code>adj_following()</code></p>
-<p>Choose the first non-event date after <code>x</code>.</p></li>
-<li><p><code>adj_preceding()</code></p>
-<p>Choose the first non-event date before <code>x</code>.</p></li>
-<li><p><code>adj_modified_following()</code></p>
-<p>Choose the first non-event date after <code>x</code>, unless it falls in a
-different month, in which case the first non-event date before <code>x</code> is
-chosen instead.</p></li>
-<li><p><code>adj_modified_preceding()</code></p>
-<p>Choose the first non-event date before <code>x</code>, unless it falls in a
-different month, in which case the first non-event date after <code>x</code> is
-chosen instead.</p></li>
-<li><p><code>adj_nearest()</code></p>
-<p>Choose the nearest non-event date to <code>x</code>. If the closest preceding and
-following non-event dates are equally far away, the following non-event
-date is chosen.</p></li>
+    <p><code>alma_step()</code> is useful for shifting dates by "n business days".</p>
+<p><code>alma_step()</code> steps over a sequence of dates 1 day at a time, for <code>n</code> days.
+After each step, an adjustment is applied to shift to the next non-event
+date.</p><ul>
+<li><p>If <code>n</code> is positive, <code><a href='adjustments.html'>adj_following()</a></code> is called.</p></li>
+<li><p>If <code>n</code> is negative, <code><a href='adjustments.html'>adj_preceding()</a></code> is called.</p></li>
+<li><p>If <code>n</code> is zero, it was arbitrarily decided to call <code><a href='adjustments.html'>adj_following()</a></code> to
+roll to the next available non-event date.</p></li>
 </ul>
 
     </div>
 
-    <pre class="usage"><span class='fu'>adj_following</span>(<span class='no'>x</span>, <span class='no'>schedule</span>)
-
-<span class='fu'>adj_preceding</span>(<span class='no'>x</span>, <span class='no'>schedule</span>)
-
-<span class='fu'>adj_modified_following</span>(<span class='no'>x</span>, <span class='no'>schedule</span>)
-
-<span class='fu'>adj_modified_preceding</span>(<span class='no'>x</span>, <span class='no'>schedule</span>)
-
-<span class='fu'>adj_nearest</span>(<span class='no'>x</span>, <span class='no'>schedule</span>)</pre>
+    <pre class="usage"><span class='fu'>alma_step</span>(<span class='no'>x</span>, <span class='no'>n</span>, <span class='no'>schedule</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -197,37 +167,53 @@ date is chosen.</p></li>
 <p>A vector of dates.</p></td>
     </tr>
     <tr>
+      <th>n</th>
+      <td><p><code>[integer]</code></p>
+<p>The number of days to step. Can be negative to step backwards.</p></td>
+    </tr>
+    <tr>
       <th>schedule</th>
       <td><p><code>[schedule / rrule]</code></p>
 <p>A schedule or rrule.</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>Imagine you are on a Friday and want to shift forward 2 days using a
+schedule that marks weekends as events. <code>alma_step()</code> works like this:</p><ul>
+<li><p>Step forward 1 day to Saturday.</p></li>
+<li><p>Apply an adjustment of <code><a href='adjustments.html'>adj_following()</a></code>, which rolls forward to Monday.</p></li>
+<li><p>Step forward 1 day to Tuesday.</p></li>
+<li><p>Apply an adjustment of <code><a href='adjustments.html'>adj_following()</a></code>, but no adjustment is required.</p></li>
+</ul>
+
+<p>This lends itself naturally to business logic. Two business days from Friday
+is Tuesday.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># A Saturday</span>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/as.Date.html'>as.Date</a></span>(<span class='st'>"1970-01-03"</span>)
+    <pre class="examples"><div class='input'><span class='co'># Make a rrule for weekends</span>
+<span class='no'>on_weekends</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rrule.html'>weekly</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='recur_on_wday.html'>recur_on_weekends</a></span>()
 
-<span class='no'>on_weekends</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rrule.html'>weekly</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'><a href='recur_on_wday.html'>recur_on_weekends</a></span>()
+<span class='co'># "Step forward by 2 business days"</span>
+<span class='co'># 2019-09-13 is a Friday.</span>
+<span class='co'># Here we:</span>
+<span class='co'># - Step 1 day to Saturday</span>
+<span class='co'># - Adjust to Monday</span>
+<span class='co'># - Step 1 day to Tuesday</span>
+<span class='fu'>alma_step</span>(<span class='st'>"2019-09-13"</span>, <span class='fl'>2</span>, <span class='no'>on_weekends</span>)</div><div class='output co'>#&gt; [1] "2019-09-17"</div><div class='input'>
+<span class='co'># If Monday, 2019-09-16, was a recurring holiday, we could create</span>
+<span class='co'># a custom schedule and step over that too.</span>
+<span class='no'>on_09_16</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rrule.html'>yearly</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='recur_on_ymonth.html'>recur_on_ymonth</a></span>(<span class='fl'>9</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='recur_on_mday.html'>recur_on_mday</a></span>(<span class='fl'>16</span>)
 
-<span class='co'># Adjust forward to Monday</span>
-<span class='fu'>adj_following</span>(<span class='no'>x</span>, <span class='no'>on_weekends</span>)</div><div class='output co'>#&gt; [1] "1970-01-05"</div><div class='input'>
-<span class='co'># Adjust backwards to Friday</span>
-<span class='fu'>adj_preceding</span>(<span class='no'>x</span>, <span class='no'>on_weekends</span>)</div><div class='output co'>#&gt; [1] "1970-01-02"</div><div class='input'>
-<span class='co'># Adjust to nearest non-event date</span>
-<span class='fu'>adj_nearest</span>(<span class='no'>x</span>, <span class='no'>on_weekends</span>)</div><div class='output co'>#&gt; [1] "1970-01-02"</div><div class='input'><span class='fu'>adj_nearest</span>(<span class='no'>x</span> + <span class='fl'>1</span>, <span class='no'>on_weekends</span>)</div><div class='output co'>#&gt; [1] "1970-01-05"</div><div class='input'>
-<span class='co'># Sundays, one of which is at the end of the month</span>
-<span class='no'>sundays</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/as.Date.html'>as.Date</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"2020-05-24"</span>, <span class='st'>"2020-05-31"</span>))
+<span class='no'>sch</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='schedule.html'>schedule</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='sch-add.html'>sch_rrule</a></span>(<span class='no'>on_09_16</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='sch-add.html'>sch_rrule</a></span>(<span class='no'>on_weekends</span>)
 
-<span class='co'># Adjust forward, unless that takes us into a new month, in which case we</span>
-<span class='co'># adjust backwards.</span>
-<span class='fu'>adj_modified_following</span>(<span class='no'>sundays</span>, <span class='no'>on_weekends</span>)</div><div class='output co'>#&gt; [1] "2020-05-25" "2020-05-29"</div><div class='input'>
-<span class='co'># Saturdays, one of which is at the beginning of the month</span>
-<span class='no'>saturdays</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/as.Date.html'>as.Date</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"2020-08-01"</span>, <span class='st'>"2020-08-08"</span>))
-
-<span class='co'># Adjust backwards, unless that takes us into a new month, in which</span>
-<span class='co'># case we adjust forwards</span>
-<span class='fu'>adj_modified_preceding</span>(<span class='no'>saturdays</span>, <span class='no'>on_weekends</span>)</div><div class='output co'>#&gt; [1] "2020-08-03" "2020-08-07"</div></pre>
+<span class='fu'>alma_step</span>(<span class='st'>"2019-09-13"</span>, <span class='fl'>2</span>, <span class='no'>sch</span>)</div><div class='output co'>#&gt; [1] "2019-09-18"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
