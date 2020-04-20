@@ -159,7 +159,7 @@ new_rrule <- function(since = as.Date("1970-01-01"),
     easter = easter
   )
 
-  cache <- CacheRrule$new(rules = rules)
+  cache <- cache_rrule$new(rules = rules)
 
   data <- list(
     rules = rules,

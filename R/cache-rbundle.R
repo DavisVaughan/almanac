@@ -1,20 +1,20 @@
-CacheRbundle <- R6::R6Class(
-  "CacheRbundle",
+cache_rbundle <- R6::R6Class(
+  "cache_rbundle",
   cloneable = FALSE,
 
   # ----------------------------------------------------------------------------
   public = list(
     set_rrules = function(rrules)
-      cacherbundle__set_rrules(self, private, rrules),
+      cache_rbundle__set_rrules(self, private, rrules),
 
     set_rdates = function(rdates)
-      cacherbundle__set_rdates(self, private, rdates),
+      cache_rbundle__set_rdates(self, private, rdates),
 
     set_exdates = function(exdates)
-      cacherbundle__set_exdates(self, private, exdates),
+      cache_rbundle__set_exdates(self, private, exdates),
 
     get_events = function()
-      cacherbundle__get_events(self, private)
+      cache_rbundle__get_events(self, private)
   ),
 
   # ----------------------------------------------------------------------------
@@ -27,18 +27,18 @@ CacheRbundle <- R6::R6Class(
     built = FALSE,
 
     cache_build = function()
-      cacherbundle__cache_build(self, private)
+      cache_rbundle__cache_build(self, private)
   )
 )
 
 # ------------------------------------------------------------------------------
 
-cacherbundle__cache_build <- function(self, private) {
+cache_rbundle__cache_build <- function(self, private) {
   rrules <- private$rrules
   rdates <- private$rdates
   exdates <- private$exdates
 
-  call <- cacherbundle_build_call(rrules, rdates, exdates)
+  call <- cache_rbundle_build_call(rrules, rdates, exdates)
 
   events <- almanac_global_context$call(call)
   events <- parse_js_date(events)
@@ -49,12 +49,12 @@ cacherbundle__cache_build <- function(self, private) {
   invisible(self)
 }
 
-cacherbundle_build_call <- function(rrules, rdates, exdates) {
-  body <- cacherbundle_build_call_body(rrules, rdates, exdates)
+cache_rbundle_build_call <- function(rrules, rdates, exdates) {
+  body <- cache_rbundle_build_call_body(rrules, rdates, exdates)
   as_js_build_call(body)
 }
 
-cacherbundle_build_call_body <- function(rrules, rdates, exdates) {
+cache_rbundle_build_call_body <- function(rrules, rdates, exdates) {
   body <- "var ruleset = new rrule.RRuleSet()"
 
   for(rrule in rrules) {
@@ -77,7 +77,7 @@ cacherbundle_build_call_body <- function(rrules, rdates, exdates) {
 
 # ------------------------------------------------------------------------------
 
-cacherbundle__get_events <- function(self, private) {
+cache_rbundle__get_events <- function(self, private) {
   if (!private$built) {
     private$cache_build()
   }
@@ -87,17 +87,17 @@ cacherbundle__get_events <- function(self, private) {
 
 # ------------------------------------------------------------------------------
 
-cacherbundle__set_rrules <- function(self, private, rrules) {
+cache_rbundle__set_rrules <- function(self, private, rrules) {
   private$rrules <- rrules
   self
 }
 
-cacherbundle__set_rdates <- function(self, private, rdates) {
+cache_rbundle__set_rdates <- function(self, private, rdates) {
   private$rdates <- rdates
   self
 }
 
-cacherbundle__set_exdates <- function(self, private, exdates) {
+cache_rbundle__set_exdates <- function(self, private, exdates) {
   private$exdates <- exdates
   self
 }

@@ -66,7 +66,7 @@ new_calendar <- function(name, since, until, weekend, holidays) {
     holiday_adjustment
   )
 
-  cache <- CalendarCache$new()
+  cache <- cache_calendar$new()
   cache$set_rbundles(rbundles)
   cache$set_adjustments(adjustments)
   cache$set_weekend(weekend)

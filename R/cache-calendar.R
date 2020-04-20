@@ -1,20 +1,20 @@
-CalendarCache <- R6::R6Class(
-  "CalendarCache",
+cache_calendar <- R6::R6Class(
+  "cache_calendar",
   cloneable = FALSE,
 
   # ----------------------------------------------------------------------------
   public = list(
     set_rbundles = function(rbundles)
-      calendarcache__set_rbundles(self, private, rbundles),
+      cache_calendar__set_rbundles(self, private, rbundles),
 
     set_adjustments = function(adjustments)
-      calendarcache__set_adjustments(self, private, adjustments),
+      cache_calendar__set_adjustments(self, private, adjustments),
 
     set_weekend = function(weekend)
-      calendarcache__set_weekend(self, private, weekend),
+      cache_calendar__set_weekend(self, private, weekend),
 
     get_events = function()
-      calendarcache__get_events(self, private)
+      cache_calendar__get_events(self, private)
   ),
 
   # ----------------------------------------------------------------------------
@@ -27,29 +27,29 @@ CalendarCache <- R6::R6Class(
     built = FALSE,
 
     cache_build = function()
-      calendarcache__cache_build(self, private)
+      cache_calendar__cache_build(self, private)
   )
 )
 
 # ------------------------------------------------------------------------------
 
-calendarcache__set_rbundles <- function(self, private, rbundles) {
+cache_calendar__set_rbundles <- function(self, private, rbundles) {
   private$rbundles <- rbundles
   self
 }
 
-calendarcache__set_adjustments <- function(self, private, adjustments) {
+cache_calendar__set_adjustments <- function(self, private, adjustments) {
   private$adjustments <- adjustments
   self
 }
 
-calendarcache__set_weekend <- function(self, private, weekend) {
+cache_calendar__set_weekend <- function(self, private, weekend) {
   private$weekend <- weekend
 }
 
 # ------------------------------------------------------------------------------
 
-calendarcache__get_events <- function(self, private) {
+cache_calendar__get_events <- function(self, private) {
   if (!private$built) {
     private$cache_build()
   }
@@ -59,7 +59,7 @@ calendarcache__get_events <- function(self, private) {
 
 # ------------------------------------------------------------------------------
 
-calendarcache__cache_build <- function(self, private) {
+cache_calendar__cache_build <- function(self, private) {
   rbundles <- private$rbundles
   adjustments <- private$adjustments
   weekend <- private$weekend
