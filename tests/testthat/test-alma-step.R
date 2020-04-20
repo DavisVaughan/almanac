@@ -38,6 +38,16 @@ test_that("can use negative adjustment", {
   )
 })
 
+test_that("`n == 0` always adjusts forward", {
+  # Saturday
+  x <- new_date(2)
+
+  on_weekends <- daily()
+  on_weekends <- recur_on_weekends(on_weekends)
+
+  expect_identical(alma_step(x, 0, on_weekends), new_date(4))
+})
+
 test_that("can use vectorized adjustment and single date", {
   x <- new_date(1)
 
