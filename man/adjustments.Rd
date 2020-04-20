@@ -7,7 +7,7 @@
 \alias{adj_modified_following}
 \alias{adj_modified_preceding}
 \alias{adj_nearest}
-\title{Common adjustments}
+\title{Date adjustments}
 \usage{
 adj_following(x, schedule)
 
@@ -24,22 +24,21 @@ adj_nearest(x, schedule)
 
 A vector of dates.}
 
-\item{schedule}{\verb{[schedule / event]}
+\item{schedule}{\verb{[schedule / rrule]}
 
-A schedule or event.}
+A schedule or rrule.}
 }
 \description{
 This family of \verb{adj_*()} functions encode business logic for common
-adjustments made in the financial world.
+date adjustments. If \code{x} falls on an event date, it is adjusted according to
+the function's adjustment rule. Otherwise it is left untouched.
 \itemize{
 \item \code{adj_following()}
 
-Choose the first non-event date after \code{x}. This is equivalent to using
-an adjustment of \code{+days(1)}.
+Choose the first non-event date after \code{x}.
 \item \code{adj_preceding()}
 
-Choose the first non-event date before \code{x}. This is equivalent to using
-an adjustment of \code{-days(1)}.
+Choose the first non-event date before \code{x}.
 \item \code{adj_modified_following()}
 
 Choose the first non-event date after \code{x}, unless it falls in a
@@ -57,6 +56,33 @@ following non-event dates are equally far away, the following non-event
 date is chosen.
 }
 }
-\details{
-For examples, see \code{\link[=alma_adjust]{alma_adjust()}}.
+\examples{
+# A Saturday
+x <- as.Date("1970-01-03")
+
+on_weekends <- weekly() \%>\% recur_on_weekends()
+
+# Adjust forward to Monday
+adj_following(x, on_weekends)
+
+# Adjust backwards to Friday
+adj_preceding(x, on_weekends)
+
+# Adjust to nearest non-event date
+adj_nearest(x, on_weekends)
+adj_nearest(x + 1, on_weekends)
+
+# Sundays, one of which is at the end of the month
+sundays <- as.Date(c("2020-05-24", "2020-05-31"))
+
+# Adjust forward, unless that takes us into a new month, in which case we
+# adjust backwards.
+adj_modified_following(sundays, on_weekends)
+
+# Saturdays, one of which is at the beginning of the month
+saturdays <- as.Date(c("2020-08-01", "2020-08-08"))
+
+# Adjust backwards, unless that takes us into a new month, in which
+# case we adjust forwards
+adj_modified_preceding(saturdays, on_weekends)
 }
