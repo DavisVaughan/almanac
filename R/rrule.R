@@ -185,9 +185,25 @@ new_rrule <- function(since = as.Date("1970-01-01"),
 
 # ------------------------------------------------------------------------------
 
+#' Is `x` a recurrence rule?
+#'
+#' `is_rrule()` tests if `x` is an rrule.
+#'
+#' @param x `[object]`
+#'
+#'   An object.
+#'
+#' @return
+#' `TRUE` if `x` inherits from `"rrule"`, otherwise `FALSE`.
+#'
+#' @export
+#' @examples
+#' is_rrule(daily())
 is_rrule <- function(x) {
   inherits(x, "rrule")
 }
+
+# ------------------------------------------------------------------------------
 
 validate_rrule <- function(x, arg = "`x`") {
   if (!is_rrule(x)) {

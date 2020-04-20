@@ -55,3 +55,9 @@ test_that("errors on max/min dates", {
   expect_error(daily(until = until), NA)
   expect_error(daily(until = until + 1), class = "almanac_error_date_above_maximum")
 })
+
+
+test_that("can detect rrules", {
+  expect_true(is_rrule(daily()))
+  expect_false(is_rrule(1))
+})
