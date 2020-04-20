@@ -5,6 +5,7 @@
 #include "alma-seq.h"
 #include "alma-step.h"
 #include "initialize.h"
+#include "months.h"
 
 extern "C" sexp export_alma_seq_impl(sexp occurrences,
                                      sexp from,
@@ -38,6 +39,22 @@ extern "C" sexp export_adj_following_impl(sexp x, sexp events) {
 
 extern "C" sexp export_adj_preceding_impl(sexp x, sexp events) {
   return adj_preceding_impl(x, events);
+}
+
+extern "C" sexp export_adj_modified_following_impl(sexp x, sexp events) {
+  return adj_modified_following_impl(x, events);
+}
+
+extern "C" sexp export_adj_modified_preceding_impl(sexp x, sexp events) {
+  return adj_modified_preceding_impl(x, events);
+}
+
+extern "C" sexp export_adj_nearest_impl(sexp x, sexp events) {
+  return adj_nearest_impl(x, events);
+}
+
+extern "C" sexp export_test_month_from_days(sexp x) {
+  return test_month_from_days(x);
 }
 
 extern "C" sexp export_almanac_init() {

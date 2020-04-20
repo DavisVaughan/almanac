@@ -149,3 +149,56 @@ test_that("+/- Inf is allowed", {
   expect_identical(adj_modified_preceding(almanac_global_inf_date, yearly()), almanac_global_inf_date)
   expect_identical(adj_modified_preceding(almanac_global_neg_inf_date, yearly()), almanac_global_neg_inf_date)
 })
+
+
+# ------------------------------------------------------------------------------
+# adj_nearest()
+
+test_that("adjusts to nearest non-event", {
+  # Saturday / Sunday
+  x <- as.Date(c("1970-01-03", "1970-01-04"))
+  rrule <- weekly() %>% recur_on_weekends()
+
+  expect_identical(adj_nearest(x, rrule), x + c(-1, 1))
+})
+
+test_that("equi-distant adjusts forward", {
+  x <- as.Date(c("1970-01-03"))
+  sch <- schedule() %>% sch_rdate(c("1970-01-02", "1970-01-03", "1970-01-04"))
+
+  expect_identical(adj_nearest(x, sch), x + 2)
+})
+
+test_that("adjustment is applied repeatedly", {
+  x <- as.Date("1970-01-03")
+  rdates <- as.Date("1970-01-01") + 0:5
+  sch <- schedule() %>% sch_rdate(rdates)
+
+  expect_identical(adj_nearest(x, sch), x - 3)
+})
+
+test_that("boundary cases work", {
+  x <- as.Date("1970-01-02")
+  rrule <- daily("1970-01-01", "1970-01-04")
+  expect_identical(adj_nearest(x, rrule), x - 2)
+})
+
+test_that("non-event is left untouched", {
+  x <- as.Date("1970-01-02")
+  rrule <- daily("1970-01-01", "1970-01-01")
+  expect_identical(adj_nearest(x, rrule), x)
+})
+
+test_that("empty input works", {
+  expect_identical(adj_nearest(almanac_global_empty_date, daily()), almanac_global_empty_date)
+})
+
+test_that("NA / NaN is allowed", {
+  expect_identical(adj_nearest(almanac_global_na_date, yearly()), almanac_global_na_date)
+  expect_identical(adj_nearest(almanac_global_nan_date, yearly()), almanac_global_nan_date)
+})
+
+test_that("+/- Inf is allowed", {
+  expect_identical(adj_nearest(almanac_global_inf_date, yearly()), almanac_global_inf_date)
+  expect_identical(adj_nearest(almanac_global_neg_inf_date, yearly()), almanac_global_neg_inf_date)
+})

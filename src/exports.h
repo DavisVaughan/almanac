@@ -17,6 +17,11 @@ extern "C" {
 
   sexp export_adj_following_impl(sexp x, sexp events);
   sexp export_adj_preceding_impl(sexp x, sexp events);
+  sexp export_adj_modified_following_impl(sexp x, sexp events);
+  sexp export_adj_modified_preceding_impl(sexp x, sexp events);
+  sexp export_adj_nearest_impl(sexp x, sexp events);
+
+  sexp export_test_month_from_days(sexp x);
 
   sexp export_almanac_init();
 

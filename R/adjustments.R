@@ -80,15 +80,11 @@ adj_modified_following <- function(x, schedule) {
 
   events <- schedule$cache$get()
 
-  out <- adj_following_impl(x, events)
+  adj_modified_following_impl(x, events)
+}
 
-  modify <- month(out) != month(x)
-
-  if (any(modify, na.rm = TRUE)) {
-    out[modify] <- adj_preceding_impl(x[modify], events)
-  }
-
-  out
+adj_modified_following_impl <- function(x, events) {
+  .Call(export_adj_modified_following_impl, x, events)
 }
 
 #' @rdname adjustments
@@ -99,15 +95,11 @@ adj_modified_preceding <- function(x, schedule) {
 
   events <- schedule$cache$get()
 
-  out <- adj_preceding_impl(x, events)
+  adj_modified_preceding_impl(x, events)
+}
 
-  modify <- month(out) != month(x)
-
-  if (any(modify, na.rm = TRUE)) {
-    out[modify] <- adj_following_impl(x[modify], events)
-  }
-
-  out
+adj_modified_preceding_impl <- function(x, events) {
+  .Call(export_adj_modified_preceding_impl, x, events)
 }
 
 #' @rdname adjustments
@@ -118,17 +110,11 @@ adj_nearest <- function(x, schedule) {
 
   events <- schedule$cache$get()
 
-  following <- adj_following_impl(x, events)
-  preceding <- adj_preceding_impl(x, events)
+  adj_nearest_impl(x, events)
+}
 
-  dist_following <- as.numeric(following - x)
-  dist_preceding <- as.numeric(x - preceding)
-
-  preceding_closer <- dist_following > dist_preceding
-
-  following[preceding_closer] <- preceding[preceding_closer]
-
-  following
+adj_nearest_impl <- function(x, events) {
+  .Call(export_adj_nearest_impl, x, events)
 }
 
 # ------------------------------------------------------------------------------
