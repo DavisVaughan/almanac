@@ -4,14 +4,8 @@ cache_rbundle <- R6::R6Class(
 
   # ----------------------------------------------------------------------------
   public = list(
-    set_rrules = function(rrules)
-      cache_rbundle__set_rrules(self, private, rrules),
-
-    set_rdates = function(rdates)
-      cache_rbundle__set_rdates(self, private, rdates),
-
-    set_exdates = function(exdates)
-      cache_rbundle__set_exdates(self, private, exdates),
+    initialize = function(rrules, rdates, exdates)
+      cache_rbundle__initialize(self, private, rrules, rdates, exdates),
 
     get_events = function()
       cache_rbundle__get_events(self, private)
@@ -87,17 +81,9 @@ cache_rbundle__get_events <- function(self, private) {
 
 # ------------------------------------------------------------------------------
 
-cache_rbundle__set_rrules <- function(self, private, rrules) {
+cache_rbundle__initialize <- function(self, private, rrules, rdates, exdates) {
   private$rrules <- rrules
-  self
-}
-
-cache_rbundle__set_rdates <- function(self, private, rdates) {
   private$rdates <- rdates
-  self
-}
-
-cache_rbundle__set_exdates <- function(self, private, exdates) {
   private$exdates <- exdates
   self
 }

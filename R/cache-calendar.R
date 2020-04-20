@@ -4,14 +4,8 @@ cache_calendar <- R6::R6Class(
 
   # ----------------------------------------------------------------------------
   public = list(
-    set_rbundles = function(rbundles)
-      cache_calendar__set_rbundles(self, private, rbundles),
-
-    set_adjustments = function(adjustments)
-      cache_calendar__set_adjustments(self, private, adjustments),
-
-    set_weekend = function(weekend)
-      cache_calendar__set_weekend(self, private, weekend),
+    initialize = function(rbundles, adjustments, weekend)
+      cache_calendar__initialize(self, private, rbundles, adjustments, weekend),
 
     get_events = function()
       cache_calendar__get_events(self, private)
@@ -33,18 +27,11 @@ cache_calendar <- R6::R6Class(
 
 # ------------------------------------------------------------------------------
 
-cache_calendar__set_rbundles <- function(self, private, rbundles) {
+cache_calendar__initialize <- function(self, private, rbundles, adjustments, weekend) {
   private$rbundles <- rbundles
-  self
-}
-
-cache_calendar__set_adjustments <- function(self, private, adjustments) {
   private$adjustments <- adjustments
-  self
-}
-
-cache_calendar__set_weekend <- function(self, private, weekend) {
   private$weekend <- weekend
+  self
 }
 
 # ------------------------------------------------------------------------------
