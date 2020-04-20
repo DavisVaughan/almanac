@@ -29,6 +29,7 @@
 #' @importFrom vctrs vec_size_common
 #' @importFrom vctrs vec_recycle
 #' @importFrom vctrs vec_slice
+#' @importFrom vctrs vec_c
 #' @useDynLib almanac, .registration = TRUE
 ## usethis namespace: end
 NULL

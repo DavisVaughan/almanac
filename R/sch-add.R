@@ -86,13 +86,12 @@ sch_rrule <- function(x, rrule) {
   validate_schedule(x)
   validate_rrule(rrule, arg = "`rrule`")
 
-  recurrences <- x$recurrences
-  recurrences$rrules <- c(recurrences$rrules, list(rrule))
+  rrules <- c(x$rrules, list(rrule))
 
   new_schedule(
-    rrules = recurrences$rrules,
-    rdates = recurrences$rdates,
-    exdates = recurrences$exdates
+    rrules = rrules,
+    rdates = x$rdates,
+    exdates = x$exdates
   )
 }
 
@@ -102,13 +101,12 @@ sch_rdate <- function(x, rdate) {
   validate_schedule(x)
   rdate <- vec_cast_date(rdate, "rdate")
 
-  recurrences <- x$recurrences
-  recurrences$rdates <- c(recurrences$rdates, list(rdate))
+  rdates <- vec_c(x$rdates, rdate)
 
   new_schedule(
-    rrules = recurrences$rrules,
-    rdates = recurrences$rdates,
-    exdates = recurrences$exdates
+    rrules = x$rrules,
+    rdates = rdates,
+    exdates = x$exdates
   )
 }
 
@@ -118,13 +116,12 @@ sch_exdate <- function(x, exdate) {
   validate_schedule(x)
   exdate <- vec_cast_date(exdate, "exdate")
 
-  recurrences <- x$recurrences
-  recurrences$exdates <- c(recurrences$exdates, list(exdate))
+  exdates <- vec_c(x$exdates, exdate)
 
   new_schedule(
-    rrules = recurrences$rrules,
-    rdates = recurrences$rdates,
-    exdates = recurrences$exdates
+    rrules = x$rrules,
+    rdates = x$rdates,
+    exdates = exdates
   )
 }
 
@@ -134,15 +131,12 @@ sch_merge <- function(x, schedule) {
   validate_schedule(x)
   validate_schedule(schedule, "`schedule`")
 
-  x_recurrences <- x$recurrences
-  y_recurrences <- schedule$recurrences
+  new_rrules <- c(x$rrules, y$rrules)
 
-  new_rrules <- c(x_recurrences$rrules, y_recurrences$rrules)
-
-  new_rdates <- c(x_recurrences$rdates, y_recurrences$rdates)
+  new_rdates <- c(x$rdates, y$rdates)
   new_rdates <- unique(new_rdates)
 
-  new_exdates <- c(x_recurrences$exdates, y_recurrences$exdates)
+  new_exdates <- c(x$exdates, y$exdates)
   new_exdates <- unique(new_exdates)
 
   new_schedule(

@@ -7,7 +7,7 @@
 \title{almanac: Tools for Adjusting and Generating Dates Using a Grammar
     of Schedules}
 \description{
-Provides tools for defining events and schedules.
+Provides tools for defining recurrence rules.
     These provide a system for generating dates in a schedule, adjusting
     them relative to a schedule, and determining if they are included in a
     schedule.

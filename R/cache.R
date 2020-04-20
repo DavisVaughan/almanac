@@ -4,8 +4,14 @@ Cache <- R6::R6Class(
 
   # ----------------------------------------------------------------------------
   public = list(
-    set_recurrences = function(recurrences)
-      cache__set_recurrences(self, private, recurrences),
+    set_rrules = function(rrules)
+      cache__set_rrules(self, private, rrules),
+
+    set_rdates = function(rdates)
+      cache__set_rdates(self, private, rdates),
+
+    set_exdates = function(exdates)
+      cache__set_exdates(self, private, exdates),
 
     get_events = function()
       cache__get_events(self, private)
@@ -13,7 +19,10 @@ Cache <- R6::R6Class(
 
   # ----------------------------------------------------------------------------
   private = list(
-    recurrences = NULL,
+    rrules = list(),
+    rdates = new_date(),
+    exdates = new_date(),
+
     events = NULL,
     built = FALSE,
 
@@ -25,9 +34,11 @@ Cache <- R6::R6Class(
 # ------------------------------------------------------------------------------
 
 cache__cache_build <- function(self, private) {
-  recurrences <- private$recurrences
+  rrules <- private$rrules
+  rdates <- private$rdates
+  exdates <- private$exdates
 
-  call <- cache_build_call(recurrences)
+  call <- cache_build_call(rrules, rdates, exdates)
 
   events <- almanac_global_context$call(call)
   events <- parse_js_date(events)
@@ -38,8 +49,8 @@ cache__cache_build <- function(self, private) {
   invisible(self)
 }
 
-cache_build_call <- function(recurrences) {
-  body <- as_js_call_body(recurrences)
+cache_build_call <- function(rrules, rdates, exdates) {
+  body <- as_js_call_body(rrules, rdates, exdates)
 
   glue2("
     function() {
@@ -61,18 +72,24 @@ cache__get_events <- function(self, private) {
 
 # ------------------------------------------------------------------------------
 
-cache__set_recurrences <- function(self, private, recurrences) {
-  private$recurrences <- recurrences
+cache__set_rrules <- function(self, private, rrules) {
+  private$rrules <- rrules
+  self
+}
+
+cache__set_rdates <- function(self, private, rdates) {
+  private$rdates <- rdates
+  self
+}
+
+cache__set_exdates <- function(self, private, exdates) {
+  private$exdates <- exdates
   self
 }
 
 # ------------------------------------------------------------------------------
 
-as_js_call_body <- function(recurrences) {
-  rrules <- recurrences$rrules
-  rdates <- recurrences$rdates
-  exdates <- recurrences$exdates
-
+as_js_call_body <- function(rrules, rdates, exdates) {
   body <- "var ruleset = new rrule.RRuleSet()"
 
   for(rrule in rrules) {

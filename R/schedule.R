@@ -29,11 +29,9 @@ print.schedule <- function(x, ...) {
 }
 
 sch_summary <- function(x) {
-  recurrences <- x$recurrences
-
-  n_rrules <- length(recurrences$rrules)
-  n_rdates <- length(recurrences$rdates)
-  n_exdates <-length(recurrences$exdates)
+  n_rrules <- length(x$rrules)
+  n_rdates <- length(x$rdates)
+  n_exdates <-length(x$exdates)
 
   glue("{n_rrules} rrules / {n_rdates} rdates / {n_exdates} exdates")
 }
@@ -44,16 +42,14 @@ new_schedule <- function(rrules = list(),
                          rdates = new_date(),
                          exdates = new_date(),
                          cache = Cache$new()) {
-  recurrences <- new_recurrences(
-    rrules = rrules,
-    rdates = rdates,
-    exdates = exdates
-  )
-
-  cache$set_recurrences(recurrences)
+  cache$set_rrules(rrules)
+  cache$set_rdates(rdates)
+  cache$set_exdates(exdates)
 
   data <- list(
-    recurrences = recurrences,
+    rrules = rrules,
+    rdates = rdates,
+    exdates = exdates,
     cache = cache
   )
 
@@ -94,12 +90,4 @@ validate_schedule <- function(x, arg = "`x`") {
   }
 
   invisible(x)
-}
-
-# ------------------------------------------------------------------------------
-
-new_recurrences <- function(rrules = list(),
-                            rdates = new_date(),
-                            exdates = new_date()) {
-  list(rrules = rrules, rdates = rdates, exdates = exdates)
 }

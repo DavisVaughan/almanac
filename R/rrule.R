@@ -26,8 +26,8 @@
 #' forward, adjust the `since` date to be `2019-01-01` for a significant speed
 #' boost.
 #'
-#' As the anchor date, recurrences are often calculated _relative to_ this
-#' date. As an example, a recurrence of "on Monday, every other week" would use
+#' As the anchor date, events are often calculated _relative to_ this
+#' date. As an example, a rule of "on Monday, every other week" would use
 #' the `since` date to find the first Monday to start the recurrence from.
 #'
 #' There is no `quarterly()` recurrence frequency, but this can be accomplished

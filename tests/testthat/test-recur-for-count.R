@@ -1,4 +1,4 @@
-test_that("recurrences stop after `count` is up", {
+test_that("events stop after `count` is up", {
   start <- as.Date("1999-01-01")
 
   rrule <- daily(start) %>% recur_for_count(2)

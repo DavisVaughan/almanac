@@ -47,8 +47,8 @@
 #' on_weekly_fridays <- weekly(since = start)
 #' alma_seq(start, end, on_weekly_fridays)
 #'
-#' # Alternatively, we could use `recur_on_wday()` and force a recurrence on
-#' # Friday
+#' # Alternatively, we could use `recur_on_wday()` and force a recurrence rule
+#' # on Friday
 #' on_wday_friday <- on_weekly_thursdays %>% recur_on_wday("Friday")
 #' alma_seq(start, end, on_wday_friday)
 #'

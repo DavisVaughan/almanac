@@ -1,8 +1,8 @@
 #' Control the number of times to recur
 #'
 #' @description
-#' `recur_for_count()` controls the number of times that a recurrence will recur
-#' for. Using `recur_for_count()` will override the `until` date of the rule.
+#' `recur_for_count()` controls the total number of events in the recurrence
+#' set. Using `recur_for_count()` will override the `until` date of the rule.
 #'
 #' @details
 #' Remember that the number of times the occurrence has occurred is counted

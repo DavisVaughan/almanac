@@ -16,8 +16,8 @@ A recurrence rule.}
 The number of times to recur for.}
 }
 \description{
-\code{recur_for_count()} controls the number of times that a recurrence will recur
-for. Using \code{recur_for_count()} will override the \code{until} date of the rule.
+\code{recur_for_count()} controls the total number of events in the recurrence
+set. Using \code{recur_for_count()} will override the \code{until} date of the rule.
 }
 \details{
 Remember that the number of times the occurrence has occurred is counted

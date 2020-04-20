@@ -30,7 +30,7 @@ test_that("`alma_in()`ness can be silently determined when all values are NA", {
 
 test_that("`alma_in()` can be called even with infinite dates", {
   rrule <- daily(since = "1970-01-01")
-  x <- vctrs::vec_c(almanac_global_inf_date, as.Date("1970-01-01"))
+  x <- vec_c(almanac_global_inf_date, as.Date("1970-01-01"))
   expect_identical(alma_in(x, rrule), c(FALSE, TRUE))
 })
 

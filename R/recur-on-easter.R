@@ -2,7 +2,7 @@
 #'
 #' `recur_on_easter()` is a special helper to recur on Easter. Easter is
 #' particularly difficult to construct a recurrence rule for. Using `offset`,
-#' this can also be used to generate a recurrence on Easter Monday or
+#' this can also be used to generate a recurrence rule on Easter Monday or
 #' Good Friday.
 #'
 #' @param x `[rrule]`

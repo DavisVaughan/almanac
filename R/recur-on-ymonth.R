@@ -8,7 +8,7 @@
 #'
 #' @param ymonth `[integer / character]`
 #'
-#'    Months of the year the mark as events. Integer values must be between
+#'    Months of the year to mark as events. Integer values must be between
 #'    `[1, 12]`. This can also be a full month string like `"November"`, or an
 #'    abbreviation like `"Nov"`.
 #'
