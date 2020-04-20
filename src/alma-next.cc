@@ -32,7 +32,7 @@ sexp alma_next_impl(sexp x, sexp events, const bool inclusive) {
     p_out[i] = *p_loc;
   }
 
-  r_poke_attr(out, syms_class, classes_date);
+  r_init_date(out);
 
   UNPROTECT(1);
   return out;
@@ -74,7 +74,7 @@ sexp alma_previous_impl(sexp x, sexp events, const bool inclusive) {
     p_out[i] = *p_loc;
   }
 
-  r_poke_attr(out, syms_class, classes_date);
+  r_init_date(out);
 
   UNPROTECT(1);
   return out;

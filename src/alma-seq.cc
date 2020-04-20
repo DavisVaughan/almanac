@@ -26,7 +26,7 @@ sexp alma_seq_impl(sexp events, double from, double to, bool inclusive) {
 
   std::copy(p_start, p_stop, p_out);
 
-  r_poke_attr(out, syms_class, classes_date);
+  r_init_date(out);
 
   UNPROTECT(1);
   return out;
