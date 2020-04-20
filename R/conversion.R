@@ -1,6 +1,6 @@
 as_js_from_date <- function(x) {
-  x <- as.POSIXlt(x)
-  glue("new Date(Date.UTC({year(x)}, {month(x) - 1L}, {day(x)}))")
+  milliseconds <- unclass(x) * 86400 * 1000
+  glue("new Date({milliseconds})")
 }
 
 as_js_from_vector <- function(x) {
@@ -46,7 +46,8 @@ as_js_from_rrule <- function(x) {
 }
 
 get_dtstart <- function(x) {
-  glue("dtstart: {as_js_from_date(x$rules$since)}")
+  dtstart <- x$rules$since
+  glue("dtstart: {as_js_from_date(dtstart)}")
 }
 
 get_frequency <- function(x) {
@@ -55,11 +56,14 @@ get_frequency <- function(x) {
 }
 
 get_until <- function(x) {
-  if (is.null(x$rules$until)) {
+  until <- x$rules$until
+
+  # In case `recur_for_count()` is set
+  if (is.null(until)) {
     return(NULL)
   }
 
-  glue("until: {as_js_from_date(x$rules$until)}")
+  glue("until: {as_js_from_date(until)}")
 }
 
 get_count <- function(x) {

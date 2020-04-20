@@ -8,6 +8,10 @@ delayedAssign("almanac_global_neg_inf_date", structure(-Inf, class = "Date"))
 delayedAssign("almanac_global_na_date", structure(NA_real_, class = "Date"))
 delayedAssign("almanac_global_nan_date", structure(NaN, class = "Date"))
 
+# JS rrule can't seem to handle dates outside this range, but that's fine
+delayedAssign("almanac_global_max_date", as.Date("9999-12-31"))
+delayedAssign("almanac_global_min_date", as.Date("0100-01-01"))
+
 # ------------------------------------------------------------------------------
 
 vec_cast_date <- function(x, x_arg = "x") {
@@ -71,6 +75,26 @@ max2 <- function(x) {
 
 glubort <- function (..., .sep = "", .envir = parent.frame()) {
   abort(glue::glue(..., .sep = .sep, .envir = .envir))
+}
+
+# ------------------------------------------------------------------------------
+
+validate_date_bounds <- function(x, ..., x_arg = "") {
+  if (nzchar(x_arg)) {
+    x_arg <- glue(" `{x_arg}`")
+  }
+
+  if (any(x > almanac_global_max_date, na.rm = TRUE)) {
+    message <- glue("Input{x_arg} cannot be larger than {almanac_global_max_date}.")
+    stop_date_above_maximum(message)
+  }
+
+  if (any(x < almanac_global_min_date, na.rm = TRUE)) {
+    message <- glue("Input{x_arg} cannot be smaller than {almanac_global_min_date}.")
+    stop_date_below_minimum(message)
+  }
+
+  invisible(x)
 }
 
 # ------------------------------------------------------------------------------

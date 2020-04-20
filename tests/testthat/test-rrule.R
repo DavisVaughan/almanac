@@ -46,3 +46,12 @@ test_that("`since` must be before `until`", {
   )
 })
 
+test_that("errors on max/min dates", {
+  since <- as.Date("0100-01-01")
+  expect_error(daily(since = since), NA)
+  expect_error(daily(since = since - 1), class = "almanac_error_date_below_minimum")
+
+  until <- as.Date("9999-12-31")
+  expect_error(daily(until = until), NA)
+  expect_error(daily(until = until + 1), class = "almanac_error_date_above_maximum")
+})

@@ -12,3 +12,11 @@ stop_cache_infinite_extension <- function() {
     class = "almanac_error_infinite_extension"
   )
 }
+
+stop_date_below_minimum <- function(message) {
+  stop_almanac(message = message, class = "almanac_error_date_below_minimum")
+}
+
+stop_date_above_maximum <- function(message) {
+  stop_almanac(message = message, class = "almanac_error_date_above_maximum")
+}

@@ -134,6 +134,9 @@ rrule <- function(since, until, frequency) {
     abort("`since` must be before `until`.")
   }
 
+  validate_date_bounds(since, x_arg = "since")
+  validate_date_bounds(until, x_arg = "until")
+
   new_rrule(
     since = since,
     until = until,

@@ -73,3 +73,20 @@ test_that("uniqueness of exdates is taken", {
 
   expect_identical(x$exdates, a)
 })
+
+test_that("errors on max/min rdates and exdates", {
+  lb <- as.Date("0100-01-01")
+  ub <- as.Date("9999-12-31")
+
+  expect_error(add_rdate(rbundle(), lb), NA)
+  expect_error(add_rdate(rbundle(), lb - 1), class = "almanac_error_date_below_minimum")
+
+  expect_error(add_exdate(rbundle(), lb), NA)
+  expect_error(add_exdate(rbundle(), lb - 1), class = "almanac_error_date_below_minimum")
+
+  expect_error(add_rdate(rbundle(), ub), NA)
+  expect_error(add_rdate(rbundle(), ub + 1), class = "almanac_error_date_above_maximum")
+
+  expect_error(add_exdate(rbundle(), ub), NA)
+  expect_error(add_exdate(rbundle(), ub + 1), class = "almanac_error_date_above_maximum")
+})
