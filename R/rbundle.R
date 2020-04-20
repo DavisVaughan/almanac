@@ -87,7 +87,7 @@ is_rbundle <- function(x) {
 
 validate_rbundle <- function(x, arg = "`x`") {
   if (!is_rbundle(x)) {
-    glubort("{arg} must be a rbundle")
+    glubort("{arg} must be an rbundle.")
   }
 
   invisible(x)

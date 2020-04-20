@@ -33,8 +33,8 @@ rrule2 <- monthly() \%>\%
 
 # Make a larger schedule made of multiple rules
 sch <- schedule() \%>\%
- sch_rrule(rrule) \%>\%
- sch_rrule(rrule2)
+ add_rrule(rrule) \%>\%
+ add_rrule(rrule2)
 
 alma_in(x, sch)
 }

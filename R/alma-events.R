@@ -19,8 +19,8 @@
 #'   recur_for_count(5)
 #'
 #' sch <- schedule() %>%
-#'   sch_rrule(rrule) %>%
-#'   sch_rrule(rrule_weekly)
+#'   add_rrule(rrule) %>%
+#'   add_rrule(rrule_weekly)
 #'
 #' alma_events(sch)
 alma_events <- function(schedule) {

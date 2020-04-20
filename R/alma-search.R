@@ -21,8 +21,8 @@
 #'
 #' # On the 12th of the month, or on Mondays
 #' sch <- schedule() %>%
-#'   sch_rrule(on_12th) %>%
-#'   sch_rrule(on_monday)
+#'   add_rrule(on_12th) %>%
+#'   add_rrule(on_monday)
 #'
 #' alma_search("2019-01-01", "2019-01-31", sch)
 alma_search <- function(from, to, schedule, inclusive = TRUE) {

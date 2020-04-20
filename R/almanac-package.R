@@ -30,6 +30,7 @@
 #' @importFrom vctrs vec_recycle
 #' @importFrom vctrs vec_slice
 #' @importFrom vctrs vec_c
+#' @importFrom vctrs vec_unique
 #' @useDynLib almanac, .registration = TRUE
 ## usethis namespace: end
 NULL

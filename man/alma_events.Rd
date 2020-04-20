@@ -27,8 +27,8 @@ rrule_weekly <- weekly(since = "1970-01-01") \%>\%
   recur_for_count(5)
 
 sch <- schedule() \%>\%
-  sch_rrule(rrule) \%>\%
-  sch_rrule(rrule_weekly)
+  add_rrule(rrule) \%>\%
+  add_rrule(rrule_weekly)
 
 alma_events(sch)
 }

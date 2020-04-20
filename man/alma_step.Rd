@@ -65,8 +65,8 @@ on_09_16 <- yearly() \%>\%
   recur_on_mday(16)
 
 sch <- schedule() \%>\%
-  sch_rrule(on_09_16) \%>\%
-  sch_rrule(on_weekends)
+  add_rrule(on_09_16) \%>\%
+  add_rrule(on_weekends)
 
 alma_step("2019-09-13", 2, sch)
 }
