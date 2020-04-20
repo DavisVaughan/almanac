@@ -1,6 +1,6 @@
-test_that("can use a schedule with no rules", {
-  expect_identical(alma_next("2000-01-01", schedule()), almanac_global_na_date)
-  expect_identical(alma_next("2000-01-01", schedule(), inclusive = TRUE), almanac_global_na_date)
+test_that("can use a rbundle with no rules", {
+  expect_identical(alma_next("2000-01-01", rbundle()), almanac_global_na_date)
+  expect_identical(alma_next("2000-01-01", rbundle(), inclusive = TRUE), almanac_global_na_date)
 })
 
 test_that("next works with infinite dates", {
@@ -54,9 +54,9 @@ test_that("next works when between the last occurrence and the until date", {
 
 # ------------------------------------------------------------------------------
 
-test_that("can use a schedule with no rules", {
-  expect_identical(alma_previous("2000-01-01", schedule()), almanac_global_na_date)
-  expect_identical(alma_previous("2000-01-01", schedule(), inclusive = TRUE), almanac_global_na_date)
+test_that("can use a rbundle with no rules", {
+  expect_identical(alma_previous("2000-01-01", rbundle()), almanac_global_na_date)
+  expect_identical(alma_previous("2000-01-01", rbundle(), inclusive = TRUE), almanac_global_na_date)
 })
 
 test_that("previous works with infinite dates", {

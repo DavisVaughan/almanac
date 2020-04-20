@@ -6,9 +6,9 @@
 #'
 #'    Dates defining the range to look for events.
 #'
-#' @param schedule `[schedule / rrule]`
+#' @param rbundle `[rbundle / rrule]`
 #'
-#'    A schedule or rrule.
+#'    A rbundle or rrule.
 #'
 #' @param inclusive `[logical(1)]`
 #'
@@ -20,12 +20,12 @@
 #' on_monday <- weekly() %>% recur_on_wday("Monday")
 #'
 #' # On the 12th of the month, or on Mondays
-#' sch <- schedule() %>%
+#' rb <- rbundle() %>%
 #'   add_rrule(on_12th) %>%
 #'   add_rrule(on_monday)
 #'
-#' alma_search("2019-01-01", "2019-01-31", sch)
-alma_search <- function(from, to, schedule, inclusive = TRUE) {
+#' alma_search("2019-01-01", "2019-01-31", rb)
+alma_search <- function(from, to, rbundle, inclusive = TRUE) {
   from <- vec_cast_date(from)
   to <- vec_cast_date(to)
 
@@ -36,14 +36,14 @@ alma_search <- function(from, to, schedule, inclusive = TRUE) {
     abort("`from` and `to` cannot be `NA`")
   }
 
-  schedule <- as_schedule(schedule)
+  rbundle <- as_rbundle(rbundle)
 
   vec_assert(inclusive, logical(), 1L)
   if (is.na(inclusive)) {
     abort("`inclusive` cannot be `NA`")
   }
 
-  events <- schedule$cache$get_events()
+  events <- rbundle$cache$get_events()
 
   alma_search_impl(events, from, to, inclusive)
 }

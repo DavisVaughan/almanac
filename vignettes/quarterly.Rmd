@@ -53,7 +53,7 @@ alma_search("2000-01-01", "2002-01-01", on_first_day_of_quarter_march_start)
 
 As a more general case of the first example, what happens if we want to compute the n-th day of the quarter, from either the front or the back? Unlike the first example, we no longer have the guarantee that the date will be in the first month, and if we count from the back we really need the entire set of 3 months that make up the quarter to count correctly.
 
-The secret here is to break the rule into 4 smaller rules, one per quarter, which you can then combine into 1 larger quarterly schedule. Let's start with a concrete example in Q1, the 60th day of the quarter.
+The secret here is to break the rule into 4 smaller rules, one per quarter, which you can then combine into 1 larger quarterly rbundle. Let's start with a concrete example in Q1, the 60th day of the quarter.
 
 ```{r}
 on_60th_day_of_q1 <- yearly(since = "2000-01-01") %>%
@@ -76,7 +76,7 @@ This breaks down as follows:
 
 Using `yearly()` rather than `monthly()` is required for `recur_on_position()` to work correctly. `recur_on_position()` takes the `n-th` position of the set, _within the frequency_. So if we had chosen monthly it would try and take the 60th position within the monthly set, which isn't what we wanted.
 
-The rest of the quarterly rules are straightforward from here. We just change the ymonth values. To make this more usable, I'll also wrap it in a parameterized function, and go ahead and construct the combined schedule object from the four pieces.
+The rest of the quarterly rules are straightforward from here. We just change the ymonth values. To make this more usable, I'll also wrap it in a parameterized function, and go ahead and construct the combined rbundle object from the four pieces.
 
 ```{r}
 make_on_nth_day_of_the_quarter <- function(since = "1970-01-01", nth = 1L) {
@@ -102,7 +102,7 @@ make_on_nth_day_of_the_quarter <- function(since = "1970-01-01", nth = 1L) {
     recur_on_mday(all_days) %>%
     recur_on_position(nth)
   
-  on_nth_day_of_the_quarter <- schedule() %>%
+  on_nth_day_of_the_quarter <- rbundle() %>%
     add_rrule(on_nth_day_of_q1) %>%
     add_rrule(on_nth_day_of_q2) %>%
     add_rrule(on_nth_day_of_q3) %>%
@@ -192,7 +192,7 @@ make_on_nth_wday_of_the_quarter <- function(since = "1970-01-01", wday = "Monday
     recur_on_wday(wday) %>%
     recur_on_position(nth)
   
-  on_nth_wday_of_the_quarter <- schedule() %>%
+  on_nth_wday_of_the_quarter <- rbundle() %>%
     add_rrule(on_nth_wday_of_q1) %>%
     add_rrule(on_nth_wday_of_q2) %>%
     add_rrule(on_nth_wday_of_q3) %>%
@@ -217,7 +217,7 @@ wday(fridays, label = TRUE)
 
 ## Combining with other rules
 
-Remember that each of these results are just schedules that can be combined with other rules if you need to create more complex quarterly strategies. For example, let's take the "last Friday of the quarter" schedule and combine it with a rule for "on every Wednesday".
+Remember that each of these results are just rbundles that can be combined with other rules if you need to create more complex quarterly strategies. For example, let's take the "last Friday of the quarter" rbundle and combine it with a rule for "on every Wednesday".
 
 ```{r}
 on_wednesdays <- weekly(since = "2000-01-01") %>%

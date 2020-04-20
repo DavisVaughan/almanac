@@ -13,11 +13,11 @@ calendar_usa_nyse(since = "1970-01-01")
 \arguments{
 \item{since}{\verb{[Date(1)]}
 
-The initial date to start the schedule from.}
+The initial date to start the rbundle from.}
 }
 \description{
-The following generate \code{schedule} objects corresponding to calendars. A
-calendar is composed of multiple holiday schedules generated from the
+The following generate rbundle objects corresponding to calendars. A
+calendar is composed of multiple holiday rbundles generated from the
 \verb{hldy_*()} functions.
 }
 \examples{

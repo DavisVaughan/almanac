@@ -18,23 +18,23 @@
 #' on_monday <- weekly() %>% recur_on_wday("Monday")
 #'
 #' # On the 12th of the month, or on Mondays
-#' sch <- schedule() %>%
+#' rb <- rbundle() %>%
 #'   add_rrule(on_12th) %>%
 #'   add_rrule(on_monday)
 #'
-#' alma_next(c("2019-01-01", "2019-01-11"), sch)
-#' alma_previous(c("2019-01-01", "2019-01-11"), sch)
-alma_next <- function(x, schedule, inclusive = FALSE) {
+#' alma_next(c("2019-01-01", "2019-01-11"), rb)
+#' alma_previous(c("2019-01-01", "2019-01-11"), rb)
+alma_next <- function(x, rbundle, inclusive = FALSE) {
   x <- vec_cast_date(x)
 
-  schedule <- as_schedule(schedule)
+  rbundle <- as_rbundle(rbundle)
 
   vec_assert(inclusive, logical(), 1L)
   if (is.na(inclusive)) {
     abort("`inclusive` cannot be `NA`")
   }
 
-  events <- schedule$cache$get_events()
+  events <- rbundle$cache$get_events()
 
   alma_next_impl(x, events, inclusive)
 }
@@ -45,17 +45,17 @@ alma_next_impl <- function(x, events, inclusive) {
 
 #' @rdname alma_next
 #' @export
-alma_previous <- function(x, schedule, inclusive = FALSE) {
+alma_previous <- function(x, rbundle, inclusive = FALSE) {
   x <- vec_cast_date(x)
 
-  schedule <- as_schedule(schedule)
+  rbundle <- as_rbundle(rbundle)
 
   vec_assert(inclusive, logical(), 1L)
   if (is.na(inclusive)) {
     abort("`inclusive` cannot be `NA`")
   }
 
-  events <- schedule$cache$get_events()
+  events <- rbundle$cache$get_events()
 
   alma_previous_impl(x, events, inclusive)
 }

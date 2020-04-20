@@ -4,16 +4,16 @@
 
 #' Holidays
 #'
-#' The following generate `schedule` objects corresponding to commonly used
+#' The following generate rbundle objects corresponding to commonly used
 #' holidays.
 #'
 #' @param since `[Date(1)]`
 #'
-#'    The initial date to start the schedule from.
+#'    The initial date to start the rbundle from.
 #'
 #' @param until `[NULL / Date(1)]`
 #'
-#'    An optional end date for the holiday schedule. Useful when constructing
+#'    An optional end date for the holiday rbundle. Useful when constructing
 #'    larger calendars, such as one for the NYSE, where holidays are
 #'    occasionally only celebrated for a set number of years.
 #'
@@ -39,10 +39,10 @@ hldy_washington_birthday <- function(since = "1970-01-01") {
   if (since >= as.Date("1971-01-01")) {
     hldy_washington_birthday_post_1971(since)
   } else {
-    sch <- schedule()
-    sch <- add_rbundle(sch, hldy_washington_birthday_pre_1971(since))
-    sch <- add_rbundle(sch, hldy_washington_birthday_post_1971())
-    sch
+    rb <- rbundle()
+    rb <- add_rbundle(rb, hldy_washington_birthday_pre_1971(since))
+    rb <- add_rbundle(rb, hldy_washington_birthday_post_1971())
+    rb
   }
 }
 
@@ -67,12 +67,12 @@ hldy_washington_birthday_pre_1971 <- function(since) {
   rrule_adj_backward <- recur_on_mday(rrule_adj_backward, 21L)
   rrule_adj_backward <- recur_on_wday(rrule_adj_backward, 5L)
 
-  sch <- schedule()
-  sch <- add_rrule(sch, rrule = rrule)
-  sch <- add_rrule(sch, rrule = rrule_adj_forward)
-  sch <- add_rrule(sch, rrule = rrule_adj_backward)
+  rb <- rbundle()
+  rb <- add_rrule(rb, rrule = rrule)
+  rb <- add_rrule(rb, rrule = rrule_adj_forward)
+  rb <- add_rrule(rb, rrule = rrule_adj_backward)
 
-  sch
+  rb
 }
 
 hldy_washington_birthday_post_1971 <- function(since = as.Date("1971-01-01")) {
@@ -80,7 +80,7 @@ hldy_washington_birthday_post_1971 <- function(since = as.Date("1971-01-01")) {
   rrule <- yearly(since)
   rrule <- recur_on_ymonth(rrule, 2L)
   rrule <- recur_on_wday(rrule, 1L, nth = 3L)
-  as_schedule(rrule)
+  as_rbundle(rrule)
 }
 
 # ------------------------------------------------------------------------------
@@ -97,10 +97,10 @@ hldy_memorial_day <- function(since = "1970-01-01") {
   if (since >= as.Date("1971-01-01")) {
     hldy_memorial_day_post_1971(since)
   } else {
-    sch <- schedule()
-    sch <- add_rbundle(sch, hldy_memorial_day_pre_1971(since))
-    sch <- add_rbundle(sch, hldy_memorial_day_post_1971())
-    sch
+    rb <- rbundle()
+    rb <- add_rbundle(rb, hldy_memorial_day_pre_1971(since))
+    rb <- add_rbundle(rb, hldy_memorial_day_post_1971())
+    rb
   }
 }
 
@@ -125,12 +125,12 @@ hldy_memorial_day_pre_1971 <- function(since) {
   rrule_adj_backward <- recur_on_mday(rrule_adj_backward, 29L)
   rrule_adj_backward <- recur_on_wday(rrule_adj_backward, 5L)
 
-  sch <- schedule()
-  sch <- add_rrule(sch, rrule = rrule)
-  sch <- add_rrule(sch, rrule = rrule_adj_forward)
-  sch <- add_rrule(sch, rrule = rrule_adj_backward)
+  rb <- rbundle()
+  rb <- add_rrule(rb, rrule = rrule)
+  rb <- add_rrule(rb, rrule = rrule_adj_forward)
+  rb <- add_rrule(rb, rrule = rrule_adj_backward)
 
-  sch
+  rb
 }
 
 # On last Monday in May
@@ -138,7 +138,7 @@ hldy_memorial_day_post_1971 <- function(since = as.Date("1971-01-01")) {
   rrule <- yearly(since)
   rrule <- recur_on_ymonth(rrule, 5L)
   rrule <- recur_on_wday(rrule, 1L, nth = -1L)
-  as_schedule(rrule)
+  as_rbundle(rrule)
 }
 
 # ------------------------------------------------------------------------------
@@ -152,7 +152,7 @@ hldy_labor_day <- function(since = "1970-01-01") {
   rrule <- yearly(since)
   rrule <- recur_on_ymonth(rrule, 9L)
   rrule <- recur_on_wday(rrule, 1L, nth = 1L)
-  as_schedule(rrule)
+  as_rbundle(rrule)
 }
 
 # ------------------------------------------------------------------------------
@@ -171,17 +171,17 @@ hldy_columbus_day <- function(since = "1970-01-01", until = NULL) {
   }
 
   if (is.null(until)) {
-    sch <- schedule()
-    sch <- add_rbundle(sch, hldy_columbus_day_pre_1971(since))
-    sch <- add_rbundle(sch, hldy_columbus_day_post_1971())
-    return(sch)
+    rb <- rbundle()
+    rb <- add_rbundle(rb, hldy_columbus_day_pre_1971(since))
+    rb <- add_rbundle(rb, hldy_columbus_day_post_1971())
+    return(rb)
   }
 
   if (until >= as.Date("1971-01-01")) {
-    sch <- schedule()
-    sch <- add_rbundle(sch, hldy_columbus_day_pre_1971(since))
-    sch <- add_rbundle(sch, hldy_columbus_day_post_1971(until = until))
-    return(sch)
+    rb <- rbundle()
+    rb <- add_rbundle(rb, hldy_columbus_day_pre_1971(since))
+    rb <- add_rbundle(rb, hldy_columbus_day_post_1971(until = until))
+    return(rb)
   }
 
   hldy_columbus_day_pre_1971(since, until)
@@ -210,19 +210,19 @@ hldy_columbus_day_pre_1971 <- function(since, until = NULL) {
   rrule_adj_backward <- recur_on_mday(rrule_adj_backward, 11L)
   rrule_adj_backward <- recur_on_wday(rrule_adj_backward, 5L)
 
-  sch <- schedule()
-  sch <- add_rrule(sch, rrule = rrule)
-  sch <- add_rrule(sch, rrule = rrule_adj_forward)
-  sch <- add_rrule(sch, rrule = rrule_adj_backward)
+  rb <- rbundle()
+  rb <- add_rrule(rb, rrule = rrule)
+  rb <- add_rrule(rb, rrule = rrule_adj_forward)
+  rb <- add_rrule(rb, rrule = rrule_adj_backward)
 
-  sch
+  rb
 }
 
 hldy_columbus_day_post_1971 <- function(since = as.Date("1971-01-01"), until = as.Date("2040-01-01")) {
   rrule <- yearly(since = since, until = until)
   rrule <- recur_on_ymonth(rrule, 10L)
   rrule <- recur_on_wday(rrule, 1L, nth = 2L)
-  as_schedule(rrule)
+  as_rbundle(rrule)
 }
 
 # ------------------------------------------------------------------------------
@@ -242,17 +242,17 @@ hldy_veterans_day <- function(since = "1970-01-01") {
   }
 
   if (since >= as.Date("1971-01-01")) {
-    sch <- schedule()
-    sch <- add_rbundle(sch, hldy_veterans_day_post_1971_pre_1978(since))
-    sch <- add_rbundle(sch, hldy_veterans_day_post_1978())
-    return(sch)
+    rb <- rbundle()
+    rb <- add_rbundle(rb, hldy_veterans_day_post_1971_pre_1978(since))
+    rb <- add_rbundle(rb, hldy_veterans_day_post_1978())
+    return(rb)
   }
 
-  sch <- schedule()
-  sch <- add_rbundle(sch, hldy_veterans_day_pre_1971(since))
-  sch <- add_rbundle(sch, hldy_veterans_day_post_1971_pre_1978())
-  sch <- add_rbundle(sch, hldy_veterans_day_post_1978())
-  return(sch)
+  rb <- rbundle()
+  rb <- add_rbundle(rb, hldy_veterans_day_pre_1971(since))
+  rb <- add_rbundle(rb, hldy_veterans_day_post_1971_pre_1978())
+  rb <- add_rbundle(rb, hldy_veterans_day_post_1978())
+  return(rb)
 }
 
 hldy_veterans_day_pre_1971 <- function(since) {
@@ -276,12 +276,12 @@ hldy_veterans_day_pre_1971 <- function(since) {
   rrule_adj_backward <- recur_on_mday(rrule_adj_backward, 10L)
   rrule_adj_backward <- recur_on_wday(rrule_adj_backward, 5L)
 
-  sch <- schedule()
-  sch <- add_rrule(sch, rrule = rrule)
-  sch <- add_rrule(sch, rrule = rrule_adj_forward)
-  sch <- add_rrule(sch, rrule = rrule_adj_backward)
+  rb <- rbundle()
+  rb <- add_rrule(rb, rrule = rrule)
+  rb <- add_rrule(rb, rrule = rrule_adj_forward)
+  rb <- add_rrule(rb, rrule = rrule_adj_backward)
 
-  sch
+  rb
 }
 
 # Fourth Monday in October
@@ -289,7 +289,7 @@ hldy_veterans_day_post_1971_pre_1978 <- function(since = as.Date("1971-01-01")) 
   rrule <- yearly(since)
   rrule <- recur_on_ymonth(rrule, 11L)
   rrule <- recur_on_wday(rrule, 1L, nth = 4L)
-  as_schedule(rrule)
+  as_rbundle(rrule)
 }
 
 # On last Monday in May
@@ -312,12 +312,12 @@ hldy_veterans_day_post_1978 <- function(since = as.Date("1978-01-01")) {
   rrule_adj_backward <- recur_on_mday(rrule_adj_backward, 10L)
   rrule_adj_backward <- recur_on_wday(rrule_adj_backward, 5L)
 
-  sch <- schedule()
-  sch <- add_rrule(sch, rrule = rrule)
-  sch <- add_rrule(sch, rrule = rrule_adj_forward)
-  sch <- add_rrule(sch, rrule = rrule_adj_backward)
+  rb <- rbundle()
+  rb <- add_rrule(rb, rrule = rrule)
+  rb <- add_rrule(rb, rrule = rrule_adj_forward)
+  rb <- add_rrule(rb, rrule = rrule_adj_backward)
 
-  sch
+  rb
 }
 
 # ------------------------------------------------------------------------------
@@ -348,12 +348,12 @@ hldy_new_years_day <- function(since = "1970-01-01") {
   rrule_adj_backward <- recur_on_mday(rrule_adj_backward, 31L)
   rrule_adj_backward <- recur_on_wday(rrule_adj_backward, 5L)
 
-  sch <- schedule()
-  sch <- add_rrule(sch, rrule = rrule)
-  sch <- add_rrule(sch, rrule = rrule_adj_forward)
-  sch <- add_rrule(sch, rrule = rrule_adj_backward)
+  rb <- rbundle()
+  rb <- add_rrule(rb, rrule = rrule)
+  rb <- add_rrule(rb, rrule = rrule_adj_forward)
+  rb <- add_rrule(rb, rrule = rrule_adj_backward)
 
-  sch
+  rb
 }
 
 # ------------------------------------------------------------------------------
@@ -380,7 +380,7 @@ hldy_martin_luther_king_jr_day <- function(since = "1970-01-01") {
   rrule <- yearly(since)
   rrule <- recur_on_ymonth(rrule, 1L)
   rrule <- recur_on_wday(rrule, 1L, nth = 3L)
-  as_schedule(rrule)
+  as_rbundle(rrule)
 }
 
 # ------------------------------------------------------------------------------
@@ -411,12 +411,12 @@ hldy_independence_day <- function(since = "1970-01-01") {
   rrule_adj_backward <- recur_on_mday(rrule_adj_backward, 3L)
   rrule_adj_backward <- recur_on_wday(rrule_adj_backward, 5L)
 
-  sch <- schedule()
-  sch <- add_rrule(sch, rrule = rrule)
-  sch <- add_rrule(sch, rrule = rrule_adj_forward)
-  sch <- add_rrule(sch, rrule = rrule_adj_backward)
+  rb <- rbundle()
+  rb <- add_rrule(rb, rrule = rrule)
+  rb <- add_rrule(rb, rrule = rrule_adj_forward)
+  rb <- add_rrule(rb, rrule = rrule_adj_backward)
 
-  sch
+  rb
 }
 
 # ------------------------------------------------------------------------------
@@ -436,17 +436,17 @@ hldy_thanksgiving <- function(since = "1970-01-01") {
   }
 
   if (since >= as.Date("1939-01-01")) {
-    sch <- schedule()
-    sch <- add_rbundle(sch, hldy_thanksgiving_post_1939_pre_1942(since))
-    sch <- add_rbundle(sch, hldy_thanksgiving_post_1942())
-    return(sch)
+    rb <- rbundle()
+    rb <- add_rbundle(rb, hldy_thanksgiving_post_1939_pre_1942(since))
+    rb <- add_rbundle(rb, hldy_thanksgiving_post_1942())
+    return(rb)
   }
 
-  sch <- schedule()
-  sch <- add_rbundle(sch, hldy_thanksgiving_pre_1939(since))
-  sch <- add_rbundle(sch, hldy_thanksgiving_post_1939_pre_1942())
-  sch <- add_rbundle(sch, hldy_thanksgiving_post_1942())
-  return(sch)
+  rb <- rbundle()
+  rb <- add_rbundle(rb, hldy_thanksgiving_pre_1939(since))
+  rb <- add_rbundle(rb, hldy_thanksgiving_post_1939_pre_1942())
+  rb <- add_rbundle(rb, hldy_thanksgiving_post_1942())
+  return(rb)
 }
 
 hldy_thanksgiving_pre_1939 <- function(since) {
@@ -455,7 +455,7 @@ hldy_thanksgiving_pre_1939 <- function(since) {
   rrule <- yearly(since = since, until = until)
   rrule <- recur_on_ymonth(rrule, 11L)
   rrule <- recur_on_wday(rrule, 4L, nth = -1L)
-  as_schedule(rrule)
+  as_rbundle(rrule)
 }
 
 hldy_thanksgiving_post_1939_pre_1942 <- function(since = as.Date("1939-01-01")) {
@@ -464,14 +464,14 @@ hldy_thanksgiving_post_1939_pre_1942 <- function(since = as.Date("1939-01-01")) 
   rrule <- yearly(since = since, until = until)
   rrule <- recur_on_ymonth(rrule, 11L)
   rrule <- recur_on_wday(rrule, 4L, nth = -2L)
-  as_schedule(rrule)
+  as_rbundle(rrule)
 }
 
 hldy_thanksgiving_post_1942 <- function(since = as.Date("1942-01-01")) {
   rrule <- yearly(since)
   rrule <- recur_on_ymonth(rrule, 11L)
   rrule <- recur_on_wday(rrule, 4L, nth = 4L)
-  as_schedule(rrule)
+  as_rbundle(rrule)
 }
 
 # ------------------------------------------------------------------------------
@@ -502,12 +502,12 @@ hldy_christmas <- function(since = "1970-01-01") {
   rrule_adj_backward <- recur_on_mday(rrule_adj_backward, 24L)
   rrule_adj_backward <- recur_on_wday(rrule_adj_backward, 5L)
 
-  sch <- schedule()
-  sch <- add_rrule(sch, rrule = rrule)
-  sch <- add_rrule(sch, rrule = rrule_adj_forward)
-  sch <- add_rrule(sch, rrule = rrule_adj_backward)
+  rb <- rbundle()
+  rb <- add_rrule(rb, rrule = rrule)
+  rb <- add_rrule(rb, rrule = rrule_adj_forward)
+  rb <- add_rrule(rb, rrule = rrule_adj_backward)
 
-  sch
+  rb
 }
 
 # ------------------------------------------------------------------------------
@@ -522,10 +522,10 @@ hldy_easter_impl <- function(since, until, offset = 0L) {
   rrule <- yearly(since = since, until = until)
   rrule <- recur_on_easter(rrule, offset = offset)
 
-  sch <- schedule()
-  sch <- add_rrule(sch, rrule)
+  rb <- rbundle()
+  rb <- add_rrule(rb, rrule)
 
-  sch
+  rb
 }
 
 # ------------------------------------------------------------------------------
@@ -561,9 +561,9 @@ hldy_july_fourth <- function(since = "1970-01-01") {
   rrule <- recur_on_ymonth(rrule, 7L)
   rrule <- recur_on_mday(rrule, 4L)
 
-  sch <- as_schedule(rrule)
+  rb <- as_rbundle(rrule)
 
-  sch
+  rb
 }
 
 # ------------------------------------------------------------------------------
@@ -576,9 +576,9 @@ hldy_lincoln_birthday <- function(since = "1970-01-01", until = "2040-01-01") {
   rrule <- recur_on_ymonth(rrule, 2L)
   rrule <- recur_on_mday(rrule, 12L)
 
-  sch <- as_schedule(rrule)
+  rb <- as_rbundle(rrule)
 
-  sch
+  rb
 }
 
 # ------------------------------------------------------------------------------
@@ -601,7 +601,7 @@ hldy_election_day <- function(since = "1970-01-01", until = "2040-01-01") {
   rrule <- recur_on_mday(rrule, 2:8)
   rrule <- recur_on_ymonth(rrule, 11L)
 
-  as_schedule(rrule)
+  as_rbundle(rrule)
 }
 
 # nocov end

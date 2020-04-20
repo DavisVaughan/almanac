@@ -33,7 +33,7 @@
 #' There is no `quarterly()` recurrence frequency, but this can be accomplished
 #' with `monthly() %>% recur_on_interval(3)`. The month to start the quarterly
 #' interval from will be pulled from the `since` date inside `monthly()`. The
-#' default will use a quarterly schedule starting in January since the default
+#' default will use a quarterly rule starting in January since the default
 #' `since` date is `1970-01-01`. See the examples.
 #'
 #' @param since `[Date(1)]`

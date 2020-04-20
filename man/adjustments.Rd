@@ -9,24 +9,24 @@
 \alias{adj_nearest}
 \title{Date adjustments}
 \usage{
-adj_following(x, schedule)
+adj_following(x, rbundle)
 
-adj_preceding(x, schedule)
+adj_preceding(x, rbundle)
 
-adj_modified_following(x, schedule)
+adj_modified_following(x, rbundle)
 
-adj_modified_preceding(x, schedule)
+adj_modified_preceding(x, rbundle)
 
-adj_nearest(x, schedule)
+adj_nearest(x, rbundle)
 }
 \arguments{
 \item{x}{\verb{[Date]}
 
 A vector of dates.}
 
-\item{schedule}{\verb{[schedule / rrule]}
+\item{rbundle}{\verb{[rbundle / rrule]}
 
-A schedule or rrule.}
+An rbundle or rrule.}
 }
 \description{
 This family of \verb{adj_*()} functions encode business logic for common

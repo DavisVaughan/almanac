@@ -6,12 +6,12 @@ test_that("can handle NA `from` and `to` values", {
 })
 
 test_that("behavior is like rlang::seq2() when `from` is after `to`", {
-  expect_identical(alma_search("1999-01-01", "1998-01-01", schedule()), almanac_global_empty_date)
+  expect_identical(alma_search("1999-01-01", "1998-01-01", rbundle()), almanac_global_empty_date)
 })
 
-test_that("empty schedule means no dates", {
+test_that("empty rbundle means no dates", {
   expect_identical(
-    alma_search(new_date(0), new_date(1), schedule()),
+    alma_search(new_date(0), new_date(1), rbundle()),
     new_date()
   )
 })

@@ -3,7 +3,7 @@
 #' @description
 #' `bdays()` is similar to [lubridate::days()] in that it constructs an object
 #' that can be added to Dates to shift by a set period. It differs in the fact
-#' that you can provide a `schedule` to shift relative to.
+#' that you can provide an rbundle to shift relative to.
 #'
 #' @details
 #' When added to a Date, this internally calls [alma_step()], meaning that an
@@ -29,7 +29,7 @@
 #' # attention to the weekend
 #' x + days(2)
 #'
-#' # With bdays(), you can specify a schedule to step relative to. This steps
+#' # With bdays(), you can specify an rbundle to step relative to. This steps
 #' # over the weekend, landing us on Monday and Tuesday.
 #' x + bdays(2, on_weekends)
 #'
@@ -40,23 +40,23 @@
 #' x + business_days
 #'
 #' x - business_days
-bdays <- function(x, schedule) {
+bdays <- function(x, rbundle) {
   x <- vec_cast(x, integer(), x_arg = "x")
-  schedule <- as_schedule(schedule)
+  rbundle <- as_rbundle(rbundle)
 
-  new_bdays(x, schedule)
+  new_bdays(x, rbundle)
 }
 
-new_bdays <- function(x = integer(), schedule = new_schedule()) {
+new_bdays <- function(x = integer(), rbundle = new_rbundle()) {
   if (!is.integer(x)) {
-    abort("`x` must be an integer")
+    abort("`x` must be an integer.")
   }
 
-  if (!is_schedule(schedule)) {
-    abort("`schedule` must be a schedule")
+  if (!is_rbundle(rbundle)) {
+    abort("`rbundle` must be an rbundle.")
   }
 
-  new("BDays", x, schedule = schedule)
+  new("BDays", x, rbundle = rbundle)
 }
 
 # ------------------------------------------------------------------------------
@@ -64,13 +64,13 @@ new_bdays <- function(x = integer(), schedule = new_schedule()) {
 
 # - Required to be able to set it as a slot in bdays
 # - Required to be before the call to setClass("bdays")
-setOldClass("schedule")
+setOldClass("rbundle")
 
 #' Business Days
 #'
 #' @description
 #' BDays is an S4 class that contains a shift in business days, relative to
-#' a schedule. The S4 nature of BDays is an implementation detail, and should
+#' a rbundle. The S4 nature of BDays is an implementation detail, and should
 #' mostly be invisible to users.
 #'
 #' @details
@@ -80,9 +80,9 @@ setOldClass("schedule")
 #'
 #'   The number of business days to shift by.
 #'
-#' - `schedule` `[schedule]`
+#' - `rbundle` `[rbundle]`
 #'
-#'   The schedule to shift relative to.
+#'   The rbundle to shift relative to.
 #'
 #' BDays place the number of business days in the `.Data` slot so that it can
 #' "contain" (inherit from) `"integer"`. This makes it look like an integer
@@ -91,15 +91,15 @@ setOldClass("schedule")
 #' @export
 #' @keywords internal
 #' @examples
-#' new("BDays", 1L, schedule = schedule())
+#' new("BDays", 1L, rbundle = rbundle())
 setClass(
   "BDays",
   contains = "integer",
-  slots = c(schedule = "schedule")
+  slots = c(rbundle = "rbundle")
 )
 
-get_bdays_schedule <- function(x) {
-  x@schedule
+get_bdays_rbundle <- function(x) {
+  x@rbundle
 }
 
 get_bdays_days <- function(x) {
@@ -152,9 +152,9 @@ NULL
 #' @export
 setMethod("show", signature(object = "BDays"), function(object) {
   x <- get_bdays_days(object)
-  schedule <- get_bdays_schedule(object)
+  rbundle <- get_bdays_rbundle(object)
 
-  cat_line(glue("<bdays<{sch_summary(schedule)}>>"))
+  cat_line(glue("<bdays<{rbundle_summary(rbundle)}>>"))
 
   if (length(x) == 0L) {
     return(invisible(object))
@@ -186,12 +186,12 @@ xtfrm.BDays <- function(x) {
 # So vec_recycle() and vec_slice() work
 
 bdays_slice <- function(x, i, j, ..., drop = TRUE) {
-  sch <- get_bdays_schedule(x)
+  rb <- get_bdays_rbundle(x)
 
   days <- get_bdays_days(x)
   days <- vec_slice(days, i)
 
-  new_bdays(days, sch)
+  new_bdays(days, rb)
 }
 
 #' @export
@@ -202,7 +202,7 @@ setMethod(
 )
 
 bdays_slice2 <- function(x, i, j, ..., exact = TRUE) {
-  sch <- get_bdays_schedule(x)
+  rb <- get_bdays_rbundle(x)
 
   days <- get_bdays_days(x)
 
@@ -210,7 +210,7 @@ bdays_slice2 <- function(x, i, j, ..., exact = TRUE) {
 
   days <- vec_slice(days, i)
 
-  new_bdays(days, sch)
+  new_bdays(days, rb)
 }
 
 #' @export
@@ -227,14 +227,14 @@ bdays_assign <- function(x, i, j, ..., value) {
 
   # value <- vec_cast(value, x)
   #
-  # sch <- get_bdays_schedule(x)
+  # rb <- get_bdays_rbundle(x)
   #
   # days <- get_bdays_days(x)
   # new_days <- get_bdays_days(value)
   #
   # vec_slice(days, i) <- new_days
   #
-  # new_bdays(days, sch)
+  # new_bdays(days, rb)
 }
 
 #' @export
@@ -276,7 +276,7 @@ bdays_rep <- function(x, ...) {
 
   days <- rep(days, ...)
 
-  new_bdays(days, schedule = get_bdays_schedule(x))
+  new_bdays(days, rbundle = get_bdays_rbundle(x))
 }
 
 #' @export
@@ -314,9 +314,9 @@ setMethod(
 )
 
 # Resolve ambiguity from:
-# sch1 <- schedule()
-# sch2 <- schedule()
-# new_bdays(1L, sch1) + new_bdays(1L, sch2)
+# rb1 <- rbundle()
+# rb2 <- rbundle()
+# new_bdays(1L, rb1) + new_bdays(1L, rb2)
 
 #' @export
 setMethod(
@@ -368,9 +368,9 @@ setMethod(
 )
 
 # Resolve ambiguity from:
-# sch1 <- schedule()
-# sch2 <- schedule()
-# new_bdays(1L, sch1) - new_bdays(1L, sch2)
+# rb1 <- rbundle()
+# rb2 <- rbundle()
+# new_bdays(1L, rb1) - new_bdays(1L, rb2)
 
 #' @export
 setMethod(
@@ -422,9 +422,9 @@ setMethod(
 )
 
 # Resolve ambiguity from:
-# sch1 <- schedule()
-# sch2 <- schedule()
-# new_bdays(1L, sch1) * new_bdays(1L, sch2)
+# rb1 <- rbundle()
+# rb2 <- rbundle()
+# new_bdays(1L, rb1) * new_bdays(1L, rb2)
 
 #' @export
 setMethod(
@@ -470,9 +470,9 @@ setMethod(
 )
 
 # Resolve ambiguity from:
-# sch1 <- schedule()
-# sch2 <- schedule()
-# new_bdays(1L, sch1) / new_bdays(1L, sch2)
+# rb1 <- rbundle()
+# rb2 <- rbundle()
+# new_bdays(1L, rb1) / new_bdays(1L, rb2)
 
 #' @export
 setMethod(
@@ -539,7 +539,7 @@ vec_arith.BDays.MISSING <- function(op, x, y, ...) {
   switch(
     op,
     `+` = x,
-    `-` = new_bdays(-get_bdays_days(x), get_bdays_schedule(x)),
+    `-` = new_bdays(-get_bdays_days(x), get_bdays_rbundle(x)),
     stop_incompatible_op(op, x, y)
   )
 }
@@ -557,16 +557,16 @@ vec_arith.BDays.BDays <- function(op, x, y, ...) {
 }
 
 op_arith_bdays_bdays <- function(op, x, y) {
-  check_identical_schedules(x, y)
+  check_identical_rbundles(x, y)
 
-  sch <- get_bdays_schedule(x)
+  rb <- get_bdays_rbundle(x)
 
   x <- get_bdays_days(x)
   y <- get_bdays_days(y)
 
   out <- vec_arith(op, x, y)
 
-  new_bdays(out, schedule = sch)
+  new_bdays(out, rbundle = rb)
 }
 
 #' @method vec_arith.BDays numeric
@@ -582,7 +582,7 @@ vec_arith.BDays.numeric <- function(op, x, y, ...) {
 }
 
 op_arith_bdays_numeric <- function(op, x, y) {
-  sch <- get_bdays_schedule(x)
+  rb <- get_bdays_rbundle(x)
   x <- get_bdays_days(x)
 
   if (!is_one_dim(y)) {
@@ -593,7 +593,7 @@ op_arith_bdays_numeric <- function(op, x, y) {
 
   out <- vec_arith(op, x, y)
 
-  new_bdays(out, schedule = sch)
+  new_bdays(out, rbundle = rb)
 }
 
 #' @method vec_arith.numeric BDays
@@ -609,7 +609,7 @@ vec_arith.numeric.BDays <- function(op, x, y, ...) {
 }
 
 op_arith_numeric_bdays <- function(op, x, y) {
-  sch <- get_bdays_schedule(y)
+  rb <- get_bdays_rbundle(y)
   y <- get_bdays_days(y)
 
   if (!is_one_dim(x)) {
@@ -620,7 +620,7 @@ op_arith_numeric_bdays <- function(op, x, y) {
 
   out <- vec_arith(op, x, y)
 
-  new_bdays(out, schedule = sch)
+  new_bdays(out, rbundle = rb)
 }
 
 # Note that `bdays(1) - Sys.Date()` is not defined!
@@ -637,10 +637,10 @@ vec_arith.BDays.Date <- function(op, x, y, ...) {
 
 op_plus_bdays_Date <- function(x, y, plus) {
   days <- get_bdays_days(x)
-  sch <- get_bdays_schedule(x)
+  rb <- get_bdays_rbundle(x)
 
   # Let `alma_step()` handle the recycling
-  alma_step(y, days, sch)
+  alma_step(y, days, rb)
 }
 
 #' @method vec_arith.Date BDays
@@ -656,24 +656,24 @@ vec_arith.Date.BDays <- function(op, x, y, ...) {
 
 op_arith_Date_bdays <- function(x, y, minus) {
   days <- get_bdays_days(y)
-  sch <- get_bdays_schedule(y)
+  rb <- get_bdays_rbundle(y)
 
   if (minus) {
     days <- -days
   }
 
   # Let `alma_step()` handle the recycling
-  alma_step(x, days, sch)
+  alma_step(x, days, rb)
 }
 
 # ------------------------------------------------------------------------------
 
-check_identical_schedules <- function(x, y) {
-  x_sch <- get_bdays_schedule(x)
-  y_sch <- get_bdays_schedule(y)
+check_identical_rbundles <- function(x, y) {
+  x_rb <- get_bdays_rbundle(x)
+  y_rb <- get_bdays_rbundle(y)
 
-  if (!identical(x_sch, y_sch)) {
-    abort("`x` and `y` must have identical schedules to perform arithmetic on them.")
+  if (!identical(x_rb, y_rb)) {
+    abort("`x` and `y` must have identical rbundles to perform arithmetic on them.")
   }
 
   invisible()

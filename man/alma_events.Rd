@@ -4,19 +4,18 @@
 \alias{alma_events}
 \title{Get all events}
 \usage{
-alma_events(schedule)
+alma_events(rbundle)
 }
 \arguments{
-\item{schedule}{\verb{[schedule / rrule]}
+\item{rbundle}{\verb{[rbundle / rrule]}
 
-A schedule or rrule.}
+An rbundle or rrule.}
 }
 \value{
 A \code{Date} vector of events.
 }
 \description{
-\code{alma_events()} retrieves all of the events defined by the schedule's
-recurrence rules.
+\code{alma_events()} retrieves all of the events in the rbundle's recurrence set.
 }
 \examples{
 rrule <- daily(since = "1970-01-01", until = "1970-01-05")
@@ -26,9 +25,9 @@ alma_events(rrule)
 rrule_weekly <- weekly(since = "1970-01-01") \%>\%
   recur_for_count(5)
 
-sch <- schedule() \%>\%
+rb <- rbundle() \%>\%
   add_rrule(rrule) \%>\%
   add_rrule(rrule_weekly)
 
-alma_events(sch)
+alma_events(rb)
 }

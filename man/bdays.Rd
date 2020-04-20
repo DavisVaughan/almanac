@@ -4,21 +4,21 @@
 \alias{bdays}
 \title{Create a business day period}
 \usage{
-bdays(x, schedule)
+bdays(x, rbundle)
 }
 \arguments{
 \item{x}{\verb{[integer]}
 
 The number of days to step. Can be negative to step backwards.}
 
-\item{schedule}{\verb{[schedule / rrule]}
+\item{rbundle}{\verb{[rbundle / rrule]}
 
-A schedule or rrule.}
+An rbundle or rrule.}
 }
 \description{
 \code{bdays()} is similar to \code{\link[lubridate:days]{lubridate::days()}} in that it constructs an object
 that can be added to Dates to shift by a set period. It differs in the fact
-that you can provide a \code{schedule} to shift relative to.
+that you can provide an rbundle to shift relative to.
 }
 \details{
 When added to a Date, this internally calls \code{\link[=alma_step]{alma_step()}}, meaning that an
@@ -37,7 +37,7 @@ x <- as.Date(c("1970-01-01", "1970-01-02"))
 # attention to the weekend
 x + days(2)
 
-# With bdays(), you can specify a schedule to step relative to. This steps
+# With bdays(), you can specify an rbundle to step relative to. This steps
 # over the weekend, landing us on Monday and Tuesday.
 x + bdays(2, on_weekends)
 
