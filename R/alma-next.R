@@ -27,14 +27,13 @@
 alma_next <- function(x, rbundle, inclusive = FALSE) {
   x <- vec_cast_date(x)
 
-  rbundle <- as_rbundle(rbundle)
-
   vec_assert(inclusive, logical(), 1L)
   if (is.na(inclusive)) {
     abort("`inclusive` cannot be `NA`")
   }
 
-  events <- rbundle$cache$get_events()
+  cacher <- as_cacher(rbundle)
+  events <- cacher_events(cacher)
 
   alma_next_impl(x, events, inclusive)
 }
@@ -48,14 +47,13 @@ alma_next_impl <- function(x, events, inclusive) {
 alma_previous <- function(x, rbundle, inclusive = FALSE) {
   x <- vec_cast_date(x)
 
-  rbundle <- as_rbundle(rbundle)
-
   vec_assert(inclusive, logical(), 1L)
   if (is.na(inclusive)) {
     abort("`inclusive` cannot be `NA`")
   }
 
-  events <- rbundle$cache$get_events()
+  cacher <- as_cacher(rbundle)
+  events <- cacher_events(cacher)
 
   alma_previous_impl(x, events, inclusive)
 }

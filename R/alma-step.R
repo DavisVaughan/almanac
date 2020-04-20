@@ -69,12 +69,12 @@
 alma_step <- function(x, n, rbundle) {
   x <- vec_cast_date(x)
   n <- vec_cast(n, integer(), x_arg = "n")
-  rbundle <- as_rbundle(rbundle)
 
   # Get the common size with nice errors, recycled cheaply internally
   size <- vec_size_common(x = x, n = n)
 
-  events <- rbundle$cache$get_events()
+  cacher <- as_cacher(rbundle)
+  events <- cacher_events(cacher)
 
   alma_step_impl(x, n, events, size)
 }

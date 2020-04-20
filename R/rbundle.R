@@ -54,29 +54,7 @@ new_rbundle <- function(rrules = list(),
     cache = cache
   )
 
-  structure(data, class = "rbundle")
-}
-
-# ------------------------------------------------------------------------------
-
-as_rbundle <- function(x, ...) {
-  UseMethod("as_rbundle")
-}
-
-as_rbundle.default <- function(x, ...) {
-  abort(glue("Cannot convert {class(x)[1]} to a rbundle."))
-}
-
-# Use the same cache as the `rrule`. Generally useful
-# when a user creates a rrule then passes it into a function
-# like `alma_search()`, which converts it to a rbundle. We want
-# to update the cache of the original rrule.
-as_rbundle.rrule <- function(x, ...) {
-  new_rbundle(rrules = list(x), cache = x$cache)
-}
-
-as_rbundle.rbundle <- function(x, ...) {
-  x
+  new_cacher(data, class = "rbundle")
 }
 
 # ------------------------------------------------------------------------------

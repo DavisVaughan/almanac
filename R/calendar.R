@@ -80,7 +80,7 @@ new_calendar <- function(name, since, until, weekend, holidays) {
     cache = cache
   )
 
-  structure(data, class = "calendar")
+  new_cacher(data, class = "calendar")
 }
 
 holiday_initialize <- function(holiday, since, until) {

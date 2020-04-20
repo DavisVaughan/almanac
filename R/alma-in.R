@@ -33,7 +33,7 @@
 #' alma_in(x, rb)
 alma_in <- function(x, rbundle) {
   x <- vec_cast_date(x)
-  rbundle <- as_rbundle(rbundle)
-  events <- rbundle$cache$get_events()
+  cacher <- as_cacher(rbundle)
+  events <- cacher_events(cacher)
   vec_in(x, events)
 }

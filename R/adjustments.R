@@ -76,9 +76,9 @@ NULL
 #' @export
 adj_following <- function(x, rbundle) {
   x <- vec_cast_date(x)
-  rbundle <- as_rbundle(rbundle)
 
-  events <- rbundle$cache$get_events()
+  cacher <- as_cacher(rbundle)
+  events <- cacher_events(cacher)
 
   adj_following_impl(x, events)
 }
@@ -91,9 +91,9 @@ adj_following_impl <- function(x, events) {
 #' @export
 adj_preceding <- function(x, rbundle) {
   x <- vec_cast_date(x)
-  rbundle <- as_rbundle(rbundle)
 
-  events <- rbundle$cache$get_events()
+  cacher <- as_cacher(rbundle)
+  events <- cacher_events(cacher)
 
   adj_preceding_impl(x, events)
 }
@@ -106,9 +106,9 @@ adj_preceding_impl <- function(x, events) {
 #' @export
 adj_modified_following <- function(x, rbundle) {
   x <- vec_cast_date(x)
-  rbundle <- as_rbundle(rbundle)
 
-  events <- rbundle$cache$get_events()
+  cacher <- as_cacher(rbundle)
+  events <- cacher_events(cacher)
 
   adj_modified_following_impl(x, events)
 }
@@ -121,9 +121,9 @@ adj_modified_following_impl <- function(x, events) {
 #' @export
 adj_modified_preceding <- function(x, rbundle) {
   x <- vec_cast_date(x)
-  rbundle <- as_rbundle(rbundle)
 
-  events <- rbundle$cache$get_events()
+  cacher <- as_cacher(rbundle)
+  events <- cacher_events(cacher)
 
   adj_modified_preceding_impl(x, events)
 }
@@ -136,9 +136,9 @@ adj_modified_preceding_impl <- function(x, events) {
 #' @export
 adj_nearest <- function(x, rbundle) {
   x <- vec_cast_date(x)
-  rbundle <- as_rbundle(rbundle)
 
-  events <- rbundle$cache$get_events()
+  cacher <- as_cacher(rbundle)
+  events <- cacher_events(cacher)
 
   adj_nearest_impl(x, events)
 }

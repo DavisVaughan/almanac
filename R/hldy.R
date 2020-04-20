@@ -1,11 +1,11 @@
 
 # ------------------------------------------------------------------------------
 
-hldy_martin_luther_king_jr_day <- function() {
+hldy_martin_luther_king_jr_day <- function(adjustment = adj_nearest) {
   new_hldy(
     "Martin Luther King Jr. Day",
     hldy_martin_luther_king_jr_day_generator,
-    adj_nearest
+    adjustment
   )
 }
 
@@ -35,11 +35,11 @@ hldy_martin_luther_king_jr_day_generator <- function(since, until) {
 
 # ------------------------------------------------------------------------------
 
-hldy_christmas <- function() {
+hldy_christmas <- function(adjustment = adj_nearest) {
   new_hldy(
     "Christmas",
     hldy_christmas_generator,
-    adj_nearest
+    adjustment
   )
 }
 
