@@ -1,5 +1,5 @@
-#ifndef ALMANAC_NEXT_HPP
-#define ALMANAC_NEXT_HPP
+#ifndef ALMANAC_NEXT_H
+#define ALMANAC_NEXT_H
 
 #include "r.h"
 

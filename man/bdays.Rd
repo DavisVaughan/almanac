@@ -11,9 +11,9 @@ bdays(x, schedule)
 
 The number of days to step. Can be negative to step backwards.}
 
-\item{schedule}{\verb{[schedule / event]}
+\item{schedule}{\verb{[schedule / rrule]}
 
-A schedule or event.}
+A schedule or rrule.}
 }
 \description{
 \code{bdays()} is similar to \code{\link[lubridate:days]{lubridate::days()}} in that it constructs an object

@@ -25,17 +25,14 @@ sexp alma_step_impl(sexp x, sexp n, sexp events, r_ssize size) {
     double elt = x_vectorized ? p_x[i] : p_x[0];
     int n_elt = n_vectorized ? p_n[i] : p_n[0];
 
-    if (r_dbl_is_missing(elt)) {
-      p_out[i] = elt;
-      continue;
-    }
     if (r_int_is_missing(n_elt)) {
-      p_out[i] = NA_REAL;
-      continue;
-    }
-
-    if (n_elt >= 0) {
+      elt = NA_REAL;
+    } else if (n_elt > 0) {
       elt = alma_step_forward(elt, n_elt, p_events_begin, p_events_end);
+    } else if (n_elt == 0) {
+      // Special case 0-sized step to ensure we step to a non-event date.
+      // Arbitrarily adjust forward to match pandas (it seems logical).
+      elt = adj_following_one(elt, p_events_begin, p_events_end);
     } else {
       n_elt = std::abs(n_elt);
       elt = alma_step_backward(elt, n_elt, p_events_begin, p_events_end);
@@ -44,7 +41,7 @@ sexp alma_step_impl(sexp x, sexp n, sexp events, r_ssize size) {
     p_out[i] = elt;
   }
 
-  r_poke_attr(out, syms_class, classes_date);
+  r_init_date(out);
 
   UNPROTECT(1);
   return out;
@@ -64,7 +61,7 @@ static double alma_step_forward(double x, int n, double* p_begin, double* p_end)
 static double alma_step_backward(double x, int n, double* p_begin, double* p_end) {
   for (r_ssize i = 0; i < n; ++i) {
     --x;
-    x = adj_previous_one(x, p_begin, p_end);
+    x = adj_preceding_one(x, p_begin, p_end);
   }
 
   return x;

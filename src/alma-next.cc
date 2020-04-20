@@ -15,12 +15,6 @@ sexp alma_next_impl(sexp x, sexp occurrences, const bool inclusive) {
 
   for (r_ssize i = 0; i < size; ++i) {
     const double elt = p_x[i];
-
-    if (r_dbl_is_missing(elt)) {
-      p_out[i] = elt;
-      continue;
-    }
-
     const double* p_loc;
 
     if (inclusive) {
@@ -60,12 +54,6 @@ sexp alma_previous_impl(sexp x, sexp occurrences, const bool inclusive) {
 
   for (r_ssize i = 0; i < size; ++i) {
     const double elt = p_x[i];
-
-    if (r_dbl_is_missing(elt)) {
-      p_out[i] = elt;
-      continue;
-    }
-
     const double* p_loc;
 
     if (inclusive) {

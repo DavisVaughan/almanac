@@ -20,8 +20,6 @@ reference:
 
 - title: Adjusting dates
   contents:
-  - alma_adjust
-  - alma_jump
   - alma_step
 
 - title: Adjustments
