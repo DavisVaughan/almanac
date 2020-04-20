@@ -160,12 +160,12 @@
 <span class="co"># The first time is "slow"</span>
 <span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>(<span class="fu"><a href="../reference/alma_search.html">alma_search</a></span>(<span class="no">start_date</span>, <span class="st">"2000-01-01"</span>, <span class="no">on_daily</span>))
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;   0.344   0.025   0.331</span>
+<span class="co">#&gt;   0.356   0.023   0.337</span>
 
 <span class="co"># Repeated access to the same location is fast</span>
 <span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>(<span class="fu"><a href="../reference/alma_search.html">alma_search</a></span>(<span class="no">start_date</span>, <span class="st">"2000-01-01"</span>, <span class="no">on_daily</span>))
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;   0.001   0.000   0.000</span>
+<span class="co">#&gt;   0.000   0.000   0.001</span>
 
 <span class="co"># Dates are cached from `[since, to]`, so if you back up `to`, its still fast</span>
 <span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>(<span class="fu"><a href="../reference/alma_search.html">alma_search</a></span>(<span class="no">start_date</span>, <span class="st">"1990-05-01"</span>, <span class="no">on_daily</span>))
@@ -231,34 +231,6 @@
 
 <span class="fu"><a href="../reference/alma_search.html">alma_search</a></span>(<span class="st">"2000-01-01"</span>, <span class="st">"2002-01-01"</span>, <span class="no">rb_christmas_or_labor_day_except_2000_labor_day</span>)
 <span class="co">#&gt; [1] "2000-12-25" "2001-09-03" "2001-12-25"</span></pre></body></html></div>
-<p>Recurrence bundles are powerful because they allow us to begin to build up more complicated recurrence sets from simpler pieces. All of the <code>hldy_*()</code> holiday functions are rbundles built up from simpler rules. As an example of how complex this can get, take a quick look at <code><a href="../reference/holidays.html">hldy_thanksgiving()</a></code>. In present time, Thanksgiving takes place on the 4th Thursday of November, but it wasn’t always this simple. The date that Thanksgiving occurs on has changed twice, which you can read about <a href="https://www.archives.gov/legislative/features/thanksgiving">here</a> if you are interested, creating the following disjoint set of rules:</p>
-<ul>
-<li><p>Pre 1939: Last Thursday in November</p></li>
-<li><p>After 1939 but before 1942: Next to last Thursday in November</p></li>
-<li><p>Post 1942: The 4th Thursday in November</p></li>
-</ul>
-<p>Here is the implementation of <code><a href="../reference/holidays.html">hldy_thanksgiving()</a></code>, which combines these pieces into a larger rbundle.</p>
-<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="no">hldy_thanksgiving</span>
-<span class="co">#&gt; function (since = "1970-01-01") </span>
-<span class="co">#&gt; {</span>
-<span class="co">#&gt;     since &lt;- vec_cast_date(since)</span>
-<span class="co">#&gt;     if (since &gt;= as.Date("1942-01-01")) {</span>
-<span class="co">#&gt;         return(hldy_thanksgiving_post_1942(since))</span>
-<span class="co">#&gt;     }</span>
-<span class="co">#&gt;     if (since &gt;= as.Date("1939-01-01")) {</span>
-<span class="co">#&gt;         rb &lt;- rbundle()</span>
-<span class="co">#&gt;         rb &lt;- add_rbundle(rb, hldy_thanksgiving_post_1939_pre_1942(since))</span>
-<span class="co">#&gt;         rb &lt;- add_rbundle(rb, hldy_thanksgiving_post_1942())</span>
-<span class="co">#&gt;         return(rb)</span>
-<span class="co">#&gt;     }</span>
-<span class="co">#&gt;     rb &lt;- rbundle()</span>
-<span class="co">#&gt;     rb &lt;- add_rbundle(rb, hldy_thanksgiving_pre_1939(since))</span>
-<span class="co">#&gt;     rb &lt;- add_rbundle(rb, hldy_thanksgiving_post_1939_pre_1942())</span>
-<span class="co">#&gt;     rb &lt;- add_rbundle(rb, hldy_thanksgiving_post_1942())</span>
-<span class="co">#&gt;     return(rb)</span>
-<span class="co">#&gt; }</span>
-<span class="co">#&gt; &lt;bytecode: 0x7ffebd4fa600&gt;</span>
-<span class="co">#&gt; &lt;environment: namespace:almanac&gt;</span></pre></body></html></div>
 </div>
   </div>
 

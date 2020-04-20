@@ -116,29 +116,6 @@
 <span class="co"># Step forward 2 non-event days, stepping over thanksgiving</span>
 <span class="fu"><a href="reference/alma_step.html">alma_step</a></span>(<span class="no">wednesday_before_thanksgiving</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fl">2</span>, <span class="no">on_thanksgiving</span>)
 <span class="co">#&gt; [1] "2000-11-25"</span></pre></div>
-<p>By combining multiple recurrence rules together, you can create larger <em>recurrence bundles</em> that form a collection of holidays or events, such as weekends. almanac comes with a pre-built <code><a href="reference/calendars.html">calendar_usa_federal()</a></code> recurrence bundle that includes recurrence rules for the US holidays. Combining this with a recurrence rule of “on weekends” constructs a business calendar, which we can use to shift dates by, for example, “2 business days”.</p>
-<div class="sourceCode" id="cb6"><pre class="r"><span class="no">on_weekends</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/rrule.html">weekly</a></span>() <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="reference/recur_on_wday.html">recur_on_weekends</a></span>()
-
-<span class="no">on_us_holidays_and_weekends</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/calendars.html">calendar_usa_federal</a></span>() <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="reference/rbundle-add.html">add_rrule</a></span>(<span class="no">on_weekends</span>)
-
-<span class="no">thursday_and_friday_before_labor_day</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"2019-08-29"</span>, <span class="st">"2019-08-30"</span>)
-
-<span class="co"># Steps over Saturday, Sunday, and Labor Day to the following Tuesday</span>
-<span class="co"># and Wednesday, aka "two business days" from now!</span>
-<span class="no">two_business_days_forward</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/alma_step.html">alma_step</a></span>(
-  <span class="no">thursday_and_friday_before_labor_day</span>,
-  <span class="kw">n</span> <span class="kw">=</span> <span class="fl">2</span>,
-  <span class="kw">rbundle</span> <span class="kw">=</span> <span class="no">on_us_holidays_and_weekends</span>
-)
-
-<span class="no">two_business_days_forward</span>
-<span class="co">#&gt; [1] "2019-09-03" "2019-09-04"</span>
-
-<span class="kw pkg">lubridate</span><span class="kw ns">::</span><span class="fu"><a href="http://lubridate.tidyverse.org/reference/day.html">wday</a></span>(<span class="no">two_business_days_forward</span>, <span class="kw">label</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
-<span class="co">#&gt; [1] Tue Wed</span>
-<span class="co">#&gt; Levels: Sun &lt; Mon &lt; Tue &lt; Wed &lt; Thu &lt; Fri &lt; Sat</span></pre></div>
 <div id="learning-more" class="section level2">
 <h2 class="hasAnchor">
 <a href="#learning-more" class="anchor"></a>Learning More</h2>
@@ -154,9 +131,9 @@
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>You can NOT install the released version of almanac from <a href="https://CRAN.R-project.org">CRAN</a> with:</p>
-<div class="sourceCode" id="cb7"><pre class="r"># NO! install.packages("almanac")</pre></div>
+<div class="sourceCode" id="cb6"><pre class="r"># NO! install.packages("almanac")</pre></div>
 <p>And the development version from <a href="https://github.com/">GitHub</a> with:</p>
-<div class="sourceCode" id="cb8"><pre class="r"><span class="co"># install.packages("devtools")</span>
+<div class="sourceCode" id="cb7"><pre class="r"><span class="co"># install.packages("devtools")</span>
 <span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu">install_github</span>(<span class="st">"DavisVaughan/almanac"</span>)</pre></div>
 <p>Mac (OS-X) and Windows users should not have any problems installing almanac. Linux users need libv8 to install the dependency R package, V8. See the <a href="https://github.com/jeroen/V8#debian--ubuntu">V8 installation instructions</a> for more information. almanac uses ES5 JavaScript, so it does <em>not</em> require any “modern” JavaScript features and should work with the “old” V8 engine provided by Ubuntu versions before 19.04.</p>
 </div>
