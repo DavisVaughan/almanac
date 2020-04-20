@@ -98,7 +98,7 @@
 
     
     
-<p>If you have read the introduction vignette, <code><a href="../articles/almanac.html">vignette("almanac")</a></code>, then you’ve seen recurrence rules, schedules, and the functions <code><a href="../reference/alma_seq.html">alma_seq()</a></code> and <code><a href="../reference/alma_in.html">alma_in()</a></code>. Additionally included in {almanac} are a set of functions for adjusting and shifting an existing set of dates, <em>relative to a schedule</em>. They will be the topic of this vignette. The three functions are:</p>
+<p>If you have read the introduction vignette, <code><a href="../articles/almanac.html">vignette("almanac")</a></code>, then you’ve seen recurrence rules, schedules, and the functions <code><a href="../reference/alma_search.html">alma_search()</a></code> and <code><a href="../reference/alma_in.html">alma_in()</a></code>. Additionally included in {almanac} are a set of functions for adjusting and shifting an existing set of dates, <em>relative to a schedule</em>. They will be the topic of this vignette. The three functions are:</p>
 <ul>
 <li><p><code>alma_adjust()</code></p></li>
 <li><p><code>alma_jump()</code></p></li>
@@ -113,7 +113,7 @@
 <div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">on_weekends</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">weekly</a></span>(<span class="kw">since</span> <span class="kw">=</span> <span class="st">"2000-01-01"</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="../reference/recur_on_wday.html">recur_on_weekends</a></span>()
 
-<span class="fu"><a href="../reference/alma_seq.html">alma_seq</a></span>(<span class="st">"2000-01-01"</span>, <span class="st">"2000-01-16"</span>, <span class="no">on_weekends</span>)</pre></body></html></div>
+<span class="fu"><a href="../reference/alma_search.html">alma_search</a></span>(<span class="st">"2000-01-01"</span>, <span class="st">"2000-01-16"</span>, <span class="no">on_weekends</span>)</pre></body></html></div>
 <p>Now, imagine you have an existing set of dates, <code>x</code>. The dates in <code>x</code> might be weekdays or weekends, but you have to ensure that any weekend dates are rolled forward to their next available non-weekend date. To do this, you can use <code>alma_adjust()</code>, which will apply an <code>adjustment</code> repeatedly until your dates are no longer on an event date. The default <code>adjustment</code> is the lubridate function <code><a href="http://lubridate.tidyverse.org/reference/period.html">days(1)</a></code>, to shift forward 1 day.</p>
 <div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">x</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span>(<span class="st">"2000-04-28"</span>) + <span class="fl">0</span>:<span class="fl">8</span>
 

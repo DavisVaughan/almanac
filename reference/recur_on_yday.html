@@ -162,17 +162,17 @@
 
 <span class='no'>on_5th_day_of_year</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rrule.html'>yearly</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'>recur_on_yday</span>(<span class='fl'>5</span>)
 
-<span class='fu'><a href='alma_seq.html'>alma_seq</a></span>(<span class='st'>"1999-01-01"</span>, <span class='st'>"2000-12-31"</span>, <span class='no'>on_5th_day_of_year</span>)</div><div class='output co'>#&gt; [1] "1999-01-05" "2000-01-05"</div><div class='input'>
+<span class='fu'><a href='alma_search.html'>alma_search</a></span>(<span class='st'>"1999-01-01"</span>, <span class='st'>"2000-12-31"</span>, <span class='no'>on_5th_day_of_year</span>)</div><div class='output co'>#&gt; [1] "1999-01-05" "2000-01-05"</div><div class='input'>
 <span class='co'># Notice that if you use a `since` date that has a day of the year</span>
 <span class='co'># after the specified one, it rolls to the next year</span>
 <span class='no'>on_5th_day_of_year2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rrule.html'>yearly</a></span>(<span class='kw'>since</span> <span class='kw'>=</span> <span class='st'>"1999-01-06"</span>) <span class='kw'>%&gt;%</span> <span class='fu'>recur_on_yday</span>(<span class='fl'>5</span>)
-<span class='fu'><a href='alma_seq.html'>alma_seq</a></span>(<span class='st'>"1999-01-01"</span>, <span class='st'>"2000-12-31"</span>, <span class='no'>on_5th_day_of_year2</span>)</div><div class='output co'>#&gt; [1] "2000-01-05"</div><div class='input'>
+<span class='fu'><a href='alma_search.html'>alma_search</a></span>(<span class='st'>"1999-01-01"</span>, <span class='st'>"2000-12-31"</span>, <span class='no'>on_5th_day_of_year2</span>)</div><div class='output co'>#&gt; [1] "2000-01-05"</div><div class='input'>
 <span class='co'># Negative values select from the back, which is useful in leap years</span>
 <span class='fu'><a href='http://lubridate.tidyverse.org/reference/leap_year.html'>leap_year</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/as.Date.html'>as.Date</a></span>(<span class='st'>"2000-01-01"</span>))</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
 <span class='no'>last_day_of_year</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rrule.html'>yearly</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'>recur_on_yday</span>(-<span class='fl'>1</span>)
 <span class='no'>last_day_of_year_bad</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rrule.html'>yearly</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'>recur_on_yday</span>(<span class='fl'>365</span>)
 
-<span class='fu'><a href='alma_seq.html'>alma_seq</a></span>(<span class='st'>"1999-01-01"</span>, <span class='st'>"2000-12-31"</span>, <span class='no'>last_day_of_year</span>)</div><div class='output co'>#&gt; [1] "1999-12-31" "2000-12-31"</div><div class='input'><span class='fu'><a href='alma_seq.html'>alma_seq</a></span>(<span class='st'>"1999-01-01"</span>, <span class='st'>"2000-12-31"</span>, <span class='no'>last_day_of_year_bad</span>)</div><div class='output co'>#&gt; [1] "1999-12-31" "2000-12-30"</div><div class='input'>
+<span class='fu'><a href='alma_search.html'>alma_search</a></span>(<span class='st'>"1999-01-01"</span>, <span class='st'>"2000-12-31"</span>, <span class='no'>last_day_of_year</span>)</div><div class='output co'>#&gt; [1] "1999-12-31" "2000-12-31"</div><div class='input'><span class='fu'><a href='alma_search.html'>alma_search</a></span>(<span class='st'>"1999-01-01"</span>, <span class='st'>"2000-12-31"</span>, <span class='no'>last_day_of_year_bad</span>)</div><div class='output co'>#&gt; [1] "1999-12-31" "2000-12-30"</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

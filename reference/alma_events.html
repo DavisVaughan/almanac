@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Control the number of times to recur — recur_for_count • almanac</title>
+<title>Get all events — alma_events • almanac</title>
 
 
 <!-- jquery -->
@@ -39,9 +39,9 @@
 
 
 
-<meta property="og:title" content="Control the number of times to recur — recur_for_count" />
-<meta property="og:description" content="recur_for_count() controls the total number of events in the recurrence
-set. Using recur_for_count() will override the until date of the rule." />
+<meta property="og:title" content="Get all events — alma_events" />
+<meta property="og:description" content="alma_events() retrieves all of the events defined by the schedule's
+recurrence rules." />
 
 
 
@@ -130,55 +130,45 @@ set. Using recur_for_count() will override the until date of the rule." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Control the number of times to recur</h1>
-    <small class="dont-index">Source: <a href='https://github.com/DavisVaughan/almanac/blob/master/R/recur-for-count.R'><code>R/recur-for-count.R</code></a></small>
-    <div class="hidden name"><code>recur_for_count.Rd</code></div>
+    <h1>Get all events</h1>
+    <small class="dont-index">Source: <a href='https://github.com/DavisVaughan/almanac/blob/master/R/alma-events.R'><code>R/alma-events.R</code></a></small>
+    <div class="hidden name"><code>alma_events.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><code>recur_for_count()</code> controls the total number of events in the recurrence
-set. Using <code>recur_for_count()</code> will override the <code>until</code> date of the rule.</p>
+    <p><code>alma_events()</code> retrieves all of the events defined by the schedule's
+recurrence rules.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>recur_for_count</span>(<span class='no'>x</span>, <span class='no'>n</span>)</pre>
+    <pre class="usage"><span class='fu'>alma_events</span>(<span class='no'>schedule</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
-      <td><p><code>[rrule]</code></p>
-<p>A recurrence rule.</p></td>
-    </tr>
-    <tr>
-      <th>n</th>
-      <td><p><code>[positive integer(1)]</code></p>
-<p>The number of times to recur for.</p></td>
+      <th>schedule</th>
+      <td><p><code>[schedule / rrule]</code></p>
+<p>A schedule or rrule.</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Remember that the number of times the occurrence has occurred is counted
-from the <code>since</code> date! Adjust it as necessary to get your desired results.</p>
+    <p>A <code>Date</code> vector of events.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># Using the default `since` date</span>
-<span class='no'>daily_since_epoch_for_5</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rrule.html'>daily</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'>recur_for_count</span>(<span class='fl'>5</span>)
+    <pre class="examples"><div class='input'><span class='no'>rrule</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rrule.html'>daily</a></span>(<span class='kw'>since</span> <span class='kw'>=</span> <span class='st'>"1970-01-01"</span>, <span class='kw'>until</span> <span class='kw'>=</span> <span class='st'>"1970-01-05"</span>)
 
-<span class='fu'><a href='alma_search.html'>alma_search</a></span>(<span class='st'>"1969-12-31"</span>, <span class='st'>"1970-01-25"</span>, <span class='no'>daily_since_epoch_for_5</span>)</div><div class='output co'>#&gt; [1] "1970-01-01" "1970-01-02" "1970-01-03" "1970-01-04" "1970-01-05"</div><div class='input'>
-<span class='co'># Changing the `since` date</span>
-<span class='no'>daily_since_2019_for_5</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rrule.html'>daily</a></span>(<span class='kw'>since</span> <span class='kw'>=</span> <span class='st'>"2019-01-01"</span>) <span class='kw'>%&gt;%</span> <span class='fu'>recur_for_count</span>(<span class='fl'>5</span>)
+<span class='fu'>alma_events</span>(<span class='no'>rrule</span>)</div><div class='output co'>#&gt; [1] "1970-01-01" "1970-01-02" "1970-01-03" "1970-01-04" "1970-01-05"</div><div class='input'>
+<span class='no'>rrule_weekly</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rrule.html'>weekly</a></span>(<span class='kw'>since</span> <span class='kw'>=</span> <span class='st'>"1970-01-01"</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='recur_for_count.html'>recur_for_count</a></span>(<span class='fl'>5</span>)
 
-<span class='fu'><a href='alma_search.html'>alma_search</a></span>(<span class='st'>"2018-12-31"</span>, <span class='st'>"2019-01-25"</span>, <span class='no'>daily_since_2019_for_5</span>)</div><div class='output co'>#&gt; [1] "2019-01-01" "2019-01-02" "2019-01-03" "2019-01-04" "2019-01-05"</div><div class='input'>
-<span class='co'># In the case of "impossible" dates, such as 2019-02-31 and 2019-04-31 in the</span>
-<span class='co'># example below, they are not added to the total count. Only true event</span>
-<span class='co'># dates are counted.</span>
-<span class='no'>on_31_for_5</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rrule.html'>monthly</a></span>(<span class='kw'>since</span> <span class='kw'>=</span> <span class='st'>"2019-01-01"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='recur_on_mday.html'>recur_on_mday</a></span>(<span class='fl'>31</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>recur_for_count</span>(<span class='fl'>5</span>)
+<span class='no'>sch</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='schedule.html'>schedule</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='sch-add.html'>sch_rrule</a></span>(<span class='no'>rrule</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='sch-add.html'>sch_rrule</a></span>(<span class='no'>rrule_weekly</span>)
 
-<span class='fu'><a href='alma_search.html'>alma_search</a></span>(<span class='st'>"2019-01-01"</span>, <span class='st'>"2020-01-01"</span>, <span class='no'>on_31_for_5</span>)</div><div class='output co'>#&gt; [1] "2019-01-31" "2019-03-31" "2019-05-31" "2019-07-31" "2019-08-31"</div></pre>
+<span class='fu'>alma_events</span>(<span class='no'>sch</span>)</div><div class='output co'>#&gt; [1] "1970-01-01" "1970-01-02" "1970-01-03" "1970-01-04" "1970-01-05"
+#&gt; [6] "1970-01-08" "1970-01-15" "1970-01-22" "1970-01-29"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

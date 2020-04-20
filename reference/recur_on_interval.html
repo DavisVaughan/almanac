@@ -164,18 +164,18 @@ become "every other month".</p>
     <pre class="examples"><div class='input'><span class='co'># The default interval is 1</span>
 <span class='no'>on_monthly</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rrule.html'>monthly</a></span>(<span class='kw'>since</span> <span class='kw'>=</span> <span class='st'>"1999-01-01"</span>)
 
-<span class='fu'><a href='alma_seq.html'>alma_seq</a></span>(<span class='st'>"1999-01-01"</span>, <span class='st'>"1999-06-01"</span>, <span class='no'>on_monthly</span>)</div><div class='output co'>#&gt; [1] "1999-01-01" "1999-02-01" "1999-03-01" "1999-04-01" "1999-05-01"
+<span class='fu'><a href='alma_search.html'>alma_search</a></span>(<span class='st'>"1999-01-01"</span>, <span class='st'>"1999-06-01"</span>, <span class='no'>on_monthly</span>)</div><div class='output co'>#&gt; [1] "1999-01-01" "1999-02-01" "1999-03-01" "1999-04-01" "1999-05-01"
 #&gt; [6] "1999-06-01"</div><div class='input'>
 <span class='co'># Adjust to every other month</span>
 <span class='no'>on_every_other_month</span> <span class='kw'>&lt;-</span> <span class='no'>on_monthly</span> <span class='kw'>%&gt;%</span> <span class='fu'>recur_on_interval</span>(<span class='fl'>2</span>)
 
-<span class='fu'><a href='alma_seq.html'>alma_seq</a></span>(<span class='st'>"1999-01-01"</span>, <span class='st'>"1999-06-01"</span>, <span class='no'>on_every_other_month</span>)</div><div class='output co'>#&gt; [1] "1999-01-01" "1999-03-01" "1999-05-01"</div><div class='input'>
+<span class='fu'><a href='alma_search.html'>alma_search</a></span>(<span class='st'>"1999-01-01"</span>, <span class='st'>"1999-06-01"</span>, <span class='no'>on_every_other_month</span>)</div><div class='output co'>#&gt; [1] "1999-01-01" "1999-03-01" "1999-05-01"</div><div class='input'>
 <span class='co'># Note that the frequency is limited to "every other month", but you</span>
 <span class='co'># can still have multiple events inside a single month</span>
 <span class='no'>on_every_other_month_on_mday_25_or_26</span> <span class='kw'>&lt;-</span> <span class='no'>on_every_other_month</span> <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='recur_on_mday.html'>recur_on_mday</a></span>(<span class='fl'>25</span>:<span class='fl'>26</span>)
 
-<span class='fu'><a href='alma_seq.html'>alma_seq</a></span>(<span class='st'>"1999-01-01"</span>, <span class='st'>"1999-06-01"</span>, <span class='no'>on_every_other_month_on_mday_25_or_26</span>)</div><div class='output co'>#&gt; [1] "1999-01-25" "1999-01-26" "1999-03-25" "1999-03-26" "1999-05-25"
+<span class='fu'><a href='alma_search.html'>alma_search</a></span>(<span class='st'>"1999-01-01"</span>, <span class='st'>"1999-06-01"</span>, <span class='no'>on_every_other_month_on_mday_25_or_26</span>)</div><div class='output co'>#&gt; [1] "1999-01-25" "1999-01-26" "1999-03-25" "1999-03-26" "1999-05-25"
 #&gt; [6] "1999-05-26"</div><div class='input'>
 </div></pre>
   </div>

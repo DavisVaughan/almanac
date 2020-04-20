@@ -229,13 +229,13 @@ month or any Tuesday".</p>
   <span class='fu'>sch_rrule</span>(<span class='no'>on_labor_day</span>)
 
 <span class='co'># Thanksgiving, Christmas, or Labor Day</span>
-<span class='fu'><a href='alma_seq.html'>alma_seq</a></span>(<span class='st'>"2019-01-01"</span>, <span class='st'>"2021-01-01"</span>, <span class='no'>sch</span>)</div><div class='output co'>#&gt; [1] "2019-09-02" "2019-11-28" "2019-12-25" "2020-09-07" "2020-11-26"
+<span class='fu'><a href='alma_search.html'>alma_search</a></span>(<span class='st'>"2019-01-01"</span>, <span class='st'>"2021-01-01"</span>, <span class='no'>sch</span>)</div><div class='output co'>#&gt; [1] "2019-09-02" "2019-11-28" "2019-12-25" "2020-09-07" "2020-11-26"
 #&gt; [6] "2020-12-25"</div><div class='input'>
 <span class='co'># Except Labor Day in 2019</span>
 <span class='no'>sch2</span> <span class='kw'>&lt;-</span> <span class='no'>sch</span> <span class='kw'>%&gt;%</span>
   <span class='fu'>sch_exdate</span>(<span class='st'>"2019-09-02"</span>)
 
-<span class='fu'><a href='alma_seq.html'>alma_seq</a></span>(<span class='st'>"2019-01-01"</span>, <span class='st'>"2021-01-01"</span>, <span class='no'>sch2</span>)</div><div class='output co'>#&gt; [1] "2019-11-28" "2019-12-25" "2020-09-07" "2020-11-26" "2020-12-25"</div><div class='input'>
+<span class='fu'><a href='alma_search.html'>alma_search</a></span>(<span class='st'>"2019-01-01"</span>, <span class='st'>"2021-01-01"</span>, <span class='no'>sch2</span>)</div><div class='output co'>#&gt; [1] "2019-11-28" "2019-12-25" "2020-09-07" "2020-11-26" "2020-12-25"</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

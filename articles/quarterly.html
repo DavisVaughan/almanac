@@ -109,7 +109,7 @@
   <span class="fu"><a href="../reference/recur_on_interval.html">recur_on_interval</a></span>(<span class="fl">3</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="../reference/recur_on_mday.html">recur_on_mday</a></span>(<span class="fl">1</span>)
 
-<span class="fu"><a href="../reference/alma_seq.html">alma_seq</a></span>(<span class="st">"2000-01-01"</span>, <span class="st">"2002-01-01"</span>, <span class="no">on_first_day_of_quarter</span>)
+<span class="fu"><a href="../reference/alma_search.html">alma_search</a></span>(<span class="st">"2000-01-01"</span>, <span class="st">"2002-01-01"</span>, <span class="no">on_first_day_of_quarter</span>)
 <span class="co">#&gt; [1] "2000-01-01" "2000-04-01" "2000-07-01" "2000-10-01" "2001-01-01"</span>
 <span class="co">#&gt; [6] "2001-04-01" "2001-07-01" "2001-10-01" "2002-01-01"</span></pre></body></html></div>
 <p>Whenever you need the “first” event per quarter, there is a good chance that that event will fall in the first month of the quarter, as is the case here. Whenever you have a guarantee that your event falls in the first month of the quarter, and can be computed from the start of that month, you can probably just use <code>monthly() %&gt;% recur_on_interval(3)</code> to get your quarterly values.</p>
@@ -122,7 +122,7 @@
   <span class="fu"><a href="../reference/recur_on_interval.html">recur_on_interval</a></span>(<span class="fl">3</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="../reference/recur_on_mday.html">recur_on_mday</a></span>(<span class="fl">1</span>)
 
-<span class="fu"><a href="../reference/alma_seq.html">alma_seq</a></span>(<span class="st">"2000-01-01"</span>, <span class="st">"2002-01-01"</span>, <span class="no">on_first_day_of_quarter_march_start</span>)
+<span class="fu"><a href="../reference/alma_search.html">alma_search</a></span>(<span class="st">"2000-01-01"</span>, <span class="st">"2002-01-01"</span>, <span class="no">on_first_day_of_quarter_march_start</span>)
 <span class="co">#&gt; [1] "2000-03-01" "2000-06-01" "2000-09-01" "2000-12-01" "2001-03-01"</span>
 <span class="co">#&gt; [6] "2001-06-01" "2001-09-01" "2001-12-01"</span></pre></body></html></div>
 </div>
@@ -136,7 +136,7 @@
   <span class="fu"><a href="../reference/recur_on_mday.html">recur_on_mday</a></span>(<span class="fl">1</span>:<span class="fl">31</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="../reference/recur_on_position.html">recur_on_position</a></span>(<span class="fl">60</span>)
 
-<span class="fu"><a href="../reference/alma_seq.html">alma_seq</a></span>(<span class="st">"2000-01-01"</span>, <span class="st">"2002-01-01"</span>, <span class="no">on_60th_day_of_q1</span>)
+<span class="fu"><a href="../reference/alma_search.html">alma_search</a></span>(<span class="st">"2000-01-01"</span>, <span class="st">"2002-01-01"</span>, <span class="no">on_60th_day_of_q1</span>)
 <span class="co">#&gt; [1] "2000-02-29" "2001-03-01"</span></pre></body></html></div>
 <p>This breaks down as follows:</p>
 <ul>
@@ -184,7 +184,7 @@
   <span class="kw">nth</span> <span class="kw">=</span> <span class="fl">60</span>
 )
 
-<span class="fu"><a href="../reference/alma_seq.html">alma_seq</a></span>(<span class="st">"2000-01-01"</span>, <span class="st">"2002-01-01"</span>, <span class="no">on_60th_day_of_the_quarter</span>)
+<span class="fu"><a href="../reference/alma_search.html">alma_search</a></span>(<span class="st">"2000-01-01"</span>, <span class="st">"2002-01-01"</span>, <span class="no">on_60th_day_of_the_quarter</span>)
 <span class="co">#&gt; [1] "2000-02-29" "2000-05-30" "2000-08-29" "2000-11-29" "2001-03-01"</span>
 <span class="co">#&gt; [6] "2001-05-30" "2001-08-29" "2001-11-29"</span></pre></body></html></div>
 <p>It can also select days from the end of the quarter, for example, the last day in the quarter.</p>
@@ -193,7 +193,7 @@
   <span class="kw">nth</span> <span class="kw">=</span> -<span class="fl">1</span>
 )
 
-<span class="fu"><a href="../reference/alma_seq.html">alma_seq</a></span>(<span class="st">"2000-01-01"</span>, <span class="st">"2002-01-01"</span>, <span class="no">on_last_day_of_the_quarter</span>)
+<span class="fu"><a href="../reference/alma_search.html">alma_search</a></span>(<span class="st">"2000-01-01"</span>, <span class="st">"2002-01-01"</span>, <span class="no">on_last_day_of_the_quarter</span>)
 <span class="co">#&gt; [1] "2000-03-31" "2000-06-30" "2000-09-30" "2000-12-31" "2001-03-31"</span>
 <span class="co">#&gt; [6] "2001-06-30" "2001-09-30" "2001-12-31"</span></pre></body></html></div>
 <p>This general strategy of using a base rule of <code>yearly() %&gt;% recur_on_ymonth()</code>, plus some usage of <code><a href="../reference/recur_on_position.html">recur_on_position()</a></code> is how I have solved most of the quarterly problems I can think of.</p>
@@ -211,7 +211,7 @@
   <span class="fu"><a href="../reference/recur_on_wday.html">recur_on_wday</a></span>(<span class="no">wday</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="../reference/recur_on_position.html">recur_on_position</a></span>(<span class="no">nth</span>)
 
-<span class="fu"><a href="../reference/alma_seq.html">alma_seq</a></span>(<span class="st">"2000-01-01"</span>, <span class="st">"2002-01-01"</span>, <span class="no">on_6th_monday_of_q1</span>)
+<span class="fu"><a href="../reference/alma_search.html">alma_search</a></span>(<span class="st">"2000-01-01"</span>, <span class="st">"2002-01-01"</span>, <span class="no">on_6th_monday_of_q1</span>)
 <span class="co">#&gt; [1] "2000-02-07" "2001-02-05"</span></pre></body></html></div>
 <p>Multiple week days can be used here.</p>
 <div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="no">since</span> <span class="kw">&lt;-</span> <span class="st">"2000-01-01"</span>
@@ -223,7 +223,7 @@
   <span class="fu"><a href="../reference/recur_on_wday.html">recur_on_wday</a></span>(<span class="no">wday</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="../reference/recur_on_position.html">recur_on_position</a></span>(<span class="no">nth</span>)
 
-<span class="fu"><a href="../reference/alma_seq.html">alma_seq</a></span>(<span class="st">"2000-01-01"</span>, <span class="st">"2002-01-01"</span>, <span class="no">on_19th_monday_or_tuesday_of_q1</span>)
+<span class="fu"><a href="../reference/alma_search.html">alma_search</a></span>(<span class="st">"2000-01-01"</span>, <span class="st">"2002-01-01"</span>, <span class="no">on_19th_monday_or_tuesday_of_q1</span>)
 <span class="co">#&gt; [1] "2000-03-06" "2001-03-05"</span></pre></body></html></div>
 <p>Now generalize:</p>
 <div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="no">make_on_nth_wday_of_the_quarter</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">since</span> <span class="kw">=</span> <span class="st">"1970-01-01"</span>, <span class="no">wday</span> <span class="kw">=</span> <span class="st">"Monday"</span>, <span class="no">nth</span> <span class="kw">=</span> <span class="fl">1L</span>) {
@@ -261,7 +261,7 @@
   <span class="kw">nth</span> <span class="kw">=</span> -<span class="fl">1</span>
 )
 
-<span class="no">fridays</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/alma_seq.html">alma_seq</a></span>(<span class="st">"2000-01-01"</span>, <span class="st">"2002-01-01"</span>, <span class="no">on_last_friday_of_the_quarter</span>)
+<span class="no">fridays</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/alma_search.html">alma_search</a></span>(<span class="st">"2000-01-01"</span>, <span class="st">"2002-01-01"</span>, <span class="no">on_last_friday_of_the_quarter</span>)
 <span class="no">fridays</span>
 <span class="co">#&gt; [1] "2000-03-31" "2000-06-30" "2000-09-29" "2000-12-29" "2001-03-30"</span>
 <span class="co">#&gt; [6] "2001-06-29" "2001-09-28" "2001-12-28"</span>
@@ -280,7 +280,7 @@
 <span class="no">on_last_friday_of_quarter_or_wednesdays</span> <span class="kw">&lt;-</span> <span class="no">on_last_friday_of_the_quarter</span> <span class="kw">%&gt;%</span>
   <span class="fu"><a href="../reference/sch-add.html">sch_rrule</a></span>(<span class="no">on_wednesdays</span>)
 
-<span class="no">last_friday_or_wednesdays</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/alma_seq.html">alma_seq</a></span>(
+<span class="no">last_friday_or_wednesdays</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/alma_search.html">alma_search</a></span>(
   <span class="st">"2000-01-01"</span>, <span class="st">"2002-01-01"</span>,
   <span class="no">on_last_friday_of_quarter_or_wednesdays</span>
 )

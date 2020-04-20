@@ -115,28 +115,28 @@
 <div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">on_yearly</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">yearly</a></span>()
 <span class="no">on_yearly</span>
 <span class="co">#&gt; rrule: yearly</span></pre></body></html></div>
-<p>The return value of <code><a href="../reference/rrule.html">yearly()</a></code> is a <em>rrule</em> object, short for “recurrence rule”. This base object is all you need to start doing something useful. For example, you can provide <code><a href="../reference/alma_seq.html">alma_seq()</a></code> this recurrence rule along with a <code>from</code> and <code>to</code> date, and it will return the events that it finds in the date range.</p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="../reference/alma_seq.html">alma_seq</a></span>(<span class="st">"1990-01-01"</span>, <span class="st">"1995-12-31"</span>, <span class="no">on_yearly</span>)
+<p>The return value of <code><a href="../reference/rrule.html">yearly()</a></code> is a <em>rrule</em> object, short for “recurrence rule”. This base object is all you need to start doing something useful. For example, you can provide <code><a href="../reference/alma_search.html">alma_search()</a></code> this recurrence rule along with a <code>from</code> and <code>to</code> date, and it will return the events that it finds in the date range.</p>
+<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="../reference/alma_search.html">alma_search</a></span>(<span class="st">"1990-01-01"</span>, <span class="st">"1995-12-31"</span>, <span class="no">on_yearly</span>)
 <span class="co">#&gt; [1] "1990-01-01" "1991-01-01" "1992-01-01" "1993-01-01" "1994-01-01"</span>
 <span class="co">#&gt; [6] "1995-01-01"</span></pre></body></html></div>
 <p>What if we want a yearly value, but we want it on January 5th every year, rather than on the 1st? <code><a href="../reference/rrule.html">yearly()</a></code> has a <em>very</em> important argument called <code>since</code> that controls two things: the start date of the recurrence rule, and information such as the month, or the day of the month to use for the event dates if no other conditions have been specified to override those.</p>
-<p>The default of <code>since</code> is set to <code>1970-01-01</code>, the Unix epoch, but this is arbitrary. It is because of this default that in the above example with <code><a href="../reference/alma_seq.html">alma_seq()</a></code> we get values on January 1st. Let’s change that.</p>
+<p>The default of <code>since</code> is set to <code>1970-01-01</code>, the Unix epoch, but this is arbitrary. It is because of this default that in the above example with <code><a href="../reference/alma_search.html">alma_search()</a></code> we get values on January 1st. Let’s change that.</p>
 <div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">on_yearly_jan_5</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">yearly</a></span>(<span class="kw">since</span> <span class="kw">=</span> <span class="st">"1990-01-05"</span>)
 
-<span class="fu"><a href="../reference/alma_seq.html">alma_seq</a></span>(<span class="st">"1990-01-01"</span>, <span class="st">"1995-12-31"</span>, <span class="no">on_yearly_jan_5</span>)
+<span class="fu"><a href="../reference/alma_search.html">alma_search</a></span>(<span class="st">"1990-01-01"</span>, <span class="st">"1995-12-31"</span>, <span class="no">on_yearly_jan_5</span>)
 <span class="co">#&gt; [1] "1990-01-05" "1991-01-05" "1992-01-05" "1993-01-05" "1994-01-05"</span>
 <span class="co">#&gt; [6] "1995-01-05"</span></pre></body></html></div>
 <p><strong>Notice that we also set the <code>since</code> date to be closer to our range of interest. This can dramatically improve performance in some cases.</strong></p>
 <p>Now that the <code>since</code> date has been set to 1990, if we try and find yearly dates before 1990, they will not be included.</p>
 <div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="co"># same as above, because the 1988 and 1989 dates are not included. </span>
-<span class="fu"><a href="../reference/alma_seq.html">alma_seq</a></span>(<span class="st">"1988-01-01"</span>, <span class="st">"1995-12-31"</span>, <span class="no">on_yearly_jan_5</span>)
+<span class="fu"><a href="../reference/alma_search.html">alma_search</a></span>(<span class="st">"1988-01-01"</span>, <span class="st">"1995-12-31"</span>, <span class="no">on_yearly_jan_5</span>)
 <span class="co">#&gt; [1] "1990-01-05" "1991-01-05" "1992-01-05" "1993-01-05" "1994-01-05"</span>
 <span class="co">#&gt; [6] "1995-01-05"</span></pre></body></html></div>
 </div>
 <div id="recurrence-set" class="section level2">
 <h2 class="hasAnchor">
 <a href="#recurrence-set" class="anchor"></a>Recurrence Set</h2>
-<p>Each recurrence rule comes with its own unique <em>recurrence set</em>. A recurrence set is the set of all event dates that are included in that rule. In the previous example, we used <code><a href="../reference/alma_seq.html">alma_seq()</a></code> to extract a subset of dates from the recurrence set that were between <code>from</code> and <code>to</code>. You can also check if an existing date is included in a recurrence rule’s set with <code><a href="../reference/alma_in.html">alma_in()</a></code>.</p>
+<p>Each recurrence rule comes with its own unique <em>recurrence set</em>. A recurrence set is the set of all event dates that are included in that rule. In the previous example, we used <code><a href="../reference/alma_search.html">alma_search()</a></code> to extract a subset of dates from the recurrence set that were between <code>from</code> and <code>to</code>. You can also check if an existing date is included in a recurrence rule’s set with <code><a href="../reference/alma_in.html">alma_in()</a></code>.</p>
 <div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">on_monthly</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">monthly</a></span>(<span class="kw">since</span> <span class="kw">=</span> <span class="st">"1990-01-10"</span>)
 
 <span class="no">x</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span>(<span class="st">"2000-01-08"</span>) + <span class="fl">0</span>:<span class="fl">5</span>
@@ -158,25 +158,25 @@
 <span class="no">on_daily</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">daily</a></span>(<span class="kw">since</span> <span class="kw">=</span> <span class="no">start_date</span>)
 
 <span class="co"># The first time is "slow"</span>
-<span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>(<span class="fu"><a href="../reference/alma_seq.html">alma_seq</a></span>(<span class="no">start_date</span>, <span class="st">"2000-01-01"</span>, <span class="no">on_daily</span>))
+<span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>(<span class="fu"><a href="../reference/alma_search.html">alma_search</a></span>(<span class="no">start_date</span>, <span class="st">"2000-01-01"</span>, <span class="no">on_daily</span>))
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;   0.327   0.025   0.310</span>
+<span class="co">#&gt;   0.326   0.031   0.316</span>
 
 <span class="co"># Repeated access to the same location is fast</span>
-<span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>(<span class="fu"><a href="../reference/alma_seq.html">alma_seq</a></span>(<span class="no">start_date</span>, <span class="st">"2000-01-01"</span>, <span class="no">on_daily</span>))
+<span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>(<span class="fu"><a href="../reference/alma_search.html">alma_search</a></span>(<span class="no">start_date</span>, <span class="st">"2000-01-01"</span>, <span class="no">on_daily</span>))
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;   0.000   0.000   0.001</span>
+<span class="co">#&gt;       0       0       0</span>
 
 <span class="co"># Dates are cached from `[since, to]`, so if you back up `to`, its still fast</span>
-<span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>(<span class="fu"><a href="../reference/alma_seq.html">alma_seq</a></span>(<span class="no">start_date</span>, <span class="st">"1990-05-01"</span>, <span class="no">on_daily</span>))
+<span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>(<span class="fu"><a href="../reference/alma_search.html">alma_search</a></span>(<span class="no">start_date</span>, <span class="st">"1990-05-01"</span>, <span class="no">on_daily</span>))
 <span class="co">#&gt;    user  system elapsed </span>
 <span class="co">#&gt;       0       0       0</span>
 
 <span class="co"># But when you extend `to` forward in time, it will have to generate all dates</span>
 <span class="co"># between `since` and `to` again</span>
-<span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>(<span class="fu"><a href="../reference/alma_seq.html">alma_seq</a></span>(<span class="no">start_date</span>, <span class="st">"2000-05-01"</span>, <span class="no">on_daily</span>))
+<span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>(<span class="fu"><a href="../reference/alma_search.html">alma_search</a></span>(<span class="no">start_date</span>, <span class="st">"2000-05-01"</span>, <span class="no">on_daily</span>))
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;   0.001   0.000   0.000</span></pre></body></html></div>
+<span class="co">#&gt;   0.001   0.000   0.001</span></pre></body></html></div>
 </div>
 </div>
 <div id="recurrence-conditions" class="section level2">
@@ -186,7 +186,7 @@
 <div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="no">on_4th_and_16th</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">monthly</a></span>(<span class="kw">since</span> <span class="kw">=</span> <span class="st">"2000-01-01"</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="../reference/recur_on_mday.html">recur_on_mday</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">4</span>, <span class="fl">16</span>))
 
-<span class="fu"><a href="../reference/alma_seq.html">alma_seq</a></span>(<span class="st">"2000-01-01"</span>, <span class="st">"2000-06-01"</span>, <span class="no">on_4th_and_16th</span>)
+<span class="fu"><a href="../reference/alma_search.html">alma_search</a></span>(<span class="st">"2000-01-01"</span>, <span class="st">"2000-06-01"</span>, <span class="no">on_4th_and_16th</span>)
 <span class="co">#&gt;  [1] "2000-01-04" "2000-01-16" "2000-02-04" "2000-02-16" "2000-03-04"</span>
 <span class="co">#&gt;  [6] "2000-03-16" "2000-04-04" "2000-04-16" "2000-05-04" "2000-05-16"</span></pre></body></html></div>
 <p>An important thing to note here is that even though our <code>since</code> date is on the first of the month, we are “overriding” that with the recurrence condition, so that information is not used.</p>
@@ -200,14 +200,14 @@
   <span class="fu"><a href="../reference/recur_on_ymonth.html">recur_on_ymonth</a></span>(<span class="st">"Sep"</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="../reference/recur_on_wday.html">recur_on_wday</a></span>(<span class="st">"Monday"</span>, <span class="kw">nth</span> <span class="kw">=</span> <span class="fl">1</span>)
 
-<span class="fu"><a href="../reference/alma_seq.html">alma_seq</a></span>(<span class="st">"2000-01-01"</span>, <span class="st">"2005-01-01"</span>, <span class="no">on_labor_day</span>)
+<span class="fu"><a href="../reference/alma_search.html">alma_search</a></span>(<span class="st">"2000-01-01"</span>, <span class="st">"2005-01-01"</span>, <span class="no">on_labor_day</span>)
 <span class="co">#&gt; [1] "2000-09-04" "2001-09-03" "2002-09-02" "2003-09-01" "2004-09-06"</span></pre></body></html></div>
 <p>The <code>nth</code> argument of <code><a href="../reference/recur_on_wday.html">recur_on_wday()</a></code> is especially useful for selecting from the end of the month. If we wanted the <em>last</em> Monday in September instead, we could do:</p>
 <div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="no">on_last_monday_in_sept</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">yearly</a></span>(<span class="kw">since</span> <span class="kw">=</span> <span class="st">"2000-01-01"</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="../reference/recur_on_ymonth.html">recur_on_ymonth</a></span>(<span class="st">"Sep"</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="../reference/recur_on_wday.html">recur_on_wday</a></span>(<span class="st">"Monday"</span>, <span class="kw">nth</span> <span class="kw">=</span> -<span class="fl">1</span>)
 
-<span class="fu"><a href="../reference/alma_seq.html">alma_seq</a></span>(<span class="st">"2000-01-01"</span>, <span class="st">"2005-01-01"</span>, <span class="no">on_last_monday_in_sept</span>)
+<span class="fu"><a href="../reference/alma_search.html">alma_search</a></span>(<span class="st">"2000-01-01"</span>, <span class="st">"2005-01-01"</span>, <span class="no">on_last_monday_in_sept</span>)
 <span class="co">#&gt; [1] "2000-09-25" "2001-09-24" "2002-09-30" "2003-09-29" "2004-09-27"</span></pre></body></html></div>
 </div>
 <div id="schedules" class="section level2">
@@ -223,13 +223,13 @@
   <span class="fu"><a href="../reference/sch-add.html">sch_rrule</a></span>(<span class="no">on_christmas</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="../reference/sch-add.html">sch_rrule</a></span>(<span class="no">on_labor_day</span>)
 
-<span class="fu"><a href="../reference/alma_seq.html">alma_seq</a></span>(<span class="st">"2000-01-01"</span>, <span class="st">"2002-01-01"</span>, <span class="no">sch_christmas_or_labor_day</span>)
+<span class="fu"><a href="../reference/alma_search.html">alma_search</a></span>(<span class="st">"2000-01-01"</span>, <span class="st">"2002-01-01"</span>, <span class="no">sch_christmas_or_labor_day</span>)
 <span class="co">#&gt; [1] "2000-09-04" "2000-12-25" "2001-09-03" "2001-12-25"</span>
 
 <span class="no">sch_christmas_or_labor_day_except_2000_labor_day</span> <span class="kw">&lt;-</span> <span class="no">sch_christmas_or_labor_day</span> <span class="kw">%&gt;%</span>
   <span class="fu"><a href="../reference/sch-add.html">sch_exdate</a></span>(<span class="st">"2000-09-04"</span>)
 
-<span class="fu"><a href="../reference/alma_seq.html">alma_seq</a></span>(<span class="st">"2000-01-01"</span>, <span class="st">"2002-01-01"</span>, <span class="no">sch_christmas_or_labor_day_except_2000_labor_day</span>)
+<span class="fu"><a href="../reference/alma_search.html">alma_search</a></span>(<span class="st">"2000-01-01"</span>, <span class="st">"2002-01-01"</span>, <span class="no">sch_christmas_or_labor_day_except_2000_labor_day</span>)
 <span class="co">#&gt; [1] "2000-12-25" "2001-09-03" "2001-12-25"</span></pre></body></html></div>
 <p>Schedules are powerful because they allow us to begin to build up more complicated recurrence sets from simpler pieces. All of the <code>hldy_*()</code> holiday functions are schedules built up from simpler rules. As an example of how complex this can get, take a quick look at <code><a href="../reference/holidays.html">hldy_thanksgiving()</a></code>. In present time, Thanksgiving takes place on the 4th Thursday of November, but it wasn’t always this simple. The date that Thanksgiving occurs on has changed twice, which you can read about <a href="https://www.archives.gov/legislative/features/thanksgiving">here</a> if you are interested, creating the following disjoint set of rules:</p>
 <ul>
@@ -257,7 +257,7 @@
 <span class="co">#&gt;     sch &lt;- sch_merge(sch, hldy_thanksgiving_post_1942())</span>
 <span class="co">#&gt;     return(sch)</span>
 <span class="co">#&gt; }</span>
-<span class="co">#&gt; &lt;bytecode: 0x7facd2399908&gt;</span>
+<span class="co">#&gt; &lt;bytecode: 0x7fdddcc8cbe8&gt;</span>
 <span class="co">#&gt; &lt;environment: namespace:almanac&gt;</span></pre></body></html></div>
 </div>
   </div>
