@@ -24,11 +24,6 @@ reference:
   contents:
   - starts_with("adj_")
 
-- title: Holidays and Calendars
-  contents:
-  - starts_with("hldy_")
-  - starts_with("calendar_")
-
 - title: Compatibility
   contents:
   - vctrs-compat

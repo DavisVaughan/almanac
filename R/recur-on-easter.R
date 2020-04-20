@@ -1,3 +1,5 @@
+# TODO: Should this be removed?
+
 #' Recur on easter
 #'
 #' `recur_on_easter()` is a special helper to recur on Easter. Easter is

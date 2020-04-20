@@ -56,39 +56,6 @@ alma_step(wednesday_before_thanksgiving, n = 2, on_thanksgiving)
 #> [1] "2000-11-25"
 ```
 
-By combining multiple recurrence rules together, you can create larger
-*recurrence bundles* that form a collection of holidays or events, such
-as weekends. almanac comes with a pre-built `calendar_usa_federal()`
-recurrence bundle that includes recurrence rules for the US holidays.
-Combining this with a recurrence rule of “on weekends” constructs a
-business calendar, which we can use to shift dates by, for example, “2
-business days”.
-
-``` r
-on_weekends <- weekly() %>% 
-  recur_on_weekends()
-
-on_us_holidays_and_weekends <- calendar_usa_federal() %>%
-  add_rrule(on_weekends)
-
-thursday_and_friday_before_labor_day <- c("2019-08-29", "2019-08-30")
-
-# Steps over Saturday, Sunday, and Labor Day to the following Tuesday
-# and Wednesday, aka "two business days" from now!
-two_business_days_forward <- alma_step(
-  thursday_and_friday_before_labor_day, 
-  n = 2,
-  rbundle = on_us_holidays_and_weekends
-)
-
-two_business_days_forward
-#> [1] "2019-09-03" "2019-09-04"
-
-lubridate::wday(two_business_days_forward, label = TRUE)
-#> [1] Tue Wed
-#> Levels: Sun < Mon < Tue < Wed < Thu < Fri < Sat
-```
-
 ## Learning More
 
 View the vignettes on [the

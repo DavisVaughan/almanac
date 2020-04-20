@@ -167,18 +167,3 @@ rb_christmas_or_labor_day_except_2000_labor_day <- rb_christmas_or_labor_day %>%
 
 alma_search("2000-01-01", "2002-01-01", rb_christmas_or_labor_day_except_2000_labor_day)
 ```
-
-Recurrence bundles are powerful because they allow us to begin to build up more complicated recurrence sets from simpler pieces. All of the `hldy_*()` holiday functions are rbundles built up from simpler rules. As an example of how complex this can get, take a quick look at `hldy_thanksgiving()`. In present time, Thanksgiving takes place on the 4th Thursday of November, but it wasn't always this simple. The date that Thanksgiving occurs on has changed twice, which you can read about [here](https://www.archives.gov/legislative/features/thanksgiving) if you are interested, creating the following disjoint set of rules:
-
-- Pre 1939: Last Thursday in November
-
-- After 1939 but before 1942: Next to last Thursday in November
-
-- Post 1942: The 4th Thursday in November
-
-Here is the implementation of `hldy_thanksgiving()`, which combines these pieces into a larger rbundle.
-
-```{r}
-hldy_thanksgiving
-```
-
