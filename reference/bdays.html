@@ -42,7 +42,7 @@
 <meta property="og:title" content="Create a business day period — bdays" />
 <meta property="og:description" content="bdays() is similar to lubridate::days() in that it constructs an object
 that can be added to Dates to shift by a set period. It differs in the fact
-that you can provide a schedule to shift relative to." />
+that you can provide an rbundle to shift relative to." />
 
 
 
@@ -139,10 +139,10 @@ that you can provide a schedule to shift relative to." />
     <div class="ref-description">
     <p><code>bdays()</code> is similar to <code><a href='http://lubridate.tidyverse.org/reference/period.html'>lubridate::days()</a></code> in that it constructs an object
 that can be added to Dates to shift by a set period. It differs in the fact
-that you can provide a <code>schedule</code> to shift relative to.</p>
+that you can provide an rbundle to shift relative to.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>bdays</span>(<span class='no'>x</span>, <span class='no'>schedule</span>)</pre>
+    <pre class="usage"><span class='fu'>bdays</span>(<span class='no'>x</span>, <span class='no'>rbundle</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -153,9 +153,9 @@ that you can provide a <code>schedule</code> to shift relative to.</p>
 <p>The number of days to step. Can be negative to step backwards.</p></td>
     </tr>
     <tr>
-      <th>schedule</th>
-      <td><p><code>[schedule / rrule]</code></p>
-<p>A schedule or rrule.</p></td>
+      <th>rbundle</th>
+      <td><p><code>[rbundle / rrule]</code></p>
+<p>An rbundle or rrule.</p></td>
     </tr>
     </table>
 
@@ -176,7 +176,7 @@ that is desired for shifting by "n business days".</p>
 <span class='co'># lubridate::days() just shifts forward by 2 days, without paying</span>
 <span class='co'># attention to the weekend</span>
 <span class='no'>x</span> + <span class='fu'><a href='http://lubridate.tidyverse.org/reference/period.html'>days</a></span>(<span class='fl'>2</span>)</div><div class='output co'>#&gt; [1] "1970-01-03" "1970-01-04"</div><div class='input'>
-<span class='co'># With bdays(), you can specify a schedule to step relative to. This steps</span>
+<span class='co'># With bdays(), you can specify an rbundle to step relative to. This steps</span>
 <span class='co'># over the weekend, landing us on Monday and Tuesday.</span>
 <span class='no'>x</span> + <span class='fu'>bdays</span>(<span class='fl'>2</span>, <span class='no'>on_weekends</span>)</div><div class='output co'>#&gt; [1] "1970-01-05" "1970-01-06"</div><div class='input'>
 <span class='co'># It is also vectorized, and arithmetic is defined on integer input</span>

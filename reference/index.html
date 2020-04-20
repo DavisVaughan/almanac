@@ -215,7 +215,7 @@
     </tbody><tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-schedules" class="hasAnchor"><a href="#section-schedules" class="anchor"></a>Schedules</h2>
+          <h2 id="section-recurrence-bundles" class="hasAnchor"><a href="#section-recurrence-bundles" class="anchor"></a>Recurrence bundles</h2>
           <p class="section-desc"></p>
         </th>
       </tr>
@@ -227,20 +227,20 @@
       <tr>
         
         <td>
-          <p><code><a href="schedule.html">schedule()</a></code> </p>
+          <p><code><a href="rbundle.html">rbundle()</a></code> </p>
         </td>
-        <td><p>Create a new schedule</p></td>
+        <td><p>Create a new recurrence bundle</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="sch-add.html">sch_rrule()</a></code> <code><a href="sch-add.html">sch_rdate()</a></code> <code><a href="sch-add.html">sch_exdate()</a></code> <code><a href="sch-add.html">sch_merge()</a></code> </p>
+          <p><code><a href="rbundle-add.html">add_rrule()</a></code> <code><a href="rbundle-add.html">add_rdate()</a></code> <code><a href="rbundle-add.html">add_exdate()</a></code> <code><a href="rbundle-add.html">add_rbundle()</a></code> </p>
         </td>
-        <td><p>Add to a schedule</p></td>
+        <td><p>Add to an rbundle</p></td>
       </tr>
     </tbody><tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-sets-and-sequences" class="hasAnchor"><a href="#section-sets-and-sequences" class="anchor"></a>Sets and sequences</h2>
+          <h2 id="section-recurrence-utilities" class="hasAnchor"><a href="#section-recurrence-utilities" class="anchor"></a>Recurrence utilities</h2>
           <p class="section-desc"></p>
         </th>
       </tr>
@@ -254,7 +254,7 @@
         <td>
           <p><code><a href="alma_in.html">alma_in()</a></code> </p>
         </td>
-        <td><p>Is <code>x</code> in the schedule?</p></td>
+        <td><p>Is <code>x</code> in the recurrence set?</p></td>
       </tr><tr>
         
         <td>
@@ -267,25 +267,18 @@
           <p><code><a href="alma_next.html">alma_next()</a></code> <code><a href="alma_next.html">alma_previous()</a></code> </p>
         </td>
         <td><p>Generate the next or previous event</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-adjusting-dates" class="hasAnchor"><a href="#section-adjusting-dates" class="anchor"></a>Adjusting dates</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      
-      
-    </tbody><tbody>
-      
-      
-      <tr>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="alma_events.html">alma_events()</a></code> </p>
+        </td>
+        <td><p>Get all events</p></td>
+      </tr><tr>
         
         <td>
           <p><code><a href="alma_step.html">alma_step()</a></code> </p>
         </td>
-        <td><p>Step relative to a schedule</p></td>
+        <td><p>Step relative to an rbundle</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -330,6 +323,44 @@
           <p><code><a href="calendars.html">calendar_usa_federal()</a></code> <code><a href="calendars.html">calendar_usa_nyse()</a></code> </p>
         </td>
         <td><p>Calendars</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-business-days" class="hasAnchor"><a href="#section-business-days" class="anchor"></a>Business Days</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="bdays.html">bdays()</a></code> </p>
+        </td>
+        <td><p>Create a business day period</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-compatibility" class="hasAnchor"><a href="#section-compatibility" class="anchor"></a>Compatibility</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="vctrs-compat.html">vec_arith(<i>&lt;BDays&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>vctrs compatibility functions</p></td>
       </tr>
     </tbody>
     </table>

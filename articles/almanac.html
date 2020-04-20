@@ -98,7 +98,7 @@
 
     
     
-<p>This vignette is designed to introduce some of the common terminology used in {almanac} to get you up to speed on how to use the package. Along the way, we will see example usage of a number of the building blocks that will allow you to construct more complex schedules.</p>
+<p>This vignette is designed to introduce some of the common terminology used in {almanac} to get you up to speed on how to use the package. Along the way, we will see example usage of a number of the building blocks that will allow you to construct more complex recurrence rule objects.</p>
 <div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">almanac</span>)</pre></body></html></div>
 <div id="recurrence-rules" class="section level2">
 <h2 class="hasAnchor">
@@ -153,19 +153,19 @@
 <div id="caching" class="section level3">
 <h3 class="hasAnchor">
 <a href="#caching" class="anchor"></a>Caching</h3>
-<p>{almanac} makes an attempt to be smart by caching dates in the recurrence set that it has “seen”. This means that repeated access to the same schedule can often speed up substantially between the first access and subsequent accesses.</p>
+<p>{almanac} makes an attempt to be smart by caching dates in the recurrence set that it has “seen”. This means that repeated access to the same rule can often speed up substantially between the first access and subsequent accesses.</p>
 <div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="no">start_date</span> <span class="kw">&lt;-</span> <span class="st">"1990-01-01"</span>
 <span class="no">on_daily</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">daily</a></span>(<span class="kw">since</span> <span class="kw">=</span> <span class="no">start_date</span>)
 
 <span class="co"># The first time is "slow"</span>
 <span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>(<span class="fu"><a href="../reference/alma_search.html">alma_search</a></span>(<span class="no">start_date</span>, <span class="st">"2000-01-01"</span>, <span class="no">on_daily</span>))
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;   0.326   0.031   0.316</span>
+<span class="co">#&gt;   0.314   0.019   0.297</span>
 
 <span class="co"># Repeated access to the same location is fast</span>
 <span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>(<span class="fu"><a href="../reference/alma_search.html">alma_search</a></span>(<span class="no">start_date</span>, <span class="st">"2000-01-01"</span>, <span class="no">on_daily</span>))
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;       0       0       0</span>
+<span class="co">#&gt;   0.001   0.000   0.001</span>
 
 <span class="co"># Dates are cached from `[since, to]`, so if you back up `to`, its still fast</span>
 <span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>(<span class="fu"><a href="../reference/alma_search.html">alma_search</a></span>(<span class="no">start_date</span>, <span class="st">"1990-05-01"</span>, <span class="no">on_daily</span>))
@@ -176,7 +176,7 @@
 <span class="co"># between `since` and `to` again</span>
 <span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>(<span class="fu"><a href="../reference/alma_search.html">alma_search</a></span>(<span class="no">start_date</span>, <span class="st">"2000-05-01"</span>, <span class="no">on_daily</span>))
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;   0.001   0.000   0.001</span></pre></body></html></div>
+<span class="co">#&gt;   0.000   0.000   0.001</span></pre></body></html></div>
 </div>
 </div>
 <div id="recurrence-conditions" class="section level2">
@@ -210,34 +210,34 @@
 <span class="fu"><a href="../reference/alma_search.html">alma_search</a></span>(<span class="st">"2000-01-01"</span>, <span class="st">"2005-01-01"</span>, <span class="no">on_last_monday_in_sept</span>)
 <span class="co">#&gt; [1] "2000-09-25" "2001-09-24" "2002-09-30" "2003-09-29" "2004-09-27"</span></pre></body></html></div>
 </div>
-<div id="schedules" class="section level2">
+<div id="recurrence-bundles" class="section level2">
 <h2 class="hasAnchor">
-<a href="#schedules" class="anchor"></a>Schedules</h2>
-<p>Recurrence rules are powerful tools on their own, but they aren’t enough to solve every task. Say you want to construct a rule that includes both Christmas and Labor Day as events. It would be impossible to construct this kind of recurrence set using a single rule, but if you could join <em>multiple</em> rules together, one for Christmas and one for Labor Day, then it would be possible.</p>
-<p>A <em>schedule</em> is a collection of recurrence rules. The recurrence set of a schedule is the union of the recurrence sets of every underlying rule. It can also contain specialized dates that you want to forcibly include in the recurrence set, called <code>rdate</code>s, and ones that you want to forcibly exclude, called <code>exdate</code>s.</p>
+<a href="#recurrence-bundles" class="anchor"></a>Recurrence bundles</h2>
+<p>Recurrence rules are powerful tools on their own, but they aren’t enough to solve every task. Say you want to construct a rule that includes both Christmas and Labor Day as events. It would be impossible to construct this kind of recurrence set using a single rule, but if you could bundle <em>multiple</em> rules together, one for Christmas and one for Labor Day, then it would be possible.</p>
+<p>An <em>rbundle</em> is a bundle of recurrence rules. The recurrence set of an rbundle is the union of the recurrence sets of every underlying recurrence rule. It can also contain specialized dates that you want to forcibly include in the recurrence set, called rdates, and ones that you want to forcibly exclude, called exdates.</p>
 <div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="no">on_christmas</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">yearly</a></span>(<span class="kw">since</span> <span class="kw">=</span> <span class="st">"2000-01-01"</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="../reference/recur_on_ymonth.html">recur_on_ymonth</a></span>(<span class="st">"Dec"</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="../reference/recur_on_mday.html">recur_on_mday</a></span>(<span class="fl">25</span>)
 
-<span class="no">sch_christmas_or_labor_day</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/schedule.html">schedule</a></span>() <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/sch-add.html">sch_rrule</a></span>(<span class="no">on_christmas</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/sch-add.html">sch_rrule</a></span>(<span class="no">on_labor_day</span>)
+<span class="no">rb_christmas_or_labor_day</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/rbundle.html">rbundle</a></span>() <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="../reference/rbundle-add.html">add_rrule</a></span>(<span class="no">on_christmas</span>) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="../reference/rbundle-add.html">add_rrule</a></span>(<span class="no">on_labor_day</span>)
 
-<span class="fu"><a href="../reference/alma_search.html">alma_search</a></span>(<span class="st">"2000-01-01"</span>, <span class="st">"2002-01-01"</span>, <span class="no">sch_christmas_or_labor_day</span>)
+<span class="fu"><a href="../reference/alma_search.html">alma_search</a></span>(<span class="st">"2000-01-01"</span>, <span class="st">"2002-01-01"</span>, <span class="no">rb_christmas_or_labor_day</span>)
 <span class="co">#&gt; [1] "2000-09-04" "2000-12-25" "2001-09-03" "2001-12-25"</span>
 
-<span class="no">sch_christmas_or_labor_day_except_2000_labor_day</span> <span class="kw">&lt;-</span> <span class="no">sch_christmas_or_labor_day</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/sch-add.html">sch_exdate</a></span>(<span class="st">"2000-09-04"</span>)
+<span class="no">rb_christmas_or_labor_day_except_2000_labor_day</span> <span class="kw">&lt;-</span> <span class="no">rb_christmas_or_labor_day</span> <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="../reference/rbundle-add.html">add_exdate</a></span>(<span class="st">"2000-09-04"</span>)
 
-<span class="fu"><a href="../reference/alma_search.html">alma_search</a></span>(<span class="st">"2000-01-01"</span>, <span class="st">"2002-01-01"</span>, <span class="no">sch_christmas_or_labor_day_except_2000_labor_day</span>)
+<span class="fu"><a href="../reference/alma_search.html">alma_search</a></span>(<span class="st">"2000-01-01"</span>, <span class="st">"2002-01-01"</span>, <span class="no">rb_christmas_or_labor_day_except_2000_labor_day</span>)
 <span class="co">#&gt; [1] "2000-12-25" "2001-09-03" "2001-12-25"</span></pre></body></html></div>
-<p>Schedules are powerful because they allow us to begin to build up more complicated recurrence sets from simpler pieces. All of the <code>hldy_*()</code> holiday functions are schedules built up from simpler rules. As an example of how complex this can get, take a quick look at <code><a href="../reference/holidays.html">hldy_thanksgiving()</a></code>. In present time, Thanksgiving takes place on the 4th Thursday of November, but it wasn’t always this simple. The date that Thanksgiving occurs on has changed twice, which you can read about <a href="https://www.archives.gov/legislative/features/thanksgiving">here</a> if you are interested, creating the following disjoint set of rules:</p>
+<p>Recurrence bundles are powerful because they allow us to begin to build up more complicated recurrence sets from simpler pieces. All of the <code>hldy_*()</code> holiday functions are rbundles built up from simpler rules. As an example of how complex this can get, take a quick look at <code><a href="../reference/holidays.html">hldy_thanksgiving()</a></code>. In present time, Thanksgiving takes place on the 4th Thursday of November, but it wasn’t always this simple. The date that Thanksgiving occurs on has changed twice, which you can read about <a href="https://www.archives.gov/legislative/features/thanksgiving">here</a> if you are interested, creating the following disjoint set of rules:</p>
 <ul>
 <li><p>Pre 1939: Last Thursday in November</p></li>
 <li><p>After 1939 but before 1942: Next to last Thursday in November</p></li>
 <li><p>Post 1942: The 4th Thursday in November</p></li>
 </ul>
-<p>Here is the implementation of <code><a href="../reference/holidays.html">hldy_thanksgiving()</a></code>, which combines these pieces into a larger schedule.</p>
+<p>Here is the implementation of <code><a href="../reference/holidays.html">hldy_thanksgiving()</a></code>, which combines these pieces into a larger rbundle.</p>
 <div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="no">hldy_thanksgiving</span>
 <span class="co">#&gt; function (since = "1970-01-01") </span>
 <span class="co">#&gt; {</span>
@@ -246,18 +246,18 @@
 <span class="co">#&gt;         return(hldy_thanksgiving_post_1942(since))</span>
 <span class="co">#&gt;     }</span>
 <span class="co">#&gt;     if (since &gt;= as.Date("1939-01-01")) {</span>
-<span class="co">#&gt;         sch &lt;- schedule()</span>
-<span class="co">#&gt;         sch &lt;- sch_merge(sch, hldy_thanksgiving_post_1939_pre_1942(since))</span>
-<span class="co">#&gt;         sch &lt;- sch_merge(sch, hldy_thanksgiving_post_1942())</span>
-<span class="co">#&gt;         return(sch)</span>
+<span class="co">#&gt;         rb &lt;- rbundle()</span>
+<span class="co">#&gt;         rb &lt;- add_rbundle(rb, hldy_thanksgiving_post_1939_pre_1942(since))</span>
+<span class="co">#&gt;         rb &lt;- add_rbundle(rb, hldy_thanksgiving_post_1942())</span>
+<span class="co">#&gt;         return(rb)</span>
 <span class="co">#&gt;     }</span>
-<span class="co">#&gt;     sch &lt;- schedule()</span>
-<span class="co">#&gt;     sch &lt;- sch_merge(sch, hldy_thanksgiving_pre_1939(since))</span>
-<span class="co">#&gt;     sch &lt;- sch_merge(sch, hldy_thanksgiving_post_1939_pre_1942())</span>
-<span class="co">#&gt;     sch &lt;- sch_merge(sch, hldy_thanksgiving_post_1942())</span>
-<span class="co">#&gt;     return(sch)</span>
+<span class="co">#&gt;     rb &lt;- rbundle()</span>
+<span class="co">#&gt;     rb &lt;- add_rbundle(rb, hldy_thanksgiving_pre_1939(since))</span>
+<span class="co">#&gt;     rb &lt;- add_rbundle(rb, hldy_thanksgiving_post_1939_pre_1942())</span>
+<span class="co">#&gt;     rb &lt;- add_rbundle(rb, hldy_thanksgiving_post_1942())</span>
+<span class="co">#&gt;     return(rb)</span>
 <span class="co">#&gt; }</span>
-<span class="co">#&gt; &lt;bytecode: 0x7fdddcc8cbe8&gt;</span>
+<span class="co">#&gt; &lt;bytecode: 0x7fb9f9e5ce90&gt;</span>
 <span class="co">#&gt; &lt;environment: namespace:almanac&gt;</span></pre></body></html></div>
 </div>
   </div>

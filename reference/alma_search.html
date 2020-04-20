@@ -138,7 +138,7 @@
     <p><code>alma_search()</code> retrieves all events between <code>from</code> and <code>to</code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>alma_search</span>(<span class='no'>from</span>, <span class='no'>to</span>, <span class='no'>schedule</span>, <span class='kw'>inclusive</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>alma_search</span>(<span class='no'>from</span>, <span class='no'>to</span>, <span class='no'>rbundle</span>, <span class='kw'>inclusive</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -149,9 +149,9 @@
 <p>Dates defining the range to look for events.</p></td>
     </tr>
     <tr>
-      <th>schedule</th>
-      <td><p><code>[schedule / rrule]</code></p>
-<p>A schedule or rrule.</p></td>
+      <th>rbundle</th>
+      <td><p><code>[rbundle / rrule]</code></p>
+<p>A rbundle or rrule.</p></td>
     </tr>
     <tr>
       <th>inclusive</th>
@@ -166,11 +166,11 @@
 <span class='no'>on_monday</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rrule.html'>weekly</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'><a href='recur_on_wday.html'>recur_on_wday</a></span>(<span class='st'>"Monday"</span>)
 
 <span class='co'># On the 12th of the month, or on Mondays</span>
-<span class='no'>sch</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='schedule.html'>schedule</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='sch-add.html'>sch_rrule</a></span>(<span class='no'>on_12th</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='sch-add.html'>sch_rrule</a></span>(<span class='no'>on_monday</span>)
+<span class='no'>rb</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rbundle.html'>rbundle</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='rbundle-add.html'>add_rrule</a></span>(<span class='no'>on_12th</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='rbundle-add.html'>add_rrule</a></span>(<span class='no'>on_monday</span>)
 
-<span class='fu'>alma_search</span>(<span class='st'>"2019-01-01"</span>, <span class='st'>"2019-01-31"</span>, <span class='no'>sch</span>)</div><div class='output co'>#&gt; [1] "2019-01-07" "2019-01-12" "2019-01-14" "2019-01-21" "2019-01-28"</div></pre>
+<span class='fu'>alma_search</span>(<span class='st'>"2019-01-01"</span>, <span class='st'>"2019-01-31"</span>, <span class='no'>rb</span>)</div><div class='output co'>#&gt; [1] "2019-01-07" "2019-01-12" "2019-01-14" "2019-01-21" "2019-01-28"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

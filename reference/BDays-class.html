@@ -41,7 +41,7 @@
 
 <meta property="og:title" content="Business Days — BDays-class" />
 <meta property="og:description" content="BDays is an S4 class that contains a shift in business days, relative to
-a schedule. The S4 nature of BDays is an implementation detail, and should
+a rbundle. The S4 nature of BDays is an implementation detail, and should
 mostly be invisible to users." />
 
 
@@ -138,7 +138,7 @@ mostly be invisible to users." />
 
     <div class="ref-description">
     <p>BDays is an S4 class that contains a shift in business days, relative to
-a schedule. The S4 nature of BDays is an implementation detail, and should
+a rbundle. The S4 nature of BDays is an implementation detail, and should
 mostly be invisible to users.</p>
     </div>
 
@@ -149,8 +149,8 @@ mostly be invisible to users.</p>
     <p>BDays objects have two slots:</p><ul>
 <li><p><code>.Data</code> <code>[integer]</code></p>
 <p>The number of business days to shift by.</p></li>
-<li><p><code>schedule</code> <code>[schedule]</code></p>
-<p>The schedule to shift relative to.</p></li>
+<li><p><code>rbundle</code> <code>[rbundle]</code></p>
+<p>The rbundle to shift relative to.</p></li>
 </ul>
 
 <p>BDays place the number of business days in the <code>.Data</code> slot so that it can
@@ -158,7 +158,7 @@ mostly be invisible to users.</p>
 to vctrs and base methods like <code><a href='https://rdrr.io/r/base/length.html'>length()</a></code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>new</span>(<span class='st'>"BDays"</span>, <span class='fl'>1L</span>, <span class='kw'>schedule</span> <span class='kw'>=</span> <span class='fu'><a href='schedule.html'>schedule</a></span>())</div><div class='output co'>#&gt; &lt;bdays&lt;0 rrules / 0 rdates / 0 exdates&gt;&gt;
+    <pre class="examples"><div class='input'><span class='fu'>new</span>(<span class='st'>"BDays"</span>, <span class='fl'>1L</span>, <span class='kw'>rbundle</span> <span class='kw'>=</span> <span class='fu'><a href='rbundle.html'>rbundle</a></span>())</div><div class='output co'>#&gt; &lt;bdays&lt;0 rrules / 0 rdates / 0 exdates&gt;&gt;
 #&gt; [1] 1</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

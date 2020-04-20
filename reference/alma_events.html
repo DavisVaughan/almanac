@@ -40,8 +40,7 @@
 
 
 <meta property="og:title" content="Get all events — alma_events" />
-<meta property="og:description" content="alma_events() retrieves all of the events defined by the schedule's
-recurrence rules." />
+<meta property="og:description" content="alma_events() retrieves all of the events in the rbundle's recurrence set." />
 
 
 
@@ -136,19 +135,18 @@ recurrence rules." />
     </div>
 
     <div class="ref-description">
-    <p><code>alma_events()</code> retrieves all of the events defined by the schedule's
-recurrence rules.</p>
+    <p><code>alma_events()</code> retrieves all of the events in the rbundle's recurrence set.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>alma_events</span>(<span class='no'>schedule</span>)</pre>
+    <pre class="usage"><span class='fu'>alma_events</span>(<span class='no'>rbundle</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>schedule</th>
-      <td><p><code>[schedule / rrule]</code></p>
-<p>A schedule or rrule.</p></td>
+      <th>rbundle</th>
+      <td><p><code>[rbundle / rrule]</code></p>
+<p>An rbundle or rrule.</p></td>
     </tr>
     </table>
 
@@ -163,11 +161,11 @@ recurrence rules.</p>
 <span class='no'>rrule_weekly</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rrule.html'>weekly</a></span>(<span class='kw'>since</span> <span class='kw'>=</span> <span class='st'>"1970-01-01"</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='recur_for_count.html'>recur_for_count</a></span>(<span class='fl'>5</span>)
 
-<span class='no'>sch</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='schedule.html'>schedule</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='sch-add.html'>sch_rrule</a></span>(<span class='no'>rrule</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='sch-add.html'>sch_rrule</a></span>(<span class='no'>rrule_weekly</span>)
+<span class='no'>rb</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rbundle.html'>rbundle</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='rbundle-add.html'>add_rrule</a></span>(<span class='no'>rrule</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='rbundle-add.html'>add_rrule</a></span>(<span class='no'>rrule_weekly</span>)
 
-<span class='fu'>alma_events</span>(<span class='no'>sch</span>)</div><div class='output co'>#&gt; [1] "1970-01-01" "1970-01-02" "1970-01-03" "1970-01-04" "1970-01-05"
+<span class='fu'>alma_events</span>(<span class='no'>rb</span>)</div><div class='output co'>#&gt; [1] "1970-01-01" "1970-01-02" "1970-01-03" "1970-01-04" "1970-01-05"
 #&gt; [6] "1970-01-08" "1970-01-15" "1970-01-22" "1970-01-29"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

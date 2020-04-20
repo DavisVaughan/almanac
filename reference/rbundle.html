@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Holidays — holidays • almanac</title>
+<title>Create a new recurrence bundle — rbundle • almanac</title>
 
 
 <!-- jquery -->
@@ -39,9 +39,12 @@
 
 
 
-<meta property="og:title" content="Holidays — holidays" />
-<meta property="og:description" content="The following generate rbundle objects corresponding to commonly used
-holidays." />
+<meta property="og:title" content="Create a new recurrence bundle — rbundle" />
+<meta property="og:description" content="Often, a single recurrence rule created from a base rule like monthly()
+will be sufficient. However, more complex rules can be constructed
+by combining simple rules into a recurrence bundle.
+rbundle() creates a new empty recurrence bundle. Add recurrence rules to
+the bundle with add_rrule(). Add required dates with add_rdate()." />
 
 
 
@@ -130,74 +133,31 @@ holidays." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Holidays</h1>
-    <small class="dont-index">Source: <a href='https://github.com/DavisVaughan/almanac/blob/master/R/holidays.R'><code>R/holidays.R</code></a></small>
-    <div class="hidden name"><code>holidays.Rd</code></div>
+    <h1>Create a new recurrence bundle</h1>
+    <small class="dont-index">Source: <a href='https://github.com/DavisVaughan/almanac/blob/master/R/rbundle.R'><code>R/rbundle.R</code></a></small>
+    <div class="hidden name"><code>rbundle.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>The following generate rbundle objects corresponding to commonly used
-holidays.</p>
+    <p>Often, a single recurrence rule created from a base rule like <code><a href='rrule.html'>monthly()</a></code>
+will be sufficient. However, more complex rules can be constructed
+by combining simple rules into a <em>recurrence bundle</em>.</p>
+<p><code>rbundle()</code> creates a new empty recurrence bundle. Add recurrence rules to
+the bundle with <code><a href='rbundle-add.html'>add_rrule()</a></code>. Add required dates with <code><a href='rbundle-add.html'>add_rdate()</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>hldy_washington_birthday</span>(<span class='kw'>since</span> <span class='kw'>=</span> <span class='st'>"1970-01-01"</span>)
+    <pre class="usage"><span class='fu'>rbundle</span>()</pre>
 
-<span class='fu'>hldy_memorial_day</span>(<span class='kw'>since</span> <span class='kw'>=</span> <span class='st'>"1970-01-01"</span>)
 
-<span class='fu'>hldy_labor_day</span>(<span class='kw'>since</span> <span class='kw'>=</span> <span class='st'>"1970-01-01"</span>)
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-<span class='fu'>hldy_columbus_day</span>(<span class='kw'>since</span> <span class='kw'>=</span> <span class='st'>"1970-01-01"</span>, <span class='kw'>until</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+    <p>An empty rbundle.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-<span class='fu'>hldy_veterans_day</span>(<span class='kw'>since</span> <span class='kw'>=</span> <span class='st'>"1970-01-01"</span>)
-
-<span class='fu'>hldy_new_years_day</span>(<span class='kw'>since</span> <span class='kw'>=</span> <span class='st'>"1970-01-01"</span>)
-
-<span class='fu'>hldy_martin_luther_king_jr_day</span>(<span class='kw'>since</span> <span class='kw'>=</span> <span class='st'>"1970-01-01"</span>)
-
-<span class='fu'>hldy_independence_day</span>(<span class='kw'>since</span> <span class='kw'>=</span> <span class='st'>"1970-01-01"</span>)
-
-<span class='fu'>hldy_thanksgiving</span>(<span class='kw'>since</span> <span class='kw'>=</span> <span class='st'>"1970-01-01"</span>)
-
-<span class='fu'>hldy_christmas</span>(<span class='kw'>since</span> <span class='kw'>=</span> <span class='st'>"1970-01-01"</span>)
-
-<span class='fu'>hldy_easter</span>(<span class='kw'>since</span> <span class='kw'>=</span> <span class='st'>"1970-01-01"</span>, <span class='kw'>until</span> <span class='kw'>=</span> <span class='st'>"2040-01-01"</span>)
-
-<span class='fu'>hldy_good_friday</span>(<span class='kw'>since</span> <span class='kw'>=</span> <span class='st'>"1970-01-01"</span>, <span class='kw'>until</span> <span class='kw'>=</span> <span class='st'>"2040-01-01"</span>)
-
-<span class='fu'>hldy_easter_monday</span>(<span class='kw'>since</span> <span class='kw'>=</span> <span class='st'>"1970-01-01"</span>, <span class='kw'>until</span> <span class='kw'>=</span> <span class='st'>"2040-01-01"</span>)
-
-<span class='fu'>hldy_july_fourth</span>(<span class='kw'>since</span> <span class='kw'>=</span> <span class='st'>"1970-01-01"</span>)
-
-<span class='fu'>hldy_lincoln_birthday</span>(<span class='kw'>since</span> <span class='kw'>=</span> <span class='st'>"1970-01-01"</span>, <span class='kw'>until</span> <span class='kw'>=</span> <span class='st'>"2040-01-01"</span>)
-
-<span class='fu'>hldy_election_day</span>(<span class='kw'>since</span> <span class='kw'>=</span> <span class='st'>"1970-01-01"</span>, <span class='kw'>until</span> <span class='kw'>=</span> <span class='st'>"2040-01-01"</span>)</pre>
-
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>since</th>
-      <td><p><code>[Date(1)]</code></p>
-<p>The initial date to start the rbundle from.</p></td>
-    </tr>
-    <tr>
-      <th>until</th>
-      <td><p><code>[NULL / Date(1)]</code></p>
-<p>An optional end date for the holiday rbundle. Useful when constructing
-larger calendars, such as one for the NYSE, where holidays are
-occasionally only celebrated for a set number of years.</p></td>
-    </tr>
-    </table>
-
+    <div class='dont-index'><p><code><a href='rbundle-add.html'>add_rrule()</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>on_thanksgiving</span> <span class='kw'>&lt;-</span> <span class='fu'>hldy_thanksgiving</span>()
-
-<span class='fu'><a href='alma_search.html'>alma_search</a></span>(<span class='st'>"2000-01-01"</span>, <span class='st'>"2019-01-01"</span>, <span class='no'>on_thanksgiving</span>)</div><div class='output co'>#&gt;  [1] "2000-11-23" "2001-11-22" "2002-11-28" "2003-11-27" "2004-11-25"
-#&gt;  [6] "2005-11-24" "2006-11-23" "2007-11-22" "2008-11-27" "2009-11-26"
-#&gt; [11] "2010-11-25" "2011-11-24" "2012-11-22" "2013-11-28" "2014-11-27"
-#&gt; [16] "2015-11-26" "2016-11-24" "2017-11-23" "2018-11-22"</div><div class='input'>
-</div></pre>
+    <pre class="examples"><div class='input'><span class='fu'>rbundle</span>()</div><div class='output co'>#&gt; rbundle: 0 rrules / 0 rdates / 0 exdates</div><div class='input'><span class='fu'><a href='rbundle-add.html'>add_rrule</a></span>(<span class='fu'>rbundle</span>(), <span class='fu'><a href='rrule.html'>monthly</a></span>())</div><div class='output co'>#&gt; rbundle: 1 rrules / 0 rdates / 0 exdates</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -40,8 +40,8 @@
 
 
 <meta property="og:title" content="Calendars — calendars" />
-<meta property="og:description" content="The following generate schedule objects corresponding to calendars. A
-calendar is composed of multiple holiday schedules generated from the
+<meta property="og:description" content="The following generate rbundle objects corresponding to calendars. A
+calendar is composed of multiple holiday rbundles generated from the
 hldy_*() functions." />
 
 
@@ -137,8 +137,8 @@ hldy_*() functions." />
     </div>
 
     <div class="ref-description">
-    <p>The following generate <code>schedule</code> objects corresponding to calendars. A
-calendar is composed of multiple holiday schedules generated from the
+    <p>The following generate rbundle objects corresponding to calendars. A
+calendar is composed of multiple holiday rbundles generated from the
 <code>hldy_*()</code> functions.</p>
     </div>
 
@@ -152,7 +152,7 @@ calendar is composed of multiple holiday schedules generated from the
     <tr>
       <th>since</th>
       <td><p><code>[Date(1)]</code></p>
-<p>The initial date to start the schedule from.</p></td>
+<p>The initial date to start the rbundle from.</p></td>
     </tr>
     </table>
 
@@ -166,10 +166,10 @@ calendar is composed of multiple holiday schedules generated from the
 #&gt; [11] "2001-01-01"</div><div class='input'>
 <span class='co'># Adjust dates relative to holidays</span>
 <span class='no'>on_weekends</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='recur_on_wday.html'>recur_on_weekends</a></span>(<span class='fu'><a href='rrule.html'>weekly</a></span>())
-<span class='no'>on_us_holidays_and_weekends</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='sch-add.html'>sch_rrule</a></span>(<span class='no'>on_us_holidays</span>, <span class='no'>on_weekends</span>)
+<span class='no'>on_us_holidays_and_weekends</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rbundle-add.html'>add_rrule</a></span>(<span class='no'>on_us_holidays</span>, <span class='no'>on_weekends</span>)
 
 <span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/as.Date.html'>as.Date</a></span>(<span class='st'>"2019-08-30"</span>)
-<span class='fu'><a href='alma_step.html'>alma_step</a></span>(<span class='no'>x</span>, <span class='fl'>1</span>, <span class='fu'><a href='sch-add.html'>sch_rrule</a></span>(<span class='no'>on_us_holidays</span>, <span class='no'>on_weekends</span>))</div><div class='output co'>#&gt; [1] "2019-09-03"</div><div class='input'>
+<span class='fu'><a href='alma_step.html'>alma_step</a></span>(<span class='no'>x</span>, <span class='fl'>1</span>, <span class='fu'><a href='rbundle-add.html'>add_rrule</a></span>(<span class='no'>on_us_holidays</span>, <span class='no'>on_weekends</span>))</div><div class='output co'>#&gt; [1] "2019-09-03"</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

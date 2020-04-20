@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Step relative to a schedule — alma_step • almanac</title>
+<title>Step relative to an rbundle — alma_step • almanac</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,7 @@
 
 
 
-<meta property="og:title" content="Step relative to a schedule — alma_step" />
+<meta property="og:title" content="Step relative to an rbundle — alma_step" />
 <meta property="og:description" content="alma_step() is useful for shifting dates by &quot;n business days&quot;.
 alma_step() steps over a sequence of dates 1 day at a time, for n days.
 After each step, an adjustment is applied to shift to the next non-event
@@ -138,7 +138,7 @@ roll to the next available non-event date.
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Step relative to a schedule</h1>
+    <h1>Step relative to an rbundle</h1>
     <small class="dont-index">Source: <a href='https://github.com/DavisVaughan/almanac/blob/master/R/alma-step.R'><code>R/alma-step.R</code></a></small>
     <div class="hidden name"><code>alma_step.Rd</code></div>
     </div>
@@ -156,7 +156,7 @@ roll to the next available non-event date.</p></li>
 
     </div>
 
-    <pre class="usage"><span class='fu'>alma_step</span>(<span class='no'>x</span>, <span class='no'>n</span>, <span class='no'>schedule</span>)</pre>
+    <pre class="usage"><span class='fu'>alma_step</span>(<span class='no'>x</span>, <span class='no'>n</span>, <span class='no'>rbundle</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -172,16 +172,16 @@ roll to the next available non-event date.</p></li>
 <p>The number of days to step. Can be negative to step backwards.</p></td>
     </tr>
     <tr>
-      <th>schedule</th>
-      <td><p><code>[schedule / rrule]</code></p>
-<p>A schedule or rrule.</p></td>
+      <th>rbundle</th>
+      <td><p><code>[rbundle / rrule]</code></p>
+<p>An rbundle or rrule.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Imagine you are on a Friday and want to shift forward 2 days using a
-schedule that marks weekends as events. <code>alma_step()</code> works like this:</p><ul>
+    <p>Imagine you are on a Friday and want to shift forward 2 days using an
+rbundle that marks weekends as events. <code>alma_step()</code> works like this:</p><ul>
 <li><p>Step forward 1 day to Saturday.</p></li>
 <li><p>Apply an adjustment of <code><a href='adjustments.html'>adj_following()</a></code>, which rolls forward to Monday.</p></li>
 <li><p>Step forward 1 day to Tuesday.</p></li>
@@ -204,16 +204,16 @@ is Tuesday.</p>
 <span class='co'># - Step 1 day to Tuesday</span>
 <span class='fu'>alma_step</span>(<span class='st'>"2019-09-13"</span>, <span class='fl'>2</span>, <span class='no'>on_weekends</span>)</div><div class='output co'>#&gt; [1] "2019-09-17"</div><div class='input'>
 <span class='co'># If Monday, 2019-09-16, was a recurring holiday, we could create</span>
-<span class='co'># a custom schedule and step over that too.</span>
+<span class='co'># a custom rbundle and step over that too.</span>
 <span class='no'>on_09_16</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rrule.html'>yearly</a></span>() <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='recur_on_ymonth.html'>recur_on_ymonth</a></span>(<span class='fl'>9</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='recur_on_mday.html'>recur_on_mday</a></span>(<span class='fl'>16</span>)
 
-<span class='no'>sch</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='schedule.html'>schedule</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='sch-add.html'>sch_rrule</a></span>(<span class='no'>on_09_16</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='sch-add.html'>sch_rrule</a></span>(<span class='no'>on_weekends</span>)
+<span class='no'>rb</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rbundle.html'>rbundle</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='rbundle-add.html'>add_rrule</a></span>(<span class='no'>on_09_16</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='rbundle-add.html'>add_rrule</a></span>(<span class='no'>on_weekends</span>)
 
-<span class='fu'>alma_step</span>(<span class='st'>"2019-09-13"</span>, <span class='fl'>2</span>, <span class='no'>sch</span>)</div><div class='output co'>#&gt; [1] "2019-09-18"</div></pre>
+<span class='fu'>alma_step</span>(<span class='st'>"2019-09-13"</span>, <span class='fl'>2</span>, <span class='no'>rb</span>)</div><div class='output co'>#&gt; [1] "2019-09-18"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -98,7 +98,7 @@
 
     
     
-<p>If you have read the introduction vignette, <code><a href="../articles/almanac.html">vignette("almanac")</a></code>, then you’ve seen recurrence rules, schedules, and the functions <code><a href="../reference/alma_search.html">alma_search()</a></code> and <code><a href="../reference/alma_in.html">alma_in()</a></code>. Additionally included in {almanac} are a set of functions for adjusting and shifting an existing set of dates, <em>relative to a schedule</em>. They will be the topic of this vignette. The three functions are:</p>
+<p>If you have read the introduction vignette, <code><a href="../articles/almanac.html">vignette("almanac")</a></code>, then you’ve seen recurrence rules, rbundles, and the functions <code><a href="../reference/alma_search.html">alma_search()</a></code> and <code><a href="../reference/alma_in.html">alma_in()</a></code>. Additionally included in {almanac} are a set of functions for adjusting and shifting an existing set of dates, <em>relative to an rbundle</em>. They will be the topic of this vignette. The three functions are:</p>
 <ul>
 <li><p><code>alma_adjust()</code></p></li>
 <li><p><code>alma_jump()</code></p></li>
@@ -109,7 +109,7 @@
 <div id="adjusting" class="section level2">
 <h2 class="hasAnchor">
 <a href="#adjusting" class="anchor"></a>Adjusting</h2>
-<p>To talk about either <code>alma_jump()</code> or <code><a href="../reference/alma_step.html">alma_step()</a></code>, we first have to cover <code>alma_adjust()</code>, as it powers both of the others. <code>alma_adjust()</code> will “adjust” an existing set of dates to ensure that no dates currently fall on an “event”, as defined by a provided schedule or recurrence rule. For example, let’s construct a recurrence rule that includes all weekends in its recurrence set.</p>
+<p>To talk about either <code>alma_jump()</code> or <code><a href="../reference/alma_step.html">alma_step()</a></code>, we first have to cover <code>alma_adjust()</code>, as it powers both of the others. <code>alma_adjust()</code> will “adjust” an existing set of dates to ensure that no dates currently fall on an “event”, as defined by a provided rbundle or recurrence rule. For example, let’s construct a recurrence rule that includes all weekends in its recurrence set.</p>
 <div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">on_weekends</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">weekly</a></span>(<span class="kw">since</span> <span class="kw">=</span> <span class="st">"2000-01-01"</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="../reference/recur_on_wday.html">recur_on_weekends</a></span>()
 
@@ -137,14 +137,14 @@
 <span class="fu"><a href="http://lubridate.tidyverse.org/reference/day.html">wday</a></span>(<span class="no">x</span>, <span class="kw">label</span> <span class="kw">=</span> <span class="fl">TRUE</span>)</pre></body></html></div>
 <p>Rather than having to think about how to tackle this, almanac provides a number of <code>adj_*()</code> functions to help out, one of which is <code><a href="../reference/adjustments.html">adj_modified_following()</a></code>.</p>
 <div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="fu">alma_adjust</span>(<span class="no">x</span>, <span class="no">on_weekends</span>, <span class="no">adj_modified_following</span>)</pre></body></html></div>
-<p><code><a href="../reference/adjustments.html">adj_modified_following()</a></code> is an example of a custom <code>adjustment</code> function, all of which should expect to take the problematic dates as their first argument, and the schedule as their second argument. The adjustment function is responsible for <em>completely</em> adjusting the dates to the next available business day. It will not be called multiple times.</p>
+<p><code><a href="../reference/adjustments.html">adj_modified_following()</a></code> is an example of a custom <code>adjustment</code> function, all of which should expect to take the problematic dates as their first argument, and the rbundle as their second argument. The adjustment function is responsible for <em>completely</em> adjusting the dates to the next available business day. It will not be called multiple times.</p>
 </div>
 <div id="jumping" class="section level2">
 <h2 class="hasAnchor">
 <a href="#jumping" class="anchor"></a>Jumping</h2>
 <p>To build on <code>alma_adjust()</code>, let’s assume that rather than just adjusting existing dates, you actually want to <em>shift</em> the dates first, <em>then</em> perform an adjustment to ensure that you have not landed on an event date. There are two natural ways to perform this shift, captured in <code>alma_jump()</code> and <code><a href="../reference/alma_step.html">alma_step()</a></code>.</p>
-<p><code>alma_jump()</code> takes a vector of dates, a schedule, and a <code>jump</code>, which can be a lubridate Period object, a character string, or an integer number of days to jump. It performs the “jump” all at once, which is essentially equivalent to calling <code>x + days(n)</code>, if you are familiar with lubridate syntax. After the jump has been performed, it calls <code>alma_adjust()</code> on the resulting dates to ensure that the dates that you landed on are non-event dates.</p>
-<p>As an example, let’s “jump” forward 1 day with <code>x</code>, providing <code>on_weekends</code> as our schedule to adjust with. Notice how jumping forward 1 day from Friday lands on Saturday, which is then adjusted to Monday.</p>
+<p><code>alma_jump()</code> takes a vector of dates, a rbundle, and a <code>jump</code>, which can be a lubridate Period object, a character string, or an integer number of days to jump. It performs the “jump” all at once, which is essentially equivalent to calling <code>x + days(n)</code>, if you are familiar with lubridate syntax. After the jump has been performed, it calls <code>alma_adjust()</code> on the resulting dates to ensure that the dates that you landed on are non-event dates.</p>
+<p>As an example, let’s “jump” forward 1 day with <code>x</code>, providing <code>on_weekends</code> as our rbundle to adjust with. Notice how jumping forward 1 day from Friday lands on Saturday, which is then adjusted to Monday.</p>
 <div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="no">jump</span> <span class="kw">&lt;-</span> <span class="fu">alma_jump</span>(<span class="no">x</span>, <span class="fu"><a href="http://lubridate.tidyverse.org/reference/period.html">days</a></span>(<span class="fl">1</span>), <span class="no">on_weekends</span>)
 
 <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(
