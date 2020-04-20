@@ -5,30 +5,8 @@
 # roxygen namespace tags. Modify with care!
 ## usethis namespace: start
 #' @import rlang
+#' @import vctrs
 #' @importFrom glue glue
-#' @importFrom vctrs vec_size
-#' @importFrom vctrs vec_cast
-#' @importFrom vctrs vec_in
-#' @importFrom vctrs vec_assert
-#' @importFrom vctrs new_date
-#' @importFrom vctrs vec_match
-#' @importFrom vctrs vec_is
-#' @importFrom vctrs vec_init
-#' @importFrom vctrs vec_arith
-#' @importFrom vctrs vec_arith.numeric
-#' @importFrom vctrs vec_arith.Date
-#' @importFrom vctrs vec_slice<-
-#' @importFrom vctrs maybe_lossy_cast
-#' @importFrom vctrs new_vctr
-#' @importFrom vctrs vec_data
-#' @importFrom vctrs stop_incompatible_op
-#' @importFrom vctrs vec_recycle_common
-#' @importFrom vctrs MISSING
-#' @importFrom vctrs vec_size_common
-#' @importFrom vctrs vec_recycle
-#' @importFrom vctrs vec_slice
-#' @importFrom vctrs vec_c
-#' @importFrom vctrs vec_unique
 #' @useDynLib almanac, .registration = TRUE
 ## usethis namespace: end
 NULL
