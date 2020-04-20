@@ -41,8 +41,8 @@ rbundle_summary <- function(x) {
 
 new_rbundle <- function(rrules = list(),
                         rdates = new_date(),
-                        exdates = new_date(),
-                        cache = Cache$new()) {
+                        exdates = new_date()) {
+  cache = CacheRbundle$new()
   cache$set_rrules(rrules)
   cache$set_rdates(rdates)
   cache$set_exdates(exdates)
