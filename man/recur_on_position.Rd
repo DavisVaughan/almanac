@@ -32,15 +32,15 @@ end <- "1999-05-01"
 on_last_monday_and_sunday <- monthly() \%>\%
   recur_on_wday(c("Monday", "Sunday"), -1)
 
-alma_seq(start, end, on_last_monday_and_sunday)
+alma_search(start, end, on_last_monday_and_sunday)
 
 # To return just the last one, you would select the last value in
 # the set, which is computed on a per month basis
 on_very_last_monday_or_sunday <- on_last_monday_and_sunday \%>\%
   recur_on_position(-1)
 
-alma_seq(start, end, on_very_last_monday_or_sunday)
+alma_search(start, end, on_very_last_monday_or_sunday)
 
-wday(alma_seq(start, end, on_very_last_monday_or_sunday), label = TRUE)
+wday(alma_search(start, end, on_very_last_monday_or_sunday), label = TRUE)
 
 }

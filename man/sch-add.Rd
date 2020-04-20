@@ -82,12 +82,12 @@ sch <- schedule() \%>\%
   sch_rrule(on_labor_day)
 
 # Thanksgiving, Christmas, or Labor Day
-alma_seq("2019-01-01", "2021-01-01", sch)
+alma_search("2019-01-01", "2021-01-01", sch)
 
 # Except Labor Day in 2019
 sch2 <- sch \%>\%
   sch_exdate("2019-09-02")
 
-alma_seq("2019-01-01", "2021-01-01", sch2)
+alma_search("2019-01-01", "2021-01-01", sch2)
 
 }

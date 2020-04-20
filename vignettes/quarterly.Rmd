@@ -32,7 +32,7 @@ on_first_day_of_quarter <- monthly(since = "2000-01-01") %>%
   recur_on_interval(3) %>%
   recur_on_mday(1)
 
-alma_seq("2000-01-01", "2002-01-01", on_first_day_of_quarter)
+alma_search("2000-01-01", "2002-01-01", on_first_day_of_quarter)
 ```
 
 Whenever you need the "first" event per quarter, there is a good chance that that event will fall in the first month of the quarter, as is the case here. Whenever you have a guarantee that your event falls in the first month of the quarter, and can be computed from the start of that month, you can probably just use `monthly() %>% recur_on_interval(3)` to get your quarterly values.
@@ -46,7 +46,7 @@ on_first_day_of_quarter_march_start <- monthly(since = "2000-03-01") %>%
   recur_on_interval(3) %>%
   recur_on_mday(1)
 
-alma_seq("2000-01-01", "2002-01-01", on_first_day_of_quarter_march_start)
+alma_search("2000-01-01", "2002-01-01", on_first_day_of_quarter_march_start)
 ```
 
 ## N-th day of the quarter
@@ -61,7 +61,7 @@ on_60th_day_of_q1 <- yearly(since = "2000-01-01") %>%
   recur_on_mday(1:31) %>%
   recur_on_position(60)
 
-alma_seq("2000-01-01", "2002-01-01", on_60th_day_of_q1)
+alma_search("2000-01-01", "2002-01-01", on_60th_day_of_q1)
 ```
 
 This breaks down as follows:
@@ -120,7 +120,7 @@ on_60th_day_of_the_quarter <- make_on_nth_day_of_the_quarter(
   nth = 60
 )
 
-alma_seq("2000-01-01", "2002-01-01", on_60th_day_of_the_quarter)
+alma_search("2000-01-01", "2002-01-01", on_60th_day_of_the_quarter)
 ```
 
 It can also select days from the end of the quarter, for example, the last day in the quarter.
@@ -131,7 +131,7 @@ on_last_day_of_the_quarter <- make_on_nth_day_of_the_quarter(
   nth = -1
 )
 
-alma_seq("2000-01-01", "2002-01-01", on_last_day_of_the_quarter)
+alma_search("2000-01-01", "2002-01-01", on_last_day_of_the_quarter)
 ```
 
 This general strategy of using a base rule of `yearly() %>% recur_on_ymonth()`, plus some usage of `recur_on_position()` is how I have solved most of the quarterly problems I can think of.
@@ -150,7 +150,7 @@ on_6th_monday_of_q1 <- yearly(since = since) %>%
   recur_on_wday(wday) %>%
   recur_on_position(nth)
 
-alma_seq("2000-01-01", "2002-01-01", on_6th_monday_of_q1)
+alma_search("2000-01-01", "2002-01-01", on_6th_monday_of_q1)
 ```
 
 Multiple week days can be used here.
@@ -165,7 +165,7 @@ on_19th_monday_or_tuesday_of_q1 <- yearly(since = since) %>%
   recur_on_wday(wday) %>%
   recur_on_position(nth)
 
-alma_seq("2000-01-01", "2002-01-01", on_19th_monday_or_tuesday_of_q1)
+alma_search("2000-01-01", "2002-01-01", on_19th_monday_or_tuesday_of_q1)
 ```
 
 Now generalize:
@@ -209,7 +209,7 @@ on_last_friday_of_the_quarter <- make_on_nth_wday_of_the_quarter(
   nth = -1
 )
 
-fridays <- alma_seq("2000-01-01", "2002-01-01", on_last_friday_of_the_quarter)
+fridays <- alma_search("2000-01-01", "2002-01-01", on_last_friday_of_the_quarter)
 fridays
 
 wday(fridays, label = TRUE)
@@ -226,7 +226,7 @@ on_wednesdays <- weekly(since = "2000-01-01") %>%
 on_last_friday_of_quarter_or_wednesdays <- on_last_friday_of_the_quarter %>%
   sch_rrule(on_wednesdays)
 
-last_friday_or_wednesdays <- alma_seq(
+last_friday_or_wednesdays <- alma_search(
   "2000-01-01", "2002-01-01", 
   on_last_friday_of_quarter_or_wednesdays
 )

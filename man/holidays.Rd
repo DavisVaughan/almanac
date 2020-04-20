@@ -70,6 +70,6 @@ holidays.
 \examples{
 on_thanksgiving <- hldy_thanksgiving()
 
-alma_seq("2000-01-01", "2019-01-01", on_thanksgiving)
+alma_search("2000-01-01", "2019-01-01", on_thanksgiving)
 
 }

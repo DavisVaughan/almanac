@@ -26,34 +26,34 @@
 #' start <- "1999-01-01"
 #' end <- "2000-06-30"
 #'
-#' alma_seq(start, end, on_yearly)
-#' alma_seq(start, end, on_yearly_mday_1_to_2)
+#' alma_search(start, end, on_yearly)
+#' alma_search(start, end, on_yearly_mday_1_to_2)
 #'
 #' # When used with a daily frequency, `recur_on_mday()` limits the number of
 #' # days in the recurrence set.
 #' on_daily <- daily()
 #' on_daily_mday_1_to_2 <- on_daily %>% recur_on_mday(1:2)
 #'
-#' length(alma_seq(start, end, on_daily))
-#' length(alma_seq(start, end, on_daily_mday_1_to_2))
+#' length(alma_search(start, end, on_daily))
+#' length(alma_search(start, end, on_daily_mday_1_to_2))
 #'
 #' # Using a negative value is a powerful way to look back from the end of the
 #' # month. This is particularly useful because months don't have the same
 #' # number of days.
 #' on_last_of_month <- monthly() %>% recur_on_mday(-1)
 #'
-#' alma_seq(start, end, on_last_of_month)
+#' alma_search(start, end, on_last_of_month)
 #'
 #' # If you want particular days of the week at the end of the month, you
 #' # could use something like this, which checks if the end of the month
 #' # is also a Friday.
 #' on_last_of_month_that_is_also_friday <- on_last_of_month %>% recur_on_wday("Friday")
-#' alma_seq(start, end, on_last_of_month_that_is_also_friday)
+#' alma_search(start, end, on_last_of_month_that_is_also_friday)
 #'
 #' # But you probably wanted this, which takes the last friday of the month,
 #' # on whatever day that lands on
 #' on_last_friday_of_month <- monthly() %>% recur_on_wday("Friday", -1)
-#' alma_seq(start, end, on_last_friday_of_month)
+#' alma_search(start, end, on_last_friday_of_month)
 #'
 #' @export
 recur_on_mday <- function(x, mday) {

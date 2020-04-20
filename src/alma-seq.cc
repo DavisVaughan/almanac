@@ -2,7 +2,7 @@
 #include "utils.h"
 #include <algorithm>
 
-sexp alma_seq_impl(sexp events, double from, double to, bool inclusive) {
+sexp alma_search_impl(sexp events, double from, double to, bool inclusive) {
   r_ssize size = r_length(events);
 
   const double* p_begin = r_dbl_deref(events);

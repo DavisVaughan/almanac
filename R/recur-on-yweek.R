@@ -28,7 +28,7 @@
 #' # In 2017:
 #' # - Look at dates 1-4
 #' # - One of these is a Monday, so start the first week here
-#' alma_seq("2017-01-01", "2017-01-25", on_first_week)
+#' alma_search("2017-01-01", "2017-01-25", on_first_week)
 #'
 #' # In 2015:
 #' # - Look at dates 1-4
@@ -36,7 +36,7 @@
 #' #   in the previous year
 #' # - Look at 2014 and find the last Monday. This is the start of the first
 #' #   week in 2015.
-#' alma_seq("2014-12-25", "2015-01-25", on_first_week)
+#' alma_search("2014-12-25", "2015-01-25", on_first_week)
 #'
 #' # Say we want the start of the week to be Sunday instead of Monday!
 #'
@@ -47,7 +47,7 @@
 #'   recur_on_yweek(1) %>%
 #'   recur_with_week_start("Sunday")
 #'
-#' alma_seq("2014-12-25", "2015-01-25", on_first_week_sun)
+#' alma_search("2014-12-25", "2015-01-25", on_first_week_sun)
 #'
 #' @export
 recur_on_yweek <- function(x, yweek) {

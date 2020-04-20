@@ -69,13 +69,13 @@
 #'   sch_rrule(on_labor_day)
 #'
 #' # Thanksgiving, Christmas, or Labor Day
-#' alma_seq("2019-01-01", "2021-01-01", sch)
+#' alma_search("2019-01-01", "2021-01-01", sch)
 #'
 #' # Except Labor Day in 2019
 #' sch2 <- sch %>%
 #'   sch_exdate("2019-09-02")
 #'
-#' alma_seq("2019-01-01", "2021-01-01", sch2)
+#' alma_search("2019-01-01", "2021-01-01", sch2)
 #'
 #' @name sch-add
 NULL
@@ -131,12 +131,12 @@ sch_merge <- function(x, schedule) {
   validate_schedule(x)
   validate_schedule(schedule, "`schedule`")
 
-  new_rrules <- c(x$rrules, y$rrules)
+  new_rrules <- c(x$rrules, schedule$rrules)
 
-  new_rdates <- c(x$rdates, y$rdates)
+  new_rdates <- c(x$rdates, schedule$rdates)
   new_rdates <- unique(new_rdates)
 
-  new_exdates <- c(x$exdates, y$exdates)
+  new_exdates <- c(x$exdates, schedule$exdates)
   new_exdates <- unique(new_exdates)
 
   new_schedule(

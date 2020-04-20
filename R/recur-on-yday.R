@@ -16,12 +16,12 @@
 #'
 #' on_5th_day_of_year <- yearly() %>% recur_on_yday(5)
 #'
-#' alma_seq("1999-01-01", "2000-12-31", on_5th_day_of_year)
+#' alma_search("1999-01-01", "2000-12-31", on_5th_day_of_year)
 #'
 #' # Notice that if you use a `since` date that has a day of the year
 #' # after the specified one, it rolls to the next year
 #' on_5th_day_of_year2 <- yearly(since = "1999-01-06") %>% recur_on_yday(5)
-#' alma_seq("1999-01-01", "2000-12-31", on_5th_day_of_year2)
+#' alma_search("1999-01-01", "2000-12-31", on_5th_day_of_year2)
 #'
 #' # Negative values select from the back, which is useful in leap years
 #' leap_year(as.Date("2000-01-01"))
@@ -29,8 +29,8 @@
 #' last_day_of_year <- yearly() %>% recur_on_yday(-1)
 #' last_day_of_year_bad <- yearly() %>% recur_on_yday(365)
 #'
-#' alma_seq("1999-01-01", "2000-12-31", last_day_of_year)
-#' alma_seq("1999-01-01", "2000-12-31", last_day_of_year_bad)
+#' alma_search("1999-01-01", "2000-12-31", last_day_of_year)
+#' alma_search("1999-01-01", "2000-12-31", last_day_of_year_bad)
 #'
 #' @export
 recur_on_yday <- function(x, yday) {

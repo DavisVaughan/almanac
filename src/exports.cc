@@ -40,11 +40,11 @@ extern "C" sexp export_alma_previous_impl(sexp x, sexp events, sexp inclusive) {
 // -----------------------------------------------------------------------------
 #include "alma-seq.h"
 
-extern "C" sexp export_alma_seq_impl(sexp events, sexp from, sexp to, sexp inclusive) {
+extern "C" sexp export_alma_search_impl(sexp events, sexp from, sexp to, sexp inclusive) {
   const double from_ = r_dbl_get(from, 0);
   const double to_ = r_dbl_get(to, 0);
   const bool inclusive_ = r_lgl_get(inclusive, 0);
-  return alma_seq_impl(events, from_, to_, inclusive_);
+  return alma_search_impl(events, from_, to_, inclusive_);
 }
 
 // -----------------------------------------------------------------------------

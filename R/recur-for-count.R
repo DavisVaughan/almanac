@@ -21,12 +21,12 @@
 #' # Using the default `since` date
 #' daily_since_epoch_for_5 <- daily() %>% recur_for_count(5)
 #'
-#' alma_seq("1969-12-31", "1970-01-25", daily_since_epoch_for_5)
+#' alma_search("1969-12-31", "1970-01-25", daily_since_epoch_for_5)
 #'
 #' # Changing the `since` date
 #' daily_since_2019_for_5 <- daily(since = "2019-01-01") %>% recur_for_count(5)
 #'
-#' alma_seq("2018-12-31", "2019-01-25", daily_since_2019_for_5)
+#' alma_search("2018-12-31", "2019-01-25", daily_since_2019_for_5)
 #'
 #' # In the case of "impossible" dates, such as 2019-02-31 and 2019-04-31 in the
 #' # example below, they are not added to the total count. Only true event
@@ -35,7 +35,7 @@
 #'   recur_on_mday(31) %>%
 #'   recur_for_count(5)
 #'
-#' alma_seq("2019-01-01", "2020-01-01", on_31_for_5)
+#' alma_search("2019-01-01", "2020-01-01", on_31_for_5)
 recur_for_count <- function(x, n) {
   validate_rrule(x)
 

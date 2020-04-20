@@ -53,29 +53,29 @@ start <- "1999-01-01" # <- a Friday
 end <- "1999-03-01"
 
 # This finds the first Thursday, and then continues from there
-alma_seq(start, end, on_weekly_thursdays)
+alma_search(start, end, on_weekly_thursdays)
 
 # We start counting from a Friday here, so our `start` date counts
 on_weekly_fridays <- weekly(since = start)
-alma_seq(start, end, on_weekly_fridays)
+alma_search(start, end, on_weekly_fridays)
 
 # Alternatively, we could use `recur_on_wday()` and force a recurrence rule
 # on Friday
 on_wday_friday <- on_weekly_thursdays \%>\% recur_on_wday("Friday")
-alma_seq(start, end, on_wday_friday)
+alma_search(start, end, on_wday_friday)
 
 # At monthly frequencies, you can use n-th values to look for particular
 # week day events
 on_first_friday_in_month <- monthly() \%>\% recur_on_wday("Fri", 1)
-alma_seq(start, end, on_first_friday_in_month)
+alma_search(start, end, on_first_friday_in_month)
 
 # Negative values let you look from the back
 on_last_friday_in_month <- monthly() \%>\% recur_on_wday("Fri", -1)
-alma_seq(start, end, on_last_friday_in_month)
+alma_search(start, end, on_last_friday_in_month)
 
 # At yearly frequencies, this looks for the first sunday of the year
 on_first_sunday_in_year <- yearly() \%>\% recur_on_wday("Sunday", 1)
-alma_seq(start, end, on_first_sunday_in_year)
+alma_search(start, end, on_first_sunday_in_year)
 
 # Last week day of the month
 last_weekday_of_month <- monthly() \%>\%
@@ -84,6 +84,6 @@ last_weekday_of_month <- monthly() \%>\%
   # Now choose the last one of those in each month
   recur_on_position(-1)
 
-alma_seq(start, end, last_weekday_of_month)
+alma_search(start, end, last_weekday_of_month)
 
 }

@@ -5,7 +5,7 @@ test_that("events stop after `count` is up", {
 
   expect <- start + 0:1
 
-  x <- alma_seq(start, start + 5, rrule)
+  x <- alma_search(start, start + 5, rrule)
 
   expect_equal(x, expect)
 })
@@ -15,7 +15,7 @@ test_that("`count` overrides `until`", {
     recur_for_count(3)
 
   expect_identical(
-    alma_seq("1970-01-01", "1970-01-05", rrule),
+    alma_search("1970-01-01", "1970-01-05", rrule),
     new_date(c(0, 1, 2))
   )
 })
@@ -33,7 +33,7 @@ test_that("impossible dates do not count towards the count", {
 
   rrule <- monthly(since = start) %>% recur_for_count(5)
 
-  x <- alma_seq(start, stop, rrule)
+  x <- alma_search(start, stop, rrule)
 
   expect <- start + months(c(0, 2, 4, 6, 7))
 

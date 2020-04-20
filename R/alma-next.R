@@ -6,7 +6,7 @@
 #'
 #' - `alma_previous()` generates the previous event before `x`.
 #'
-#' @inheritParams alma_seq
+#' @inheritParams alma_search
 #'
 #' @param x `[Date]`
 #'

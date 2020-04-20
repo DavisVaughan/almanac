@@ -33,7 +33,7 @@ After constructing a recurrence rule, it can be used to generate dates
 that are in the “recurrence set”.
 
 ``` r
-alma_seq("2000-01-01", "2006-01-01", on_thanksgiving)
+alma_search("2000-01-01", "2006-01-01", on_thanksgiving)
 #> [1] "2000-11-23" "2001-11-22" "2002-11-28" "2003-11-27" "2004-11-25"
 #> [6] "2005-11-24"
 ```

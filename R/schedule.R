@@ -68,7 +68,7 @@ as_schedule.default <- function(x, ...) {
 
 # Use the same cache as the `rrule`. Generally useful
 # when a user creates a rrule then passes it into a function
-# like `alma_seq()`, which converts it to a schedule. We want
+# like `alma_search()`, which converts it to a schedule. We want
 # to update the cache of the original rrule.
 as_schedule.rrule <- function(x, ...) {
   new_schedule(rrules = list(x), cache = x$cache)

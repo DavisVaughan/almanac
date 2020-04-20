@@ -8,9 +8,9 @@ test_that("can select positional wdays in a week", {
   start <- "1990-01-01"
   stop <- "1990-01-31"
 
-  x <- alma_seq(start, stop, rrule_pos)
+  x <- alma_search(start, stop, rrule_pos)
 
-  expect <- alma_seq(start, stop, rrule)
+  expect <- alma_search(start, stop, rrule)
   expect <- expect[seq(2, length(expect), by = 2)]
 
   expect_equal(x, expect)
@@ -24,7 +24,7 @@ test_that("can select positional wdays in a month", {
   start <- "1990-01-01"
   stop <- "1990-02-28"
 
-  x <- alma_seq(start, stop, rrule)
+  x <- alma_search(start, stop, rrule)
 
   expect <- as.Date(c("1990-01-02", "1990-02-06"))
 
@@ -39,7 +39,7 @@ test_that("can select positional wdays in a year", {
   start <- "1990-01-01"
   stop <- "1990-02-28"
 
-  x <- alma_seq(start, stop, rrule)
+  x <- alma_search(start, stop, rrule)
 
   expect <- as.Date("1990-01-02")
 
@@ -54,7 +54,7 @@ test_that("can select positional wdays from the back", {
   start <- "1990-01-01"
   stop <- "1990-12-31"
 
-  x <- alma_seq(start, stop, rrule)
+  x <- alma_search(start, stop, rrule)
 
   expect <- as.Date("1990-12-25")
 
@@ -71,7 +71,7 @@ test_that("can select multiple positions", {
   start <- "1990-01-01"
   stop <- "1990-02-28"
 
-  x <- alma_seq(start, stop, rrule)
+  x <- alma_search(start, stop, rrule)
 
   expect <- as.Date(c("1990-01-02", "1990-01-15", "1990-02-06", "1990-02-19"))
 

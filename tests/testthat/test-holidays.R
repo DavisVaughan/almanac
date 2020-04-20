@@ -32,7 +32,7 @@ easters <- as.Date(easters)
 test_that("can locate easter", {
   sch <- hldy_easter(since = "1900-01-01")
 
-  x <- alma_seq("1900-01-01", "1999-12-31", sch)
+  x <- alma_search("1900-01-01", "1999-12-31", sch)
 
   expect_equal(x, easters)
 })
@@ -40,7 +40,7 @@ test_that("can locate easter", {
 test_that("can recur on easter monday", {
   sch <- hldy_easter_monday(since = "1900-01-01")
 
-  x <- alma_seq("1900-01-01", "1999-12-31", sch)
+  x <- alma_search("1900-01-01", "1999-12-31", sch)
 
   expect_equal(x, easters + 1)
 })
@@ -48,7 +48,7 @@ test_that("can recur on easter monday", {
 test_that("can recur on good friday", {
   sch <- hldy_good_friday(since = "1900-01-01")
 
-  x <- alma_seq("1900-01-01", "1999-12-31", sch)
+  x <- alma_search("1900-01-01", "1999-12-31", sch)
 
   expect_equal(x, easters - 2)
 })
