@@ -1,6 +1,6 @@
 test_that("can get events from a rrule", {
   rrule <- daily(since = "1970-01-01", until = "1970-01-03")
-  expect_identical(sch_events(rrule), new_date(c(0, 1, 2)))
+  expect_identical(alma_events(rrule), new_date(c(0, 1, 2)))
 })
 
 test_that("can get events from a calendar", {
@@ -11,5 +11,5 @@ test_that("can get events from a calendar", {
     sch_rrule(rrule1) %>%
     sch_rrule(rrule2)
 
-  expect_identical(sch_events(sch), new_date(c(0, 1, 2)))
+  expect_identical(alma_events(sch), new_date(c(0, 1, 2)))
 })

@@ -1,6 +1,6 @@
 #' Get all events
 #'
-#' `sch_events()` retrieves all of the events defined by the schedule's
+#' `alma_events()` retrieves all of the events defined by the schedule's
 #' recurrence rules.
 #'
 #' @param schedule `[schedule / rrule]`
@@ -13,7 +13,7 @@
 #' @examples
 #' rrule <- daily(since = "1970-01-01", until = "1970-01-05")
 #'
-#' sch_events(rrule)
+#' alma_events(rrule)
 #'
 #' rrule_weekly <- weekly(since = "1970-01-01") %>%
 #'   recur_for_count(5)
@@ -22,8 +22,8 @@
 #'   sch_rrule(rrule) %>%
 #'   sch_rrule(rrule_weekly)
 #'
-#' sch_events(sch)
-sch_events <- function(schedule) {
+#' alma_events(sch)
+alma_events <- function(schedule) {
   schedule <- as_schedule(schedule)
   schedule$cache$get_events()
 }
