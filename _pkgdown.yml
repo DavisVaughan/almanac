@@ -29,10 +29,6 @@ reference:
   - starts_with("hldy_")
   - starts_with("calendar_")
 
-- title: Business Days
-  contents:
-  - bdays
-
 - title: Compatibility
   contents:
   - vctrs-compat
