@@ -2,9 +2,9 @@
 % Please edit documentation in R/alma-step.R
 \name{alma_step}
 \alias{alma_step}
-\title{Step relative to a schedule}
+\title{Step relative to an rbundle}
 \usage{
-alma_step(x, n, schedule)
+alma_step(x, n, rbundle)
 }
 \arguments{
 \item{x}{\verb{[Date]}
@@ -15,9 +15,9 @@ A vector of dates.}
 
 The number of days to step. Can be negative to step backwards.}
 
-\item{schedule}{\verb{[schedule / rrule]}
+\item{rbundle}{\verb{[rbundle / rrule]}
 
-A schedule or rrule.}
+An rbundle or rrule.}
 }
 \description{
 \code{alma_step()} is useful for shifting dates by "n business days".
@@ -33,8 +33,8 @@ roll to the next available non-event date.
 }
 }
 \details{
-Imagine you are on a Friday and want to shift forward 2 days using a
-schedule that marks weekends as events. \code{alma_step()} works like this:
+Imagine you are on a Friday and want to shift forward 2 days using an
+rbundle that marks weekends as events. \code{alma_step()} works like this:
 \itemize{
 \item Step forward 1 day to Saturday.
 \item Apply an adjustment of \code{\link[=adj_following]{adj_following()}}, which rolls forward to Monday.
@@ -59,14 +59,14 @@ on_weekends <- weekly() \%>\%
 alma_step("2019-09-13", 2, on_weekends)
 
 # If Monday, 2019-09-16, was a recurring holiday, we could create
-# a custom schedule and step over that too.
+# a custom rbundle and step over that too.
 on_09_16 <- yearly() \%>\%
   recur_on_ymonth(9) \%>\%
   recur_on_mday(16)
 
-sch <- schedule() \%>\%
-  sch_rrule(on_09_16) \%>\%
-  sch_rrule(on_weekends)
+rb <- rbundle() \%>\%
+  add_rrule(on_09_16) \%>\%
+  add_rrule(on_weekends)
 
-alma_step("2019-09-13", 2, sch)
+alma_step("2019-09-13", 2, rb)
 }

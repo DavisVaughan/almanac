@@ -35,9 +35,9 @@
 #'
 #'   A vector of dates.
 #'
-#' @param schedule `[schedule / rrule]`
+#' @param rbundle `[rbundle / rrule]`
 #'
-#'   A schedule or rrule.
+#'   An rbundle or rrule.
 #'
 #' @name adjustments
 #'
@@ -74,11 +74,11 @@ NULL
 
 #' @rdname adjustments
 #' @export
-adj_following <- function(x, schedule) {
+adj_following <- function(x, rbundle) {
   x <- vec_cast_date(x)
-  schedule <- as_schedule(schedule)
+  rbundle <- as_rbundle(rbundle)
 
-  events <- schedule$cache$get_events()
+  events <- rbundle$cache$get_events()
 
   adj_following_impl(x, events)
 }
@@ -89,11 +89,11 @@ adj_following_impl <- function(x, events) {
 
 #' @rdname adjustments
 #' @export
-adj_preceding <- function(x, schedule) {
+adj_preceding <- function(x, rbundle) {
   x <- vec_cast_date(x)
-  schedule <- as_schedule(schedule)
+  rbundle <- as_rbundle(rbundle)
 
-  events <- schedule$cache$get_events()
+  events <- rbundle$cache$get_events()
 
   adj_preceding_impl(x, events)
 }
@@ -104,11 +104,11 @@ adj_preceding_impl <- function(x, events) {
 
 #' @rdname adjustments
 #' @export
-adj_modified_following <- function(x, schedule) {
+adj_modified_following <- function(x, rbundle) {
   x <- vec_cast_date(x)
-  schedule <- as_schedule(schedule)
+  rbundle <- as_rbundle(rbundle)
 
-  events <- schedule$cache$get_events()
+  events <- rbundle$cache$get_events()
 
   adj_modified_following_impl(x, events)
 }
@@ -119,11 +119,11 @@ adj_modified_following_impl <- function(x, events) {
 
 #' @rdname adjustments
 #' @export
-adj_modified_preceding <- function(x, schedule) {
+adj_modified_preceding <- function(x, rbundle) {
   x <- vec_cast_date(x)
-  schedule <- as_schedule(schedule)
+  rbundle <- as_rbundle(rbundle)
 
-  events <- schedule$cache$get_events()
+  events <- rbundle$cache$get_events()
 
   adj_modified_preceding_impl(x, events)
 }
@@ -134,11 +134,11 @@ adj_modified_preceding_impl <- function(x, events) {
 
 #' @rdname adjustments
 #' @export
-adj_nearest <- function(x, schedule) {
+adj_nearest <- function(x, rbundle) {
   x <- vec_cast_date(x)
-  schedule <- as_schedule(schedule)
+  rbundle <- as_rbundle(rbundle)
 
-  events <- schedule$cache$get_events()
+  events <- rbundle$cache$get_events()
 
   adj_nearest_impl(x, events)
 }

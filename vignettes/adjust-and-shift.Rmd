@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-If you have read the introduction vignette, `vignette("almanac")`, then you've seen recurrence rules, schedules, and the functions `alma_search()` and `alma_in()`. Additionally included in {almanac} are a set of functions for adjusting and shifting an existing set of dates, _relative to a schedule_. They will be the topic of this vignette. The three functions are:
+If you have read the introduction vignette, `vignette("almanac")`, then you've seen recurrence rules, rbundles, and the functions `alma_search()` and `alma_in()`. Additionally included in {almanac} are a set of functions for adjusting and shifting an existing set of dates, _relative to an rbundle_. They will be the topic of this vignette. The three functions are:
 
 - `alma_adjust()`
 
@@ -32,7 +32,7 @@ library(lubridate, warn.conflicts = FALSE)
 
 ## Adjusting
 
-To talk about either `alma_jump()` or `alma_step()`, we first have to cover `alma_adjust()`, as it powers both of the others. `alma_adjust()` will "adjust" an existing set of dates to ensure that no dates currently fall on an "event", as defined by a provided schedule or recurrence rule. For example, let's construct a recurrence rule that includes all weekends in its recurrence set.
+To talk about either `alma_jump()` or `alma_step()`, we first have to cover `alma_adjust()`, as it powers both of the others. `alma_adjust()` will "adjust" an existing set of dates to ensure that no dates currently fall on an "event", as defined by a provided rbundle or recurrence rule. For example, let's construct a recurrence rule that includes all weekends in its recurrence set.
 
 ```{r}
 on_weekends <- weekly(since = "2000-01-01") %>% 
@@ -80,15 +80,15 @@ Rather than having to think about how to tackle this, almanac provides a number 
 alma_adjust(x, on_weekends, adj_modified_following)
 ```
 
-`adj_modified_following()` is an example of a custom `adjustment` function, all of which should expect to take the problematic dates as their first argument, and the schedule as their second argument. The adjustment function is responsible for _completely_ adjusting the dates to the next available business day. It will not be called multiple times.
+`adj_modified_following()` is an example of a custom `adjustment` function, all of which should expect to take the problematic dates as their first argument, and the rbundle as their second argument. The adjustment function is responsible for _completely_ adjusting the dates to the next available business day. It will not be called multiple times.
 
 ## Jumping
 
 To build on `alma_adjust()`, let's assume that rather than just adjusting existing dates, you actually want to _shift_ the dates first, _then_ perform an adjustment to ensure that you have not landed on an event date. There are two natural ways to perform this shift, captured in `alma_jump()` and `alma_step()`.
 
-`alma_jump()` takes a vector of dates, a schedule, and a `jump`, which can be a lubridate Period object, a character string, or an integer number of days to jump. It performs the "jump" all at once, which is essentially equivalent to calling `x + days(n)`, if you are familiar with lubridate syntax. After the jump has been performed, it calls `alma_adjust()` on the resulting dates to ensure that the dates that you landed on are non-event dates.
+`alma_jump()` takes a vector of dates, a rbundle, and a `jump`, which can be a lubridate Period object, a character string, or an integer number of days to jump. It performs the "jump" all at once, which is essentially equivalent to calling `x + days(n)`, if you are familiar with lubridate syntax. After the jump has been performed, it calls `alma_adjust()` on the resulting dates to ensure that the dates that you landed on are non-event dates.
 
-As an example, let's "jump" forward 1 day with `x`, providing `on_weekends` as our schedule to adjust with. Notice how jumping forward 1 day from Friday lands on Saturday, which is then adjusted to Monday.
+As an example, let's "jump" forward 1 day with `x`, providing `on_weekends` as our rbundle to adjust with. Notice how jumping forward 1 day from Friday lands on Saturday, which is then adjusted to Monday.
 
 ```{r}
 jump <- alma_jump(x, days(1), on_weekends)

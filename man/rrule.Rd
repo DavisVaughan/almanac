@@ -58,7 +58,7 @@ the \code{since} date to find the first Monday to start the recurrence from.
 There is no \code{quarterly()} recurrence frequency, but this can be accomplished
 with \code{monthly() \%>\% recur_on_interval(3)}. The month to start the quarterly
 interval from will be pulled from the \code{since} date inside \code{monthly()}. The
-default will use a quarterly schedule starting in January since the default
+default will use a quarterly rule starting in January since the default
 \code{since} date is \code{1970-01-01}. See the examples.
 }
 \examples{

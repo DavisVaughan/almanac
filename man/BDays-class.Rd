@@ -6,7 +6,7 @@
 \title{Business Days}
 \description{
 BDays is an S4 class that contains a shift in business days, relative to
-a schedule. The S4 nature of BDays is an implementation detail, and should
+a rbundle. The S4 nature of BDays is an implementation detail, and should
 mostly be invisible to users.
 }
 \details{
@@ -15,9 +15,9 @@ BDays objects have two slots:
 \item \code{.Data} \verb{[integer]}
 
 The number of business days to shift by.
-\item \code{schedule} \verb{[schedule]}
+\item \code{rbundle} \verb{[rbundle]}
 
-The schedule to shift relative to.
+The rbundle to shift relative to.
 }
 
 BDays place the number of business days in the \code{.Data} slot so that it can
@@ -25,6 +25,6 @@ BDays place the number of business days in the \code{.Data} slot so that it can
 to vctrs and base methods like \code{length()}.
 }
 \examples{
-new("BDays", 1L, schedule = schedule())
+new("BDays", 1L, rbundle = rbundle())
 }
 \keyword{internal}

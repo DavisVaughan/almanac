@@ -21,11 +21,11 @@
 #'
 #' alma_search("1999-01-01", "2001-01-01", on_easter)
 #'
-#' sch <- schedule() %>%
-#'   sch_rrule(on_easter) %>%
-#'   sch_rrule(on_easter_monday)
+#' rb <- rbundle() %>%
+#'   add_rrule(on_easter) %>%
+#'   add_rrule(on_easter_monday)
 #'
-#' alma_search("1999-01-01", "2001-01-01", sch)
+#' alma_search("1999-01-01", "2001-01-01", rb)
 #'
 #'
 #' # Note that `offset` must land within the same year, otherwise the date

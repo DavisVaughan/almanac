@@ -1,4 +1,4 @@
-#' Step relative to a schedule
+#' Step relative to an rbundle
 #'
 #' @description
 #' `alma_step()` is useful for shifting dates by "n business days".
@@ -15,8 +15,8 @@
 #'     roll to the next available non-event date.
 #'
 #' @details
-#' Imagine you are on a Friday and want to shift forward 2 days using a
-#' schedule that marks weekends as events. `alma_step()` works like this:
+#' Imagine you are on a Friday and want to shift forward 2 days using an
+#' rbundle that marks weekends as events. `alma_step()` works like this:
 #'
 #' - Step forward 1 day to Saturday.
 #'
@@ -33,9 +33,9 @@
 #'
 #'   A vector of dates.
 #'
-#' @param schedule `[schedule / rrule]`
+#' @param rbundle `[rbundle / rrule]`
 #'
-#'   A schedule or rrule.
+#'   An rbundle or rrule.
 #'
 #' @param n `[integer]`
 #'
@@ -55,26 +55,26 @@
 #' alma_step("2019-09-13", 2, on_weekends)
 #'
 #' # If Monday, 2019-09-16, was a recurring holiday, we could create
-#' # a custom schedule and step over that too.
+#' # a custom rbundle and step over that too.
 #' on_09_16 <- yearly() %>%
 #'   recur_on_ymonth(9) %>%
 #'   recur_on_mday(16)
 #'
-#' sch <- schedule() %>%
-#'   sch_rrule(on_09_16) %>%
-#'   sch_rrule(on_weekends)
+#' rb <- rbundle() %>%
+#'   add_rrule(on_09_16) %>%
+#'   add_rrule(on_weekends)
 #'
-#' alma_step("2019-09-13", 2, sch)
+#' alma_step("2019-09-13", 2, rb)
 #' @export
-alma_step <- function(x, n, schedule) {
+alma_step <- function(x, n, rbundle) {
   x <- vec_cast_date(x)
   n <- vec_cast(n, integer(), x_arg = "n")
-  schedule <- as_schedule(schedule)
+  rbundle <- as_rbundle(rbundle)
 
   # Get the common size with nice errors, recycled cheaply internally
   size <- vec_size_common(x = x, n = n)
 
-  events <- schedule$cache$get_events()
+  events <- rbundle$cache$get_events()
 
   alma_step_impl(x, n, events, size)
 }

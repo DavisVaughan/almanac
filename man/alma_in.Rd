@@ -2,21 +2,22 @@
 % Please edit documentation in R/alma-in.R
 \name{alma_in}
 \alias{alma_in}
-\title{Is \code{x} in the schedule?}
+\title{Is \code{x} in the recurrence set?}
 \usage{
-alma_in(x, schedule)
+alma_in(x, rbundle)
 }
 \arguments{
 \item{x}{\verb{[Date]}
 
 A vector of dates.}
 
-\item{schedule}{\verb{[schedule / rrule]}
+\item{rbundle}{\verb{[rbundle / rrule]}
 
-A schedule or rrule.}
+An rbundle or rrule.}
 }
 \description{
-\code{alma_in()} checks if \code{x} is in the set of dates defined by the schedule.
+\code{alma_in()} checks if \code{x} is in the recurrence set of dates defined by the
+rbundle.
 }
 \examples{
 rrule <- weekly() \%>\%
@@ -31,10 +32,10 @@ alma_in(x, rrule)
 rrule2 <- monthly() \%>\%
   recur_on_mday(2)
 
-# Make a larger schedule made of multiple rules
-sch <- schedule() \%>\%
- sch_rrule(rrule) \%>\%
- sch_rrule(rrule2)
+# Make a larger rbundle made of multiple rules
+rb <- rbundle() \%>\%
+ add_rrule(rrule) \%>\%
+ add_rrule(rrule2)
 
-alma_in(x, sch)
+alma_in(x, rb)
 }

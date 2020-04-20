@@ -1,14 +1,15 @@
-#' Is `x` in the schedule?
+#' Is `x` in the recurrence set?
 #'
-#' `alma_in()` checks if `x` is in the set of dates defined by the schedule.
+#' `alma_in()` checks if `x` is in the recurrence set of dates defined by the
+#' rbundle.
 #'
 #' @param x `[Date]`
 #'
 #'    A vector of dates.
 #'
-#' @param schedule `[schedule / rrule]`
+#' @param rbundle `[rbundle / rrule]`
 #'
-#'    A schedule or rrule.
+#'    An rbundle or rrule.
 #'
 #' @export
 #' @examples
@@ -24,15 +25,15 @@
 #' rrule2 <- monthly() %>%
 #'   recur_on_mday(2)
 #'
-#' # Make a larger schedule made of multiple rules
-#' sch <- schedule() %>%
-#'  sch_rrule(rrule) %>%
-#'  sch_rrule(rrule2)
+#' # Make a larger rbundle made of multiple rules
+#' rb <- rbundle() %>%
+#'  add_rrule(rrule) %>%
+#'  add_rrule(rrule2)
 #'
-#' alma_in(x, sch)
-alma_in <- function(x, schedule) {
+#' alma_in(x, rb)
+alma_in <- function(x, rbundle) {
   x <- vec_cast_date(x)
-  schedule <- as_schedule(schedule)
-  events <- schedule$cache$get_events()
+  rbundle <- as_rbundle(rbundle)
+  events <- rbundle$cache$get_events()
   vec_in(x, events)
 }

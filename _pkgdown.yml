@@ -6,20 +6,18 @@ reference:
   - daily
   - starts_with("recur_")
 
-- title: Schedules
+- title: Recurrence bundles
   contents:
-  - schedule
-  - starts_with("sch_")
+  - rbundle
+  - starts_with("add_")
 
-- title: Sets and sequences
+- title: Recurrence utilities
   contents:
   - alma_in
   - alma_search
   - alma_next
   - alma_previous
-
-- title: Adjusting dates
-  contents:
+  - alma_events
   - alma_step
 
 - title: Adjustments
@@ -30,3 +28,11 @@ reference:
   contents:
   - starts_with("hldy_")
   - starts_with("calendar_")
+
+- title: Business Days
+  contents:
+  - bdays
+
+- title: Compatibility
+  contents:
+  - vctrs-compat

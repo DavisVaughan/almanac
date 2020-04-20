@@ -1,5 +1,5 @@
-test_that("can step with empty schedule", {
-  expect_identical(alma_step(new_date(0), 1, schedule()), new_date(1))
+test_that("can step with empty rbundle", {
+  expect_identical(alma_step(new_date(0), 1, rbundle()), new_date(1))
 })
 
 test_that("adjustment is applied after each step", {
@@ -98,48 +98,48 @@ test_that("can use vectorized adjustment and multiple dates", {
 
 test_that("can use size 0 input", {
   expect_identical(
-    alma_step(new_date(numeric()), 1, schedule()),
+    alma_step(new_date(numeric()), 1, rbundle()),
     new_date(numeric())
   )
 
   expect_identical(
-    alma_step(new_date(1), numeric(), schedule()),
+    alma_step(new_date(1), numeric(), rbundle()),
     new_date(numeric())
   )
 })
 
 test_that("tidy recycling rules are used between `x` and `adjustment`", {
-  expect_error(alma_step(new_date(c(1, 2)), 1:3, schedule()), class = "vctrs_error_incompatible_size")
+  expect_error(alma_step(new_date(c(1, 2)), 1:3, rbundle()), class = "vctrs_error_incompatible_size")
 })
 
 test_that("`NA` `n` propagates", {
   expect_identical(
-    alma_step(new_date(c(1, 2)), NA_integer_, schedule()),
+    alma_step(new_date(c(1, 2)), NA_integer_, rbundle()),
     c(almanac_global_na_date, almanac_global_na_date)
   )
   expect_identical(
-    alma_step(new_date(c(1, 2)), c(NA_integer_, NA_integer_), schedule()),
+    alma_step(new_date(c(1, 2)), c(NA_integer_, NA_integer_), rbundle()),
     c(almanac_global_na_date, almanac_global_na_date)
   )
 })
 
 test_that("`Inf` `n` is an error", {
   expect_error(
-    alma_step(new_date(c(1, 2)), Inf, schedule()),
+    alma_step(new_date(c(1, 2)), Inf, rbundle()),
     class = "vctrs_error_cast_lossy"
   )
 })
 
 test_that("can step with `NA` dates", {
   expect_identical(
-    alma_step(new_date(c(1, NA)), 1, schedule()),
+    alma_step(new_date(c(1, NA)), 1, rbundle()),
     c(as.Date("1970-01-03"), almanac_global_na_date)
   )
 })
 
 test_that("can step with all `NA` dates", {
   expect_identical(
-    alma_step(new_date(c(NA_real_, NA_real_)), 1, schedule()),
+    alma_step(new_date(c(NA_real_, NA_real_)), 1, rbundle()),
     c(almanac_global_na_date, almanac_global_na_date)
   )
 })

@@ -55,16 +55,16 @@ hldy_election_day(since = "1970-01-01", until = "2040-01-01")
 \arguments{
 \item{since}{\verb{[Date(1)]}
 
-The initial date to start the schedule from.}
+The initial date to start the rbundle from.}
 
 \item{until}{\verb{[NULL / Date(1)]}
 
-An optional end date for the holiday schedule. Useful when constructing
+An optional end date for the holiday rbundle. Useful when constructing
 larger calendars, such as one for the NYSE, where holidays are
 occasionally only celebrated for a set number of years.}
 }
 \description{
-The following generate \code{schedule} objects corresponding to commonly used
+The following generate rbundle objects corresponding to commonly used
 holidays.
 }
 \examples{
