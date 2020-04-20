@@ -2,6 +2,7 @@
 
 S3method(format,hldy)
 S3method(format,rrule)
+S3method(print,hldy)
 S3method(print,rbundle)
 S3method(print,rrule)
 export("%>%")
