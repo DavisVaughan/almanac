@@ -12,3 +12,8 @@ test_that("rbundle() generates informative output", {
     rbundle()
   })
 })
+
+test_that("can detect rbundles", {
+  expect_true(is_rbundle(rbundle()))
+  expect_false(is_rbundle(1))
+})

@@ -81,9 +81,25 @@ as_rbundle.rbundle <- function(x, ...) {
 
 # ------------------------------------------------------------------------------
 
+#' Is `x` a recurrence bundle?
+#'
+#' `is_rbundle()` tests if `x` is a recurrence bundle.
+#'
+#' @param x `[object]`
+#'
+#'   An object.
+#'
+#' @return
+#' `TRUE` if `x` inherits from `"rbundle"`, otherwise `FALSE`.
+#'
+#' @export
+#' @examples
+#' is_rbundle(rbundle())
 is_rbundle <- function(x) {
   inherits(x, "rbundle")
 }
+
+# ------------------------------------------------------------------------------
 
 validate_rbundle <- function(x, arg = "`x`") {
   if (!is_rbundle(x)) {
