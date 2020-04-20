@@ -7,7 +7,7 @@
 #include "initialize.h"
 #include "months.h"
 
-extern "C" sexp export_alma_seq_impl(sexp occurrences,
+extern "C" sexp export_alma_seq_impl(sexp events,
                                      sexp from,
                                      sexp to,
                                      sexp inclusive) {
@@ -15,17 +15,17 @@ extern "C" sexp export_alma_seq_impl(sexp occurrences,
   const double to_ = r_dbl_get(to, 0);
   const bool inclusive_ = r_lgl_get(inclusive, 0);
 
-  return alma_seq_impl(occurrences, from_, to_, inclusive_);
+  return alma_seq_impl(events, from_, to_, inclusive_);
 }
 
-extern "C" sexp export_alma_next_impl(sexp x, sexp occurrences, sexp inclusive) {
+extern "C" sexp export_alma_next_impl(sexp x, sexp events, sexp inclusive) {
   const bool inclusive_ = r_lgl_get(inclusive, 0);
-  return alma_next_impl(x, occurrences, inclusive_);
+  return alma_next_impl(x, events, inclusive_);
 }
 
-extern "C" sexp export_alma_previous_impl(sexp x, sexp occurrences, sexp inclusive) {
+extern "C" sexp export_alma_previous_impl(sexp x, sexp events, sexp inclusive) {
   const bool inclusive_ = r_lgl_get(inclusive, 0);
-  return alma_previous_impl(x, occurrences, inclusive_);
+  return alma_previous_impl(x, events, inclusive_);
 }
 
 extern "C" sexp export_alma_step_impl(sexp x, sexp n, sexp events, sexp size) {

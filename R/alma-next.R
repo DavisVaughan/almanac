@@ -34,13 +34,13 @@ alma_next <- function(x, schedule, inclusive = FALSE) {
     abort("`inclusive` cannot be `NA`")
   }
 
-  occurrences <- schedule$cache$get()
+  events <- schedule$cache$get()
 
-  alma_next_impl(x, occurrences, inclusive)
+  alma_next_impl(x, events, inclusive)
 }
 
-alma_next_impl <- function(x, occurrences, inclusive) {
-  .Call(export_alma_next_impl, x, occurrences, inclusive)
+alma_next_impl <- function(x, events, inclusive) {
+  .Call(export_alma_next_impl, x, events, inclusive)
 }
 
 #' @rdname alma_next
@@ -55,11 +55,11 @@ alma_previous <- function(x, schedule, inclusive = FALSE) {
     abort("`inclusive` cannot be `NA`")
   }
 
-  occurrences <- schedule$cache$get()
+  events <- schedule$cache$get()
 
-  alma_previous_impl(x, occurrences, inclusive)
+  alma_previous_impl(x, events, inclusive)
 }
 
-alma_previous_impl <- function(x, occurrences, inclusive) {
-  .Call(export_alma_previous_impl, x, occurrences, inclusive)
+alma_previous_impl <- function(x, events, inclusive) {
+  .Call(export_alma_previous_impl, x, events, inclusive)
 }

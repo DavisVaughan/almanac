@@ -8,7 +8,7 @@ stop_lossy_parse <- function(message) {
 
 stop_cache_infinite_extension <- function() {
   stop_almanac(
-    "Cannot extend the internal cache of occurrences out to an infinite date",
+    "Cannot extend the internal cache of events out to an infinite date",
     class = "almanac_error_infinite_extension"
   )
 }

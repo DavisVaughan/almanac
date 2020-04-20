@@ -3,6 +3,6 @@
 
 #include "r.h"
 
-sexp alma_seq_impl(sexp occurrences, double from, double to, bool inclusive);
+sexp alma_seq_impl(sexp events, double from, double to, bool inclusive);
 
 #endif

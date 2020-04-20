@@ -14,7 +14,7 @@ Cache <- R6::R6Class(
   # ----------------------------------------------------------------------------
   private = list(
     recurrences = NULL,
-    occurrences = NULL,
+    events = NULL,
     built = FALSE,
 
     cache_build = function()
@@ -29,10 +29,10 @@ cache__cache_build <- function(self, private) {
 
   call <- cache_build_call(recurrences)
 
-  occurrences <- almanac_global_context$call(call)
-  occurrences <- parse_js_date(occurrences)
+  events <- almanac_global_context$call(call)
+  events <- parse_js_date(events)
 
-  private$occurrences <- occurrences
+  private$events <- events
   private$built <- TRUE
 
   invisible(self)
@@ -56,7 +56,7 @@ cache__get <- function(self, private) {
     private$cache_build()
   }
 
-  private$occurrences
+  private$events
 }
 
 # ------------------------------------------------------------------------------

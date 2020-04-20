@@ -5,13 +5,13 @@
 
 extern "C" {
 
-  sexp export_alma_seq_impl(sexp occurrences,
+  sexp export_alma_seq_impl(sexp events,
                             sexp from,
                             sexp to,
                             sexp inclusive);
 
-  sexp export_alma_next_impl(sexp x, sexp occurrences, sexp inclusive);
-  sexp export_alma_previous_impl(sexp x, sexp occurrences, sexp inclusive);
+  sexp export_alma_next_impl(sexp x, sexp events, sexp inclusive);
+  sexp export_alma_previous_impl(sexp x, sexp events, sexp inclusive);
 
   sexp export_alma_step_impl(sexp x, sexp n, sexp events, sexp size);
 

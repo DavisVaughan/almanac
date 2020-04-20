@@ -2,13 +2,13 @@
 #include "utils.h"
 #include <algorithm>
 
-sexp alma_next_impl(sexp x, sexp occurrences, const bool inclusive) {
+sexp alma_next_impl(sexp x, sexp events, const bool inclusive) {
   r_ssize size = r_length(x);
 
   const double* p_x = r_dbl_deref(x);
 
-  const double* p_begin = r_dbl_deref(occurrences);
-  const double* p_end = p_begin + r_length(occurrences);
+  const double* p_begin = r_dbl_deref(events);
+  const double* p_end = p_begin + r_length(events);
 
   sexp out = PROTECT(r_new_vector(REALSXP, size));
   double* p_out = r_dbl_deref(out);
@@ -41,13 +41,13 @@ sexp alma_next_impl(sexp x, sexp occurrences, const bool inclusive) {
 // Very similar to `alma_next_impl()`, but uses an adjustment to upper/lower_bound
 // https://stackoverflow.com/questions/9989731/algorithm-function-for-finding-last-item-less-than-or-equal-to-like-lower-bou
 
-sexp alma_previous_impl(sexp x, sexp occurrences, const bool inclusive) {
+sexp alma_previous_impl(sexp x, sexp events, const bool inclusive) {
   r_ssize size = r_length(x);
 
   const double* p_x = r_dbl_deref(x);
 
-  const double* p_begin = r_dbl_deref(occurrences);
-  const double* p_end = p_begin + r_length(occurrences);
+  const double* p_begin = r_dbl_deref(events);
+  const double* p_end = p_begin + r_length(events);
 
   sexp out = PROTECT(r_new_vector(REALSXP, size));
   double* p_out = r_dbl_deref(out);

@@ -44,11 +44,11 @@ alma_seq <- function(from, to, schedule, inclusive = TRUE) {
     abort("`inclusive` cannot be `NA`")
   }
 
-  occurrences <- schedule$cache$get()
+  events <- schedule$cache$get()
 
-  alma_seq_impl(occurrences, from, to, inclusive)
+  alma_seq_impl(events, from, to, inclusive)
 }
 
-alma_seq_impl <- function(occurrences, from, to, inclusive) {
-  .Call(export_alma_seq_impl, occurrences, from, to, inclusive)
+alma_seq_impl <- function(events, from, to, inclusive) {
+  .Call(export_alma_seq_impl, events, from, to, inclusive)
 }

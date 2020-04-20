@@ -46,7 +46,7 @@ test_that("alma_next() respects `inclusive`", {
 test_that("next works when between the last occurrence and the until date", {
   # Previous weekend value before "2020-04-20" is "2020-04-18"
   # so we are between the last occurrence in the set and the until date.
-  # There are no occurrences left, so the result is a size 1 NA date.
+  # There are no events left, so the result is a size 1 NA date.
   rule <- weekly(until = "2020-04-21") %>% recur_on_weekends()
 
   expect_identical(alma_next("2020-04-20", rule), almanac_global_na_date)
@@ -63,7 +63,7 @@ test_that("previous works with infinite dates", {
   until <- as.Date("2030-01-01")
   expect_identical(alma_previous(almanac_global_inf_date, daily(until = until)), until)
 
-  # Guarantee a size 1 return value, but no previous occurrences. Returns NA.
+  # Guarantee a size 1 return value, but no previous events. Returns NA.
   expect_identical(alma_previous(almanac_global_neg_inf_date, daily()), almanac_global_na_date)
   expect_identical(alma_previous(almanac_global_neg_inf_date, daily(since = "1970-01-02")), almanac_global_na_date)
 

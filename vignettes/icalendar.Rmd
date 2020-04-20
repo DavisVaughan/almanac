@@ -30,7 +30,7 @@ since <- as.Date("1997-09-02")
 to <- as.Date("2010-01-01")
 ```
 
-### Daily for 10 occurrences
+### Daily for 10 events
 
 ```{r}
 rrule <- daily(since) %>%
@@ -56,7 +56,7 @@ rrule <- daily(since) %>%
 alma_seq(since, "1997-10-01", rrule)
 ```
 
-### Every 10 days, 5 occurrences
+### Every 10 days, 5 events
 
 ```{r}
 rrule <- daily(since) %>%
@@ -75,7 +75,7 @@ rrule <- daily(since = "1998-01-01", until = "2000-01-31") %>%
 alma_seq(since, to, rrule)
 ```
 
-### Weekly for 10 occurrences
+### Weekly for 10 events
 
 ```{r}
 rrule <- weekly(since) %>%
@@ -121,7 +121,7 @@ rrule <- weekly(since = "1997-09-01", until = "1997-12-24") %>%
 alma_seq("1997-09-01", to, rrule)
 ```
 
-### Every other week on Tuesday and Thursday, for 8 occurrences
+### Every other week on Tuesday and Thursday, for 8 events
 
 ```{r}
 rrule <- weekly(since) %>%
@@ -132,7 +132,7 @@ rrule <- weekly(since) %>%
 alma_seq(since, to, rrule)
 ```
 
-### Monthly on the first Friday for 10 occurrences
+### Monthly on the first Friday for 10 events
 
 ```{r}
 rrule <- monthly("1997-09-05") %>%
@@ -151,7 +151,7 @@ rrule <- monthly(since = "1997-09-05", until = "1997-12-24") %>%
 alma_seq(since, to, rrule)
 ```
 
-### Every other month on the first and last Sunday of the month for 10 occurrences
+### Every other month on the first and last Sunday of the month for 10 events
 
 ```{r}
 rrule <- monthly("1997-09-07") %>%
@@ -181,7 +181,7 @@ rrule <- monthly("1997-09-28") %>%
 alma_seq(since, "1997-12-01", rrule)
 ```
 
-### Monthly on the 2nd and 15th of the month for 10 occurrences
+### Monthly on the 2nd and 15th of the month for 10 events
 
 ```{r}
 rrule <- monthly("1997-09-02") %>%
@@ -191,7 +191,7 @@ rrule <- monthly("1997-09-02") %>%
 alma_seq(since, to, rrule)
 ```
 
-### Monthly on the first and last day of the month for 10 occurrences
+### Monthly on the first and last day of the month for 10 events
 
 ```{r}
 rrule <- monthly("1997-09-30") %>%
@@ -201,7 +201,7 @@ rrule <- monthly("1997-09-30") %>%
 alma_seq(since, to, rrule)
 ```
 
-### Every 18 months on the 10th thru 15th of the month for 10 occurrences
+### Every 18 months on the 10th thru 15th of the month for 10 events
 
 ```{r}
 rrule <- monthly("1997-09-10") %>%
@@ -222,7 +222,7 @@ rrule <- monthly(since) %>%
 alma_seq(since, "1997-12-01", rrule)
 ```
 
-### Yearly in June and July for 10 occurrences
+### Yearly in June and July for 10 events
 
 Note that the day of the month is taken from the `since` date, since it is not otherwise specified!
 
@@ -234,7 +234,7 @@ rrule <- yearly("1997-06-10") %>%
 alma_seq("1997-06-10", to, rrule)
 ```
 
-### Every other year on January, February, and March for 10 occurrences
+### Every other year on January, February, and March for 10 events
 
 ```{r}
 rrule <- yearly("1997-03-10") %>%
@@ -245,7 +245,7 @@ rrule <- yearly("1997-03-10") %>%
 alma_seq("1997-03-10", to, rrule)
 ```
 
-### Every third year on the 1st, 100th, and 200th day for 10 occurrences
+### Every third year on the 1st, 100th, and 200th day for 10 events
 
 ```{r}
 rrule <- yearly("1997-01-01") %>%

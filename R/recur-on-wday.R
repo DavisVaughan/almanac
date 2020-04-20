@@ -53,7 +53,7 @@
 #' alma_seq(start, end, on_wday_friday)
 #'
 #' # At monthly frequencies, you can use n-th values to look for particular
-#' # week day occurrences
+#' # week day events
 #' on_first_friday_in_month <- monthly() %>% recur_on_wday("Fri", 1)
 #' alma_seq(start, end, on_first_friday_in_month)
 #'
