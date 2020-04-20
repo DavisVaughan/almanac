@@ -50,14 +50,29 @@ cache__cache_build <- function(self, private) {
 }
 
 cache_build_call <- function(rrules, rdates, exdates) {
-  body <- as_js_call_body(rrules, rdates, exdates)
+  body <- cache_build_call_body(rrules, rdates, exdates)
+  as_js_build_call(body)
+}
 
-  glue2("
-    function() {
-      [[body]]
-      return ruleset.all()
-    }
-  ")
+cache_build_call_body <- function(rrules, rdates, exdates) {
+  body <- "var ruleset = new rrule.RRuleSet()"
+
+  for(rrule in rrules) {
+    rules <- rrule$rules
+    body <- append_rrule(body, rules)
+  }
+
+  for(i in seq_along(rdates)) {
+    rdate <- rdates[i]
+    body <- append_rdate(body, rdate)
+  }
+
+  for(i in seq_along(exdates)) {
+    exdate <- exdates[i]
+    body <- append_exdate(body, exdate)
+  }
+
+  body
 }
 
 # ------------------------------------------------------------------------------
@@ -89,34 +104,23 @@ cache__set_exdates <- function(self, private, exdates) {
 
 # ------------------------------------------------------------------------------
 
-as_js_call_body <- function(rrules, rdates, exdates) {
-  body <- "var ruleset = new rrule.RRuleSet()"
-
-  for(rrule in rrules) {
-    body <- append_rrule(body, rrule)
-  }
-
-  for(i in seq_along(rdates)) {
-    rdate <- rdates[i]
-    body <- append_rdate(body, rdate)
-  }
-
-  for(i in seq_along(exdates)) {
-    exdate <- exdates[i]
-    body <- append_exdate(body, exdate)
-  }
-
-  body
+as_js_build_call <- function(body) {
+  glue2("
+    function() {
+      [[body]]
+      return ruleset.all()
+    }
+  ")
 }
 
-append_rrule <- function(body, rrule) {
-  rrule <- as_js_from_rrule(rrule)
+append_rrule <- function(body, rules) {
+  rules <- as_js_from_rrule(rules)
 
   glue("
     {body}
 
     ruleset.rrule(
-      {rrule}
+      {rules}
     )
   ")
 }
