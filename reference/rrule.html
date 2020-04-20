@@ -191,8 +191,8 @@ be closer to the first date in the sequence of dates that you are working
 with. For example, if you are working with dates in the range of 2019 and
 forward, adjust the <code>since</code> date to be <code>2019-01-01</code> for a significant speed
 boost.</p>
-<p>As the anchor date, recurrences are often calculated <em>relative to</em> this
-date. As an example, a recurrence of "on Monday, every other week" would use
+<p>As the anchor date, events are often calculated <em>relative to</em> this
+date. As an example, a rule of "on Monday, every other week" would use
 the <code>since</code> date to find the first Monday to start the recurrence from.</p>
 <p>There is no <code>quarterly()</code> recurrence frequency, but this can be accomplished
 with <code>monthly() %&gt;% recur_on_interval(3)</code>. The month to start the quarterly

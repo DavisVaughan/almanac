@@ -106,9 +106,9 @@
 
 <span class="no">since</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span>(<span class="st">"1997-09-02"</span>)
 <span class="no">to</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span>(<span class="st">"2010-01-01"</span>)</pre></body></html></div>
-<div id="daily-for-10-occurrences" class="section level3">
+<div id="daily-for-10-events" class="section level3">
 <h3 class="hasAnchor">
-<a href="#daily-for-10-occurrences" class="anchor"></a>Daily for 10 occurrences</h3>
+<a href="#daily-for-10-events" class="anchor"></a>Daily for 10 events</h3>
 <div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">rrule</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">daily</a></span>(<span class="no">since</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="../reference/recur_for_count.html">recur_for_count</a></span>(<span class="fl">10</span>)
 
@@ -157,9 +157,9 @@
 <span class="co">#&gt;  [6] "1997-09-12" "1997-09-14" "1997-09-16" "1997-09-18" "1997-09-20"</span>
 <span class="co">#&gt; [11] "1997-09-22" "1997-09-24" "1997-09-26" "1997-09-28" "1997-09-30"</span></pre></body></html></div>
 </div>
-<div id="every-10-days-5-occurrences" class="section level3">
+<div id="every-10-days-5-events" class="section level3">
 <h3 class="hasAnchor">
-<a href="#every-10-days-5-occurrences" class="anchor"></a>Every 10 days, 5 occurrences</h3>
+<a href="#every-10-days-5-events" class="anchor"></a>Every 10 days, 5 events</h3>
 <div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">rrule</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">daily</a></span>(<span class="no">since</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="../reference/recur_on_interval.html">recur_on_interval</a></span>(<span class="fl">10</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="../reference/recur_for_count.html">recur_for_count</a></span>(<span class="fl">5</span>)
@@ -194,9 +194,9 @@
 <span class="co">#&gt; [86] "2000-01-24" "2000-01-25" "2000-01-26" "2000-01-27" "2000-01-28"</span>
 <span class="co">#&gt; [91] "2000-01-29" "2000-01-30" "2000-01-31"</span></pre></body></html></div>
 </div>
-<div id="weekly-for-10-occurrences" class="section level3">
+<div id="weekly-for-10-events" class="section level3">
 <h3 class="hasAnchor">
-<a href="#weekly-for-10-occurrences" class="anchor"></a>Weekly for 10 occurrences</h3>
+<a href="#weekly-for-10-events" class="anchor"></a>Weekly for 10 events</h3>
 <div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="no">rrule</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">weekly</a></span>(<span class="no">since</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="../reference/recur_for_count.html">recur_for_count</a></span>(<span class="fl">10</span>)
 
@@ -250,9 +250,9 @@
 <span class="co">#&gt; [21] "1997-11-28" "1997-12-08" "1997-12-10" "1997-12-12" "1997-12-22"</span>
 <span class="co">#&gt; [26] "1997-12-24"</span></pre></body></html></div>
 </div>
-<div id="every-other-week-on-tuesday-and-thursday-for-8-occurrences" class="section level3">
+<div id="every-other-week-on-tuesday-and-thursday-for-8-events" class="section level3">
 <h3 class="hasAnchor">
-<a href="#every-other-week-on-tuesday-and-thursday-for-8-occurrences" class="anchor"></a>Every other week on Tuesday and Thursday, for 8 occurrences</h3>
+<a href="#every-other-week-on-tuesday-and-thursday-for-8-events" class="anchor"></a>Every other week on Tuesday and Thursday, for 8 events</h3>
 <div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="no">rrule</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">weekly</a></span>(<span class="no">since</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="../reference/recur_on_wday.html">recur_on_wday</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Tue"</span>, <span class="st">"Thu"</span>)) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="../reference/recur_on_interval.html">recur_on_interval</a></span>(<span class="fl">2</span>) <span class="kw">%&gt;%</span>
@@ -262,9 +262,9 @@
 <span class="co">#&gt; [1] "1997-09-02" "1997-09-04" "1997-09-16" "1997-09-18" "1997-09-30"</span>
 <span class="co">#&gt; [6] "1997-10-02" "1997-10-14" "1997-10-16"</span></pre></body></html></div>
 </div>
-<div id="monthly-on-the-first-friday-for-10-occurrences" class="section level3">
+<div id="monthly-on-the-first-friday-for-10-events" class="section level3">
 <h3 class="hasAnchor">
-<a href="#monthly-on-the-first-friday-for-10-occurrences" class="anchor"></a>Monthly on the first Friday for 10 occurrences</h3>
+<a href="#monthly-on-the-first-friday-for-10-events" class="anchor"></a>Monthly on the first Friday for 10 events</h3>
 <div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="no">rrule</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">monthly</a></span>(<span class="st">"1997-09-05"</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="../reference/recur_on_wday.html">recur_on_wday</a></span>(<span class="st">"Fri"</span>, <span class="kw">nth</span> <span class="kw">=</span> <span class="fl">1</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="../reference/recur_for_count.html">recur_for_count</a></span>(<span class="fl">10</span>)
@@ -282,9 +282,9 @@
 <span class="fu"><a href="../reference/alma_seq.html">alma_seq</a></span>(<span class="no">since</span>, <span class="no">to</span>, <span class="no">rrule</span>)
 <span class="co">#&gt; [1] "1997-09-05" "1997-10-03" "1997-11-07" "1997-12-05"</span></pre></body></html></div>
 </div>
-<div id="every-other-month-on-the-first-and-last-sunday-of-the-month-for-10-occurrences" class="section level3">
+<div id="every-other-month-on-the-first-and-last-sunday-of-the-month-for-10-events" class="section level3">
 <h3 class="hasAnchor">
-<a href="#every-other-month-on-the-first-and-last-sunday-of-the-month-for-10-occurrences" class="anchor"></a>Every other month on the first and last Sunday of the month for 10 occurrences</h3>
+<a href="#every-other-month-on-the-first-and-last-sunday-of-the-month-for-10-events" class="anchor"></a>Every other month on the first and last Sunday of the month for 10 events</h3>
 <div class="sourceCode" id="cb15"><html><body><pre class="r"><span class="no">rrule</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">monthly</a></span>(<span class="st">"1997-09-07"</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="../reference/recur_on_wday.html">recur_on_wday</a></span>(<span class="st">"Sun"</span>, <span class="kw">nth</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>, -<span class="fl">1</span>)) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="../reference/recur_on_interval.html">recur_on_interval</a></span>(<span class="fl">2</span>) <span class="kw">%&gt;%</span>
@@ -314,9 +314,9 @@
 <span class="fu"><a href="../reference/alma_seq.html">alma_seq</a></span>(<span class="no">since</span>, <span class="st">"1997-12-01"</span>, <span class="no">rrule</span>)
 <span class="co">#&gt; [1] "1997-09-28" "1997-10-29" "1997-11-28"</span></pre></body></html></div>
 </div>
-<div id="monthly-on-the-2nd-and-15th-of-the-month-for-10-occurrences" class="section level3">
+<div id="monthly-on-the-2nd-and-15th-of-the-month-for-10-events" class="section level3">
 <h3 class="hasAnchor">
-<a href="#monthly-on-the-2nd-and-15th-of-the-month-for-10-occurrences" class="anchor"></a>Monthly on the 2nd and 15th of the month for 10 occurrences</h3>
+<a href="#monthly-on-the-2nd-and-15th-of-the-month-for-10-events" class="anchor"></a>Monthly on the 2nd and 15th of the month for 10 events</h3>
 <div class="sourceCode" id="cb18"><html><body><pre class="r"><span class="no">rrule</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">monthly</a></span>(<span class="st">"1997-09-02"</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="../reference/recur_on_mday.html">recur_on_mday</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">2</span>, <span class="fl">15</span>)) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="../reference/recur_for_count.html">recur_for_count</a></span>(<span class="fl">10</span>)
@@ -325,9 +325,9 @@
 <span class="co">#&gt;  [1] "1997-09-02" "1997-09-15" "1997-10-02" "1997-10-15" "1997-11-02"</span>
 <span class="co">#&gt;  [6] "1997-11-15" "1997-12-02" "1997-12-15" "1998-01-02" "1998-01-15"</span></pre></body></html></div>
 </div>
-<div id="monthly-on-the-first-and-last-day-of-the-month-for-10-occurrences" class="section level3">
+<div id="monthly-on-the-first-and-last-day-of-the-month-for-10-events" class="section level3">
 <h3 class="hasAnchor">
-<a href="#monthly-on-the-first-and-last-day-of-the-month-for-10-occurrences" class="anchor"></a>Monthly on the first and last day of the month for 10 occurrences</h3>
+<a href="#monthly-on-the-first-and-last-day-of-the-month-for-10-events" class="anchor"></a>Monthly on the first and last day of the month for 10 events</h3>
 <div class="sourceCode" id="cb19"><html><body><pre class="r"><span class="no">rrule</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">monthly</a></span>(<span class="st">"1997-09-30"</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="../reference/recur_on_mday.html">recur_on_mday</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>, -<span class="fl">1</span>)) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="../reference/recur_for_count.html">recur_for_count</a></span>(<span class="fl">10</span>)
@@ -336,9 +336,9 @@
 <span class="co">#&gt;  [1] "1997-09-30" "1997-10-01" "1997-10-31" "1997-11-01" "1997-11-30"</span>
 <span class="co">#&gt;  [6] "1997-12-01" "1997-12-31" "1998-01-01" "1998-01-31" "1998-02-01"</span></pre></body></html></div>
 </div>
-<div id="every-18-months-on-the-10th-thru-15th-of-the-month-for-10-occurrences" class="section level3">
+<div id="every-18-months-on-the-10th-thru-15th-of-the-month-for-10-events" class="section level3">
 <h3 class="hasAnchor">
-<a href="#every-18-months-on-the-10th-thru-15th-of-the-month-for-10-occurrences" class="anchor"></a>Every 18 months on the 10th thru 15th of the month for 10 occurrences</h3>
+<a href="#every-18-months-on-the-10th-thru-15th-of-the-month-for-10-events" class="anchor"></a>Every 18 months on the 10th thru 15th of the month for 10 events</h3>
 <div class="sourceCode" id="cb20"><html><body><pre class="r"><span class="no">rrule</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">monthly</a></span>(<span class="st">"1997-09-10"</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="../reference/recur_on_interval.html">recur_on_interval</a></span>(<span class="fl">18</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="../reference/recur_on_mday.html">recur_on_mday</a></span>(<span class="fl">10</span>:<span class="fl">15</span>) <span class="kw">%&gt;%</span>
@@ -359,9 +359,9 @@
 <span class="co">#&gt; [1] "1997-09-02" "1997-09-09" "1997-09-16" "1997-09-23" "1997-09-30"</span>
 <span class="co">#&gt; [6] "1997-11-04" "1997-11-11" "1997-11-18" "1997-11-25"</span></pre></body></html></div>
 </div>
-<div id="yearly-in-june-and-july-for-10-occurrences" class="section level3">
+<div id="yearly-in-june-and-july-for-10-events" class="section level3">
 <h3 class="hasAnchor">
-<a href="#yearly-in-june-and-july-for-10-occurrences" class="anchor"></a>Yearly in June and July for 10 occurrences</h3>
+<a href="#yearly-in-june-and-july-for-10-events" class="anchor"></a>Yearly in June and July for 10 events</h3>
 <p>Note that the day of the month is taken from the <code>since</code> date, since it is not otherwise specified!</p>
 <div class="sourceCode" id="cb22"><html><body><pre class="r"><span class="no">rrule</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">yearly</a></span>(<span class="st">"1997-06-10"</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="../reference/recur_on_ymonth.html">recur_on_ymonth</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"June"</span>, <span class="st">"July"</span>)) <span class="kw">%&gt;%</span>
@@ -371,9 +371,9 @@
 <span class="co">#&gt;  [1] "1997-06-10" "1997-07-10" "1998-06-10" "1998-07-10" "1999-06-10"</span>
 <span class="co">#&gt;  [6] "1999-07-10" "2000-06-10" "2000-07-10" "2001-06-10" "2001-07-10"</span></pre></body></html></div>
 </div>
-<div id="every-other-year-on-january-february-and-march-for-10-occurrences" class="section level3">
+<div id="every-other-year-on-january-february-and-march-for-10-events" class="section level3">
 <h3 class="hasAnchor">
-<a href="#every-other-year-on-january-february-and-march-for-10-occurrences" class="anchor"></a>Every other year on January, February, and March for 10 occurrences</h3>
+<a href="#every-other-year-on-january-february-and-march-for-10-events" class="anchor"></a>Every other year on January, February, and March for 10 events</h3>
 <div class="sourceCode" id="cb23"><html><body><pre class="r"><span class="no">rrule</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">yearly</a></span>(<span class="st">"1997-03-10"</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="../reference/recur_on_ymonth.html">recur_on_ymonth</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Jan"</span>, <span class="st">"Feb"</span>, <span class="st">"Mar"</span>)) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="../reference/recur_on_interval.html">recur_on_interval</a></span>(<span class="fl">2</span>) <span class="kw">%&gt;%</span>
@@ -383,9 +383,9 @@
 <span class="co">#&gt;  [1] "1997-03-10" "1999-01-10" "1999-02-10" "1999-03-10" "2001-01-10"</span>
 <span class="co">#&gt;  [6] "2001-02-10" "2001-03-10" "2003-01-10" "2003-02-10" "2003-03-10"</span></pre></body></html></div>
 </div>
-<div id="every-third-year-on-the-1st-100th-and-200th-day-for-10-occurrences" class="section level3">
+<div id="every-third-year-on-the-1st-100th-and-200th-day-for-10-events" class="section level3">
 <h3 class="hasAnchor">
-<a href="#every-third-year-on-the-1st-100th-and-200th-day-for-10-occurrences" class="anchor"></a>Every third year on the 1st, 100th, and 200th day for 10 occurrences</h3>
+<a href="#every-third-year-on-the-1st-100th-and-200th-day-for-10-events" class="anchor"></a>Every third year on the 1st, 100th, and 200th day for 10 events</h3>
 <div class="sourceCode" id="cb24"><html><body><pre class="r"><span class="no">rrule</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">yearly</a></span>(<span class="st">"1997-01-01"</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="../reference/recur_on_yday.html">recur_on_yday</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>, <span class="fl">100</span>, <span class="fl">200</span>)) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="../reference/recur_on_interval.html">recur_on_interval</a></span>(<span class="fl">3</span>) <span class="kw">%&gt;%</span>

@@ -203,13 +203,13 @@ by default, is a Thursday (<code>1970-01-01</code>).</p>
 <span class='no'>on_weekly_fridays</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rrule.html'>weekly</a></span>(<span class='kw'>since</span> <span class='kw'>=</span> <span class='no'>start</span>)
 <span class='fu'><a href='alma_seq.html'>alma_seq</a></span>(<span class='no'>start</span>, <span class='no'>end</span>, <span class='no'>on_weekly_fridays</span>)</div><div class='output co'>#&gt; [1] "1999-01-01" "1999-01-08" "1999-01-15" "1999-01-22" "1999-01-29"
 #&gt; [6] "1999-02-05" "1999-02-12" "1999-02-19" "1999-02-26"</div><div class='input'>
-<span class='co'># Alternatively, we could use `recur_on_wday()` and force a recurrence on</span>
-<span class='co'># Friday</span>
+<span class='co'># Alternatively, we could use `recur_on_wday()` and force a recurrence rule</span>
+<span class='co'># on Friday</span>
 <span class='no'>on_wday_friday</span> <span class='kw'>&lt;-</span> <span class='no'>on_weekly_thursdays</span> <span class='kw'>%&gt;%</span> <span class='fu'>recur_on_wday</span>(<span class='st'>"Friday"</span>)
 <span class='fu'><a href='alma_seq.html'>alma_seq</a></span>(<span class='no'>start</span>, <span class='no'>end</span>, <span class='no'>on_wday_friday</span>)</div><div class='output co'>#&gt; [1] "1999-01-01" "1999-01-08" "1999-01-15" "1999-01-22" "1999-01-29"
 #&gt; [6] "1999-02-05" "1999-02-12" "1999-02-19" "1999-02-26"</div><div class='input'>
 <span class='co'># At monthly frequencies, you can use n-th values to look for particular</span>
-<span class='co'># week day occurrences</span>
+<span class='co'># week day events</span>
 <span class='no'>on_first_friday_in_month</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rrule.html'>monthly</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'>recur_on_wday</span>(<span class='st'>"Fri"</span>, <span class='fl'>1</span>)
 <span class='fu'><a href='alma_seq.html'>alma_seq</a></span>(<span class='no'>start</span>, <span class='no'>end</span>, <span class='no'>on_first_friday_in_month</span>)</div><div class='output co'>#&gt; [1] "1999-01-01" "1999-02-05"</div><div class='input'>
 <span class='co'># Negative values let you look from the back</span>
