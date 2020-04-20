@@ -34,7 +34,7 @@ alma_next <- function(x, schedule, inclusive = FALSE) {
     abort("`inclusive` cannot be `NA`")
   }
 
-  events <- schedule$cache$get()
+  events <- schedule$cache$get_events()
 
   alma_next_impl(x, events, inclusive)
 }
@@ -55,7 +55,7 @@ alma_previous <- function(x, schedule, inclusive = FALSE) {
     abort("`inclusive` cannot be `NA`")
   }
 
-  events <- schedule$cache$get()
+  events <- schedule$cache$get_events()
 
   alma_previous_impl(x, events, inclusive)
 }

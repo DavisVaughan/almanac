@@ -33,6 +33,6 @@
 alma_in <- function(x, schedule) {
   x <- vec_cast_date(x)
   schedule <- as_schedule(schedule)
-  events <- schedule$cache$get()
+  events <- schedule$cache$get_events()
   vec_in(x, events)
 }

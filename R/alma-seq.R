@@ -44,7 +44,7 @@ alma_seq <- function(from, to, schedule, inclusive = TRUE) {
     abort("`inclusive` cannot be `NA`")
   }
 
-  events <- schedule$cache$get()
+  events <- schedule$cache$get_events()
 
   alma_seq_impl(events, from, to, inclusive)
 }

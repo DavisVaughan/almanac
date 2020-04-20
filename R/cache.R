@@ -7,8 +7,8 @@ Cache <- R6::R6Class(
     set_recurrences = function(recurrences)
       cache__set_recurrences(self, private, recurrences),
 
-    get = function()
-      cache__get(self, private)
+    get_events = function()
+      cache__get_events(self, private)
   ),
 
   # ----------------------------------------------------------------------------
@@ -51,7 +51,7 @@ cache_build_call <- function(recurrences) {
 
 # ------------------------------------------------------------------------------
 
-cache__get <- function(self, private) {
+cache__get_events <- function(self, private) {
   if (!private$built) {
     private$cache_build()
   }

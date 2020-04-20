@@ -25,5 +25,5 @@
 #' sch_events(sch)
 sch_events <- function(schedule) {
   schedule <- as_schedule(schedule)
-  schedule$cache$get()
+  schedule$cache$get_events()
 }

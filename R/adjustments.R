@@ -78,7 +78,7 @@ adj_following <- function(x, schedule) {
   x <- vec_cast_date(x)
   schedule <- as_schedule(schedule)
 
-  events <- schedule$cache$get()
+  events <- schedule$cache$get_events()
 
   adj_following_impl(x, events)
 }
@@ -93,7 +93,7 @@ adj_preceding <- function(x, schedule) {
   x <- vec_cast_date(x)
   schedule <- as_schedule(schedule)
 
-  events <- schedule$cache$get()
+  events <- schedule$cache$get_events()
 
   adj_preceding_impl(x, events)
 }
@@ -108,7 +108,7 @@ adj_modified_following <- function(x, schedule) {
   x <- vec_cast_date(x)
   schedule <- as_schedule(schedule)
 
-  events <- schedule$cache$get()
+  events <- schedule$cache$get_events()
 
   adj_modified_following_impl(x, events)
 }
@@ -123,7 +123,7 @@ adj_modified_preceding <- function(x, schedule) {
   x <- vec_cast_date(x)
   schedule <- as_schedule(schedule)
 
-  events <- schedule$cache$get()
+  events <- schedule$cache$get_events()
 
   adj_modified_preceding_impl(x, events)
 }
@@ -138,7 +138,7 @@ adj_nearest <- function(x, schedule) {
   x <- vec_cast_date(x)
   schedule <- as_schedule(schedule)
 
-  events <- schedule$cache$get()
+  events <- schedule$cache$get_events()
 
   adj_nearest_impl(x, events)
 }

@@ -74,7 +74,7 @@ alma_step <- function(x, n, schedule) {
   # Get the common size with nice errors, recycled cheaply internally
   size <- vec_size_common(x = x, n = n)
 
-  events <- schedule$cache$get()
+  events <- schedule$cache$get_events()
 
   alma_step_impl(x, n, events, size)
 }
