@@ -70,10 +70,10 @@ test_that("weekly on ymonth respects `since` week day", {
   # so 5th day of the week is Thurs and 7th is Saturday
 
   x <- alma_search(start, stop, rrule_thursday)
-  expect_equal(wday(x, FALSE), rep(5L, length(x)))
+  expect_equal(lubridate::wday(x, FALSE), rep(5L, length(x)))
 
   x <- alma_search(start, stop, rrule_saturday)
-  expect_equal(wday(x, FALSE), rep(7L, length(x)))
+  expect_equal(lubridate::wday(x, FALSE), rep(7L, length(x)))
 })
 
 test_that("can use on ymonth multiple in the same rule to take a sorted unique union", {

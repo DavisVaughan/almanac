@@ -39,7 +39,7 @@ test_that("can construct a rbundle to select n-th mday of the quarter", {
   rb_60th_day_of_quarter <- make_nth_mday_of_the_quarter(n)
 
   expect <- seq(start, stop, "1 day")
-  expect <- expect[qday(expect) == n]
+  expect <- expect[lubridate::qday(expect) == n]
 
   x <- alma_search(start, stop, rb_60th_day_of_quarter)
 

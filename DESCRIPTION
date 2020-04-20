@@ -21,7 +21,6 @@ Imports:
     glue,
     lubridate,
     magrittr,
-    methods,
     R6,
     rlang,
     V8 (>= 3.0.1),

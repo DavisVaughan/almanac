@@ -152,7 +152,7 @@ parse_js_date <- function(x) {
     return(new_date())
   }
 
-  x <- fast_strptime(x, format = "%Y-%m-%dT%H:%M:%OSZ", tz = "UTC", lt = FALSE)
+  x <- lubridate::fast_strptime(x, format = "%Y-%m-%dT%H:%M:%OSZ", tz = "UTC", lt = FALSE)
 
   as.Date(x)
 }

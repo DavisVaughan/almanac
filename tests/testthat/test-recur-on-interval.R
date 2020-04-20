@@ -19,7 +19,7 @@ test_that("weekly - on a interval", {
   base <- weekly(since = "1990-01-01") # reliant on since date
   rrule <- base %>% recur_on_interval(2)
 
-  expect <- as.Date("1990-01-01") + weeks(c(0, 2))
+  expect <- as.Date("1990-01-01") + lubridate::weeks(c(0, 2))
 
   start <- "1990-01-01"
   stop <- "1990-01-25"

@@ -5,9 +5,7 @@
 # roxygen namespace tags. Modify with care!
 ## usethis namespace: start
 #' @import rlang
-#' @import lubridate
 #' @importFrom glue glue
-#' @importFrom methods new
 #' @importFrom vctrs vec_size
 #' @importFrom vctrs vec_cast
 #' @importFrom vctrs vec_in
@@ -34,6 +32,3 @@
 #' @useDynLib almanac, .registration = TRUE
 ## usethis namespace: end
 NULL
-
-#' @export
-lubridate::days
