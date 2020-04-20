@@ -116,26 +116,12 @@ format.rrule <- function(x, ...) {
 # ------------------------------------------------------------------------------
 
 rrule <- function(since, until, frequency) {
-  since <- vec_cast_date(since, "since")
-  vec_assert(since, size = 1L)
-
-  if (is_missing_or_infinite(since)) {
-    abort("`since` must be a finite date.")
-  }
-
-  until <- vec_cast_date(until, "until")
-  vec_assert(until, size = 1L)
-
-  if (is_missing_or_infinite(until)) {
-    abort("`until` must be a finite date.")
-  }
+  since <- check_since(since)
+  until <- check_until(until)
 
   if (since > until) {
     abort("`since` must be before `until`.")
   }
-
-  validate_date_bounds(since, x_arg = "since")
-  validate_date_bounds(until, x_arg = "until")
 
   new_rrule(
     since = since,
@@ -211,6 +197,32 @@ validate_rrule <- function(x, arg = "`x`") {
   }
 
   invisible(x)
+}
+
+check_since <- function(since) {
+  since <- vec_cast_date(since, "since")
+  vec_assert(since, size = 1L)
+
+  if (is_missing_or_infinite(since)) {
+    abort("`since` must be a finite date.")
+  }
+
+  validate_date_bounds(since, x_arg = "since")
+
+  since
+}
+
+check_until <- function(until) {
+  until <- vec_cast_date(until, "until")
+  vec_assert(until, size = 1L)
+
+  if (is_missing_or_infinite(until)) {
+    abort("`until` must be a finite date.")
+  }
+
+  validate_date_bounds(until, x_arg = "until")
+
+  until
 }
 
 # ------------------------------------------------------------------------------
