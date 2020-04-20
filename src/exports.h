@@ -1,5 +1,5 @@
-#ifndef ALMANAC_EXPORTS_HPP
-#define ALMANAC_EXPORTS_HPP
+#ifndef ALMANAC_EXPORTS_H
+#define ALMANAC_EXPORTS_H
 
 #include "r.h"
 
