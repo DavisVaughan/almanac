@@ -21,8 +21,7 @@ calendar <- function(name,
     name = name,
     since = since,
     until = until,
-    weekend = weekend,
-    holidays = list()
+    weekend = weekend
   )
 }
 
@@ -45,7 +44,7 @@ add_hldy <- function(calendar, hldy) {
 
 # ------------------------------------------------------------------------------
 
-new_calendar <- function(name, since, until, weekend, holidays) {
+new_calendar <- function(name, since, until, weekend, holidays = list()) {
   if (!is_character(name, n = 1L)) {
     abort("`name` must be a size 1 character vector.")
   }
