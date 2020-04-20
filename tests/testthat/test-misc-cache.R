@@ -45,7 +45,11 @@ test_that("adjusting `since` results in significant speed ups", {
 })
 
 test_that("cache `since` date respects `rdate`s", {
-  rb <- as_rbundle(daily()) %>% add_rdate("1950-01-01")
+  rrule <- daily()
+
+  rb <- rbundle()
+  rb <- add_rrule(rb, rrule)
+  rb <- add_rdate(rb, "1950-01-01")
 
   expect <- as.Date(c("1950-01-01", "1970-01-01"))
 
