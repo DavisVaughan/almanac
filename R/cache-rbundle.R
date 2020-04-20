@@ -1,20 +1,14 @@
-Cache <- R6::R6Class(
-  "Cache",
+cache_rbundle <- R6::R6Class(
+  "cache_rbundle",
   cloneable = FALSE,
 
   # ----------------------------------------------------------------------------
   public = list(
-    set_rrules = function(rrules)
-      cache__set_rrules(self, private, rrules),
-
-    set_rdates = function(rdates)
-      cache__set_rdates(self, private, rdates),
-
-    set_exdates = function(exdates)
-      cache__set_exdates(self, private, exdates),
+    initialize = function(rrules, rdates, exdates)
+      cache_rbundle__initialize(self, private, rrules, rdates, exdates),
 
     get_events = function()
-      cache__get_events(self, private)
+      cache_rbundle__get_events(self, private)
   ),
 
   # ----------------------------------------------------------------------------
@@ -27,18 +21,18 @@ Cache <- R6::R6Class(
     built = FALSE,
 
     cache_build = function()
-      cache__cache_build(self, private)
+      cache_rbundle__cache_build(self, private)
   )
 )
 
 # ------------------------------------------------------------------------------
 
-cache__cache_build <- function(self, private) {
+cache_rbundle__cache_build <- function(self, private) {
   rrules <- private$rrules
   rdates <- private$rdates
   exdates <- private$exdates
 
-  call <- cache_build_call(rrules, rdates, exdates)
+  call <- cache_rbundle_build_call(rrules, rdates, exdates)
 
   events <- almanac_global_context$call(call)
   events <- parse_js_date(events)
@@ -49,51 +43,17 @@ cache__cache_build <- function(self, private) {
   invisible(self)
 }
 
-cache_build_call <- function(rrules, rdates, exdates) {
-  body <- as_js_call_body(rrules, rdates, exdates)
-
-  glue2("
-    function() {
-      [[body]]
-      return ruleset.all()
-    }
-  ")
+cache_rbundle_build_call <- function(rrules, rdates, exdates) {
+  body <- cache_rbundle_build_call_body(rrules, rdates, exdates)
+  as_js_build_call(body)
 }
 
-# ------------------------------------------------------------------------------
-
-cache__get_events <- function(self, private) {
-  if (!private$built) {
-    private$cache_build()
-  }
-
-  private$events
-}
-
-# ------------------------------------------------------------------------------
-
-cache__set_rrules <- function(self, private, rrules) {
-  private$rrules <- rrules
-  self
-}
-
-cache__set_rdates <- function(self, private, rdates) {
-  private$rdates <- rdates
-  self
-}
-
-cache__set_exdates <- function(self, private, exdates) {
-  private$exdates <- exdates
-  self
-}
-
-# ------------------------------------------------------------------------------
-
-as_js_call_body <- function(rrules, rdates, exdates) {
+cache_rbundle_build_call_body <- function(rrules, rdates, exdates) {
   body <- "var ruleset = new rrule.RRuleSet()"
 
   for(rrule in rrules) {
-    body <- append_rrule(body, rrule)
+    rules <- rrule$rules
+    body <- append_rrule(body, rules)
   }
 
   for(i in seq_along(rdates)) {
@@ -109,14 +69,44 @@ as_js_call_body <- function(rrules, rdates, exdates) {
   body
 }
 
-append_rrule <- function(body, rrule) {
-  rrule <- as_js_from_rrule(rrule)
+# ------------------------------------------------------------------------------
+
+cache_rbundle__get_events <- function(self, private) {
+  if (!private$built) {
+    private$cache_build()
+  }
+
+  private$events
+}
+
+# ------------------------------------------------------------------------------
+
+cache_rbundle__initialize <- function(self, private, rrules, rdates, exdates) {
+  private$rrules <- rrules
+  private$rdates <- rdates
+  private$exdates <- exdates
+  self
+}
+
+# ------------------------------------------------------------------------------
+
+as_js_build_call <- function(body) {
+  glue2("
+    function() {
+      [[body]]
+      return ruleset.all()
+    }
+  ")
+}
+
+append_rrule <- function(body, rules) {
+  rules <- as_js_from_rrule(rules)
 
   glue("
     {body}
 
     ruleset.rrule(
-      {rrule}
+      {rules}
     )
   ")
 }

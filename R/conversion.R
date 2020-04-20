@@ -46,17 +46,17 @@ as_js_from_rrule <- function(x) {
 }
 
 get_dtstart <- function(x) {
-  dtstart <- x$rules$since
+  dtstart <- x$since
   glue("dtstart: {as_js_from_date(dtstart)}")
 }
 
 get_frequency <- function(x) {
-  frequency <- toupper(x$rules$frequency)
+  frequency <- toupper(x$frequency)
   glue("freq: rrule.RRule.{frequency}")
 }
 
 get_until <- function(x) {
-  until <- x$rules$until
+  until <- x$until
 
   # In case `recur_for_count()` is set
   if (is.null(until)) {
@@ -67,79 +67,79 @@ get_until <- function(x) {
 }
 
 get_count <- function(x) {
-  if (is.null(x$rules$count)) {
+  if (is.null(x$count)) {
     return(NULL)
   }
 
-  glue("count: {x$rules$count}")
+  glue("count: {x$count}")
 }
 
 get_interval <- function(x) {
-  if (is.null(x$rules$interval)) {
+  if (is.null(x$interval)) {
     interval <- 1L
   } else {
-    interval <- x$rules$interval
+    interval <- x$interval
   }
 
   glue("interval: {interval}")
 }
 
 get_week_start <- function(x) {
-  if (is.null(x$rules$week_start)) {
+  if (is.null(x$week_start)) {
     week_start <- 0L # Monday, same as rrule.js
   } else {
-    week_start <- x$rules$week_start - 1L
+    week_start <- x$week_start - 1L
   }
 
   glue("wkst: {week_start}")
 }
 
 get_mday <- function(x) {
-  if (is.null(x$rules$mday)) {
+  if (is.null(x$mday)) {
     return(NULL)
   }
 
-  mday <- as_js_from_vector(x$rules$mday)
+  mday <- as_js_from_vector(x$mday)
 
   glue("bymonthday: {mday}")
 }
 
 get_ymonth <- function(x) {
-  if (is.null(x$rules$ymonth)) {
+  if (is.null(x$ymonth)) {
     return(NULL)
   }
 
-  ymonth <- as_js_from_vector(x$rules$ymonth)
+  ymonth <- as_js_from_vector(x$ymonth)
 
   glue("bymonth: {ymonth}")
 }
 
 get_yweek <- function(x) {
-  if (is.null(x$rules$yweek)) {
+  if (is.null(x$yweek)) {
     return(NULL)
   }
 
-  yweek <- as_js_from_vector(x$rules$yweek)
+  yweek <- as_js_from_vector(x$yweek)
 
   glue("byweekno: {yweek}")
 }
 
 get_yday <- function(x) {
-  if (is.null(x$rules$yday)) {
+  if (is.null(x$yday)) {
     return(NULL)
   }
 
-  yday <- as_js_from_vector(x$rules$yday)
+  yday <- as_js_from_vector(x$yday)
 
   glue("byyearday: {yday}")
 }
 
 get_wday <- function(x) {
-  if (is.null(x$rules$wday)) {
+  if (is.null(x$wday)) {
     return(NULL)
   }
 
-  wdays <- x$rules$wday
+  wdays <- x$wday
   wday_strings <- character()
 
   for (i in seq_along(wdays)) {
@@ -181,19 +181,19 @@ get_js_wday_base <- function(wday) {
 }
 
 get_position <- function(x) {
-  if (is.null(x$rules$position)) {
+  if (is.null(x$position)) {
     return(NULL)
   }
 
-  position <- as_js_from_vector(x$rules$position)
+  position <- as_js_from_vector(x$position)
 
   glue("bysetpos: {position}")
 }
 
 get_easter <- function(x) {
-  if (is.null(x$rules$easter)) {
+  if (is.null(x$easter)) {
     return(NULL)
   }
 
-  glue("byeaster: {x$rules$easter}")
+  glue("byeaster: {x$easter}")
 }

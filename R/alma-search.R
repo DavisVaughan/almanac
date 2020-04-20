@@ -36,14 +36,13 @@ alma_search <- function(from, to, rbundle, inclusive = TRUE) {
     abort("`from` and `to` cannot be `NA`")
   }
 
-  rbundle <- as_rbundle(rbundle)
-
   vec_assert(inclusive, logical(), 1L)
   if (is.na(inclusive)) {
     abort("`inclusive` cannot be `NA`")
   }
 
-  events <- rbundle$cache$get_events()
+  cacher <- as_cacher(rbundle)
+  events <- cacher_events(cacher)
 
   alma_search_impl(events, from, to, inclusive)
 }
