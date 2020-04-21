@@ -1,15 +1,13 @@
 #' Add to an rbundle
 #'
 #' @description
-#' - `add_rrule()` adds a rrule to an rbundle.
+#' - `add_cacher()` adds a rrule to an rbundle.
 #'
 #' - `add_rdate()` adds a rdate to an rbundle. rdates are singular
 #'   special cased dates that are forcibly included in the recurrence set.
 #'
 #' - `add_exdate()` adds an exdate to a rbundle. exdates are singular
 #'   special cased dates that are forcibly excluded from the recurrence set.
-#'
-#' - `add_rbundle()` merges two rbundles together.
 #'
 #' @details
 #' In terms of priority:
@@ -33,8 +31,8 @@
 #'   on_wday("Tuesday")
 #'
 #' rbundle() %>%
-#'   add_rrule(on_5th_of_the_month) %>%
-#'   add_rrule(on_tuesday)
+#'   add_cacher(on_5th_of_the_month) %>%
+#'   add_cacher(on_tuesday)
 #' ```
 #'
 #' @param x `[rbundle]`
@@ -71,9 +69,9 @@
 #'   recur_on_wday("Mon", 1)
 #'
 #' rb <- rbundle() %>%
-#'   add_rrule(on_thanksgiving) %>%
-#'   add_rrule(on_christmas) %>%
-#'   add_rrule(on_labor_day)
+#'   add_cacher(on_thanksgiving) %>%
+#'   add_cacher(on_christmas) %>%
+#'   add_cacher(on_labor_day)
 #'
 #' # Thanksgiving, Christmas, or Labor Day
 #' alma_search("2019-01-01", "2021-01-01", rb)
@@ -88,14 +86,14 @@ NULL
 
 #' @rdname rbundle-add
 #' @export
-add_rrule <- function(x, rrule) {
+add_cacher <- function(x, cacher) {
   validate_rbundle(x)
-  validate_rrule(rrule, arg = "`rrule`")
+  validate_cacher(cacher, x_arg = "cacher")
 
-  rrules <- c(x$rrules, list(rrule))
+  cachers <- c(x$cachers, list(cacher))
 
   new_rbundle(
-    rrules = rrules,
+    cachers = cachers,
     rdates = x$rdates,
     exdates = x$exdates
   )
@@ -113,7 +111,7 @@ add_rdate <- function(x, rdate) {
   rdates <- unique(rdates)
 
   new_rbundle(
-    rrules = x$rrules,
+    cachers = x$cachers,
     rdates = rdates,
     exdates = x$exdates
   )
@@ -131,29 +129,8 @@ add_exdate <- function(x, exdate) {
   exdates <- vec_unique(exdates)
 
   new_rbundle(
-    rrules = x$rrules,
+    cachers = x$cachers,
     rdates = x$rdates,
-    exdates = exdates
-  )
-}
-
-#' @rdname rbundle-add
-#' @export
-add_rbundle <- function(x, rbundle) {
-  validate_rbundle(x)
-  validate_rbundle(rbundle, "`rbundle`")
-
-  rrules <- c(x$rrules, rbundle$rrules)
-
-  rdates <- c(x$rdates, rbundle$rdates)
-  rdates <- vec_unique(rdates)
-
-  exdates <- c(x$exdates, rbundle$exdates)
-  exdates <- vec_unique(exdates)
-
-  new_rbundle(
-    rrules = rrules,
-    rdates = rdates,
     exdates = exdates
   )
 }

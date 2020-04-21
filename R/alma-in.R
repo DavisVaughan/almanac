@@ -27,8 +27,8 @@
 #'
 #' # Make a larger rbundle made of multiple rules
 #' rb <- rbundle() %>%
-#'  add_rrule(rrule) %>%
-#'  add_rrule(rrule2)
+#'  add_cacher(rrule) %>%
+#'  add_cacher(rrule2)
 #'
 #' alma_in(x, rb)
 alma_in <- function(x, rbundle) {

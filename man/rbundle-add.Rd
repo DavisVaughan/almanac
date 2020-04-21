@@ -2,28 +2,21 @@
 % Please edit documentation in R/rbundle-add.R
 \name{rbundle-add}
 \alias{rbundle-add}
-\alias{add_rrule}
+\alias{add_cacher}
 \alias{add_rdate}
 \alias{add_exdate}
-\alias{add_rbundle}
 \title{Add to an rbundle}
 \usage{
-add_rrule(x, rrule)
+add_cacher(x, cacher)
 
 add_rdate(x, rdate)
 
 add_exdate(x, exdate)
-
-add_rbundle(x, rbundle)
 }
 \arguments{
 \item{x}{\verb{[rbundle]}
 
 An rbundle to add to.}
-
-\item{rrule}{\verb{[rrule]}
-
-An rrule to add to the rbundle.}
 
 \item{rdate}{\verb{[Date]}
 
@@ -33,18 +26,21 @@ Dates to forcibly include in the rbundle.}
 
 Dates to forcibly exclude from the rbundle.}
 
+\item{rrule}{\verb{[rrule]}
+
+An rrule to add to the rbundle.}
+
 \item{rbundle}{\verb{[rbundle]}
 
 An rbundle to merge with \code{x}.}
 }
 \description{
 \itemize{
-\item \code{add_rrule()} adds a rrule to an rbundle.
+\item \code{add_cacher()} adds a rrule to an rbundle.
 \item \code{add_rdate()} adds a rdate to an rbundle. rdates are singular
 special cased dates that are forcibly included in the recurrence set.
 \item \code{add_exdate()} adds an exdate to a rbundle. exdates are singular
 special cased dates that are forcibly excluded from the recurrence set.
-\item \code{add_rbundle()} merges two rbundles together.
 }
 }
 \details{
@@ -65,8 +61,8 @@ on_tuesday <- weekly() \%>\%
   on_wday("Tuesday")
 
 rbundle() \%>\%
-  add_rrule(on_5th_of_the_month) \%>\%
-  add_rrule(on_tuesday)
+  add_cacher(on_5th_of_the_month) \%>\%
+  add_cacher(on_tuesday)
 }
 }
 \examples{
@@ -83,9 +79,9 @@ on_labor_day <- monthly() \%>\%
   recur_on_wday("Mon", 1)
 
 rb <- rbundle() \%>\%
-  add_rrule(on_thanksgiving) \%>\%
-  add_rrule(on_christmas) \%>\%
-  add_rrule(on_labor_day)
+  add_cacher(on_thanksgiving) \%>\%
+  add_cacher(on_christmas) \%>\%
+  add_cacher(on_labor_day)
 
 # Thanksgiving, Christmas, or Labor Day
 alma_search("2019-01-01", "2021-01-01", rb)

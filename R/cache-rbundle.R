@@ -4,8 +4,8 @@ cache_rbundle <- R6::R6Class(
 
   # ----------------------------------------------------------------------------
   public = list(
-    initialize = function(rrules, rdates, exdates)
-      cache_rbundle__initialize(self, private, rrules, rdates, exdates),
+    initialize = function(cachers, rdates, exdates)
+      cache_rbundle__initialize(self, private, cachers, rdates, exdates),
 
     get_events = function()
       cache_rbundle__get_events(self, private)
@@ -13,7 +13,7 @@ cache_rbundle <- R6::R6Class(
 
   # ----------------------------------------------------------------------------
   private = list(
-    rrules = list(),
+    cachers = list(),
     rdates = new_date(),
     exdates = new_date(),
 
@@ -28,7 +28,45 @@ cache_rbundle <- R6::R6Class(
 # ------------------------------------------------------------------------------
 
 cache_rbundle__cache_build <- function(self, private) {
-  rrules <- private$rrules
+  if (all_rrules(private$cachers)) {
+    # When all `cachers` are `rrules`, we can optimize into 1 JS call
+    cache_rbundle__cache_build_rrules(self, private)
+  } else {
+    cache_rbundle__cache_build_impl(self, private)
+  }
+}
+
+cache_rbundle__cache_build_impl <- function(self, private) {
+  cachers <- private$cachers
+  rdates <- private$rdates
+  exdates <- private$exdates
+
+  # Get events for each cacher
+  cachers_events <- map(cachers, cacher_events)
+
+  # Forcibly include `rdates`
+  if (!vec_is_empty(rdates)) {
+    cachers_events <- c(cachers_events, list(rdates))
+  }
+
+  # Combine, sort, and uniquify
+  events <- vec_unchop(cachers_events, ptype = new_date())
+  events <- vec_unique(events)
+  events <- vec_sort(events)
+
+  # Forcibly remove `exdates`
+  if (!vec_is_empty(exdates)) {
+    events <- vec_set_diff(events, exdates)
+  }
+
+  private$events <- events
+  private$built <- TRUE
+
+  invisible(self)
+}
+
+cache_rbundle__cache_build_rrules <- function(self, private) {
+  rrules <- private$cachers
   rdates <- private$rdates
   exdates <- private$exdates
 
@@ -81,8 +119,8 @@ cache_rbundle__get_events <- function(self, private) {
 
 # ------------------------------------------------------------------------------
 
-cache_rbundle__initialize <- function(self, private, rrules, rdates, exdates) {
-  private$rrules <- rrules
+cache_rbundle__initialize <- function(self, private, cachers, rdates, exdates) {
+  private$cachers <- cachers
   private$rdates <- rdates
   private$exdates <- exdates
   self
@@ -147,3 +185,6 @@ parse_js_date <- function(x) {
   as.Date(x)
 }
 
+all_rrules <- function(x) {
+  all(map_lgl(x, is_rrule))
+}

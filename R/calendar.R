@@ -59,7 +59,11 @@ new_calendar <- function(name, since, until, adjuster, holidays = list()) {
     adjuster = adjuster
   )
 
-  cache <- cache_rcollection$new(cachers = cachers)
+  cache <- cache_rbundle$new(
+    cachers = cachers,
+    rdates = new_date(),
+    exdates = new_date()
+  )
 
   data <- list(
     name = name,

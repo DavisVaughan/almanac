@@ -34,8 +34,8 @@ on_monday <- weekly() \%>\% recur_on_wday("Monday")
 
 # On the 12th of the month, or on Mondays
 rb <- rbundle() \%>\%
-  add_rrule(on_12th) \%>\%
-  add_rrule(on_monday)
+  add_cacher(on_12th) \%>\%
+  add_cacher(on_monday)
 
 alma_next(c("2019-01-01", "2019-01-11"), rb)
 alma_previous(c("2019-01-01", "2019-01-11"), rb)

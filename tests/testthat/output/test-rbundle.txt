@@ -3,5 +3,5 @@ Empty rbundle
 =============
 
 > rbundle()
-rbundle: 0 rrules / 0 rdates / 0 exdates
+rbundle: 0 cachers / 0 rdates / 0 exdates
 
