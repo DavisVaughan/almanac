@@ -33,7 +33,7 @@ cache_radjusted__cache_build <- function(self, private) {
   adjustment <- private$adjustment
 
   # Get the events of `rschedule`
-  events <- cacher_events(rschedule)
+  events <- rschedule_events(rschedule)
 
   # Adjust them as necessary according to `adjustment_rschedule`
   events <- adjustment(events, adjustment_rschedule)

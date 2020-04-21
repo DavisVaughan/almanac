@@ -84,7 +84,7 @@ NULL
 #' @export
 add_cacher <- function(x, cacher) {
   validate_rbundle(x)
-  validate_cacher(cacher, x_arg = "cacher")
+  validate_rschedule(cacher, x_arg = "cacher")
 
   cachers <- c(x$cachers, list(cacher))
 

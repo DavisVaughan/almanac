@@ -39,8 +39,8 @@ alma_search <- function(from, to, rschedule, inclusive = TRUE) {
     abort("`inclusive` cannot be `NA`")
   }
 
-  validate_cacher(rschedule, "rschedule")
-  events <- cacher_events(rschedule)
+  validate_rschedule(rschedule, "rschedule")
+  events <- rschedule_events(rschedule)
 
   alma_search_impl(events, from, to, inclusive)
 }

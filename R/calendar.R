@@ -90,7 +90,7 @@ new_calendar <- function(name, since, until, adjuster, hldys = list(), cachers =
     cache = cache
   )
 
-  new_cacher(data, class = "calendar")
+  new_rschedule(data, class = "calendar")
 }
 
 # ------------------------------------------------------------------------------

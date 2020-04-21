@@ -42,7 +42,7 @@ cache_rbundle__cache_build_impl <- function(self, private) {
   exdates <- private$exdates
 
   # Get events for each rschedule
-  rschedules_events <- map(rschedules, cacher_events)
+  rschedules_events <- map(rschedules, rschedule_events)
 
   # Forcibly include `rdates`
   if (!vec_is_empty(rdates)) {

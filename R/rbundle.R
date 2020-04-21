@@ -67,7 +67,7 @@ new_rbundle <- function(cachers = list(),
     cache = cache
   )
 
-  new_cacher(data, class = "rbundle")
+  new_rschedule(data, class = "rbundle")
 }
 
 # ------------------------------------------------------------------------------

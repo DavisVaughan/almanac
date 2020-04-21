@@ -23,6 +23,6 @@
 #'
 #' alma_events(rb)
 alma_events <- function(rschedule) {
-  validate_cacher(rschedule, "rschedule")
-  cacher_events(rschedule)
+  validate_rschedule(rschedule, "rschedule")
+  rschedule_events(rschedule)
 }

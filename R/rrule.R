@@ -166,7 +166,7 @@ new_rrule <- function(since = as.Date("1970-01-01"),
     cache = cache
   )
 
-  new_cacher(data, class = "rrule")
+  new_rschedule(data, class = "rrule")
 }
 
 # ------------------------------------------------------------------------------

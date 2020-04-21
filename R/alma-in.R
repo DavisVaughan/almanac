@@ -27,7 +27,7 @@
 #' alma_in(x, rb)
 alma_in <- function(x, rschedule) {
   x <- vec_cast_date(x)
-  validate_cacher(rschedule, "rschedule")
-  events <- cacher_events(rschedule)
+  validate_rschedule(rschedule, "rschedule")
+  events <- rschedule_events(rschedule)
   vec_in(x, events)
 }
