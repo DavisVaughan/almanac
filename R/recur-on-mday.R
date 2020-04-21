@@ -57,7 +57,7 @@
 #'
 #' @export
 recur_on_mday <- function(x, mday) {
-  validate_rrule(x)
+  validate_rrule(x, "x")
 
   old <- get_rule(x, "mday")
   new <- vec_cast(mday, integer(), x_arg = "mday")

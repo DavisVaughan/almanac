@@ -51,7 +51,7 @@
 #'
 #' @export
 recur_on_yweek <- function(x, yweek) {
-  validate_rrule(x)
+  validate_rrule(x, "x")
 
   old <- get_rule(x, "yweek")
   new <- vec_cast(yweek, integer(), x_arg = "yweek")

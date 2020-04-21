@@ -37,7 +37,7 @@
 #' alma_search("1999-01-01", "2001-01-01", on_easter_back_93_days)
 #' alma_search("1999-01-01", "2001-01-01", on_easter_back_94_days)
 recur_on_easter <- function(x, offset = 0L) {
-  validate_rrule(x)
+  validate_rrule(x, "x")
 
   if (is_already_set(x, "easter")) {
     abort("The `easter` rule has already been set.")

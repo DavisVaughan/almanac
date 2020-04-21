@@ -32,7 +32,7 @@
 #'
 #' @export
 recur_on_interval <- function(x, n) {
-  validate_rrule(x)
+  validate_rrule(x, "x")
 
   if (is_already_set(x, "interval")) {
     abort("`interval` has already been set for this rrule.")

@@ -37,7 +37,7 @@
 #'
 #' alma_search("2019-01-01", "2020-01-01", on_31_for_5)
 recur_for_count <- function(x, n) {
-  validate_rrule(x)
+  validate_rrule(x, "x")
 
   if (is_already_set(x, "count")) {
     abort("`count` has already been set for this rrule.")
