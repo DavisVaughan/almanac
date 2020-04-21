@@ -83,7 +83,13 @@ cache_rbundle__cache_build_rrules <- function(self, private) {
 
 cache_rbundle_build_call <- function(rrules, rdates, exdates) {
   body <- cache_rbundle_build_call_body(rrules, rdates, exdates)
-  as_js_build_call(body)
+
+  glue2("
+    function() {
+      [[body]]
+      return ruleset.all()
+    }
+  ")
 }
 
 cache_rbundle_build_call_body <- function(rrules, rdates, exdates) {
@@ -127,15 +133,6 @@ cache_rbundle__initialize <- function(self, private, cachers, rdates, exdates) {
 }
 
 # ------------------------------------------------------------------------------
-
-as_js_build_call <- function(body) {
-  glue2("
-    function() {
-      [[body]]
-      return ruleset.all()
-    }
-  ")
-}
 
 append_rrule <- function(body, rules) {
   rules <- as_js_from_rrule(rules)
