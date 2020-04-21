@@ -120,7 +120,7 @@ validate_adjustment <- function(x, x_arg = "") {
   fmls <- fn_fmls(x)
 
   if (length(fmls) != 2L) {
-    abort("Input{x_arg} must have two arguments, `x` and `rbundle`.")
+    abort("Input{x_arg} must have two arguments, `x` and `rschedule`.")
   }
 
   x
