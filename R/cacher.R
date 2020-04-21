@@ -18,9 +18,13 @@ is_cacher <- function(x) {
   inherits(x, "cacher")
 }
 
-validate_cacher <- function(x, x_arg = "x") {
+validate_cacher <- function(x, x_arg = "") {
+  if (nzchar(x_arg)) {
+    x_arg <- glue(" `{x_arg}`")
+  }
+
   if (!is_cacher(x)) {
-    glubort("`{x_arg}` must be a rrule, rbundle, or calendar.")
+    glubort("Input{x_arg} must be a rrule, rbundle, or calendar.")
   }
 
   invisible(x)
