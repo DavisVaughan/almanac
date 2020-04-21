@@ -7,6 +7,12 @@
 
 # ------------------------------------------------------------------------------
 
+radjusted <- function(cacher, adjuster, adjustment) {
+  new_radjusted(cacher, adjuster, adjustment)
+}
+
+# ------------------------------------------------------------------------------
+
 new_radjusted <- function(cacher, adjuster, adjustment) {
   validate_cacher(cacher, "cacher")
   validate_cacher(adjuster, "adjuster")

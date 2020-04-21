@@ -27,7 +27,7 @@ hldy_martin_luther_king_jr_day_generator <- function(since, until, adjuster, adj
   rrule <- recur_on_ymonth(rrule, 1L)
   rrule <- recur_on_wday(rrule, 1L, nth = 3L)
 
-  radjusted <- new_radjusted(rrule, adjuster, adjustment)
+  radjusted <- radjusted(rrule, adjuster, adjustment)
 
   radjusted
 }
@@ -47,7 +47,7 @@ hldy_christmas_generator <- function(since, until, adjuster, adjustment) {
   rrule <- recur_on_ymonth(rrule, 12L)
   rrule <- recur_on_mday(rrule, 25L)
 
-  radjusted <- new_radjusted(rrule, adjuster, adjustment)
+  radjusted <- radjusted(rrule, adjuster, adjustment)
 
   radjusted
 }
