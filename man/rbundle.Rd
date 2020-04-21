@@ -15,12 +15,12 @@ will be sufficient. However, more complex rules can be constructed
 by combining simple rules into a \emph{recurrence bundle}.
 
 \code{rbundle()} creates a new empty recurrence bundle. Add recurrence rules to
-the bundle with \code{\link[=add_cacher]{add_cacher()}}. Add required dates with \code{\link[=add_rdate]{add_rdate()}}.
+the bundle with \code{\link[=add_rschedule]{add_rschedule()}}. Add required dates with \code{\link[=add_rdate]{add_rdate()}}.
 }
 \examples{
 rbundle()
-add_cacher(rbundle(), monthly())
+add_rschedule(rbundle(), monthly())
 }
 \seealso{
-\code{\link[=add_cacher]{add_cacher()}}
+\code{\link[=add_rschedule]{add_rschedule()}}
 }

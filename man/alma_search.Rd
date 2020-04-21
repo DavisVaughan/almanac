@@ -28,8 +28,8 @@ on_monday <- weekly() \%>\% recur_on_wday("Monday")
 
 # On the 12th of the month, or on Mondays
 rb <- rbundle() \%>\%
-  add_cacher(on_12th) \%>\%
-  add_cacher(on_monday)
+  add_rschedule(on_12th) \%>\%
+  add_rschedule(on_monday)
 
 alma_search("2019-01-01", "2019-01-31", rb)
 }

@@ -55,8 +55,8 @@
 #'   recur_on_mday(16)
 #'
 #' rb <- rbundle() %>%
-#'   add_cacher(on_09_16) %>%
-#'   add_cacher(on_weekends)
+#'   add_rschedule(on_09_16) %>%
+#'   add_rschedule(on_weekends)
 #'
 #' alma_step("2019-09-13", 2, rb)
 #' @export

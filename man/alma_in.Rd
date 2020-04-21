@@ -34,8 +34,8 @@ rrule2 <- monthly() \%>\%
 
 # Make a larger rbundle made of multiple rules
 rb <- rbundle() \%>\%
- add_cacher(rrule) \%>\%
- add_cacher(rrule2)
+ add_rschedule(rrule) \%>\%
+ add_rschedule(rrule2)
 
 alma_in(x, rb)
 }

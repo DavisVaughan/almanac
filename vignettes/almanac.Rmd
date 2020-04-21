@@ -157,8 +157,8 @@ on_christmas <- yearly(since = "2000-01-01") %>%
   recur_on_mday(25)
 
 rb_christmas_or_labor_day <- rbundle() %>%
-  add_cacher(on_christmas) %>%
-  add_cacher(on_labor_day)
+  add_rschedule(on_christmas) %>%
+  add_rschedule(on_labor_day)
 
 alma_search("2000-01-01", "2002-01-01", rb_christmas_or_labor_day)
 

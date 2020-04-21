@@ -23,8 +23,8 @@
 #' alma_search("1999-01-01", "2001-01-01", on_easter)
 #'
 #' rb <- rbundle() %>%
-#'   add_cacher(on_easter) %>%
-#'   add_cacher(on_easter_monday)
+#'   add_rschedule(on_easter) %>%
+#'   add_rschedule(on_easter_monday)
 #'
 #' alma_search("1999-01-01", "2001-01-01", rb)
 #'

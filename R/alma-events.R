@@ -18,8 +18,8 @@
 #'   recur_for_count(5)
 #'
 #' rb <- rbundle() %>%
-#'   add_cacher(rrule) %>%
-#'   add_cacher(rrule_weekly)
+#'   add_rschedule(rrule) %>%
+#'   add_rschedule(rrule_weekly)
 #'
 #' alma_events(rb)
 alma_events <- function(rschedule) {

@@ -1,7 +1,8 @@
 #' Add to an rbundle
 #'
 #' @description
-#' - `add_cacher()` adds a rrule to an rbundle.
+#' - `add_rschedule()` adds an rschedule to an rbundle. This can be another
+#'   rrule or another rbundle.
 #'
 #' - `add_rdate()` adds a rdate to an rbundle. rdates are singular
 #'   special cased dates that are forcibly included in the recurrence set.
@@ -16,7 +17,7 @@
 #'
 #' - A rdate will always be included if it is not also an exdate.
 #'
-#' - An event generated from a rrule will always be included if it is not
+#' - An event generated from an rschedule will always be included if it is not
 #'   also an exdate.
 #'
 #' Combining two rrules into the same rbundle is a way of joining them using
@@ -31,17 +32,15 @@
 #'   on_wday("Tuesday")
 #'
 #' rbundle() %>%
-#'   add_cacher(on_5th_of_the_month) %>%
-#'   add_cacher(on_tuesday)
+#'   add_rschedule(on_5th_of_the_month) %>%
+#'   add_rschedule(on_tuesday)
 #' ```
+#'
+#' @inheritParams adj_following
 #'
 #' @param x `[rbundle]`
 #'
 #'   An rbundle to add to.
-#'
-#' @param cacher `[cacher]`
-#'
-#'   A cacher to add to the rbundle.
 #'
 #' @param rdate `[Date]`
 #'
@@ -65,9 +64,9 @@
 #'   recur_on_wday("Mon", 1)
 #'
 #' rb <- rbundle() %>%
-#'   add_cacher(on_thanksgiving) %>%
-#'   add_cacher(on_christmas) %>%
-#'   add_cacher(on_labor_day)
+#'   add_rschedule(on_thanksgiving) %>%
+#'   add_rschedule(on_christmas) %>%
+#'   add_rschedule(on_labor_day)
 #'
 #' # Thanksgiving, Christmas, or Labor Day
 #' alma_search("2019-01-01", "2021-01-01", rb)
@@ -82,14 +81,14 @@ NULL
 
 #' @rdname rbundle-add
 #' @export
-add_cacher <- function(x, cacher) {
+add_rschedule <- function(x, rschedule) {
   validate_rbundle(x)
-  validate_rschedule(cacher, x_arg = "cacher")
+  validate_rschedule(rschedule, x_arg = "rschedule")
 
-  cachers <- c(x$cachers, list(cacher))
+  rschedules <- c(x$rschedules, list(rschedule))
 
   new_rbundle(
-    cachers = cachers,
+    rschedules = rschedules,
     rdates = x$rdates,
     exdates = x$exdates
   )
@@ -107,7 +106,7 @@ add_rdate <- function(x, rdate) {
   rdates <- unique(rdates)
 
   new_rbundle(
-    cachers = x$cachers,
+    rschedules = x$rschedules,
     rdates = rdates,
     exdates = x$exdates
   )
@@ -125,7 +124,7 @@ add_exdate <- function(x, exdate) {
   exdates <- vec_unique(exdates)
 
   new_rbundle(
-    cachers = x$cachers,
+    rschedules = x$rschedules,
     rdates = x$rdates,
     exdates = exdates
   )

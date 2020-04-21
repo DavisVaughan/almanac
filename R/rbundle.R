@@ -6,16 +6,16 @@
 #' by combining simple rules into a _recurrence bundle_.
 #'
 #' `rbundle()` creates a new empty recurrence bundle. Add recurrence rules to
-#' the bundle with [add_cacher()]. Add required dates with [add_rdate()].
+#' the bundle with [add_rschedule()]. Add required dates with [add_rdate()].
 #'
 #' @return
 #' An empty rbundle.
 #'
-#' @seealso [add_cacher()]
+#' @seealso [add_rschedule()]
 #' @export
 #' @examples
 #' rbundle()
-#' add_cacher(rbundle(), monthly())
+#' add_rschedule(rbundle(), monthly())
 rbundle <- function() {
   new_rbundle()
 }
