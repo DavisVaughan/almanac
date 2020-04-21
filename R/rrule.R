@@ -191,12 +191,12 @@ is_rrule <- function(x) {
 
 # ------------------------------------------------------------------------------
 
-validate_rrule <- function(x, arg = "") {
+validate_rrule <- function(x, x_arg = "") {
   if (nzchar(x_arg)) {
     x_arg <- glue(" `{x_arg}`")
   }
 
-  if (!is_rbundle(x)) {
+  if (!is_rrule(x)) {
     glubort("Input{x_arg} must be an rrule.")
   }
 
