@@ -1,12 +1,12 @@
 #' Get all events
 #'
-#' `alma_events()` retrieves all of the events in the rbundle's recurrence set.
+#' `alma_events()` retrieves all of the events in the rschedule's
+#' recurrence set.
 #'
-#' @param rbundle `[rbundle / rrule]`
+#' @inheritParams adj_following
 #'
-#'   An rbundle or rrule.
-#'
-#' @return A `Date` vector of events.
+#' @return
+#' A `Date` vector of events.
 #'
 #' @export
 #' @examples
@@ -17,12 +17,12 @@
 #' rrule_weekly <- weekly(since = "1970-01-01") %>%
 #'   recur_for_count(5)
 #'
-#' rb <- rbundle() %>%
+#' rsched <- rschedule() %>%
 #'   add_cacher(rrule) %>%
 #'   add_cacher(rrule_weekly)
 #'
-#' alma_events(rb)
-alma_events <- function(rbundle) {
-  validate_cacher(rbundle, "rbundle")
-  cacher_events(rbundle)
+#' alma_events(rsched)
+alma_events <- function(rschedule) {
+  validate_cacher(rschedule, "rschedule")
+  cacher_events(rschedule)
 }
