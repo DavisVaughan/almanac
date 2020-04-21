@@ -160,23 +160,23 @@
 <span class="co"># The first time is "slow"</span>
 <span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>(<span class="fu"><a href="../reference/alma_search.html">alma_search</a></span>(<span class="no">start_date</span>, <span class="st">"2000-01-01"</span>, <span class="no">on_daily</span>))
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;   0.326   0.024   0.311</span>
+<span class="co">#&gt;   0.237   0.019   0.224</span>
 
 <span class="co"># Repeated access to the same location is fast</span>
 <span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>(<span class="fu"><a href="../reference/alma_search.html">alma_search</a></span>(<span class="no">start_date</span>, <span class="st">"2000-01-01"</span>, <span class="no">on_daily</span>))
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;   0.001   0.000   0.001</span>
+<span class="co">#&gt;   0.000   0.000   0.001</span>
 
 <span class="co"># Dates are cached from `[since, to]`, so if you back up `to`, its still fast</span>
 <span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>(<span class="fu"><a href="../reference/alma_search.html">alma_search</a></span>(<span class="no">start_date</span>, <span class="st">"1990-05-01"</span>, <span class="no">on_daily</span>))
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;   0.001   0.000   0.000</span>
+<span class="co">#&gt;   0.001   0.000   0.001</span>
 
 <span class="co"># But when you extend `to` forward in time, it will have to generate all dates</span>
 <span class="co"># between `since` and `to` again</span>
 <span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>(<span class="fu"><a href="../reference/alma_search.html">alma_search</a></span>(<span class="no">start_date</span>, <span class="st">"2000-05-01"</span>, <span class="no">on_daily</span>))
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;       0       0       0</span></pre></body></html></div>
+<span class="co">#&gt;   0.000   0.000   0.001</span></pre></body></html></div>
 </div>
 </div>
 <div id="recurrence-conditions" class="section level2">
