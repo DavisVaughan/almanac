@@ -179,8 +179,8 @@ alma_previous() generates the previous event before x.
 
 <span class='co'># On the 12th of the month, or on Mondays</span>
 <span class='no'>rb</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rbundle.html'>rbundle</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='rbundle-add.html'>add_rrule</a></span>(<span class='no'>on_12th</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='rbundle-add.html'>add_rrule</a></span>(<span class='no'>on_monday</span>)
+  <span class='fu'><a href='rbundle-add.html'>add_cacher</a></span>(<span class='no'>on_12th</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='rbundle-add.html'>add_cacher</a></span>(<span class='no'>on_monday</span>)
 
 <span class='fu'>alma_next</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"2019-01-01"</span>, <span class='st'>"2019-01-11"</span>), <span class='no'>rb</span>)</div><div class='output co'>#&gt; [1] "2019-01-07" "2019-01-12"</div><div class='input'><span class='fu'>alma_previous</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"2019-01-01"</span>, <span class='st'>"2019-01-11"</span>), <span class='no'>rb</span>)</div><div class='output co'>#&gt; [1] "2018-12-31" "2019-01-07"</div></pre>
   </div>

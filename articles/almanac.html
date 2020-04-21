@@ -160,17 +160,17 @@
 <span class="co"># The first time is "slow"</span>
 <span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>(<span class="fu"><a href="../reference/alma_search.html">alma_search</a></span>(<span class="no">start_date</span>, <span class="st">"2000-01-01"</span>, <span class="no">on_daily</span>))
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;   0.311   0.021   0.298</span>
+<span class="co">#&gt;   0.326   0.024   0.311</span>
 
 <span class="co"># Repeated access to the same location is fast</span>
 <span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>(<span class="fu"><a href="../reference/alma_search.html">alma_search</a></span>(<span class="no">start_date</span>, <span class="st">"2000-01-01"</span>, <span class="no">on_daily</span>))
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;   0.000   0.000   0.001</span>
+<span class="co">#&gt;   0.001   0.000   0.001</span>
 
 <span class="co"># Dates are cached from `[since, to]`, so if you back up `to`, its still fast</span>
 <span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>(<span class="fu"><a href="../reference/alma_search.html">alma_search</a></span>(<span class="no">start_date</span>, <span class="st">"1990-05-01"</span>, <span class="no">on_daily</span>))
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;       0       0       0</span>
+<span class="co">#&gt;   0.001   0.000   0.000</span>
 
 <span class="co"># But when you extend `to` forward in time, it will have to generate all dates</span>
 <span class="co"># between `since` and `to` again</span>
@@ -220,8 +220,8 @@
   <span class="fu"><a href="../reference/recur_on_mday.html">recur_on_mday</a></span>(<span class="fl">25</span>)
 
 <span class="no">rb_christmas_or_labor_day</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/rbundle.html">rbundle</a></span>() <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/rbundle-add.html">add_rrule</a></span>(<span class="no">on_christmas</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/rbundle-add.html">add_rrule</a></span>(<span class="no">on_labor_day</span>)
+  <span class="fu"><a href="../reference/rbundle-add.html">add_cacher</a></span>(<span class="no">on_christmas</span>) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="../reference/rbundle-add.html">add_cacher</a></span>(<span class="no">on_labor_day</span>)
 
 <span class="fu"><a href="../reference/alma_search.html">alma_search</a></span>(<span class="st">"2000-01-01"</span>, <span class="st">"2002-01-01"</span>, <span class="no">rb_christmas_or_labor_day</span>)
 <span class="co">#&gt; [1] "2000-09-04" "2000-12-25" "2001-09-03" "2001-12-25"</span>

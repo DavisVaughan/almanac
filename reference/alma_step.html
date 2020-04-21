@@ -210,8 +210,8 @@ is Tuesday.</p>
   <span class='fu'><a href='recur_on_mday.html'>recur_on_mday</a></span>(<span class='fl'>16</span>)
 
 <span class='no'>rb</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rbundle.html'>rbundle</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='rbundle-add.html'>add_rrule</a></span>(<span class='no'>on_09_16</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='rbundle-add.html'>add_rrule</a></span>(<span class='no'>on_weekends</span>)
+  <span class='fu'><a href='rbundle-add.html'>add_cacher</a></span>(<span class='no'>on_09_16</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='rbundle-add.html'>add_cacher</a></span>(<span class='no'>on_weekends</span>)
 
 <span class='fu'>alma_step</span>(<span class='st'>"2019-09-13"</span>, <span class='fl'>2</span>, <span class='no'>rb</span>)</div><div class='output co'>#&gt; [1] "2019-09-18"</div></pre>
   </div>
