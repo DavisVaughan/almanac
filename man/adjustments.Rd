@@ -7,6 +7,7 @@
 \alias{adj_modified_following}
 \alias{adj_modified_preceding}
 \alias{adj_nearest}
+\alias{adj_none}
 \title{Date adjustments}
 \usage{
 adj_following(x, rbundle)
@@ -18,6 +19,8 @@ adj_modified_following(x, rbundle)
 adj_modified_preceding(x, rbundle)
 
 adj_nearest(x, rbundle)
+
+adj_none(x, rbundle)
 }
 \arguments{
 \item{x}{\verb{[Date]}

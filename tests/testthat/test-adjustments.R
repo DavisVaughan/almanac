@@ -202,3 +202,13 @@ test_that("+/- Inf is allowed", {
   expect_identical(adj_nearest(almanac_global_inf_date, yearly()), almanac_global_inf_date)
   expect_identical(adj_nearest(almanac_global_neg_inf_date, yearly()), almanac_global_neg_inf_date)
 })
+
+
+# ------------------------------------------------------------------------------
+# adj_none()
+
+test_that("adj_none() does nothing", {
+  x <- as.Date("1970-01-01")
+  rrule <- daily(since = "1970-01-01", until = "1970-01-01")
+  expect_identical(adj_none(x, rrule), x)
+})

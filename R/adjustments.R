@@ -146,3 +146,11 @@ adj_nearest <- function(x, rbundle) {
 adj_nearest_impl <- function(x, events) {
   .Call(export_adj_nearest_impl, x, events)
 }
+
+#' @rdname adjustments
+#' @export
+adj_none <- function(x, rbundle) {
+  x <- vec_cast_date(x)
+  validate_cacher(rbundle, "rbundle")
+  x
+}
