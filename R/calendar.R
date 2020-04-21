@@ -29,57 +29,68 @@ add_hldy <- function(calendar, hldy) {
   validate_calendar(calendar)
   validate_hldy(hldy)
 
-  holidays <- c(calendar$holidays, list(hldy))
+  generator <- hldy$generator
+  adjustment <- hldy$adjustment
+
+  since <- calendar$since
+  until <- calendar$until
+  adjuster <- calendar$adjuster
+
+  # Generate the holiday cacher
+  cacher <- generator(since, until)
+
+  # Create an adjusted version of it
+  cacher <- radjusted(cacher, adjuster, adjustment)
+
+  hldys <- c(calendar$hldys, list(hldy))
+  cachers <- c(calendar$cachers, list(cacher))
 
   new_calendar(
     name = calendar$name,
     since = calendar$since,
     until = calendar$until,
     adjuster = calendar$adjuster,
-    holidays = holidays
+    hldys = hldys,
+    cachers = cachers
   )
 }
 
 # ------------------------------------------------------------------------------
 
-new_calendar <- function(name, since, until, adjuster, holidays = list()) {
+new_calendar <- function(name, since, until, adjuster, hldys = list(), cachers = list()) {
   if (!is_character(name, n = 1L)) {
     abort("`name` must be a size 1 character vector.")
   }
 
-  if (!is_list(holidays)) {
-    abort("`holidays` must be a list of holidays.")
+  if (!is_list(hldys)) {
+    abort("`hldys` must be a list of holidays.")
   }
 
-  cachers <- map(
-    holidays,
-    holiday_initialize,
-    since = since,
-    until = until,
-    adjuster = adjuster
-  )
+  if (!is_list(cachers)) {
+    abort("`cachers` must be a list of cachers")
+  }
 
-  cache <- cache_rbundle$new(
-    cachers = cachers,
-    rdates = new_date(),
-    exdates = new_date()
-  )
+  if (length(cachers) != length(hldys)) {
+    abort("`cachers` length must match `hldys` length.")
+  }
+
+  # Slightly gross, we get the cache of the rbundle but don't use the
+  # rest of it. We don't want to inherit from rbundle, because we don't
+  # want to allow `add_cacher()` to work on calendars.
+  rbundle <- new_rbundle(cachers = cachers)
+  cache <- rbundle$cache
 
   data <- list(
     name = name,
     since = since,
     until = until,
     adjuster = adjuster,
-    holidays = holidays,
+    hldys = hldys,
+    cachers = cachers,
     cache = cache
   )
 
   new_cacher(data, class = "calendar")
-}
-
-holiday_initialize <- function(holiday, since, until, adjuster) {
-  cacher <- holiday$generator(since, until)
-  radjusted(cacher, adjuster, holiday$adjustment)
 }
 
 # ------------------------------------------------------------------------------
