@@ -5,22 +5,22 @@
 \alias{alma_previous}
 \title{Generate the next or previous event}
 \usage{
-alma_next(x, rbundle, inclusive = FALSE)
+alma_next(x, rschedule, inclusive = FALSE)
 
-alma_previous(x, rbundle, inclusive = FALSE)
+alma_previous(x, rschedule, inclusive = FALSE)
 }
 \arguments{
 \item{x}{\verb{[Date]}
 
-A vector of dates to look forward or backwards from.}
+A vector of dates.}
 
-\item{rbundle}{\verb{[rbundle / rrule]}
+\item{rschedule}{\verb{[rschedule]}
 
-A rbundle or rrule.}
+An rschedule, such as an rrule or rbundle.}
 
 \item{inclusive}{\verb{[logical(1)]}
 
-If \code{from} or \code{to} are events, should they be included?}
+If \code{x} is an event, should it be considered the next or previous event?}
 }
 \description{
 \itemize{
@@ -34,8 +34,8 @@ on_monday <- weekly() \%>\% recur_on_wday("Monday")
 
 # On the 12th of the month, or on Mondays
 rb <- rbundle() \%>\%
-  add_cacher(on_12th) \%>\%
-  add_cacher(on_monday)
+  add_rschedule(on_12th) \%>\%
+  add_rschedule(on_monday)
 
 alma_next(c("2019-01-01", "2019-01-11"), rb)
 alma_previous(c("2019-01-01", "2019-01-11"), rb)

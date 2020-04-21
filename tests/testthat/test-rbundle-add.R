@@ -3,10 +3,10 @@ test_that("can add an rrule to an rbundle", {
   b <- weekly()
 
   x <- rbundle()
-  x <- add_cacher(x, a)
-  x <- add_cacher(x, b)
+  x <- add_rschedule(x, a)
+  x <- add_rschedule(x, b)
 
-  expect_identical(x$cachers, list(a, b))
+  expect_identical(x$rschedules, list(a, b))
 })
 
 test_that("can add an rdate to an rbundle", {
@@ -45,16 +45,16 @@ test_that("can add an rbundle to an rbundle", {
   rrule <- daily()
 
   x <- rbundle()
-  x <- add_cacher(x, rrule)
+  x <- add_rschedule(x, rrule)
 
   y <- rbundle()
-  x <- add_cacher(x, y)
+  x <- add_rschedule(x, y)
 
   expect <- rbundle()
-  expect <- add_cacher(expect, rrule)
-  expect <- add_cacher(expect, y)
+  expect <- add_rschedule(expect, rrule)
+  expect <- add_rschedule(expect, y)
 
-  expect_equal(x$cachers, expect$cachers)
+  expect_equal(x$rschedules, expect$rschedules)
 })
 
 test_that("uniqueness of rdates is taken", {

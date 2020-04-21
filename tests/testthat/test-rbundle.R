@@ -1,7 +1,7 @@
 test_that("can create an empty rbundle()", {
   x <- rbundle()
   expect_s3_class(x, "rbundle")
-  expect_identical(x$cachers, list())
+  expect_identical(x$rschedules, list())
   expect_identical(x$rdates, new_date())
   expect_identical(x$exdates, new_date())
 })

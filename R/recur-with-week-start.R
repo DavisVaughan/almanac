@@ -20,7 +20,7 @@
 #'
 #' @export
 recur_with_week_start <- function(x, wday) {
-  validate_rrule(x)
+  validate_rrule(x, "x")
 
   wday <- wday_normalize(wday)
 

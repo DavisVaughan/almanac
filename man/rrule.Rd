@@ -39,11 +39,10 @@ to them, use one of the \verb{recur_*()} functions.
 }
 }
 \details{
-The \code{since} argument is \emph{very} important for both practical use, and speed.
-The default is set to the Unix epoch time, but there is no hard and fast
-rule for doing this. Remember that this is the first possible event date,
-so you may need to move this date backwards in time if you need to generate
-dates before \code{1970-01-01}.
+By default \code{since} is set to the Unix epoch time, but there is no hard and
+fast rule for doing this. Remember that this is the first possible event
+date, so you may need to move this date backwards in time if you need to
+generate dates before \code{1970-01-01}.
 
 In terms of speed, it is more efficient if you adjust the \code{since} date to
 be closer to the first date in the sequence of dates that you are working
@@ -86,6 +85,10 @@ on_first_of_the_quarter_starting_in_feb <- monthly(since = "1998-02-01") \%>\%
   recur_on_interval(3) \%>\%
   recur_on_mday(1)
 
-alma_search("1999-01-01", "2000-04-01", on_first_of_the_quarter_starting_in_feb)
+alma_search(
+  "1999-01-01",
+  "2000-04-01",
+  on_first_of_the_quarter_starting_in_feb
+)
 
 }

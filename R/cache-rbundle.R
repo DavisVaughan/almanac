@@ -4,8 +4,8 @@ cache_rbundle <- R6::R6Class(
 
   # ----------------------------------------------------------------------------
   public = list(
-    initialize = function(cachers, rdates, exdates)
-      cache_rbundle__initialize(self, private, cachers, rdates, exdates),
+    initialize = function(rschedules, rdates, exdates)
+      cache_rbundle__initialize(self, private, rschedules, rdates, exdates),
 
     get_events = function()
       cache_rbundle__get_events(self, private)
@@ -13,7 +13,7 @@ cache_rbundle <- R6::R6Class(
 
   # ----------------------------------------------------------------------------
   private = list(
-    cachers = list(),
+    rschedules = list(),
     rdates = new_date(),
     exdates = new_date(),
 
@@ -28,8 +28,8 @@ cache_rbundle <- R6::R6Class(
 # ------------------------------------------------------------------------------
 
 cache_rbundle__cache_build <- function(self, private) {
-  if (all_rrules(private$cachers)) {
-    # When all `cachers` are `rrules`, we can optimize into 1 JS call
+  if (all_rrules(private$rschedules)) {
+    # When all `rschedules` are `rrules`, we can optimize into 1 JS call
     cache_rbundle__cache_build_rrules(self, private)
   } else {
     cache_rbundle__cache_build_impl(self, private)
@@ -37,20 +37,20 @@ cache_rbundle__cache_build <- function(self, private) {
 }
 
 cache_rbundle__cache_build_impl <- function(self, private) {
-  cachers <- private$cachers
+  rschedules <- private$rschedules
   rdates <- private$rdates
   exdates <- private$exdates
 
-  # Get events for each cacher
-  cachers_events <- map(cachers, cacher_events)
+  # Get events for each rschedule
+  rschedules_events <- map(rschedules, rschedule_events)
 
   # Forcibly include `rdates`
   if (!vec_is_empty(rdates)) {
-    cachers_events <- c(cachers_events, list(rdates))
+    rschedules_events <- c(rschedules_events, list(rdates))
   }
 
   # Combine, sort, and uniquify
-  events <- vec_unchop(cachers_events, ptype = new_date())
+  events <- vec_unchop(rschedules_events, ptype = new_date())
   events <- vec_unique(events)
   events <- vec_sort(events)
 
@@ -66,7 +66,7 @@ cache_rbundle__cache_build_impl <- function(self, private) {
 }
 
 cache_rbundle__cache_build_rrules <- function(self, private) {
-  rrules <- private$cachers
+  rrules <- private$rschedules
   rdates <- private$rdates
   exdates <- private$exdates
 
@@ -125,8 +125,8 @@ cache_rbundle__get_events <- function(self, private) {
 
 # ------------------------------------------------------------------------------
 
-cache_rbundle__initialize <- function(self, private, cachers, rdates, exdates) {
-  private$cachers <- cachers
+cache_rbundle__initialize <- function(self, private, rschedules, rdates, exdates) {
+  private$rschedules <- rschedules
   private$rdates <- rdates
   private$exdates <- exdates
   self

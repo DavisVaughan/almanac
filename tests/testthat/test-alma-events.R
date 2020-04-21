@@ -8,8 +8,8 @@ test_that("can get events from a rbundle", {
   rrule2 <- daily(since = "1970-01-02", until = "1970-01-03")
 
   rb <- rbundle() %>%
-    add_cacher(rrule1) %>%
-    add_cacher(rrule2)
+    add_rschedule(rrule1) %>%
+    add_rschedule(rrule2)
 
   expect_identical(alma_events(rb), new_date(c(0, 1, 2)))
 })

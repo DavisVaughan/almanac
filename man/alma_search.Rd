@@ -4,16 +4,16 @@
 \alias{alma_search}
 \title{Search for events}
 \usage{
-alma_search(from, to, rbundle, inclusive = TRUE)
+alma_search(from, to, rschedule, inclusive = TRUE)
 }
 \arguments{
 \item{from, to}{\verb{[Date(1)]}
 
 Dates defining the range to look for events.}
 
-\item{rbundle}{\verb{[rbundle / rrule]}
+\item{rschedule}{\verb{[rschedule]}
 
-A rbundle or rrule.}
+An rschedule, such as an rrule or rbundle.}
 
 \item{inclusive}{\verb{[logical(1)]}
 
@@ -28,8 +28,8 @@ on_monday <- weekly() \%>\% recur_on_wday("Monday")
 
 # On the 12th of the month, or on Mondays
 rb <- rbundle() \%>\%
-  add_cacher(on_12th) \%>\%
-  add_cacher(on_monday)
+  add_rschedule(on_12th) \%>\%
+  add_rschedule(on_monday)
 
 alma_search("2019-01-01", "2019-01-31", rb)
 }

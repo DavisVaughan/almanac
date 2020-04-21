@@ -34,7 +34,7 @@
 #'
 #' @export
 recur_on_yday <- function(x, yday) {
-  validate_rrule(x)
+  validate_rrule(x, "x")
 
   old <- get_rule(x, "yday")
   new <- vec_cast(yday, integer(), x_arg = "yday")

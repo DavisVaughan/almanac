@@ -14,13 +14,22 @@ Often, a single recurrence rule created from a base rule like \code{monthly()}
 will be sufficient. However, more complex rules can be constructed
 by combining simple rules into a \emph{recurrence bundle}.
 
-\code{rbundle()} creates a new empty recurrence bundle. Add recurrence rules to
-the bundle with \code{\link[=add_cacher]{add_cacher()}}. Add required dates with \code{\link[=add_rdate]{add_rdate()}}.
+\code{rbundle()} creates a new empty recurrence bundle.
+\itemize{
+\item Add recurrence rules or other recurrence bundles with \code{\link[=add_rschedule]{add_rschedule()}}.
+\item Forcibly include dates with \code{\link[=add_rdate]{add_rdate()}}.
+\item Forcibly exclude dates with \code{\link[=add_exdate]{add_exdate()}}.
+}
 }
 \examples{
 rbundle()
-add_cacher(rbundle(), monthly())
+
+on_weekends <- weekly() \%>\%
+  recur_on_weekends()
+
+rbundle() \%>\%
+  add_rschedule(on_weekends)
 }
 \seealso{
-\code{\link[=add_cacher]{add_cacher()}}
+\code{\link[=add_rschedule]{add_rschedule()}}
 }

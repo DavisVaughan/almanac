@@ -5,17 +5,27 @@
 #' will be sufficient. However, more complex rules can be constructed
 #' by combining simple rules into a _recurrence bundle_.
 #'
-#' `rbundle()` creates a new empty recurrence bundle. Add recurrence rules to
-#' the bundle with [add_cacher()]. Add required dates with [add_rdate()].
+#' `rbundle()` creates a new empty recurrence bundle.
+#'
+#' - Add recurrence rules or other recurrence bundles with [add_rschedule()].
+#'
+#' - Forcibly include dates with [add_rdate()].
+#'
+#' - Forcibly exclude dates with [add_exdate()].
 #'
 #' @return
 #' An empty rbundle.
 #'
-#' @seealso [add_cacher()]
+#' @seealso [add_rschedule()]
 #' @export
 #' @examples
 #' rbundle()
-#' add_cacher(rbundle(), monthly())
+#'
+#' on_weekends <- weekly() %>%
+#'   recur_on_weekends()
+#'
+#' rbundle() %>%
+#'   add_rschedule(on_weekends)
 rbundle <- function() {
   new_rbundle()
 }
@@ -29,21 +39,21 @@ print.rbundle <- function(x, ...) {
 }
 
 rbundle_summary <- function(x) {
-  n_cachers <- length(x$cachers)
+  n_rschedules <- length(x$rschedules)
   n_rdates <- length(x$rdates)
   n_exdates <-length(x$exdates)
 
-  glue("{n_cachers} cachers / {n_rdates} rdates / {n_exdates} exdates")
+  glue("{n_rschedules} rschedules / {n_rdates} rdates / {n_exdates} exdates")
 }
 
 # ------------------------------------------------------------------------------
 
-new_rbundle <- function(cachers = list(),
+new_rbundle <- function(rschedules = list(),
                         rdates = new_date(),
                         exdates = new_date()) {
 
-  if (!is_list(cachers)) {
-    abort("`cachers` must be a list.")
+  if (!is_list(rschedules)) {
+    abort("`rschedules` must be a list.")
   }
 
   if (!is_date(rdates)) {
@@ -55,19 +65,19 @@ new_rbundle <- function(cachers = list(),
   }
 
   cache <- cache_rbundle$new(
-    cachers = cachers,
+    rschedules = rschedules,
     rdates = rdates,
     exdates = exdates
   )
 
   data <- list(
-    cachers = cachers,
+    rschedules = rschedules,
     rdates = rdates,
     exdates = exdates,
     cache = cache
   )
 
-  new_cacher(data, class = "rbundle")
+  new_rschedule(data, class = "rbundle")
 }
 
 # ------------------------------------------------------------------------------
@@ -92,9 +102,13 @@ is_rbundle <- function(x) {
 
 # ------------------------------------------------------------------------------
 
-validate_rbundle <- function(x, arg = "`x`") {
+validate_rbundle <- function(x, x_arg = "") {
+  if (nzchar(x_arg)) {
+    x_arg <- glue(" `{x_arg}`")
+  }
+
   if (!is_rbundle(x)) {
-    glubort("{arg} must be an rbundle.")
+    glubort("Input{x_arg} must be an rbundle.")
   }
 
   invisible(x)

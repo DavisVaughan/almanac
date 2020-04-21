@@ -76,7 +76,7 @@
 #'
 #' @export
 recur_on_wday <- function(x, wday, nth = NULL) {
-  validate_rrule(x)
+  validate_rrule(x, "x")
 
   old <- get_rule(x, "wday")
 

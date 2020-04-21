@@ -35,9 +35,9 @@
 #'
 #'   A vector of dates.
 #'
-#' @param rbundle `[rbundle / rrule]`
+#' @param rschedule `[rschedule]`
 #'
-#'   An rbundle or rrule.
+#'   An rschedule, such as an rrule or rbundle.
 #'
 #' @name adjustments
 #'
@@ -74,11 +74,11 @@ NULL
 
 #' @rdname adjustments
 #' @export
-adj_following <- function(x, rbundle) {
+adj_following <- function(x, rschedule) {
   x <- vec_cast_date(x)
 
-  validate_cacher(rbundle, "rbundle")
-  events <- cacher_events(rbundle)
+  validate_rschedule(rschedule, "rschedule")
+  events <- rschedule_events(rschedule)
 
   adj_following_impl(x, events)
 }
@@ -89,11 +89,11 @@ adj_following_impl <- function(x, events) {
 
 #' @rdname adjustments
 #' @export
-adj_preceding <- function(x, rbundle) {
+adj_preceding <- function(x, rschedule) {
   x <- vec_cast_date(x)
 
-  validate_cacher(rbundle, "rbundle")
-  events <- cacher_events(rbundle)
+  validate_rschedule(rschedule, "rschedule")
+  events <- rschedule_events(rschedule)
 
   adj_preceding_impl(x, events)
 }
@@ -104,11 +104,11 @@ adj_preceding_impl <- function(x, events) {
 
 #' @rdname adjustments
 #' @export
-adj_modified_following <- function(x, rbundle) {
+adj_modified_following <- function(x, rschedule) {
   x <- vec_cast_date(x)
 
-  validate_cacher(rbundle, "rbundle")
-  events <- cacher_events(rbundle)
+  validate_rschedule(rschedule, "rschedule")
+  events <- rschedule_events(rschedule)
 
   adj_modified_following_impl(x, events)
 }
@@ -119,11 +119,11 @@ adj_modified_following_impl <- function(x, events) {
 
 #' @rdname adjustments
 #' @export
-adj_modified_preceding <- function(x, rbundle) {
+adj_modified_preceding <- function(x, rschedule) {
   x <- vec_cast_date(x)
 
-  validate_cacher(rbundle, "rbundle")
-  events <- cacher_events(rbundle)
+  validate_rschedule(rschedule, "rschedule")
+  events <- rschedule_events(rschedule)
 
   adj_modified_preceding_impl(x, events)
 }
@@ -134,11 +134,11 @@ adj_modified_preceding_impl <- function(x, events) {
 
 #' @rdname adjustments
 #' @export
-adj_nearest <- function(x, rbundle) {
+adj_nearest <- function(x, rschedule) {
   x <- vec_cast_date(x)
 
-  validate_cacher(rbundle, "rbundle")
-  events <- cacher_events(rbundle)
+  validate_rschedule(rschedule, "rschedule")
+  events <- rschedule_events(rschedule)
 
   adj_nearest_impl(x, events)
 }
@@ -149,8 +149,8 @@ adj_nearest_impl <- function(x, events) {
 
 #' @rdname adjustments
 #' @export
-adj_none <- function(x, rbundle) {
+adj_none <- function(x, rschedule) {
   x <- vec_cast_date(x)
-  validate_cacher(rbundle, "rbundle")
+  validate_rschedule(rschedule, "rschedule")
   x
 }

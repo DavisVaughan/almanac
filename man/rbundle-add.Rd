@@ -2,12 +2,12 @@
 % Please edit documentation in R/rbundle-add.R
 \name{rbundle-add}
 \alias{rbundle-add}
-\alias{add_cacher}
+\alias{add_rschedule}
 \alias{add_rdate}
 \alias{add_exdate}
 \title{Add to an rbundle}
 \usage{
-add_cacher(x, cacher)
+add_rschedule(x, rschedule)
 
 add_rdate(x, rdate)
 
@@ -18,9 +18,9 @@ add_exdate(x, exdate)
 
 An rbundle to add to.}
 
-\item{cacher}{\verb{[cacher]}
+\item{rschedule}{\verb{[rschedule]}
 
-A cacher to add to the rbundle.}
+An rschedule, such as an rrule or rbundle.}
 
 \item{rdate}{\verb{[Date]}
 
@@ -32,7 +32,8 @@ Dates to forcibly exclude from the rbundle.}
 }
 \description{
 \itemize{
-\item \code{add_cacher()} adds a rrule to an rbundle.
+\item \code{add_rschedule()} adds an rschedule to an rbundle. This can be another
+rrule or another rbundle.
 \item \code{add_rdate()} adds a rdate to an rbundle. rdates are singular
 special cased dates that are forcibly included in the recurrence set.
 \item \code{add_exdate()} adds an exdate to a rbundle. exdates are singular
@@ -44,7 +45,7 @@ In terms of priority:
 \itemize{
 \item An exdate will never be included.
 \item A rdate will always be included if it is not also an exdate.
-\item An event generated from a rrule will always be included if it is not
+\item An event generated from an rschedule will always be included if it is not
 also an exdate.
 }
 
@@ -57,8 +58,8 @@ on_tuesday <- weekly() \%>\%
   on_wday("Tuesday")
 
 rbundle() \%>\%
-  add_cacher(on_5th_of_the_month) \%>\%
-  add_cacher(on_tuesday)
+  add_rschedule(on_5th_of_the_month) \%>\%
+  add_rschedule(on_tuesday)
 }
 }
 \examples{
@@ -75,9 +76,9 @@ on_labor_day <- monthly() \%>\%
   recur_on_wday("Mon", 1)
 
 rb <- rbundle() \%>\%
-  add_cacher(on_thanksgiving) \%>\%
-  add_cacher(on_christmas) \%>\%
-  add_cacher(on_labor_day)
+  add_rschedule(on_thanksgiving) \%>\%
+  add_rschedule(on_christmas) \%>\%
+  add_rschedule(on_labor_day)
 
 # Thanksgiving, Christmas, or Labor Day
 alma_search("2019-01-01", "2021-01-01", rb)

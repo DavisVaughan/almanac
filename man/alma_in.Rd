@@ -4,20 +4,20 @@
 \alias{alma_in}
 \title{Is \code{x} in the recurrence set?}
 \usage{
-alma_in(x, rbundle)
+alma_in(x, rschedule)
 }
 \arguments{
 \item{x}{\verb{[Date]}
 
 A vector of dates.}
 
-\item{rbundle}{\verb{[rbundle / rrule]}
+\item{rschedule}{\verb{[rschedule]}
 
-An rbundle or rrule.}
+An rschedule, such as an rrule or rbundle.}
 }
 \description{
 \code{alma_in()} checks if \code{x} is in the recurrence set of dates defined by the
-rbundle.
+rschedule.
 }
 \examples{
 rrule <- weekly() \%>\%
@@ -34,8 +34,8 @@ rrule2 <- monthly() \%>\%
 
 # Make a larger rbundle made of multiple rules
 rb <- rbundle() \%>\%
- add_cacher(rrule) \%>\%
- add_cacher(rrule2)
+ add_rschedule(rrule) \%>\%
+ add_rschedule(rrule2)
 
 alma_in(x, rb)
 }

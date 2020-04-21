@@ -4,8 +4,8 @@ cache_radjusted <- R6::R6Class(
 
   # ----------------------------------------------------------------------------
   public = list(
-    initialize = function(cacher, adjuster, adjustment)
-      cache_radjusted__initialize(self, private, cacher, adjuster, adjustment),
+    initialize = function(rschedule, adjustment_rschedule, adjustment)
+      cache_radjusted__initialize(self, private, rschedule, adjustment_rschedule, adjustment),
 
     get_events = function()
       cache_radjusted__get_events(self, private)
@@ -13,8 +13,8 @@ cache_radjusted <- R6::R6Class(
 
   # ----------------------------------------------------------------------------
   private = list(
-    cacher = NULL,
-    adjuster = NULL,
+    rschedule = NULL,
+    adjustment_rschedule = NULL,
     adjustment = NULL,
 
     events = NULL,
@@ -28,15 +28,15 @@ cache_radjusted <- R6::R6Class(
 # ------------------------------------------------------------------------------
 
 cache_radjusted__cache_build <- function(self, private) {
-  cacher <- private$cacher
-  adjuster <- private$adjuster
+  rschedule <- private$rschedule
+  adjustment_rschedule <- private$adjustment_rschedule
   adjustment <- private$adjustment
 
-  # Get the events of `cacher`
-  events <- cacher_events(cacher)
+  # Get the events of `rschedule`
+  events <- rschedule_events(rschedule)
 
-  # Adjust them as necessary according to `adjuster`
-  events <- adjustment(events, adjuster)
+  # Adjust them as necessary according to `adjustment_rschedule`
+  events <- adjustment(events, adjustment_rschedule)
 
   private$events <- events
   private$built <- TRUE
@@ -56,9 +56,9 @@ cache_radjusted__get_events <- function(self, private) {
 
 # ------------------------------------------------------------------------------
 
-cache_radjusted__initialize <- function(self, private, cacher, adjuster, adjustment) {
-  private$cacher <- cacher
-  private$adjuster <- adjuster
+cache_radjusted__initialize <- function(self, private, rschedule, adjustment_rschedule, adjustment) {
+  private$rschedule <- rschedule
+  private$adjustment_rschedule <- adjustment_rschedule
   private$adjustment <- adjustment
   self
 }

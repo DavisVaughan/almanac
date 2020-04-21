@@ -37,7 +37,7 @@
 #'
 #' @export
 recur_on_position <- function(x, n) {
-  validate_rrule(x)
+  validate_rrule(x, "x")
 
   if (is_already_set(x, "position")) {
     abort("`position` has already been set for this rrule.")
