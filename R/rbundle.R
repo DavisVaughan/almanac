@@ -55,7 +55,7 @@ new_rbundle <- function(cachers = list(),
   }
 
   cache <- cache_rbundle$new(
-    cachers = cachers,
+    rschedules = cachers,
     rdates = rdates,
     exdates = exdates
   )
