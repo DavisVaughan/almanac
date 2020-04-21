@@ -41,7 +41,7 @@
 
 <meta property="og:title" content="Is <code>x</code> in the recurrence set? — alma_in" />
 <meta property="og:description" content="alma_in() checks if x is in the recurrence set of dates defined by the
-rbundle." />
+rschedule." />
 
 
 
@@ -137,10 +137,10 @@ rbundle." />
 
     <div class="ref-description">
     <p><code>alma_in()</code> checks if <code>x</code> is in the recurrence set of dates defined by the
-rbundle.</p>
+rschedule.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>alma_in</span>(<span class='no'>x</span>, <span class='no'>rbundle</span>)</pre>
+    <pre class="usage"><span class='fu'>alma_in</span>(<span class='no'>x</span>, <span class='no'>rschedule</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -151,9 +151,9 @@ rbundle.</p>
 <p>A vector of dates.</p></td>
     </tr>
     <tr>
-      <th>rbundle</th>
-      <td><p><code>[rbundle / rrule]</code></p>
-<p>An rbundle or rrule.</p></td>
+      <th>rschedule</th>
+      <td><p><code>[rschedule]</code></p>
+<p>An rschedule, such as an rrule or rbundle.</p></td>
     </tr>
     </table>
 
@@ -172,8 +172,8 @@ rbundle.</p>
 
 <span class='co'># Make a larger rbundle made of multiple rules</span>
 <span class='no'>rb</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rbundle.html'>rbundle</a></span>() <span class='kw'>%&gt;%</span>
- <span class='fu'><a href='rbundle-add.html'>add_cacher</a></span>(<span class='no'>rrule</span>) <span class='kw'>%&gt;%</span>
- <span class='fu'><a href='rbundle-add.html'>add_cacher</a></span>(<span class='no'>rrule2</span>)
+ <span class='fu'><a href='rbundle-add.html'>add_rschedule</a></span>(<span class='no'>rrule</span>) <span class='kw'>%&gt;%</span>
+ <span class='fu'><a href='rbundle-add.html'>add_rschedule</a></span>(<span class='no'>rrule2</span>)
 
 <span class='fu'>alma_in</span>(<span class='no'>x</span>, <span class='no'>rb</span>)</div><div class='output co'>#&gt; [1] TRUE TRUE</div></pre>
   </div>

@@ -43,8 +43,12 @@
 <meta property="og:description" content="Often, a single recurrence rule created from a base rule like monthly()
 will be sufficient. However, more complex rules can be constructed
 by combining simple rules into a recurrence bundle.
-rbundle() creates a new empty recurrence bundle. Add recurrence rules to
-the bundle with add_cacher(). Add required dates with add_rdate()." />
+rbundle() creates a new empty recurrence bundle.
+Add recurrence rules or other recurrence bundles with add_rschedule().
+Forcibly include dates with add_rdate().
+Forcibly exclude dates with add_exdate().
+
+" />
 
 
 
@@ -142,8 +146,12 @@ the bundle with add_cacher(). Add required dates with add_rdate()." />
     <p>Often, a single recurrence rule created from a base rule like <code><a href='rrule.html'>monthly()</a></code>
 will be sufficient. However, more complex rules can be constructed
 by combining simple rules into a <em>recurrence bundle</em>.</p>
-<p><code>rbundle()</code> creates a new empty recurrence bundle. Add recurrence rules to
-the bundle with <code><a href='rbundle-add.html'>add_cacher()</a></code>. Add required dates with <code><a href='rbundle-add.html'>add_rdate()</a></code>.</p>
+<p><code>rbundle()</code> creates a new empty recurrence bundle.</p><ul>
+<li><p>Add recurrence rules or other recurrence bundles with <code><a href='rbundle-add.html'>add_rschedule()</a></code>.</p></li>
+<li><p>Forcibly include dates with <code><a href='rbundle-add.html'>add_rdate()</a></code>.</p></li>
+<li><p>Forcibly exclude dates with <code><a href='rbundle-add.html'>add_exdate()</a></code>.</p></li>
+</ul>
+
     </div>
 
     <pre class="usage"><span class='fu'>rbundle</span>()</pre>
@@ -154,10 +162,15 @@ the bundle with <code><a href='rbundle-add.html'>add_cacher()</a></code>. Add re
     <p>An empty rbundle.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='rbundle-add.html'>add_cacher()</a></code></p></div>
+    <div class='dont-index'><p><code><a href='rbundle-add.html'>add_rschedule()</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>rbundle</span>()</div><div class='output co'>#&gt; rbundle: 0 cachers / 0 rdates / 0 exdates</div><div class='input'><span class='fu'><a href='rbundle-add.html'>add_cacher</a></span>(<span class='fu'>rbundle</span>(), <span class='fu'><a href='rrule.html'>monthly</a></span>())</div><div class='output co'>#&gt; rbundle: 1 cachers / 0 rdates / 0 exdates</div></pre>
+    <pre class="examples"><div class='input'><span class='fu'>rbundle</span>()</div><div class='output co'>#&gt; rbundle: 0 rschedules / 0 rdates / 0 exdates</div><div class='input'>
+<span class='no'>on_weekends</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rrule.html'>weekly</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='recur_on_wday.html'>recur_on_weekends</a></span>()
+
+<span class='fu'>rbundle</span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='rbundle-add.html'>add_rschedule</a></span>(<span class='no'>on_weekends</span>)</div><div class='output co'>#&gt; rbundle: 1 rschedules / 0 rdates / 0 exdates</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

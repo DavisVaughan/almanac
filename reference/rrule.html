@@ -181,11 +181,10 @@ to generate a complete recurrence rule.</p></td>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The <code>since</code> argument is <em>very</em> important for both practical use, and speed.
-The default is set to the Unix epoch time, but there is no hard and fast
-rule for doing this. Remember that this is the first possible event date,
-so you may need to move this date backwards in time if you need to generate
-dates before <code>1970-01-01</code>.</p>
+    <p>By default <code>since</code> is set to the Unix epoch time, but there is no hard and
+fast rule for doing this. Remember that this is the first possible event
+date, so you may need to move this date backwards in time if you need to
+generate dates before <code>1970-01-01</code>.</p>
 <p>In terms of speed, it is more efficient if you adjust the <code>since</code> date to
 be closer to the first date in the sequence of dates that you are working
 with. For example, if you are working with dates in the range of 2019 and
@@ -226,7 +225,11 @@ default will use a quarterly rule starting in January since the default
   <span class='fu'><a href='recur_on_interval.html'>recur_on_interval</a></span>(<span class='fl'>3</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='recur_on_mday.html'>recur_on_mday</a></span>(<span class='fl'>1</span>)
 
-<span class='fu'><a href='alma_search.html'>alma_search</a></span>(<span class='st'>"1999-01-01"</span>, <span class='st'>"2000-04-01"</span>, <span class='no'>on_first_of_the_quarter_starting_in_feb</span>)</div><div class='output co'>#&gt; [1] "1999-02-01" "1999-05-01" "1999-08-01" "1999-11-01" "2000-02-01"</div><div class='input'>
+<span class='fu'><a href='alma_search.html'>alma_search</a></span>(
+  <span class='st'>"1999-01-01"</span>,
+  <span class='st'>"2000-04-01"</span>,
+  <span class='no'>on_first_of_the_quarter_starting_in_feb</span>
+)</div><div class='output co'>#&gt; [1] "1999-02-01" "1999-05-01" "1999-08-01" "1999-11-01" "2000-02-01"</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

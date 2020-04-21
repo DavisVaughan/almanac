@@ -42,7 +42,8 @@
 <meta property="og:title" content="Add to an rbundle — rbundle-add" />
 <meta property="og:description" content="
 
-add_cacher() adds a rrule to an rbundle.
+add_rschedule() adds an rschedule to an rbundle. This can be another
+rrule or another rbundle.
 add_rdate() adds a rdate to an rbundle. rdates are singular
 special cased dates that are forcibly included in the recurrence set.
 add_exdate() adds an exdate to a rbundle. exdates are singular
@@ -145,7 +146,8 @@ special cased dates that are forcibly excluded from the recurrence set.
     <div class="ref-description">
     
 <ul>
-<li><p><code>add_cacher()</code> adds a rrule to an rbundle.</p></li>
+<li><p><code>add_rschedule()</code> adds an rschedule to an rbundle. This can be another
+rrule or another rbundle.</p></li>
 <li><p><code>add_rdate()</code> adds a rdate to an rbundle. rdates are singular
 special cased dates that are forcibly included in the recurrence set.</p></li>
 <li><p><code>add_exdate()</code> adds an exdate to a rbundle. exdates are singular
@@ -154,7 +156,7 @@ special cased dates that are forcibly excluded from the recurrence set.</p></li>
 
     </div>
 
-    <pre class="usage"><span class='fu'>add_cacher</span>(<span class='no'>x</span>, <span class='no'>cacher</span>)
+    <pre class="usage"><span class='fu'>add_rschedule</span>(<span class='no'>x</span>, <span class='no'>rschedule</span>)
 
 <span class='fu'>add_rdate</span>(<span class='no'>x</span>, <span class='no'>rdate</span>)
 
@@ -169,9 +171,9 @@ special cased dates that are forcibly excluded from the recurrence set.</p></li>
 <p>An rbundle to add to.</p></td>
     </tr>
     <tr>
-      <th>cacher</th>
-      <td><p><code>[cacher]</code></p>
-<p>A cacher to add to the rbundle.</p></td>
+      <th>rschedule</th>
+      <td><p><code>[rschedule]</code></p>
+<p>An rschedule, such as an rrule or rbundle.</p></td>
     </tr>
     <tr>
       <th>rdate</th>
@@ -190,7 +192,7 @@ special cased dates that are forcibly excluded from the recurrence set.</p></li>
     <p>In terms of priority:</p><ul>
 <li><p>An exdate will never be included.</p></li>
 <li><p>A rdate will always be included if it is not also an exdate.</p></li>
-<li><p>An event generated from a rrule will always be included if it is not
+<li><p>An event generated from an rschedule will always be included if it is not
 also an exdate.</p></li>
 </ul>
 
@@ -203,8 +205,8 @@ would translate to "the 5th day of the month or any Tuesday".</p><pre><span clas
   <span class='fu'>on_wday</span>(<span class='st'>"Tuesday"</span>)
 
 <span class='fu'><a href='rbundle.html'>rbundle</a></span>() <span class='kw'>%&amp;gt;%</span>
-  <span class='fu'>add_cacher</span>(<span class='no'>on_5th_of_the_month</span>) <span class='kw'>%&amp;gt;%</span>
-  <span class='fu'>add_cacher</span>(<span class='no'>on_tuesday</span>)</pre>
+  <span class='fu'>add_rschedule</span>(<span class='no'>on_5th_of_the_month</span>) <span class='kw'>%&amp;gt;%</span>
+  <span class='fu'>add_rschedule</span>(<span class='no'>on_tuesday</span>)</pre>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -221,9 +223,9 @@ would translate to "the 5th day of the month or any Tuesday".</p><pre><span clas
   <span class='fu'><a href='recur_on_wday.html'>recur_on_wday</a></span>(<span class='st'>"Mon"</span>, <span class='fl'>1</span>)
 
 <span class='no'>rb</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rbundle.html'>rbundle</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'>add_cacher</span>(<span class='no'>on_thanksgiving</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>add_cacher</span>(<span class='no'>on_christmas</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>add_cacher</span>(<span class='no'>on_labor_day</span>)
+  <span class='fu'>add_rschedule</span>(<span class='no'>on_thanksgiving</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'>add_rschedule</span>(<span class='no'>on_christmas</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'>add_rschedule</span>(<span class='no'>on_labor_day</span>)
 
 <span class='co'># Thanksgiving, Christmas, or Labor Day</span>
 <span class='fu'><a href='alma_search.html'>alma_search</a></span>(<span class='st'>"2019-01-01"</span>, <span class='st'>"2021-01-01"</span>, <span class='no'>rb</span>)</div><div class='output co'>#&gt; [1] "2019-09-02" "2019-11-28" "2019-12-25" "2020-09-07" "2020-11-26"
