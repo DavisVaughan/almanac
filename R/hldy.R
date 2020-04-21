@@ -9,7 +9,7 @@ hldy_martin_luther_king_jr_day <- function(adjustment = adj_nearest) {
   )
 }
 
-hldy_martin_luther_king_jr_day_generator <- function(since, until) {
+hldy_martin_luther_king_jr_day_generator <- function(since, until, adjuster, adjustment) {
   hldy_start <- as.Date("1986-01-01")
 
   # Completely before holiday starts
@@ -27,10 +27,9 @@ hldy_martin_luther_king_jr_day_generator <- function(since, until) {
   rrule <- recur_on_ymonth(rrule, 1L)
   rrule <- recur_on_wday(rrule, 1L, nth = 3L)
 
-  rbundle <- rbundle()
-  rbundle <- add_rrule(rbundle, rrule)
+  radjusted <- new_radjusted(rrule, adjuster, adjustment)
 
-  rbundle
+  radjusted
 }
 
 # ------------------------------------------------------------------------------
@@ -43,15 +42,14 @@ hldy_christmas <- function(adjustment = adj_nearest) {
   )
 }
 
-hldy_christmas_generator <- function(since, until) {
+hldy_christmas_generator <- function(since, until, adjuster, adjustment) {
   rrule <- yearly(since, until)
   rrule <- recur_on_ymonth(rrule, 12L)
   rrule <- recur_on_mday(rrule, 25L)
 
-  rbundle <- rbundle()
-  rbundle <- add_rrule(rbundle, rrule)
+  radjusted <- new_radjusted(rrule, adjuster, adjustment)
 
-  rbundle
+  radjusted
 }
 
 # ------------------------------------------------------------------------------
@@ -75,7 +73,7 @@ new_hldy <- function(name, generator, adjustment) {
   }
 
   generator <- validate_generator(generator)
-  adjustment <- validate_adjustment(adjustment)
+  adjustment <- validate_adjustment(adjustment, "adjustment")
 
   data <- list(
     name = name,
@@ -108,23 +106,27 @@ validate_generator <- function(generator) {
 
   fmls <- fn_fmls(generator)
 
-  if (length(fmls) != 2L) {
-    abort("`generator` must have two arguments, `since` and `until`.")
+  if (length(fmls) != 4L) {
+    abort("`generator` must have four arguments, `since`, `until`, `adjuster`, and `adjustment`.")
   }
 
   generator
 }
 
-validate_adjustment <- function(adjustment) {
-  if (!is_function(adjustment)) {
-    abort("`adjustment` must be a function.")
+validate_adjustment <- function(x, x_arg = "") {
+  if (nzchar(x_arg)) {
+    x_arg <- glue(" `{x_arg}`")
   }
 
-  fmls <- fn_fmls(adjustment)
+  if (!is_function(x)) {
+    glubort("Input{x_arg} must be a function.")
+  }
+
+  fmls <- fn_fmls(x)
 
   if (length(fmls) != 2L) {
-    abort("`adjustment` must have two arguments, `x` and `rbundle`.")
+    abort("Input{x_arg} must have two arguments, `x` and `rbundle`.")
   }
 
-  adjustment
+  x
 }
