@@ -37,7 +37,7 @@
 #'
 #' @param rschedule `[rschedule]`
 #'
-#'   A rschedule, such as an rrule or rbundle.
+#'   An rschedule, such as an rrule or rbundle.
 #'
 #' @name adjustments
 #'

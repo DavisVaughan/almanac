@@ -29,7 +29,7 @@ A vector of dates.}
 
 \item{rschedule}{\verb{[rschedule]}
 
-A rschedule, such as an rrule or rbundle.}
+An rschedule, such as an rrule or rbundle.}
 }
 \description{
 This family of \verb{adj_*()} functions encode business logic for common
