@@ -6,11 +6,11 @@
 #'
 #' - `alma_previous()` generates the previous event before `x`.
 #'
-#' @inheritParams alma_search
+#' @inheritParams adj_following
 #'
-#' @param x `[Date]`
+#' @param inclusive `[logical(1)]`
 #'
-#'    A vector of dates to look forward or backwards from.
+#'   If `x` is an event, should it be considered the next or previous event?
 #'
 #' @export
 #' @examples
@@ -24,7 +24,7 @@
 #'
 #' alma_next(c("2019-01-01", "2019-01-11"), rb)
 #' alma_previous(c("2019-01-01", "2019-01-11"), rb)
-alma_next <- function(x, rbundle, inclusive = FALSE) {
+alma_next <- function(x, rschedule, inclusive = FALSE) {
   x <- vec_cast_date(x)
 
   vec_assert(inclusive, logical(), 1L)
@@ -32,8 +32,8 @@ alma_next <- function(x, rbundle, inclusive = FALSE) {
     abort("`inclusive` cannot be `NA`")
   }
 
-  validate_cacher(rbundle, "rbundle")
-  events <- cacher_events(rbundle)
+  validate_cacher(rschedule, "rschedule")
+  events <- cacher_events(rschedule)
 
   alma_next_impl(x, events, inclusive)
 }
@@ -44,7 +44,7 @@ alma_next_impl <- function(x, events, inclusive) {
 
 #' @rdname alma_next
 #' @export
-alma_previous <- function(x, rbundle, inclusive = FALSE) {
+alma_previous <- function(x, rschedule, inclusive = FALSE) {
   x <- vec_cast_date(x)
 
   vec_assert(inclusive, logical(), 1L)
@@ -52,8 +52,8 @@ alma_previous <- function(x, rbundle, inclusive = FALSE) {
     abort("`inclusive` cannot be `NA`")
   }
 
-  validate_cacher(rbundle, "rbundle")
-  events <- cacher_events(rbundle)
+  validate_cacher(rschedule, "rschedule")
+  events <- cacher_events(rschedule)
 
   alma_previous_impl(x, events, inclusive)
 }
