@@ -176,3 +176,12 @@ weekday_print <- function() {
 is_missing_or_infinite <- function(x) {
   !is.finite(x)
 }
+
+is_date <- function(x) {
+  inherits(x, "Date")
+}
+
+# https://github.com/r-lib/vctrs/issues/548
+vec_set_diff <- function(x, y) {
+  vec_unique(vec_slice(x, !vec_in(x, y)))
+}
