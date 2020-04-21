@@ -26,9 +26,9 @@ alma_events(rrule)
 rrule_weekly <- weekly(since = "1970-01-01") \%>\%
   recur_for_count(5)
 
-rsched <- rschedule() \%>\%
+rb <- rbundle() \%>\%
   add_cacher(rrule) \%>\%
   add_cacher(rrule_weekly)
 
-alma_events(rsched)
+alma_events(rb)
 }
