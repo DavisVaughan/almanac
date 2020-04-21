@@ -1,4 +1,4 @@
-#' Step relative to an rbundle
+#' Step relative to an rschedule
 #'
 #' @description
 #' `alma_step()` is useful for shifting dates by "n business days".
@@ -29,13 +29,7 @@
 #' This lends itself naturally to business logic. Two business days from Friday
 #' is Tuesday.
 #'
-#' @param x `[Date]`
-#'
-#'   A vector of dates.
-#'
-#' @param rbundle `[rbundle / rrule]`
-#'
-#'   An rbundle or rrule.
+#' @inheritParams adj_following
 #'
 #' @param n `[integer]`
 #'
@@ -66,15 +60,15 @@
 #'
 #' alma_step("2019-09-13", 2, rb)
 #' @export
-alma_step <- function(x, n, rbundle) {
+alma_step <- function(x, n, rschedule) {
   x <- vec_cast_date(x)
   n <- vec_cast(n, integer(), x_arg = "n")
 
   # Get the common size with nice errors, recycled cheaply internally
   size <- vec_size_common(x = x, n = n)
 
-  validate_cacher(rbundle, "rbundle")
-  events <- cacher_events(rbundle)
+  validate_cacher(rschedule, "rschedule")
+  events <- cacher_events(rschedule)
 
   alma_step_impl(x, n, events, size)
 }

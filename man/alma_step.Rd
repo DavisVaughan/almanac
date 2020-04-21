@@ -2,9 +2,9 @@
 % Please edit documentation in R/alma-step.R
 \name{alma_step}
 \alias{alma_step}
-\title{Step relative to an rbundle}
+\title{Step relative to an rschedule}
 \usage{
-alma_step(x, n, rbundle)
+alma_step(x, n, rschedule)
 }
 \arguments{
 \item{x}{\verb{[Date]}
@@ -15,9 +15,9 @@ A vector of dates.}
 
 The number of days to step. Can be negative to step backwards.}
 
-\item{rbundle}{\verb{[rbundle / rrule]}
+\item{rschedule}{\verb{[rschedule]}
 
-An rbundle or rrule.}
+An rschedule, such as an rrule or rbundle.}
 }
 \description{
 \code{alma_step()} is useful for shifting dates by "n business days".
