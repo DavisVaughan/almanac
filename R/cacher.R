@@ -14,14 +14,15 @@ cacher_events <- function(x) {
 
 # ------------------------------------------------------------------------------
 
-as_cacher <- function(x, ...) {
-  UseMethod("as_cacher")
+is_cacher <- function(x) {
+  inherits(x, "cacher")
 }
 
-as_cacher.default <- function(x, ...) {
-  abort(glue("Cannot convert {class(x)[1]} to an rrule, rbundle, or calendar."))
+validate_cacher <- function(x, x_arg = "x") {
+  if (!is_cacher(x)) {
+    glubort("`{x_arg}` must be a rrule, rbundle, or calendar.")
+  }
+
+  invisible(x)
 }
 
-as_cacher.cacher <- function(x, ...) {
-  x
-}

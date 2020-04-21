@@ -73,8 +73,8 @@ alma_step <- function(x, n, rbundle) {
   # Get the common size with nice errors, recycled cheaply internally
   size <- vec_size_common(x = x, n = n)
 
-  cacher <- as_cacher(rbundle)
-  events <- cacher_events(cacher)
+  validate_cacher(rbundle, "rbundle")
+  events <- cacher_events(rbundle)
 
   alma_step_impl(x, n, events, size)
 }

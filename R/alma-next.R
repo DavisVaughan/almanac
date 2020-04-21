@@ -32,8 +32,8 @@ alma_next <- function(x, rbundle, inclusive = FALSE) {
     abort("`inclusive` cannot be `NA`")
   }
 
-  cacher <- as_cacher(rbundle)
-  events <- cacher_events(cacher)
+  validate_cacher(rbundle, "rbundle")
+  events <- cacher_events(rbundle)
 
   alma_next_impl(x, events, inclusive)
 }
@@ -52,8 +52,8 @@ alma_previous <- function(x, rbundle, inclusive = FALSE) {
     abort("`inclusive` cannot be `NA`")
   }
 
-  cacher <- as_cacher(rbundle)
-  events <- cacher_events(cacher)
+  validate_cacher(rbundle, "rbundle")
+  events <- cacher_events(rbundle)
 
   alma_previous_impl(x, events, inclusive)
 }

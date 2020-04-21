@@ -23,6 +23,6 @@
 #'
 #' alma_events(rb)
 alma_events <- function(rbundle) {
-  cacher <- as_cacher(rbundle)
-  cacher_events(cacher)
+  validate_cacher(rbundle, "rbundle")
+  events <- cacher_events(rbundle)
 }
