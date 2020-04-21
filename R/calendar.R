@@ -11,15 +11,15 @@ calendar <- function(name,
     abort("`since` must be before `until`.")
   }
 
-  # Adjuster cacher
-  adjuster <- weekly(since = since, until = until)
-  adjuster <- recur_on_wday(adjuster, adjust_on)
+  # Adjustment rschedule
+  adjustment_rschedule <- weekly(since = since, until = until)
+  adjustment_rschedule <- recur_on_wday(adjustment_rschedule, adjust_on)
 
   new_calendar(
     name = name,
     since = since,
     until = until,
-    adjuster = adjuster
+    adjustment_rschedule = adjustment_rschedule
   )
 }
 
@@ -34,30 +34,35 @@ add_hldy <- function(calendar, hldy) {
 
   since <- calendar$since
   until <- calendar$until
-  adjuster <- calendar$adjuster
+  adjustment_rschedule <- calendar$adjustment_rschedule
 
-  # Generate the holiday cacher
-  cacher <- generator(since, until)
+  # Generate the holiday rschedule
+  rschedule <- generator(since, until)
 
   # Create an adjusted version of it
-  cacher <- radjusted(cacher, adjuster, adjustment)
+  rschedule <- radjusted(rschedule, adjustment_rschedule, adjustment)
 
   hldys <- c(calendar$hldys, list(hldy))
-  cachers <- c(calendar$cachers, list(cacher))
+  rschedules <- c(calendar$rschedules, list(rschedule))
 
   new_calendar(
     name = calendar$name,
     since = calendar$since,
     until = calendar$until,
-    adjuster = calendar$adjuster,
+    adjustment_rschedule = calendar$adjustment_rschedule,
     hldys = hldys,
-    cachers = cachers
+    rschedules = rschedules
   )
 }
 
 # ------------------------------------------------------------------------------
 
-new_calendar <- function(name, since, until, adjuster, hldys = list(), cachers = list()) {
+new_calendar <- function(name,
+                         since,
+                         until,
+                         adjustment_rschedule,
+                         hldys = list(),
+                         rschedules = list()) {
   if (!is_character(name, n = 1L)) {
     abort("`name` must be a size 1 character vector.")
   }
@@ -66,27 +71,27 @@ new_calendar <- function(name, since, until, adjuster, hldys = list(), cachers =
     abort("`hldys` must be a list of holidays.")
   }
 
-  if (!is_list(cachers)) {
-    abort("`cachers` must be a list of cachers")
+  if (!is_list(rschedules)) {
+    abort("`rschedules` must be a list of rschedules")
   }
 
-  if (length(cachers) != length(hldys)) {
-    abort("`cachers` length must match `hldys` length.")
+  if (length(rschedules) != length(hldys)) {
+    abort("`rschedules` length must match `hldys` length.")
   }
 
   # Slightly gross, we get the cache of the rbundle but don't use the
   # rest of it. We don't want to inherit from rbundle, because we don't
-  # want to allow `add_cacher()` to work on calendars.
-  rbundle <- new_rbundle(cachers = cachers)
+  # want to allow `add_rschedule()` to work on calendars.
+  rbundle <- new_rbundle(rschedules = rschedules)
   cache <- rbundle$cache
 
   data <- list(
     name = name,
     since = since,
     until = until,
-    adjuster = adjuster,
+    adjustment_rschedule = adjustment_rschedule,
     hldys = hldys,
-    cachers = cachers,
+    rschedules = rschedules,
     cache = cache
   )
 
