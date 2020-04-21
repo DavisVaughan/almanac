@@ -18,7 +18,11 @@ new_radjusted <- function(cacher, adjuster, adjustment) {
   validate_cacher(adjuster, "adjuster")
   validate_adjustment(adjustment, "adjustment")
 
-  cache <- cache_radjusted$new(cacher, adjuster, adjustment)
+  cache <- cache_radjusted$new(
+    rschedule = cacher,
+    adjustment_rschedule = adjuster,
+    adjustment = adjustment
+  )
 
   data <- list(
     cacher = cacher,
