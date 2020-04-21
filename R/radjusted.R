@@ -1,35 +1,35 @@
-# Built on top of a `cacher`, this adjusted version will apply
-# an adjustment to the events that `cacher` returns whenever those events
-# fall on the events that `adjustment_cacher` returns. This is appropriate
+# Built on top of an `rschedule`, this adjusted version will apply
+# an adjustment to the events that `rschedule` returns whenever those events
+# fall on the events that `adjustment_rschedule` returns. This is appropriate
 # for representing corporate holidays, where for example, Christmas is normally
 # December 25th, unless it falls on a weekend, in which case it is rolled
 # to the nearest workday.
 
 # ------------------------------------------------------------------------------
 
-radjusted <- function(cacher, adjuster, adjustment) {
-  new_radjusted(cacher, adjuster, adjustment)
+radjusted <- function(rschedule, adjustment_rschedule, adjustment) {
+  new_radjusted(rschedule, adjustment_rschedule, adjustment)
 }
 
 # ------------------------------------------------------------------------------
 
-new_radjusted <- function(cacher, adjuster, adjustment) {
-  validate_rschedule(cacher, "cacher")
-  validate_rschedule(adjuster, "adjuster")
+new_radjusted <- function(rschedule, adjustment_rschedule, adjustment) {
+  validate_rschedule(rschedule, "rschedule")
+  validate_rschedule(adjustment_rschedule, "adjustment_rschedule")
   validate_adjustment(adjustment, "adjustment")
 
   cache <- cache_radjusted$new(
-    rschedule = cacher,
-    adjustment_rschedule = adjuster,
+    rschedule = rschedule,
+    adjustment_rschedule = adjustment_rschedule,
     adjustment = adjustment
   )
 
   data <- list(
-    cacher = cacher,
-    adjuster = adjuster,
+    rschedule = rschedule,
+    adjustment_rschedule = adjustment_rschedule,
     adjustment = adjustment,
     cache = cache
   )
 
-  new_rschedule(data, "radjusted")
+  new_rschedule(data, class = "radjusted")
 }
