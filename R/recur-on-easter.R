@@ -1,5 +1,3 @@
-# TODO: Should this be removed?
-
 #' Recur on easter
 #'
 #' `recur_on_easter()` is a special helper to recur on Easter. Easter is
@@ -17,6 +15,7 @@
 #'    on. This offset must still fall within the same year, otherwise the date
 #'    will be silently ignored.
 #'
+#' @export
 #' @examples
 #' on_easter <- yearly() %>% recur_on_easter()
 #' on_easter_monday <- yearly() %>% recur_on_easter(-1)
@@ -37,12 +36,6 @@
 #'
 #' alma_search("1999-01-01", "2001-01-01", on_easter_back_93_days)
 #' alma_search("1999-01-01", "2001-01-01", on_easter_back_94_days)
-#'
-#' @noRd
-NULL
-
-# `recur_on_easter()` is exposed through `hldy_on_easter()`
-
 recur_on_easter <- function(x, offset = 0L) {
   validate_rrule(x)
 
@@ -52,6 +45,10 @@ recur_on_easter <- function(x, offset = 0L) {
 
   offset <- vec_cast(offset, integer(), x_arg = "offset")
   vec_assert(offset, size = 1L, arg = "offset")
+
+  if (is.na(offset)) {
+    abort("`offset` cannot be `NA`.")
+  }
 
   abs_offset <- abs(offset)
   if (abs_offset > 366) {
