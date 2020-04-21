@@ -41,12 +41,18 @@ cache_rrule__cache_build <- function(self, private) {
 
 cache_rrule_build_call <- function(rules) {
   body <- cache_rrule_build_call_body(rules)
-  as_js_build_call(body)
+
+  glue2("
+    function() {
+      [[body]]
+      return rule.all()
+    }
+  ")
 }
 
 cache_rrule_build_call_body <- function(rules) {
-  body <- "var ruleset = new rrule.RRuleSet()"
-  body <- append_rrule(body, rules)
+  rrule <- as_js_from_rrule(rules)
+  body <- glue("var rule = {rrule}")
   body
 }
 
