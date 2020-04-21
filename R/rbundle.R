@@ -102,9 +102,13 @@ is_rbundle <- function(x) {
 
 # ------------------------------------------------------------------------------
 
-validate_rbundle <- function(x, arg = "`x`") {
+validate_rbundle <- function(x, x_arg = "") {
+  if (nzchar(x_arg)) {
+    x_arg <- glue(" `{x_arg}`")
+  }
+
   if (!is_rbundle(x)) {
-    glubort("{arg} must be an rbundle.")
+    glubort("Input{x_arg} must be an rbundle.")
   }
 
   invisible(x)

@@ -82,7 +82,7 @@ NULL
 #' @rdname rbundle-add
 #' @export
 add_rschedule <- function(x, rschedule) {
-  validate_rbundle(x)
+  validate_rbundle(x, "x")
   validate_rschedule(rschedule, x_arg = "rschedule")
 
   rschedules <- c(x$rschedules, list(rschedule))
@@ -97,7 +97,7 @@ add_rschedule <- function(x, rschedule) {
 #' @rdname rbundle-add
 #' @export
 add_rdate <- function(x, rdate) {
-  validate_rbundle(x)
+  validate_rbundle(x, "x")
   rdate <- vec_cast_date(rdate, "rdate")
 
   validate_date_bounds(rdate, x_arg = "rdate")
@@ -115,7 +115,7 @@ add_rdate <- function(x, rdate) {
 #' @rdname rbundle-add
 #' @export
 add_exdate <- function(x, exdate) {
-  validate_rbundle(x)
+  validate_rbundle(x, "x")
   exdate <- vec_cast_date(exdate, "exdate")
 
   validate_date_bounds(exdate, x_arg = "exdate")
