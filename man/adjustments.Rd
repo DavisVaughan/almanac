@@ -10,26 +10,26 @@
 \alias{adj_none}
 \title{Date adjustments}
 \usage{
-adj_following(x, rbundle)
+adj_following(x, rschedule)
 
-adj_preceding(x, rbundle)
+adj_preceding(x, rschedule)
 
-adj_modified_following(x, rbundle)
+adj_modified_following(x, rschedule)
 
-adj_modified_preceding(x, rbundle)
+adj_modified_preceding(x, rschedule)
 
-adj_nearest(x, rbundle)
+adj_nearest(x, rschedule)
 
-adj_none(x, rbundle)
+adj_none(x, rschedule)
 }
 \arguments{
 \item{x}{\verb{[Date]}
 
 A vector of dates.}
 
-\item{rbundle}{\verb{[rbundle / rrule]}
+\item{rschedule}{\verb{[rschedule]}
 
-An rbundle or rrule.}
+A rschedule, such as an rrule or rbundle.}
 }
 \description{
 This family of \verb{adj_*()} functions encode business logic for common
