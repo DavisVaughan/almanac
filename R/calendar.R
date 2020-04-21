@@ -78,7 +78,8 @@ new_calendar <- function(name, since, until, adjuster, holidays = list()) {
 }
 
 holiday_initialize <- function(holiday, since, until, adjuster) {
-  holiday$generator(since, until, adjuster, holiday$adjustment)
+  cacher <- holiday$generator(since, until)
+  radjusted(cacher, adjuster, holiday$adjustment)
 }
 
 # ------------------------------------------------------------------------------

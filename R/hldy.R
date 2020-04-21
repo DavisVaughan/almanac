@@ -9,7 +9,7 @@ hldy_martin_luther_king_jr_day <- function(adjustment = adj_nearest) {
   )
 }
 
-hldy_martin_luther_king_jr_day_generator <- function(since, until, adjuster, adjustment) {
+hldy_martin_luther_king_jr_day_generator <- function(since, until) {
   hldy_start <- as.Date("1986-01-01")
 
   # Completely before holiday starts
@@ -27,9 +27,7 @@ hldy_martin_luther_king_jr_day_generator <- function(since, until, adjuster, adj
   rrule <- recur_on_ymonth(rrule, 1L)
   rrule <- recur_on_wday(rrule, 1L, nth = 3L)
 
-  radjusted <- radjusted(rrule, adjuster, adjustment)
-
-  radjusted
+  rrule
 }
 
 # ------------------------------------------------------------------------------
@@ -42,14 +40,11 @@ hldy_christmas <- function(adjustment = adj_nearest) {
   )
 }
 
-hldy_christmas_generator <- function(since, until, adjuster, adjustment) {
+hldy_christmas_generator <- function(since, until) {
   rrule <- yearly(since, until)
   rrule <- recur_on_ymonth(rrule, 12L)
   rrule <- recur_on_mday(rrule, 25L)
-
-  radjusted <- radjusted(rrule, adjuster, adjustment)
-
-  radjusted
+  rrule
 }
 
 # ------------------------------------------------------------------------------
@@ -106,8 +101,8 @@ validate_generator <- function(generator) {
 
   fmls <- fn_fmls(generator)
 
-  if (length(fmls) != 4L) {
-    abort("`generator` must have four arguments, `since`, `until`, `adjuster`, and `adjustment`.")
+  if (length(fmls) != 2L) {
+    abort("`generator` must have two arguments, `since`, `until`.")
   }
 
   generator
