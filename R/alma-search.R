@@ -2,13 +2,11 @@
 #'
 #' `alma_search()` retrieves all events between `from` and `to`.
 #'
+#' @inheritParams adj_following
+#'
 #' @param from,to `[Date(1)]`
 #'
 #'    Dates defining the range to look for events.
-#'
-#' @param rbundle `[rbundle / rrule]`
-#'
-#'    A rbundle or rrule.
 #'
 #' @param inclusive `[logical(1)]`
 #'
@@ -25,7 +23,7 @@
 #'   add_cacher(on_monday)
 #'
 #' alma_search("2019-01-01", "2019-01-31", rb)
-alma_search <- function(from, to, rbundle, inclusive = TRUE) {
+alma_search <- function(from, to, rschedule, inclusive = TRUE) {
   from <- vec_cast_date(from)
   to <- vec_cast_date(to)
 
@@ -41,8 +39,8 @@ alma_search <- function(from, to, rbundle, inclusive = TRUE) {
     abort("`inclusive` cannot be `NA`")
   }
 
-  validate_cacher(rbundle, "rbundle")
-  events <- cacher_events(rbundle)
+  validate_cacher(rschedule, "rschedule")
+  events <- cacher_events(rschedule)
 
   alma_search_impl(events, from, to, inclusive)
 }

@@ -4,16 +4,16 @@
 \alias{alma_search}
 \title{Search for events}
 \usage{
-alma_search(from, to, rbundle, inclusive = TRUE)
+alma_search(from, to, rschedule, inclusive = TRUE)
 }
 \arguments{
 \item{from, to}{\verb{[Date(1)]}
 
 Dates defining the range to look for events.}
 
-\item{rbundle}{\verb{[rbundle / rrule]}
+\item{rschedule}{\verb{[rschedule]}
 
-A rbundle or rrule.}
+An rschedule, such as an rrule or rbundle.}
 
 \item{inclusive}{\verb{[logical(1)]}
 
