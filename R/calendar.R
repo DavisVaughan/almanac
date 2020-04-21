@@ -2,7 +2,7 @@
 
 calendar <- function(name,
                      since = "1970-01-01",
-                     until = "2100-01-01",
+                     until = "2040-01-01",
                      adjust_on = c("Saturday", "Sunday")) {
   since <- check_since(since)
   until <- check_until(until)
