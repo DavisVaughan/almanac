@@ -18,6 +18,10 @@ add_exdate(x, exdate)
 
 An rbundle to add to.}
 
+\item{cacher}{\verb{[cacher]}
+
+A cacher to add to the rbundle.}
+
 \item{rdate}{\verb{[Date]}
 
 Dates to forcibly include in the rbundle.}
@@ -25,14 +29,6 @@ Dates to forcibly include in the rbundle.}
 \item{exdate}{\verb{[Date]}
 
 Dates to forcibly exclude from the rbundle.}
-
-\item{rrule}{\verb{[rrule]}
-
-An rrule to add to the rbundle.}
-
-\item{rbundle}{\verb{[rbundle]}
-
-An rbundle to merge with \code{x}.}
 }
 \description{
 \itemize{

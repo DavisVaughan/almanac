@@ -39,9 +39,9 @@
 #'
 #'   An rbundle to add to.
 #'
-#' @param rrule `[rrule]`
+#' @param cacher `[cacher]`
 #'
-#'   An rrule to add to the rbundle.
+#'   A cacher to add to the rbundle.
 #'
 #' @param rdate `[Date]`
 #'
@@ -50,10 +50,6 @@
 #' @param exdate `[Date]`
 #'
 #'   Dates to forcibly exclude from the rbundle.
-#'
-#' @param rbundle `[rbundle]`
-#'
-#'   An rbundle to merge with `x`.
 #'
 #' @examples
 #' on_thanksgiving <- yearly() %>%
