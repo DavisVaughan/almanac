@@ -24,5 +24,5 @@
 #' alma_events(rb)
 alma_events <- function(rbundle) {
   validate_cacher(rbundle, "rbundle")
-  events <- cacher_events(rbundle)
+  cacher_events(rbundle)
 }
