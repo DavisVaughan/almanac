@@ -32,9 +32,9 @@ Install the development version from [GitHub](https://github.com/) with:
 remotes::install_github("DavisVaughan/almanac")
 ```
 
-Mac (OS-X) and Windows users should not have any problems installing
-almanac. Linux users need libv8 to install the dependency R package, V8.
-See the [V8 installation
+Mac and Windows users should not have any problems installing almanac.
+Linux users need libv8 to install the dependency R package, V8. See the
+[V8 installation
 instructions](https://github.com/jeroen/V8#debian--ubuntu) for more
 information. almanac uses ES5 JavaScript, so it does *not* require any
 “modern” JavaScript features and should work with the “old” V8 engine
@@ -103,7 +103,7 @@ wednesday_before_thanksgiving %s+% step_over_thanksgiving(2)
 
 The above example just scratches the surface of what almanac can do.
 Practically speaking, you’ll probably have multiple holidays and events
-that you’d like to combine into one bit recurrence object. This is known
+that you’d like to combine into one big recurrence object. This is known
 as a *recurrence bundle*.
 
 This example creates recurrence rules for weekends and Christmas, and
