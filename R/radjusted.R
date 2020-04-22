@@ -108,3 +108,23 @@ new_radjusted <- function(rschedule, adjust_on, adjustment) {
 
   new_rschedule(data, class = "radjusted")
 }
+
+# ------------------------------------------------------------------------------
+
+validate_adjustment <- function(x, x_arg = "") {
+  if (nzchar(x_arg)) {
+    x_arg <- glue(" `{x_arg}`")
+  }
+
+  if (!is_function(x)) {
+    glubort("Input{x_arg} must be a function.")
+  }
+
+  fmls <- fn_fmls(x)
+
+  if (length(fmls) != 2L) {
+    glubort("Input{x_arg} must have two arguments, `x` and `rschedule`.")
+  }
+
+  invisible(x)
+}
