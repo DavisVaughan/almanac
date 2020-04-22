@@ -125,6 +125,7 @@ recur_on_wday <- function(x, wday, nth = NULL) {
 
     new_nth <- union(old_nth, new_nth)
     new_nth <- unique(new_nth)
+    new_nth <- sort(new_nth)
 
     old[[day]] <- new_nth
   }
