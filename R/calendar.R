@@ -1,6 +1,6 @@
 # ------------------------------------------------------------------------------
 
-calendar <- function(name,
+calendar <- function(name = NULL,
                      since = "1970-01-01",
                      until = "2040-01-01",
                      adjust_on = c("Saturday", "Sunday")) {
@@ -75,8 +75,8 @@ new_calendar <- function(name,
                          adjustment_rschedule,
                          hldys = list(),
                          rschedules = list()) {
-  if (!is_character(name, n = 1L)) {
-    abort("`name` must be a size 1 character vector.")
+  if (!(is.null(name) || is_character(name, n = 1L))) {
+    abort("`name` must be a size 1 character vector or `NULL`.")
   }
 
   if (!is_list(hldys)) {
