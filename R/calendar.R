@@ -25,21 +25,21 @@ calendar <- function(name = NULL,
 
 # ------------------------------------------------------------------------------
 
-add_hldy <- function(calendar, hldy) {
-  validate_calendar(calendar)
+add_hldy <- function(x, hldy) {
+  validate_calendar(x)
   validate_hldy(hldy)
 
-  if (hldy_exists(hldy, calendar)) {
+  if (hldy_exists(hldy, x)) {
     warn("`hldy` already exists in the calendar, returning calendar unmodified.")
-    return(calendar)
+    return(x)
   }
 
   generator <- hldy$generator
   adjustment <- hldy$adjustment
 
-  since <- calendar$since
-  until <- calendar$until
-  adjustment_rschedule <- calendar$adjustment_rschedule
+  since <- x$since
+  until <- x$until
+  adjustment_rschedule <- x$adjustment_rschedule
 
   # Generate the holiday rschedule
   rschedule <- generator(since, until)
@@ -47,14 +47,14 @@ add_hldy <- function(calendar, hldy) {
   # Create an adjusted version of it
   rschedule <- radjusted(rschedule, adjustment_rschedule, adjustment)
 
-  hldys <- c(calendar$hldys, list(hldy))
-  rschedules <- c(calendar$rschedules, list(rschedule))
+  hldys <- c(x$hldys, list(hldy))
+  rschedules <- c(x$rschedules, list(rschedule))
 
   new_calendar(
-    name = calendar$name,
-    since = calendar$since,
-    until = calendar$until,
-    adjustment_rschedule = calendar$adjustment_rschedule,
+    name = x$name,
+    since = x$since,
+    until = x$until,
+    adjustment_rschedule = x$adjustment_rschedule,
     hldys = hldys,
     rschedules = rschedules
   )
