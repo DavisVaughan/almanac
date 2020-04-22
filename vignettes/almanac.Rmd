@@ -70,7 +70,7 @@ alma_search("1988-01-01", "1995-12-31", on_yearly_jan_5)
 
 ## Recurrence Set
 
-Each recurrence rule comes with its own unique _recurrence set_. A recurrence set is the set of all event dates that are included in that rule. In the previous example, we used `alma_search()` to extract a subset of dates from the recurrence set that were between `from` and `to`. You can also check if an existing date is included in a recurrence rule's set with `alma_in()`.
+Each recurrence rule comes with its own unique _event set_. An event set is the set of all event dates that are included in that rule. In the previous example, we used `alma_search()` to extract a subset of dates from the event set that were between `from` and `to`. You can also check if an existing date is included in a recurrence rule's event set with `alma_in()`.
 
 ```{r}
 on_monthly <- monthly(since = "1990-01-10")
@@ -147,9 +147,9 @@ alma_search("2000-01-01", "2005-01-01", on_last_monday_in_sept)
 
 ## Recurrence bundles
 
-Recurrence rules are powerful tools on their own, but they aren't enough to solve every task. Say you want to construct a rule that includes both Christmas and Labor Day as events. It would be impossible to construct this kind of recurrence set using a single rule, but if you could bundle _multiple_ rules together, one for Christmas and one for Labor Day, then it would be possible.
+Recurrence rules are powerful tools on their own, but they aren't enough to solve every task. Say you want to construct a rule that includes both Christmas and Labor Day as events. It would be impossible to construct this kind of event set using a single rule, but if you could bundle _multiple_ rules together, one for Christmas and one for Labor Day, then it would be possible.
 
-An _rbundle_ is a bundle of recurrence rules. The recurrence set of an rbundle is the union of the recurrence sets of every underlying recurrence rule. It can also contain specialized dates that you want to forcibly include in the recurrence set, called rdates, and ones that you want to forcibly exclude, called exdates.
+An _rbundle_ is a bundle of recurrence rules. The event set of an rbundle is the union of the event sets of every underlying recurrence rule. It can also contain specialized dates that you want to forcibly include in the event set, called rdates, and ones that you want to forcibly exclude, called exdates.
 
 ```{r}
 on_christmas <- yearly(since = "2000-01-01") %>%

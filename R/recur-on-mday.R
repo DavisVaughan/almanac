@@ -22,7 +22,7 @@
 #'
 #' @examples
 #' # When used with a yearly or monthly frequency, `recur_on_mday()` expands the
-#' # number of days in the recurrence set.
+#' # number of days in the event set.
 #' on_yearly <- yearly()
 #' on_yearly_mday_1_to_2 <- on_yearly %>% recur_on_mday(1:2)
 #'
@@ -33,7 +33,7 @@
 #' alma_search(start, end, on_yearly_mday_1_to_2)
 #'
 #' # When used with a daily frequency, `recur_on_mday()` limits the number of
-#' # days in the recurrence set.
+#' # days in the event set.
 #' on_daily <- daily()
 #' on_daily_mday_1_to_2 <- on_daily %>% recur_on_mday(1:2)
 #'

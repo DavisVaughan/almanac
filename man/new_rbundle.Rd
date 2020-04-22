@@ -13,11 +13,11 @@ A list of rschedules.}
 
 \item{rdates}{\verb{[Date]}
 
-A vector of dates to forcibly include in the recurrence set.}
+A vector of dates to forcibly include in the event set.}
 
 \item{exdates}{\verb{[Date]}
 
-A vector of dates to forcibly exclude from the recurrence set.}
+A vector of dates to forcibly exclude from the event set.}
 }
 \value{
 A new rbundle.

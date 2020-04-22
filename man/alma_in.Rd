@@ -2,7 +2,7 @@
 % Please edit documentation in R/alma-in.R
 \name{alma_in}
 \alias{alma_in}
-\title{Is \code{x} in the recurrence set?}
+\title{Is \code{x} in the event set?}
 \usage{
 alma_in(x, rschedule)
 }
@@ -19,7 +19,7 @@ An rschedule, such as an rrule or rbundle.}
 A logical vector the same size as \code{x}.
 }
 \description{
-\code{alma_in()} checks if \code{x} is in the recurrence set of dates defined by the
+\code{alma_in()} checks if \code{x} is in the event set of dates defined by the
 rschedule.
 }
 \examples{

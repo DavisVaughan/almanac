@@ -32,7 +32,7 @@ library(lubridate, warn.conflicts = FALSE)
 
 ## Adjusting
 
-To talk about either `alma_jump()` or `alma_step()`, we first have to cover `alma_adjust()`, as it powers both of the others. `alma_adjust()` will "adjust" an existing set of dates to ensure that no dates currently fall on an "event", as defined by a provided rbundle or recurrence rule. For example, let's construct a recurrence rule that includes all weekends in its recurrence set.
+To talk about either `alma_jump()` or `alma_step()`, we first have to cover `alma_adjust()`, as it powers both of the others. `alma_adjust()` will "adjust" an existing set of dates to ensure that no dates currently fall on an "event", as defined by a provided rbundle or recurrence rule. For example, let's construct a recurrence rule that includes all weekends in its event set.
 
 ```{r}
 on_weekends <- weekly(since = "2000-01-01") %>% 

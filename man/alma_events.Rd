@@ -16,7 +16,7 @@ A Date vector of events.
 }
 \description{
 \code{alma_events()} retrieves all of the events in the rschedule's
-recurrence set.
+event set.
 }
 \examples{
 rrule <- daily(since = "1970-01-01", until = "1970-01-05")

@@ -1,6 +1,6 @@
-#' Is `x` in the recurrence set?
+#' Is `x` in the event set?
 #'
-#' `alma_in()` checks if `x` is in the recurrence set of dates defined by the
+#' `alma_in()` checks if `x` is in the event set of dates defined by the
 #' rschedule.
 #'
 #' @inheritParams adj_following

@@ -5,10 +5,10 @@
 #'   rrule or another rbundle.
 #'
 #' - `add_rdate()` adds a rdate to an rbundle. rdates are singular
-#'   special cased dates that are forcibly included in the recurrence set.
+#'   special cased dates that are forcibly included in the event set.
 #'
 #' - `add_exdate()` adds an exdate to a rbundle. exdates are singular
-#'   special cased dates that are forcibly excluded from the recurrence set.
+#'   special cased dates that are forcibly excluded from the event set.
 #'
 #' @details
 #' In terms of priority:

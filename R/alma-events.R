@@ -1,7 +1,7 @@
 #' Get all events
 #'
 #' `alma_events()` retrieves all of the events in the rschedule's
-#' recurrence set.
+#' event set.
 #'
 #' @inheritParams adj_following
 #'

@@ -30,13 +30,13 @@ The number of days to step. Can be negative to step backwards.}
 
 \item{since}{\verb{[Date(1)]}
 
-The lower bound on the recurrence set. Depending on the final
+The lower bound on the event set. Depending on the final
 recurrence rule, pieces of information from this anchor date might be used
 to generate a complete recurrence rule.}
 
 \item{until}{\verb{[Date(1)]}
 
-The upper bound on the recurrence set.}
+The upper bound on the event set.}
 }
 \value{
 \itemize{

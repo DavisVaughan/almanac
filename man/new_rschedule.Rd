@@ -35,7 +35,7 @@ prefixed with \verb{alma_*()}, like \code{\link[=alma_in]{alma_in()}}.
 
 \code{rschedule_events()} is a generic function that rschedule subclasses must
 provide a method for. \code{rschedule_events()} should return a Date vector
-containing the complete ordered set of events in the recurrence set of
+containing the complete ordered set of events in the event set of
 that rschedule.
 }
 \details{

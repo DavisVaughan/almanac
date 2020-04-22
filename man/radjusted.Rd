@@ -22,7 +22,7 @@ of the pre-existing adjustment functions, like \code{\link[=adj_nearest]{adj_nea
 
 A custom adjustment function must have two arguments \code{x} and \code{rschedule}.
 \code{x} is the complete vector of dates that possibly need adjustment.
-\code{rschedule} is the rschedule who's recurrence set determines when an
+\code{rschedule} is the rschedule who's event set determines when an
 adjustment needs to be applied. The function should adjust \code{x} as required
 and return the adjusted Date vector.}
 }
@@ -32,7 +32,7 @@ An adjusted rschedule.
 \description{
 \code{radjusted()} creates a new adjusted rschedule on top of an existing one. The
 new rschedule contains the same event dates as the existing rschedule,
-except when they intersect with the dates in the recurrence set of the
+except when they intersect with the dates in the event set of the
 rschedule, \code{adjust_on}. In those cases, an \code{adjustment} is applied to the
 problematic dates to shift them to valid event dates.
 

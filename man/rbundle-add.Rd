@@ -38,9 +38,9 @@ An updated rbundle.
 \item \code{add_rschedule()} adds an rschedule to an rbundle. This can be another
 rrule or another rbundle.
 \item \code{add_rdate()} adds a rdate to an rbundle. rdates are singular
-special cased dates that are forcibly included in the recurrence set.
+special cased dates that are forcibly included in the event set.
 \item \code{add_exdate()} adds an exdate to a rbundle. exdates are singular
-special cased dates that are forcibly excluded from the recurrence set.
+special cased dates that are forcibly excluded from the event set.
 }
 }
 \details{

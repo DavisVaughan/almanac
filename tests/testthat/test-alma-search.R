@@ -16,7 +16,7 @@ test_that("empty rbundle means no dates", {
   )
 })
 
-test_that("can query a range outside the recurrence set", {
+test_that("can query a range outside the event set", {
   rrule <- daily(since = "1970-01-01", until = "1970-01-02")
 
   # before

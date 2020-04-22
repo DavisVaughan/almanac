@@ -37,13 +37,13 @@
 #'
 #' @param since `[Date(1)]`
 #'
-#'    The lower bound on the recurrence set. Depending on the final
+#'    The lower bound on the event set. Depending on the final
 #'    recurrence rule, pieces of information from this anchor date might be used
 #'    to generate a complete recurrence rule.
 #'
 #' @param until `[Date(1)]`
 #'
-#'    The upper bound on the recurrence set.
+#'    The upper bound on the event set.
 #'
 #' @return
 #' A new empty rrule.

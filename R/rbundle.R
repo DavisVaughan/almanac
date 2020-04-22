@@ -68,11 +68,11 @@ format.rbundle <- function(x, ...) {
 #'
 #' @param rdates `[Date]`
 #'
-#'   A vector of dates to forcibly include in the recurrence set.
+#'   A vector of dates to forcibly include in the event set.
 #'
 #' @param exdates `[Date]`
 #'
-#'   A vector of dates to forcibly exclude from the recurrence set.
+#'   A vector of dates to forcibly exclude from the event set.
 #'
 #' @return
 #' A new rbundle.
