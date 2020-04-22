@@ -51,7 +51,7 @@ hldy_christmas_generator <- function(since, until) {
 
 #' @export
 print.hldy <- function(x, ...) {
-  cat(format(x))
+  print(format(x))
   invisible(x)
 }
 

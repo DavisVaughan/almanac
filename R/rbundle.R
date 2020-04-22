@@ -35,7 +35,7 @@ rbundle <- function() {
 #' @export
 print.rbundle <- function(x, ...) {
   fmt <- format(x)
-  cat(glue("<rbundle[{fmt}]>"))
+  print(glue("<rbundle[{fmt}]>"))
   invisible(x)
 }
 
