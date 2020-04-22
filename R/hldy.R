@@ -1,10 +1,11 @@
 
 # ------------------------------------------------------------------------------
 
-hldy_martin_luther_king_jr_day <- function(adjustment = adj_none) {
+hldy_martin_luther_king_jr_day <- function(adjust_on = NULL, adjustment = NULL) {
   new_hldy(
     "Martin Luther King Jr. Day",
     hldy_martin_luther_king_jr_day_generator,
+    adjust_on,
     adjustment
   )
 }
@@ -32,10 +33,11 @@ hldy_martin_luther_king_jr_day_generator <- function(since, until) {
 
 # ------------------------------------------------------------------------------
 
-hldy_christmas <- function(adjustment = adj_none) {
+hldy_christmas <- function(adjust_on = NULL, adjustment = NULL) {
   new_hldy(
     "Christmas",
     hldy_christmas_generator,
+    adjust_on,
     adjustment
   )
 }
@@ -67,17 +69,18 @@ hldy_name <- function(x) {
 
 # ------------------------------------------------------------------------------
 
-new_hldy <- function(name, generator, adjustment) {
-  if (!is_character(name, n = 1L)) {
+new_hldy <- function(name, generator, adjust_on, adjustment) {
+  if (!is_string(name)) {
     abort("`name` must be a size 1 character vector.")
   }
 
-  generator <- validate_generator(generator)
-  adjustment <- validate_adjustment(adjustment, "adjustment")
+  validate_generator(generator)
+  validate_adjust_on_and_adjustment(adjust_on, adjustment)
 
   data <- list(
     name = name,
     generator = generator,
+    adjust_on = adjust_on,
     adjustment = adjustment
   )
 
@@ -110,7 +113,7 @@ validate_generator <- function(generator) {
     abort("`generator` must have two arguments, `since`, `until`.")
   }
 
-  generator
+  invisible(generator)
 }
 
 validate_adjustment <- function(x, x_arg = "") {
@@ -128,5 +131,5 @@ validate_adjustment <- function(x, x_arg = "") {
     abort("Input{x_arg} must have two arguments, `x` and `rschedule`.")
   }
 
-  x
+  invisible(x)
 }

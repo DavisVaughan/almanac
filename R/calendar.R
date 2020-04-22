@@ -3,7 +3,8 @@
 calendar <- function(name = NULL,
                      since = "1970-01-01",
                      until = "2040-01-01",
-                     adjust_on = c("Saturday", "Sunday")) {
+                     adjust_on = NULL,
+                     adjustment = NULL) {
   since <- check_since(since)
   until <- check_until(until)
 
@@ -11,15 +12,14 @@ calendar <- function(name = NULL,
     abort("`since` must be before `until`.")
   }
 
-  # Adjustment rschedule
-  adjustment_rschedule <- weekly(since = since, until = until)
-  adjustment_rschedule <- recur_on_wday(adjustment_rschedule, adjust_on)
+  validate_adjust_on_and_adjustment(adjust_on, adjustment)
 
   new_calendar(
     name = name,
     since = since,
     until = until,
-    adjustment_rschedule = adjustment_rschedule
+    adjust_on = adjust_on,
+    adjustment = adjustment
   )
 }
 
@@ -37,22 +37,25 @@ add_hldy <- function(x, hldy) {
   validate_hldy(hldy)
 
   if (hldy_exists(hldy, x)) {
-    warn("`hldy` already exists in the calendar, returning calendar unmodified.")
     return(x)
   }
 
-  generator <- hldy$generator
-  adjustment <- hldy$adjustment
-
   since <- x$since
   until <- x$until
-  adjustment_rschedule <- x$adjustment_rschedule
+  generator <- hldy$generator
 
   # Generate the holiday rschedule
   rschedule <- generator(since, until)
 
-  # Create an adjusted version of it
-  rschedule <- radjusted(rschedule, adjustment_rschedule, adjustment)
+  # Check for holiday specific adjustment if it has one, then
+  # drop back to calendar adjustment if it exists.
+  adjust_on <- hldy$adjust_on %||% x$adjust_on
+  adjustment <- hldy$adjustment %||% x$adjustment
+
+  # Optionally create an adjusted version of the rschedule
+  if (!is.null(adjust_on)) {
+    rschedule <- radjusted(rschedule, adjust_on, adjustment)
+  }
 
   hldys <- c(x$hldys, list(hldy))
   rschedules <- c(x$rschedules, list(rschedule))
@@ -61,7 +64,8 @@ add_hldy <- function(x, hldy) {
     name = x$name,
     since = x$since,
     until = x$until,
-    adjustment_rschedule = x$adjustment_rschedule,
+    adjust_on = x$adjust_on,
+    adjustment = x$adjustment,
     hldys = hldys,
     rschedules = rschedules
   )
@@ -102,7 +106,8 @@ remove_hldy <- function(x, hldy) {
     name = x$name,
     since = x$since,
     until = x$until,
-    adjustment_rschedule = x$adjustment_rschedule,
+    adjust_on = x$adjust_on,
+    adjustment = x$adjustment,
     hldys = hldys,
     rschedules = rschedules
   )
@@ -113,7 +118,8 @@ remove_hldy <- function(x, hldy) {
 new_calendar <- function(name,
                          since,
                          until,
-                         adjustment_rschedule,
+                         adjust_on,
+                         adjustment,
                          hldys = list(),
                          rschedules = list()) {
   if (!(is.null(name) || is_character(name, n = 1L))) {
@@ -138,7 +144,8 @@ new_calendar <- function(name,
     name = name,
     since = since,
     until = until,
-    adjustment_rschedule = adjustment_rschedule,
+    adjust_on = adjust_on,
+    adjustment = adjustment,
     hldys = hldys,
     rschedules = rschedules,
     rbundle = rbundle
@@ -169,4 +176,25 @@ hldy_exists <- function(hldy, calendar) {
 
 calendar_names <- function(x) {
   map_chr(x$hldys, hldy_name)
+}
+
+# ------------------------------------------------------------------------------
+
+validate_adjust_on_and_adjustment <- function(adjust_on, adjustment) {
+  adjust_on_supplied <- !is.null(adjust_on)
+  adjustment_supplied <- !is.null(adjustment)
+
+  if (xor(adjust_on_supplied, adjustment_supplied)) {
+    abort("If one of `adjust_on` or `adjustment` is supplied, both must be supplied.")
+  }
+
+  if (adjust_on_supplied) {
+    validate_rschedule(adjust_on, "adjust_on")
+  }
+
+  if (adjustment_supplied) {
+    validate_adjustment(adjustment, "adjustment")
+  }
+
+  invisible()
 }

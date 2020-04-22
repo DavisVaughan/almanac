@@ -4,8 +4,8 @@ cache_radjusted <- R6::R6Class(
 
   # ----------------------------------------------------------------------------
   public = list(
-    initialize = function(rschedule, adjustment_rschedule, adjustment)
-      cache_radjusted__initialize(self, private, rschedule, adjustment_rschedule, adjustment),
+    initialize = function(rschedule, adjust_on, adjustment)
+      cache_radjusted__initialize(self, private, rschedule, adjust_on, adjustment),
 
     get_events = function()
       cache_radjusted__get_events(self, private)
@@ -14,7 +14,7 @@ cache_radjusted <- R6::R6Class(
   # ----------------------------------------------------------------------------
   private = list(
     rschedule = NULL,
-    adjustment_rschedule = NULL,
+    adjust_on = NULL,
     adjustment = NULL,
 
     events = NULL,
@@ -29,14 +29,14 @@ cache_radjusted <- R6::R6Class(
 
 cache_radjusted__cache_build <- function(self, private) {
   rschedule <- private$rschedule
-  adjustment_rschedule <- private$adjustment_rschedule
+  adjust_on <- private$adjust_on
   adjustment <- private$adjustment
 
   # Get the events of `rschedule`
   events <- rschedule_events(rschedule)
 
-  # Adjust them as necessary according to `adjustment_rschedule`
-  events <- adjustment(events, adjustment_rschedule)
+  # Adjust them as necessary according to `adjust_on`
+  events <- adjustment(events, adjust_on)
 
   private$events <- events
   private$built <- TRUE
@@ -56,9 +56,9 @@ cache_radjusted__get_events <- function(self, private) {
 
 # ------------------------------------------------------------------------------
 
-cache_radjusted__initialize <- function(self, private, rschedule, adjustment_rschedule, adjustment) {
+cache_radjusted__initialize <- function(self, private, rschedule, adjust_on, adjustment) {
   private$rschedule <- rschedule
-  private$adjustment_rschedule <- adjustment_rschedule
+  private$adjust_on <- adjust_on
   private$adjustment <- adjustment
   self
 }
