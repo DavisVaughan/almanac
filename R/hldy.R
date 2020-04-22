@@ -50,14 +50,19 @@ hldy_christmas_generator <- function(since, until) {
 # ------------------------------------------------------------------------------
 
 #' @export
-format.hldy <- function(x, ...) {
-  glue("hldy: {x$name}")
-}
-
-#' @export
 print.hldy <- function(x, ...) {
   cat(format(x))
   invisible(x)
+}
+
+#' @export
+format.hldy <- function(x, ...) {
+  name <- hldy_name(x)
+  glue("<hldy[{name}]>")
+}
+
+hldy_name <- function(x) {
+  x$name
 }
 
 # ------------------------------------------------------------------------------
