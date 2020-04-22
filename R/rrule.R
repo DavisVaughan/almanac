@@ -105,6 +105,13 @@ yearly <- function(since = "1970-01-01", until = "2040-01-01") {
 
 # ------------------------------------------------------------------------------
 
+#' @export
+rschedule_events.rrule <- function(x) {
+  x$cache$get_events()
+}
+
+# ------------------------------------------------------------------------------
+
 rrule <- function(since, until, frequency) {
   since <- check_since(since)
   until <- check_until(until)

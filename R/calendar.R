@@ -25,6 +25,13 @@ calendar <- function(name = NULL,
 
 # ------------------------------------------------------------------------------
 
+#' @export
+rschedule_events.calendar <- function(x) {
+  rschedule_events(x$rbundle)
+}
+
+# ------------------------------------------------------------------------------
+
 add_hldy <- function(x, hldy) {
   validate_calendar(x)
   validate_hldy(hldy)
@@ -125,11 +132,7 @@ new_calendar <- function(name,
     abort("`rschedules` length must match `hldys` length.")
   }
 
-  # Slightly gross, we get the cache of the rbundle but don't use the
-  # rest of it. We don't want to inherit from rbundle, because we don't
-  # want to allow `add_rschedule()` to work on calendars.
   rbundle <- new_rbundle(rschedules = rschedules)
-  cache <- rbundle$cache
 
   data <- list(
     name = name,
@@ -138,7 +141,7 @@ new_calendar <- function(name,
     adjustment_rschedule = adjustment_rschedule,
     hldys = hldys,
     rschedules = rschedules,
-    cache = cache
+    rbundle = rbundle
   )
 
   new_rschedule(data, class = "calendar")

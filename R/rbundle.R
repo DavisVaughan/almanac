@@ -33,6 +33,13 @@ rbundle <- function() {
 # ------------------------------------------------------------------------------
 
 #' @export
+rschedule_events.rbundle <- function(x) {
+  x$cache$get_events()
+}
+
+# ------------------------------------------------------------------------------
+
+#' @export
 print.rbundle <- function(x, ...) {
   fmt <- format(x)
   print(glue("<rbundle[{fmt}]>"))

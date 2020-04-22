@@ -11,6 +11,11 @@ radjusted <- function(rschedule, adjustment_rschedule, adjustment) {
   new_radjusted(rschedule, adjustment_rschedule, adjustment)
 }
 
+#' @export
+rschedule_events.radjusted <- function(x) {
+  x$cache$get_events()
+}
+
 # ------------------------------------------------------------------------------
 
 new_radjusted <- function(rschedule, adjustment_rschedule, adjustment) {
