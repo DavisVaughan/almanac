@@ -5,11 +5,13 @@ reference:
   contents:
   - daily
   - starts_with("recur_")
+  - is_rrule
 
 - title: Recurrence bundles
   contents:
   - rbundle
   - starts_with("add_")
+  - is_rbundle
 
 - title: Recurrence utilities
   contents:
@@ -19,11 +21,18 @@ reference:
   - alma_previous
   - alma_events
   - alma_step
+  - stepper
 
 - title: Adjustments
   contents:
   - starts_with("adj_")
+  - radjusted
+
+- title: Developer tools
+  contents:
+  - new_rbundle
+  - new_rschedule
 
 - title: Compatibility
   contents:
-  - vctrs-compat
+  - almanac-vctrs-compat
