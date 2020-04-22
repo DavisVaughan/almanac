@@ -45,7 +45,13 @@ recur_on_position <- function(x, n) {
 
   n <- vec_cast(n, integer(), x_arg = "n")
 
+  if (any(is.na(n))) {
+    abort("`n` cannot be `NA`.")
+  }
+
   validate_frequency_position(x$rules$frequency, n)
+
+  n <- sort(n)
 
   tweak_rrule(x, position = n)
 }
