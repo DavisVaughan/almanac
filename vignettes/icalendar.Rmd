@@ -24,7 +24,6 @@ For whatever reason, most examples use a start date of `1997-09-02`. To show the
 
 ```{r setup}
 library(almanac)
-library(lubridate, warn.conflicts = FALSE)
 
 since <- as.Date("1997-09-02")
 to <- as.Date("2010-01-01")
