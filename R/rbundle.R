@@ -34,11 +34,13 @@ rbundle <- function() {
 
 #' @export
 print.rbundle <- function(x, ...) {
-  cat(glue("rbundle: {rbundle_summary(x)}"))
+  fmt <- format(x)
+  cat(glue("<rbundle[{fmt}]>"))
   invisible(x)
 }
 
-rbundle_summary <- function(x) {
+#' @export
+format.rbundle <- function(x, ...) {
   n_rschedules <- length(x$rschedules)
   n_rdates <- length(x$rdates)
   n_exdates <-length(x$exdates)
