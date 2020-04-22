@@ -4,7 +4,7 @@
 \name{almanac-package}
 \alias{almanac}
 \alias{almanac-package}
-\title{almanac: Tools For Working With Recurrence Rules}
+\title{almanac: Tools for Working with Recurrence Rules}
 \description{
 Provides tools for defining recurrence rules and recurrence
     bundles. Recurrence rules are a programatic way to define a recurring
