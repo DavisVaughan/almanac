@@ -136,7 +136,7 @@
 <div id="recurrence-set" class="section level2">
 <h2 class="hasAnchor">
 <a href="#recurrence-set" class="anchor"></a>Recurrence Set</h2>
-<p>Each recurrence rule comes with its own unique <em>recurrence set</em>. A recurrence set is the set of all event dates that are included in that rule. In the previous example, we used <code><a href="../reference/alma_search.html">alma_search()</a></code> to extract a subset of dates from the recurrence set that were between <code>from</code> and <code>to</code>. You can also check if an existing date is included in a recurrence rule’s set with <code><a href="../reference/alma_in.html">alma_in()</a></code>.</p>
+<p>Each recurrence rule comes with its own unique <em>event set</em>. An event set is the set of all event dates that are included in that rule. In the previous example, we used <code><a href="../reference/alma_search.html">alma_search()</a></code> to extract a subset of dates from the event set that were between <code>from</code> and <code>to</code>. You can also check if an existing date is included in a recurrence rule’s event set with <code><a href="../reference/alma_in.html">alma_in()</a></code>.</p>
 <div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">on_monthly</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">monthly</a></span>(<span class="kw">since</span> <span class="kw">=</span> <span class="st">"1990-01-10"</span>)
 
 <span class="no">x</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span>(<span class="st">"2000-01-08"</span>) + <span class="fl">0</span>:<span class="fl">5</span>
@@ -160,12 +160,12 @@
 <span class="co"># The first time is "slow"</span>
 <span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>(<span class="fu"><a href="../reference/alma_search.html">alma_search</a></span>(<span class="no">start_date</span>, <span class="st">"2000-01-01"</span>, <span class="no">on_daily</span>))
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;   0.239   0.018   0.223</span>
+<span class="co">#&gt;   0.220   0.016   0.209</span>
 
 <span class="co"># Repeated access to the same location is fast</span>
 <span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>(<span class="fu"><a href="../reference/alma_search.html">alma_search</a></span>(<span class="no">start_date</span>, <span class="st">"2000-01-01"</span>, <span class="no">on_daily</span>))
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;   0.000   0.000   0.001</span>
+<span class="co">#&gt;       0       0       0</span>
 
 <span class="co"># Dates are cached from `[since, to]`, so if you back up `to`, its still fast</span>
 <span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>(<span class="fu"><a href="../reference/alma_search.html">alma_search</a></span>(<span class="no">start_date</span>, <span class="st">"1990-05-01"</span>, <span class="no">on_daily</span>))
@@ -176,7 +176,7 @@
 <span class="co"># between `since` and `to` again</span>
 <span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>(<span class="fu"><a href="../reference/alma_search.html">alma_search</a></span>(<span class="no">start_date</span>, <span class="st">"2000-05-01"</span>, <span class="no">on_daily</span>))
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;       0       0       0</span></pre></body></html></div>
+<span class="co">#&gt;   0.000   0.000   0.001</span></pre></body></html></div>
 </div>
 </div>
 <div id="recurrence-conditions" class="section level2">
@@ -213,8 +213,8 @@
 <div id="recurrence-bundles" class="section level2">
 <h2 class="hasAnchor">
 <a href="#recurrence-bundles" class="anchor"></a>Recurrence bundles</h2>
-<p>Recurrence rules are powerful tools on their own, but they aren’t enough to solve every task. Say you want to construct a rule that includes both Christmas and Labor Day as events. It would be impossible to construct this kind of recurrence set using a single rule, but if you could bundle <em>multiple</em> rules together, one for Christmas and one for Labor Day, then it would be possible.</p>
-<p>An <em>rbundle</em> is a bundle of recurrence rules. The recurrence set of an rbundle is the union of the recurrence sets of every underlying recurrence rule. It can also contain specialized dates that you want to forcibly include in the recurrence set, called rdates, and ones that you want to forcibly exclude, called exdates.</p>
+<p>Recurrence rules are powerful tools on their own, but they aren’t enough to solve every task. Say you want to construct a rule that includes both Christmas and Labor Day as events. It would be impossible to construct this kind of event set using a single rule, but if you could bundle <em>multiple</em> rules together, one for Christmas and one for Labor Day, then it would be possible.</p>
+<p>An <em>rbundle</em> is a bundle of recurrence rules. The event set of an rbundle is the union of the event sets of every underlying recurrence rule. It can also contain specialized dates that you want to forcibly include in the event set, called rdates, and ones that you want to forcibly exclude, called exdates.</p>
 <div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="no">on_christmas</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">yearly</a></span>(<span class="kw">since</span> <span class="kw">=</span> <span class="st">"2000-01-01"</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="../reference/recur_on_ymonth.html">recur_on_ymonth</a></span>(<span class="st">"Dec"</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="../reference/recur_on_mday.html">recur_on_mday</a></span>(<span class="fl">25</span>)

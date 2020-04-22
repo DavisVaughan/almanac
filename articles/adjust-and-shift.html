@@ -109,7 +109,7 @@
 <div id="adjusting" class="section level2">
 <h2 class="hasAnchor">
 <a href="#adjusting" class="anchor"></a>Adjusting</h2>
-<p>To talk about either <code>alma_jump()</code> or <code><a href="../reference/alma_step.html">alma_step()</a></code>, we first have to cover <code>alma_adjust()</code>, as it powers both of the others. <code>alma_adjust()</code> will “adjust” an existing set of dates to ensure that no dates currently fall on an “event”, as defined by a provided rbundle or recurrence rule. For example, let’s construct a recurrence rule that includes all weekends in its recurrence set.</p>
+<p>To talk about either <code>alma_jump()</code> or <code><a href="../reference/alma_step.html">alma_step()</a></code>, we first have to cover <code>alma_adjust()</code>, as it powers both of the others. <code>alma_adjust()</code> will “adjust” an existing set of dates to ensure that no dates currently fall on an “event”, as defined by a provided rbundle or recurrence rule. For example, let’s construct a recurrence rule that includes all weekends in its event set.</p>
 <div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">on_weekends</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">weekly</a></span>(<span class="kw">since</span> <span class="kw">=</span> <span class="st">"2000-01-01"</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="../reference/recur_on_wday.html">recur_on_weekends</a></span>()
 

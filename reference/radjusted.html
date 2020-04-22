@@ -42,7 +42,7 @@
 <meta property="og:title" content="Create an adjusted rschedule — radjusted" />
 <meta property="og:description" content="radjusted() creates a new adjusted rschedule on top of an existing one. The
 new rschedule contains the same event dates as the existing rschedule,
-except when they intersect with the dates in the recurrence set of the
+except when they intersect with the dates in the event set of the
 rschedule, adjust_on. In those cases, an adjustment is applied to the
 problematic dates to shift them to valid event dates.
 This is most useful when creating corporate holiday rschedules. For example,
@@ -148,7 +148,7 @@ you would apply an adjustment of adj_nearest() to get the observance date." />
     <div class="ref-description">
     <p><code>radjusted()</code> creates a new adjusted rschedule on top of an existing one. The
 new rschedule contains the same event dates as the existing rschedule,
-except when they intersect with the dates in the recurrence set of the
+except when they intersect with the dates in the event set of the
 rschedule, <code>adjust_on</code>. In those cases, an <code>adjustment</code> is applied to the
 problematic dates to shift them to valid event dates.</p>
 <p>This is most useful when creating corporate holiday rschedules. For example,
@@ -182,7 +182,7 @@ you would apply an adjustment of <code><a href='adjustments.html'>adj_nearest()<
 of the pre-existing adjustment functions, like <code><a href='adjustments.html'>adj_nearest()</a></code>.</p>
 <p>A custom adjustment function must have two arguments <code>x</code> and <code>rschedule</code>.
 <code>x</code> is the complete vector of dates that possibly need adjustment.
-<code>rschedule</code> is the rschedule who's recurrence set determines when an
+<code>rschedule</code> is the rschedule who's event set determines when an
 adjustment needs to be applied. The function should adjust <code>x</code> as required
 and return the adjusted Date vector.</p></td>
     </tr>
