@@ -7,7 +7,7 @@
 \alias{workdays}
 \title{Create a new stepper}
 \usage{
-stepper(n, rschedule)
+stepper(rschedule)
 
 x \%s+\% y
 
@@ -16,10 +16,6 @@ x \%s-\% y
 workdays(n, since = "1970-01-01", until = "2040-01-01")
 }
 \arguments{
-\item{n}{\verb{[integer]}
-
-The number of days to step. Can be negative to step backwards.}
-
 \item{rschedule}{\verb{[rschedule]}
 
 An rschedule, such as an rrule or rbundle.}
@@ -27,6 +23,10 @@ An rschedule, such as an rrule or rbundle.}
 \item{x, y}{\verb{[objects]}
 
 Objects to perform step arithmetic on. Typically Dates or steppers.}
+
+\item{n}{\verb{[integer]}
+
+The number of days to step. Can be negative to step backwards.}
 
 \item{since}{\verb{[Date(1)]}
 
@@ -40,15 +40,18 @@ The upper bound on the recurrence set.}
 }
 \value{
 \itemize{
-\item \code{stepper()} and \code{workdays()} return a new stepper object.
+\item \code{stepper()} returns a function of 1 argument, \code{n}, that can be used to
+step by \code{n} days, relative to the rschedule.
+\item \code{workdays()} return a new stepper object.
 \item \verb{\%s+\%} and \verb{\%s-\%} return a new shifted Date vector.
 }
 }
 \description{
 \itemize{
-\item \code{stepper()} construct an object that can be added or subtracted from a
-Date to shift by a number of days, "stepping" over events specified by
-an rschedule.
+\item \code{stepper()} returns a function that can be used to add or subtract a
+number of days from a Date, "stepping" over events specified by an
+rschedule. You supply it the rschedule to step relative to, and then
+call the returned function with the number of days to step by.
 \item \code{workdays()} is a convenient stepper for stepping over the weekend.
 \item \verb{\%s+\%} steps forwards.
 \item \verb{\%s-\%} steps backwards.
@@ -86,13 +89,13 @@ rb <- rbundle() \%>\%
   add_rschedule(on_weekends) \%>\%
   add_rschedule(on_christmas)
 
-workday <- stepper(1, rb)
+workday <- stepper(rb)
 
 # Friday before Christmas, which was on a Monday
 friday_before_christmas <- as.Date("2000-12-22")
 
 # Steps over the weekend and Christmas to the following Tuesday
-friday_before_christmas \%s+\% workday
+friday_before_christmas \%s+\% workday(1)
 
 # ---------------------------------------------------------------------------
 
@@ -115,11 +118,11 @@ rb2 <- rbundle() \%>\%
   add_rschedule(on_weekends) \%>\%
   add_rschedule(on_observed_christmas)
 
-workday2 <- stepper(1, rb2)
+workday2 <- stepper(rb2)
 
 friday_before_christmas_2005 <- as.Date("2005-12-23")
 
 # Steps over the weekend and the observed Christmas date
 # of 2005-12-26 to Tuesday the 27th.
-friday_before_christmas_2005 \%s+\% workday2
+friday_before_christmas_2005 \%s+\% workday2(1)
 }

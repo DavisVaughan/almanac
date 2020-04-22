@@ -3,11 +3,13 @@
 
 test_that("allows integerish input", {
   rrule <- daily()
-  expect_identical(stepper(1, rrule), stepper(1L, rrule))
+  step <- stepper(rrule)
+  expect_identical(step(1), step(1L))
 })
 
 test_that("must be integerish `n`", {
-  expect_error(stepper(1.5, daily()), class = "vctrs_error_cast_lossy")
+  step <- stepper(daily())
+  expect_error(step(1.5), class = "vctrs_error_cast_lossy")
 })
 
 # ------------------------------------------------------------------------------
@@ -44,60 +46,60 @@ test_that("default method error is thrown", {
 
 test_that("can use unary ops", {
   rb <- rbundle()
-  x <- stepper(1, rb)
+  step <- stepper(rb)
 
-  expect_equal(+x, x)
-  expect_equal(-x, stepper(-1, rb))
+  expect_equal(+step(1), step(1))
+  expect_equal(-step(1), step(-1))
 })
 
 test_that("can add stepper to date", {
   rrule <- recur_on_weekends(weekly())
-  workday <- stepper(1, rrule)
+  step <- stepper(rrule)
 
   # friday
   x <- as.Date("1970-01-02")
 
   expect_identical(
-    workday %s+% x,
+    step(1) %s+% x,
     x + 3
   )
 })
 
 test_that("can add date to stepper", {
   rrule <- recur_on_weekends(weekly())
-  workday <- stepper(1, rrule)
+  step <- stepper(rrule)
 
   # friday
   x <- as.Date("1970-01-02")
 
   expect_identical(
-    x %s+% workday,
+    x %s+% step(1),
     x + 3
   )
 })
 
 test_that("can subtract stepper from date", {
   rrule <- recur_on_weekends(weekly())
-  workday <- stepper(1, rrule)
+  step <- stepper(rrule)
 
   # monday
   x <- as.Date("1970-01-05")
 
   expect_identical(
-    x %s-% workday,
+    x %s-% step(1),
     x - 3
   )
 })
 
 test_that("cannot subtract date from stepper", {
   rrule <- recur_on_weekends(weekly())
-  workday <- stepper(1, rrule)
+  step <- stepper(rrule)
 
   # monday
   x <- as.Date("1970-01-05")
 
   expect_error(
-    workday %s-% x,
+    step(1) %s-% x,
     class = "vctrs_error_incompatible_op"
   )
 })
@@ -107,10 +109,15 @@ test_that("cannot subtract date from stepper", {
 
 test_that("steppers are coercible if from the same rschedule", {
   rrule <- weekly()
-  x <- stepper(1, rrule)
-  y <- stepper(2, rrule)
+  x_step <- stepper(rrule)
+  y_step <- stepper(rrule)
+  x <- x_step(1)
+  y <- y_step(2)
 
-  expect_identical(vec_ptype2(x, y), stepper(integer(), rrule))
+  expect_step <- stepper(rrule)
+  expect <- expect_step(integer())
+
+  expect_identical(vec_ptype2(x, y), expect)
   expect_error(vec_ptype2(x, new_stepper()), class = "vctrs_error_incompatible_type")
 })
 
@@ -119,8 +126,10 @@ test_that("steppers are coercible if from the same rschedule", {
 
 test_that("steppers are coercible if from the same rschedule", {
   rrule <- weekly()
-  x <- stepper(1, rrule)
-  y <- stepper(2, rrule)
+  x_step <- stepper(rrule)
+  y_step <- stepper(rrule)
+  x <- x_step(1)
+  y <- y_step(2)
 
   expect_identical(vec_cast(x, y),  x)
   expect_identical(vec_cast(y, x),  y)

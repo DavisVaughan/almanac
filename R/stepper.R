@@ -1,9 +1,10 @@
 #' Create a new stepper
 #'
 #' @description
-#' - `stepper()` construct an object that can be added or subtracted from a
-#'   Date to shift by a number of days, "stepping" over events specified by
-#'   an rschedule.
+#' - `stepper()` returns a function that can be used to add or subtract a
+#'   number of days from a Date, "stepping" over events specified by an
+#'   rschedule. You supply it the rschedule to step relative to, and then
+#'   call the returned function with the number of days to step by.
 #'
 #' - `workdays()` is a convenient stepper for stepping over the weekend.
 #'
@@ -28,7 +29,10 @@
 #'   Objects to perform step arithmetic on. Typically Dates or steppers.
 #'
 #' @return
-#' - `stepper()` and `workdays()` return a new stepper object.
+#' - `stepper()` returns a function of 1 argument, `n`, that can be used to
+#'   step by `n` days, relative to the rschedule.
+#'
+#' - `workdays()` return a new stepper object.
 #'
 #' - `%s+%` and `%s-%` return a new shifted Date vector.
 #'
@@ -56,13 +60,13 @@
 #'   add_rschedule(on_weekends) %>%
 #'   add_rschedule(on_christmas)
 #'
-#' workday <- stepper(1, rb)
+#' workday <- stepper(rb)
 #'
 #' # Friday before Christmas, which was on a Monday
 #' friday_before_christmas <- as.Date("2000-12-22")
 #'
 #' # Steps over the weekend and Christmas to the following Tuesday
-#' friday_before_christmas %s+% workday
+#' friday_before_christmas %s+% workday(1)
 #'
 #' # ---------------------------------------------------------------------------
 #'
@@ -85,16 +89,18 @@
 #'   add_rschedule(on_weekends) %>%
 #'   add_rschedule(on_observed_christmas)
 #'
-#' workday2 <- stepper(1, rb2)
+#' workday2 <- stepper(rb2)
 #'
 #' friday_before_christmas_2005 <- as.Date("2005-12-23")
 #'
 #' # Steps over the weekend and the observed Christmas date
 #' # of 2005-12-26 to Tuesday the 27th.
-#' friday_before_christmas_2005 %s+% workday2
-stepper <- function(n, rschedule) {
-  n <- vec_cast(n, integer(), x_arg = "n")
-  new_stepper(n = n, rschedule = rschedule)
+#' friday_before_christmas_2005 %s+% workday2(1)
+stepper <- function(rschedule) {
+  function(n) {
+    n <- vec_cast(n, integer(), x_arg = "n")
+    new_stepper(n = n, rschedule = rschedule)
+  }
 }
 
 # ------------------------------------------------------------------------------
@@ -118,8 +124,8 @@ stepper <- function(n, rschedule) {
 workdays <- function(n, since = "1970-01-01", until = "2040-01-01") {
   rschedule <- weekly(since = since, until = until)
   rschedule <- recur_on_weekends(rschedule)
-
-  stepper(n, rschedule)
+  workdays_stepper <- stepper(rschedule)
+  workdays_stepper(n)
 }
 
 # ------------------------------------------------------------------------------
