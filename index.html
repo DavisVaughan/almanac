@@ -106,7 +106,7 @@
 <p>Install the development version from <a href="https://github.com/">GitHub</a> with:</p>
 <div class="sourceCode" id="cb2"><pre class="r"><span class="co"># install.packages("remotes")</span>
 <span class="kw pkg">remotes</span><span class="kw ns">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(<span class="st">"DavisVaughan/almanac"</span>)</pre></div>
-<p>Mac (OS-X) and Windows users should not have any problems installing almanac. Linux users need libv8 to install the dependency R package, V8. See the <a href="https://github.com/jeroen/V8#debian--ubuntu">V8 installation instructions</a> for more information. almanac uses ES5 JavaScript, so it does <em>not</em> require any “modern” JavaScript features and should work with the “old” V8 engine provided by Ubuntu versions before 19.04.</p>
+<p>Mac and Windows users should not have any problems installing almanac. Linux users need libv8 to install the dependency R package, V8. See the <a href="https://github.com/jeroen/V8#debian--ubuntu">V8 installation instructions</a> for more information. almanac uses ES5 JavaScript, so it does <em>not</em> require any “modern” JavaScript features and should work with the “old” V8 engine provided by Ubuntu versions before 19.04.</p>
 </div>
 <div id="recurrence-rules" class="section level2">
 <h2 class="hasAnchor">
@@ -145,7 +145,7 @@
 <div id="recurrence-bundles" class="section level2">
 <h2 class="hasAnchor">
 <a href="#recurrence-bundles" class="anchor"></a>Recurrence Bundles</h2>
-<p>The above example just scratches the surface of what almanac can do. Practically speaking, you’ll probably have multiple holidays and events that you’d like to combine into one bit recurrence object. This is known as a <em>recurrence bundle</em>.</p>
+<p>The above example just scratches the surface of what almanac can do. Practically speaking, you’ll probably have multiple holidays and events that you’d like to combine into one big recurrence object. This is known as a <em>recurrence bundle</em>.</p>
 <p>This example creates recurrence rules for weekends and Christmas, and bundles them together along with the Thanksgiving rule.</p>
 <div class="sourceCode" id="cb8"><pre class="r"><span class="no">on_weekends</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/rrule.html">weekly</a></span>() <span class="kw">%&gt;%</span>
   <span class="fu"><a href="reference/recur_on_wday.html">recur_on_weekends</a></span>()
