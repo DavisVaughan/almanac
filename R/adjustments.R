@@ -43,6 +43,9 @@
 #'
 #'   An rschedule, such as an rrule or rbundle.
 #'
+#' @return
+#' An adjusted vector of Dates.
+#'
 #' @name adjustments
 #'
 #' @examples

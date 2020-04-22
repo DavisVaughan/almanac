@@ -15,6 +15,9 @@
 #'    on. This offset must still fall within the same year, otherwise the date
 #'    will be silently ignored.
 #'
+#' @return
+#' An updated rrule.
+#'
 #' @export
 #' @examples
 #' on_easter <- yearly() %>% recur_on_easter()

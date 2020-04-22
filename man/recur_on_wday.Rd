@@ -29,6 +29,9 @@ Limit to the n-th occurence of the \code{wday} in the base frequency. For
 example, in a monthly frequency, using \code{nth = -1} would limit to the
 last \code{wday} in the month. The default of \code{NULL} chooses all occurences.}
 }
+\value{
+An updated rrule.
+}
 \description{
 \itemize{
 \item \code{recur_on_wday()} recurs on a specific day of the week.

@@ -50,6 +50,9 @@
 #'
 #'   Dates to forcibly exclude from the rbundle.
 #'
+#' @return
+#' An updated rbundle.
+#'
 #' @examples
 #' on_thanksgiving <- yearly() %>%
 #'   recur_on_wday("Thurs", 4) %>%

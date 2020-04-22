@@ -16,6 +16,9 @@ A recurrence rule.}
 The days of the month on which to recur. Negative values are allowed,
 which specify n days from the end of the month.}
 }
+\value{
+An updated rrule.
+}
 \description{
 \code{recur_on_mday()} recurs on a specific day of the month.
 }

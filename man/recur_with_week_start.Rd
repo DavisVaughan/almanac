@@ -17,6 +17,9 @@ Day of the week to start the week on. Must be an integer value in
 \verb{[1, 7]}, with \code{1 = Monday} and \code{7 = Sunday}. This is also allowed to be
 a full weekday string like \code{"Tuesday"}, or an abbreviation like \code{"Tues"}.}
 }
+\value{
+An updated rrule.
+}
 \description{
 \code{recur_with_week_start()} controls the week day that represents the start of
 the week. This is important for rules that use \code{\link[=recur_on_yweek]{recur_on_yweek()}}. See that

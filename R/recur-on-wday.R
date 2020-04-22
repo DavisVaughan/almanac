@@ -33,6 +33,9 @@
 #'    example, in a monthly frequency, using `nth = -1` would limit to the
 #'    last `wday` in the month. The default of `NULL` chooses all occurences.
 #'
+#' @return
+#' An updated rrule.
+#'
 #' @examples
 #' # Using default `since` (1970-01-01, a Thursday)
 #' on_weekly_thursdays <- weekly()

@@ -28,7 +28,7 @@ cache_rbundle <- R6::R6Class(
 # ------------------------------------------------------------------------------
 
 cache_rbundle__cache_build <- function(self, private) {
-  if (all_rrules(private$rschedules)) {
+  if (all_are_rrules(private$rschedules)) {
     # When all `rschedules` are `rrules`, we can optimize into 1 JS call
     cache_rbundle__cache_build_rrules(self, private)
   } else {
@@ -130,58 +130,4 @@ cache_rbundle__initialize <- function(self, private, rschedules, rdates, exdates
   private$rdates <- rdates
   private$exdates <- exdates
   self
-}
-
-# ------------------------------------------------------------------------------
-
-append_rrule <- function(body, rules) {
-  rules <- as_js_from_rrule(rules)
-
-  glue("
-    {body}
-
-    ruleset.rrule(
-      {rules}
-    )
-  ")
-}
-
-append_rdate <- function(body, rdate) {
-  rdate <- as_js_from_date(rdate)
-
-  glue("
-    {body}
-
-    ruleset.rdate(
-      {rdate}
-    )
-  ")
-}
-
-append_exdate <- function(body, exdate) {
-  exdate <- as_js_from_date(exdate)
-
-  glue("
-    {body}
-
-    ruleset.exdate(
-      {exdate}
-    )
-  ")
-}
-
-# ------------------------------------------------------------------------------
-
-parse_js_date <- function(x) {
-  if (length(x) == 0L) {
-    return(new_date())
-  }
-
-  x <- lubridate::fast_strptime(x, format = "%Y-%m-%dT%H:%M:%OSZ", tz = "UTC", lt = FALSE)
-
-  as.Date(x)
-}
-
-all_rrules <- function(x) {
-  all(map_lgl(x, is_rrule))
 }

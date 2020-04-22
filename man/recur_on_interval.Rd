@@ -15,6 +15,9 @@ A recurrence rule.}
 
 The interval on which to recur.}
 }
+\value{
+An updated rrule.
+}
 \description{
 \code{recur_on_interval()} adjusts the interval of the base frequency of the
 recurrence rule. For example, a \code{\link[=monthly]{monthly()}} rule with an interval of 2 would

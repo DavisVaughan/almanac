@@ -16,6 +16,9 @@ A recurrence rule.}
 Weeks of the year to recur on. Integer values must be between
 \verb{[1, 53]} or \verb{[-53, -1]}.}
 }
+\value{
+An updated rrule.
+}
 \description{
 \code{recur_on_yweek()} recurs on a specific week of the year.
 }

@@ -27,6 +27,9 @@ to generate a complete recurrence rule.}
 
 The upper bound on the recurrence set.}
 }
+\value{
+A new empty rrule.
+}
 \description{
 These functions allow you to create a recurrence rule with a specified
 frequency. They are the base elements for all recurrence rules. To add

@@ -11,6 +11,9 @@
 #'    Days of the year to recur on. Values must be from `[-366, -1]` and
 #'    `[1, 366]`.
 #'
+#' @return
+#' An updated rrule.
+#'
 #' @examples
 #' library(lubridate, warn.conflicts = FALSE)
 #'

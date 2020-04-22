@@ -12,6 +12,9 @@
 #'    The positions to select within an intrafrequency set. Negative numbers
 #'    select from the end of the set.
 #'
+#' @return
+#' An updated rrule.
+#'
 #' @examples
 #' library(lubridate, warn.conflicts = FALSE)
 #'

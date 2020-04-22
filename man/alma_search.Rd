@@ -19,6 +19,9 @@ An rschedule, such as an rrule or rbundle.}
 
 If \code{from} or \code{to} are events, should they be included?}
 }
+\value{
+A Date vector of all events between \code{from} and \code{to}.
+}
 \description{
 \code{alma_search()} retrieves all events between \code{from} and \code{to}.
 }

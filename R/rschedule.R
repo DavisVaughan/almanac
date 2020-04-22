@@ -28,6 +28,11 @@
 #'
 #'   An object that subclasses rschedule.
 #'
+#' @return
+#' For `new_rschedule()`, a new rschedule subclass.
+#'
+#' For `rschedule_events()`, a Date vector of events.
+#'
 #' @export
 #' @examples
 #' events <- as.Date("1970-01-01")

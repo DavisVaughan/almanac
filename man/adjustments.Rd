@@ -31,6 +31,9 @@ A vector of dates.}
 
 An rschedule, such as an rrule or rbundle.}
 }
+\value{
+An adjusted vector of Dates.
+}
 \description{
 This family of \verb{adj_*()} functions encode business logic for common
 date adjustments. If \code{x} falls on an event date, it is adjusted according to

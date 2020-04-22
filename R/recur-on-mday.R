@@ -17,6 +17,9 @@
 #'    The days of the month on which to recur. Negative values are allowed,
 #'    which specify n days from the end of the month.
 #'
+#' @return
+#' An updated rrule.
+#'
 #' @examples
 #' # When used with a yearly or monthly frequency, `recur_on_mday()` expands the
 #' # number of days in the recurrence set.

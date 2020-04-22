@@ -22,6 +22,9 @@ An rschedule, such as an rrule or rbundle.}
 
 If \code{x} is an event, should it be considered the next or previous event?}
 }
+\value{
+A Date vector the same size as \code{x}.
+}
 \description{
 \itemize{
 \item \code{alma_next()} generates the next event after \code{x}.

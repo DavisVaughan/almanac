@@ -1,12 +1,29 @@
+
+parse_js_date <- function(x) {
+  if (length(x) == 0L) {
+    return(new_date())
+  }
+
+  x <- lubridate::fast_strptime(x, format = "%Y-%m-%dT%H:%M:%OSZ", tz = "UTC", lt = FALSE)
+
+  as.Date(x)
+}
+
+# ------------------------------------------------------------------------------
+
 as_js_from_date <- function(x) {
   milliseconds <- unclass(x) * 86400 * 1000
   glue("new Date({milliseconds})")
 }
 
+# ------------------------------------------------------------------------------
+
 as_js_from_vector <- function(x) {
   x <- glue::glue_collapse(x, sep = ", ")
   glue("[{x}]")
 }
+
+# ------------------------------------------------------------------------------
 
 as_js_from_boolean <- function(x) {
   if (x) {
@@ -44,6 +61,8 @@ as_js_from_rrule <- function(x) {
 
   js_rrule
 }
+
+# ------------------------------------------------------------------------------
 
 get_dtstart <- function(x) {
   dtstart <- x$since
@@ -197,3 +216,42 @@ get_easter <- function(x) {
 
   glue("byeaster: {x$easter}")
 }
+
+# ------------------------------------------------------------------------------
+
+append_rrule <- function(body, rules) {
+  rules <- as_js_from_rrule(rules)
+
+  glue("
+    {body}
+
+    ruleset.rrule(
+      {rules}
+    )
+  ")
+}
+
+append_rdate <- function(body, rdate) {
+  rdate <- as_js_from_date(rdate)
+
+  glue("
+    {body}
+
+    ruleset.rdate(
+      {rdate}
+    )
+  ")
+}
+
+append_exdate <- function(body, exdate) {
+  exdate <- as_js_from_date(exdate)
+
+  glue("
+    {body}
+
+    ruleset.exdate(
+      {exdate}
+    )
+  ")
+}
+

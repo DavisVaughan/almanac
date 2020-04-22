@@ -6,7 +6,7 @@
 #' @inheritParams adj_following
 #'
 #' @return
-#' A `Date` vector of events.
+#' A Date vector of events.
 #'
 #' @export
 #' @examples

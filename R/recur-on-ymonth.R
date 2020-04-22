@@ -12,6 +12,9 @@
 #'    `[1, 12]`. This can also be a full month string like `"November"`, or an
 #'    abbreviation like `"Nov"`.
 #'
+#' @return
+#' An updated rrule.
+#'
 #' @examples
 #' # There is a big difference between adding this rule to a `yearly()`
 #' # or `monthly()` frequency, and a `daily()` frequency.

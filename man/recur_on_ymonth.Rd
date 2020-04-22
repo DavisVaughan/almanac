@@ -17,6 +17,9 @@ Months of the year to mark as events. Integer values must be between
 \verb{[1, 12]}. This can also be a full month string like \code{"November"}, or an
 abbreviation like \code{"Nov"}.}
 }
+\value{
+An updated rrule.
+}
 \description{
 \code{recur_on_ymonth()} recurs on a specific month of the year.
 }

@@ -12,6 +12,9 @@
 #'
 #'    The interval on which to recur.
 #'
+#' @return
+#' An updated rrule.
+#'
 #' @examples
 #' # The default interval is 1
 #' on_monthly <- monthly(since = "1999-01-01")

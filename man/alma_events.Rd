@@ -12,7 +12,7 @@ alma_events(rschedule)
 An rschedule, such as an rrule or rbundle.}
 }
 \value{
-A \code{Date} vector of events.
+A Date vector of events.
 }
 \description{
 \code{alma_events()} retrieves all of the events in the rschedule's

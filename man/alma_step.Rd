@@ -19,6 +19,9 @@ The number of days to step. Can be negative to step backwards.}
 
 An rschedule, such as an rrule or rbundle.}
 }
+\value{
+A Date vector the same size as \code{x} shifted by \code{n} steps.
+}
 \description{
 \code{alma_step()} is useful for shifting dates by "n business days".
 

@@ -18,6 +18,9 @@
 #'    Weeks of the year to recur on. Integer values must be between
 #'    `[1, 53]` or `[-53, -1]`.
 #'
+#' @return
+#' An updated rrule.
+#'
 #' @examples
 #' # Weekly rules are a bit tricky because they are implemented to comply
 #' # with ISO-8601 standards, which require that the first week of the year

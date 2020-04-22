@@ -5,6 +5,9 @@
 #'
 #' @inheritParams adj_following
 #'
+#' @return
+#' A logical vector the same size as `x`.
+#'
 #' @export
 #' @examples
 #' rrule <- weekly() %>%

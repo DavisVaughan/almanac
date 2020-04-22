@@ -15,6 +15,9 @@ A vector of dates.}
 
 An rschedule, such as an rrule or rbundle.}
 }
+\value{
+A logical vector the same size as \code{x}.
+}
 \description{
 \code{alma_in()} checks if \code{x} is in the recurrence set of dates defined by the
 rschedule.

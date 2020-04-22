@@ -16,6 +16,9 @@ A recurrence rule.}
 Days of the year to recur on. Values must be from \verb{[-366, -1]} and
 \verb{[1, 366]}.}
 }
+\value{
+An updated rrule.
+}
 \description{
 \code{recur_on_yday()} recurs on a specific day of the year.
 }

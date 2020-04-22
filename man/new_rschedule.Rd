@@ -22,6 +22,11 @@ A required subclass.}
 
 An object that subclasses rschedule.}
 }
+\value{
+For \code{new_rschedule()}, a new rschedule subclass.
+
+For \code{rschedule_events()}, a Date vector of events.
+}
 \description{
 \code{new_rschedule()} is a developer focused tool that is not required for
 normal usage of almanac. It is only exported to allow other packages

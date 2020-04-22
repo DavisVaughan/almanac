@@ -18,6 +18,9 @@
 #'    `[1, 7]`, with `1 = Monday` and `7 = Sunday`. This is also allowed to be
 #'    a full weekday string like `"Tuesday"`, or an abbreviation like `"Tues"`.
 #'
+#' @return
+#' An updated rrule.
+#'
 #' @export
 recur_with_week_start <- function(x, wday) {
   validate_rrule(x, "x")

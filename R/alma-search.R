@@ -12,6 +12,9 @@
 #'
 #'    If `from` or `to` are events, should they be included?
 #'
+#' @return
+#' A Date vector of all events between `from` and `to`.
+#'
 #' @export
 #' @examples
 #' on_12th <- monthly() %>% recur_on_mday(12)

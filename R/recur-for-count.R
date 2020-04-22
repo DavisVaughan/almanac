@@ -16,6 +16,9 @@
 #'
 #'    The number of times to recur for.
 #'
+#' @return
+#' An updated rrule.
+#'
 #' @export
 #' @examples
 #' # Using the default `since` date

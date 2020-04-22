@@ -30,6 +30,9 @@ Dates to forcibly include in the rbundle.}
 
 Dates to forcibly exclude from the rbundle.}
 }
+\value{
+An updated rbundle.
+}
 \description{
 \itemize{
 \item \code{add_rschedule()} adds an rschedule to an rbundle. This can be another

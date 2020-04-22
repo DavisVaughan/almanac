@@ -16,6 +16,9 @@ A recurrence rule.}
 The positions to select within an intrafrequency set. Negative numbers
 select from the end of the set.}
 }
+\value{
+An updated rrule.
+}
 \description{
 \code{recur_on_position()} let's you have fine tuned control over which element
 of the set to select \emph{within} the base frequency.

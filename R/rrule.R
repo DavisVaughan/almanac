@@ -45,6 +45,9 @@
 #'
 #'    The upper bound on the recurrence set.
 #'
+#' @return
+#' A new empty rrule.
+#'
 #' @examples
 #' rrule <- monthly() %>% recur_on_mday(25)
 #'
@@ -184,6 +187,10 @@ new_rrule <- function(since = as.Date("1970-01-01"),
 #' is_rrule(daily())
 is_rrule <- function(x) {
   inherits(x, "rrule")
+}
+
+all_are_rrules <- function(x) {
+  all(map_lgl(x, is_rrule))
 }
 
 # ------------------------------------------------------------------------------

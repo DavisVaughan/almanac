@@ -35,6 +35,9 @@
 #'
 #'   The number of days to step. Can be negative to step backwards.
 #'
+#' @return
+#' A Date vector the same size as `x` shifted by `n` steps.
+#'
 #' @examples
 #' # Make a rrule for weekends
 #' on_weekends <- weekly() %>%

@@ -17,6 +17,9 @@ An offset in terms of a number of days on either side of Easter to recur
 on. This offset must still fall within the same year, otherwise the date
 will be silently ignored.}
 }
+\value{
+An updated rrule.
+}
 \description{
 \code{recur_on_easter()} is a special helper to recur on Easter. Easter is
 particularly difficult to construct a recurrence rule for. Using \code{offset},

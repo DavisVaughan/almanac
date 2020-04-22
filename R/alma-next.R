@@ -12,6 +12,9 @@
 #'
 #'   If `x` is an event, should it be considered the next or previous event?
 #'
+#' @return
+#' A Date vector the same size as `x`.
+#'
 #' @export
 #' @examples
 #' on_12th <- monthly() %>% recur_on_mday(12)
