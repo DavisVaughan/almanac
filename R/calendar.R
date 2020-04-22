@@ -29,6 +29,13 @@ add_hldy <- function(calendar, hldy) {
   validate_calendar(calendar)
   validate_hldy(hldy)
 
+  hldys <- calendar$hldys
+
+  if (hldy_exists(hldy, hldys)) {
+    warn("`hldy` already exists in the calendar, returning calendar unmodified.")
+    return(calendar)
+  }
+
   generator <- hldy$generator
   adjustment <- hldy$adjustment
 
@@ -42,7 +49,7 @@ add_hldy <- function(calendar, hldy) {
   # Create an adjusted version of it
   rschedule <- radjusted(rschedule, adjustment_rschedule, adjustment)
 
-  hldys <- c(calendar$hldys, list(hldy))
+  hldys <- c(hldys, list(hldy))
   rschedules <- c(calendar$rschedules, list(rschedule))
 
   new_calendar(
@@ -53,6 +60,11 @@ add_hldy <- function(calendar, hldy) {
     hldys = hldys,
     rschedules = rschedules
   )
+}
+
+hldy_exists <- function(hldy, hldys) {
+  names <- map_chr(hldys, hldy_name)
+  hldy_name(hldy) %in% names
 }
 
 # ------------------------------------------------------------------------------
