@@ -1,0 +1,29 @@
+
+basic method
+============
+
+> radjusted(daily(), daily(), adj_none)
+<radjusted>
+
+Adjust:
+<rrule[daily / 1970-01-01 / 2040-01-01]>
+
+Adjust on:
+<rrule[daily / 1970-01-01 / 2040-01-01]>
+
+
+with rbundles
+=============
+
+> rrule <- recur_on_wday(weekly(), "Wed")
+> rbundle <- add_rschedule(rbundle(), weekly())
+> radjusted(rrule, rbundle, adj_none)
+<radjusted>
+
+Adjust:
+<rrule[weekly / 1970-01-01 / 2040-01-01]>
+- wday: Wed
+
+Adjust on:
+<rbundle[1 rschedules / 0 rdates / 0 exdates]>
+

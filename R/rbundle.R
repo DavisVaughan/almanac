@@ -41,8 +41,7 @@ rschedule_events.rbundle <- function(x) {
 
 #' @export
 print.rbundle <- function(x, ...) {
-  fmt <- format(x)
-  print(glue("<rbundle[{fmt}]>"))
+  print(format(x))
   invisible(x)
 }
 
@@ -52,7 +51,7 @@ format.rbundle <- function(x, ...) {
   n_rdates <- length(x$rdates)
   n_exdates <-length(x$exdates)
 
-  glue("{n_rschedules} rschedules / {n_rdates} rdates / {n_exdates} exdates")
+  glue("<rbundle[{n_rschedules} rschedules / {n_rdates} rdates / {n_exdates} exdates]>")
 }
 
 # ------------------------------------------------------------------------------
