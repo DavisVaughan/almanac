@@ -13,6 +13,14 @@ test_that("must be integerish `n`", {
 })
 
 # ------------------------------------------------------------------------------
+# workdays()
+
+test_that("workdays works", {
+  x <- as.Date("2020-04-24")
+  expect_identical(x %s+% workdays(1), x + 3)
+})
+
+# ------------------------------------------------------------------------------
 # new_stepper()
 
 test_that("can create an empty stepper", {
