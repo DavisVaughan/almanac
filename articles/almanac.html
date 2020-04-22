@@ -175,12 +175,12 @@
 <span class="co"># The first time is "slow"</span>
 <span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>(<span class="fu"><a href="../reference/alma_search.html">alma_search</a></span>(<span class="no">since</span>, <span class="st">"2000-01-01"</span>, <span class="no">on_weekly</span>))
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;   0.084   0.004   0.066</span>
+<span class="co">#&gt;   0.079   0.005   0.064</span>
 
 <span class="co"># Repeated access is fast</span>
 <span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>(<span class="fu"><a href="../reference/alma_search.html">alma_search</a></span>(<span class="no">since</span>, <span class="st">"2000-01-01"</span>, <span class="no">on_weekly</span>))
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;       0       0       0</span>
+<span class="co">#&gt;   0.001   0.000   0.001</span>
 
 <span class="co"># The entire event set is cached, so even if you change the arguments,</span>
 <span class="co"># the operation is still fast.</span>
