@@ -42,9 +42,10 @@
 <meta property="og:title" content="Create a new stepper — stepper" />
 <meta property="og:description" content="
 
-stepper() construct an object that can be added or subtracted from a
-Date to shift by a number of days, &quot;stepping&quot; over events specified by
-an rschedule.
+stepper() returns a function that can be used to add or subtract a
+number of days from a Date, &quot;stepping&quot; over events specified by an
+rschedule. You supply it the rschedule to step relative to, and then
+call the returned function with the number of days to step by.
 workdays() is a convenient stepper for stepping over the weekend.
 %s+% steps forwards.
 %s-% steps backwards.
@@ -150,9 +151,10 @@ double dispatch implementation." />
     <div class="ref-description">
     
 <ul>
-<li><p><code>stepper()</code> construct an object that can be added or subtracted from a
-Date to shift by a number of days, "stepping" over events specified by
-an rschedule.</p></li>
+<li><p><code>stepper()</code> returns a function that can be used to add or subtract a
+number of days from a Date, "stepping" over events specified by an
+rschedule. You supply it the rschedule to step relative to, and then
+call the returned function with the number of days to step by.</p></li>
 <li><p><code>workdays()</code> is a convenient stepper for stepping over the weekend.</p></li>
 <li><p><code>%s+%</code> steps forwards.</p></li>
 <li><p><code>%s-%</code> steps backwards.</p></li>
@@ -164,7 +166,7 @@ can call <code><a href='https://vctrs.r-lib.org/reference/vec_arith.html'>vctrs:
 double dispatch implementation.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>stepper</span>(<span class='no'>n</span>, <span class='no'>rschedule</span>)
+    <pre class="usage"><span class='fu'>stepper</span>(<span class='no'>rschedule</span>)
 
 <span class='no'>x</span> <span class='kw'>%s+%</span> <span class='no'>y</span>
 
@@ -176,11 +178,6 @@ double dispatch implementation.</p>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>n</th>
-      <td><p><code>[integer]</code></p>
-<p>The number of days to step. Can be negative to step backwards.</p></td>
-    </tr>
-    <tr>
       <th>rschedule</th>
       <td><p><code>[rschedule]</code></p>
 <p>An rschedule, such as an rrule or rbundle.</p></td>
@@ -189,6 +186,11 @@ double dispatch implementation.</p>
       <th>x, y</th>
       <td><p><code>[objects]</code></p>
 <p>Objects to perform step arithmetic on. Typically Dates or steppers.</p></td>
+    </tr>
+    <tr>
+      <th>n</th>
+      <td><p><code>[integer]</code></p>
+<p>The number of days to step. Can be negative to step backwards.</p></td>
     </tr>
     <tr>
       <th>since</th>
@@ -208,7 +210,9 @@ to generate a complete recurrence rule.</p></td>
 
     
 <ul>
-<li><p><code>stepper()</code> and <code>workdays()</code> return a new stepper object.</p></li>
+<li><p><code>stepper()</code> returns a function of 1 argument, <code>n</code>, that can be used to
+step by <code>n</code> days, relative to the rschedule.</p></li>
+<li><p><code>workdays()</code> return a new stepper object.</p></li>
 <li><p><code>%s+%</code> and <code>%s-%</code> return a new shifted Date vector.</p></li>
 </ul>
 
@@ -239,13 +243,13 @@ use that directly.</p>
   <span class='fu'><a href='rbundle-add.html'>add_rschedule</a></span>(<span class='no'>on_weekends</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='rbundle-add.html'>add_rschedule</a></span>(<span class='no'>on_christmas</span>)
 
-<span class='no'>workday</span> <span class='kw'>&lt;-</span> <span class='fu'>stepper</span>(<span class='fl'>1</span>, <span class='no'>rb</span>)
+<span class='no'>workday</span> <span class='kw'>&lt;-</span> <span class='fu'>stepper</span>(<span class='no'>rb</span>)
 
 <span class='co'># Friday before Christmas, which was on a Monday</span>
 <span class='no'>friday_before_christmas</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/as.Date.html'>as.Date</a></span>(<span class='st'>"2000-12-22"</span>)
 
 <span class='co'># Steps over the weekend and Christmas to the following Tuesday</span>
-<span class='no'>friday_before_christmas</span> <span class='kw'>%s+%</span> <span class='no'>workday</span></div><div class='output co'>#&gt; [1] "2000-12-26"</div><div class='input'>
+<span class='no'>friday_before_christmas</span> <span class='kw'>%s+%</span> <span class='fu'>workday</span>(<span class='fl'>1</span>)</div><div class='output co'>#&gt; [1] "2000-12-26"</div><div class='input'>
 <span class='co'># ---------------------------------------------------------------------------</span>
 
 <span class='co'># Christmas in 2005 was on a Sunday, but your company probably "observed"</span>
@@ -266,13 +270,13 @@ use that directly.</p>
   <span class='fu'><a href='rbundle-add.html'>add_rschedule</a></span>(<span class='no'>on_weekends</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='rbundle-add.html'>add_rschedule</a></span>(<span class='no'>on_observed_christmas</span>)
 
-<span class='no'>workday2</span> <span class='kw'>&lt;-</span> <span class='fu'>stepper</span>(<span class='fl'>1</span>, <span class='no'>rb2</span>)
+<span class='no'>workday2</span> <span class='kw'>&lt;-</span> <span class='fu'>stepper</span>(<span class='no'>rb2</span>)
 
 <span class='no'>friday_before_christmas_2005</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/as.Date.html'>as.Date</a></span>(<span class='st'>"2005-12-23"</span>)
 
 <span class='co'># Steps over the weekend and the observed Christmas date</span>
 <span class='co'># of 2005-12-26 to Tuesday the 27th.</span>
-<span class='no'>friday_before_christmas_2005</span> <span class='kw'>%s+%</span> <span class='no'>workday2</span></div><div class='output co'>#&gt; [1] "2005-12-27"</div></pre>
+<span class='no'>friday_before_christmas_2005</span> <span class='kw'>%s+%</span> <span class='fu'>workday2</span>(<span class='fl'>1</span>)</div><div class='output co'>#&gt; [1] "2005-12-27"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

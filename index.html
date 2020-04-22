@@ -98,24 +98,72 @@
 <!-- badges: start -->
 
 <div class="sourceCode" id="cb1"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">almanac</span>)</pre></div>
-<p>almanac provides tools for working with recurrence rules, the fundamental building blocks used to identify calendar “events”, such as weekends or holidays. Constructing recurrence rules looks a little like this:</p>
+<p>almanac provides tools for working with recurrence rules, the fundamental building blocks used to identify calendar “events”, such as weekends or holidays.</p>
+<div id="recurrence-rules" class="section level2">
+<h2 class="hasAnchor">
+<a href="#recurrence-rules" class="anchor"></a>Recurrence Rules</h2>
+<p>Constructing recurrence rules looks a little like this:</p>
 <div class="sourceCode" id="cb2"><pre class="r"><span class="co"># Thanksgiving = "The fourth Thursday in November"</span>
 <span class="no">on_thanksgiving</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/rrule.html">yearly</a></span>() <span class="kw">%&gt;%</span>
   <span class="fu"><a href="reference/recur_on_ymonth.html">recur_on_ymonth</a></span>(<span class="st">"November"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="reference/recur_on_wday.html">recur_on_wday</a></span>(<span class="st">"Thursday"</span>, <span class="kw">nth</span> <span class="kw">=</span> <span class="fl">4</span>)</pre></div>
-<p>After constructing a recurrence rule, it can be used to generate dates that are in the “recurrence set”.</p>
-<div class="sourceCode" id="cb3"><pre class="r"><span class="fu"><a href="reference/alma_search.html">alma_search</a></span>(<span class="st">"2000-01-01"</span>, <span class="st">"2006-01-01"</span>, <span class="no">on_thanksgiving</span>)
-<span class="co">#&gt; [1] "2000-11-23" "2001-11-22" "2002-11-28" "2003-11-27" "2004-11-25"</span>
-<span class="co">#&gt; [6] "2005-11-24"</span></pre></div>
-<p>Or determine if a particular date is a part of the recurrence set.</p>
-<div class="sourceCode" id="cb4"><pre class="r"><span class="fu"><a href="reference/alma_in.html">alma_in</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"2000-01-01"</span>, <span class="st">"2000-11-23"</span>), <span class="no">on_thanksgiving</span>)
-<span class="co">#&gt; [1] FALSE  TRUE</span></pre></div>
-<p>It also allows you to shift an existing sequence of dates, “stepping over” dates that are in the recurrence set.</p>
-<div class="sourceCode" id="cb5"><pre class="r"><span class="no">wednesday_before_thanksgiving</span> <span class="kw">&lt;-</span> <span class="st">"2000-11-22"</span>
+  <span class="fu"><a href="reference/recur_on_wday.html">recur_on_wday</a></span>(<span class="st">"Thursday"</span>, <span class="kw">nth</span> <span class="kw">=</span> <span class="fl">4</span>)
 
-<span class="co"># Step forward 2 non-event days, stepping over thanksgiving</span>
+<span class="no">on_thanksgiving</span>
+<span class="co">#&gt; &lt;rrule[yearly / 1970-01-01 / 2040-01-01]&gt;</span>
+<span class="co">#&gt; - ymonth: Nov</span>
+<span class="co">#&gt; - wday: Thu[4]</span></pre></div>
+<p>After constructing a recurrence rule, it can be used to generate dates that are in the “event set”. For example, you can search for all Thanksgivings between 2000-2006.</p>
+<div class="sourceCode" id="cb3"><pre class="r"><span class="fu"><a href="reference/alma_search.html">alma_search</a></span>(<span class="st">"2000-01-01"</span>, <span class="st">"2006-12-31"</span>, <span class="no">on_thanksgiving</span>)
+<span class="co">#&gt; [1] "2000-11-23" "2001-11-22" "2002-11-28" "2003-11-27" "2004-11-25"</span>
+<span class="co">#&gt; [6] "2005-11-24" "2006-11-23"</span></pre></div>
+<p>Determine if a particular date is a part of the event set with <code><a href="reference/alma_in.html">alma_in()</a></code>.</p>
+<div class="sourceCode" id="cb4"><pre class="r"><span class="co"># Is this a Thanksgiving?</span>
+<span class="fu"><a href="reference/alma_in.html">alma_in</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"2000-01-01"</span>, <span class="st">"2000-11-23"</span>), <span class="no">on_thanksgiving</span>)
+<span class="co">#&gt; [1] FALSE  TRUE</span></pre></div>
+<p>You can also shift an existing sequence of dates, “stepping over” dates that are part of the event set.</p>
+<div class="sourceCode" id="cb5"><pre class="r"><span class="no">wednesday_before_thanksgiving</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span>(<span class="st">"2000-11-22"</span>)
+
+<span class="co"># Thanksgiving was on 2000-11-23.</span>
+<span class="co"># This steps over Thanksgiving to 2000-11-24.</span>
+<span class="co"># Then steps 1 more day to 2000-11-25.</span>
 <span class="fu"><a href="reference/alma_step.html">alma_step</a></span>(<span class="no">wednesday_before_thanksgiving</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fl">2</span>, <span class="no">on_thanksgiving</span>)
 <span class="co">#&gt; [1] "2000-11-25"</span></pre></div>
+<p>There is an additional “stepper” object you can create for more intuitive stepping. Combine it with <code><a href="reference/stepper.html">%s+%</a></code> to perform the same step done by <code><a href="reference/alma_step.html">alma_step()</a></code>. Create a stepper function with <code><a href="reference/stepper.html">stepper()</a></code>, and then use it by supplying the number of days to step.</p>
+<div class="sourceCode" id="cb6"><pre class="r"><span class="no">step_over_thanksgiving</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/stepper.html">stepper</a></span>(<span class="no">on_thanksgiving</span>)
+<span class="no">wednesday_before_thanksgiving</span> <span class="kw">%s+%</span> <span class="fu">step_over_thanksgiving</span>(<span class="fl">2</span>)
+<span class="co">#&gt; [1] "2000-11-25"</span></pre></div>
+</div>
+<div id="recurrence-bundles" class="section level2">
+<h2 class="hasAnchor">
+<a href="#recurrence-bundles" class="anchor"></a>Recurrence Bundles</h2>
+<p>The above example just scratches the surface of what almanac can do. Practically speaking, you’ll probably have multiple holidays and events that you’d like to combine into one bit recurrence object. This is known as a <em>recurrence bundle</em>.</p>
+<p>This example creates recurrence rules for weekends and Christmas, and bundles them together along with the Thanksgiving rule.</p>
+<div class="sourceCode" id="cb7"><pre class="r"><span class="no">on_weekends</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/rrule.html">weekly</a></span>() <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="reference/recur_on_wday.html">recur_on_weekends</a></span>()
+
+<span class="no">on_christmas</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/rrule.html">yearly</a></span>() <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="reference/recur_on_mday.html">recur_on_mday</a></span>(<span class="fl">25</span>) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="reference/recur_on_ymonth.html">recur_on_ymonth</a></span>(<span class="st">"Dec"</span>)
+
+<span class="no">bundle</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/rbundle.html">rbundle</a></span>() <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="reference/rbundle-add.html">add_rschedule</a></span>(<span class="no">on_weekends</span>) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="reference/rbundle-add.html">add_rschedule</a></span>(<span class="no">on_christmas</span>) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="reference/rbundle-add.html">add_rschedule</a></span>(<span class="no">on_thanksgiving</span>)
+
+<span class="no">bundle</span>
+<span class="co">#&gt; &lt;rbundle[3 rschedules / 0 rdates / 0 exdates]&gt;</span></pre></div>
+<p>We can create a stepper that steps over all of the events in the bundle. If these two holidays were the only ones that your company celebrated, the stepper could be viewed as a way to step forward by a “business day”.</p>
+<p>For example, Christmas was on a Monday in 2006. If you wanted to step 1 business day forward from the Friday before Christmas, you’d probably like it to step over the weekend and the Christmas Monday to Tuesday. The <code>bundle</code> lets you do exactly that!</p>
+<div class="sourceCode" id="cb8"><pre class="r"><span class="no">business_day</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/stepper.html">stepper</a></span>(<span class="no">bundle</span>)
+
+<span class="co"># Christmas was on a Monday in 2006.</span>
+<span class="co"># This is the Friday before Christmas</span>
+<span class="no">friday</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span>(<span class="st">"2006-12-22"</span>)
+
+<span class="co"># Step forward 1 business day, going over the weekend and Christmas</span>
+<span class="no">friday</span> <span class="kw">%s+%</span> <span class="fu">business_day</span>(<span class="fl">1</span>)
+<span class="co">#&gt; [1] "2006-12-26"</span></pre></div>
+</div>
 <div id="learning-more" class="section level2">
 <h2 class="hasAnchor">
 <a href="#learning-more" class="anchor"></a>Learning More</h2>
@@ -131,9 +179,9 @@
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>You can NOT install the released version of almanac from <a href="https://CRAN.R-project.org">CRAN</a> with:</p>
-<div class="sourceCode" id="cb6"><pre class="r"># NO! install.packages("almanac")</pre></div>
+<div class="sourceCode" id="cb9"><pre class="r"># NO! install.packages("almanac")</pre></div>
 <p>And the development version from <a href="https://github.com/">GitHub</a> with:</p>
-<div class="sourceCode" id="cb7"><pre class="r"><span class="co"># install.packages("devtools")</span>
+<div class="sourceCode" id="cb10"><pre class="r"><span class="co"># install.packages("devtools")</span>
 <span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu">install_github</span>(<span class="st">"DavisVaughan/almanac"</span>)</pre></div>
 <p>Mac (OS-X) and Windows users should not have any problems installing almanac. Linux users need libv8 to install the dependency R package, V8. See the <a href="https://github.com/jeroen/V8#debian--ubuntu">V8 installation instructions</a> for more information. almanac uses ES5 JavaScript, so it does <em>not</em> require any “modern” JavaScript features and should work with the “old” V8 engine provided by Ubuntu versions before 19.04.</p>
 </div>
