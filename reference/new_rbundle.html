@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Step relative to an rschedule — alma_step • almanac</title>
+<title>Constructor for an rbundle — new_rbundle • almanac</title>
 
 
 <!-- jquery -->
@@ -39,17 +39,10 @@
 
 
 
-<meta property="og:title" content="Step relative to an rschedule — alma_step" />
-<meta property="og:description" content="alma_step() is useful for shifting dates by &quot;n business days&quot;.
-alma_step() steps over a sequence of dates 1 day at a time, for n days.
-After each step, an adjustment is applied to shift to the next non-event
-date.
-If n is positive, adj_following() is called.
-If n is negative, adj_preceding() is called.
-If n is zero, it was arbitrarily decided to call adj_following() to
-roll to the next available non-event date.
-
-" />
+<meta property="og:title" content="Constructor for an rbundle — new_rbundle" />
+<meta property="og:description" content="new_rbundle() is a developer focused tool that is not required for normal
+usage of almanac. It constructs a new rbundle directly from a list of
+existing rschedules." />
 
 
 
@@ -138,85 +131,51 @@ roll to the next available non-event date.
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Step relative to an rschedule</h1>
-    <small class="dont-index">Source: <a href='https://github.com/DavisVaughan/almanac/blob/master/R/alma-step.R'><code>R/alma-step.R</code></a></small>
-    <div class="hidden name"><code>alma_step.Rd</code></div>
+    <h1>Constructor for an rbundle</h1>
+    <small class="dont-index">Source: <a href='https://github.com/DavisVaughan/almanac/blob/master/R/rbundle.R'><code>R/rbundle.R</code></a></small>
+    <div class="hidden name"><code>new_rbundle.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><code>alma_step()</code> is useful for shifting dates by "n business days".</p>
-<p><code>alma_step()</code> steps over a sequence of dates 1 day at a time, for <code>n</code> days.
-After each step, an adjustment is applied to shift to the next non-event
-date.</p><ul>
-<li><p>If <code>n</code> is positive, <code><a href='adjustments.html'>adj_following()</a></code> is called.</p></li>
-<li><p>If <code>n</code> is negative, <code><a href='adjustments.html'>adj_preceding()</a></code> is called.</p></li>
-<li><p>If <code>n</code> is zero, it was arbitrarily decided to call <code><a href='adjustments.html'>adj_following()</a></code> to
-roll to the next available non-event date.</p></li>
-</ul>
-
+    <p><code>new_rbundle()</code> is a developer focused tool that is not required for normal
+usage of almanac. It constructs a new rbundle directly from a list of
+existing rschedules.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>alma_step</span>(<span class='no'>x</span>, <span class='no'>n</span>, <span class='no'>rschedule</span>)</pre>
+    <pre class="usage"><span class='fu'>new_rbundle</span>(<span class='kw'>rschedules</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(), <span class='kw'>rdates</span> <span class='kw'>=</span> <span class='fu'>new_date</span>(), <span class='kw'>exdates</span> <span class='kw'>=</span> <span class='fu'>new_date</span>())</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
+      <th>rschedules</th>
+      <td><p><code>[list]</code></p>
+<p>A list of rschedules.</p></td>
+    </tr>
+    <tr>
+      <th>rdates</th>
       <td><p><code>[Date]</code></p>
-<p>A vector of dates.</p></td>
+<p>A vector of dates to forcibly include in the recurrence set.</p></td>
     </tr>
     <tr>
-      <th>n</th>
-      <td><p><code>[integer]</code></p>
-<p>The number of days to step. Can be negative to step backwards.</p></td>
-    </tr>
-    <tr>
-      <th>rschedule</th>
-      <td><p><code>[rschedule]</code></p>
-<p>An rschedule, such as an rrule or rbundle.</p></td>
+      <th>exdates</th>
+      <td><p><code>[Date]</code></p>
+<p>A vector of dates to forcibly exclude from the recurrence set.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A Date vector the same size as <code>x</code> shifted by <code>n</code> steps.</p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>Imagine you are on a Friday and want to shift forward 2 days using an
-rbundle that marks weekends as events. <code>alma_step()</code> works like this:</p><ul>
-<li><p>Step forward 1 day to Saturday.</p></li>
-<li><p>Apply an adjustment of <code><a href='adjustments.html'>adj_following()</a></code>, which rolls forward to Monday.</p></li>
-<li><p>Step forward 1 day to Tuesday.</p></li>
-<li><p>Apply an adjustment of <code><a href='adjustments.html'>adj_following()</a></code>, but no adjustment is required.</p></li>
-</ul>
-
-<p>This lends itself naturally to business logic. Two business days from Friday
-is Tuesday.</p>
+    <p>A new rbundle.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># Make a rrule for weekends</span>
-<span class='no'>on_weekends</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rrule.html'>weekly</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='recur_on_wday.html'>recur_on_weekends</a></span>()
+    <pre class="examples"><div class='input'><span class='fu'>new_rbundle</span>()</div><div class='output co'>#&gt; &lt;rbundle[0 rschedules / 0 rdates / 0 exdates]&gt;</div><div class='input'>
+<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rrule.html'>daily</a></span>()
+<span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rrule.html'>weekly</a></span>()
 
-<span class='co'># "Step forward by 2 business days"</span>
-<span class='co'># 2019-09-13 is a Friday.</span>
-<span class='co'># Here we:</span>
-<span class='co'># - Step 1 day to Saturday</span>
-<span class='co'># - Adjust to Monday</span>
-<span class='co'># - Step 1 day to Tuesday</span>
-<span class='fu'>alma_step</span>(<span class='st'>"2019-09-13"</span>, <span class='fl'>2</span>, <span class='no'>on_weekends</span>)</div><div class='output co'>#&gt; [1] "2019-09-17"</div><div class='input'>
-<span class='co'># If Monday, 2019-09-16, was a recurring holiday, we could create</span>
-<span class='co'># a custom rbundle and step over that too.</span>
-<span class='no'>on_09_16</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rrule.html'>yearly</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='recur_on_ymonth.html'>recur_on_ymonth</a></span>(<span class='fl'>9</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='recur_on_mday.html'>recur_on_mday</a></span>(<span class='fl'>16</span>)
+<span class='no'>rschedules</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='no'>x</span>, <span class='no'>y</span>)
 
-<span class='no'>rb</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rbundle.html'>rbundle</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='rbundle-add.html'>add_rschedule</a></span>(<span class='no'>on_09_16</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='rbundle-add.html'>add_rschedule</a></span>(<span class='no'>on_weekends</span>)
-
-<span class='fu'>alma_step</span>(<span class='st'>"2019-09-13"</span>, <span class='fl'>2</span>, <span class='no'>rb</span>)</div><div class='output co'>#&gt; [1] "2019-09-18"</div></pre>
+<span class='fu'>new_rbundle</span>(<span class='no'>rschedules</span>)</div><div class='output co'>#&gt; &lt;rbundle[2 rschedules / 0 rdates / 0 exdates]&gt;</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -59,6 +59,8 @@ adj_nearest()
 Choose the nearest non-event date to x. If the closest preceding and
 following non-event dates are equally far away, the following non-event
 date is chosen.
+adj_none()
+Performs no adjustment and returns x unchanged.
 
 " />
 
@@ -174,6 +176,8 @@ chosen instead.</p></li>
 <p>Choose the nearest non-event date to <code>x</code>. If the closest preceding and
 following non-event dates are equally far away, the following non-event
 date is chosen.</p></li>
+<li><p><code>adj_none()</code></p>
+<p>Performs no adjustment and returns <code>x</code> unchanged.</p></li>
 </ul>
 
     </div>
@@ -205,6 +209,9 @@ date is chosen.</p></li>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>An adjusted vector of Dates.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># A Saturday</span>
