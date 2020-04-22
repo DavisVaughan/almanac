@@ -100,8 +100,6 @@ add_rdate <- function(x, rdate) {
   validate_rbundle(x, "x")
   rdate <- vec_cast_date(rdate, "rdate")
 
-  validate_date_bounds(rdate, x_arg = "rdate")
-
   rdates <- vec_c(x$rdates, rdate)
   rdates <- unique(rdates)
 
@@ -117,8 +115,6 @@ add_rdate <- function(x, rdate) {
 add_exdate <- function(x, exdate) {
   validate_rbundle(x, "x")
   exdate <- vec_cast_date(exdate, "exdate")
-
-  validate_date_bounds(exdate, x_arg = "exdate")
 
   exdates <- vec_c(x$exdates, exdate)
   exdates <- vec_unique(exdates)

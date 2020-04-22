@@ -57,6 +57,37 @@ format.rbundle <- function(x, ...) {
 
 # ------------------------------------------------------------------------------
 
+#' Constructor for an rbundle
+#'
+#' `new_rbundle()` is a developer focused tool that is not required for normal
+#' usage of almanac. It constructs a new rbundle directly from a list of
+#' existing rschedules.
+#'
+#' @param rschedules `[list]`
+#'
+#'   A list of rschedules.
+#'
+#' @param rdates `[Date]`
+#'
+#'   A vector of dates to forcibly include in the recurrence set.
+#'
+#' @param exdates `[Date]`
+#'
+#'   A vector of dates to forcibly exclude from the recurrence set.
+#'
+#' @return
+#' A new rbundle.
+#'
+#' @export
+#' @examples
+#' new_rbundle()
+#'
+#' x <- daily()
+#' y <- weekly()
+#'
+#' rschedules <- list(x, y)
+#'
+#' new_rbundle(rschedules)
 new_rbundle <- function(rschedules = list(),
                         rdates = new_date(),
                         exdates = new_date()) {
@@ -65,13 +96,25 @@ new_rbundle <- function(rschedules = list(),
     abort("`rschedules` must be a list.")
   }
 
+  for (i in seq_along(rschedules)) {
+    validate_rschedule(rschedules[[i]], x_arg = glue("rschedules[[{i}]]"))
+  }
+
   if (!is_date(rdates)) {
     abort("`rdates` must be a Date.")
   }
+  if (any(is_missing_or_infinite(rdates))) {
+    abort("`rdates` must be finite.")
+  }
+  validate_date_bounds(rdates, x_arg = "rdates")
 
   if (!is_date(exdates)) {
     abort("`exdates` must be a Date.")
   }
+  if (any(is_missing_or_infinite(exdates))) {
+    abort("`exdates` must be finite.")
+  }
+  validate_date_bounds(exdates, x_arg = "exdates")
 
   cache <- cache_rbundle$new(
     rschedules = rschedules,
