@@ -63,16 +63,6 @@ lossy_to_message <- function(lossy, x_arg) {
 
 # ------------------------------------------------------------------------------
 
-min2 <- function(x) {
-  suppressWarnings(min(x, na.rm = TRUE))
-}
-
-max2 <- function(x) {
-  suppressWarnings(max(x, na.rm = TRUE))
-}
-
-# ------------------------------------------------------------------------------
-
 glubort <- function (..., .sep = "", .envir = parent.frame()) {
   abort(glue::glue(..., .sep = .sep, .envir = .envir))
 }
@@ -165,10 +155,6 @@ weekday_int <- function() {
     rep(6L, 2L),
     rep(7L, 2L)
   )
-}
-
-weekday_print <- function() {
-  c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")
 }
 
 weekday_abbr_print <- function() {
