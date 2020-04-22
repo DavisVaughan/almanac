@@ -21,6 +21,52 @@ test_that("can detect rbundles", {
   expect_false(is_rbundle(1))
 })
 
+test_that("rbundle works with non-rrules in the bundle", {
+  rrule1 <- daily(since = "1970-01-01", until = "1970-01-02")
+  rrule2 <- daily(since = "1970-01-03", until = "1970-01-04")
+
+  rb <- rbundle() %>%
+    add_rschedule(rrule1)
+
+  rb2 <- rbundle() %>%
+    add_rschedule(rb) %>%
+    add_rschedule(rrule2)
+
+  expect_identical(alma_events(rb2), new_date(c(0, 1, 2, 3)))
+})
+
+test_that("rbundle rdates work with non-rrules in the bundle", {
+  rrule1 <- daily(since = "1970-01-01", until = "1970-01-02")
+  rrule2 <- daily(since = "1970-01-03", until = "1970-01-04")
+  rdate <- "1970-01-05"
+
+  rb <- rbundle() %>%
+    add_rschedule(rrule1)
+
+  rb2 <- rbundle() %>%
+    add_rschedule(rb) %>%
+    add_rschedule(rrule2) %>%
+    add_rdate(rdate)
+
+  expect_identical(alma_events(rb2), new_date(c(0, 1, 2, 3, 4)))
+})
+
+test_that("rbundle exdates work with non-rrules in the bundle", {
+  rrule1 <- daily(since = "1970-01-01", until = "1970-01-02")
+  rrule2 <- daily(since = "1970-01-03", until = "1970-01-04")
+  exdate <- "1970-01-04"
+
+  rb <- rbundle() %>%
+    add_rschedule(rrule1)
+
+  rb2 <- rbundle() %>%
+    add_rschedule(rb) %>%
+    add_rschedule(rrule2) %>%
+    add_exdate(exdate)
+
+  expect_identical(alma_events(rb2), new_date(c(0, 1, 2)))
+})
+
 # ------------------------------------------------------------------------------
 # new_rbundle()
 
