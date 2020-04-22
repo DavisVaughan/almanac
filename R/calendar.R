@@ -29,9 +29,7 @@ add_hldy <- function(calendar, hldy) {
   validate_calendar(calendar)
   validate_hldy(hldy)
 
-  hldys <- calendar$hldys
-
-  if (hldy_exists(hldy, hldys)) {
+  if (hldy_exists(hldy, calendar)) {
     warn("`hldy` already exists in the calendar, returning calendar unmodified.")
     return(calendar)
   }
@@ -49,7 +47,7 @@ add_hldy <- function(calendar, hldy) {
   # Create an adjusted version of it
   rschedule <- radjusted(rschedule, adjustment_rschedule, adjustment)
 
-  hldys <- c(hldys, list(hldy))
+  hldys <- c(calendar$hldys, list(hldy))
   rschedules <- c(calendar$rschedules, list(rschedule))
 
   new_calendar(
@@ -62,9 +60,45 @@ add_hldy <- function(calendar, hldy) {
   )
 }
 
-hldy_exists <- function(hldy, hldys) {
-  names <- map_chr(hldys, hldy_name)
-  hldy_name(hldy) %in% names
+# ------------------------------------------------------------------------------
+
+# Remove by name or by object that has that name
+remove_hldy <- function(x, hldy) {
+  validate_calendar(x, x_arg = "x")
+
+  if (is_hldy(hldy)) {
+    hldy <- hldy_name(hldy)
+  }
+  if (!is_string(hldy)) {
+    abort("`hldy` must be a single character name or a hldy object.")
+  }
+
+  names <- calendar_names(x)
+
+  indicator <- vec_in(hldy, names)
+  name_exists <- any(indicator)
+
+  # Early return if name didn't exist
+  if (!name_exists) {
+    return(x)
+  }
+
+  keep <- !indicator
+
+  hldys <- x$hldys
+  rschedules <- x$rschedules
+
+  hldys <- hldys[keep]
+  rschedules <- rschedules[keep]
+
+  new_calendar(
+    name = x$name,
+    since = x$since,
+    until = x$until,
+    adjustment_rschedule = x$adjustment_rschedule,
+    hldys = hldys,
+    rschedules = rschedules
+  )
 }
 
 # ------------------------------------------------------------------------------
@@ -121,4 +155,15 @@ validate_calendar <- function(x, x_arg = "calendar") {
     glubort("`{x_arg}` must be a calendar.")
   }
   invisible(x)
+}
+
+# ------------------------------------------------------------------------------
+
+hldy_exists <- function(hldy, calendar) {
+  names <- calendar_names(calendar)
+  hldy_name(hldy) %in% names
+}
+
+calendar_names <- function(x) {
+  map_chr(x$hldys, hldy_name)
 }
