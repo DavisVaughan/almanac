@@ -105,19 +105,6 @@ yearly <- function(since = "1970-01-01", until = "2040-01-01") {
 
 # ------------------------------------------------------------------------------
 
-#' @export
-print.rrule <- function(x, ...) {
-  cat(format(x))
-  invisible(x)
-}
-
-#' @export
-format.rrule <- function(x, ...) {
-  glue("rrule: {x$rules$frequency}")
-}
-
-# ------------------------------------------------------------------------------
-
 rrule <- function(since, until, frequency) {
   since <- check_since(since)
   until <- check_until(until)

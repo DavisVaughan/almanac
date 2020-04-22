@@ -171,6 +171,10 @@ weekday_print <- function() {
   c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")
 }
 
+weekday_abbr_print <- function() {
+  c("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")
+}
+
 # ------------------------------------------------------------------------------
 
 is_missing_or_infinite <- function(x) {
