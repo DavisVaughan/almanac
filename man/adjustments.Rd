@@ -57,6 +57,9 @@ chosen instead.
 Choose the nearest non-event date to \code{x}. If the closest preceding and
 following non-event dates are equally far away, the following non-event
 date is chosen.
+\item \code{adj_none()}
+
+Performs no adjustment and returns \code{x} unchanged.
 }
 }
 \examples{

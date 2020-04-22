@@ -31,6 +31,10 @@
 #'     following non-event dates are equally far away, the following non-event
 #'     date is chosen.
 #'
+#'   - `adj_none()`
+#'
+#'     Performs no adjustment and returns `x` unchanged.
+#'
 #' @param x `[Date]`
 #'
 #'   A vector of dates.
