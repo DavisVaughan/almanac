@@ -165,12 +165,12 @@ by combining simple rules into a <em>recurrence bundle</em>.</p>
     <div class='dont-index'><p><code><a href='rbundle-add.html'>add_rschedule()</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>rbundle</span>()</div><div class='output co'>#&gt; rbundle: 0 rschedules / 0 rdates / 0 exdates</div><div class='input'>
+    <pre class="examples"><div class='input'><span class='fu'>rbundle</span>()</div><div class='output co'>#&gt; &lt;rbundle[0 rschedules / 0 rdates / 0 exdates]&gt;</div><div class='input'>
 <span class='no'>on_weekends</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rrule.html'>weekly</a></span>() <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='recur_on_wday.html'>recur_on_weekends</a></span>()
 
 <span class='fu'>rbundle</span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='rbundle-add.html'>add_rschedule</a></span>(<span class='no'>on_weekends</span>)</div><div class='output co'>#&gt; rbundle: 1 rschedules / 0 rdates / 0 exdates</div></pre>
+  <span class='fu'><a href='rbundle-add.html'>add_rschedule</a></span>(<span class='no'>on_weekends</span>)</div><div class='output co'>#&gt; &lt;rbundle[1 rschedules / 0 rdates / 0 exdates]&gt;</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
