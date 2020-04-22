@@ -98,97 +98,161 @@
 
     
     
-<p>If you have read the introduction vignette, <code><a href="../articles/almanac.html">vignette("almanac")</a></code>, then you’ve seen recurrence rules, rbundles, and the functions <code><a href="../reference/alma_search.html">alma_search()</a></code> and <code><a href="../reference/alma_in.html">alma_in()</a></code>. Additionally included in {almanac} are a set of functions for adjusting and shifting an existing set of dates, <em>relative to an rbundle</em>. They will be the topic of this vignette. The three functions are:</p>
+<p>If you have read the introduction vignette, <code><a href="../articles/almanac.html">vignette("almanac")</a></code>, then you’ve seen rrules, rbundles, and the functions <code><a href="../reference/alma_search.html">alma_search()</a></code>, <code><a href="../reference/alma_events.html">alma_events()</a></code>, and <code><a href="../reference/alma_in.html">alma_in()</a></code>. Additionally included in almanac are a set of tools for <em>adjusting</em> and <em>shifting</em> dates. These functions are broken down as:</p>
 <ul>
-<li><p><code>alma_adjust()</code></p></li>
-<li><p><code>alma_jump()</code></p></li>
+<li><p>Adjustment functions, such as <code><a href="../reference/adjustments.html">adj_following()</a></code> and <code><a href="../reference/adjustments.html">adj_nearest()</a></code></p></li>
+<li><p>Adjusted rschedules</p></li>
 <li><p><code><a href="../reference/alma_step.html">alma_step()</a></code></p></li>
+<li><p><code><a href="../reference/stepper.html">stepper()</a></code></p></li>
 </ul>
 <div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">almanac</span>)
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">lubridate</span>, <span class="kw">warn.conflicts</span> <span class="kw">=</span> <span class="fl">FALSE</span>)</pre></body></html></div>
 <div id="adjusting" class="section level2">
 <h2 class="hasAnchor">
 <a href="#adjusting" class="anchor"></a>Adjusting</h2>
-<p>To talk about either <code>alma_jump()</code> or <code><a href="../reference/alma_step.html">alma_step()</a></code>, we first have to cover <code>alma_adjust()</code>, as it powers both of the others. <code>alma_adjust()</code> will “adjust” an existing set of dates to ensure that no dates currently fall on an “event”, as defined by a provided rbundle or recurrence rule. For example, let’s construct a recurrence rule that includes all weekends in its event set.</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">on_weekends</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">weekly</a></span>(<span class="kw">since</span> <span class="kw">=</span> <span class="st">"2000-01-01"</span>) <span class="kw">%&gt;%</span>
+<p>“Adjusting” a date defines the behavior of what happens if a date lands on an event in a rschedule’s event set. For example, if you have a date that is currently on Christmas, you could adjust forward to the next non-event date, adjust backwards to the previous non-event date, or adjust to the nearest non-event date. The logic of how to perform these adjustments is encoded into the following adjustment functions:</p>
+<ul>
+<li>
+<p><code><a href="../reference/adjustments.html">adj_following()</a></code></p>
+<p>Choose the first non-event date after <code>x</code>.</p>
+</li>
+<li>
+<p><code><a href="../reference/adjustments.html">adj_preceding()</a></code></p>
+<p>Choose the first non-event date before <code>x</code>.</p>
+</li>
+<li>
+<p><code><a href="../reference/adjustments.html">adj_modified_following()</a></code></p>
+<p>Choose the first non-event date after <code>x</code>, unless it falls in a different month, in which case the first non-event date before <code>x</code> is chosen instead.</p>
+</li>
+<li>
+<p><code><a href="../reference/adjustments.html">adj_modified_preceding()</a></code></p>
+<p>Choose the first non-event date before <code>x</code>, unless it falls in a different month, in which case the first non-event date after <code>x</code> is chosen instead.</p>
+</li>
+<li>
+<p><code><a href="../reference/adjustments.html">adj_nearest()</a></code></p>
+<p>Choose the nearest non-event date to <code>x</code>. If the closest preceding and following non-event dates are equally far away, the following non-event date is chosen.</p>
+</li>
+<li>
+<p><code><a href="../reference/adjustments.html">adj_none()</a></code></p>
+<p>Performs no adjustment and returns <code>x</code> unchanged.</p>
+</li>
+</ul>
+<p>To use an adjustment function, you’ll need an rschedule that contains the event set you are interested in adjusting around. Then provide that, along with the dates you are interested in adjusting, to an <code>adj_*()</code> function.</p>
+<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">on_christmas</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">yearly</a></span>() <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="../reference/recur_on_mday.html">recur_on_mday</a></span>(<span class="fl">25</span>) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="../reference/recur_on_ymonth.html">recur_on_ymonth</a></span>(<span class="st">"Dec"</span>)
+
+<span class="no">x</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"2019-12-24"</span>, <span class="st">"2019-12-25"</span>))
+
+<span class="fu"><a href="../reference/adjustments.html">adj_following</a></span>(<span class="no">x</span>, <span class="no">on_christmas</span>)
+<span class="co">#&gt; [1] "2019-12-24" "2019-12-26"</span>
+
+<span class="fu"><a href="../reference/adjustments.html">adj_preceding</a></span>(<span class="no">x</span>, <span class="no">on_christmas</span>)
+<span class="co">#&gt; [1] "2019-12-24" "2019-12-24"</span></pre></body></html></div>
+<p>The <code><a href="../reference/adjustments.html">adj_nearest()</a></code> function is particularly useful when you have a date on a weekend and want to roll it back to Friday if it falls on Saturday but roll it forward to Monday if it falls on Sunday.</p>
+<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="co"># Saturday / Sunday</span>
+<span class="no">x</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"2019-12-21"</span>, <span class="st">"2019-12-22"</span>))
+
+<span class="no">on_weekends</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">weekly</a></span>() <span class="kw">%&gt;%</span>
   <span class="fu"><a href="../reference/recur_on_wday.html">recur_on_weekends</a></span>()
 
-<span class="fu"><a href="../reference/alma_search.html">alma_search</a></span>(<span class="st">"2000-01-01"</span>, <span class="st">"2000-01-16"</span>, <span class="no">on_weekends</span>)</pre></body></html></div>
-<p>Now, imagine you have an existing set of dates, <code>x</code>. The dates in <code>x</code> might be weekdays or weekends, but you have to ensure that any weekend dates are rolled forward to their next available non-weekend date. To do this, you can use <code>alma_adjust()</code>, which will apply an <code>adjustment</code> repeatedly until your dates are no longer on an event date. The default <code>adjustment</code> is the lubridate function <code><a href="http://lubridate.tidyverse.org/reference/period.html">days(1)</a></code>, to shift forward 1 day.</p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">x</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span>(<span class="st">"2000-04-28"</span>) + <span class="fl">0</span>:<span class="fl">8</span>
-
-<span class="co"># Any Saturday / Sunday should be rolled forward to a Monday</span>
-<span class="fu"><a href="http://lubridate.tidyverse.org/reference/day.html">wday</a></span>(<span class="no">x</span>, <span class="fl">TRUE</span>)
-
-<span class="no">x_adjusted</span> <span class="kw">&lt;-</span> <span class="fu">alma_adjust</span>(<span class="no">x</span>, <span class="no">on_weekends</span>)
-
-<span class="fu"><a href="http://lubridate.tidyverse.org/reference/day.html">wday</a></span>(<span class="no">x_adjusted</span>, <span class="fl">TRUE</span>)</pre></body></html></div>
-<p>You could have also rolled the dates backwards to the previous Friday using <code>adjustment = -1</code>.</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="http://lubridate.tidyverse.org/reference/day.html">wday</a></span>(<span class="fu">alma_adjust</span>(<span class="no">x</span>, <span class="no">on_weekends</span>, <span class="kw">adjustment</span> <span class="kw">=</span> -<span class="fl">1</span>), <span class="fl">TRUE</span>)</pre></body></html></div>
+<span class="co"># Roll Saturday backwards and Sunday forwards</span>
+<span class="fu"><a href="../reference/adjustments.html">adj_nearest</a></span>(<span class="no">x</span>, <span class="no">on_weekends</span>)
+<span class="co">#&gt; [1] "2019-12-20" "2019-12-23"</span></pre></body></html></div>
 </div>
-<div id="adjustment-functions" class="section level2">
+<div id="adjusted-rschedules" class="section level2">
 <h2 class="hasAnchor">
-<a href="#adjustment-functions" class="anchor"></a>Adjustment Functions</h2>
-<p>The <code>adjustment</code> parameter is pretty flexible. It can be a single integer to adjust by a number of days, a lubridate period function like <code><a href="http://lubridate.tidyverse.org/reference/period.html">days()</a></code>, <code><a href="http://lubridate.tidyverse.org/reference/period.html">years()</a></code>, and <code><a href="http://lubridate.tidyverse.org/reference/period.html">weeks()</a></code>, or a function. The function adjustments are particularly useful when your specific adjustment depends on the date in question.</p>
-<p>To show this, we’ll pull an example from finance. When traders enter agreements with each other, they often construct a schedule of dates of when one trader should pay the other. There are common conventions that are used to construct these schedules, one of which is to use a <em>modified following</em> rule. This rule states that if a normal payment date is a non-business day (perhaps a weekend or holiday), then it should be adjusted forward to the next available business day <em>unless</em> that date is in the next month, in which case it should instead be adjusted backwards to the next business day.</p>
-<p>Take a look at our existing dates, <code>x</code>. The second and third dates are weekends, but they are also right at the end of the month. Adjusting forward would land you in May immediately, so these should be adjusted backwards to <code>2000-04-28</code>. The last date is also a weekend, but the next available business day does not cross into a new month, so the normal adjustment forward should be applied.</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">x</span>
+<a href="#adjusted-rschedules" class="anchor"></a>Adjusted rschedules</h2>
+<p>In the introduction vignette, you were introduced to a number of different rschedules. As a reminder, an rschedule is just a general term for an rrule or an rbundle. There is actually a third type of rschedule in almanac, called radjusted, which is useful when combined with the adjustment functions.</p>
+<p>To motivate it, imagine your company deems Christmas to be a holiday. Whenever Christmas rolls around on the 25th of December, you get that day off. But what happens when Christmas falls on a Saturday? What about Sunday? Most corporations will <em>observe</em> a holiday that falls on the weekend on the nearest working day instead of on the weekend date that it actually occurred on.</p>
+<p>In almanac, it seems like this would pose a problem. You can create rrules for Christmas and for weekends, but an rbundle would just take the union of them. What you really need is a way to say: recur on the dates defined by this rschedule, <em>unless</em> it intersects with this second rschedule. In those cases, apply an <em>adjustment</em> to the intersected dates to create valid dates. This is the job of radjusted.</p>
+<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">on_adjusted_christmas</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/radjusted.html">radjusted</a></span>(
+  <span class="kw">rschedule</span> <span class="kw">=</span> <span class="no">on_christmas</span>,
+  <span class="kw">adjust_on</span> <span class="kw">=</span> <span class="no">on_weekends</span>,
+  <span class="kw">adjustment</span> <span class="kw">=</span> <span class="no">adj_nearest</span>
+)
 
-<span class="fu"><a href="http://lubridate.tidyverse.org/reference/day.html">wday</a></span>(<span class="no">x</span>, <span class="kw">label</span> <span class="kw">=</span> <span class="fl">TRUE</span>)</pre></body></html></div>
-<p>Rather than having to think about how to tackle this, almanac provides a number of <code>adj_*()</code> functions to help out, one of which is <code><a href="../reference/adjustments.html">adj_modified_following()</a></code>.</p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="fu">alma_adjust</span>(<span class="no">x</span>, <span class="no">on_weekends</span>, <span class="no">adj_modified_following</span>)</pre></body></html></div>
-<p><code><a href="../reference/adjustments.html">adj_modified_following()</a></code> is an example of a custom <code>adjustment</code> function, all of which should expect to take the problematic dates as their first argument, and the rbundle as their second argument. The adjustment function is responsible for <em>completely</em> adjusting the dates to the next available business day. It will not be called multiple times.</p>
-</div>
-<div id="jumping" class="section level2">
-<h2 class="hasAnchor">
-<a href="#jumping" class="anchor"></a>Jumping</h2>
-<p>To build on <code>alma_adjust()</code>, let’s assume that rather than just adjusting existing dates, you actually want to <em>shift</em> the dates first, <em>then</em> perform an adjustment to ensure that you have not landed on an event date. There are two natural ways to perform this shift, captured in <code>alma_jump()</code> and <code><a href="../reference/alma_step.html">alma_step()</a></code>.</p>
-<p><code>alma_jump()</code> takes a vector of dates, a rbundle, and a <code>jump</code>, which can be a lubridate Period object, a character string, or an integer number of days to jump. It performs the “jump” all at once, which is essentially equivalent to calling <code>x + days(n)</code>, if you are familiar with lubridate syntax. After the jump has been performed, it calls <code>alma_adjust()</code> on the resulting dates to ensure that the dates that you landed on are non-event dates.</p>
-<p>As an example, let’s “jump” forward 1 day with <code>x</code>, providing <code>on_weekends</code> as our rbundle to adjust with. Notice how jumping forward 1 day from Friday lands on Saturday, which is then adjusted to Monday.</p>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="no">jump</span> <span class="kw">&lt;-</span> <span class="fu">alma_jump</span>(<span class="no">x</span>, <span class="fu"><a href="http://lubridate.tidyverse.org/reference/period.html">days</a></span>(<span class="fl">1</span>), <span class="no">on_weekends</span>)
-
-<span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(
-  <span class="kw">x</span> <span class="kw">=</span> <span class="no">x</span>,
-  <span class="kw">x_wday</span> <span class="kw">=</span> <span class="fu"><a href="http://lubridate.tidyverse.org/reference/day.html">wday</a></span>(<span class="no">x</span>, <span class="kw">label</span> <span class="kw">=</span> <span class="fl">TRUE</span>),
-  <span class="kw">jump</span> <span class="kw">=</span> <span class="no">jump</span>,
-  <span class="kw">jump_wday</span> <span class="kw">=</span> <span class="fu"><a href="http://lubridate.tidyverse.org/reference/day.html">wday</a></span>(<span class="no">jump</span>, <span class="kw">label</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
-)</pre></body></html></div>
-<p>Consider what happens when we “jump” forward 2 days.</p>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="no">jump</span> <span class="kw">&lt;-</span> <span class="fu">alma_jump</span>(<span class="no">x</span>, <span class="fu"><a href="http://lubridate.tidyverse.org/reference/period.html">days</a></span>(<span class="fl">2</span>), <span class="no">on_weekends</span>)
-
-<span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(
-  <span class="kw">x</span> <span class="kw">=</span> <span class="no">x</span>,
-  <span class="kw">x_wday</span> <span class="kw">=</span> <span class="fu"><a href="http://lubridate.tidyverse.org/reference/day.html">wday</a></span>(<span class="no">x</span>, <span class="kw">label</span> <span class="kw">=</span> <span class="fl">TRUE</span>),
-  <span class="kw">jump</span> <span class="kw">=</span> <span class="no">jump</span>,
-  <span class="kw">jump_wday</span> <span class="kw">=</span> <span class="fu"><a href="http://lubridate.tidyverse.org/reference/day.html">wday</a></span>(<span class="no">jump</span>, <span class="kw">label</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
-)</pre></body></html></div>
-<p>In particular, take a look at what happens with Friday. The jump is applied all at once, landing us on Sunday, and then the adjustment is applied, which moves us to Monday. While this is consistent with what <code>alma_jump()</code> is trying to do, it might not always be what you want. If you want to move forward “2 business days”, for example, then really Friday should be shifted forward to Tuesday, not Monday. To solve this problem, we turn to <code><a href="../reference/alma_step.html">alma_step()</a></code>.</p>
+<span class="no">on_adjusted_christmas</span>
+<span class="co">#&gt; &lt;radjusted&gt;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Adjust:</span>
+<span class="co">#&gt; &lt;rrule[yearly / 1970-01-01 / 2040-01-01]&gt;</span>
+<span class="co">#&gt; - ymonth: Dec</span>
+<span class="co">#&gt; - mday: 25</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Adjust on:</span>
+<span class="co">#&gt; &lt;rrule[weekly / 1970-01-01 / 2040-01-01]&gt;</span>
+<span class="co">#&gt; - wday: Sat, Sun</span></pre></body></html></div>
+<p>This is just another rschedule, so it can be used with all of the other <code>alma_*()</code> functions we’ve seen so far. For example, we can confirm that Christmas dates that fall on the weekend are adjusted appropriately by searching for a few of them.</p>
+<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="co"># Note 2004-12-24, which was rolled back from 2004-12-25, a Saturday.</span>
+<span class="co"># Note 2005-12-26, which was rolled forward from 2005-12-25, a Sunday.</span>
+<span class="fu"><a href="../reference/alma_search.html">alma_search</a></span>(<span class="st">"2002-01-01"</span>, <span class="st">"2008-01-01"</span>, <span class="no">on_adjusted_christmas</span>)
+<span class="co">#&gt; [1] "2002-12-25" "2003-12-25" "2004-12-24" "2005-12-26" "2006-12-25"</span>
+<span class="co">#&gt; [6] "2007-12-25"</span></pre></body></html></div>
 </div>
 <div id="stepping" class="section level2">
 <h2 class="hasAnchor">
 <a href="#stepping" class="anchor"></a>Stepping</h2>
-<p><code><a href="../reference/alma_step.html">alma_step()</a></code> is a specialized version of shifting dates that is only applicable when shifting by a set number of days (as opposed to weeks or months). Rather than taking the <code>alma_jump()</code> approach by applying the jump all at once, <code><a href="../reference/alma_step.html">alma_step()</a></code> instead “steps” 1 day at a time, <em>and applies <code>alma_adjust()</code> at every step</em>. This will result in correct “business logic” of stepping forward by “2 business days” that <code>alma_jump()</code> couldn’t provide.</p>
-<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="no">step</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/alma_step.html">alma_step</a></span>(<span class="no">x</span>, <span class="fl">2</span>, <span class="no">on_weekends</span>)
+<p><code><a href="../reference/alma_step.html">alma_step()</a></code> allows you to take an existing vector of dates and shift it by a number of days, “stepping over” any events in the event set defined by an rschedule. This is generally useful for shifting by “N business days”, where the logic for a business day is encapsulated in the rschedule.</p>
+<p>You can think of <code><a href="../reference/alma_step.html">alma_step()</a></code> as a way to replace lubridate’s <code>x + days(5)</code> with <code>x + business_days(5)</code> where <code>business_days()</code> is specific to your company’s holiday calendar.</p>
+<p>In the following example, we shift a Thursday and Friday by 1 working day. Notice that Friday is shifted forward to Monday.</p>
+<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="co"># A Thursday / Friday pair</span>
+<span class="no">x</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"2019-12-19"</span>, <span class="st">"2019-12-20"</span>))
+
+<span class="co"># Shift by 1 working day, stepping over weekends</span>
+<span class="no">step</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/alma_step.html">alma_step</a></span>(<span class="no">x</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="kw">rschedule</span> <span class="kw">=</span> <span class="no">on_weekends</span>)
 
 <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(
   <span class="kw">x</span> <span class="kw">=</span> <span class="no">x</span>,
   <span class="kw">x_wday</span> <span class="kw">=</span> <span class="fu"><a href="http://lubridate.tidyverse.org/reference/day.html">wday</a></span>(<span class="no">x</span>, <span class="kw">label</span> <span class="kw">=</span> <span class="fl">TRUE</span>),
   <span class="kw">step</span> <span class="kw">=</span> <span class="no">step</span>,
   <span class="kw">step_wday</span> <span class="kw">=</span> <span class="fu"><a href="http://lubridate.tidyverse.org/reference/day.html">wday</a></span>(<span class="no">step</span>, <span class="kw">label</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
-)</pre></body></html></div>
-<p>To break this down, take a look at just that first Friday.</p>
+)
+<span class="co">#&gt;            x x_wday       step step_wday</span>
+<span class="co">#&gt; 1 2019-12-19    Thu 2019-12-20       Fri</span>
+<span class="co">#&gt; 2 2019-12-20    Fri 2019-12-23       Mon</span></pre></body></html></div>
+<p>Internally, <code>n</code> is applied 1 day at a time. <code><a href="../reference/adjustments.html">adj_following()</a></code> is called after each 1 day shift if <code>n</code> is positive, otherwise <code><a href="../reference/adjustments.html">adj_preceding()</a></code> is called.</p>
+<p>To break this down, we’ll analyze the Friday.</p>
 <ul>
-<li><p>Start on <code>2000-04-28</code>, a Friday</p></li>
-<li><p>Step forward 1 day, to <code>2000-04-29</code>, a Saturday</p></li>
-<li><p>Adjust, moving to <code>2000-05-01</code>, a Monday</p></li>
-<li><p>Step forward 1 day, to <code>2000-05-02</code>, a Tuesday</p></li>
-<li><p>Adjust, but no adjustment is required</p></li>
-<li><p>Done, landed on <code>2000-05-02</code></p></li>
+<li><p>Start on <code>2019-12-20</code>, a Friday.</p></li>
+<li><p>Step forward 1 day, to <code>2019-12-21</code>, a Saturday.</p></li>
+<li><p>Apply <code><a href="../reference/adjustments.html">adj_following()</a></code>, landing us on Monday, <code>2019-12-23</code>.</p></li>
 </ul>
-<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="no">friday</span> <span class="kw">&lt;-</span> <span class="no">x</span>[<span class="fl">1</span>]
-<span class="no">friday</span>
+<p>You can shift backwards with a negative <code>n</code>. It’s also fully vectorized, and you can use different signs of <code>n</code> in the same call. For an example, let’s consider what happens if you start on a non-event date. Here, we start on a Saturday and Sunday, and apply a +1 and -1 day shift to them, respectively.</p>
+<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="co"># A Saturday / Sunday pair</span>
+<span class="no">x</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"2019-12-21"</span>, <span class="st">"2019-12-22"</span>))
 
-<span class="fu"><a href="../reference/alma_step.html">alma_step</a></span>(<span class="no">friday</span>, <span class="fl">2</span>, <span class="no">on_weekends</span>)</pre></body></html></div>
+<span class="no">step</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/alma_step.html">alma_step</a></span>(<span class="no">x</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>, -<span class="fl">1</span>), <span class="no">on_weekends</span>)
+
+<span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(
+  <span class="kw">x</span> <span class="kw">=</span> <span class="no">x</span>,
+  <span class="kw">x_wday</span> <span class="kw">=</span> <span class="fu"><a href="http://lubridate.tidyverse.org/reference/day.html">wday</a></span>(<span class="no">x</span>, <span class="kw">label</span> <span class="kw">=</span> <span class="fl">TRUE</span>),
+  <span class="kw">step</span> <span class="kw">=</span> <span class="no">step</span>,
+  <span class="kw">step_wday</span> <span class="kw">=</span> <span class="fu"><a href="http://lubridate.tidyverse.org/reference/day.html">wday</a></span>(<span class="no">step</span>, <span class="kw">label</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
+)
+<span class="co">#&gt;            x x_wday       step step_wday</span>
+<span class="co">#&gt; 1 2019-12-21    Sat 2019-12-23       Mon</span>
+<span class="co">#&gt; 2 2019-12-22    Sun 2019-12-20       Fri</span></pre></body></html></div>
+<p>For Saturday, we apply the 1 day shift, landing on Sunday, and then call <code><a href="../reference/adjustments.html">adj_following()</a></code>, landing on Monday.</p>
+<p>For Sunday, we apply the -1 day shift, landing on Saturday, and then call <code><a href="../reference/adjustments.html">adj_preceding()</a></code>, landing on Friday.</p>
+</div>
+<div id="steppers" class="section level2">
+<h2 class="hasAnchor">
+<a href="#steppers" class="anchor"></a>Steppers</h2>
+<p><code><a href="../reference/alma_step.html">alma_step()</a></code> is nice, but it would be really nice to have something like lubridate’s <code>x + days(5)</code> syntax, but relative to an rschedule. Due to some issues with how R’s S3 dispatch system works with <code><a href="https://rdrr.io/r/base/Arithmetic.html">+</a></code>, this isn’t exactly replicable with almanac, but you can get close (lubridate uses R’s S4 object oriented system to get it to work, but I don’t want to go there).</p>
+<p>First off, you need an object the holds information about how to shift relative to an rschedule. You can create one of these with <code><a href="../reference/stepper.html">stepper()</a></code>. The only thing you give <code><a href="../reference/stepper.html">stepper()</a></code> is the rschedule to step relative to. It returns a function of 1 argument, <code>n</code>, which you’ll call with the desired number of days to shift. The resulting object can be added to or subtracted from your vector of dates. It sounds a little complicated, but hopefully things will clear up with an example. Let’s reproduce the last example from the previous section:</p>
+<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="no">working_day</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/stepper.html">stepper</a></span>(<span class="no">on_weekends</span>)
+
+<span class="no">x</span> <span class="kw">%s+%</span> <span class="fu">working_day</span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>, -<span class="fl">1</span>))
+<span class="co">#&gt; [1] "2019-12-23" "2019-12-20"</span></pre></body></html></div>
+<p>Notice the usage of <code><a href="../reference/stepper.html">%s+%</a></code>. This replaces <code><a href="https://rdrr.io/r/base/Arithmetic.html">+</a></code>, and allows you to step forward. There is also a <code><a href="../reference/stepper.html">%s-%</a></code> for stepping backwards.</p>
+<p>The nice thing about <code>working_day</code> is that you can continue to use it on other date vectors.</p>
+<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="co"># A Wednesday</span>
+<span class="no">wednesday</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span>(<span class="st">"2019-12-18"</span>)
+
+<span class="co"># Returns Thursday, Friday, Monday</span>
+<span class="no">wednesday</span> <span class="kw">%s+%</span> <span class="fu">working_day</span>(<span class="fl">1</span>:<span class="fl">3</span>)
+<span class="co">#&gt; [1] "2019-12-19" "2019-12-20" "2019-12-23"</span></pre></body></html></div>
 </div>
   </div>
 
