@@ -67,6 +67,17 @@ test_that("rbundle exdates work with non-rrules in the bundle", {
   expect_identical(alma_events(rb2), new_date(c(0, 1, 2)))
 })
 
+test_that("rbundle exdates work with all rrules in the bundle", {
+  rrule1 <- daily(since = "1970-01-03", until = "1970-01-04")
+  exdate <- "1970-01-04"
+
+  rb <- rbundle() %>%
+    add_rschedule(rrule1) %>%
+    add_exdate(exdate)
+
+  expect_identical(alma_events(rb), new_date(2))
+})
+
 # ------------------------------------------------------------------------------
 # new_rbundle()
 
