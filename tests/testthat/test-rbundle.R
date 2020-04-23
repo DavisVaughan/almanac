@@ -145,3 +145,42 @@ test_that("rbundle_restore() gives developers a way to restore to `to`", {
   expect_s3_class(result, c("rsubclass", "rbundle", "rschedule"), exact = TRUE)
   expect_identical(result$foo, numeric())
 })
+
+test_that("add_rschedule() uses rbundle_restore()", {
+  rschedule <- daily()
+
+  x <- new_rsubclass()
+  local_rsubclass()
+
+  result <- add_rschedule(x, rschedule = rschedule)
+
+  expect_s3_class(result, class(x), exact = TRUE)
+  expect_identical(result$foo, numeric())
+  expect_identical(result$rschedules, list(rschedule))
+})
+
+test_that("add_rdate() uses rbundle_restore()", {
+  rdate <- as.Date("2019-01-01")
+
+  x <- new_rsubclass()
+  local_rsubclass()
+
+  result <- add_rdate(x, rdate = rdate)
+
+  expect_s3_class(result, class(x), exact = TRUE)
+  expect_identical(result$foo, numeric())
+  expect_identical(result$rdates, rdate)
+})
+
+test_that("add_exdate() uses rbundle_restore()", {
+  exdate <- as.Date("2019-01-01")
+
+  x <- new_rsubclass()
+  local_rsubclass()
+
+  result <- add_exdate(x, exdate = exdate)
+
+  expect_s3_class(result, class(x), exact = TRUE)
+  expect_identical(result$foo, numeric())
+  expect_identical(result$exdates, exdate)
+})
