@@ -114,13 +114,13 @@
 <p>Take the <code><a href="../reference/rrule.html">yearly()</a></code> frequency, for example. By default, this will declare that 1 value per year is an event.</p>
 <div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">on_yearly</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">yearly</a></span>()
 <span class="no">on_yearly</span>
-<span class="co">#&gt; &lt;rrule[yearly / 1970-01-01 / 2040-01-01]&gt;</span></pre></body></html></div>
+<span class="co">#&gt; &lt;rrule[yearly / 1900-01-01 / 2100-01-01]&gt;</span></pre></body></html></div>
 <p>The return value of <code><a href="../reference/rrule.html">yearly()</a></code> is a <em>rrule</em> object, short for “recurrence rule”. This base object is all you need to start doing something useful. For example, you can pass this rrule to <code><a href="../reference/alma_search.html">alma_search()</a></code> along with a <code>from</code> and <code>to</code> date, and it will return all of the events in that date range.</p>
 <div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="../reference/alma_search.html">alma_search</a></span>(<span class="kw">from</span> <span class="kw">=</span> <span class="st">"1990-01-01"</span>, <span class="kw">to</span> <span class="kw">=</span> <span class="st">"1995-12-31"</span>, <span class="no">on_yearly</span>)
 <span class="co">#&gt; [1] "1990-01-01" "1991-01-01" "1992-01-01" "1993-01-01" "1994-01-01"</span>
 <span class="co">#&gt; [6] "1995-01-01"</span></pre></body></html></div>
 <p>What if we want a yearly value, but we want it on January 5th every year, rather than on the 1st? <code><a href="../reference/rrule.html">yearly()</a></code> has an important argument called <code>since</code> that controls two things: the start date of the recurrence rule, and information such as the month, or the day of the month to use if no other conditions have been specified to override those.</p>
-<p>The default of <code>since</code> is set to <code>1970-01-01</code>, the Unix epoch, but this is arbitrary. It is because of this default that in the above example with <code><a href="../reference/alma_search.html">alma_search()</a></code> we get values on January 1st. Let’s change that.</p>
+<p>The default of <code>since</code> is set to <code>1900-01-01</code>, but this is arbitrary. It is because of this default that in the above example with <code><a href="../reference/alma_search.html">alma_search()</a></code> we get values on January 1st. Let’s change that.</p>
 <div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">on_yearly_jan_5</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">yearly</a></span>(<span class="kw">since</span> <span class="kw">=</span> <span class="st">"1990-01-05"</span>)
 
 <span class="fu"><a href="../reference/alma_search.html">alma_search</a></span>(<span class="st">"1990-01-01"</span>, <span class="st">"1995-12-31"</span>, <span class="no">on_yearly_jan_5</span>)
@@ -131,7 +131,7 @@
 <span class="fu"><a href="../reference/alma_search.html">alma_search</a></span>(<span class="st">"1988-01-01"</span>, <span class="st">"1995-12-31"</span>, <span class="no">on_yearly_jan_5</span>)
 <span class="co">#&gt; [1] "1990-01-05" "1991-01-05" "1992-01-05" "1993-01-05" "1994-01-05"</span>
 <span class="co">#&gt; [6] "1995-01-05"</span></pre></body></html></div>
-<p>There is also an <code>until</code> argument to <code><a href="../reference/rrule.html">yearly()</a></code> that controls the upper bound of the range to look in. This is arbitrarily set to <code>2040-01-01</code>, but can be expanded or contracted as required.</p>
+<p>There is also an <code>until</code> argument to <code><a href="../reference/rrule.html">yearly()</a></code> that controls the upper bound of the range to look in. This is arbitrarily set to <code>2100-01-01</code>, but can be expanded or contracted as required.</p>
 </div>
 <div id="event-set" class="section level2">
 <h2 class="hasAnchor">
@@ -139,16 +139,28 @@
 <p>I mentioned earlier that the job of a recurrence rule is to flag dates in a pre-specified range to be events or not. The dates that are flagged as events are known as the <em>event set</em>.</p>
 <p>In the previous example, we used <code><a href="../reference/alma_search.html">alma_search()</a></code> to extract a subset of dates from the event set that were between <code>from</code> and <code>to</code>. You can get the entire event set with <code><a href="../reference/alma_events.html">alma_events()</a></code>. Notice that this is bounded by our custom <code>since</code> date, and the default <code>until</code> upper bound. Otherwise we’d have an infinite event set, which is nice in theory but bad in practice.</p>
 <div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="fu"><a href="../reference/alma_events.html">alma_events</a></span>(<span class="no">on_yearly_jan_5</span>)
-<span class="co">#&gt;  [1] "1990-01-05" "1991-01-05" "1992-01-05" "1993-01-05" "1994-01-05"</span>
-<span class="co">#&gt;  [6] "1995-01-05" "1996-01-05" "1997-01-05" "1998-01-05" "1999-01-05"</span>
-<span class="co">#&gt; [11] "2000-01-05" "2001-01-05" "2002-01-05" "2003-01-05" "2004-01-05"</span>
-<span class="co">#&gt; [16] "2005-01-05" "2006-01-05" "2007-01-05" "2008-01-05" "2009-01-05"</span>
-<span class="co">#&gt; [21] "2010-01-05" "2011-01-05" "2012-01-05" "2013-01-05" "2014-01-05"</span>
-<span class="co">#&gt; [26] "2015-01-05" "2016-01-05" "2017-01-05" "2018-01-05" "2019-01-05"</span>
-<span class="co">#&gt; [31] "2020-01-05" "2021-01-05" "2022-01-05" "2023-01-05" "2024-01-05"</span>
-<span class="co">#&gt; [36] "2025-01-05" "2026-01-05" "2027-01-05" "2028-01-05" "2029-01-05"</span>
-<span class="co">#&gt; [41] "2030-01-05" "2031-01-05" "2032-01-05" "2033-01-05" "2034-01-05"</span>
-<span class="co">#&gt; [46] "2035-01-05" "2036-01-05" "2037-01-05" "2038-01-05" "2039-01-05"</span></pre></body></html></div>
+<span class="co">#&gt;   [1] "1990-01-05" "1991-01-05" "1992-01-05" "1993-01-05" "1994-01-05"</span>
+<span class="co">#&gt;   [6] "1995-01-05" "1996-01-05" "1997-01-05" "1998-01-05" "1999-01-05"</span>
+<span class="co">#&gt;  [11] "2000-01-05" "2001-01-05" "2002-01-05" "2003-01-05" "2004-01-05"</span>
+<span class="co">#&gt;  [16] "2005-01-05" "2006-01-05" "2007-01-05" "2008-01-05" "2009-01-05"</span>
+<span class="co">#&gt;  [21] "2010-01-05" "2011-01-05" "2012-01-05" "2013-01-05" "2014-01-05"</span>
+<span class="co">#&gt;  [26] "2015-01-05" "2016-01-05" "2017-01-05" "2018-01-05" "2019-01-05"</span>
+<span class="co">#&gt;  [31] "2020-01-05" "2021-01-05" "2022-01-05" "2023-01-05" "2024-01-05"</span>
+<span class="co">#&gt;  [36] "2025-01-05" "2026-01-05" "2027-01-05" "2028-01-05" "2029-01-05"</span>
+<span class="co">#&gt;  [41] "2030-01-05" "2031-01-05" "2032-01-05" "2033-01-05" "2034-01-05"</span>
+<span class="co">#&gt;  [46] "2035-01-05" "2036-01-05" "2037-01-05" "2038-01-05" "2039-01-05"</span>
+<span class="co">#&gt;  [51] "2040-01-05" "2041-01-05" "2042-01-05" "2043-01-05" "2044-01-05"</span>
+<span class="co">#&gt;  [56] "2045-01-05" "2046-01-05" "2047-01-05" "2048-01-05" "2049-01-05"</span>
+<span class="co">#&gt;  [61] "2050-01-05" "2051-01-05" "2052-01-05" "2053-01-05" "2054-01-05"</span>
+<span class="co">#&gt;  [66] "2055-01-05" "2056-01-05" "2057-01-05" "2058-01-05" "2059-01-05"</span>
+<span class="co">#&gt;  [71] "2060-01-05" "2061-01-05" "2062-01-05" "2063-01-05" "2064-01-05"</span>
+<span class="co">#&gt;  [76] "2065-01-05" "2066-01-05" "2067-01-05" "2068-01-05" "2069-01-05"</span>
+<span class="co">#&gt;  [81] "2070-01-05" "2071-01-05" "2072-01-05" "2073-01-05" "2074-01-05"</span>
+<span class="co">#&gt;  [86] "2075-01-05" "2076-01-05" "2077-01-05" "2078-01-05" "2079-01-05"</span>
+<span class="co">#&gt;  [91] "2080-01-05" "2081-01-05" "2082-01-05" "2083-01-05" "2084-01-05"</span>
+<span class="co">#&gt;  [96] "2085-01-05" "2086-01-05" "2087-01-05" "2088-01-05" "2089-01-05"</span>
+<span class="co">#&gt; [101] "2090-01-05" "2091-01-05" "2092-01-05" "2093-01-05" "2094-01-05"</span>
+<span class="co">#&gt; [106] "2095-01-05" "2096-01-05" "2097-01-05" "2098-01-05" "2099-01-05"</span></pre></body></html></div>
 <p>You can also check if an existing date is included in a recurrence rule’s event set with <code><a href="../reference/alma_in.html">alma_in()</a></code>.</p>
 <div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="co"># Uses the 10th of the month, pulled from `since`</span>
 <span class="no">on_monthly</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">monthly</a></span>(<span class="kw">since</span> <span class="kw">=</span> <span class="st">"1990-01-10"</span>)
@@ -175,7 +187,7 @@
 <span class="co"># The first time is "slow"</span>
 <span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>(<span class="fu"><a href="../reference/alma_search.html">alma_search</a></span>(<span class="no">since</span>, <span class="st">"2000-01-01"</span>, <span class="no">on_weekly</span>))
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;   0.082   0.004   0.064</span>
+<span class="co">#&gt;   0.148   0.010   0.136</span>
 
 <span class="co"># Repeated access is fast</span>
 <span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>(<span class="fu"><a href="../reference/alma_search.html">alma_search</a></span>(<span class="no">since</span>, <span class="st">"2000-01-01"</span>, <span class="no">on_weekly</span>))
@@ -186,7 +198,7 @@
 <span class="co"># the operation is still fast.</span>
 <span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>(<span class="fu"><a href="../reference/alma_search.html">alma_search</a></span>(<span class="no">since</span>, <span class="st">"1990-05-01"</span>, <span class="no">on_weekly</span>))
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;   0.000   0.000   0.001</span></pre></body></html></div>
+<span class="co">#&gt;   0.001   0.000   0.000</span></pre></body></html></div>
 </div>
 </div>
 <div id="recurrence-conditions" class="section level2">

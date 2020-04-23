@@ -154,13 +154,13 @@ to them, use one of the <code>recur_*()</code> functions.</p><ul>
 
     </div>
 
-    <pre class="usage"><span class='fu'>daily</span>(<span class='kw'>since</span> <span class='kw'>=</span> <span class='st'>"1970-01-01"</span>, <span class='kw'>until</span> <span class='kw'>=</span> <span class='st'>"2040-01-01"</span>)
+    <pre class="usage"><span class='fu'>daily</span>(<span class='kw'>since</span> <span class='kw'>=</span> <span class='st'>"1900-01-01"</span>, <span class='kw'>until</span> <span class='kw'>=</span> <span class='st'>"2100-01-01"</span>)
 
-<span class='fu'>weekly</span>(<span class='kw'>since</span> <span class='kw'>=</span> <span class='st'>"1970-01-01"</span>, <span class='kw'>until</span> <span class='kw'>=</span> <span class='st'>"2040-01-01"</span>)
+<span class='fu'>weekly</span>(<span class='kw'>since</span> <span class='kw'>=</span> <span class='st'>"1900-01-01"</span>, <span class='kw'>until</span> <span class='kw'>=</span> <span class='st'>"2100-01-01"</span>)
 
-<span class='fu'>monthly</span>(<span class='kw'>since</span> <span class='kw'>=</span> <span class='st'>"1970-01-01"</span>, <span class='kw'>until</span> <span class='kw'>=</span> <span class='st'>"2040-01-01"</span>)
+<span class='fu'>monthly</span>(<span class='kw'>since</span> <span class='kw'>=</span> <span class='st'>"1900-01-01"</span>, <span class='kw'>until</span> <span class='kw'>=</span> <span class='st'>"2100-01-01"</span>)
 
-<span class='fu'>yearly</span>(<span class='kw'>since</span> <span class='kw'>=</span> <span class='st'>"1970-01-01"</span>, <span class='kw'>until</span> <span class='kw'>=</span> <span class='st'>"2040-01-01"</span>)</pre>
+<span class='fu'>yearly</span>(<span class='kw'>since</span> <span class='kw'>=</span> <span class='st'>"1900-01-01"</span>, <span class='kw'>until</span> <span class='kw'>=</span> <span class='st'>"2100-01-01"</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -184,15 +184,14 @@ to generate a complete recurrence rule.</p></td>
     <p>A new empty rrule.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>By default <code>since</code> is set to the Unix epoch time, but there is no hard and
-fast rule for doing this. Remember that this is the first possible event
-date, so you may need to move this date backwards in time if you need to
-generate dates before <code>1970-01-01</code>.</p>
-<p>In terms of speed, it is more efficient if you adjust the <code>since</code> date to
-be closer to the first date in the sequence of dates that you are working
-with. For example, if you are working with dates in the range of 2019 and
-forward, adjust the <code>since</code> date to be <code>2019-01-01</code> for a significant speed
-boost.</p>
+    <p>By default, <code>since == "1900-01-01"</code> and <code>until == "2100-01-01"</code>, which should
+capture most use cases well while still being performant. You may need to
+adjust these dates if you want events outside this range.</p>
+<p>In terms of speed, it is generally more efficient if you adjust the <code>since</code>
+and <code>until</code> date to be closer to the first date in the sequence of dates
+that you are working with. For example, if you are working with dates in the
+range of 2019 and forward, adjust the <code>since</code> date to be <code>2019-01-01</code> for a
+significant speed boost.</p>
 <p>As the anchor date, events are often calculated <em>relative to</em> this
 date. As an example, a rule of "on Monday, every other week" would use
 the <code>since</code> date to find the first Monday to start the recurrence from.</p>
@@ -200,7 +199,7 @@ the <code>since</code> date to find the first Monday to start the recurrence fro
 with <code>monthly() %&gt;% recur_on_interval(3)</code>. The month to start the quarterly
 interval from will be pulled from the <code>since</code> date inside <code>monthly()</code>. The
 default will use a quarterly rule starting in January since the default
-<code>since</code> date is <code>1970-01-01</code>. See the examples.</p>
+<code>since</code> date is <code>1900-01-01</code>. See the examples.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>rrule</span> <span class='kw'>&lt;-</span> <span class='fu'>monthly</span>() <span class='kw'>%&gt;%</span> <span class='fu'><a href='recur_on_mday.html'>recur_on_mday</a></span>(<span class='fl'>25</span>)
@@ -208,13 +207,17 @@ default will use a quarterly rule starting in January since the default
 <span class='fu'><a href='alma_search.html'>alma_search</a></span>(<span class='st'>"1970-01-01"</span>, <span class='st'>"1971-01-01"</span>, <span class='no'>rrule</span>)</div><div class='output co'>#&gt;  [1] "1970-01-25" "1970-02-25" "1970-03-25" "1970-04-25" "1970-05-25"
 #&gt;  [6] "1970-06-25" "1970-07-25" "1970-08-25" "1970-09-25" "1970-10-25"
 #&gt; [11] "1970-11-25" "1970-12-25"</div><div class='input'>
-<span class='co'># Notice that dates before 1970-01-01 are never generated with the defaults!</span>
-<span class='fu'><a href='alma_search.html'>alma_search</a></span>(<span class='st'>"1969-01-01"</span>, <span class='st'>"1970-01-01"</span>, <span class='no'>rrule</span>)</div><div class='output co'>#&gt; Date of length 0</div><div class='input'>
+<span class='co'># Notice that dates before 1900-01-01 are never generated with the defaults!</span>
+<span class='fu'><a href='alma_search.html'>alma_search</a></span>(<span class='st'>"1899-01-01"</span>, <span class='st'>"1901-01-01"</span>, <span class='no'>rrule</span>)</div><div class='output co'>#&gt;  [1] "1900-01-25" "1900-02-25" "1900-03-25" "1900-04-25" "1900-05-25"
+#&gt;  [6] "1900-06-25" "1900-07-25" "1900-08-25" "1900-09-25" "1900-10-25"
+#&gt; [11] "1900-11-25" "1900-12-25"</div><div class='input'>
 <span class='co'># Adjust the `since` date to get access to these dates</span>
-<span class='no'>rrule_pre_1970</span> <span class='kw'>&lt;-</span> <span class='fu'>monthly</span>(<span class='kw'>since</span> <span class='kw'>=</span> <span class='st'>"1969-01-01"</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='recur_on_mday.html'>recur_on_mday</a></span>(<span class='fl'>25</span>)
-<span class='fu'><a href='alma_search.html'>alma_search</a></span>(<span class='st'>"1969-01-01"</span>, <span class='st'>"1970-01-01"</span>, <span class='no'>rrule_pre_1970</span>)</div><div class='output co'>#&gt;  [1] "1969-01-25" "1969-02-25" "1969-03-25" "1969-04-25" "1969-05-25"
-#&gt;  [6] "1969-06-25" "1969-07-25" "1969-08-25" "1969-09-25" "1969-10-25"
-#&gt; [11] "1969-11-25" "1969-12-25"</div><div class='input'>
+<span class='no'>rrule_pre_1900</span> <span class='kw'>&lt;-</span> <span class='fu'>monthly</span>(<span class='kw'>since</span> <span class='kw'>=</span> <span class='st'>"1850-01-01"</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='recur_on_mday.html'>recur_on_mday</a></span>(<span class='fl'>25</span>)
+<span class='fu'><a href='alma_search.html'>alma_search</a></span>(<span class='st'>"1899-01-01"</span>, <span class='st'>"1901-01-01"</span>, <span class='no'>rrule_pre_1900</span>)</div><div class='output co'>#&gt;  [1] "1899-01-25" "1899-02-25" "1899-03-25" "1899-04-25" "1899-05-25"
+#&gt;  [6] "1899-06-25" "1899-07-25" "1899-08-25" "1899-09-25" "1899-10-25"
+#&gt; [11] "1899-11-25" "1899-12-25" "1900-01-25" "1900-02-25" "1900-03-25"
+#&gt; [16] "1900-04-25" "1900-05-25" "1900-06-25" "1900-07-25" "1900-08-25"
+#&gt; [21] "1900-09-25" "1900-10-25" "1900-11-25" "1900-12-25"</div><div class='input'>
 <span class='co'># A quarterly recurrence rule can be built from</span>
 <span class='co'># `monthly()` and `recur_on_interval()`</span>
 <span class='no'>on_first_of_the_quarter</span> <span class='kw'>&lt;-</span> <span class='fu'>monthly</span>() <span class='kw'>%&gt;%</span>
