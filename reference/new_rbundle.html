@@ -42,7 +42,16 @@
 <meta property="og:title" content="Constructor for an rbundle — new_rbundle" />
 <meta property="og:description" content="new_rbundle() is a developer focused tool that is not required for normal
 usage of almanac. It constructs a new rbundle directly from a list of
-existing rschedules." />
+existing rschedules.
+rbundle_restore() is a generic function that rbundle subclasses can provide
+a method for. It dispatches off of to. Its sole purpose is to restore
+classes and fields of the subclass after calling any of the following
+functions:
+add_rdate()
+add_exdate()
+add_rschedule()
+
+" />
 
 
 
@@ -140,9 +149,26 @@ existing rschedules." />
     <p><code>new_rbundle()</code> is a developer focused tool that is not required for normal
 usage of almanac. It constructs a new rbundle directly from a list of
 existing rschedules.</p>
+<p><code>rbundle_restore()</code> is a generic function that rbundle subclasses can provide
+a method for. It dispatches off of <code>to</code>. Its sole purpose is to restore
+classes and fields of the subclass after calling any of the following
+functions:</p><ul>
+<li><p><code><a href='rbundle-add.html'>add_rdate()</a></code></p></li>
+<li><p><code><a href='rbundle-add.html'>add_exdate()</a></code></p></li>
+<li><p><code><a href='rbundle-add.html'>add_rschedule()</a></code></p></li>
+</ul>
+
     </div>
 
-    <pre class="usage"><span class='fu'>new_rbundle</span>(<span class='kw'>rschedules</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(), <span class='kw'>rdates</span> <span class='kw'>=</span> <span class='fu'>new_date</span>(), <span class='kw'>exdates</span> <span class='kw'>=</span> <span class='fu'>new_date</span>())</pre>
+    <pre class="usage"><span class='fu'>new_rbundle</span>(
+  <span class='kw'>rschedules</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(),
+  <span class='kw'>rdates</span> <span class='kw'>=</span> <span class='fu'>new_date</span>(),
+  <span class='kw'>exdates</span> <span class='kw'>=</span> <span class='fu'>new_date</span>(),
+  <span class='no'>...</span>,
+  <span class='kw'>class</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span>()
+)
+
+<span class='fu'>rbundle_restore</span>(<span class='no'>x</span>, <span class='no'>to</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -162,11 +188,37 @@ existing rschedules.</p>
       <td><p><code>[Date]</code></p>
 <p>A vector of dates to forcibly exclude from the event set.</p></td>
     </tr>
+    <tr>
+      <th>...</th>
+      <td><p><code>[named dots]</code></p>
+<p>Additional named elements added to the rbundle list.</p></td>
+    </tr>
+    <tr>
+      <th>class</th>
+      <td><p><code>[character]</code></p>
+<p>An optional subclass.</p></td>
+    </tr>
+    <tr>
+      <th>x</th>
+      <td><p><code>[rbundle]</code></p>
+<p>An updated rbundle that needs to be restored to the type of <code>to</code>.</p></td>
+    </tr>
+    <tr>
+      <th>to</th>
+      <td><p><code>[rbundle subclass]</code></p>
+<p>An rbundle, or an rbundle subclass, that you are restoring to.</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A new rbundle.</p>
+    
+<ul>
+<li><p><code>new_rbundle()</code> returns a new rbundle.</p></li>
+<li><p><code>rbundle_restore()</code> should return an rbundle subclass of the same type
+as <code>to</code>.</p></li>
+</ul>
+
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>new_rbundle</span>()</div><div class='output co'>#&gt; &lt;rbundle[0 rschedules / 0 rdates / 0 exdates]&gt;</div><div class='input'>
