@@ -51,12 +51,15 @@ static <- new_rschedule(
   class = "static_rschedule"
 )
 
-rschedule_events.static_rschedule <- function(x) {
-  x$events
-}
+# You have to register an `rschedule_events()` method first!
+try(alma_events(static))
 
-alma_events(static)
+# For example, the below comment block could be run, and then
+# `alma_events()` would work, and would just return `x$events`.
 
-alma_in(events, static)
-alma_in(events + 1, static)
+# rschedule_events.static_rschedule <- function(x) {
+#   x$events
+# }
+#
+# alma_events(static)
 }
