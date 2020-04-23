@@ -74,6 +74,14 @@ format.rbundle <- function(x, ...) {
 #'
 #'   A vector of dates to forcibly exclude from the event set.
 #'
+#' @param ... `[named dots]`
+#'
+#'   Additional named elements added to the rbundle list.
+#'
+#' @param class `[character]`
+#'
+#'   An optional subclass.
+#'
 #' @return
 #' A new rbundle.
 #'
@@ -89,7 +97,9 @@ format.rbundle <- function(x, ...) {
 #' new_rbundle(rschedules)
 new_rbundle <- function(rschedules = list(),
                         rdates = new_date(),
-                        exdates = new_date()) {
+                        exdates = new_date(),
+                        ...,
+                        class = character()) {
 
   if (!is_list(rschedules)) {
     abort("`rschedules` must be a list.")
@@ -125,10 +135,15 @@ new_rbundle <- function(rschedules = list(),
     rschedules = rschedules,
     rdates = rdates,
     exdates = exdates,
-    cache = cache
+    cache = cache,
+    ...
   )
 
-  new_rschedule(data, class = "rbundle")
+  if (!is_named(data)) {
+    abort("All elements of `...` must be named.")
+  }
+
+  new_rschedule(data, class = c(class, "rbundle"))
 }
 
 # ------------------------------------------------------------------------------

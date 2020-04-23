@@ -112,3 +112,15 @@ test_that("validates date bounds", {
   expect_error(new_rbundle(exdates = almanac_global_max_date + 1), class = "almanac_error_date_above_maximum")
 })
 
+test_that("can subclass rbundle", {
+  x <- new_rbundle(foo = 1, class = "rsubclass")
+  expect_s3_class(x, c("rsubclass", "rbundle", "rschedule"), exact = TRUE)
+  expect_identical(x$foo, 1)
+})
+
+test_that("`...` must be named", {
+  expect_error(
+    new_rbundle(rschedules = list(), rdates = new_date(), exdates = new_date(), 1),
+    "must be named"
+  )
+})

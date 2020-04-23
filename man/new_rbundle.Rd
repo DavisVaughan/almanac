@@ -4,7 +4,13 @@
 \alias{new_rbundle}
 \title{Constructor for an rbundle}
 \usage{
-new_rbundle(rschedules = list(), rdates = new_date(), exdates = new_date())
+new_rbundle(
+  rschedules = list(),
+  rdates = new_date(),
+  exdates = new_date(),
+  ...,
+  class = character()
+)
 }
 \arguments{
 \item{rschedules}{\verb{[list]}
@@ -18,6 +24,14 @@ A vector of dates to forcibly include in the event set.}
 \item{exdates}{\verb{[Date]}
 
 A vector of dates to forcibly exclude from the event set.}
+
+\item{...}{\verb{[named dots]}
+
+Additional named elements added to the rbundle list.}
+
+\item{class}{\verb{[character]}
+
+An optional subclass.}
 }
 \value{
 A new rbundle.
