@@ -194,12 +194,17 @@ The sole functionality of rschedule classes is to provide a method for
   <span class='kw'>class</span> <span class='kw'>=</span> <span class='st'>"static_rschedule"</span>
 )
 
-<span class='no'>rschedule_events.static_rschedule</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>x</span>) {
-  <span class='no'>x</span>$<span class='no'>events</span>
-}
+<span class='co'># You have to register an `rschedule_events()` method first!</span>
+<span class='fu'><a href='https://rdrr.io/r/base/try.html'>try</a></span>(<span class='fu'><a href='alma_events.html'>alma_events</a></span>(<span class='no'>static</span>))</div><div class='output co'>#&gt; Error : rschedule subclasses must provide their own `rschedule_events()` method.</div><div class='input'>
+# For example, the below comment block could be run, and then
+# `alma_events()` would work, and would just return `x$events`.
 
-<span class='fu'><a href='alma_events.html'>alma_events</a></span>(<span class='no'>static</span>)</div><div class='output co'>#&gt; <span class='error'>Error: rschedule subclasses must provide their own `rschedule_events()` method.</span></div><div class='input'>
-<span class='fu'><a href='alma_in.html'>alma_in</a></span>(<span class='no'>events</span>, <span class='no'>static</span>)</div><div class='output co'>#&gt; <span class='error'>Error: rschedule subclasses must provide their own `rschedule_events()` method.</span></div><div class='input'><span class='fu'><a href='alma_in.html'>alma_in</a></span>(<span class='no'>events</span> + <span class='fl'>1</span>, <span class='no'>static</span>)</div><div class='output co'>#&gt; <span class='error'>Error: rschedule subclasses must provide their own `rschedule_events()` method.</span></div></pre>
+# rschedule_events.static_rschedule &lt;- function(x) {
+#   x$events
+# }
+#
+# alma_events(static)
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
