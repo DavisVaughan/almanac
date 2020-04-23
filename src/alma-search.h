@@ -1,5 +1,5 @@
-#ifndef ALMANAC_SEQ_H
-#define ALMANAC_SEQ_H
+#ifndef ALMANAC_SEARCH_H
+#define ALMANAC_SEARCH_H
 
 #include "r.h"
 

@@ -19,7 +19,7 @@ extern "C" sexp export_alma_next_impl(sexp x, sexp events, sexp inclusive);
 extern "C" sexp export_alma_previous_impl(sexp x, sexp events, sexp inclusive);
 
 // -----------------------------------------------------------------------------
-// #include "alma-seq.h"
+// #include "alma-search.h"
 
 extern "C" sexp export_alma_search_impl(sexp events, sexp from, sexp to, sexp inclusive);
 

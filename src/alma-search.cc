@@ -1,4 +1,4 @@
-#include "alma-seq.h"
+#include "alma-search.h"
 #include "utils.h"
 #include <algorithm>
 

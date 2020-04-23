@@ -21,7 +21,7 @@ static const R_CallMethodDef CallEntries[] = {
   {"export_alma_next_impl",                  (DL_FUNC) &export_alma_next_impl, 3},
   {"export_alma_previous_impl",              (DL_FUNC) &export_alma_previous_impl, 3},
 
-  // #include "alma-seq.h"
+  // #include "alma-search.h"
   {"export_alma_search_impl",                (DL_FUNC) &export_alma_search_impl, 4},
 
   // #include "alma-step.h"
