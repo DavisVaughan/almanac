@@ -6,10 +6,10 @@ basic method
 <radjusted>
 
 Adjust:
-<rrule[daily / 1970-01-01 / 2040-01-01]>
+<rrule[daily / 1900-01-01 / 2100-01-01]>
 
 Adjust on:
-<rrule[daily / 1970-01-01 / 2040-01-01]>
+<rrule[daily / 1900-01-01 / 2100-01-01]>
 
 
 with rbundles
@@ -21,7 +21,7 @@ with rbundles
 <radjusted>
 
 Adjust:
-<rrule[weekly / 1970-01-01 / 2040-01-01]>
+<rrule[weekly / 1900-01-01 / 2100-01-01]>
 - wday: Wed
 
 Adjust on:

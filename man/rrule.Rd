@@ -8,13 +8,13 @@
 \alias{yearly}
 \title{Create a recurrence rule}
 \usage{
-daily(since = "1970-01-01", until = "2040-01-01")
+daily(since = "1900-01-01", until = "2100-01-01")
 
-weekly(since = "1970-01-01", until = "2040-01-01")
+weekly(since = "1900-01-01", until = "2100-01-01")
 
-monthly(since = "1970-01-01", until = "2040-01-01")
+monthly(since = "1900-01-01", until = "2100-01-01")
 
-yearly(since = "1970-01-01", until = "2040-01-01")
+yearly(since = "1900-01-01", until = "2100-01-01")
 }
 \arguments{
 \item{since}{\verb{[Date(1)]}
@@ -42,16 +42,15 @@ to them, use one of the \verb{recur_*()} functions.
 }
 }
 \details{
-By default \code{since} is set to the Unix epoch time, but there is no hard and
-fast rule for doing this. Remember that this is the first possible event
-date, so you may need to move this date backwards in time if you need to
-generate dates before \code{1970-01-01}.
+By default, \code{since == "1900-01-01"} and \code{until == "2100-01-01"}, which should
+capture most use cases well while still being performant. You may need to
+adjust these dates if you want events outside this range.
 
-In terms of speed, it is more efficient if you adjust the \code{since} date to
-be closer to the first date in the sequence of dates that you are working
-with. For example, if you are working with dates in the range of 2019 and
-forward, adjust the \code{since} date to be \code{2019-01-01} for a significant speed
-boost.
+In terms of speed, it is generally more efficient if you adjust the \code{since}
+and \code{until} date to be closer to the first date in the sequence of dates
+that you are working with. For example, if you are working with dates in the
+range of 2019 and forward, adjust the \code{since} date to be \code{2019-01-01} for a
+significant speed boost.
 
 As the anchor date, events are often calculated \emph{relative to} this
 date. As an example, a rule of "on Monday, every other week" would use
@@ -61,19 +60,19 @@ There is no \code{quarterly()} recurrence frequency, but this can be accomplishe
 with \code{monthly() \%>\% recur_on_interval(3)}. The month to start the quarterly
 interval from will be pulled from the \code{since} date inside \code{monthly()}. The
 default will use a quarterly rule starting in January since the default
-\code{since} date is \code{1970-01-01}. See the examples.
+\code{since} date is \code{1900-01-01}. See the examples.
 }
 \examples{
 rrule <- monthly() \%>\% recur_on_mday(25)
 
 alma_search("1970-01-01", "1971-01-01", rrule)
 
-# Notice that dates before 1970-01-01 are never generated with the defaults!
-alma_search("1969-01-01", "1970-01-01", rrule)
+# Notice that dates before 1900-01-01 are never generated with the defaults!
+alma_search("1899-01-01", "1901-01-01", rrule)
 
 # Adjust the `since` date to get access to these dates
-rrule_pre_1970 <- monthly(since = "1969-01-01") \%>\% recur_on_mday(25)
-alma_search("1969-01-01", "1970-01-01", rrule_pre_1970)
+rrule_pre_1900 <- monthly(since = "1850-01-01") \%>\% recur_on_mday(25)
+alma_search("1899-01-01", "1901-01-01", rrule_pre_1900)
 
 # A quarterly recurrence rule can be built from
 # `monthly()` and `recur_on_interval()`

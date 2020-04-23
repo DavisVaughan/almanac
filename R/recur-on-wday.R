@@ -15,7 +15,7 @@
 #'
 #' It is particularly important to pay attention to the `since` date when using
 #' weekly rules. The day of the week to use comes from the `since` date, which,
-#' by default, is a Thursday (`1970-01-01`).
+#' by default, is a Monday (`1900-01-01`).
 #'
 #' @param x `[rrule]`
 #'
@@ -37,22 +37,22 @@
 #' An updated rrule.
 #'
 #' @examples
-#' # Using default `since` (1970-01-01, a Thursday)
-#' on_weekly_thursdays <- weekly()
+#' # Using default `since` (1900-01-01, a Monday)
+#' on_weekly_mondays <- weekly()
 #'
 #' start <- "1999-01-01" # <- a Friday
 #' end <- "1999-03-01"
 #'
 #' # This finds the first Thursday, and then continues from there
-#' alma_search(start, end, on_weekly_thursdays)
+#' alma_search(start, end, on_weekly_mondays)
 #'
-#' # We start counting from a Friday here, so our `start` date counts
+#' # We start counting from a Friday here
 #' on_weekly_fridays <- weekly(since = start)
 #' alma_search(start, end, on_weekly_fridays)
 #'
 #' # Alternatively, we could use `recur_on_wday()` and force a recurrence rule
 #' # on Friday
-#' on_wday_friday <- on_weekly_thursdays %>% recur_on_wday("Friday")
+#' on_wday_friday <- on_weekly_mondays %>% recur_on_wday("Friday")
 #' alma_search(start, end, on_wday_friday)
 #'
 #' # At monthly frequencies, you can use n-th values to look for particular

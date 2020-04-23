@@ -49,9 +49,9 @@ test_that("cache `since` date respects `rdate`s", {
 
   rb <- rbundle()
   rb <- add_rschedule(rb, rrule)
-  rb <- add_rdate(rb, "1950-01-01")
+  rb <- add_rdate(rb, "1899-01-05")
 
-  expect <- as.Date(c("1950-01-01", "1970-01-01"))
+  expect <- as.Date(c("1899-01-05", "1900-01-01"))
 
-  expect_equal(alma_search("1930-01-01", "1970-01-01", rb), expect)
+  expect_equal(alma_search("1899-01-01", "1900-01-01", rb), expect)
 })

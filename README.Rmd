@@ -147,3 +147,4 @@ The date shifting / adjusting functions are modeled after similar functions in [
 The fast binary search based implementations of `alma_next()` and `alma_step()` are inspired by Pandas and the implementation of Numpy's [busday_offset()](https://docs.scipy.org/doc/numpy/reference/generated/numpy.busday_offset.html).
 
 The author of [gs](https://github.com/jameslairdsmith/gs), James Laird-Smith, has been a great collaborator as we have bounced ideas off of each other. gs attempts to solve a similar problem, but with a slightly different implementation.
+
