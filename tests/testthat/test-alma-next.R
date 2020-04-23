@@ -6,7 +6,7 @@ test_that("can use a rbundle with no rules", {
 test_that("next works with infinite dates", {
   expect_identical(alma_next(almanac_global_inf_date, daily()), almanac_global_na_date)
 
-  expect_identical(alma_next(almanac_global_neg_inf_date, daily()), new_date(0))
+  expect_identical(alma_next(almanac_global_neg_inf_date, daily()), almanac_global_default_since)
   expect_identical(alma_next(almanac_global_neg_inf_date, daily(since = "1970-01-02")), new_date(1))
 
   # If a cache already exists...
@@ -14,7 +14,7 @@ test_that("next works with infinite dates", {
   alma_next("1970-01-01", rrule, inclusive = TRUE)
 
   expect_identical(alma_next(almanac_global_inf_date, rrule), almanac_global_na_date)
-  expect_identical(alma_next(almanac_global_neg_inf_date, rrule), new_date(0))
+  expect_identical(alma_next(almanac_global_neg_inf_date, rrule), almanac_global_default_since)
 })
 
 test_that("alma_next() works with missing dates", {

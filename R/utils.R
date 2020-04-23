@@ -8,6 +8,9 @@ delayedAssign("almanac_global_neg_inf_date", structure(-Inf, class = "Date"))
 delayedAssign("almanac_global_na_date", structure(NA_real_, class = "Date"))
 delayedAssign("almanac_global_nan_date", structure(NaN, class = "Date"))
 
+delayedAssign("almanac_global_default_since", as.Date("1900-01-01"))
+delayedAssign("almanac_global_default_until", as.Date("2100-01-01"))
+
 # JS rrule can't seem to handle dates outside this range, but that's fine
 delayedAssign("almanac_global_max_date", as.Date("9999-12-31"))
 delayedAssign("almanac_global_min_date", as.Date("0100-01-01"))

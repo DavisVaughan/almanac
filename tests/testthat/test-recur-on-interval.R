@@ -2,7 +2,7 @@
 # Basic tests with all frequencies
 
 test_that("daily - on a interval", {
-  base <- daily()
+  base <- daily(since = "1990-01-01")
   rrule <- base %>% recur_on_interval(5)
 
   expect <- as.Date("1990-01-01") + c(0, 5, 10, 15, 20)

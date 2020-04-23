@@ -16,7 +16,8 @@ test_that("daily - on a ymonth", {
 })
 
 test_that("weekly - on a ymonth", {
-  base <- weekly()
+  # A Monday
+  base <- weekly(since = "1990-01-01")
   rrule <- base %>% recur_on_ymonth(5)
 
   start <- "1990-01-01"
@@ -24,9 +25,13 @@ test_that("weekly - on a ymonth", {
 
   x <- alma_search(start, stop, rrule)
 
-  expect_equal(x[1], as.Date("1990-05-03"))
-  expect_equal(x[length(x)], as.Date("1991-05-30"))
-  expect_length(x, 10)
+  # First monday in the 5th month
+  expect_equal(x[1], as.Date("1990-05-07"))
+
+  expect_equal(x[length(x)], as.Date("1991-05-27"))
+
+  # 4 mondays in 5th month of 1990, and 4 in the 5th month of 1991
+  expect_length(x, 8)
 })
 
 test_that("monthly - on a ymonth", {

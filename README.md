@@ -51,7 +51,7 @@ on_thanksgiving <- yearly() %>%
   recur_on_wday("Thursday", nth = 4)
 
 on_thanksgiving
-#> <rrule[yearly / 1970-01-01 / 2040-01-01]>
+#> <rrule[yearly / 1900-01-01 / 2100-01-01]>
 #> - ymonth: Nov
 #> - wday: Thu[4]
 ```
