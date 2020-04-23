@@ -58,9 +58,21 @@ format.rbundle <- function(x, ...) {
 
 #' Constructor for an rbundle
 #'
+#' @description
 #' `new_rbundle()` is a developer focused tool that is not required for normal
 #' usage of almanac. It constructs a new rbundle directly from a list of
 #' existing rschedules.
+#'
+#' `rbundle_restore()` is a generic function that rbundle subclasses can provide
+#' a method for. It dispatches off of `to`. Its sole purpose is to restore
+#' classes and fields of the subclass after calling any of the following
+#' functions:
+#'
+#' - `add_rdate()`
+#'
+#' - `add_exdate()`
+#'
+#' - `add_rschedule()`
 #'
 #' @param rschedules `[list]`
 #'
@@ -74,8 +86,27 @@ format.rbundle <- function(x, ...) {
 #'
 #'   A vector of dates to forcibly exclude from the event set.
 #'
+#' @param ... `[named dots]`
+#'
+#'   Additional named elements added to the rbundle list.
+#'
+#' @param class `[character]`
+#'
+#'   An optional subclass.
+#'
+#' @param x `[rbundle]`
+#'
+#'   An updated rbundle that needs to be restored to the type of `to`.
+#'
+#' @param to `[rbundle subclass]`
+#'
+#'   An rbundle, or an rbundle subclass, that you are restoring to.
+#'
 #' @return
-#' A new rbundle.
+#' - `new_rbundle()` returns a new rbundle.
+#'
+#' - `rbundle_restore()` should return an rbundle subclass of the same type
+#'   as `to`.
 #'
 #' @export
 #' @examples
@@ -89,7 +120,9 @@ format.rbundle <- function(x, ...) {
 #' new_rbundle(rschedules)
 new_rbundle <- function(rschedules = list(),
                         rdates = new_date(),
-                        exdates = new_date()) {
+                        exdates = new_date(),
+                        ...,
+                        class = character()) {
 
   if (!is_list(rschedules)) {
     abort("`rschedules` must be a list.")
@@ -125,10 +158,34 @@ new_rbundle <- function(rschedules = list(),
     rschedules = rschedules,
     rdates = rdates,
     exdates = exdates,
-    cache = cache
+    cache = cache,
+    ...
   )
 
-  new_rschedule(data, class = "rbundle")
+  if (!is_named(data)) {
+    abort("All elements of `...` must be named.")
+  }
+
+  new_rschedule(data, class = c(class, "rbundle"))
+}
+
+# ------------------------------------------------------------------------------
+
+#' @rdname new_rbundle
+#' @export
+rbundle_restore <- function(x, to) {
+  UseMethod("rbundle_restore", to)
+}
+
+#' @export
+rbundle_restore.default <- function(x, to) {
+  cls <- glue::glue_collapse(class(to), sep = "/")
+  glubort("Can't restore an rbundle to a <{cls}>.")
+}
+
+#' @export
+rbundle_restore.rbundle <- function(x, to) {
+  x
 }
 
 # ------------------------------------------------------------------------------

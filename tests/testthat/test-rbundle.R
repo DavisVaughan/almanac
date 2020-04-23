@@ -112,3 +112,75 @@ test_that("validates date bounds", {
   expect_error(new_rbundle(exdates = almanac_global_max_date + 1), class = "almanac_error_date_above_maximum")
 })
 
+test_that("can subclass rbundle", {
+  x <- new_rbundle(foo = 1, class = "rsubclass")
+  expect_s3_class(x, c("rsubclass", "rbundle", "rschedule"), exact = TRUE)
+  expect_identical(x$foo, 1)
+})
+
+test_that("`...` must be named", {
+  expect_error(
+    new_rbundle(rschedules = list(), rdates = new_date(), exdates = new_date(), 1),
+    "must be named"
+  )
+})
+
+# ------------------------------------------------------------------------------
+# rbundle_restore()
+
+test_that("rbundle_restore() gives developers a way to restore to `to`", {
+  x <- new_rbundle()
+  to <- new_rsubclass()
+
+  # By default, no restore
+  result <- rbundle_restore(x, to)
+  expect_s3_class(result, c("rbundle", "rschedule"), exact = TRUE)
+  expect_null(result$foo)
+
+  # Register `rbundle_restore()` method
+  local_rsubclass()
+
+  # Now class and attributes are restored
+  result <- rbundle_restore(x, to)
+  expect_s3_class(result, c("rsubclass", "rbundle", "rschedule"), exact = TRUE)
+  expect_identical(result$foo, numeric())
+})
+
+test_that("add_rschedule() uses rbundle_restore()", {
+  rschedule <- daily()
+
+  x <- new_rsubclass()
+  local_rsubclass()
+
+  result <- add_rschedule(x, rschedule = rschedule)
+
+  expect_s3_class(result, class(x), exact = TRUE)
+  expect_identical(result$foo, numeric())
+  expect_identical(result$rschedules, list(rschedule))
+})
+
+test_that("add_rdate() uses rbundle_restore()", {
+  rdate <- as.Date("2019-01-01")
+
+  x <- new_rsubclass()
+  local_rsubclass()
+
+  result <- add_rdate(x, rdate = rdate)
+
+  expect_s3_class(result, class(x), exact = TRUE)
+  expect_identical(result$foo, numeric())
+  expect_identical(result$rdates, rdate)
+})
+
+test_that("add_exdate() uses rbundle_restore()", {
+  exdate <- as.Date("2019-01-01")
+
+  x <- new_rsubclass()
+  local_rsubclass()
+
+  result <- add_exdate(x, exdate = exdate)
+
+  expect_s3_class(result, class(x), exact = TRUE)
+  expect_identical(result$foo, numeric())
+  expect_identical(result$exdates, exdate)
+})

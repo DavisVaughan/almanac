@@ -90,11 +90,13 @@ add_rschedule <- function(x, rschedule) {
 
   rschedules <- c(x$rschedules, list(rschedule))
 
-  new_rbundle(
+  out <- new_rbundle(
     rschedules = rschedules,
     rdates = x$rdates,
     exdates = x$exdates
   )
+
+  rbundle_restore(out, x)
 }
 
 #' @rdname rbundle-add
@@ -106,11 +108,13 @@ add_rdate <- function(x, rdate) {
   rdates <- vec_c(x$rdates, rdate)
   rdates <- unique(rdates)
 
-  new_rbundle(
+  out <- new_rbundle(
     rschedules = x$rschedules,
     rdates = rdates,
     exdates = x$exdates
   )
+
+  rbundle_restore(out, x)
 }
 
 #' @rdname rbundle-add
@@ -122,9 +126,11 @@ add_exdate <- function(x, exdate) {
   exdates <- vec_c(x$exdates, exdate)
   exdates <- vec_unique(exdates)
 
-  new_rbundle(
+  out <- new_rbundle(
     rschedules = x$rschedules,
     rdates = x$rdates,
     exdates = exdates
   )
+
+  rbundle_restore(out, x)
 }
