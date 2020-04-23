@@ -2,6 +2,7 @@
 % Please edit documentation in R/rbundle.R
 \name{new_rbundle}
 \alias{new_rbundle}
+\alias{rbundle_restore}
 \title{Constructor for an rbundle}
 \usage{
 new_rbundle(
@@ -11,6 +12,8 @@ new_rbundle(
   ...,
   class = character()
 )
+
+rbundle_restore(x, to)
 }
 \arguments{
 \item{rschedules}{\verb{[list]}
@@ -32,14 +35,36 @@ Additional named elements added to the rbundle list.}
 \item{class}{\verb{[character]}
 
 An optional subclass.}
+
+\item{x}{\verb{[rbundle]}
+
+An updated rbundle that needs to be restored to the type of \code{to}.}
+
+\item{to}{\verb{[rbundle subclass]}
+
+An rbundle, or an rbundle subclass, that you are restoring to.}
 }
 \value{
-A new rbundle.
+\itemize{
+\item \code{new_rbundle()} returns a new rbundle.
+\item \code{rbundle_restore()} should return an rbundle subclass of the same type
+as \code{to}.
+}
 }
 \description{
 \code{new_rbundle()} is a developer focused tool that is not required for normal
 usage of almanac. It constructs a new rbundle directly from a list of
 existing rschedules.
+
+\code{rbundle_restore()} is a generic function that rbundle subclasses can provide
+a method for. It dispatches off of \code{to}. Its sole purpose is to restore
+classes and fields of the subclass after calling any of the following
+functions:
+\itemize{
+\item \code{add_rdate()}
+\item \code{add_exdate()}
+\item \code{add_rschedule()}
+}
 }
 \examples{
 new_rbundle()
