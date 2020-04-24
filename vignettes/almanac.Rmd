@@ -170,7 +170,7 @@ christmas_or_labor_day <- rbundle() %>%
 alma_search("2000-01-01", "2002-01-01", christmas_or_labor_day)
 
 christmas_or_labor_day_except_2000_labor_day <- christmas_or_labor_day %>%
-  add_exdate("2000-09-04")
+  add_exdates("2000-09-04")
 
 alma_search("2000-01-01", "2002-01-01", christmas_or_labor_day_except_2000_labor_day)
 ```

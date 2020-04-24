@@ -30,13 +30,13 @@ test_that("can add an exdate to an rbundle", {
   b <- as.Date("1970-01-02")
 
   x <- rbundle()
-  x <- add_exdate(x, a)
-  x <- add_exdate(x, b)
+  x <- add_exdates(x, a)
+  x <- add_exdates(x, b)
 
   expect_identical(x$exdates, vec_c(a, b))
 
   x <- rbundle()
-  x <- add_exdate(x, vec_c(a, b))
+  x <- add_exdates(x, vec_c(a, b))
 
   expect_identical(x$exdates, vec_c(a, b))
 })
@@ -70,7 +70,7 @@ test_that("uniqueness of exdates is taken", {
   a <- as.Date("1970-01-01")
 
   x <- rbundle()
-  x <- add_exdate(x, vec_c(a, a))
+  x <- add_exdates(x, vec_c(a, a))
 
   expect_identical(x$exdates, a)
 })
@@ -82,12 +82,12 @@ test_that("errors on max/min rdates and exdates", {
   expect_error(add_rdates(rbundle(), lb), NA)
   expect_error(add_rdates(rbundle(), lb - 1), class = "almanac_error_date_below_minimum")
 
-  expect_error(add_exdate(rbundle(), lb), NA)
-  expect_error(add_exdate(rbundle(), lb - 1), class = "almanac_error_date_below_minimum")
+  expect_error(add_exdates(rbundle(), lb), NA)
+  expect_error(add_exdates(rbundle(), lb - 1), class = "almanac_error_date_below_minimum")
 
   expect_error(add_rdates(rbundle(), ub), NA)
   expect_error(add_rdates(rbundle(), ub + 1), class = "almanac_error_date_above_maximum")
 
-  expect_error(add_exdate(rbundle(), ub), NA)
-  expect_error(add_exdate(rbundle(), ub + 1), class = "almanac_error_date_above_maximum")
+  expect_error(add_exdates(rbundle(), ub), NA)
+  expect_error(add_exdates(rbundle(), ub + 1), class = "almanac_error_date_above_maximum")
 })

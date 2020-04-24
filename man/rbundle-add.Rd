@@ -4,14 +4,14 @@
 \alias{rbundle-add}
 \alias{add_rschedule}
 \alias{add_rdates}
-\alias{add_exdate}
+\alias{add_exdates}
 \title{Add to an rbundle}
 \usage{
 add_rschedule(x, rschedule)
 
 add_rdates(x, rdates)
 
-add_exdate(x, exdate)
+add_exdates(x, exdates)
 }
 \arguments{
 \item{x}{\verb{[rbundle]}
@@ -26,7 +26,7 @@ An rschedule, such as an rrule or rbundle.}
 
 Dates to forcibly include in the rbundle.}
 
-\item{exdate}{\verb{[Date]}
+\item{exdates}{\verb{[Date]}
 
 Dates to forcibly exclude from the rbundle.}
 }
@@ -39,7 +39,7 @@ An updated rbundle.
 rrule or another rbundle.
 \item \code{add_rdates()} adds rdates to an rbundle. rdates are singular
 special cased dates that are forcibly included in the event set.
-\item \code{add_exdate()} adds an exdate to a rbundle. exdates are singular
+\item \code{add_exdates()} adds exdates to an rbundle. exdates are singular
 special cased dates that are forcibly excluded from the event set.
 }
 }
@@ -87,7 +87,7 @@ rb <- rbundle() \%>\%
 alma_search("2019-01-01", "2021-01-01", rb)
 
 # Except Labor Day in 2019
-rb2 <- add_exdate(rb, "2019-09-02")
+rb2 <- add_exdates(rb, "2019-09-02")
 
 alma_search("2019-01-01", "2021-01-01", rb2)
 

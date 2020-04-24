@@ -11,7 +11,7 @@
 #'
 #' - Forcibly include dates with [add_rdates()].
 #'
-#' - Forcibly exclude dates with [add_exdate()].
+#' - Forcibly exclude dates with [add_exdates()].
 #'
 #' @return
 #' An empty rbundle.
@@ -70,7 +70,7 @@ format.rbundle <- function(x, ...) {
 #'
 #' - `add_rdates()`
 #'
-#' - `add_exdate()`
+#' - `add_exdates()`
 #'
 #' - `add_rschedule()`
 #'

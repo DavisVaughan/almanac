@@ -7,7 +7,7 @@
 #' - `add_rdates()` adds rdates to an rbundle. rdates are singular
 #'   special cased dates that are forcibly included in the event set.
 #'
-#' - `add_exdate()` adds an exdate to a rbundle. exdates are singular
+#' - `add_exdates()` adds exdates to an rbundle. exdates are singular
 #'   special cased dates that are forcibly excluded from the event set.
 #'
 #' @details
@@ -46,7 +46,7 @@
 #'
 #'   Dates to forcibly include in the rbundle.
 #'
-#' @param exdate `[Date]`
+#' @param exdates `[Date]`
 #'
 #'   Dates to forcibly exclude from the rbundle.
 #'
@@ -75,7 +75,7 @@
 #' alma_search("2019-01-01", "2021-01-01", rb)
 #'
 #' # Except Labor Day in 2019
-#' rb2 <- add_exdate(rb, "2019-09-02")
+#' rb2 <- add_exdates(rb, "2019-09-02")
 #'
 #' alma_search("2019-01-01", "2021-01-01", rb2)
 #'
@@ -106,8 +106,8 @@ add_rdates <- function(x, rdates) {
   rdates <- vec_cast_date(rdates, "rdates")
 
   rdates <- vec_c(x$rdates, rdates)
-  rdates <- unique(rdates)
-  rdates <- sort(rdates)
+  rdates <- vec_unique(rdates)
+  rdates <- vec_sort(rdates)
 
   out <- new_rbundle(
     rschedules = x$rschedules,
@@ -120,12 +120,13 @@ add_rdates <- function(x, rdates) {
 
 #' @rdname rbundle-add
 #' @export
-add_exdate <- function(x, exdate) {
+add_exdates <- function(x, exdates) {
   validate_rbundle(x, "x")
-  exdate <- vec_cast_date(exdate, "exdate")
+  exdates <- vec_cast_date(exdates, "exdates")
 
-  exdates <- vec_c(x$exdates, exdate)
+  exdates <- vec_c(x$exdates, exdates)
   exdates <- vec_unique(exdates)
+  exdates <- vec_sort(exdates)
 
   out <- new_rbundle(
     rschedules = x$rschedules,
