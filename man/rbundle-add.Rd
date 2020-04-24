@@ -54,15 +54,16 @@ also an exdate.
 
 Combining two rrules into the same rbundle is a way of joining them using
 an "or" condition. For example, joining the following recurrence rules
-would translate to "the 5th day of the month or any Tuesday".\preformatted{on_5th_of_the_month <- monthly() \%>\%
-  on_mday(5)
+would translate to "the 5th day of the month or any Tuesday".\if{html}{\out{<div class="r">}}\preformatted{on_5th_of_the_month <- monthly() \%>\%
+  recur_on_mday(5)
 
 on_tuesday <- weekly() \%>\%
-  on_wday("Tuesday")
+  recur_on_wday("Tuesday")
 
 rbundle() \%>\%
   add_rschedule(on_5th_of_the_month) \%>\%
   add_rschedule(on_tuesday)
+}\if{html}{\out{</div>}}\preformatted{## <rbundle[2 rschedules / 0 rdates / 0 exdates]>
 }
 }
 \examples{

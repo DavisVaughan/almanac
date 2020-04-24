@@ -24,12 +24,12 @@
 #' an "or" condition. For example, joining the following recurrence rules
 #' would translate to "the 5th day of the month or any Tuesday".
 #'
-#' ```
+#' ```{r}
 #' on_5th_of_the_month <- monthly() %>%
-#'   on_mday(5)
+#'   recur_on_mday(5)
 #'
 #' on_tuesday <- weekly() %>%
-#'   on_wday("Tuesday")
+#'   recur_on_wday("Tuesday")
 #'
 #' rbundle() %>%
 #'   add_rschedule(on_5th_of_the_month) %>%
