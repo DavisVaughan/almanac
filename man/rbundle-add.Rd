@@ -3,13 +3,13 @@
 \name{rbundle-add}
 \alias{rbundle-add}
 \alias{add_rschedule}
-\alias{add_rdate}
+\alias{add_rdates}
 \alias{add_exdate}
 \title{Add to an rbundle}
 \usage{
 add_rschedule(x, rschedule)
 
-add_rdate(x, rdate)
+add_rdates(x, rdates)
 
 add_exdate(x, exdate)
 }
@@ -22,7 +22,7 @@ An rbundle to add to.}
 
 An rschedule, such as an rrule or rbundle.}
 
-\item{rdate}{\verb{[Date]}
+\item{rdates}{\verb{[Date]}
 
 Dates to forcibly include in the rbundle.}
 
@@ -37,7 +37,7 @@ An updated rbundle.
 \itemize{
 \item \code{add_rschedule()} adds an rschedule to an rbundle. This can be another
 rrule or another rbundle.
-\item \code{add_rdate()} adds a rdate to an rbundle. rdates are singular
+\item \code{add_rdates()} adds rdates to an rbundle. rdates are singular
 special cased dates that are forcibly included in the event set.
 \item \code{add_exdate()} adds an exdate to a rbundle. exdates are singular
 special cased dates that are forcibly excluded from the event set.

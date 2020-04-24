@@ -9,7 +9,7 @@
 #'
 #' - Add recurrence rules or other recurrence bundles with [add_rschedule()].
 #'
-#' - Forcibly include dates with [add_rdate()].
+#' - Forcibly include dates with [add_rdates()].
 #'
 #' - Forcibly exclude dates with [add_exdate()].
 #'
@@ -68,7 +68,7 @@ format.rbundle <- function(x, ...) {
 #' classes and fields of the subclass after calling any of the following
 #' functions:
 #'
-#' - `add_rdate()`
+#' - `add_rdates()`
 #'
 #' - `add_exdate()`
 #'

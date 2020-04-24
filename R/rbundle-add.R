@@ -4,7 +4,7 @@
 #' - `add_rschedule()` adds an rschedule to an rbundle. This can be another
 #'   rrule or another rbundle.
 #'
-#' - `add_rdate()` adds a rdate to an rbundle. rdates are singular
+#' - `add_rdates()` adds rdates to an rbundle. rdates are singular
 #'   special cased dates that are forcibly included in the event set.
 #'
 #' - `add_exdate()` adds an exdate to a rbundle. exdates are singular
@@ -42,7 +42,7 @@
 #'
 #'   An rbundle to add to.
 #'
-#' @param rdate `[Date]`
+#' @param rdates `[Date]`
 #'
 #'   Dates to forcibly include in the rbundle.
 #'
@@ -101,12 +101,13 @@ add_rschedule <- function(x, rschedule) {
 
 #' @rdname rbundle-add
 #' @export
-add_rdate <- function(x, rdate) {
+add_rdates <- function(x, rdates) {
   validate_rbundle(x, "x")
-  rdate <- vec_cast_date(rdate, "rdate")
+  rdates <- vec_cast_date(rdates, "rdates")
 
-  rdates <- vec_c(x$rdates, rdate)
+  rdates <- vec_c(x$rdates, rdates)
   rdates <- unique(rdates)
+  rdates <- sort(rdates)
 
   out <- new_rbundle(
     rschedules = x$rschedules,

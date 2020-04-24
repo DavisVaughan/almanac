@@ -17,7 +17,7 @@ by combining simple rules into a \emph{recurrence bundle}.
 \code{rbundle()} creates a new empty recurrence bundle.
 \itemize{
 \item Add recurrence rules or other recurrence bundles with \code{\link[=add_rschedule]{add_rschedule()}}.
-\item Forcibly include dates with \code{\link[=add_rdate]{add_rdate()}}.
+\item Forcibly include dates with \code{\link[=add_rdates]{add_rdates()}}.
 \item Forcibly exclude dates with \code{\link[=add_exdate]{add_exdate()}}.
 }
 }

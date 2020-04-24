@@ -61,7 +61,7 @@ a method for. It dispatches off of \code{to}. Its sole purpose is to restore
 classes and fields of the subclass after calling any of the following
 functions:
 \itemize{
-\item \code{add_rdate()}
+\item \code{add_rdates()}
 \item \code{add_exdate()}
 \item \code{add_rschedule()}
 }

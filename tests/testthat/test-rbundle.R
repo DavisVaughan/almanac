@@ -46,7 +46,7 @@ test_that("rbundle rdates work with non-rrules in the bundle", {
   rb2 <- rbundle() %>%
     add_rschedule(rb) %>%
     add_rschedule(rrule2) %>%
-    add_rdate(rdate)
+    add_rdates(rdate)
 
   expect_identical(alma_events(rb2), new_date(c(0, 1, 2, 3, 4)))
 })
@@ -159,13 +159,13 @@ test_that("add_rschedule() uses rbundle_restore()", {
   expect_identical(result$rschedules, list(rschedule))
 })
 
-test_that("add_rdate() uses rbundle_restore()", {
+test_that("add_rdates() uses rbundle_restore()", {
   rdate <- as.Date("2019-01-01")
 
   x <- new_rsubclass()
   local_rsubclass()
 
-  result <- add_rdate(x, rdate = rdate)
+  result <- add_rdates(x, rdates = rdate)
 
   expect_s3_class(result, class(x), exact = TRUE)
   expect_identical(result$foo, numeric())

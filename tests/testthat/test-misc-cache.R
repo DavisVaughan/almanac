@@ -49,7 +49,7 @@ test_that("cache `since` date respects `rdate`s", {
 
   rb <- rbundle()
   rb <- add_rschedule(rb, rrule)
-  rb <- add_rdate(rb, "1899-01-05")
+  rb <- add_rdates(rb, "1899-01-05")
 
   expect <- as.Date(c("1899-01-05", "1900-01-01"))
 
