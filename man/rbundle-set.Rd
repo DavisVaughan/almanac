@@ -39,13 +39,28 @@ For \code{rsetdiff()}, the event set is created "from left to right" and depends
 on the order that the rschedules were added to the bundle.
 }
 \examples{
-runion()
+since <- "2019-01-01"
+until <- "2020-01-01"
 
-on_weekends <- weekly() \%>\%
+on_weekends <- weekly(since = since, until = until) \%>\%
   recur_on_weekends()
 
-runion() \%>\%
-  add_rschedule(on_weekends)
+on_25th <- monthly(since = since, until = until) \%>\%
+  recur_on_mday(25)
+
+# On weekends OR the 25th of the month
+ru <- runion() \%>\%
+  add_rschedule(on_weekends) \%>\%
+  add_rschedule(on_25th)
+
+# On weekends AND the 25th of the month
+ri <- rintersect() \%>\%
+  add_rschedule(on_weekends) \%>\%
+  add_rschedule(on_25th)
+
+alma_events(ru)
+
+alma_events(ri)
 }
 \seealso{
 \code{\link[=add_rschedule]{add_rschedule()}}
