@@ -9,6 +9,7 @@ reference:
 - title: Recurrence bundles
   contents:
   - runion
+  - rintersect
   - starts_with("add_")
 
 - title: Recurrence utilities
@@ -31,6 +32,7 @@ reference:
   - new_rschedule
   - new_rbundle
   - new_runion
+  - new_rintersect
 
 - title: Compatibility
   contents:
