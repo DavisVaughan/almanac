@@ -187,12 +187,12 @@
 <span class="co"># The first time is "slow"</span>
 <span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>(<span class="fu"><a href="../reference/alma_search.html">alma_search</a></span>(<span class="no">since</span>, <span class="st">"2000-01-01"</span>, <span class="no">on_weekly</span>))
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;   0.118   0.005   0.111</span>
+<span class="co">#&gt;   0.122   0.005   0.111</span>
 
 <span class="co"># Repeated access is fast</span>
 <span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>(<span class="fu"><a href="../reference/alma_search.html">alma_search</a></span>(<span class="no">since</span>, <span class="st">"2000-01-01"</span>, <span class="no">on_weekly</span>))
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;   0.001   0.000   0.000</span>
+<span class="co">#&gt;   0.000   0.000   0.001</span>
 
 <span class="co"># The entire event set is cached, so even if you change the arguments,</span>
 <span class="co"># the operation is still fast.</span>
@@ -239,8 +239,8 @@
 <p>An <em>rbundle</em> is a bundle of recurrence schedules. A recurrence schedule, or rschedule, is an overarching term for both rrules and rbundles. There are three types of rbundles in almanac. Each create their event set by performing some kind of set operation on the event sets of the underlying rschedules that you added to the bundle.</p>
 <ul>
 <li><p><code><a href="../reference/rbundle-set.html">runion()</a></code> takes the union.</p></li>
-<li><p><code>rintersect()</code> takes the intersection.</p></li>
-<li><p><code>rsetdiff()</code> takes the set difference.</p></li>
+<li><p><code><a href="../reference/rbundle-set.html">rintersect()</a></code> takes the intersection.</p></li>
+<li><p><code><a href="../reference/rbundle-set.html">rsetdiff()</a></code> takes the set difference.</p></li>
 </ul>
 <p>rbundles can also contain specialized dates that you want to forcibly include in the event set, called rdates, and ones that you want to forcibly exclude, called exdates.</p>
 <p>The most useful rbundle is runion, as this allows you construct an event set that, for example, falls on multiple holidays and all weekends. The following creates an runion from rrules based on Christmas and Labor Day.</p>

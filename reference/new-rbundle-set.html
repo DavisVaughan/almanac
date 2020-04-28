@@ -137,7 +137,7 @@ new_rsetdiff() creates a rsetdiff.
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Constructor for a set-based recurrence bundle</h1>
-    <small class="dont-index">Source: <a href='https://github.com/DavisVaughan/almanac/blob/master/R/rbundle-set.R'><code>R/rbundle-set.R</code></a>, <a href='https://github.com/DavisVaughan/almanac/blob/master/R/runion.R'><code>R/runion.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/DavisVaughan/almanac/blob/master/R/rbundle-set.R'><code>R/rbundle-set.R</code></a>, <a href='https://github.com/DavisVaughan/almanac/blob/master/R/rintersect.R'><code>R/rintersect.R</code></a>, <a href='https://github.com/DavisVaughan/almanac/blob/master/R/rsetdiff.R'><code>R/rsetdiff.R</code></a>, and 1 more</small>
     <div class="hidden name"><code>new-rbundle-set.Rd</code></div>
     </div>
 
@@ -152,7 +152,23 @@ a list of existing rschedules.</p><ul>
 
     </div>
 
-    <pre class="usage"><span class='fu'>new_runion</span>(
+    <pre class="usage"><span class='fu'>new_rintersect</span>(
+  <span class='kw'>rschedules</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(),
+  <span class='kw'>rdates</span> <span class='kw'>=</span> <span class='fu'>new_date</span>(),
+  <span class='kw'>exdates</span> <span class='kw'>=</span> <span class='fu'>new_date</span>(),
+  <span class='no'>...</span>,
+  <span class='kw'>class</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span>()
+)
+
+<span class='fu'>new_rsetdiff</span>(
+  <span class='kw'>rschedules</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(),
+  <span class='kw'>rdates</span> <span class='kw'>=</span> <span class='fu'>new_date</span>(),
+  <span class='kw'>exdates</span> <span class='kw'>=</span> <span class='fu'>new_date</span>(),
+  <span class='no'>...</span>,
+  <span class='kw'>class</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span>()
+)
+
+<span class='fu'>new_runion</span>(
   <span class='kw'>rschedules</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(),
   <span class='kw'>rdates</span> <span class='kw'>=</span> <span class='fu'>new_date</span>(),
   <span class='kw'>exdates</span> <span class='kw'>=</span> <span class='fu'>new_date</span>(),
