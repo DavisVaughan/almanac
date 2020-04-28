@@ -160,12 +160,11 @@ new_rrule <- function(since = as.Date("1900-01-01"),
 
   cache <- cache_rrule$new(rules = rules)
 
-  data <- list(
+  new_rschedule(
     rules = rules,
-    cache = cache
+    cache = cache,
+    class = "rrule"
   )
-
-  new_rschedule(data, class = "rrule")
 }
 
 # ------------------------------------------------------------------------------

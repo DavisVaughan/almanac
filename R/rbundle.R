@@ -97,20 +97,13 @@ new_rbundle <- function(rschedules = list(),
   }
   validate_date_bounds(exdates, x_arg = "exdates")
 
-  # TODO: new_rschedule() should take `...` not `data`
-  # and then should validate that the dots are named
-  data <- list(
+  new_rschedule(
     rschedules = rschedules,
     rdates = rdates,
     exdates = exdates,
-    ...
+    ...,
+    class = c(class, "rbundle")
   )
-
-  if (!is_named(data)) {
-    abort("All elements of `...` must be named.")
-  }
-
-  new_rschedule(data, class = c(class, "rbundle"))
 }
 
 # ------------------------------------------------------------------------------

@@ -116,6 +116,6 @@ test_that("can subclass runion", {
 test_that("`...` must be named", {
   expect_error(
     new_runion(rschedules = list(), rdates = new_date(), exdates = new_date(), 1),
-    "must be named"
+    "must have named elements"
   )
 })
