@@ -30,7 +30,7 @@ A vector of dates to forcibly exclude from the event set.}
 
 \item{...}{\verb{[named dots]}
 
-Additional named elements added to the rbundle list.}
+Additional named elements added to the rbundle object.}
 
 \item{class}{\verb{[character]}
 
@@ -42,7 +42,7 @@ An updated rbundle that needs to be restored to the type of \code{to}.}
 
 \item{to}{\verb{[rbundle subclass]}
 
-An rbundle, or an rbundle subclass, that you are restoring to.}
+An rbundle subclass that you are restoring to.}
 }
 \value{
 \itemize{
@@ -65,6 +65,14 @@ functions:
 \item \code{add_exdates()}
 \item \code{add_rschedule()}
 }
+}
+\details{
+An rbundle is an abstract class that rintersect, runion, and rsetdiff all
+inherit from. The sole purpose of an rbundle subclass is to implement an
+\code{rbundle_restore()} method that defines how to recover the original
+rbundle subclass after adding a new rschedule, rdate, or exdate.
+Additionally, because rbundles are also rschedules, a \code{\link[=rschedule_events]{rschedule_events()}}
+method must be implemented.
 }
 \examples{
 new_rbundle()

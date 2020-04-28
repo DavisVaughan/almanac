@@ -40,9 +40,9 @@ test_that("radjusted has informative print method", {
     "# basic method"
     radjusted(daily(), daily(), adj_none)
 
-    "# with rbundles"
+    "# with runions"
     rrule <- recur_on_wday(weekly(), "Wed")
-    rbundle <- add_rschedule(rbundle(), weekly())
-    radjusted(rrule, rbundle, adj_none)
+    runion <- add_rschedule(runion(), weekly())
+    radjusted(rrule, runion, adj_none)
   })
 })

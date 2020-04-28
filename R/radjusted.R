@@ -99,14 +99,13 @@ new_radjusted <- function(rschedule, adjust_on, adjustment) {
     adjustment = adjustment
   )
 
-  data <- list(
+  new_rschedule(
     rschedule = rschedule,
     adjust_on = adjust_on,
     adjustment = adjustment,
-    cache = cache
+    cache = cache,
+    class = "radjusted"
   )
-
-  new_rschedule(data, class = "radjusted")
 }
 
 # ------------------------------------------------------------------------------

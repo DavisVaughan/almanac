@@ -36,7 +36,7 @@ on_12th <- monthly() \%>\% recur_on_mday(12)
 on_monday <- weekly() \%>\% recur_on_wday("Monday")
 
 # On the 12th of the month, or on Mondays
-rb <- rbundle() \%>\%
+rb <- runion() \%>\%
   add_rschedule(on_12th) \%>\%
   add_rschedule(on_monday)
 

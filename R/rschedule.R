@@ -16,9 +16,9 @@
 #' The sole functionality of rschedule classes is to provide a method for
 #' `rschedule_events()`.
 #'
-#' @param data `[named list]`
+#' @param ... `[named fields]`
 #'
-#'   A named list of data fields.
+#'   Named data fields.
 #'
 #' @param class `[character]`
 #'
@@ -38,7 +38,7 @@
 #' events <- as.Date("1970-01-01")
 #'
 #' static <- new_rschedule(
-#'   list(events = events),
+#'   events = events,
 #'   class = "static_rschedule"
 #' )
 #'
@@ -53,15 +53,15 @@
 #' # }
 #' #
 #' # alma_events(static)
-new_rschedule <- function(data, class) {
-  if (!is_list(data)) {
-    abort("`data` must be a list.")
-  }
+new_rschedule <- function(..., class) {
+  data <- list(...)
+
   if (length(data) == 0L) {
-    abort("`data` must have at least one field.")
+    abort("`...` must have at least one field.")
   }
+
   if (!is_named(data)) {
-    abort("`data` must have named elements.")
+    abort("`...` must have named elements.")
   }
 
   structure(data, class = c(class, "rschedule"))

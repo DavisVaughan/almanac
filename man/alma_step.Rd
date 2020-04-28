@@ -37,7 +37,7 @@ roll to the next available non-event date.
 }
 \details{
 Imagine you are on a Friday and want to shift forward 2 days using an
-rbundle that marks weekends as events. \code{alma_step()} works like this:
+rrule that marks weekends as events. \code{alma_step()} works like this:
 \itemize{
 \item Step forward 1 day to Saturday.
 \item Apply an adjustment of \code{\link[=adj_following]{adj_following()}}, which rolls forward to Monday.
@@ -62,12 +62,12 @@ on_weekends <- weekly() \%>\%
 alma_step("2019-09-13", 2, on_weekends)
 
 # If Monday, 2019-09-16, was a recurring holiday, we could create
-# a custom rbundle and step over that too.
+# a custom runion and step over that too.
 on_09_16 <- yearly() \%>\%
   recur_on_ymonth(9) \%>\%
   recur_on_mday(16)
 
-rb <- rbundle() \%>\%
+rb <- runion() \%>\%
   add_rschedule(on_09_16) \%>\%
   add_rschedule(on_weekends)
 

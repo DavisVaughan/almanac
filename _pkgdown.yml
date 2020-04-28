@@ -5,13 +5,11 @@ reference:
   contents:
   - daily
   - starts_with("recur_")
-  - is_rrule
 
 - title: Recurrence bundles
   contents:
-  - rbundle
+  - runion
   - starts_with("add_")
-  - is_rbundle
 
 - title: Recurrence utilities
   contents:
@@ -30,8 +28,9 @@ reference:
 
 - title: Developer tools
   contents:
-  - new_rbundle
   - new_rschedule
+  - new_rbundle
+  - new_runion
 
 - title: Compatibility
   contents:

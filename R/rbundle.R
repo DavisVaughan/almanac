@@ -1,61 +1,3 @@
-#' Create a new recurrence bundle
-#'
-#' @description
-#' Often, a single recurrence rule created from a base rule like `monthly()`
-#' will be sufficient. However, more complex rules can be constructed
-#' by combining simple rules into a _recurrence bundle_.
-#'
-#' `rbundle()` creates a new empty recurrence bundle.
-#'
-#' - Add recurrence rules or other recurrence bundles with [add_rschedule()].
-#'
-#' - Forcibly include dates with [add_rdates()].
-#'
-#' - Forcibly exclude dates with [add_exdates()].
-#'
-#' @return
-#' An empty rbundle.
-#'
-#' @seealso [add_rschedule()]
-#' @export
-#' @examples
-#' rbundle()
-#'
-#' on_weekends <- weekly() %>%
-#'   recur_on_weekends()
-#'
-#' rbundle() %>%
-#'   add_rschedule(on_weekends)
-rbundle <- function() {
-  new_rbundle()
-}
-
-# ------------------------------------------------------------------------------
-
-#' @export
-rschedule_events.rbundle <- function(x) {
-  x$cache$get_events()
-}
-
-# ------------------------------------------------------------------------------
-
-#' @export
-print.rbundle <- function(x, ...) {
-  print(format(x))
-  invisible(x)
-}
-
-#' @export
-format.rbundle <- function(x, ...) {
-  n_rschedules <- length(x$rschedules)
-  n_rdates <- length(x$rdates)
-  n_exdates <-length(x$exdates)
-
-  glue("<rbundle[{n_rschedules} rschedules / {n_rdates} rdates / {n_exdates} exdates]>")
-}
-
-# ------------------------------------------------------------------------------
-
 #' Constructor for an rbundle
 #'
 #' @description
@@ -74,6 +16,14 @@ format.rbundle <- function(x, ...) {
 #'
 #' - `add_rschedule()`
 #'
+#' @details
+#' An rbundle is an abstract class that rintersect, runion, and rsetdiff all
+#' inherit from. The sole purpose of an rbundle subclass is to implement an
+#' `rbundle_restore()` method that defines how to recover the original
+#' rbundle subclass after adding a new rschedule, rdate, or exdate.
+#' Additionally, because rbundles are also rschedules, a [rschedule_events()]
+#' method must be implemented.
+#'
 #' @param rschedules `[list]`
 #'
 #'   A list of rschedules.
@@ -88,7 +38,7 @@ format.rbundle <- function(x, ...) {
 #'
 #' @param ... `[named dots]`
 #'
-#'   Additional named elements added to the rbundle list.
+#'   Additional named elements added to the rbundle object.
 #'
 #' @param class `[character]`
 #'
@@ -100,7 +50,7 @@ format.rbundle <- function(x, ...) {
 #'
 #' @param to `[rbundle subclass]`
 #'
-#'   An rbundle, or an rbundle subclass, that you are restoring to.
+#'   An rbundle subclass that you are restoring to.
 #'
 #' @return
 #' - `new_rbundle()` returns a new rbundle.
@@ -123,7 +73,6 @@ new_rbundle <- function(rschedules = list(),
                         exdates = new_date(),
                         ...,
                         class = character()) {
-
   if (!is_list(rschedules)) {
     abort("`rschedules` must be a list.")
   }
@@ -148,25 +97,13 @@ new_rbundle <- function(rschedules = list(),
   }
   validate_date_bounds(exdates, x_arg = "exdates")
 
-  cache <- cache_rbundle$new(
-    rschedules = rschedules,
-    rdates = rdates,
-    exdates = exdates
-  )
-
-  data <- list(
+  new_rschedule(
     rschedules = rschedules,
     rdates = rdates,
     exdates = exdates,
-    cache = cache,
-    ...
+    ...,
+    class = c(class, "rbundle")
   )
-
-  if (!is_named(data)) {
-    abort("All elements of `...` must be named.")
-  }
-
-  new_rschedule(data, class = c(class, "rbundle"))
 }
 
 # ------------------------------------------------------------------------------
@@ -185,30 +122,14 @@ rbundle_restore.default <- function(x, to) {
 
 #' @export
 rbundle_restore.rbundle <- function(x, to) {
-  x
+  glubort("rbundle subclasses must provide their own `rbundle_restore()` method.")
 }
 
 # ------------------------------------------------------------------------------
 
-#' Is `x` a recurrence bundle?
-#'
-#' `is_rbundle()` tests if `x` is a recurrence bundle.
-#'
-#' @param x `[object]`
-#'
-#'   An object.
-#'
-#' @return
-#' `TRUE` if `x` inherits from `"rbundle"`, otherwise `FALSE`.
-#'
-#' @export
-#' @examples
-#' is_rbundle(rbundle())
 is_rbundle <- function(x) {
   inherits(x, "rbundle")
 }
-
-# ------------------------------------------------------------------------------
 
 validate_rbundle <- function(x, x_arg = "") {
   if (nzchar(x_arg)) {

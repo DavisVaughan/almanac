@@ -5,14 +5,14 @@
 \alias{rschedule_events}
 \title{Create a new rschedule}
 \usage{
-new_rschedule(data, class)
+new_rschedule(..., class)
 
 rschedule_events(x)
 }
 \arguments{
-\item{data}{\verb{[named list]}
+\item{...}{\verb{[named fields]}
 
-A named list of data fields.}
+Named data fields.}
 
 \item{class}{\verb{[character]}
 
@@ -47,7 +47,7 @@ The sole functionality of rschedule classes is to provide a method for
 events <- as.Date("1970-01-01")
 
 static <- new_rschedule(
-  list(events = events),
+  events = events,
   class = "static_rschedule"
 )
 

@@ -53,7 +53,7 @@ test_that("default method error is thrown", {
 })
 
 test_that("can use unary ops", {
-  rb <- rbundle()
+  rb <- runion()
   step <- stepper(rb)
 
   expect_equal(+step(1), step(1))

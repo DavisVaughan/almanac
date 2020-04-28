@@ -160,30 +160,15 @@ new_rrule <- function(since = as.Date("1900-01-01"),
 
   cache <- cache_rrule$new(rules = rules)
 
-  data <- list(
+  new_rschedule(
     rules = rules,
-    cache = cache
+    cache = cache,
+    class = "rrule"
   )
-
-  new_rschedule(data, class = "rrule")
 }
 
 # ------------------------------------------------------------------------------
 
-#' Is `x` a recurrence rule?
-#'
-#' `is_rrule()` tests if `x` is an rrule.
-#'
-#' @param x `[object]`
-#'
-#'   An object.
-#'
-#' @return
-#' `TRUE` if `x` inherits from `"rrule"`, otherwise `FALSE`.
-#'
-#' @export
-#' @examples
-#' is_rrule(daily())
 is_rrule <- function(x) {
   inherits(x, "rrule")
 }
@@ -191,8 +176,6 @@ is_rrule <- function(x) {
 all_are_rrules <- function(x) {
   all(map_lgl(x, is_rrule))
 }
-
-# ------------------------------------------------------------------------------
 
 validate_rrule <- function(x, x_arg = "") {
   if (nzchar(x_arg)) {
@@ -205,6 +188,8 @@ validate_rrule <- function(x, x_arg = "") {
 
   invisible(x)
 }
+
+# ------------------------------------------------------------------------------
 
 check_since <- function(since) {
   since <- vec_cast_date(since, "since")
