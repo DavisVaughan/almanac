@@ -1,14 +1,14 @@
-cache_rbundle <- R6::R6Class(
-  "cache_rbundle",
+cache_runion <- R6::R6Class(
+  "cache_runion",
   cloneable = FALSE,
 
   # ----------------------------------------------------------------------------
   public = list(
     initialize = function(rschedules, rdates, exdates)
-      cache_rbundle__initialize(self, private, rschedules, rdates, exdates),
+      cache_runion__initialize(self, private, rschedules, rdates, exdates),
 
     get_events = function()
-      cache_rbundle__get_events(self, private)
+      cache_runion__get_events(self, private)
   ),
 
   # ----------------------------------------------------------------------------
@@ -21,22 +21,22 @@ cache_rbundle <- R6::R6Class(
     built = FALSE,
 
     cache_build = function()
-      cache_rbundle__cache_build(self, private)
+      cache_runion__cache_build(self, private)
   )
 )
 
 # ------------------------------------------------------------------------------
 
-cache_rbundle__cache_build <- function(self, private) {
+cache_runion__cache_build <- function(self, private) {
   if (all_are_rrules(private$rschedules)) {
     # When all `rschedules` are `rrules`, we can optimize into 1 JS call
-    cache_rbundle__cache_build_rrules(self, private)
+    cache_runion__cache_build_rrules(self, private)
   } else {
-    cache_rbundle__cache_build_impl(self, private)
+    cache_runion__cache_build_impl(self, private)
   }
 }
 
-cache_rbundle__cache_build_impl <- function(self, private) {
+cache_runion__cache_build_impl <- function(self, private) {
   rschedules <- private$rschedules
   rdates <- private$rdates
   exdates <- private$exdates
@@ -65,12 +65,12 @@ cache_rbundle__cache_build_impl <- function(self, private) {
   invisible(self)
 }
 
-cache_rbundle__cache_build_rrules <- function(self, private) {
+cache_runion__cache_build_rrules <- function(self, private) {
   rrules <- private$rschedules
   rdates <- private$rdates
   exdates <- private$exdates
 
-  call <- cache_rbundle_build_call(rrules, rdates, exdates)
+  call <- cache_runion_build_call(rrules, rdates, exdates)
 
   events <- almanac_global_context$call(call)
   events <- parse_js_date(events)
@@ -81,8 +81,8 @@ cache_rbundle__cache_build_rrules <- function(self, private) {
   invisible(self)
 }
 
-cache_rbundle_build_call <- function(rrules, rdates, exdates) {
-  body <- cache_rbundle_build_call_body(rrules, rdates, exdates)
+cache_runion_build_call <- function(rrules, rdates, exdates) {
+  body <- cache_runion_build_call_body(rrules, rdates, exdates)
 
   glue2("
     function() {
@@ -92,7 +92,7 @@ cache_rbundle_build_call <- function(rrules, rdates, exdates) {
   ")
 }
 
-cache_rbundle_build_call_body <- function(rrules, rdates, exdates) {
+cache_runion_build_call_body <- function(rrules, rdates, exdates) {
   body <- "var ruleset = new rrule.RRuleSet()"
 
   for(rrule in rrules) {
@@ -115,7 +115,7 @@ cache_rbundle_build_call_body <- function(rrules, rdates, exdates) {
 
 # ------------------------------------------------------------------------------
 
-cache_rbundle__get_events <- function(self, private) {
+cache_runion__get_events <- function(self, private) {
   if (!private$built) {
     private$cache_build()
   }
@@ -125,7 +125,7 @@ cache_rbundle__get_events <- function(self, private) {
 
 # ------------------------------------------------------------------------------
 
-cache_rbundle__initialize <- function(self, private, rschedules, rdates, exdates) {
+cache_runion__initialize <- function(self, private, rschedules, rdates, exdates) {
   private$rschedules <- rschedules
   private$rdates <- rdates
   private$exdates <- exdates

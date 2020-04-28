@@ -16,7 +16,7 @@
 #'
 #' @details
 #' Imagine you are on a Friday and want to shift forward 2 days using an
-#' rbundle that marks weekends as events. `alma_step()` works like this:
+#' rrule that marks weekends as events. `alma_step()` works like this:
 #'
 #' - Step forward 1 day to Saturday.
 #'
@@ -52,12 +52,12 @@
 #' alma_step("2019-09-13", 2, on_weekends)
 #'
 #' # If Monday, 2019-09-16, was a recurring holiday, we could create
-#' # a custom rbundle and step over that too.
+#' # a custom runion and step over that too.
 #' on_09_16 <- yearly() %>%
 #'   recur_on_ymonth(9) %>%
 #'   recur_on_mday(16)
 #'
-#' rb <- rbundle() %>%
+#' rb <- runion() %>%
 #'   add_rschedule(on_09_16) %>%
 #'   add_rschedule(on_weekends)
 #'

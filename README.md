@@ -107,7 +107,8 @@ that you’d like to combine into one big recurrence object. This is known
 as a *recurrence bundle*.
 
 This example creates recurrence rules for weekends and Christmas, and
-bundles them together along with the Thanksgiving rule.
+bundles them together along with the Thanksgiving rule in such a way
+that we get the *union* of the underlying event sets.
 
 ``` r
 on_weekends <- weekly() %>%
@@ -117,13 +118,13 @@ on_christmas <- yearly() %>%
   recur_on_mday(25) %>%
   recur_on_ymonth("Dec")
 
-bundle <- rbundle() %>%
+bundle <- runion() %>%
   add_rschedule(on_weekends) %>%
   add_rschedule(on_christmas) %>%
   add_rschedule(on_thanksgiving)
 
 bundle
-#> <rbundle[3 rschedules / 0 rdates / 0 exdates]>
+#> <runion[3 rschedules / 0 rdates / 0 exdates]>
 ```
 
 We can create a stepper that steps over all of the events in the bundle.

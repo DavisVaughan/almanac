@@ -47,7 +47,7 @@ test_that("adjusting `since` results in significant speed ups", {
 test_that("cache `since` date respects `rdate`s", {
   rrule <- daily()
 
-  rb <- rbundle()
+  rb <- runion()
   rb <- add_rschedule(rb, rrule)
   rb <- add_rdates(rb, "1899-01-05")
 

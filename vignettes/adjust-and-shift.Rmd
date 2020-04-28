@@ -98,7 +98,7 @@ In the introduction vignette, you were introduced to a number of different rsche
 
 To motivate it, imagine your company deems Christmas to be a holiday. Whenever Christmas rolls around on the 25th of December, you get that day off. But what happens when Christmas falls on a Saturday? What about Sunday? Most corporations will _observe_ a holiday that falls on the weekend on the nearest working day instead of on the weekend date that it actually occurred on.
 
-In almanac, it seems like this would pose a problem. You can create rrules for Christmas and for weekends, but an rbundle would just take the union of them. What you really need is a way to say: recur on the dates defined by this rschedule, _unless_ it intersects with this second rschedule. In those cases, apply an _adjustment_ to the intersected dates to create valid dates. This is the job of radjusted.
+In almanac, it seems like this would pose a problem. You can create rrules for Christmas and for weekends, but an rbundle like runion, rintersect, or rsetdiff would perform some kind of set operation on them. What you really need is a way to say: recur on the dates defined by this rschedule, _unless_ it intersects with this second rschedule. In those cases, apply an _adjustment_ to the intersected dates to create valid dates. This is the job of radjusted.
 
 ```{r}
 on_adjusted_christmas <- radjusted(

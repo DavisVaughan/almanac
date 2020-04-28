@@ -21,7 +21,7 @@ make_nth_mday_of_the_quarter <- function(n) {
     recur_on_mday(1:31) %>%
     recur_on_position(n)
 
-  rb_nth_day_of_quarter <- rbundle() %>%
+  rb_nth_day_of_quarter <- runion() %>%
     add_rschedule(rr_nth_of_q1) %>%
     add_rschedule(rr_nth_of_q2) %>%
     add_rschedule(rr_nth_of_q3) %>%
@@ -31,7 +31,7 @@ make_nth_mday_of_the_quarter <- function(n) {
 }
 
 
-test_that("can construct a rbundle to select n-th mday of the quarter", {
+test_that("can construct a runion to select n-th mday of the quarter", {
   n <- 60L
   start <- as.Date("2000-01-01")
   stop <- as.Date("2001-12-31")
@@ -84,7 +84,7 @@ make_nth_wday_of_the_quarter <- function(wday, n) {
     recur_on_wday(wday) %>%
     recur_on_position(n)
 
-  rb_nth_wday_of_quarter <- rbundle() %>%
+  rb_nth_wday_of_quarter <- runion() %>%
     add_rschedule(rr_nth_wday_of_q1) %>%
     add_rschedule(rr_nth_wday_of_q2) %>%
     add_rschedule(rr_nth_wday_of_q3) %>%
@@ -93,7 +93,7 @@ make_nth_wday_of_the_quarter <- function(wday, n) {
   rb_nth_wday_of_quarter
 }
 
-test_that("can construct a rbundle to select n-th wday of the quarter", {
+test_that("can construct a runion to select n-th wday of the quarter", {
   n <- 6L
   wday <- "Monday"
   start <- as.Date("2000-01-01")

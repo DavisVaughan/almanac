@@ -1,4 +1,4 @@
-test_that("can check if a date is in a rbundle", {
+test_that("can check if a date is in a runion", {
   rrule <- monthly(since = "2019-01-01")
 
   expect_true(alma_in("2019-01-01", rrule))
@@ -42,7 +42,7 @@ test_that("`alma_in()`ness is defined in the extreme cases", {
 
 test_that("can handle size zero input without warnings", {
   expect_warning(
-    expect_identical(alma_in(new_date(), rbundle()), logical()),
+    expect_identical(alma_in(new_date(), runion()), logical()),
     NA
   )
 })

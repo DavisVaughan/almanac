@@ -20,22 +20,6 @@
 #' - An event generated from an rschedule will always be included if it is not
 #'   also an exdate.
 #'
-#' Combining two rrules into the same rbundle is a way of joining them using
-#' an "or" condition. For example, joining the following recurrence rules
-#' would translate to "the 5th day of the month or any Tuesday".
-#'
-#' ```{r}
-#' on_5th_of_the_month <- monthly() %>%
-#'   recur_on_mday(5)
-#'
-#' on_tuesday <- weekly() %>%
-#'   recur_on_wday("Tuesday")
-#'
-#' rbundle() %>%
-#'   add_rschedule(on_5th_of_the_month) %>%
-#'   add_rschedule(on_tuesday)
-#' ```
-#'
 #' @inheritParams adj_following
 #'
 #' @param x `[rbundle]`
@@ -66,7 +50,7 @@
 #'   recur_on_ymonth("Sep") %>%
 #'   recur_on_wday("Mon", 1)
 #'
-#' rb <- rbundle() %>%
+#' rb <- runion() %>%
 #'   add_rschedule(on_thanksgiving) %>%
 #'   add_rschedule(on_christmas) %>%
 #'   add_rschedule(on_labor_day)

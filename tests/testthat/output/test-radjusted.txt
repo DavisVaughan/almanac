@@ -12,12 +12,12 @@ Adjust on:
 <rrule[daily / 1900-01-01 / 2100-01-01]>
 
 
-with rbundles
-=============
+with runions
+============
 
 > rrule <- recur_on_wday(weekly(), "Wed")
-> rbundle <- add_rschedule(rbundle(), weekly())
-> radjusted(rrule, rbundle, adj_none)
+> runion <- add_rschedule(runion(), weekly())
+> radjusted(rrule, runion, adj_none)
 <radjusted>
 
 Adjust:
@@ -25,5 +25,5 @@ Adjust:
 - wday: Wed
 
 Adjust on:
-<rbundle[1 rschedules / 0 rdates / 0 exdates]>
+<runion[1 rschedules / 0 rdates / 0 exdates]>
 

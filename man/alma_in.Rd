@@ -36,7 +36,7 @@ rrule2 <- monthly() \%>\%
   recur_on_mday(2)
 
 # Make a larger rbundle made of multiple rules
-rb <- rbundle() \%>\%
+rb <- runion() \%>\%
  add_rschedule(rrule) \%>\%
  add_rschedule(rrule2)
 

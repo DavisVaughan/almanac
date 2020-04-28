@@ -56,7 +56,7 @@
 #'   recur_on_mday(25) %>%
 #'   recur_on_ymonth("Dec")
 #'
-#' rb <- rbundle() %>%
+#' rb <- runion() %>%
 #'   add_rschedule(on_weekends) %>%
 #'   add_rschedule(on_christmas)
 #'
@@ -85,7 +85,7 @@
 #' # Note that the "observed" date for Christmas is the 26th
 #' alma_search("2005-01-01", "2006-01-01", on_observed_christmas)
 #'
-#' rb2 <- rbundle() %>%
+#' rb2 <- runion() %>%
 #'   add_rschedule(on_weekends) %>%
 #'   add_rschedule(on_observed_christmas)
 #'
