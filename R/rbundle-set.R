@@ -33,8 +33,8 @@
 #' @name rbundle-set
 #' @seealso [add_rschedule()]
 #' @examples
-#' since <- "2019-01-01"
-#' until <- "2020-01-01"
+#' since <- "2019-04-01"
+#' until <- "2019-05-31"
 #'
 #' on_weekends <- weekly(since = since, until = until) %>%
 #'   recur_on_weekends()
@@ -47,14 +47,28 @@
 #'   add_rschedule(on_weekends) %>%
 #'   add_rschedule(on_25th)
 #'
+#' alma_events(ru)
+#'
 #' # On weekends AND the 25th of the month
 #' ri <- rintersect() %>%
 #'   add_rschedule(on_weekends) %>%
 #'   add_rschedule(on_25th)
 #'
-#' alma_events(ru)
-#'
 #' alma_events(ri)
+#'
+#' # On weekends AND NOT the 25th of the month
+#' rsd1 <- rsetdiff() %>%
+#'   add_rschedule(on_weekends) %>%
+#'   add_rschedule(on_25th)
+#'
+#' alma_events(rsd1)
+#'
+#' # On the 25th of the month AND NOT the weekend
+#' rsd2 <- rsetdiff() %>%
+#'   add_rschedule(on_25th) %>%
+#'   add_rschedule(on_weekends)
+#'
+#' alma_events(rsd2)
 NULL
 
 
