@@ -5,7 +5,6 @@ reference:
   contents:
   - daily
   - starts_with("recur_")
-  - is_rrule
 
 - title: Recurrence bundles
   contents:
