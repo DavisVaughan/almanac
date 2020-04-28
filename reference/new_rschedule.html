@@ -152,7 +152,7 @@ containing the complete ordered set of events in the event set of
 that rschedule.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>new_rschedule</span>(<span class='no'>data</span>, <span class='no'>class</span>)
+    <pre class="usage"><span class='fu'>new_rschedule</span>(<span class='no'>...</span>, <span class='no'>class</span>)
 
 <span class='fu'>rschedule_events</span>(<span class='no'>x</span>)</pre>
 
@@ -160,9 +160,9 @@ that rschedule.</p>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>data</th>
-      <td><p><code>[named list]</code></p>
-<p>A named list of data fields.</p></td>
+      <th>...</th>
+      <td><p><code>[named fields]</code></p>
+<p>Named data fields.</p></td>
     </tr>
     <tr>
       <th>class</th>
@@ -190,7 +190,7 @@ The sole functionality of rschedule classes is to provide a method for
     <pre class="examples"><div class='input'><span class='no'>events</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/as.Date.html'>as.Date</a></span>(<span class='st'>"1970-01-01"</span>)
 
 <span class='no'>static</span> <span class='kw'>&lt;-</span> <span class='fu'>new_rschedule</span>(
-  <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>events</span> <span class='kw'>=</span> <span class='no'>events</span>),
+  <span class='kw'>events</span> <span class='kw'>=</span> <span class='no'>events</span>,
   <span class='kw'>class</span> <span class='kw'>=</span> <span class='st'>"static_rschedule"</span>
 )
 

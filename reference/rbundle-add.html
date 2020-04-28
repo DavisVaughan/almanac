@@ -199,19 +199,6 @@ special cased dates that are forcibly excluded from the event set.</p></li>
 also an exdate.</p></li>
 </ul>
 
-<p>Combining two rrules into the same rbundle is a way of joining them using
-an "or" condition. For example, joining the following recurrence rules
-would translate to "the 5th day of the month or any Tuesday".<div class="r"></p><pre><span class='no'>on_5th_of_the_month</span> <span class='kw'>&amp;</span><span class='no'>lt</span>;- <span class='fu'><a href='rrule.html'>monthly</a></span>() <span class='kw'>%&amp;gt;%</span>
-  <span class='fu'><a href='recur_on_mday.html'>recur_on_mday</a></span>(<span class='fl'>5</span>)
-
-<span class='no'>on_tuesday</span> <span class='kw'>&amp;</span><span class='no'>lt</span>;- <span class='fu'><a href='rrule.html'>weekly</a></span>() <span class='kw'>%&amp;gt;%</span>
-  <span class='fu'><a href='recur_on_wday.html'>recur_on_wday</a></span>(<span class='st'>"Tuesday"</span>)
-
-<span class='fu'><a href='rbundle.html'>rbundle</a></span>() <span class='kw'>%&amp;gt;%</span>
-  <span class='fu'>add_rschedule</span>(<span class='no'>on_5th_of_the_month</span>) <span class='kw'>%&amp;gt;%</span>
-  <span class='fu'>add_rschedule</span>(<span class='no'>on_tuesday</span>)</pre><p></div></p><pre>## &amp;lt;rbundle[2 rschedules / 0 rdates / 0 exdates]&amp;gt;
-</pre>
-
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>on_thanksgiving</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rrule.html'>yearly</a></span>() <span class='kw'>%&gt;%</span>
@@ -226,7 +213,7 @@ would translate to "the 5th day of the month or any Tuesday".<div class="r"></p>
   <span class='fu'><a href='recur_on_ymonth.html'>recur_on_ymonth</a></span>(<span class='st'>"Sep"</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='recur_on_wday.html'>recur_on_wday</a></span>(<span class='st'>"Mon"</span>, <span class='fl'>1</span>)
 
-<span class='no'>rb</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rbundle.html'>rbundle</a></span>() <span class='kw'>%&gt;%</span>
+<span class='no'>rb</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rbundle-set.html'>runion</a></span>() <span class='kw'>%&gt;%</span>
   <span class='fu'>add_rschedule</span>(<span class='no'>on_thanksgiving</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'>add_rschedule</span>(<span class='no'>on_christmas</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'>add_rschedule</span>(<span class='no'>on_labor_day</span>)

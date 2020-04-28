@@ -130,7 +130,7 @@
 <h2 class="hasAnchor">
 <a href="#n-th-day-of-the-quarter" class="anchor"></a>N-th day of the quarter</h2>
 <p>As a more general case of the first example, what happens if we want to compute the N-th day of the quarter, from either the front or the back? Unlike the first example, we no longer have the guarantee that the date will be in the first month, and if we count from the back we really need the entire set of 3 months that make up the quarter to count correctly.</p>
-<p>The secret here is to break the rule into 4 smaller rules, one per quarter, which you can then combine into 1 larger quarterly rbundle. Let’s start with a concrete example in Q1. How can we get the 60th day of the quarter?</p>
+<p>The secret here is to break the rule into 4 smaller rules, one per quarter, which you can then combine into 1 larger quarterly runion. Let’s start with a concrete example in Q1. How can we get the 60th day of the quarter?</p>
 <div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">on_60th_day_of_q1</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">yearly</a></span>() <span class="kw">%&gt;%</span>
   <span class="fu"><a href="../reference/recur_on_ymonth.html">recur_on_ymonth</a></span>(<span class="fl">1</span>:<span class="fl">3</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="../reference/recur_on_mday.html">recur_on_mday</a></span>(<span class="fl">1</span>:<span class="fl">31</span>) <span class="kw">%&gt;%</span>
@@ -146,7 +146,7 @@
 <li><p>This gives us access to all ~90 days in the quarter (the exact number varies per quarter). With <code><a href="../reference/recur_on_position.html">recur_on_position()</a></code> we can take the <code>nth</code> day of that set.</p></li>
 </ul>
 <p>Using <code><a href="../reference/rrule.html">yearly()</a></code> rather than <code><a href="../reference/rrule.html">monthly()</a></code> is required for <code><a href="../reference/recur_on_position.html">recur_on_position()</a></code> to work correctly. <code><a href="../reference/recur_on_position.html">recur_on_position()</a></code> takes the <code>n-th</code> position of the set, <em>within the frequency</em>. So if we had chosen monthly it would try and take the 60th position within the monthly set, which isn’t what we wanted.</p>
-<p>The rest of the quarterly rules are straightforward from here. We just change the ymonth values. To make this more usable, I’ll also wrap it in a parameterized function, and go ahead and construct the combined rbundle object from the four pieces.</p>
+<p>The rest of the quarterly rules are straightforward from here. We just change the ymonth values. To make this more usable, I’ll also wrap it in a parameterized function, and go ahead and construct the combined runion object from the four pieces.</p>
 <div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">make_on_nth_doq</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">since</span> <span class="kw">=</span> <span class="st">"1970-01-01"</span>, <span class="no">nth</span> <span class="kw">=</span> <span class="fl">1L</span>) {
   <span class="no">all_days</span> <span class="kw">&lt;-</span> <span class="fl">1</span>:<span class="fl">31</span>
 
@@ -170,7 +170,7 @@
     <span class="fu"><a href="../reference/recur_on_mday.html">recur_on_mday</a></span>(<span class="no">all_days</span>) <span class="kw">%&gt;%</span>
     <span class="fu"><a href="../reference/recur_on_position.html">recur_on_position</a></span>(<span class="no">nth</span>)
 
-  <span class="no">on_nth_doq</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/rbundle.html">rbundle</a></span>() <span class="kw">%&gt;%</span>
+  <span class="no">on_nth_doq</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/rbundle-set.html">runion</a></span>() <span class="kw">%&gt;%</span>
     <span class="fu"><a href="../reference/rbundle-add.html">add_rschedule</a></span>(<span class="no">on_nth_day_of_q1</span>) <span class="kw">%&gt;%</span>
     <span class="fu"><a href="../reference/rbundle-add.html">add_rschedule</a></span>(<span class="no">on_nth_day_of_q2</span>) <span class="kw">%&gt;%</span>
     <span class="fu"><a href="../reference/rbundle-add.html">add_rschedule</a></span>(<span class="no">on_nth_day_of_q3</span>) <span class="kw">%&gt;%</span>
@@ -243,7 +243,7 @@
     <span class="fu"><a href="../reference/recur_on_wday.html">recur_on_wday</a></span>(<span class="no">wday</span>) <span class="kw">%&gt;%</span>
     <span class="fu"><a href="../reference/recur_on_position.html">recur_on_position</a></span>(<span class="no">nth</span>)
 
-  <span class="no">on_nth_wday_of_the_quarter</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/rbundle.html">rbundle</a></span>() <span class="kw">%&gt;%</span>
+  <span class="no">on_nth_wday_of_the_quarter</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/rbundle-set.html">runion</a></span>() <span class="kw">%&gt;%</span>
     <span class="fu"><a href="../reference/rbundle-add.html">add_rschedule</a></span>(<span class="no">on_nth_wday_of_q1</span>) <span class="kw">%&gt;%</span>
     <span class="fu"><a href="../reference/rbundle-add.html">add_rschedule</a></span>(<span class="no">on_nth_wday_of_q2</span>) <span class="kw">%&gt;%</span>
     <span class="fu"><a href="../reference/rbundle-add.html">add_rschedule</a></span>(<span class="no">on_nth_wday_of_q3</span>) <span class="kw">%&gt;%</span>
@@ -269,11 +269,11 @@
 <div id="combining-with-other-rules" class="section level2">
 <h2 class="hasAnchor">
 <a href="#combining-with-other-rules" class="anchor"></a>Combining with other rules</h2>
-<p>Remember that each of these results are just rbundles that can be combined with other rules if you need to create more complex quarterly strategies. For example, let’s take the “last Friday of the quarter” rbundle and combine it with a rule for “on every Wednesday”.</p>
+<p>Remember that each of these results are just rbundles that can be combined with other rules if you need to create more complex quarterly strategies. For example, let’s take the “last Friday of the quarter” runion and combine it with a rule for “on every Wednesday”.</p>
 <div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="no">on_wednesdays</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">weekly</a></span>() <span class="kw">%&gt;%</span>
   <span class="fu"><a href="../reference/recur_on_wday.html">recur_on_wday</a></span>(<span class="st">"Wednesday"</span>)
 
-<span class="no">on_last_friday_of_quarter_or_wednesdays</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/rbundle.html">rbundle</a></span>() <span class="kw">%&gt;%</span>
+<span class="no">on_last_friday_of_quarter_or_wednesdays</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/rbundle-set.html">runion</a></span>() <span class="kw">%&gt;%</span>
   <span class="fu"><a href="../reference/rbundle-add.html">add_rschedule</a></span>(<span class="no">on_wednesdays</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="../reference/rbundle-add.html">add_rschedule</a></span>(<span class="no">on_last_friday_of_the_quarter</span>)
 

@@ -184,7 +184,7 @@ roll to the next available non-event date.</p></li>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Imagine you are on a Friday and want to shift forward 2 days using an
-rbundle that marks weekends as events. <code>alma_step()</code> works like this:</p><ul>
+rrule that marks weekends as events. <code>alma_step()</code> works like this:</p><ul>
 <li><p>Step forward 1 day to Saturday.</p></li>
 <li><p>Apply an adjustment of <code><a href='adjustments.html'>adj_following()</a></code>, which rolls forward to Monday.</p></li>
 <li><p>Step forward 1 day to Tuesday.</p></li>
@@ -207,12 +207,12 @@ is Tuesday.</p>
 <span class='co'># - Step 1 day to Tuesday</span>
 <span class='fu'>alma_step</span>(<span class='st'>"2019-09-13"</span>, <span class='fl'>2</span>, <span class='no'>on_weekends</span>)</div><div class='output co'>#&gt; [1] "2019-09-17"</div><div class='input'>
 <span class='co'># If Monday, 2019-09-16, was a recurring holiday, we could create</span>
-<span class='co'># a custom rbundle and step over that too.</span>
+<span class='co'># a custom runion and step over that too.</span>
 <span class='no'>on_09_16</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rrule.html'>yearly</a></span>() <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='recur_on_ymonth.html'>recur_on_ymonth</a></span>(<span class='fl'>9</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='recur_on_mday.html'>recur_on_mday</a></span>(<span class='fl'>16</span>)
 
-<span class='no'>rb</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rbundle.html'>rbundle</a></span>() <span class='kw'>%&gt;%</span>
+<span class='no'>rb</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rbundle-set.html'>runion</a></span>() <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='rbundle-add.html'>add_rschedule</a></span>(<span class='no'>on_09_16</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='rbundle-add.html'>add_rschedule</a></span>(<span class='no'>on_weekends</span>)
 

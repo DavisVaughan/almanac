@@ -239,7 +239,7 @@ use that directly.</p>
   <span class='fu'><a href='recur_on_mday.html'>recur_on_mday</a></span>(<span class='fl'>25</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='recur_on_ymonth.html'>recur_on_ymonth</a></span>(<span class='st'>"Dec"</span>)
 
-<span class='no'>rb</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rbundle.html'>rbundle</a></span>() <span class='kw'>%&gt;%</span>
+<span class='no'>rb</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rbundle-set.html'>runion</a></span>() <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='rbundle-add.html'>add_rschedule</a></span>(<span class='no'>on_weekends</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='rbundle-add.html'>add_rschedule</a></span>(<span class='no'>on_christmas</span>)
 
@@ -266,7 +266,7 @@ use that directly.</p>
 
 <span class='co'># Note that the "observed" date for Christmas is the 26th</span>
 <span class='fu'><a href='alma_search.html'>alma_search</a></span>(<span class='st'>"2005-01-01"</span>, <span class='st'>"2006-01-01"</span>, <span class='no'>on_observed_christmas</span>)</div><div class='output co'>#&gt; [1] "2005-12-26"</div><div class='input'>
-<span class='no'>rb2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rbundle.html'>rbundle</a></span>() <span class='kw'>%&gt;%</span>
+<span class='no'>rb2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rbundle-set.html'>runion</a></span>() <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='rbundle-add.html'>add_rschedule</a></span>(<span class='no'>on_weekends</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='rbundle-add.html'>add_rschedule</a></span>(<span class='no'>on_observed_christmas</span>)
 

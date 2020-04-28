@@ -146,7 +146,7 @@
 <h2 class="hasAnchor">
 <a href="#recurrence-bundles" class="anchor"></a>Recurrence Bundles</h2>
 <p>The above example just scratches the surface of what almanac can do. Practically speaking, you’ll probably have multiple holidays and events that you’d like to combine into one big recurrence object. This is known as a <em>recurrence bundle</em>.</p>
-<p>This example creates recurrence rules for weekends and Christmas, and bundles them together along with the Thanksgiving rule.</p>
+<p>This example creates recurrence rules for weekends and Christmas, and bundles them together along with the Thanksgiving rule in such a way that we get the <em>union</em> of the underlying event sets.</p>
 <div class="sourceCode" id="cb8"><pre class="r"><span class="no">on_weekends</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/rrule.html">weekly</a></span>() <span class="kw">%&gt;%</span>
   <span class="fu"><a href="reference/recur_on_wday.html">recur_on_weekends</a></span>()
 
@@ -154,13 +154,13 @@
   <span class="fu"><a href="reference/recur_on_mday.html">recur_on_mday</a></span>(<span class="fl">25</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="reference/recur_on_ymonth.html">recur_on_ymonth</a></span>(<span class="st">"Dec"</span>)
 
-<span class="no">bundle</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/rbundle.html">rbundle</a></span>() <span class="kw">%&gt;%</span>
+<span class="no">bundle</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/rbundle-set.html">runion</a></span>() <span class="kw">%&gt;%</span>
   <span class="fu"><a href="reference/rbundle-add.html">add_rschedule</a></span>(<span class="no">on_weekends</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="reference/rbundle-add.html">add_rschedule</a></span>(<span class="no">on_christmas</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="reference/rbundle-add.html">add_rschedule</a></span>(<span class="no">on_thanksgiving</span>)
 
 <span class="no">bundle</span>
-<span class="co">#&gt; &lt;rbundle[3 rschedules / 0 rdates / 0 exdates]&gt;</span></pre></div>
+<span class="co">#&gt; &lt;runion[3 rschedules / 0 rdates / 0 exdates]&gt;</span></pre></div>
 <p>We can create a stepper that steps over all of the events in the bundle. If these two holidays were the only ones that your company celebrated, the stepper could be viewed as a way to step forward by a “business day”.</p>
 <p>For example, Christmas was on a Monday in 2006. If you wanted to step 1 business day forward from the Friday before Christmas, you’d probably like it to step over the weekend and the Christmas Monday to Tuesday. The <code>bundle</code> lets you do exactly that!</p>
 <div class="sourceCode" id="cb9"><pre class="r"><span class="no">business_day</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/stepper.html">stepper</a></span>(<span class="no">bundle</span>)

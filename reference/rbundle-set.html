@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Is <code>x</code> in the event set? — alma_in • almanac</title>
+<title>Create a new set-based recurrence bundle — rbundle-set • almanac</title>
 
 
 <!-- jquery -->
@@ -39,9 +39,24 @@
 
 
 
-<meta property="og:title" content="Is <code>x</code> in the event set? — alma_in" />
-<meta property="og:description" content="alma_in() checks if x is in the event set of dates defined by the
-rschedule." />
+<meta property="og:title" content="Create a new set-based recurrence bundle — rbundle-set" />
+<meta property="og:description" content="Often, a single rrule will be sufficient. However, more complex
+recurrence objects can be constructed by combining multiple rschedules into
+a recurrence bundle.
+There are three types of recurrence bundles provided in almanac, each of
+which construct their event sets by performing a set operation on the
+underlying event sets of the rschedules in the bundle.
+runion() takes the union.
+rintersect() takes the intersection.
+rsetdiff() takes the set difference.
+
+
+Once you have created a recurrence bundle, you can:
+Add recurrence rules or other recurrence bundles with add_rschedule().
+Forcibly include dates in its event set with add_rdates().
+Forcibly exclude dates from its event set with add_exdates().
+
+" />
 
 
 
@@ -130,55 +145,52 @@ rschedule." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Is <code>x</code> in the event set?</h1>
-    <small class="dont-index">Source: <a href='https://github.com/DavisVaughan/almanac/blob/master/R/alma-in.R'><code>R/alma-in.R</code></a></small>
-    <div class="hidden name"><code>alma_in.Rd</code></div>
+    <h1>Create a new set-based recurrence bundle</h1>
+    <small class="dont-index">Source: <a href='https://github.com/DavisVaughan/almanac/blob/master/R/rbundle-set.R'><code>R/rbundle-set.R</code></a>, <a href='https://github.com/DavisVaughan/almanac/blob/master/R/runion.R'><code>R/runion.R</code></a></small>
+    <div class="hidden name"><code>rbundle-set.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><code>alma_in()</code> checks if <code>x</code> is in the event set of dates defined by the
-rschedule.</p>
+    <p>Often, a single rrule will be sufficient. However, more complex
+recurrence objects can be constructed by combining multiple rschedules into
+a <em>recurrence bundle</em>.</p>
+<p>There are three types of recurrence bundles provided in almanac, each of
+which construct their event sets by performing a set operation on the
+underlying event sets of the rschedules in the bundle.</p><ul>
+<li><p><code>runion()</code> takes the union.</p></li>
+<li><p><code>rintersect()</code> takes the intersection.</p></li>
+<li><p><code>rsetdiff()</code> takes the set difference.</p></li>
+</ul>
+
+<p>Once you have created a recurrence bundle, you can:</p><ul>
+<li><p>Add recurrence rules or other recurrence bundles with <code><a href='rbundle-add.html'>add_rschedule()</a></code>.</p></li>
+<li><p>Forcibly include dates in its event set with <code><a href='rbundle-add.html'>add_rdates()</a></code>.</p></li>
+<li><p>Forcibly exclude dates from its event set with <code><a href='rbundle-add.html'>add_exdates()</a></code>.</p></li>
+</ul>
+
     </div>
 
-    <pre class="usage"><span class='fu'>alma_in</span>(<span class='no'>x</span>, <span class='no'>rschedule</span>)</pre>
+    <pre class="usage"><span class='fu'>runion</span>()</pre>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>x</th>
-      <td><p><code>[Date]</code></p>
-<p>A vector of dates.</p></td>
-    </tr>
-    <tr>
-      <th>rschedule</th>
-      <td><p><code>[rschedule]</code></p>
-<p>An rschedule, such as an rrule or rbundle.</p></td>
-    </tr>
-    </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A logical vector the same size as <code>x</code>.</p>
+    <p>An empty rbundle.</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>For <code>rsetdiff()</code>, the event set is created "from left to right" and depends
+on the order that the rschedules were added to the bundle.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='rbundle-add.html'>add_rschedule()</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>rrule</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rrule.html'>weekly</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='recur_on_wday.html'>recur_on_wday</a></span>(<span class='st'>"Thursday"</span>)
+    <pre class="examples"><div class='input'><span class='fu'>runion</span>()</div><div class='output co'>#&gt; &lt;runion[0 rschedules / 0 rdates / 0 exdates]&gt;</div><div class='input'>
+<span class='no'>on_weekends</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rrule.html'>weekly</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='recur_on_wday.html'>recur_on_weekends</a></span>()
 
-<span class='co'># A Thursday and Friday</span>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/as.Date.html'>as.Date</a></span>(<span class='st'>"1970-01-01"</span>) + <span class='fl'>0</span>:<span class='fl'>1</span>
-
-<span class='fu'>alma_in</span>(<span class='no'>x</span>, <span class='no'>rrule</span>)</div><div class='output co'>#&gt; [1]  TRUE FALSE</div><div class='input'>
-<span class='co'># Every month, on the 2nd day of the month</span>
-<span class='no'>rrule2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rrule.html'>monthly</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='recur_on_mday.html'>recur_on_mday</a></span>(<span class='fl'>2</span>)
-
-<span class='co'># Make a larger rbundle made of multiple rules</span>
-<span class='no'>rb</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rbundle-set.html'>runion</a></span>() <span class='kw'>%&gt;%</span>
- <span class='fu'><a href='rbundle-add.html'>add_rschedule</a></span>(<span class='no'>rrule</span>) <span class='kw'>%&gt;%</span>
- <span class='fu'><a href='rbundle-add.html'>add_rschedule</a></span>(<span class='no'>rrule2</span>)
-
-<span class='fu'>alma_in</span>(<span class='no'>x</span>, <span class='no'>rb</span>)</div><div class='output co'>#&gt; [1] TRUE TRUE</div></pre>
+<span class='fu'>runion</span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='rbundle-add.html'>add_rschedule</a></span>(<span class='no'>on_weekends</span>)</div><div class='output co'>#&gt; &lt;runion[1 rschedules / 0 rdates / 0 exdates]&gt;</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

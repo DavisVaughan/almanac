@@ -187,12 +187,12 @@
 <span class="co"># The first time is "slow"</span>
 <span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>(<span class="fu"><a href="../reference/alma_search.html">alma_search</a></span>(<span class="no">since</span>, <span class="st">"2000-01-01"</span>, <span class="no">on_weekly</span>))
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;   0.153   0.010   0.146</span>
+<span class="co">#&gt;   0.118   0.005   0.111</span>
 
 <span class="co"># Repeated access is fast</span>
 <span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>(<span class="fu"><a href="../reference/alma_search.html">alma_search</a></span>(<span class="no">since</span>, <span class="st">"2000-01-01"</span>, <span class="no">on_weekly</span>))
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;       0       0       0</span>
+<span class="co">#&gt;   0.001   0.000   0.000</span>
 
 <span class="co"># The entire event set is cached, so even if you change the arguments,</span>
 <span class="co"># the operation is still fast.</span>
@@ -236,12 +236,19 @@
 <h2 class="hasAnchor">
 <a href="#recurrence-bundles" class="anchor"></a>Recurrence Bundles</h2>
 <p>Recurrence rules are powerful tools on their own, but they aren’t enough to solve every task. Say you want to construct a rule that includes both Christmas and Labor Day as events. It would be impossible to construct this kind of event set using a single rule, but if you could <em>bundle</em> multiple rules together, one for Christmas and one for Labor Day, then it would be possible.</p>
-<p>An <em>rbundle</em> is a bundle of recurrence schedules. A recurrence schedule, or rschedule, is an overarching term for both rrules and rbundles. The event set of an rbundle is the union of the event sets of every underlying recurrence schedule. It can also contain specialized dates that you want to forcibly include in the event set, called rdates, and ones that you want to forcibly exclude, called exdates.</p>
+<p>An <em>rbundle</em> is a bundle of recurrence schedules. A recurrence schedule, or rschedule, is an overarching term for both rrules and rbundles. There are three types of rbundles in almanac. Each create their event set by performing some kind of set operation on the event sets of the underlying rschedules that you added to the bundle.</p>
+<ul>
+<li><p><code><a href="../reference/rbundle-set.html">runion()</a></code> takes the union.</p></li>
+<li><p><code>rintersect()</code> takes the intersection.</p></li>
+<li><p><code>rsetdiff()</code> takes the set difference.</p></li>
+</ul>
+<p>rbundles can also contain specialized dates that you want to forcibly include in the event set, called rdates, and ones that you want to forcibly exclude, called exdates.</p>
+<p>The most useful rbundle is runion, as this allows you construct an event set that, for example, falls on multiple holidays and all weekends. The following creates an runion from rrules based on Christmas and Labor Day.</p>
 <div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="no">on_christmas</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">yearly</a></span>() <span class="kw">%&gt;%</span>
   <span class="fu"><a href="../reference/recur_on_ymonth.html">recur_on_ymonth</a></span>(<span class="st">"Dec"</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="../reference/recur_on_mday.html">recur_on_mday</a></span>(<span class="fl">25</span>)
 
-<span class="no">christmas_or_labor_day</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/rbundle.html">rbundle</a></span>() <span class="kw">%&gt;%</span>
+<span class="no">christmas_or_labor_day</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/rbundle-set.html">runion</a></span>() <span class="kw">%&gt;%</span>
   <span class="fu"><a href="../reference/rbundle-add.html">add_rschedule</a></span>(<span class="no">on_christmas</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="../reference/rbundle-add.html">add_rschedule</a></span>(<span class="no">on_labor_day</span>)
 
