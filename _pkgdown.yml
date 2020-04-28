@@ -10,6 +10,7 @@ reference:
   contents:
   - runion
   - rintersect
+  - rsetdiff
   - starts_with("add_")
 
 - title: Recurrence utilities
@@ -33,6 +34,7 @@ reference:
   - new_rbundle
   - new_runion
   - new_rintersect
+  - new_rsetdiff
 
 - title: Compatibility
   contents:
