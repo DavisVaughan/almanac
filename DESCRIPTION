@@ -1,6 +1,6 @@
 Package: almanac
 Title: Tools for Working with Recurrence Rules
-Version: 0.0.0.9000
+Version: 0.1.0
 Authors@R: 
     c(person(given = "Davis",
              family = "Vaughan",
