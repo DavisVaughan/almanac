@@ -10,3 +10,4 @@
 ^pkgdown$
 ^appveyor\.yml$
 ^\.github$
+^cran-comments\.md$
