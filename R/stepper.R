@@ -140,9 +140,21 @@ new_stepper <- function(n = integer(), rschedule = daily()) {
   new_vctr(
     .data = n,
     rschedule = rschedule,
-    class = "stepper",
+    class = "almanac_stepper",
     inherit_base_type = FALSE
   )
+}
+
+# ------------------------------------------------------------------------------
+
+#' @export
+vec_ptype_abbr.almanac_stepper <- function(x, ...) {
+  "stepper"
+}
+
+#' @export
+vec_ptype_full.almanac_stepper <- function(x, ...) {
+  "stepper"
 }
 
 # ------------------------------------------------------------------------------
@@ -168,22 +180,22 @@ NULL
 # ------------------------------------------------------------------------------
 
 #' @rdname almanac-vctrs-compat
-#' @export vec_arith.stepper
-#' @method vec_arith stepper
+#' @export vec_arith.almanac_stepper
+#' @method vec_arith almanac_stepper
 #' @export
-vec_arith.stepper <- function(op, x, y, ...) {
-  UseMethod("vec_arith.stepper", y)
+vec_arith.almanac_stepper <- function(op, x, y, ...) {
+  UseMethod("vec_arith.almanac_stepper", y)
 }
 
-#' @method vec_arith.stepper default
+#' @method vec_arith.almanac_stepper default
 #' @export
-vec_arith.stepper.default <- function(op, x, y, ...) {
+vec_arith.almanac_stepper.default <- function(op, x, y, ...) {
   stop_incompatible_op(op, x, y)
 }
 
-#' @method vec_arith.stepper MISSING
+#' @method vec_arith.almanac_stepper MISSING
 #' @export
-vec_arith.stepper.MISSING <- function(op, x, y, ...) {
+vec_arith.almanac_stepper.MISSING <- function(op, x, y, ...) {
   switch(
     op,
     `+` = plus_stepper_missing(x),
@@ -205,9 +217,9 @@ minus_stepper_missing <- function(x) {
 
 # Note that `stepper(1, daily()) - Sys.Date()` is not defined!
 
-#' @method vec_arith.stepper Date
+#' @method vec_arith.almanac_stepper Date
 #' @export
-vec_arith.stepper.Date <- function(op, x, y, ...) {
+vec_arith.almanac_stepper.Date <- function(op, x, y, ...) {
   switch(
     op,
     `+` = plus_stepper_date(x, y),
@@ -221,9 +233,9 @@ plus_stepper_date <- function(x, y) {
   alma_step(y, n, rschedule)
 }
 
-#' @method vec_arith.Date stepper
+#' @method vec_arith.Date almanac_stepper
 #' @export
-vec_arith.Date.stepper <- function(op, x, y, ...) {
+vec_arith.Date.almanac_stepper <- function(op, x, y, ...) {
   switch(
     op,
     `+` = plus_date_stepper(x, y),
@@ -249,16 +261,16 @@ minus_date_stepper <- function(x, y) {
 # vec_ptype2()
 
 #' @rdname almanac-vctrs-compat
-#' @export vec_ptype2.stepper
-#' @method vec_ptype2 stepper
+#' @export vec_ptype2.almanac_stepper
+#' @method vec_ptype2 almanac_stepper
 #' @export
-vec_ptype2.stepper <- function(x, y, ..., x_arg = "", y_arg = "") {
-  UseMethod("vec_ptype2.stepper", y)
+vec_ptype2.almanac_stepper <- function(x, y, ..., x_arg = "", y_arg = "") {
+  UseMethod("vec_ptype2.almanac_stepper", y)
 }
 
-#' @method vec_ptype2.stepper stepper
+#' @method vec_ptype2.almanac_stepper almanac_stepper
 #' @export
-vec_ptype2.stepper.stepper <- function(x, y, ..., x_arg = "", y_arg = "") {
+vec_ptype2.almanac_stepper.almanac_stepper <- function(x, y, ..., x_arg = "", y_arg = "") {
   if (!stepper_identical_rschedules(x, y)) {
     details <- "Steppers must have identical rschedules to be coercible."
     stop_incompatible_type(x, y, x_arg = x_arg, y_arg = y_arg, details = details)
@@ -271,16 +283,16 @@ vec_ptype2.stepper.stepper <- function(x, y, ..., x_arg = "", y_arg = "") {
 # vec_cast()
 
 #' @rdname almanac-vctrs-compat
-#' @export vec_cast.stepper
-#' @method vec_cast stepper
+#' @export vec_cast.almanac_stepper
+#' @method vec_cast almanac_stepper
 #' @export
-vec_cast.stepper <- function(x, to, ..., x_arg = "", to_arg = "") {
-  UseMethod("vec_cast.stepper")
+vec_cast.almanac_stepper <- function(x, to, ..., x_arg = "", to_arg = "") {
+  UseMethod("vec_cast.almanac_stepper")
 }
 
-#' @method vec_cast.stepper stepper
+#' @method vec_cast.almanac_stepper almanac_stepper
 #' @export
-vec_cast.stepper.stepper <- function(x, to, ..., x_arg = "", to_arg = "") {
+vec_cast.almanac_stepper.almanac_stepper <- function(x, to, ..., x_arg = "", to_arg = "") {
   if (!stepper_identical_rschedules(x, to)) {
     details <- "Steppers must have identical rschedules to be coercible."
     stop_incompatible_cast(x, to, x_arg = x_arg, to_arg = to_arg, details = details)

@@ -2,16 +2,16 @@
 % Please edit documentation in R/stepper.R
 \name{almanac-vctrs-compat}
 \alias{almanac-vctrs-compat}
-\alias{vec_arith.stepper}
-\alias{vec_ptype2.stepper}
-\alias{vec_cast.stepper}
+\alias{vec_arith.almanac_stepper}
+\alias{vec_ptype2.almanac_stepper}
+\alias{vec_cast.almanac_stepper}
 \title{vctrs compatibility functions}
 \usage{
-\method{vec_arith}{stepper}(op, x, y, ...)
+\method{vec_arith}{almanac_stepper}(op, x, y, ...)
 
-\method{vec_ptype2}{stepper}(x, y, ..., x_arg = "", y_arg = "")
+\method{vec_ptype2}{almanac_stepper}(x, y, ..., x_arg = "", y_arg = "")
 
-\method{vec_cast}{stepper}(x, to, ..., x_arg = "", to_arg = "")
+\method{vec_cast}{almanac_stepper}(x, to, ..., x_arg = "", to_arg = "")
 }
 \arguments{
 \item{op}{An arithmetic operator as a string.}
