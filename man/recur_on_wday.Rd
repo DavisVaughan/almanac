@@ -25,9 +25,9 @@ string like \code{"Tuesday"}, or an abbreviation like \code{"Tues"}.}
 
 \item{nth}{\verb{[integer / NULL]}
 
-Limit to the n-th occurence of the \code{wday} in the base frequency. For
+Limit to the n-th occurrence of the \code{wday} in the base frequency. For
 example, in a monthly frequency, using \code{nth = -1} would limit to the
-last \code{wday} in the month. The default of \code{NULL} chooses all occurences.}
+last \code{wday} in the month. The default of \code{NULL} chooses all occurrences.}
 }
 \value{
 An updated rrule.
@@ -82,7 +82,7 @@ alma_search(start, end, on_first_sunday_in_year)
 
 # Last week day of the month
 last_weekday_of_month <- monthly() \%>\%
-  # Last occurence of each weekday in the month
+  # Last occurrence of each weekday in the month
   recur_on_wday(c("Mon", "Tue", "Wed", "Thu", "Fri"), -1) \%>\%
   # Now choose the last one of those in each month
   recur_on_position(-1)

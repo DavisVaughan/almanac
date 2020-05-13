@@ -29,9 +29,9 @@
 #'
 #' @param nth `[integer / NULL]`
 #'
-#'    Limit to the n-th occurence of the `wday` in the base frequency. For
+#'    Limit to the n-th occurrence of the `wday` in the base frequency. For
 #'    example, in a monthly frequency, using `nth = -1` would limit to the
-#'    last `wday` in the month. The default of `NULL` chooses all occurences.
+#'    last `wday` in the month. The default of `NULL` chooses all occurrences.
 #'
 #' @return
 #' An updated rrule.
@@ -70,7 +70,7 @@
 #'
 #' # Last week day of the month
 #' last_weekday_of_month <- monthly() %>%
-#'   # Last occurence of each weekday in the month
+#'   # Last occurrence of each weekday in the month
 #'   recur_on_wday(c("Mon", "Tue", "Wed", "Thu", "Fri"), -1) %>%
 #'   # Now choose the last one of those in each month
 #'   recur_on_position(-1)
