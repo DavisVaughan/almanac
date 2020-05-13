@@ -29,3 +29,8 @@ See the corresponding vctrs function for the exact return value.
 These functions are the extensions that allow stepper objects to
 work with vctrs.
 }
+\examples{
+library(vctrs)
+vec_arith("+", as.Date("2019-01-04"), workdays(1))
+}
+\keyword{internal}

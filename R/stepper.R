@@ -170,11 +170,14 @@ vec_ptype_full.almanac_stepper <- function(x, ...) {
 #' @param ... Used to pass along error message information.
 #'
 #' @return
-#'
 #' See the corresponding vctrs function for the exact return value.
 #'
 #' @name almanac-vctrs-compat
+#' @keywords internal
 #'
+#' @examples
+#' library(vctrs)
+#' vec_arith("+", as.Date("2019-01-04"), workdays(1))
 NULL
 
 # ------------------------------------------------------------------------------
