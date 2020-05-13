@@ -261,21 +261,12 @@ minus_date_stepper <- function(x, y) {
 # vec_ptype2()
 
 #' @rdname almanac-vctrs-compat
-#' @export vec_ptype2.almanac_stepper
-#' @method vec_ptype2 almanac_stepper
-#' @export
-vec_ptype2.almanac_stepper <- function(x, y, ..., x_arg = "", y_arg = "") {
-  UseMethod("vec_ptype2.almanac_stepper", y)
-}
-
-#' @method vec_ptype2.almanac_stepper almanac_stepper
 #' @export
 vec_ptype2.almanac_stepper.almanac_stepper <- function(x, y, ..., x_arg = "", y_arg = "") {
   if (!stepper_identical_rschedules(x, y)) {
     details <- "Steppers must have identical rschedules to be coercible."
     stop_incompatible_type(x, y, x_arg = x_arg, y_arg = y_arg, details = details)
   }
-
   new_stepper(rschedule = stepper_rschedule(x))
 }
 
@@ -283,14 +274,6 @@ vec_ptype2.almanac_stepper.almanac_stepper <- function(x, y, ..., x_arg = "", y_
 # vec_cast()
 
 #' @rdname almanac-vctrs-compat
-#' @export vec_cast.almanac_stepper
-#' @method vec_cast almanac_stepper
-#' @export
-vec_cast.almanac_stepper <- function(x, to, ..., x_arg = "", to_arg = "") {
-  UseMethod("vec_cast.almanac_stepper")
-}
-
-#' @method vec_cast.almanac_stepper almanac_stepper
 #' @export
 vec_cast.almanac_stepper.almanac_stepper <- function(x, to, ..., x_arg = "", to_arg = "") {
   if (!stepper_identical_rschedules(x, to)) {

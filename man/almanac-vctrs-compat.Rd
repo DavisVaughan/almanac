@@ -3,15 +3,15 @@
 \name{almanac-vctrs-compat}
 \alias{almanac-vctrs-compat}
 \alias{vec_arith.almanac_stepper}
-\alias{vec_ptype2.almanac_stepper}
-\alias{vec_cast.almanac_stepper}
+\alias{vec_ptype2.almanac_stepper.almanac_stepper}
+\alias{vec_cast.almanac_stepper.almanac_stepper}
 \title{vctrs compatibility functions}
 \usage{
 \method{vec_arith}{almanac_stepper}(op, x, y, ...)
 
-\method{vec_ptype2}{almanac_stepper}(x, y, ..., x_arg = "", y_arg = "")
+\method{vec_ptype2}{almanac_stepper.almanac_stepper}(x, y, ..., x_arg = "", y_arg = "")
 
-\method{vec_cast}{almanac_stepper}(x, to, ..., x_arg = "", to_arg = "")
+\method{vec_cast}{almanac_stepper.almanac_stepper}(x, to, ..., x_arg = "", to_arg = "")
 }
 \arguments{
 \item{op}{An arithmetic operator as a string.}
