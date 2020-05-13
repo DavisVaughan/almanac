@@ -174,9 +174,9 @@ string like <code>"Tuesday"</code>, or an abbreviation like <code>"Tues"</code>.
     <tr>
       <th>nth</th>
       <td><p><code>[integer / NULL]</code></p>
-<p>Limit to the n-th occurence of the <code>wday</code> in the base frequency. For
+<p>Limit to the n-th occurrence of the <code>wday</code> in the base frequency. For
 example, in a monthly frequency, using <code>nth = -1</code> would limit to the
-last <code>wday</code> in the month. The default of <code>NULL</code> chooses all occurences.</p></td>
+last <code>wday</code> in the month. The default of <code>NULL</code> chooses all occurrences.</p></td>
     </tr>
     </table>
 
@@ -223,7 +223,7 @@ by default, is a Monday (<code>1900-01-01</code>).</p>
 <span class='fu'><a href='alma_search.html'>alma_search</a></span>(<span class='no'>start</span>, <span class='no'>end</span>, <span class='no'>on_first_sunday_in_year</span>)</div><div class='output co'>#&gt; [1] "1999-01-03"</div><div class='input'>
 <span class='co'># Last week day of the month</span>
 <span class='no'>last_weekday_of_month</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rrule.html'>monthly</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='co'># Last occurence of each weekday in the month</span>
+  <span class='co'># Last occurrence of each weekday in the month</span>
   <span class='fu'>recur_on_wday</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Mon"</span>, <span class='st'>"Tue"</span>, <span class='st'>"Wed"</span>, <span class='st'>"Thu"</span>, <span class='st'>"Fri"</span>), -<span class='fl'>1</span>) <span class='kw'>%&gt;%</span>
   <span class='co'># Now choose the last one of those in each month</span>
   <span class='fu'><a href='recur_on_position.html'>recur_on_position</a></span>(-<span class='fl'>1</span>)

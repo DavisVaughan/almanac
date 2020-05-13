@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Generate events in a schedule — alma_seq • almanac</title>
+<title>Generate date sequences — alma_seq • almanac</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,9 @@
 
 
 
-<meta property="og:title" content="Generate events in a schedule — alma_seq" />
-<meta property="og:description" content="alma_seq() generates all events in a schedule from from to to." />
+<meta property="og:title" content="Generate date sequences — alma_seq" />
+<meta property="og:description" content="alma_seq() generates a sequence of all dates between from and to,
+skipping any events defined by the rschedule." />
 
 
 
@@ -129,16 +130,17 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Generate events in a schedule</h1>
+    <h1>Generate date sequences</h1>
     <small class="dont-index">Source: <a href='https://github.com/DavisVaughan/almanac/blob/master/R/alma-seq.R'><code>R/alma-seq.R</code></a></small>
     <div class="hidden name"><code>alma_seq.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><code>alma_seq()</code> generates all events in a schedule from <code>from</code> to <code>to</code>.</p>
+    <p><code>alma_seq()</code> generates a sequence of all dates between <code>from</code> and <code>to</code>,
+skipping any events defined by the <code>rschedule</code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>alma_seq</span>(<span class='no'>from</span>, <span class='no'>to</span>, <span class='no'>schedule</span>, <span class='kw'>inclusive</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>alma_seq</span>(<span class='no'>from</span>, <span class='no'>to</span>, <span class='no'>rschedule</span>, <span class='kw'>inclusive</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -146,32 +148,35 @@
     <tr>
       <th>from, to</th>
       <td><p><code>[Date(1)]</code></p>
-<p>Dates defining the range to look for events in the <code>schedule</code>.</p></td>
+<p>Dates defining the range to look for events.</p></td>
     </tr>
     <tr>
-      <th>schedule</th>
-      <td><p><code>[schedule / rrule]</code></p>
-<p>A schedule or rrule.</p></td>
+      <th>rschedule</th>
+      <td><p><code>[rschedule]</code></p>
+<p>An rschedule, such as an rrule or rbundle.</p></td>
     </tr>
     <tr>
       <th>inclusive</th>
       <td><p><code>[logical(1)]</code></p>
-<p>If <code>from</code> or <code>to</code> are events, should they be included?</p></td>
+<p>If <code>from</code> or <code>to</code> are events in the <code>rschedule</code>, should they be removed
+from the sequence?</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A vector of dates in the range of <code>[from, to]</code>, with all events in the
+<code>rschedule</code> removed.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>on_12th</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rrule.html'>monthly</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'><a href='recur_on_mday.html'>recur_on_mday</a></span>(<span class='fl'>12</span>)
-<span class='no'>on_monday</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rrule.html'>weekly</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'><a href='recur_on_wday.html'>recur_on_wday</a></span>(<span class='st'>"Monday"</span>)
+    <pre class="examples"><div class='input'><span class='no'>on_weekends</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rrule.html'>weekly</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'><a href='recur_on_wday.html'>recur_on_weekends</a></span>()
 
-<span class='co'># On the 12th of the month, or on Mondays</span>
-<span class='no'>sch</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='schedule.html'>schedule</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='sch-add.html'>sch_rrule</a></span>(<span class='no'>on_12th</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='sch-add.html'>sch_rrule</a></span>(<span class='no'>on_monday</span>)
-
-<span class='fu'>alma_seq</span>(<span class='st'>"2019-01-01"</span>, <span class='st'>"2019-01-31"</span>, <span class='no'>sch</span>)</div><div class='output co'>#&gt; [1] "2019-01-07" "2019-01-12" "2019-01-14" "2019-01-21" "2019-01-28"</div><div class='input'>
-</div></pre>
+<span class='co'># Generate a sequence of all non-weekend dates in Jan-2000</span>
+<span class='fu'>alma_seq</span>(<span class='st'>"2000-01-01"</span>, <span class='st'>"2000-01-31"</span>, <span class='no'>on_weekends</span>)</div><div class='output co'>#&gt;  [1] "2000-01-03" "2000-01-04" "2000-01-05" "2000-01-06" "2000-01-07"
+#&gt;  [6] "2000-01-10" "2000-01-11" "2000-01-12" "2000-01-13" "2000-01-14"
+#&gt; [11] "2000-01-17" "2000-01-18" "2000-01-19" "2000-01-20" "2000-01-21"
+#&gt; [16] "2000-01-24" "2000-01-25" "2000-01-26" "2000-01-27" "2000-01-28"
+#&gt; [21] "2000-01-31"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
