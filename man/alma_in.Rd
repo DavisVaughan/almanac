@@ -2,7 +2,7 @@
 % Please edit documentation in R/alma-in.R
 \name{alma_in}
 \alias{alma_in}
-\title{Is \code{x} in the event set?}
+\title{Check if dates are in an event set}
 \usage{
 alma_in(x, rschedule)
 }
