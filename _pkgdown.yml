@@ -17,6 +17,7 @@ reference:
   contents:
   - alma_in
   - alma_search
+  - alma_seq
   - alma_next
   - alma_previous
   - alma_events
