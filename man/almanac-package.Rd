@@ -8,7 +8,7 @@
 \description{
 Provides tools for defining recurrence rules and
     recurrence bundles. Recurrence rules are a programmatic way to define
-    a recurring event, like "the first Monday of December". Multiple
+    a recurring event, like the first Monday of December. Multiple
     recurrence rules can be combined into larger recurrence bundles.
     Together, these provide a system for adjusting and generating
     sequences of dates while simultaneously skipping over dates in a
