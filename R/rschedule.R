@@ -44,15 +44,6 @@
 #'
 #' # You have to register an `rschedule_events()` method first!
 #' try(alma_events(static))
-#'
-#' # For example, the below comment block could be run, and then
-#' # `alma_events()` would work, and would just return `x$events`.
-#'
-#' # rschedule_events.static_rschedule <- function(x) {
-#' #   x$events
-#' # }
-#' #
-#' # alma_events(static)
 new_rschedule <- function(..., class) {
   data <- list(...)
 
