@@ -79,7 +79,7 @@ that rschedule." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">almanac</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -195,16 +195,7 @@ The sole functionality of rschedule classes is to provide a method for
 )
 
 <span class='co'># You have to register an `rschedule_events()` method first!</span>
-<span class='fu'><a href='https://rdrr.io/r/base/try.html'>try</a></span>(<span class='fu'><a href='alma_events.html'>alma_events</a></span>(<span class='no'>static</span>))</div><div class='output co'>#&gt; Error : rschedule subclasses must provide their own `rschedule_events()` method.</div><div class='input'>
-# For example, the below comment block could be run, and then
-# `alma_events()` would work, and would just return `x$events`.
-
-# rschedule_events.static_rschedule &lt;- function(x) {
-#   x$events
-# }
-#
-# alma_events(static)
-</div></pre>
+<span class='fu'><a href='https://rdrr.io/r/base/try.html'>try</a></span>(<span class='fu'><a href='alma_events.html'>alma_events</a></span>(<span class='no'>static</span>))</div><div class='output co'>#&gt; Error : rschedule subclasses must provide their own `rschedule_events()` method.</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

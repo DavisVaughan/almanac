@@ -14,7 +14,7 @@
 <script src="pkgdown.js"></script><meta property="og:title" content="Tools for Working with Recurrence Rules">
 <meta property="og:description" content="Provides tools for defining recurrence rules and
     recurrence bundles. Recurrence rules are a programmatic way to define
-    a recurring event, like &quot;the first Monday of December&quot;. Multiple
+    a recurring event, like the first Monday of December. Multiple
     recurrence rules can be combined into larger recurrence bundles.
     Together, these provide a system for adjusting and generating
     sequences of dates while simultaneously skipping over dates in a
@@ -37,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">almanac</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -103,17 +103,18 @@
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<p>almanac is not yet on CRAN.</p>
+<p>Install the released version of almanac from CRAN with:</p>
+<div class="sourceCode" id="cb2"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"almanac"</span>)</pre></div>
 <p>Install the development version from <a href="https://github.com/">GitHub</a> with:</p>
-<div class="sourceCode" id="cb2"><pre class="r"><span class="co"># install.packages("remotes")</span>
+<div class="sourceCode" id="cb3"><pre class="r"><span class="co"># install.packages("remotes")</span>
 <span class="kw pkg">remotes</span><span class="kw ns">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(<span class="st">"DavisVaughan/almanac"</span>)</pre></div>
 <p>Mac and Windows users should not have any problems installing almanac. Linux users need libv8 to install the dependency R package, V8. See the <a href="https://github.com/jeroen/V8#debian--ubuntu">V8 installation instructions</a> for more information. almanac uses ES5 JavaScript, so it does <em>not</em> require any “modern” JavaScript features and should work with the “old” V8 engine provided by Ubuntu versions before 19.04.</p>
 </div>
 <div id="recurrence-rules" class="section level2">
 <h2 class="hasAnchor">
 <a href="#recurrence-rules" class="anchor"></a>Recurrence Rules</h2>
-<p>Constructing recurrence rules looks a little like this:</p>
-<div class="sourceCode" id="cb3"><pre class="r"><span class="co"># Thanksgiving = "The fourth Thursday in November"</span>
+<p>Constructing recurrence rules looks like this:</p>
+<div class="sourceCode" id="cb4"><pre class="r"><span class="co"># Thanksgiving = "The fourth Thursday in November"</span>
 <span class="no">on_thanksgiving</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/rrule.html">yearly</a></span>() <span class="kw">%&gt;%</span>
   <span class="fu"><a href="reference/recur_on_ymonth.html">recur_on_ymonth</a></span>(<span class="st">"November"</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="reference/recur_on_wday.html">recur_on_wday</a></span>(<span class="st">"Thursday"</span>, <span class="kw">nth</span> <span class="kw">=</span> <span class="fl">4</span>)
@@ -123,15 +124,15 @@
 <span class="co">#&gt; - ymonth: Nov</span>
 <span class="co">#&gt; - wday: Thu[4]</span></pre></div>
 <p>After constructing a recurrence rule, it can be used to generate dates that are in the “event set”. For example, you can search for all Thanksgivings between 2000-2006.</p>
-<div class="sourceCode" id="cb4"><pre class="r"><span class="fu"><a href="reference/alma_search.html">alma_search</a></span>(<span class="st">"2000-01-01"</span>, <span class="st">"2006-12-31"</span>, <span class="no">on_thanksgiving</span>)
+<div class="sourceCode" id="cb5"><pre class="r"><span class="fu"><a href="reference/alma_search.html">alma_search</a></span>(<span class="st">"2000-01-01"</span>, <span class="st">"2006-12-31"</span>, <span class="no">on_thanksgiving</span>)
 <span class="co">#&gt; [1] "2000-11-23" "2001-11-22" "2002-11-28" "2003-11-27" "2004-11-25"</span>
 <span class="co">#&gt; [6] "2005-11-24" "2006-11-23"</span></pre></div>
 <p>Determine if a particular date is a part of the event set with <code><a href="reference/alma_in.html">alma_in()</a></code>.</p>
-<div class="sourceCode" id="cb5"><pre class="r"><span class="co"># Is this a Thanksgiving?</span>
+<div class="sourceCode" id="cb6"><pre class="r"><span class="co"># Is this a Thanksgiving?</span>
 <span class="fu"><a href="reference/alma_in.html">alma_in</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"2000-01-01"</span>, <span class="st">"2000-11-23"</span>), <span class="no">on_thanksgiving</span>)
 <span class="co">#&gt; [1] FALSE  TRUE</span></pre></div>
 <p>You can also shift an existing sequence of dates, “stepping over” dates that are part of the event set.</p>
-<div class="sourceCode" id="cb6"><pre class="r"><span class="no">wednesday_before_thanksgiving</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span>(<span class="st">"2000-11-22"</span>)
+<div class="sourceCode" id="cb7"><pre class="r"><span class="no">wednesday_before_thanksgiving</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span>(<span class="st">"2000-11-22"</span>)
 
 <span class="co"># Thanksgiving was on 2000-11-23.</span>
 <span class="co"># This steps over Thanksgiving to 2000-11-24.</span>
@@ -139,7 +140,7 @@
 <span class="fu"><a href="reference/alma_step.html">alma_step</a></span>(<span class="no">wednesday_before_thanksgiving</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fl">2</span>, <span class="no">on_thanksgiving</span>)
 <span class="co">#&gt; [1] "2000-11-25"</span></pre></div>
 <p>There is an additional “stepper” object you can create for more intuitive stepping. Combine it with <code><a href="reference/stepper.html">%s+%</a></code> to perform the same step done by <code><a href="reference/alma_step.html">alma_step()</a></code>. Create a stepper function with <code><a href="reference/stepper.html">stepper()</a></code>, and then use it by supplying the number of days to step.</p>
-<div class="sourceCode" id="cb7"><pre class="r"><span class="no">step_over_thanksgiving</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/stepper.html">stepper</a></span>(<span class="no">on_thanksgiving</span>)
+<div class="sourceCode" id="cb8"><pre class="r"><span class="no">step_over_thanksgiving</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/stepper.html">stepper</a></span>(<span class="no">on_thanksgiving</span>)
 <span class="no">wednesday_before_thanksgiving</span> <span class="kw">%s+%</span> <span class="fu">step_over_thanksgiving</span>(<span class="fl">2</span>)
 <span class="co">#&gt; [1] "2000-11-25"</span></pre></div>
 </div>
@@ -148,7 +149,7 @@
 <a href="#recurrence-bundles" class="anchor"></a>Recurrence Bundles</h2>
 <p>The above example just scratches the surface of what almanac can do. Practically speaking, you’ll probably have multiple holidays and events that you’d like to combine into one big recurrence object. This is known as a <em>recurrence bundle</em>.</p>
 <p>This example creates recurrence rules for weekends and Christmas, and bundles them together along with the Thanksgiving rule in such a way that we get the <em>union</em> of the underlying event sets.</p>
-<div class="sourceCode" id="cb8"><pre class="r"><span class="no">on_weekends</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/rrule.html">weekly</a></span>() <span class="kw">%&gt;%</span>
+<div class="sourceCode" id="cb9"><pre class="r"><span class="no">on_weekends</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/rrule.html">weekly</a></span>() <span class="kw">%&gt;%</span>
   <span class="fu"><a href="reference/recur_on_wday.html">recur_on_weekends</a></span>()
 
 <span class="no">on_christmas</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/rrule.html">yearly</a></span>() <span class="kw">%&gt;%</span>
@@ -164,7 +165,7 @@
 <span class="co">#&gt; &lt;runion[3 rschedules / 0 rdates / 0 exdates]&gt;</span></pre></div>
 <p>We can create a stepper that steps over all of the events in the bundle. If these two holidays were the only ones that your company celebrated, the stepper could be viewed as a way to step forward by a “business day”.</p>
 <p>For example, Christmas was on a Monday in 2006. If you wanted to step 1 business day forward from the Friday before Christmas, you’d probably like it to step over the weekend and the Christmas Monday to Tuesday. The <code>bundle</code> lets you do exactly that!</p>
-<div class="sourceCode" id="cb9"><pre class="r"><span class="no">business_day</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/stepper.html">stepper</a></span>(<span class="no">bundle</span>)
+<div class="sourceCode" id="cb10"><pre class="r"><span class="no">business_day</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/stepper.html">stepper</a></span>(<span class="no">bundle</span>)
 
 <span class="co"># Christmas was on a Monday in 2006.</span>
 <span class="co"># This is the Friday before Christmas</span>
@@ -201,6 +202,8 @@
     <div class="links">
 <h2>Links</h2>
 <ul class="list-unstyled">
+<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=almanac">https://​cloud.r-project.org/​package=almanac</a>
+</li>
 <li>Browse source code at <br><a href="https://github.com/DavisVaughan/almanac/">https://​github.com/​DavisVaughan/​almanac/​</a>
 </li>
 <li>Report a bug at <br><a href="https://github.com/DavisVaughan/almanac/issues">https://​github.com/​DavisVaughan/​almanac/​issues</a>
