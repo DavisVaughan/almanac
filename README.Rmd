@@ -32,7 +32,11 @@ almanac provides tools for working with recurrence rules, the fundamental buildi
 
 ## Installation
 
-almanac is not yet on CRAN.
+Install the released version of almanac from CRAN with:
+
+``` r
+install.packages("almanac")
+```
 
 Install the development version from [GitHub](https://github.com/) with:
 
@@ -45,7 +49,7 @@ Mac and Windows users should not have any problems installing almanac. Linux use
 
 ## Recurrence Rules
 
-Constructing recurrence rules looks a little like this:
+Constructing recurrence rules looks like this:
 
 ```{r}
 # Thanksgiving = "The fourth Thursday in November"

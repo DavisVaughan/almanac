@@ -23,7 +23,11 @@ weekends or holidays.
 
 ## Installation
 
-almanac is not yet on CRAN.
+Install the released version of almanac from CRAN with:
+
+``` r
+install.packages("almanac")
+```
 
 Install the development version from [GitHub](https://github.com/) with:
 
@@ -42,7 +46,7 @@ provided by Ubuntu versions before 19.04.
 
 ## Recurrence Rules
 
-Constructing recurrence rules looks a little like this:
+Constructing recurrence rules looks like this:
 
 ``` r
 # Thanksgiving = "The fourth Thursday in November"
