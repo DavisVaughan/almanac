@@ -5,16 +5,16 @@
 
 // -----------------------------------------------------------------------------
 
-#define ADJ_IMPL(X, EVENTS, ADJ_ONE) {                         \
-  const r_ssize size = r_length(X);                            \
+#define ADJ_IMPL(ADJ_ONE) {                                    \
+  const r_ssize size = r_length(x);                            \
                                                                \
   sexp out = PROTECT(r_new_vector(REALSXP, size));             \
   double* p_out = r_dbl_deref(out);                            \
                                                                \
-  const double* p_x = r_dbl_deref(X);                          \
+  const double* p_x = r_dbl_deref(x);                          \
                                                                \
-  double* p_events_begin = r_dbl_deref(EVENTS);                \
-  double* p_events_end = p_events_begin + r_length(EVENTS);    \
+  double* p_events_begin = r_dbl_deref(events);                \
+  double* p_events_end = p_events_begin + r_length(events);    \
                                                                \
   for (r_ssize i = 0; i < size; ++i) {                         \
     p_out[i] = ADJ_ONE(p_x[i], p_events_begin, p_events_end);  \
@@ -28,23 +28,23 @@
 
 
 sexp adj_following_impl(sexp x, sexp events) {
-  ADJ_IMPL(x, events, adj_following_one);
+  ADJ_IMPL(adj_following_one);
 }
 
 sexp adj_preceding_impl(sexp x, sexp events) {
-  ADJ_IMPL(x, events, adj_preceding_one);
+  ADJ_IMPL(adj_preceding_one);
 }
 
 sexp adj_modified_following_impl(sexp x, sexp events) {
-  ADJ_IMPL(x, events, adj_modified_following_one);
+  ADJ_IMPL(adj_modified_following_one);
 }
 
 sexp adj_modified_preceding_impl(sexp x, sexp events) {
-  ADJ_IMPL(x, events, adj_modified_preceding_one);
+  ADJ_IMPL(adj_modified_preceding_one);
 }
 
 sexp adj_nearest_impl(sexp x, sexp events) {
-  ADJ_IMPL(x, events, adj_nearest_one);
+  ADJ_IMPL(adj_nearest_one);
 }
 
 
