@@ -1,7 +1,7 @@
 # almanac (development version)
 
 * Explicitly imports `R6::R6Class()` and `V8::v8()` to avoid R CMD Check
-  false alarms.
+  false alarms (#74).
 
 * Fix USBAN error of casting `NA_real_` and `NaN` to integer (#72).
 
