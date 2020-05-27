@@ -2,7 +2,6 @@
 #include "utils.h"
 #include "months.h"
 #include <algorithm>
-#include <cmath>
 
 // -----------------------------------------------------------------------------
 
@@ -21,7 +20,7 @@
     const double elt = p_x[i];                                 \
                                                                \
     /* Handle `NA_real_` and `NaN` early (#72) */              \
-    if (std::isnan(elt)) {                                     \
+    if (ISNAN(elt)) {                                          \
       p_out[i] = elt;                                          \
       continue;                                                \
     }                                                          \
