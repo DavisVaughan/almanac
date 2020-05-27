@@ -17,7 +17,15 @@
   double* p_events_end = p_events_begin + r_length(events);    \
                                                                \
   for (r_ssize i = 0; i < size; ++i) {                         \
-    p_out[i] = ADJ_ONE(p_x[i], p_events_begin, p_events_end);  \
+    const double elt = p_x[i];                                 \
+                                                               \
+    /* Handle `NA_real_` and `NaN` early (#72) */              \
+    if (isnan(elt)) {                                          \
+      p_out[i] = elt;                                          \
+      continue;                                                \
+    }                                                          \
+                                                               \
+    p_out[i] = ADJ_ONE(elt, p_events_begin, p_events_end);     \
   }                                                            \
                                                                \
   r_init_date(out);                                            \
