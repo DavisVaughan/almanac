@@ -5,9 +5,15 @@
 
 ## R CMD check results
 
-0 errors | 0 warnings | 1 note
+0 errors | 0 warnings | 0 notes
 
-* This is a new release.
+## 0.1.1 Submission
+
+This patch release fixed two issues surfaced by the CRAN checks page.
+
+- Imports are now correctly declared for V8 and R6.
+
+- An USBAN issue regarding `NaN` handling has been fixed.
 
 ## 0.1.0 Resubmission
 
