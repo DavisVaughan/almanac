@@ -1,4 +1,4 @@
-# almanac (development version)
+# almanac 0.1.1
 
 * Explicitly imports `R6::R6Class()` and `V8::v8()` to avoid R CMD Check
   false alarms (#74).
