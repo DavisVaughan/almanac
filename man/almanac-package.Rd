@@ -6,13 +6,7 @@
 \alias{almanac-package}
 \title{almanac: Tools for Working with Recurrence Rules}
 \description{
-Provides tools for defining recurrence rules and
-    recurrence bundles. Recurrence rules are a programmatic way to define
-    a recurring event, like the first Monday of December. Multiple
-    recurrence rules can be combined into larger recurrence bundles.
-    Together, these provide a system for adjusting and generating
-    sequences of dates while simultaneously skipping over dates in a
-    recurrence bundle's event set.
+Provides tools for defining recurrence rules and recurrence bundles. Recurrence rules are a programmatic way to define a recurring event, like the first Monday of December. Multiple recurrence rules can be combined into larger recurrence bundles. Together, these provide a system for adjusting and generating sequences of dates while simultaneously skipping over dates in a recurrence bundle's event set.
 }
 \seealso{
 Useful links:
