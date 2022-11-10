@@ -1,6 +1,6 @@
 # almanac (development version)
 
-* rlang >=1.0.6 and vctrs >=0.5.0 are now required.
+* rlang >=1.0.6, vctrs >=0.5.0, and V8 >=4.2.2 are now required.
 
 # almanac 0.1.1
 
