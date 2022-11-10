@@ -6,7 +6,7 @@
 <!-- badges: start -->
 
 [![Codecov test
-coverage](https://codecov.io/gh/DavisVaughan/almanac/branch/master/graph/badge.svg)](https://codecov.io/gh/DavisVaughan/almanac?branch=master)
+coverage](https://codecov.io/gh/DavisVaughan/almanac/branch/main/graph/badge.svg)](https://codecov.io/gh/DavisVaughan/almanac?branch=main)
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![R-CMD-check](https://github.com/DavisVaughan/almanac/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/DavisVaughan/almanac/actions/workflows/R-CMD-check.yaml)
