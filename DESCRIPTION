@@ -19,7 +19,7 @@ License: MIT + file LICENSE
 URL: https://github.com/DavisVaughan/almanac
 BugReports: https://github.com/DavisVaughan/almanac/issues
 Depends: 
-    R (>= 3.2)
+    R (>= 3.4.0)
 Imports: 
     glue,
     lubridate,
