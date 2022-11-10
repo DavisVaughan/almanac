@@ -6,9 +6,9 @@
 <!-- badges: start -->
 
 [![Codecov test
-coverage](https://codecov.io/gh/DavisVaughan/almanac/branch/main/graph/badge.svg)](https://codecov.io/gh/DavisVaughan/almanac?branch=main)
+coverage](https://codecov.io/gh/DavisVaughan/almanac/branch/main/graph/badge.svg)](https://app.codecov.io/gh/DavisVaughan/almanac?branch=main)
 [![Lifecycle:
-experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 [![R-CMD-check](https://github.com/DavisVaughan/almanac/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/DavisVaughan/almanac/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
@@ -181,7 +181,7 @@ functions in [QuantLib](https://github.com/lballabio/QuantLib).
 
 The fast binary search based implementations of `alma_next()` and
 `alma_step()` are inspired by Pandas and the implementation of Numpy’s
-[busday_offset()](https://docs.scipy.org/doc/numpy/reference/generated/numpy.busday_offset.html).
+[busday_offset()](https://numpy.org/doc/stable/reference/generated/numpy.busday_offset.html).
 
 The author of [gs](https://github.com/jameslairdsmith/gs), James
 Laird-Smith, has been a great collaborator as we have bounced ideas off
