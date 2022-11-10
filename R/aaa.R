@@ -4,6 +4,9 @@
   rrule_js_path <- system.file("js/rrule.js", package = pkgname)
   almanac_global_context$source(rrule_js_path)
 
+  s3_register("slider::slider_plus", "Date.almanac_stepper")
+  s3_register("slider::slider_minus", "Date.almanac_stepper")
+
   .Call(export_almanac_init)
 }
 

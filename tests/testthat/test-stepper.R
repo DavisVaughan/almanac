@@ -144,3 +144,79 @@ test_that("steppers are coercible if from the same rschedule", {
   expect_error(vec_cast(x, new_stepper()), class = "vctrs_error_incompatible_type")
 })
 
+# ------------------------------------------------------------------------------
+# slider_plus() / slider_minus()
+
+test_that("`slider_plus()` method is registered", {
+  skip_if_not_installed("slider", minimum_version = "0.2.2.9000")
+
+  y <- workdays(1)
+
+  # friday
+  x <- as.Date("1970-01-09")
+
+  expect_identical(
+    slider::slider_plus(x, y),
+    as.Date("1970-01-12")
+  )
+
+  # monday
+  x <- as.Date("1970-01-12")
+
+  expect_identical(
+    slider::slider_plus(x, y),
+    as.Date("1970-01-13")
+  )
+})
+
+test_that("`slider_minus()` method is registered", {
+  skip_if_not_installed("slider", minimum_version = "0.2.2.9000")
+
+  y <- workdays(1)
+
+  # monday
+  x <- as.Date("1970-01-12")
+
+  expect_identical(
+    slider::slider_minus(x, y),
+    as.Date("1970-01-09")
+  )
+
+  # friday
+  x <- as.Date("1970-01-09")
+
+  expect_identical(
+    slider::slider_minus(x, y),
+    as.Date("1970-01-08")
+  )
+})
+
+test_that("`slide_index()` works with steppers", {
+  skip_if_not_installed("slider", minimum_version = "0.2.2.9000")
+
+  # wednesday -> wednesday
+  x <- 1:8
+  i <- as.Date("1970-01-07") + 0:7
+
+  out <- slider::slide_index(
+    .x = x,
+    .i = i,
+    .f = identity,
+    .before = workdays(1),
+    .after = workdays(1)
+  )
+
+  expect_identical(
+    out,
+    list(
+      1:2, # On Wed, Bounds Tue-Thu
+      1:3, # On Thu, Bounds Wed-Fri
+      2:6, # On Fri, Bounds Thu-Mon
+      3:6, # On Sat, Bounds Fri-Mon
+      3:6, # On Sun, Bounds Fri-Mon
+      3:7, # On Mon, Bounds Fri-Tue
+      6:8, # On Tue, Bounds Mon-Wed
+      7:8  # On Wed, Bounds Tue-Thu
+    )
+  )
+})
