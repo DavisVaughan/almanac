@@ -2,8 +2,6 @@
 
 * R >=3.4.0 is now required, which is in line with tidyverse standards.
 
-* rlang >=1.0.6, vctrs >=0.5.0, and V8 >=4.2.2 are now required.
-
 # almanac 0.1.1
 
 * Explicitly imports `R6::R6Class()` and `V8::v8()` to avoid R CMD Check
