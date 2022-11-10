@@ -1,5 +1,7 @@
 # almanac (development version)
 
+* rlang >=1.0.6 and vctrs >=0.5.0 are now required.
+
 # almanac 0.1.1
 
 * Explicitly imports `R6::R6Class()` and `V8::v8()` to avoid R CMD Check

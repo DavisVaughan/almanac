@@ -25,9 +25,9 @@ Imports:
     lubridate,
     magrittr,
     R6,
-    rlang,
+    rlang (>= 1.0.6),
     V8 (>= 3.0.1),
-    vctrs (>= 0.3.0)
+    vctrs (>= 0.5.0)
 Suggests: 
     covr,
     knitr,
