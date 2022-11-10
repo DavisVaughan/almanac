@@ -9,8 +9,7 @@
 coverage](https://codecov.io/gh/DavisVaughan/almanac/branch/master/graph/badge.svg)](https://codecov.io/gh/DavisVaughan/almanac?branch=master)
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
-[![R build
-status](https://github.com/DavisVaughan/almanac/workflows/R-CMD-check/badge.svg)](https://github.com/DavisVaughan/almanac/actions)
+[![R-CMD-check](https://github.com/DavisVaughan/almanac/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/DavisVaughan/almanac/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 ``` r
@@ -139,7 +138,7 @@ day”.
 For example, Christmas was on a Monday in 2006. If you wanted to step 1
 business day forward from the Friday before Christmas, you’d probably
 like it to step over the weekend and the Christmas Monday to Tuesday.
-The `bundle` lets you do exactly that\!
+The `bundle` lets you do exactly that!
 
 ``` r
 business_day <- stepper(bundle)
@@ -159,13 +158,13 @@ View the vignettes on [the
 website](https://davisvaughan.github.io/almanac/index.html) to learn
 more about how to use almanac.
 
-  - `vignette("almanac")`
+- `vignette("almanac")`
 
-  - `vignette("adjust-and-shift")`
+- `vignette("adjust-and-shift")`
 
-  - `vignette("quarterly")`
+- `vignette("quarterly")`
 
-  - `vignette("icalendar")`
+- `vignette("icalendar")`
 
 ## Acknowledgements
 
@@ -182,7 +181,7 @@ functions in [QuantLib](https://github.com/lballabio/QuantLib).
 
 The fast binary search based implementations of `alma_next()` and
 `alma_step()` are inspired by Pandas and the implementation of Numpy’s
-[busday\_offset()](https://docs.scipy.org/doc/numpy/reference/generated/numpy.busday_offset.html).
+[busday_offset()](https://docs.scipy.org/doc/numpy/reference/generated/numpy.busday_offset.html).
 
 The author of [gs](https://github.com/jameslairdsmith/gs), James
 Laird-Smith, has been a great collaborator as we have bounced ideas off
