@@ -19,6 +19,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -31,18 +33,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">almanac</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.1.9000</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../articles/almanac.html">Get started</a>
 </li>
@@ -50,7 +46,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -73,8 +69,8 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/DavisVaughan/almanac/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/DavisVaughan/almanac/" class="external-link">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -94,176 +90,259 @@
       <h1 data-toc-skip>Introduction to almanac</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/DavisVaughan/almanac/blob/master/vignettes/almanac.Rmd"><code>vignettes/almanac.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/DavisVaughan/almanac/blob/HEAD/vignettes/almanac.Rmd" class="external-link"><code>vignettes/almanac.Rmd</code></a></small>
       <div class="hidden name"><code>almanac.Rmd</code></div>
 
     </div>
 
     
     
-<p>This vignette is designed to introduce some of the common terminology used in almanac to get you up to speed on how to use the package. Along the way, we will see example usage of a number of the building blocks that will allow you to construct more complex recurrence objects.</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">almanac</span>)</pre></body></html></div>
-<div id="recurrence-rules" class="section level2">
-<h2 class="hasAnchor">
-<a href="#recurrence-rules" class="anchor"></a>Recurrence Rules</h2>
-<p>A <em>recurrence rule</em> is a structured object that determines if a date should be counted as an <em>event</em> or not. At the most basic level, the job of a recurrence rule is to search through a pre-specified range of dates and flag any event dates in that range.</p>
-<p>To build a recurrence rule, you start with a base recurrence frequency. There are 4 frequencies to choose from:</p>
+<p>This vignette is designed to introduce some of the common terminology
+used in almanac to get you up to speed on how to use the package. Along
+the way, we will see example usage of a number of the building blocks
+that will allow you to construct more complex recurrence objects.</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/DavisVaughan/almanac" class="external-link">almanac</a></span><span class="op">)</span></span></code></pre></div>
+<div class="section level2">
+<h2 id="recurrence-rules">Recurrence Rules<a class="anchor" aria-label="anchor" href="#recurrence-rules"></a>
+</h2>
+<p>A <em>recurrence rule</em> is a structured object that determines if
+a date should be counted as an <em>event</em> or not. At the most basic
+level, the job of a recurrence rule is to search through a pre-specified
+range of dates and flag any event dates in that range.</p>
+<p>To build a recurrence rule, you start with a base recurrence
+frequency. There are 4 frequencies to choose from:</p>
 <ul>
 <li><p><code><a href="../reference/rrule.html">daily()</a></code></p></li>
 <li><p><code><a href="../reference/rrule.html">weekly()</a></code></p></li>
 <li><p><code><a href="../reference/rrule.html">monthly()</a></code></p></li>
 <li><p><code><a href="../reference/rrule.html">yearly()</a></code></p></li>
 </ul>
-<p>Take the <code><a href="../reference/rrule.html">yearly()</a></code> frequency, for example. By default, this will declare that 1 value per year is an event.</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">on_yearly</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">yearly</a></span>()
-<span class="no">on_yearly</span>
-<span class="co">#&gt; &lt;rrule[yearly / 1900-01-01 / 2100-01-01]&gt;</span></pre></body></html></div>
-<p>The return value of <code><a href="../reference/rrule.html">yearly()</a></code> is a <em>rrule</em> object, short for “recurrence rule”. This base object is all you need to start doing something useful. For example, you can pass this rrule to <code><a href="../reference/alma_search.html">alma_search()</a></code> along with a <code>from</code> and <code>to</code> date, and it will return all of the events in that date range.</p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="../reference/alma_search.html">alma_search</a></span>(<span class="kw">from</span> <span class="kw">=</span> <span class="st">"1990-01-01"</span>, <span class="kw">to</span> <span class="kw">=</span> <span class="st">"1995-12-31"</span>, <span class="no">on_yearly</span>)
-<span class="co">#&gt; [1] "1990-01-01" "1991-01-01" "1992-01-01" "1993-01-01" "1994-01-01"</span>
-<span class="co">#&gt; [6] "1995-01-01"</span></pre></body></html></div>
-<p>What if we want a yearly value, but we want it on January 5th every year, rather than on the 1st? <code><a href="../reference/rrule.html">yearly()</a></code> has an important argument called <code>since</code> that controls two things: the start date of the recurrence rule, and information such as the month, or the day of the month to use if no other conditions have been specified to override those.</p>
-<p>The default of <code>since</code> is set to <code>1900-01-01</code>, but this is arbitrary. It is because of this default that in the above example with <code><a href="../reference/alma_search.html">alma_search()</a></code> we get values on January 1st. Let’s change that.</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">on_yearly_jan_5</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">yearly</a></span>(<span class="kw">since</span> <span class="kw">=</span> <span class="st">"1990-01-05"</span>)
-
-<span class="fu"><a href="../reference/alma_search.html">alma_search</a></span>(<span class="st">"1990-01-01"</span>, <span class="st">"1995-12-31"</span>, <span class="no">on_yearly_jan_5</span>)
-<span class="co">#&gt; [1] "1990-01-05" "1991-01-05" "1992-01-05" "1993-01-05" "1994-01-05"</span>
-<span class="co">#&gt; [6] "1995-01-05"</span></pre></body></html></div>
-<p>Now that the <code>since</code> date has been set to 1990, if we try and find yearly dates before 1990, they will not be included.</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="co"># Same result as above, because the 1988 and 1989 dates are not included. </span>
-<span class="fu"><a href="../reference/alma_search.html">alma_search</a></span>(<span class="st">"1988-01-01"</span>, <span class="st">"1995-12-31"</span>, <span class="no">on_yearly_jan_5</span>)
-<span class="co">#&gt; [1] "1990-01-05" "1991-01-05" "1992-01-05" "1993-01-05" "1994-01-05"</span>
-<span class="co">#&gt; [6] "1995-01-05"</span></pre></body></html></div>
-<p>There is also an <code>until</code> argument to <code><a href="../reference/rrule.html">yearly()</a></code> that controls the upper bound of the range to look in. This is arbitrarily set to <code>2100-01-01</code>, but can be expanded or contracted as required.</p>
+<p>Take the <code><a href="../reference/rrule.html">yearly()</a></code> frequency, for example. By default,
+this will declare that 1 value per year is an event.</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">on_yearly</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">yearly</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">on_yearly</span></span>
+<span><span class="co">#&gt; &lt;rrule[yearly / 1900-01-01 / 2100-01-01]&gt;</span></span></code></pre></div>
+<p>The return value of <code><a href="../reference/rrule.html">yearly()</a></code> is a <em>rrule</em> object,
+short for “recurrence rule”. This base object is all you need to start
+doing something useful. For example, you can pass this rrule to
+<code><a href="../reference/alma_search.html">alma_search()</a></code> along with a <code>from</code> and
+<code>to</code> date, and it will return all of the events in that date
+range.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/alma_search.html">alma_search</a></span><span class="op">(</span>from <span class="op">=</span> <span class="st">"1990-01-01"</span>, to <span class="op">=</span> <span class="st">"1995-12-31"</span>, <span class="va">on_yearly</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "1990-01-01" "1991-01-01" "1992-01-01" "1993-01-01" "1994-01-01"</span></span>
+<span><span class="co">#&gt; [6] "1995-01-01"</span></span></code></pre></div>
+<p>What if we want a yearly value, but we want it on January 5th every
+year, rather than on the 1st? <code><a href="../reference/rrule.html">yearly()</a></code> has an important
+argument called <code>since</code> that controls two things: the start
+date of the recurrence rule, and information such as the month, or the
+day of the month to use if no other conditions have been specified to
+override those.</p>
+<p>The default of <code>since</code> is set to <code>1900-01-01</code>,
+but this is arbitrary. It is because of this default that in the above
+example with <code><a href="../reference/alma_search.html">alma_search()</a></code> we get values on January 1st.
+Let’s change that.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">on_yearly_jan_5</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">yearly</a></span><span class="op">(</span>since <span class="op">=</span> <span class="st">"1990-01-05"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/alma_search.html">alma_search</a></span><span class="op">(</span><span class="st">"1990-01-01"</span>, <span class="st">"1995-12-31"</span>, <span class="va">on_yearly_jan_5</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "1990-01-05" "1991-01-05" "1992-01-05" "1993-01-05" "1994-01-05"</span></span>
+<span><span class="co">#&gt; [6] "1995-01-05"</span></span></code></pre></div>
+<p>Now that the <code>since</code> date has been set to 1990, if we try
+and find yearly dates before 1990, they will not be included.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Same result as above, because the 1988 and 1989 dates are not included. </span></span>
+<span><span class="fu"><a href="../reference/alma_search.html">alma_search</a></span><span class="op">(</span><span class="st">"1988-01-01"</span>, <span class="st">"1995-12-31"</span>, <span class="va">on_yearly_jan_5</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "1990-01-05" "1991-01-05" "1992-01-05" "1993-01-05" "1994-01-05"</span></span>
+<span><span class="co">#&gt; [6] "1995-01-05"</span></span></code></pre></div>
+<p>There is also an <code>until</code> argument to <code><a href="../reference/rrule.html">yearly()</a></code>
+that controls the upper bound of the range to look in. This is
+arbitrarily set to <code>2100-01-01</code>, but can be expanded or
+contracted as required.</p>
 </div>
-<div id="event-set" class="section level2">
-<h2 class="hasAnchor">
-<a href="#event-set" class="anchor"></a>Event Set</h2>
-<p>I mentioned earlier that the job of a recurrence rule is to flag dates in a pre-specified range to be events or not. The dates that are flagged as events are known as the <em>event set</em>.</p>
-<p>In the previous example, we used <code><a href="../reference/alma_search.html">alma_search()</a></code> to extract a subset of dates from the event set that were between <code>from</code> and <code>to</code>. You can get the entire event set with <code><a href="../reference/alma_events.html">alma_events()</a></code>. Notice that this is bounded by our custom <code>since</code> date, and the default <code>until</code> upper bound. Otherwise we’d have an infinite event set, which is nice in theory but bad in practice.</p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="fu"><a href="../reference/alma_events.html">alma_events</a></span>(<span class="no">on_yearly_jan_5</span>)
-<span class="co">#&gt;   [1] "1990-01-05" "1991-01-05" "1992-01-05" "1993-01-05" "1994-01-05"</span>
-<span class="co">#&gt;   [6] "1995-01-05" "1996-01-05" "1997-01-05" "1998-01-05" "1999-01-05"</span>
-<span class="co">#&gt;  [11] "2000-01-05" "2001-01-05" "2002-01-05" "2003-01-05" "2004-01-05"</span>
-<span class="co">#&gt;  [16] "2005-01-05" "2006-01-05" "2007-01-05" "2008-01-05" "2009-01-05"</span>
-<span class="co">#&gt;  [21] "2010-01-05" "2011-01-05" "2012-01-05" "2013-01-05" "2014-01-05"</span>
-<span class="co">#&gt;  [26] "2015-01-05" "2016-01-05" "2017-01-05" "2018-01-05" "2019-01-05"</span>
-<span class="co">#&gt;  [31] "2020-01-05" "2021-01-05" "2022-01-05" "2023-01-05" "2024-01-05"</span>
-<span class="co">#&gt;  [36] "2025-01-05" "2026-01-05" "2027-01-05" "2028-01-05" "2029-01-05"</span>
-<span class="co">#&gt;  [41] "2030-01-05" "2031-01-05" "2032-01-05" "2033-01-05" "2034-01-05"</span>
-<span class="co">#&gt;  [46] "2035-01-05" "2036-01-05" "2037-01-05" "2038-01-05" "2039-01-05"</span>
-<span class="co">#&gt;  [51] "2040-01-05" "2041-01-05" "2042-01-05" "2043-01-05" "2044-01-05"</span>
-<span class="co">#&gt;  [56] "2045-01-05" "2046-01-05" "2047-01-05" "2048-01-05" "2049-01-05"</span>
-<span class="co">#&gt;  [61] "2050-01-05" "2051-01-05" "2052-01-05" "2053-01-05" "2054-01-05"</span>
-<span class="co">#&gt;  [66] "2055-01-05" "2056-01-05" "2057-01-05" "2058-01-05" "2059-01-05"</span>
-<span class="co">#&gt;  [71] "2060-01-05" "2061-01-05" "2062-01-05" "2063-01-05" "2064-01-05"</span>
-<span class="co">#&gt;  [76] "2065-01-05" "2066-01-05" "2067-01-05" "2068-01-05" "2069-01-05"</span>
-<span class="co">#&gt;  [81] "2070-01-05" "2071-01-05" "2072-01-05" "2073-01-05" "2074-01-05"</span>
-<span class="co">#&gt;  [86] "2075-01-05" "2076-01-05" "2077-01-05" "2078-01-05" "2079-01-05"</span>
-<span class="co">#&gt;  [91] "2080-01-05" "2081-01-05" "2082-01-05" "2083-01-05" "2084-01-05"</span>
-<span class="co">#&gt;  [96] "2085-01-05" "2086-01-05" "2087-01-05" "2088-01-05" "2089-01-05"</span>
-<span class="co">#&gt; [101] "2090-01-05" "2091-01-05" "2092-01-05" "2093-01-05" "2094-01-05"</span>
-<span class="co">#&gt; [106] "2095-01-05" "2096-01-05" "2097-01-05" "2098-01-05" "2099-01-05"</span></pre></body></html></div>
-<p>You can also check if an existing date is included in a recurrence rule’s event set with <code><a href="../reference/alma_in.html">alma_in()</a></code>.</p>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="co"># Uses the 10th of the month, pulled from `since`</span>
-<span class="no">on_monthly</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">monthly</a></span>(<span class="kw">since</span> <span class="kw">=</span> <span class="st">"1990-01-10"</span>)
-
-<span class="no">x</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span>(<span class="st">"2000-01-08"</span>) + <span class="fl">0</span>:<span class="fl">5</span>
-<span class="no">x</span>
-<span class="co">#&gt; [1] "2000-01-08" "2000-01-09" "2000-01-10" "2000-01-11" "2000-01-12"</span>
-<span class="co">#&gt; [6] "2000-01-13"</span>
-
-<span class="no">x_in_set</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/alma_in.html">alma_in</a></span>(<span class="no">x</span>, <span class="no">on_monthly</span>)
-<span class="no">x_in_set</span>
-<span class="co">#&gt; [1] FALSE FALSE  TRUE FALSE FALSE FALSE</span>
-
-<span class="no">x</span>[<span class="no">x_in_set</span>]
-<span class="co">#&gt; [1] "2000-01-10"</span></pre></body></html></div>
-<div id="caching" class="section level3">
-<h3 class="hasAnchor">
-<a href="#caching" class="anchor"></a>Caching</h3>
-<p>almanac attempts to be smart by caching the event set of a recurrence rule the first time that it is queried. This means that the first usage of a recurrence rule is generally slower than repeated uses.</p>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="no">since</span> <span class="kw">&lt;-</span> <span class="st">"1990-01-01"</span>
-
-<span class="no">on_weekly</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">weekly</a></span>(<span class="kw">since</span> <span class="kw">=</span> <span class="no">since</span>)
-
-<span class="co"># The first time is "slow"</span>
-<span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>(<span class="fu"><a href="../reference/alma_search.html">alma_search</a></span>(<span class="no">since</span>, <span class="st">"2000-01-01"</span>, <span class="no">on_weekly</span>))
-<span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;   0.137   0.011   0.130</span>
-
-<span class="co"># Repeated access is fast</span>
-<span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>(<span class="fu"><a href="../reference/alma_search.html">alma_search</a></span>(<span class="no">since</span>, <span class="st">"2000-01-01"</span>, <span class="no">on_weekly</span>))
-<span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;   0.001   0.000   0.001</span>
-
-<span class="co"># The entire event set is cached, so even if you change the arguments,</span>
-<span class="co"># the operation is still fast.</span>
-<span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>(<span class="fu"><a href="../reference/alma_search.html">alma_search</a></span>(<span class="no">since</span>, <span class="st">"1990-05-01"</span>, <span class="no">on_weekly</span>))
-<span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;   0.001   0.000   0.000</span></pre></body></html></div>
+<div class="section level2">
+<h2 id="event-set">Event Set<a class="anchor" aria-label="anchor" href="#event-set"></a>
+</h2>
+<p>I mentioned earlier that the job of a recurrence rule is to flag
+dates in a pre-specified range to be events or not. The dates that are
+flagged as events are known as the <em>event set</em>.</p>
+<p>In the previous example, we used <code><a href="../reference/alma_search.html">alma_search()</a></code> to
+extract a subset of dates from the event set that were between
+<code>from</code> and <code>to</code>. You can get the entire event set
+with <code><a href="../reference/alma_events.html">alma_events()</a></code>. Notice that this is bounded by our
+custom <code>since</code> date, and the default <code>until</code> upper
+bound. Otherwise we’d have an infinite event set, which is nice in
+theory but bad in practice.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/alma_events.html">alma_events</a></span><span class="op">(</span><span class="va">on_yearly_jan_5</span><span class="op">)</span></span>
+<span><span class="co">#&gt;   [1] "1990-01-05" "1991-01-05" "1992-01-05" "1993-01-05" "1994-01-05"</span></span>
+<span><span class="co">#&gt;   [6] "1995-01-05" "1996-01-05" "1997-01-05" "1998-01-05" "1999-01-05"</span></span>
+<span><span class="co">#&gt;  [11] "2000-01-05" "2001-01-05" "2002-01-05" "2003-01-05" "2004-01-05"</span></span>
+<span><span class="co">#&gt;  [16] "2005-01-05" "2006-01-05" "2007-01-05" "2008-01-05" "2009-01-05"</span></span>
+<span><span class="co">#&gt;  [21] "2010-01-05" "2011-01-05" "2012-01-05" "2013-01-05" "2014-01-05"</span></span>
+<span><span class="co">#&gt;  [26] "2015-01-05" "2016-01-05" "2017-01-05" "2018-01-05" "2019-01-05"</span></span>
+<span><span class="co">#&gt;  [31] "2020-01-05" "2021-01-05" "2022-01-05" "2023-01-05" "2024-01-05"</span></span>
+<span><span class="co">#&gt;  [36] "2025-01-05" "2026-01-05" "2027-01-05" "2028-01-05" "2029-01-05"</span></span>
+<span><span class="co">#&gt;  [41] "2030-01-05" "2031-01-05" "2032-01-05" "2033-01-05" "2034-01-05"</span></span>
+<span><span class="co">#&gt;  [46] "2035-01-05" "2036-01-05" "2037-01-05" "2038-01-05" "2039-01-05"</span></span>
+<span><span class="co">#&gt;  [51] "2040-01-05" "2041-01-05" "2042-01-05" "2043-01-05" "2044-01-05"</span></span>
+<span><span class="co">#&gt;  [56] "2045-01-05" "2046-01-05" "2047-01-05" "2048-01-05" "2049-01-05"</span></span>
+<span><span class="co">#&gt;  [61] "2050-01-05" "2051-01-05" "2052-01-05" "2053-01-05" "2054-01-05"</span></span>
+<span><span class="co">#&gt;  [66] "2055-01-05" "2056-01-05" "2057-01-05" "2058-01-05" "2059-01-05"</span></span>
+<span><span class="co">#&gt;  [71] "2060-01-05" "2061-01-05" "2062-01-05" "2063-01-05" "2064-01-05"</span></span>
+<span><span class="co">#&gt;  [76] "2065-01-05" "2066-01-05" "2067-01-05" "2068-01-05" "2069-01-05"</span></span>
+<span><span class="co">#&gt;  [81] "2070-01-05" "2071-01-05" "2072-01-05" "2073-01-05" "2074-01-05"</span></span>
+<span><span class="co">#&gt;  [86] "2075-01-05" "2076-01-05" "2077-01-05" "2078-01-05" "2079-01-05"</span></span>
+<span><span class="co">#&gt;  [91] "2080-01-05" "2081-01-05" "2082-01-05" "2083-01-05" "2084-01-05"</span></span>
+<span><span class="co">#&gt;  [96] "2085-01-05" "2086-01-05" "2087-01-05" "2088-01-05" "2089-01-05"</span></span>
+<span><span class="co">#&gt; [101] "2090-01-05" "2091-01-05" "2092-01-05" "2093-01-05" "2094-01-05"</span></span>
+<span><span class="co">#&gt; [106] "2095-01-05" "2096-01-05" "2097-01-05" "2098-01-05" "2099-01-05"</span></span></code></pre></div>
+<p>You can also check if an existing date is included in a recurrence
+rule’s event set with <code><a href="../reference/alma_in.html">alma_in()</a></code>.</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Uses the 10th of the month, pulled from `since`</span></span>
+<span><span class="va">on_monthly</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">monthly</a></span><span class="op">(</span>since <span class="op">=</span> <span class="st">"1990-01-10"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="st">"2000-01-08"</span><span class="op">)</span> <span class="op">+</span> <span class="fl">0</span><span class="op">:</span><span class="fl">5</span></span>
+<span><span class="va">x</span></span>
+<span><span class="co">#&gt; [1] "2000-01-08" "2000-01-09" "2000-01-10" "2000-01-11" "2000-01-12"</span></span>
+<span><span class="co">#&gt; [6] "2000-01-13"</span></span>
+<span></span>
+<span><span class="va">x_in_set</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/alma_in.html">alma_in</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">on_monthly</span><span class="op">)</span></span>
+<span><span class="va">x_in_set</span></span>
+<span><span class="co">#&gt; [1] FALSE FALSE  TRUE FALSE FALSE FALSE</span></span>
+<span></span>
+<span><span class="va">x</span><span class="op">[</span><span class="va">x_in_set</span><span class="op">]</span></span>
+<span><span class="co">#&gt; [1] "2000-01-10"</span></span></code></pre></div>
+<div class="section level3">
+<h3 id="caching">Caching<a class="anchor" aria-label="anchor" href="#caching"></a>
+</h3>
+<p>almanac attempts to be smart by caching the event set of a recurrence
+rule the first time that it is queried. This means that the first usage
+of a recurrence rule is generally slower than repeated uses.</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">since</span> <span class="op">&lt;-</span> <span class="st">"1990-01-01"</span></span>
+<span></span>
+<span><span class="va">on_weekly</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">weekly</a></span><span class="op">(</span>since <span class="op">=</span> <span class="va">since</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># The first time is "slow"</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/alma_search.html">alma_search</a></span><span class="op">(</span><span class="va">since</span>, <span class="st">"2000-01-01"</span>, <span class="va">on_weekly</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt;    user  system elapsed </span></span>
+<span><span class="co">#&gt;   0.200   0.004   0.162</span></span>
+<span></span>
+<span><span class="co"># Repeated access is fast</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/alma_search.html">alma_search</a></span><span class="op">(</span><span class="va">since</span>, <span class="st">"2000-01-01"</span>, <span class="va">on_weekly</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt;    user  system elapsed </span></span>
+<span><span class="co">#&gt;   0.001   0.000   0.002</span></span>
+<span></span>
+<span><span class="co"># The entire event set is cached, so even if you change the arguments,</span></span>
+<span><span class="co"># the operation is still fast.</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/alma_search.html">alma_search</a></span><span class="op">(</span><span class="va">since</span>, <span class="st">"1990-05-01"</span>, <span class="va">on_weekly</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt;    user  system elapsed </span></span>
+<span><span class="co">#&gt;   0.001   0.000   0.000</span></span></code></pre></div>
 </div>
 </div>
-<div id="recurrence-conditions" class="section level2">
-<h2 class="hasAnchor">
-<a href="#recurrence-conditions" class="anchor"></a>Recurrence Conditions</h2>
-<p>So far we have worked with the base recurrence rules. Things get <em>much</em> more interesting when we start adding extra conditions to these rules. Conditions are ways to <em>limit</em> or <em>expand</em> a given recurrence rule to hone in on recurring dates that you are particularly interested in. All condition functions in almanac start with <code>recur_*()</code>. For example, let’s take a monthly rule, which defaults to give us 1 day per month, and <em>expand</em> it to give us every 4th and 16th day of the month.</p>
-<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="no">on_4th_and_16th</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">monthly</a></span>(<span class="kw">since</span> <span class="kw">=</span> <span class="st">"2000-01-01"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/recur_on_mday.html">recur_on_mday</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">4</span>, <span class="fl">16</span>))
-
-<span class="fu"><a href="../reference/alma_search.html">alma_search</a></span>(<span class="st">"2000-01-01"</span>, <span class="st">"2000-06-01"</span>, <span class="no">on_4th_and_16th</span>)
-<span class="co">#&gt;  [1] "2000-01-04" "2000-01-16" "2000-02-04" "2000-02-16" "2000-03-04"</span>
-<span class="co">#&gt;  [6] "2000-03-16" "2000-04-04" "2000-04-16" "2000-05-04" "2000-05-16"</span></pre></body></html></div>
-<p>An important thing to note here is that even though our <code>since</code> date is on the first of the month, we are “overriding” that with the recurrence condition, so that information is not used.</p>
-<p>Recurrence rules can continually be added to further refine your rule. When you add a condition to a rule, you get another rule back. Let’s try creating a rule for the recurring holiday, Labor Day. This recurs on the first Monday of September, yearly. To do this, we will:</p>
+<div class="section level2">
+<h2 id="recurrence-conditions">Recurrence Conditions<a class="anchor" aria-label="anchor" href="#recurrence-conditions"></a>
+</h2>
+<p>So far we have worked with the base recurrence rules. Things get
+<em>much</em> more interesting when we start adding extra conditions to
+these rules. Conditions are ways to <em>limit</em> or <em>expand</em> a
+given recurrence rule to hone in on recurring dates that you are
+particularly interested in. All condition functions in almanac start
+with <code>recur_*()</code>. For example, let’s take a monthly rule,
+which defaults to give us 1 day per month, and <em>expand</em> it to
+give us every 4th and 16th day of the month.</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">on_4th_and_16th</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">monthly</a></span><span class="op">(</span>since <span class="op">=</span> <span class="st">"2000-01-01"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/recur_on_mday.html">recur_on_mday</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">16</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/alma_search.html">alma_search</a></span><span class="op">(</span><span class="st">"2000-01-01"</span>, <span class="st">"2000-06-01"</span>, <span class="va">on_4th_and_16th</span><span class="op">)</span></span>
+<span><span class="co">#&gt;  [1] "2000-01-04" "2000-01-16" "2000-02-04" "2000-02-16" "2000-03-04"</span></span>
+<span><span class="co">#&gt;  [6] "2000-03-16" "2000-04-04" "2000-04-16" "2000-05-04" "2000-05-16"</span></span></code></pre></div>
+<p>An important thing to note here is that even though our
+<code>since</code> date is on the first of the month, we are
+“overriding” that with the recurrence condition, so that information is
+not used.</p>
+<p>Recurrence rules can continually be added to further refine your
+rule. When you add a condition to a rule, you get another rule back.
+Let’s try creating a rule for the recurring holiday, Labor Day. This
+recurs on the first Monday of September, yearly. To do this, we
+will:</p>
 <ul>
-<li><p>Use a <code><a href="../reference/rrule.html">yearly()</a></code> base since this happens 1 time per year.</p></li>
-<li><p>Use <code><a href="../reference/recur_on_ymonth.html">recur_on_ymonth()</a></code> to hone in on September.</p></li>
-<li><p>Use <code><a href="../reference/recur_on_wday.html">recur_on_wday()</a></code> to hone in on the first Monday of the month.</p></li>
+<li><p>Use a <code><a href="../reference/rrule.html">yearly()</a></code> base since this happens 1 time per
+year.</p></li>
+<li><p>Use <code><a href="../reference/recur_on_ymonth.html">recur_on_ymonth()</a></code> to hone in on
+September.</p></li>
+<li><p>Use <code><a href="../reference/recur_on_wday.html">recur_on_wday()</a></code> to hone in on the first Monday
+of the month.</p></li>
 </ul>
-<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="no">on_labor_day</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">yearly</a></span>() <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/recur_on_ymonth.html">recur_on_ymonth</a></span>(<span class="st">"Sep"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/recur_on_wday.html">recur_on_wday</a></span>(<span class="st">"Monday"</span>, <span class="kw">nth</span> <span class="kw">=</span> <span class="fl">1</span>)
-
-<span class="fu"><a href="../reference/alma_search.html">alma_search</a></span>(<span class="st">"2000-01-01"</span>, <span class="st">"2005-01-01"</span>, <span class="no">on_labor_day</span>)
-<span class="co">#&gt; [1] "2000-09-04" "2001-09-03" "2002-09-02" "2003-09-01" "2004-09-06"</span></pre></body></html></div>
-<p>The <code>nth</code> argument of <code><a href="../reference/recur_on_wday.html">recur_on_wday()</a></code> is especially useful for selecting from the end of the month. If we wanted the <em>last</em> Monday in September instead, we could do:</p>
-<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="no">on_last_monday_in_sept</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">yearly</a></span>(<span class="kw">since</span> <span class="kw">=</span> <span class="st">"2000-01-01"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/recur_on_ymonth.html">recur_on_ymonth</a></span>(<span class="st">"Sep"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/recur_on_wday.html">recur_on_wday</a></span>(<span class="st">"Monday"</span>, <span class="kw">nth</span> <span class="kw">=</span> -<span class="fl">1</span>)
-
-<span class="fu"><a href="../reference/alma_search.html">alma_search</a></span>(<span class="st">"2000-01-01"</span>, <span class="st">"2005-01-01"</span>, <span class="no">on_last_monday_in_sept</span>)
-<span class="co">#&gt; [1] "2000-09-25" "2001-09-24" "2002-09-30" "2003-09-29" "2004-09-27"</span></pre></body></html></div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">on_labor_day</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">yearly</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/recur_on_ymonth.html">recur_on_ymonth</a></span><span class="op">(</span><span class="st">"Sep"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/recur_on_wday.html">recur_on_wday</a></span><span class="op">(</span><span class="st">"Monday"</span>, nth <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/alma_search.html">alma_search</a></span><span class="op">(</span><span class="st">"2000-01-01"</span>, <span class="st">"2005-01-01"</span>, <span class="va">on_labor_day</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "2000-09-04" "2001-09-03" "2002-09-02" "2003-09-01" "2004-09-06"</span></span></code></pre></div>
+<p>The <code>nth</code> argument of <code><a href="../reference/recur_on_wday.html">recur_on_wday()</a></code> is
+especially useful for selecting from the end of the month. If we wanted
+the <em>last</em> Monday in September instead, we could do:</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">on_last_monday_in_sept</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">yearly</a></span><span class="op">(</span>since <span class="op">=</span> <span class="st">"2000-01-01"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/recur_on_ymonth.html">recur_on_ymonth</a></span><span class="op">(</span><span class="st">"Sep"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/recur_on_wday.html">recur_on_wday</a></span><span class="op">(</span><span class="st">"Monday"</span>, nth <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/alma_search.html">alma_search</a></span><span class="op">(</span><span class="st">"2000-01-01"</span>, <span class="st">"2005-01-01"</span>, <span class="va">on_last_monday_in_sept</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "2000-09-25" "2001-09-24" "2002-09-30" "2003-09-29" "2004-09-27"</span></span></code></pre></div>
 </div>
-<div id="recurrence-bundles" class="section level2">
-<h2 class="hasAnchor">
-<a href="#recurrence-bundles" class="anchor"></a>Recurrence Bundles</h2>
-<p>Recurrence rules are powerful tools on their own, but they aren’t enough to solve every task. Say you want to construct a rule that includes both Christmas and Labor Day as events. It would be impossible to construct this kind of event set using a single rule, but if you could <em>bundle</em> multiple rules together, one for Christmas and one for Labor Day, then it would be possible.</p>
-<p>An <em>rbundle</em> is a bundle of recurrence schedules. A recurrence schedule, or rschedule, is an overarching term for both rrules and rbundles. There are three types of rbundles in almanac. Each create their event set by performing some kind of set operation on the event sets of the underlying rschedules that you added to the bundle.</p>
+<div class="section level2">
+<h2 id="recurrence-bundles">Recurrence Bundles<a class="anchor" aria-label="anchor" href="#recurrence-bundles"></a>
+</h2>
+<p>Recurrence rules are powerful tools on their own, but they aren’t
+enough to solve every task. Say you want to construct a rule that
+includes both Christmas and Labor Day as events. It would be impossible
+to construct this kind of event set using a single rule, but if you
+could <em>bundle</em> multiple rules together, one for Christmas and one
+for Labor Day, then it would be possible.</p>
+<p>An <em>rbundle</em> is a bundle of recurrence schedules. A recurrence
+schedule, or rschedule, is an overarching term for both rrules and
+rbundles. There are three types of rbundles in almanac. Each create
+their event set by performing some kind of set operation on the event
+sets of the underlying rschedules that you added to the bundle.</p>
 <ul>
 <li><p><code><a href="../reference/rbundle-set.html">runion()</a></code> takes the union.</p></li>
 <li><p><code><a href="../reference/rbundle-set.html">rintersect()</a></code> takes the intersection.</p></li>
 <li><p><code><a href="../reference/rbundle-set.html">rsetdiff()</a></code> takes the set difference.</p></li>
 </ul>
-<p>rbundles can also contain specialized dates that you want to forcibly include in the event set, called rdates, and ones that you want to forcibly exclude, called exdates.</p>
-<p>The most useful rbundle is runion, as this allows you construct an event set that, for example, falls on multiple holidays and all weekends. The following creates an runion from rrules based on Christmas and Labor Day.</p>
-<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="no">on_christmas</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">yearly</a></span>() <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/recur_on_ymonth.html">recur_on_ymonth</a></span>(<span class="st">"Dec"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/recur_on_mday.html">recur_on_mday</a></span>(<span class="fl">25</span>)
-
-<span class="no">christmas_or_labor_day</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/rbundle-set.html">runion</a></span>() <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/rbundle-add.html">add_rschedule</a></span>(<span class="no">on_christmas</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/rbundle-add.html">add_rschedule</a></span>(<span class="no">on_labor_day</span>)
-
-<span class="fu"><a href="../reference/alma_search.html">alma_search</a></span>(<span class="st">"2000-01-01"</span>, <span class="st">"2002-01-01"</span>, <span class="no">christmas_or_labor_day</span>)
-<span class="co">#&gt; [1] "2000-09-04" "2000-12-25" "2001-09-03" "2001-12-25"</span>
-
-<span class="no">christmas_or_labor_day_except_2000_labor_day</span> <span class="kw">&lt;-</span> <span class="no">christmas_or_labor_day</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/rbundle-add.html">add_exdates</a></span>(<span class="st">"2000-09-04"</span>)
-
-<span class="fu"><a href="../reference/alma_search.html">alma_search</a></span>(<span class="st">"2000-01-01"</span>, <span class="st">"2002-01-01"</span>, <span class="no">christmas_or_labor_day_except_2000_labor_day</span>)
-<span class="co">#&gt; [1] "2000-12-25" "2001-09-03" "2001-12-25"</span></pre></body></html></div>
-<p>A recurrence bundle is a critical data structure in almanac. It serves as a general container to dump all of your company’s holiday and weekend recurrence rules.</p>
+<p>rbundles can also contain specialized dates that you want to forcibly
+include in the event set, called rdates, and ones that you want to
+forcibly exclude, called exdates.</p>
+<p>The most useful rbundle is runion, as this allows you construct an
+event set that, for example, falls on multiple holidays and all
+weekends. The following creates an runion from rrules based on Christmas
+and Labor Day.</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">on_christmas</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">yearly</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/recur_on_ymonth.html">recur_on_ymonth</a></span><span class="op">(</span><span class="st">"Dec"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/recur_on_mday.html">recur_on_mday</a></span><span class="op">(</span><span class="fl">25</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">christmas_or_labor_day</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rbundle-set.html">runion</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/rbundle-add.html">add_rschedule</a></span><span class="op">(</span><span class="va">on_christmas</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/rbundle-add.html">add_rschedule</a></span><span class="op">(</span><span class="va">on_labor_day</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/alma_search.html">alma_search</a></span><span class="op">(</span><span class="st">"2000-01-01"</span>, <span class="st">"2002-01-01"</span>, <span class="va">christmas_or_labor_day</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "2000-09-04" "2000-12-25" "2001-09-03" "2001-12-25"</span></span>
+<span></span>
+<span><span class="va">christmas_or_labor_day_except_2000_labor_day</span> <span class="op">&lt;-</span> <span class="va">christmas_or_labor_day</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/rbundle-add.html">add_exdates</a></span><span class="op">(</span><span class="st">"2000-09-04"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/alma_search.html">alma_search</a></span><span class="op">(</span><span class="st">"2000-01-01"</span>, <span class="st">"2002-01-01"</span>, <span class="va">christmas_or_labor_day_except_2000_labor_day</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "2000-12-25" "2001-09-03" "2001-12-25"</span></span></code></pre></div>
+<p>A recurrence bundle is a critical data structure in almanac. It
+serves as a general container to dump all of your company’s holiday and
+weekend recurrence rules.</p>
 </div>
   </div>
 
@@ -278,11 +357,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Davis Vaughan.</p>
+  <p></p>
+<p>Developed by Davis Vaughan.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer>
@@ -290,6 +371,8 @@
 
   
 
+
+  
 
   </body>
 </html>
