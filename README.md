@@ -35,14 +35,6 @@ Install the development version from [GitHub](https://github.com/) with:
 remotes::install_github("DavisVaughan/almanac")
 ```
 
-Mac and Windows users should not have any problems installing almanac.
-Linux users need libv8 to install the dependency R package, V8. See the
-[V8 installation
-instructions](https://github.com/jeroen/V8#debian--ubuntu) for more
-information. almanac uses ES5 JavaScript, so it does *not* require any
-“modern” JavaScript features and should work with the “old” V8 engine
-provided by Ubuntu versions before 19.04.
-
 ## Recurrence Rules
 
 Constructing recurrence rules looks like this:
