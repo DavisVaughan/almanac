@@ -148,7 +148,7 @@ test_that("steppers are coercible if from the same rschedule", {
 # slider_plus() / slider_minus()
 
 test_that("`slider_plus()` method is registered", {
-  skip_if_not_installed("slider", minimum_version = "0.2.2.9000")
+  skip_if_not_installed("slider", minimum_version = "0.3.0")
 
   y <- workdays(1)
 
@@ -170,7 +170,7 @@ test_that("`slider_plus()` method is registered", {
 })
 
 test_that("`slider_minus()` method is registered", {
-  skip_if_not_installed("slider", minimum_version = "0.2.2.9000")
+  skip_if_not_installed("slider", minimum_version = "0.3.0")
 
   y <- workdays(1)
 
@@ -192,7 +192,7 @@ test_that("`slider_minus()` method is registered", {
 })
 
 test_that("`slide_index()` works with steppers", {
-  skip_if_not_installed("slider", minimum_version = "0.2.2.9000")
+  skip_if_not_installed("slider", minimum_version = "0.3.0")
 
   # wednesday -> wednesday
   x <- 1:8
