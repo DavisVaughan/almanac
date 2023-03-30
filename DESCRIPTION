@@ -1,20 +1,16 @@
 Package: almanac
 Title: Tools for Working with Recurrence Rules
 Version: 0.1.1.9000
-Authors@R: 
-    c(person(given = "Davis",
-             family = "Vaughan",
-             role = c("aut", "cre"),
-             email = "davis@rstudio.com"),
-      person(given = "RStudio",
-             role = "cph"))
-Description: Provides tools for defining recurrence rules and
-    recurrence bundles. Recurrence rules are a programmatic way to define
-    a recurring event, like the first Monday of December. Multiple
-    recurrence rules can be combined into larger recurrence bundles.
-    Together, these provide a system for adjusting and generating
-    sequences of dates while simultaneously skipping over dates in a
-    recurrence bundle's event set.
+Authors@R: c(
+    person("Davis", "Vaughan", , "davis@rstudio.com", role = c("aut", "cre")),
+    person("RStudio", role = "cph")
+  )
+Description: Provides tools for defining recurrence rules and recurrence
+    bundles. Recurrence rules are a programmatic way to define a recurring
+    event, like the first Monday of December. Multiple recurrence rules
+    can be combined into larger recurrence bundles.  Together, these
+    provide a system for adjusting and generating sequences of dates while
+    simultaneously skipping over dates in a recurrence bundle's event set.
 License: MIT + file LICENSE
 URL: https://github.com/DavisVaughan/almanac
 BugReports: https://github.com/DavisVaughan/almanac/issues
@@ -38,4 +34,4 @@ VignetteBuilder:
     knitr
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.1
+RoxygenNote: 7.2.3
