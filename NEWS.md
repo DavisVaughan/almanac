@@ -1,5 +1,7 @@
 # almanac (development version)
 
+* Updated internal JavaScript rrule library to version 2.7.2 (#82).
+
 * almanac steppers created with `stepper()` now work as `.before` and
   `.after` arguments of `slider::slide_index()` and friends (#80).
 
