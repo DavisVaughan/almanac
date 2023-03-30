@@ -1,5 +1,8 @@
 # almanac (development version)
 
+* almanac steppers created with `stepper()` now work as `.before` and
+  `.after` arguments of `slider::slide_index()` and friends (#80).
+
 * R >=3.4.0 is now required, which is in line with tidyverse standards.
 
 # almanac 0.1.1

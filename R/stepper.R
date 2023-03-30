@@ -287,6 +287,19 @@ vec_cast.almanac_stepper.almanac_stepper <- function(x, to, ..., x_arg = "", to_
 }
 
 # ------------------------------------------------------------------------------
+# slider_plus() / slider_minus()
+
+# @export - .onLoad()
+slider_plus.Date.almanac_stepper <- function(x, y) {
+  vec_arith("+", x, y)
+}
+
+# @export - .onLoad()
+slider_minus.Date.almanac_stepper <- function(x, y) {
+  vec_arith("-", x, y)
+}
+
+# ------------------------------------------------------------------------------
 
 stepper_rschedule <- function(x) {
   attr(x, "rschedule", exact = TRUE)
