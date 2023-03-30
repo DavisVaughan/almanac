@@ -91,11 +91,15 @@ test_that("can select from the back", {
 # Error checking
 
 test_that("cannot use `yday > 366` or `yday < -366` or `yday == 0`", {
-  expect_error(yearly() %>% recur_on_yday(367), "can only take values")
-  expect_error(yearly() %>% recur_on_yday(-367), "can only take values")
-  expect_error(yearly() %>% recur_on_yday(0), "can only take values")
+  expect_snapshot({
+    (expect_error(yearly() %>% recur_on_yday(367)))
+    (expect_error(yearly() %>% recur_on_yday(-367)))
+    (expect_error(yearly() %>% recur_on_yday(0)))
+  })
 })
 
 test_that("yday must be an integer", {
-  expect_error(yearly() %>% recur_on_yday(367.5), class = "vctrs_error_cast_lossy")
+  expect_snapshot(error = TRUE, {
+    yearly() %>% recur_on_yday(367.5)
+  })
 })

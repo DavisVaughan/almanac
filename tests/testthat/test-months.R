@@ -11,12 +11,18 @@ test_that("check lower boundary", {
   x <- structure(-.Machine$integer.max, class = "Date")
 
   expect_identical(test_month_from_days(x), 6L)
-  expect_error(test_month_from_days(x - 1), "Minimum")
+
+  expect_snapshot(error = TRUE, {
+    test_month_from_days(x - 1)
+  })
 })
 
 test_that("check upper boundary", {
   x <- structure(.Machine$integer.max - 719468, class = "Date")
 
   expect_identical(test_month_from_days(x), 9L)
-  expect_error(test_month_from_days(x + 1), "Maximum")
+
+  expect_snapshot(error = TRUE, {
+    test_month_from_days(x + 1)
+  })
 })

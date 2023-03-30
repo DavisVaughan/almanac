@@ -21,16 +21,24 @@ test_that("radjusted adjusts dates", {
 })
 
 test_that("rschedule is checked", {
-  expect_error(radjusted(1, daily(), adj_none), "`rschedule` must be an rschedule")
+  expect_snapshot(error = TRUE, {
+    radjusted(1, daily(), adj_none)
+  })
 })
 
 test_that("adjust_on is checked", {
-  expect_error(radjusted(daily(), 1, adj_none), "`adjust_on` must be an rschedule")
+  expect_snapshot(error = TRUE, {
+    radjusted(daily(), 1, adj_none)
+  })
 })
 
 test_that("adjustment is checked", {
-  expect_error(radjusted(daily(), daily(), 1), "must be a function")
-  expect_error(radjusted(daily(), daily(), function(x) x), "must have two arguments")
+  expect_snapshot(error = TRUE, {
+    radjusted(daily(), daily(), 1)
+  })
+  expect_snapshot(error = TRUE, {
+    radjusted(daily(), daily(), function(x) x)
+  })
 })
 
 # ------------------------------------------------------------------------------

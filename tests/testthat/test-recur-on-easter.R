@@ -55,18 +55,29 @@ test_that("can recur on good friday", {
 
 test_that("cannot be set twice", {
   x <- yearly() %>% recur_on_easter()
-  expect_error(recur_on_easter(x), "has already been set")
+
+  expect_snapshot(error = TRUE, {
+    recur_on_easter(x)
+  })
 })
 
 test_that("offset must be integerish", {
-  expect_error(recur_on_easter(yearly(), offset = 1.5), class = "vctrs_error_cast_lossy")
+  expect_snapshot(error = TRUE, {
+    recur_on_easter(yearly(), offset = 1.5)
+  })
 })
 
 test_that("offset cannot be NA", {
-  expect_error(recur_on_easter(yearly(), offset = NA), "cannot be `NA`")
+  expect_snapshot(error = TRUE, {
+    recur_on_easter(yearly(), offset = NA)
+  })
 })
 
 test_that("offset is bounded", {
-  expect_error(recur_on_easter(yearly(), offset = 367), "can only take values")
-  expect_error(recur_on_easter(yearly(), offset = -367), "can only take values")
+  expect_snapshot(error = TRUE, {
+    recur_on_easter(yearly(), offset = 367)
+  })
+  expect_snapshot(error = TRUE, {
+    recur_on_easter(yearly(), offset = -367)
+  })
 })
