@@ -1,8 +1,8 @@
 test_that("can construct a base recurrence rule", {
-  expect_is(daily(), "rrule")
-  expect_is(weekly(), "rrule")
-  expect_is(monthly(), "rrule")
-  expect_is(yearly(), "rrule")
+  expect_s3_class(daily(), "rrule")
+  expect_s3_class(weekly(), "rrule")
+  expect_s3_class(monthly(), "rrule")
+  expect_s3_class(yearly(), "rrule")
 })
 
 test_that("can use a character `since` date", {
