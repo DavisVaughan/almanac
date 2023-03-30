@@ -1,8 +1,8 @@
 ---
-title: "Adjusting and Shifting Dates"
+title: "Adjusting and shifting dates"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Adjusting and Shifting Dates}
+  %\VignetteIndexEntry{Adjusting and shifting dates}
   %\VignetteEncoding{UTF-8}
   %\VignetteEngine{knitr::rmarkdown}
 editor_options: 

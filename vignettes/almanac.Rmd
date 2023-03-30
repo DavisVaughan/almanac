@@ -2,7 +2,7 @@
 title: "Introduction to almanac"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{almanac}
+  %\VignetteIndexEntry{Introduction to almanac}
   %\VignetteEncoding{UTF-8}
   %\VignetteEngine{knitr::rmarkdown}
 editor_options: 

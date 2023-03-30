@@ -1,8 +1,8 @@
 ---
-title: "iCalendar Specification"
+title: "iCalendar specification"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{iCalendar Specification}
+  %\VignetteIndexEntry{iCalendar specification}
   %\VignetteEncoding{UTF-8}
   %\VignetteEngine{knitr::rmarkdown}
 editor_options: 

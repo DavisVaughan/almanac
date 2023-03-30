@@ -1,8 +1,8 @@
 ---
-title: "Quarterly Rules"
+title: "Quarterly rules"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{quarterly}
+  %\VignetteIndexEntry{Quarterly rules}
   %\VignetteEncoding{UTF-8}
   %\VignetteEngine{knitr::rmarkdown}
 editor_options: 
