@@ -173,15 +173,3 @@ is_missing_or_infinite <- function(x) {
 is_date <- function(x) {
   inherits(x, "Date")
 }
-
-# https://github.com/r-lib/vctrs/issues/548
-vec_set_diff <- function(x, y) {
-  vec_unique(vec_slice(x, !vec_in(x, y)))
-}
-
-vec_set_intersect <- function(x, y) {
-  pos <- vec_match(y, x)
-  pos <- vec_unique(pos)
-  pos <- pos[!is.na(pos)]
-  vec_slice(x, pos)
-}

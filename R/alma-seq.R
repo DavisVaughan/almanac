@@ -45,5 +45,5 @@ alma_seq <- function(from, to, rschedule, inclusive = TRUE) {
   dates <- as.double(dates)
   dates <- new_date(dates)
 
-  vec_set_diff(dates, events)
+  vec_set_difference(dates, events)
 }

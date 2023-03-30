@@ -36,7 +36,7 @@ cache_rsetdiff__cache_build <- function(self, private) {
   rschedules_events <- map(rschedules, rschedule_events)
 
   # Take the set diff of all of the events from left to right.
-  # `vec_set_diff()` ensures uniqueness.
+  # `vec_set_difference()` ensures uniqueness.
   # `rschedule_events()` ensures sortedness.
   events <- events_set_diff(rschedules_events)
 
@@ -48,7 +48,7 @@ cache_rsetdiff__cache_build <- function(self, private) {
 
   # Forcibly remove `exdates`
   if (!vec_is_empty(exdates)) {
-    events <- vec_set_diff(events, exdates)
+    events <- vec_set_difference(events, exdates)
   }
 
   private$events <- events
@@ -79,7 +79,7 @@ events_set_diff <- function(x) {
 
   for (i in seq_along(x)) {
     elt <- x[[i]]
-    events <- vec_set_diff(events, elt)
+    events <- vec_set_difference(events, elt)
   }
 
   events
