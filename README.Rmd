@@ -41,8 +41,8 @@ install.packages("almanac")
 Install the development version from [GitHub](https://github.com/) with:
 
 ``` r
-# install.packages("remotes")
-remotes::install_github("DavisVaughan/almanac")
+# install.packages("pak")
+pak::pak("DavisVaughan/almanac")
 ```
 
 ## Recurrence Rules
