@@ -78,16 +78,30 @@ validate_date_bounds <- function(x, ..., x_arg = "") {
   }
 
   if (any(x > almanac_global_max_date, na.rm = TRUE)) {
-    message <- glue("Input{x_arg} cannot be larger than {almanac_global_max_date}.")
+    date <- format(almanac_global_max_date, format = format_ymd())
+    message <- glue("Input{x_arg} cannot be larger than {date}.")
     stop_date_above_maximum(message)
   }
 
   if (any(x < almanac_global_min_date, na.rm = TRUE)) {
-    message <- glue("Input{x_arg} cannot be smaller than {almanac_global_min_date}.")
+    date <- format(almanac_global_min_date, format = format_ymd())
+    message <- glue("Input{x_arg} cannot be smaller than {date}.")
     stop_date_below_minimum(message)
   }
 
   invisible(x)
+}
+
+format_ymd <- function() {
+  if (is_linux()) {
+    # See `?strptime` section `Printing years`
+    "%04Y-%m-%d"
+  } else {
+    "%Y-%m-%d"
+  }
+}
+is_linux <- function() {
+  tolower(Sys.info()[["sysname"]]) == "linux"
 }
 
 # ------------------------------------------------------------------------------

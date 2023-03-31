@@ -120,11 +120,15 @@ test_that("week start option is respected", {
 # Error checking
 
 test_that("cannot use `yweek > 53` or `yweek < -53` or `yweek == 0`", {
-  expect_error(yearly() %>% recur_on_yweek(54), "can only take values")
-  expect_error(yearly() %>% recur_on_yweek(-54), "can only take values")
-  expect_error(yearly() %>% recur_on_yweek(0), "can only take values")
+  expect_snapshot({
+    (expect_error(yearly() %>% recur_on_yweek(54)))
+    (expect_error(yearly() %>% recur_on_yweek(-54)))
+    (expect_error(yearly() %>% recur_on_yweek(0)))
+  })
 })
 
 test_that("yweek must be an integer", {
-  expect_error(yearly() %>% recur_on_yweek(30.5), class = "vctrs_error_cast_lossy")
+  expect_snapshot(error = TRUE, {
+    yearly() %>% recur_on_yweek(30.5)
+  })
 })

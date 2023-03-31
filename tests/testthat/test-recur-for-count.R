@@ -21,10 +21,9 @@ test_that("`count` overrides `until`", {
 })
 
 test_that("`count` can only be set once", {
-  expect_error(
-    daily() %>% recur_for_count(2) %>% recur_for_count(2),
-    "`count` has already been set"
-  )
+  expect_snapshot(error = TRUE, {
+    daily() %>% recur_for_count(2) %>% recur_for_count(2)
+  })
 })
 
 test_that("impossible dates do not count towards the count", {
@@ -41,6 +40,8 @@ test_that("impossible dates do not count towards the count", {
 })
 
 test_that("`count` must be castable to a scalar integer", {
-  expect_error(daily() %>% recur_for_count("a"), class = "vctrs_error_incompatible_type")
-  expect_error(daily() %>% recur_for_count(c(1, 2)), class = "vctrs_error_assert_size")
+  expect_snapshot({
+    (expect_error(daily() %>% recur_for_count("a"), class = "vctrs_error_incompatible_type"))
+    (expect_error(daily() %>% recur_for_count(c(1, 2)), class = "vctrs_error_assert_size"))
+  })
 })

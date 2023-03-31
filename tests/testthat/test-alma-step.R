@@ -109,7 +109,9 @@ test_that("can use size 0 input", {
 })
 
 test_that("tidy recycling rules are used between `x` and `adjustment`", {
-  expect_error(alma_step(new_date(c(1, 2)), 1:3, runion()), class = "vctrs_error_incompatible_size")
+  expect_snapshot(error = TRUE, {
+    alma_step(new_date(c(1, 2)), 1:3, runion())
+  })
 })
 
 test_that("`NA` `n` propagates", {
@@ -124,10 +126,9 @@ test_that("`NA` `n` propagates", {
 })
 
 test_that("`Inf` `n` is an error", {
-  expect_error(
-    alma_step(new_date(c(1, 2)), Inf, runion()),
-    class = "vctrs_error_cast_lossy"
-  )
+  expect_snapshot(error = TRUE, {
+    alma_step(new_date(c(1, 2)), Inf, runion())
+  })
 })
 
 test_that("can step with `NA` dates", {

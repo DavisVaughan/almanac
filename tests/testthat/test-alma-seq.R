@@ -1,8 +1,12 @@
 test_that("can handle NA `from` and `to` values", {
   na <- new_date(NA_real_)
 
-  expect_error(alma_seq(na, Sys.Date(), daily()), "cannot be `NA`")
-  expect_error(alma_seq(Sys.Date(), na, daily()), "cannot be `NA`")
+  expect_snapshot(error = TRUE, {
+    alma_seq(na, Sys.Date(), daily())
+  })
+  expect_snapshot(error = TRUE, {
+    alma_seq(Sys.Date(), na, daily())
+  })
 })
 
 test_that("behavior is like rlang::seq2() when `from` is after `to`", {

@@ -19,7 +19,9 @@ test_that("can pass along a `since` date to all bases", {
 })
 
 test_that("`since` cannot be `NA`", {
-  expect_error(daily(since = as.Date(NA)), "must be a finite date")
+  expect_snapshot(error = TRUE, {
+    daily(since = as.Date(NA))
+  })
 })
 
 test_that("can use a character `until` date", {
@@ -36,24 +38,29 @@ test_that("can pass along a `until` date to all bases", {
 })
 
 test_that("`until` cannot be `NA`", {
-  expect_error(daily(until = as.Date(NA)), "must be a finite date")
+  expect_snapshot(error = TRUE, {
+    daily(until = as.Date(NA))
+  })
 })
 
 test_that("`since` must be before `until`", {
-  expect_error(
-    daily(since = "1970-01-02", until = "1970-01-01"),
-    "`since` must be before `until`."
-  )
+  expect_snapshot(error = TRUE, {
+    daily(since = "1970-01-02", until = "1970-01-01")
+  })
 })
 
 test_that("errors on max/min dates", {
   since <- as.Date("0100-01-01")
   expect_error(daily(since = since), NA)
-  expect_error(daily(since = since - 1), class = "almanac_error_date_below_minimum")
+  expect_snapshot(error = TRUE, {
+    daily(since = since - 1)
+  })
 
   until <- as.Date("9999-12-31")
   expect_error(daily(until = until), NA)
-  expect_error(daily(until = until + 1), class = "almanac_error_date_above_maximum")
+  expect_snapshot(error = TRUE, {
+    daily(until = until + 1)
+  })
 })
 
 

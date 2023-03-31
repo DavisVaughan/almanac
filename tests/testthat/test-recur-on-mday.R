@@ -89,11 +89,15 @@ test_that("can select from the end of the month", {
 # Error checking
 
 test_that("cannot use `mday > 31` or `mday < -31` or `mday == 0`", {
-  expect_error(yearly() %>% recur_on_mday(32), "can only take values")
-  expect_error(yearly() %>% recur_on_mday(-32), "can only take values")
-  expect_error(yearly() %>% recur_on_mday(0), "can only take values")
+  expect_snapshot({
+    (expect_error(yearly() %>% recur_on_mday(32)))
+    (expect_error(yearly() %>% recur_on_mday(-32)))
+    (expect_error(yearly() %>% recur_on_mday(0)))
+  })
 })
 
 test_that("mday must be an integer", {
-  expect_error(yearly() %>% recur_on_mday(30.5), class = "vctrs_error_cast_lossy")
+  expect_snapshot(error = TRUE, {
+    yearly() %>% recur_on_mday(30.5)
+  })
 })

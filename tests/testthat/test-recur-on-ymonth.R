@@ -103,7 +103,9 @@ test_that("can normalize various month character strings", {
   x <- yearly() %>% recur_on_ymonth("jaNuary")
   expect_equal(x$rules$ymonth, 1L)
 
-  expect_error(yearly() %>% recur_on_ymonth("Janu"), "month name or abbreviation")
+  expect_snapshot(error = TRUE, {
+    yearly() %>% recur_on_ymonth("Janu")
+  })
 })
 
 test_that("can normalize Sep or Sept", {
@@ -118,11 +120,15 @@ test_that("can normalize Sep or Sept", {
 # Error checking
 
 test_that("cannot use `ymonth > 12` or `ymonth < 1`", {
-  expect_error(yearly() %>% recur_on_ymonth(13), "can only take values")
-  expect_error(yearly() %>% recur_on_ymonth(0), "can only take values")
-  expect_error(yearly() %>% recur_on_ymonth(-1), "can only take values")
+  expect_snapshot({
+    (expect_error(yearly() %>% recur_on_ymonth(13)))
+    (expect_error(yearly() %>% recur_on_ymonth(0)))
+    (expect_error(yearly() %>% recur_on_ymonth(-1)))
+  })
 })
 
 test_that("ymonth must be a character / integer", {
-  expect_error(yearly() %>% recur_on_ymonth(30.5), class = "vctrs_error_cast_lossy")
+  expect_snapshot(error = TRUE, {
+    yearly() %>% recur_on_ymonth(30.5)
+  })
 })

@@ -9,7 +9,9 @@ test_that("allows integerish input", {
 
 test_that("must be integerish `n`", {
   step <- stepper(daily())
-  expect_error(step(1.5), class = "vctrs_error_cast_lossy")
+  expect_snapshot(error = TRUE, {
+    step(1.5)
+  })
 })
 
 # ------------------------------------------------------------------------------
@@ -37,19 +39,25 @@ test_that("can create a new stepper", {
 })
 
 test_that("`n` is validated", {
-  expect_error(new_stepper(1), "must be an integer")
+  expect_snapshot(error = TRUE, {
+    new_stepper(1)
+  })
 })
 
 test_that("`rschedule` is validated", {
-  expect_error(new_stepper(rschedule = 1), "must be an rschedule")
+  expect_snapshot(error = TRUE, {
+    new_stepper(rschedule = 1)
+  })
 })
 
 # ------------------------------------------------------------------------------
 # vec_arith()
 
 test_that("default method error is thrown", {
-  expect_error(vec_arith("+", new_stepper(), 1), class = "vctrs_error_incompatible_op")
-  expect_error(vec_arith("+", 1, new_stepper()), class = "vctrs_error_incompatible_op")
+  expect_snapshot({
+    (expect_error(vec_arith("+", new_stepper(), 1), class = "vctrs_error_incompatible_op"))
+    (expect_error(vec_arith("+", 1, new_stepper()), class = "vctrs_error_incompatible_op"))
+  })
 })
 
 test_that("can use unary ops", {
@@ -106,10 +114,9 @@ test_that("cannot subtract date from stepper", {
   # monday
   x <- as.Date("1970-01-05")
 
-  expect_error(
-    step(1) %s-% x,
-    class = "vctrs_error_incompatible_op"
-  )
+  expect_snapshot(error = TRUE, {
+    step(1) %s-% x
+  })
 })
 
 # ------------------------------------------------------------------------------
@@ -126,7 +133,10 @@ test_that("steppers are coercible if from the same rschedule", {
   expect <- expect_step(integer())
 
   expect_identical(vec_ptype2(x, y), expect)
-  expect_error(vec_ptype2(x, new_stepper()), class = "vctrs_error_incompatible_type")
+
+  expect_snapshot(error = TRUE, {
+    vec_ptype2(x, new_stepper())
+  })
 })
 
 # ------------------------------------------------------------------------------
@@ -141,7 +151,10 @@ test_that("steppers are coercible if from the same rschedule", {
 
   expect_identical(vec_cast(x, y),  x)
   expect_identical(vec_cast(y, x),  y)
-  expect_error(vec_cast(x, new_stepper()), class = "vctrs_error_incompatible_type")
+
+  expect_snapshot(error = TRUE, {
+    vec_cast(x, new_stepper())
+  })
 })
 
 # ------------------------------------------------------------------------------

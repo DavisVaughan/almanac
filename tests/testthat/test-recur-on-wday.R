@@ -159,7 +159,9 @@ test_that("can normalize various weekday character strings", {
   x <- yearly() %>% recur_on_wday("monDay")
   expect_equal(x$rules$wday[[1]], "all")
 
-  expect_error(yearly() %>% recur_on_wday("mond"), "weekday name or abbreviation")
+  expect_snapshot(error = TRUE, {
+    yearly() %>% recur_on_wday("mond")
+  })
 })
 
 test_that("can normalize Tu or Tue or Tues", {
@@ -191,11 +193,15 @@ test_that("can normalize Th or Thu or Thur or Thurs", {
 # Error checking
 
 test_that("cannot use `wday > 7` or `wday < 1`", {
-  expect_error(yearly() %>% recur_on_wday(8), "must be in")
-  expect_error(yearly() %>% recur_on_wday(0), "must be in")
-  expect_error(yearly() %>% recur_on_wday(-1), "must be in")
+  expect_snapshot({
+    (expect_error(yearly() %>% recur_on_wday(8)))
+    (expect_error(yearly() %>% recur_on_wday(0)))
+    (expect_error(yearly() %>% recur_on_wday(-1)))
+  })
 })
 
 test_that("wday must be a character / integer", {
-  expect_error(yearly() %>% recur_on_wday(30.5), class = "vctrs_error_cast_lossy")
+  expect_snapshot(error = TRUE, {
+    yearly() %>% recur_on_wday(30.5)
+  })
 })
