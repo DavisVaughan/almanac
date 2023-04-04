@@ -41,7 +41,7 @@ alma_search("2018-12-31", "2019-01-25", daily_since_2019_for_5)
 # example below, they are not added to the total count. Only true event
 # dates are counted.
 on_31_for_5 <- monthly(since = "2019-01-01") \%>\%
-  recur_on_mday(31) \%>\%
+  recur_on_day_of_month(31) \%>\%
   recur_for_count(5)
 
 alma_search("2019-01-01", "2020-01-01", on_31_for_5)

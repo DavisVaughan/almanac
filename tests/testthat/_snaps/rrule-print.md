@@ -33,8 +33,8 @@
       * count: 5
       * interval: 2
     Code
-      # # can use multiple ymonths
-      recur_on_ymonth(daily(), c("Feb", "Mar"))
+      # # can use multiple months of the year
+      recur_on_month_of_year(daily(), c("Feb", "Mar"))
     Message
       <rrule>
       * frequency: daily
@@ -42,8 +42,8 @@
       * until: 2100-01-01
       * month of year: Feb and Mar
     Code
-      # # can use multiple yweeks
-      recur_on_yweek(daily(), c(5, 9, 12))
+      # # can use multiple weeks of the year
+      recur_on_week_of_year(daily(), c(5, 9, 12))
     Message
       <rrule>
       * frequency: daily
@@ -51,8 +51,8 @@
       * until: 2100-01-01
       * week of year: 5, 9, and 12
     Code
-      # # can use multiple ydays
-      recur_on_yday(daily(), c(5, 9, 12))
+      # # can use multiple days of the year
+      recur_on_day_of_year(daily(), c(5, 9, 12))
     Message
       <rrule>
       * frequency: daily
@@ -60,8 +60,8 @@
       * until: 2100-01-01
       * day of year: 5, 9, and 12
     Code
-      # # can use multiple mdays
-      recur_on_mday(daily(), c(5, 9, 12))
+      # # can use multiple days of the month
+      recur_on_day_of_month(daily(), c(5, 9, 12))
     Message
       <rrule>
       * frequency: daily
@@ -69,8 +69,8 @@
       * until: 2100-01-01
       * day of month: 5, 9, and 12
     Code
-      # # can use wday variations
-      recur_on_wday(daily(), c("Mon", "Thu"), nth = c(1, 2))
+      # # can use day of week variations
+      recur_on_day_of_week(daily(), c("Mon", "Thu"), nth = c(1, 2))
     Message
       <rrule>
       * frequency: daily
@@ -78,7 +78,8 @@
       * until: 2100-01-01
       * day of week: Mon[1, 2], and Thu[1, 2]
     Code
-      recur_on_wday(recur_on_wday(daily(), "Mon", nth = c(1, 2)), "Thu", nth = c(4, 5))
+      recur_on_day_of_week(recur_on_day_of_week(daily(), "Mon", nth = c(1, 2)), "Thu",
+      nth = c(4, 5))
     Message
       <rrule>
       * frequency: daily
@@ -86,7 +87,7 @@
       * until: 2100-01-01
       * day of week: Mon[1, 2], and Thu[4, 5]
     Code
-      recur_on_wday(yearly(), "Mon", nth = c(1, 2, 10, 13, 15, 16))
+      recur_on_day_of_week(yearly(), "Mon", nth = c(1, 2, 10, 13, 15, 16))
     Message
       <rrule>
       * frequency: yearly
@@ -144,7 +145,7 @@
       * until: 2100-01-01
       * week start: Tue
     Code
-      recur_on_ymonth(daily(), "Feb")
+      recur_on_month_of_year(daily(), "Feb")
     Message
       <rrule>
       * frequency: daily
@@ -152,7 +153,7 @@
       * until: 2100-01-01
       * month of year: Feb
     Code
-      recur_on_yweek(daily(), 5)
+      recur_on_week_of_year(daily(), 5)
     Message
       <rrule>
       * frequency: daily
@@ -160,7 +161,7 @@
       * until: 2100-01-01
       * week of year: 5
     Code
-      recur_on_yday(daily(), 5)
+      recur_on_day_of_year(daily(), 5)
     Message
       <rrule>
       * frequency: daily
@@ -168,7 +169,7 @@
       * until: 2100-01-01
       * day of year: 5
     Code
-      recur_on_mday(daily(), 5)
+      recur_on_day_of_month(daily(), 5)
     Message
       <rrule>
       * frequency: daily
@@ -176,7 +177,7 @@
       * until: 2100-01-01
       * day of month: 5
     Code
-      recur_on_wday(daily(), "Wed")
+      recur_on_day_of_week(daily(), "Wed")
     Message
       <rrule>
       * frequency: daily

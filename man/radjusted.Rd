@@ -49,8 +49,8 @@ since <- "2000-01-01"
 until <- "2010-01-01"
 
 on_christmas <- yearly(since = since, until = until) \%>\%
-  recur_on_ymonth("Dec") \%>\%
-  recur_on_mday(25)
+  recur_on_month_of_year("Dec") \%>\%
+  recur_on_day_of_month(25)
 
 # All Christmas dates, with no adjustments
 alma_events(on_christmas)

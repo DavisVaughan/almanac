@@ -1,6 +1,6 @@
-test_that("can select positional wdays in a week", {
+test_that("can select positional days of the week in a week", {
   rrule <- weekly() %>%
-    recur_on_wday(c("Mon", "Tue"))
+    recur_on_day_of_week(c("Mon", "Tue"))
 
   rrule_pos <- rrule %>%
     recur_on_position(2)
@@ -16,9 +16,9 @@ test_that("can select positional wdays in a week", {
   expect_equal(x, expect)
 })
 
-test_that("can select positional wdays in a month", {
+test_that("can select positional days of the week in a month", {
   rrule <- monthly() %>%
-    recur_on_wday(c("Mon", "Tue")) %>%
+    recur_on_day_of_week(c("Mon", "Tue")) %>%
     recur_on_position(2)
 
   start <- "1990-01-01"
@@ -31,9 +31,9 @@ test_that("can select positional wdays in a month", {
   expect_equal(x, expect)
 })
 
-test_that("can select positional wdays in a year", {
+test_that("can select positional days of the week in a year", {
   rrule <- yearly() %>%
-    recur_on_wday(c("Mon", "Tue")) %>%
+    recur_on_day_of_week(c("Mon", "Tue")) %>%
     recur_on_position(2)
 
   start <- "1990-01-01"
@@ -46,9 +46,9 @@ test_that("can select positional wdays in a year", {
   expect_equal(x, expect)
 })
 
-test_that("can select positional wdays from the back", {
+test_that("can select positional days of the week from the back", {
   rrule <- yearly() %>%
-    recur_on_wday(c("Mon", "Tue")) %>%
+    recur_on_day_of_week(c("Mon", "Tue")) %>%
     recur_on_position(-2)
 
   start <- "1990-01-01"
@@ -65,7 +65,7 @@ test_that("can select positional wdays from the back", {
 
 test_that("can select multiple positions", {
   rrule <- monthly() %>%
-    recur_on_wday(c("Mon", "Tue")) %>%
+    recur_on_day_of_week(c("Mon", "Tue")) %>%
     recur_on_position(c(2, 5))
 
   start <- "1990-01-01"

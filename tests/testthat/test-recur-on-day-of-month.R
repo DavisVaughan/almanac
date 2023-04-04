@@ -1,9 +1,9 @@
 # ------------------------------------------------------------------------------
 # Basic tests with all frequencies
 
-test_that("daily - on a mday", {
+test_that("daily - on a day of the month", {
   base <- daily()
-  rrule <- base %>% recur_on_mday(5)
+  rrule <- base %>% recur_on_day_of_month(5)
 
   expect <- as.Date(c("1990-01-05", "1990-02-05"))
 
@@ -15,9 +15,9 @@ test_that("daily - on a mday", {
   expect_equal(x, expect)
 })
 
-test_that("weekly - on a mday", {
+test_that("weekly - on a day of the month", {
   base <- weekly()
-  rrule <- base %>% recur_on_mday(5)
+  rrule <- base %>% recur_on_day_of_month(5)
 
   expect <- as.Date(c("1990-01-05", "1990-02-05"))
 
@@ -29,9 +29,9 @@ test_that("weekly - on a mday", {
   expect_equal(x, expect)
 })
 
-test_that("monthly - on a mday", {
+test_that("monthly - on a day of the month", {
   base <- monthly()
-  rrule <- base %>% recur_on_mday(5)
+  rrule <- base %>% recur_on_day_of_month(5)
 
   expect <- as.Date(c("1990-01-05", "1990-02-05"))
 
@@ -43,9 +43,9 @@ test_that("monthly - on a mday", {
   expect_equal(x, expect)
 })
 
-test_that("yearly - on a mday", {
+test_that("yearly - on a day of the month", {
   base <- yearly()
-  rrule <- base %>% recur_on_mday(5)
+  rrule <- base %>% recur_on_day_of_month(5)
 
   expect <- as.Date(c("1990-01-05", "1990-02-05"))
 
@@ -60,7 +60,7 @@ test_that("yearly - on a mday", {
 # ------------------------------------------------------------------------------
 
 test_that("can select multiple days of the month", {
-  rrule <- monthly() %>% recur_on_mday(c(1, 3, 5))
+  rrule <- monthly() %>% recur_on_day_of_month(c(1, 3, 5))
 
   start <- "1990-01-01"
   stop <- "1990-01-31"
@@ -73,7 +73,7 @@ test_that("can select multiple days of the month", {
 })
 
 test_that("can select from the end of the month", {
-  rrule <- monthly() %>% recur_on_mday(c(-1, -3, -5))
+  rrule <- monthly() %>% recur_on_day_of_month(c(-1, -3, -5))
 
   start <- "1990-01-01"
   stop <- "1990-01-31"
@@ -88,16 +88,16 @@ test_that("can select from the end of the month", {
 # ------------------------------------------------------------------------------
 # Error checking
 
-test_that("cannot use `mday > 31` or `mday < -31` or `mday == 0`", {
+test_that("cannot use `day > 31` or `day < -31` or `day == 0`", {
   expect_snapshot({
-    (expect_error(yearly() %>% recur_on_mday(32)))
-    (expect_error(yearly() %>% recur_on_mday(-32)))
-    (expect_error(yearly() %>% recur_on_mday(0)))
+    (expect_error(yearly() %>% recur_on_day_of_month(32)))
+    (expect_error(yearly() %>% recur_on_day_of_month(-32)))
+    (expect_error(yearly() %>% recur_on_day_of_month(0)))
   })
 })
 
-test_that("mday must be an integer", {
+test_that("`day` must be an integer", {
   expect_snapshot(error = TRUE, {
-    yearly() %>% recur_on_mday(30.5)
+    yearly() %>% recur_on_day_of_month(30.5)
   })
 })

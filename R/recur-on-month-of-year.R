@@ -1,12 +1,12 @@
 #' Recur on a month of the year
 #'
-#' `recur_on_ymonth()` recurs on a specific month of the year.
+#' `recur_on_month_of_year()` recurs on a specific month of the year.
 #'
 #' @param x `[rrule]`
 #'
 #'    A recurrence rule.
 #'
-#' @param ymonth `[integer / character]`
+#' @param month `[integer / character]`
 #'
 #'    Months of the year to mark as events. Integer values must be between
 #'    `[1, 12]`. This can also be a full month string like `"November"`, or an
@@ -15,15 +15,16 @@
 #' @return
 #' An updated rrule.
 #'
+#' @export
 #' @examples
 #' # There is a big difference between adding this rule to a `yearly()`
 #' # or `monthly()` frequency, and a `daily()` frequency.
 #'
 #' # Limit from every day to every day in February
-#' on_feb_daily <- daily() %>% recur_on_ymonth("Feb")
+#' on_feb_daily <- daily() %>% recur_on_month_of_year("Feb")
 #'
 #' # Limit from 1 day per month to 1 day in February
-#' on_feb_monthly <- monthly() %>% recur_on_ymonth("Feb")
+#' on_feb_monthly <- monthly() %>% recur_on_month_of_year("Feb")
 #'
 #' start <- "1999-01-01"
 #' end <- "2001-01-01"
@@ -31,24 +32,25 @@
 #' alma_search(start, end, on_feb_daily)
 #'
 #' alma_search(start, end, on_feb_monthly)
-#'
-#' @export
-recur_on_ymonth <- function(x, ymonth) {
+recur_on_month_of_year <- function(x, month) {
   validate_rrule(x, "x")
-  ymonth <- month_normalize(ymonth)
 
-  old <- get_rule(x, "ymonth")
-  new <- vec_cast(ymonth, integer(), x_arg = "ymonth")
+  month <- month_normalize(month)
+  month <- vec_cast(month, to = integer())
 
-  if (any(new > 12 | new < 1)) {
-    abort("`ymonth` can only take values in [1, 12].")
+  if (any(month > 12 | month < 1)) {
+    abort("`month` can only take values in [1, 12].")
   }
 
-  new <- union(old, new)
-  new <- unique(new)
-  new <- sort(new)
+  old <- get_rule(x, "month_of_year")
+  if (!is_null(old)) {
+    month <- vec_set_union(old, month)
+  }
 
-  tweak_rrule(x, ymonth = new)
+  month <- vec_unique(month)
+  month <- vec_sort(month)
+
+  tweak_rrule(x, month_of_year = month)
 }
 
 # ------------------------------------------------------------------------------

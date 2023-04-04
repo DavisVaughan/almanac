@@ -22,7 +22,7 @@ test_that("alma_next() works with missing dates", {
 })
 
 test_that("alma_next() is vectorized", {
-  rrule <- weekly() %>% recur_on_wday("Friday")
+  rrule <- weekly() %>% recur_on_day_of_week("Friday")
 
   x <- as.Date(c("1970-01-01", "1970-01-03"))
   expect <- as.Date(c("1970-01-02", "1970-01-09"))
@@ -80,7 +80,7 @@ test_that("alma_previous() works with missing dates", {
 })
 
 test_that("alma_previous() is vectorized", {
-  rrule <- weekly() %>% recur_on_wday("Friday")
+  rrule <- weekly() %>% recur_on_day_of_week("Friday")
 
   x <- as.Date(c("1970-01-03", "1970-01-10"))
   expect <- as.Date(c("1970-01-02", "1970-01-09"))

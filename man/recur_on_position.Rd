@@ -33,7 +33,7 @@ end <- "1999-05-01"
 # Sunday or a Monday, but you don't want to return both.
 # This would return both:
 on_last_monday_and_sunday <- monthly() \%>\%
-  recur_on_wday(c("Monday", "Sunday"), -1)
+  recur_on_day_of_week(c("Monday", "Sunday"), nth = -1)
 
 alma_search(start, end, on_last_monday_and_sunday)
 

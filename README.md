@@ -42,13 +42,16 @@ Constructing recurrence rules looks like this:
 ``` r
 # Thanksgiving = "The fourth Thursday in November"
 on_thanksgiving <- yearly() %>% 
-  recur_on_ymonth("November") %>%
-  recur_on_wday("Thursday", nth = 4)
+  recur_on_month_of_year("November") %>%
+  recur_on_day_of_week("Thursday", nth = 4)
 
 on_thanksgiving
-#> <rrule[yearly / 1900-01-01 / 2100-01-01]>
-#> - ymonth: Nov
-#> - wday: Thu[4]
+#> <rrule>
+#> • frequency: yearly
+#> • since: 1900-01-01
+#> • until: 2100-01-01
+#> • month of year: Nov
+#> • day of week: Thu[4]
 ```
 
 After constructing a recurrence rule, it can be used to generate dates
@@ -110,8 +113,8 @@ on_weekends <- weekly() %>%
   recur_on_weekends()
 
 on_christmas <- yearly() %>%
-  recur_on_mday(25) %>%
-  recur_on_ymonth("Dec")
+  recur_on_day_of_month(25) %>%
+  recur_on_month_of_year("Dec")
 
 bundle <- runion() %>%
   add_rschedule(on_weekends) %>%
@@ -119,7 +122,24 @@ bundle <- runion() %>%
   add_rschedule(on_thanksgiving)
 
 bundle
-#> <runion[3 rschedules / 0 rdates / 0 exdates]>
+#> <runion[3]>
+#>  <rrule>
+#>  • frequency: weekly
+#>  • since: 1900-01-01
+#>  • until: 2100-01-01
+#>  • day of week: Sat, and Sun
+#>  <rrule>
+#>  • frequency: yearly
+#>  • since: 1900-01-01
+#>  • until: 2100-01-01
+#>  • month of year: Dec
+#>  • day of month: 25
+#>  <rrule>
+#>  • frequency: yearly
+#>  • since: 1900-01-01
+#>  • until: 2100-01-01
+#>  • month of year: Nov
+#>  • day of week: Thu[4]
 ```
 
 We can create a stepper that steps over all of the events in the bundle.

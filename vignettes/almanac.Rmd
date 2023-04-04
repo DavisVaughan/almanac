@@ -119,7 +119,7 @@ So far we have worked with the base recurrence rules. Things get _much_ more int
 
 ```{r}
 on_4th_and_16th <- monthly(since = "2000-01-01") %>%
-  recur_on_mday(c(4, 16))
+  recur_on_day_of_month(c(4, 16))
 
 alma_search("2000-01-01", "2000-06-01", on_4th_and_16th)
 ```
@@ -130,24 +130,24 @@ Recurrence rules can continually be added to further refine your rule. When you 
 
 - Use a `yearly()` base since this happens 1 time per year.
 
-- Use `recur_on_ymonth()` to hone in on September.
+- Use `recur_on_month_of_year()` to hone in on September.
 
-- Use `recur_on_wday()` to hone in on the first Monday of the month.
+- Use `recur_on_day_of_week()` to hone in on the first Monday of the month.
 
 ```{r}
 on_labor_day <- yearly() %>%
-  recur_on_ymonth("Sep") %>%
-  recur_on_wday("Monday", nth = 1)
+  recur_on_month_of_year("Sep") %>%
+  recur_on_day_of_week("Monday", nth = 1)
 
 alma_search("2000-01-01", "2005-01-01", on_labor_day)
 ```
 
-The `nth` argument of `recur_on_wday()` is especially useful for selecting from the end of the month. If we wanted the _last_ Monday in September instead, we could do:
+The `nth` argument of `recur_on_day_of_week()` is especially useful for selecting from the end of the month. If we wanted the _last_ Monday in September instead, we could do:
 
 ```{r}
 on_last_monday_in_sept <- yearly(since = "2000-01-01") %>%
-  recur_on_ymonth("Sep") %>%
-  recur_on_wday("Monday", nth = -1)
+  recur_on_month_of_year("Sep") %>%
+  recur_on_day_of_week("Monday", nth = -1)
 
 alma_search("2000-01-01", "2005-01-01", on_last_monday_in_sept)
 ```
@@ -170,8 +170,8 @@ The most useful rbundle is runion, as this allows you construct an event set tha
 
 ```{r}
 on_christmas <- yearly() %>%
-  recur_on_ymonth("Dec") %>%
-  recur_on_mday(25)
+  recur_on_month_of_year("Dec") %>%
+  recur_on_day_of_month(25)
 
 christmas_or_labor_day <- runion() %>%
   add_rschedule(on_christmas) %>%

@@ -32,8 +32,8 @@ A Date vector the same size as \code{x}.
 }
 }
 \examples{
-on_12th <- monthly() \%>\% recur_on_mday(12)
-on_monday <- weekly() \%>\% recur_on_wday("Monday")
+on_12th <- monthly() \%>\% recur_on_day_of_month(12)
+on_monday <- weekly() \%>\% recur_on_day_of_week("Monday")
 
 # On the 12th of the month, or on Mondays
 rb <- runion() \%>\%

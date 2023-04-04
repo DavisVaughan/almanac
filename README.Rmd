@@ -52,8 +52,8 @@ Constructing recurrence rules looks like this:
 ```{r}
 # Thanksgiving = "The fourth Thursday in November"
 on_thanksgiving <- yearly() %>% 
-  recur_on_ymonth("November") %>%
-  recur_on_wday("Thursday", nth = 4)
+  recur_on_month_of_year("November") %>%
+  recur_on_day_of_week("Thursday", nth = 4)
 
 on_thanksgiving
 ```
@@ -100,8 +100,8 @@ on_weekends <- weekly() %>%
   recur_on_weekends()
 
 on_christmas <- yearly() %>%
-  recur_on_mday(25) %>%
-  recur_on_ymonth("Dec")
+  recur_on_day_of_month(25) %>%
+  recur_on_month_of_year("Dec")
 
 bundle <- runion() %>%
   add_rschedule(on_weekends) %>%

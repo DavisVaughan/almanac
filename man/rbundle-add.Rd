@@ -54,16 +54,16 @@ also an exdate.
 }
 \examples{
 on_thanksgiving <- yearly() \%>\%
-  recur_on_wday("Thurs", 4) \%>\%
-  recur_on_ymonth("Nov")
+  recur_on_day_of_week("Thurs", nth = 4) \%>\%
+  recur_on_month_of_year("Nov")
 
 on_christmas <- yearly() \%>\%
-  recur_on_mday(25) \%>\%
-  recur_on_ymonth("Dec")
+  recur_on_day_of_month(25) \%>\%
+  recur_on_month_of_year("Dec")
 
 on_labor_day <- monthly() \%>\%
-  recur_on_ymonth("Sep") \%>\%
-  recur_on_wday("Mon", 1)
+  recur_on_month_of_year("Sep") \%>\%
+  recur_on_day_of_week("Mon", nth = 1)
 
 rb <- runion() \%>\%
   add_rschedule(on_thanksgiving) \%>\%
