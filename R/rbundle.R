@@ -78,7 +78,7 @@ new_rbundle <- function(rschedules = list(),
   }
 
   for (i in seq_along(rschedules)) {
-    validate_rschedule(rschedules[[i]], x_arg = glue("rschedules[[{i}]]"))
+    check_rschedule(rschedules[[i]], arg = cli::format_inline("rschedules[[{i}]]"))
   }
 
   if (!is_date(rdates)) {

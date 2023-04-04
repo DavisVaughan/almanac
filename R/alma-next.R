@@ -35,7 +35,7 @@ alma_next <- function(x, rschedule, inclusive = FALSE) {
     abort("`inclusive` cannot be `NA`")
   }
 
-  validate_rschedule(rschedule, "rschedule")
+  check_rschedule(rschedule)
   events <- rschedule_events(rschedule)
 
   alma_next_impl(x, events, inclusive)
@@ -55,7 +55,7 @@ alma_previous <- function(x, rschedule, inclusive = FALSE) {
     abort("`inclusive` cannot be `NA`")
   }
 
-  validate_rschedule(rschedule, "rschedule")
+  check_rschedule(rschedule)
   events <- rschedule_events(rschedule)
 
   alma_previous_impl(x, events, inclusive)

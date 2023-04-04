@@ -3,16 +3,16 @@
     Code
       radjusted(1, daily(), adj_none)
     Condition
-      Error in `glubort()`:
-      ! Input `rschedule` must be an rschedule, such as an rrule or rbundle.
+      Error in `new_radjusted()`:
+      ! `rschedule` must be a <rschedule>, not the number 1.
 
 # adjust_on is checked
 
     Code
       radjusted(daily(), 1, adj_none)
     Condition
-      Error in `glubort()`:
-      ! Input `adjust_on` must be an rschedule, such as an rrule or rbundle.
+      Error in `new_radjusted()`:
+      ! `adjust_on` must be a <rschedule>, not the number 1.
 
 # adjustment is checked
 

@@ -89,8 +89,8 @@ rschedule_events.radjusted <- function(x) {
 # ------------------------------------------------------------------------------
 
 new_radjusted <- function(rschedule, adjust_on, adjustment) {
-  validate_rschedule(rschedule, "rschedule")
-  validate_rschedule(adjust_on, "adjust_on")
+  check_rschedule(rschedule)
+  check_rschedule(adjust_on)
   validate_adjustment(adjustment, "adjustment")
 
   cache <- cache_radjusted$new(

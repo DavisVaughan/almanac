@@ -70,7 +70,7 @@ NULL
 #' @export
 add_rschedule <- function(x, rschedule) {
   validate_rbundle(x, "x")
-  validate_rschedule(rschedule, x_arg = "rschedule")
+  check_rschedule(rschedule)
 
   rschedules <- c(x$rschedules, list(rschedule))
 

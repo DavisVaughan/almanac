@@ -11,8 +11,8 @@
     Code
       new_rbundle(list(1))
     Condition
-      Error in `glubort()`:
-      ! Input `rschedules[[1]]` must be an rschedule, such as an rrule or rbundle.
+      Error in `new_rbundle()`:
+      ! `rschedules[[1]]` must be a <rschedule>, not the number 1.
 
 # validates rdates
 
