@@ -48,7 +48,7 @@
 #' A new empty rrule.
 #'
 #' @examples
-#' rrule <- monthly() %>% recur_on_mday(25)
+#' rrule <- monthly() %>% recur_on_day_of_month(25)
 #'
 #' alma_search("1970-01-01", "1971-01-01", rrule)
 #'
@@ -56,21 +56,21 @@
 #' alma_search("1899-01-01", "1901-01-01", rrule)
 #'
 #' # Adjust the `since` date to get access to these dates
-#' rrule_pre_1900 <- monthly(since = "1850-01-01") %>% recur_on_mday(25)
+#' rrule_pre_1900 <- monthly(since = "1850-01-01") %>% recur_on_day_of_month(25)
 #' alma_search("1899-01-01", "1901-01-01", rrule_pre_1900)
 #'
 #' # A quarterly recurrence rule can be built from
 #' # `monthly()` and `recur_on_interval()`
 #' on_first_of_the_quarter <- monthly() %>%
 #'   recur_on_interval(3) %>%
-#'   recur_on_mday(1)
+#'   recur_on_day_of_month(1)
 #'
 #' alma_search("1999-01-01", "2000-04-01", on_first_of_the_quarter)
 #'
 #' # Alter the starting quarter by altering the `since` date
 #' on_first_of_the_quarter_starting_in_feb <- monthly(since = "1998-02-01") %>%
 #'   recur_on_interval(3) %>%
-#'   recur_on_mday(1)
+#'   recur_on_day_of_month(1)
 #'
 #' alma_search(
 #'   "1999-01-01",
@@ -138,7 +138,7 @@ new_rrule <- function(since = as.Date("1900-01-01"),
                       ymonth = NULL,
                       yweek = NULL,
                       yday = NULL,
-                      mday = NULL,
+                      day_of_month = NULL,
                       wday = NULL,
                       position = NULL,
                       easter = NULL) {
@@ -152,7 +152,7 @@ new_rrule <- function(since = as.Date("1900-01-01"),
     ymonth = ymonth,
     yweek = yweek,
     yday = yday,
-    mday = mday,
+    day_of_month = day_of_month,
     wday = wday,
     position = position,
     easter = easter

@@ -20,7 +20,7 @@
 #'
 #' # Every month, on the 2nd day of the month
 #' rrule2 <- monthly() %>%
-#'   recur_on_mday(2)
+#'   recur_on_day_of_month(2)
 #'
 #' # Make a larger rbundle made of multiple rules
 #' rb <- runion() %>%

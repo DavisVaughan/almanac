@@ -20,7 +20,7 @@ format_body <- function(x) {
     format_ymonth(x),
     format_yweek(x),
     format_yday(x),
-    format_mday(x),
+    format_day_of_month(x),
     format_wday(x),
     format_position(x),
     format_easter(x)
@@ -110,13 +110,13 @@ format_yday <- function(x) {
   }
 }
 
-format_mday <- function(x) {
-  mday <- x$mday
+format_day_of_month <- function(x) {
+  day_of_month <- x$day_of_month
 
-  if (is.null(mday)) {
+  if (is.null(day_of_month)) {
     character()
   } else {
-    cli::format_inline("day of month: {mday}")
+    cli::format_inline("day of month: {day_of_month}")
   }
 }
 

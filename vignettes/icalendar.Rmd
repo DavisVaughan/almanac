@@ -175,7 +175,7 @@ alma_search(since, to, rrule)
 
 ```{r}
 rrule <- monthly("1997-09-28") %>%
-  recur_on_mday(-3)
+  recur_on_day_of_month(-3)
 
 alma_search(since, "1997-12-01", rrule)
 ```
@@ -184,7 +184,7 @@ alma_search(since, "1997-12-01", rrule)
 
 ```{r}
 rrule <- monthly("1997-09-02") %>%
-  recur_on_mday(c(2, 15)) %>%
+  recur_on_day_of_month(c(2, 15)) %>%
   recur_for_count(10)
 
 alma_search(since, to, rrule)
@@ -194,7 +194,7 @@ alma_search(since, to, rrule)
 
 ```{r}
 rrule <- monthly("1997-09-30") %>%
-  recur_on_mday(c(1, -1)) %>%
+  recur_on_day_of_month(c(1, -1)) %>%
   recur_for_count(10)
 
 alma_search(since, to, rrule)
@@ -205,7 +205,7 @@ alma_search(since, to, rrule)
 ```{r}
 rrule <- monthly("1997-09-10") %>%
   recur_on_interval(18) %>%
-  recur_on_mday(10:15) %>%
+  recur_on_day_of_month(10:15) %>%
   recur_for_count(10)
 
 alma_search("1997-09-10", to, rrule)
@@ -301,7 +301,7 @@ alma_search("1997-06-05", "1999-01-01", rrule)
 ```{r}
 rrule <- yearly(since) %>%
   recur_on_wday("Friday") %>%
-  recur_on_mday(13)
+  recur_on_day_of_month(13)
 
 alma_search(since, "2001-01-01", rrule)
 ```
@@ -311,7 +311,7 @@ alma_search(since, "2001-01-01", rrule)
 ```{r}
 rrule <- yearly("1997-09-13") %>%
   recur_on_wday("Saturday") %>%
-  recur_on_mday(7:13)
+  recur_on_day_of_month(7:13)
 
 alma_search("1997-09-13", "1998-06-01", rrule)
 ```
@@ -321,7 +321,7 @@ alma_search("1997-09-13", "1998-06-01", rrule)
 ```{r}
 rrule <- yearly("1996-11-05") %>%
   recur_on_wday("Tuesday") %>%
-  recur_on_mday(2:8) %>%
+  recur_on_day_of_month(2:8) %>%
   recur_on_interval(4) %>%
   recur_on_ymonth("November")
 
@@ -389,7 +389,7 @@ Invalid dates do not decrease the total count.
 
 ```{r}
 rrule <- weekly("2007-01-15") %>%
-  recur_on_mday(c(15, 30)) %>%
+  recur_on_day_of_month(c(15, 30)) %>%
   recur_for_count(5)
 
 alma_search("2007-01-15", "2007-12-31", rrule)

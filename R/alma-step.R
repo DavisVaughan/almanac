@@ -55,7 +55,7 @@
 #' # a custom runion and step over that too.
 #' on_09_16 <- yearly() %>%
 #'   recur_on_ymonth(9) %>%
-#'   recur_on_mday(16)
+#'   recur_on_day_of_month(16)
 #'
 #' rb <- runion() %>%
 #'   add_rschedule(on_09_16) %>%

@@ -60,8 +60,8 @@
       * until: 2100-01-01
       * day of year: 5, 9, and 12
     Code
-      # # can use multiple mdays
-      recur_on_mday(daily(), c(5, 9, 12))
+      # # can use multiple days of the month
+      recur_on_day_of_month(daily(), c(5, 9, 12))
     Message
       <rrule>
       * frequency: daily
@@ -168,7 +168,7 @@
       * until: 2100-01-01
       * day of year: 5
     Code
-      recur_on_mday(daily(), 5)
+      recur_on_day_of_month(daily(), 5)
     Message
       <rrule>
       * frequency: daily

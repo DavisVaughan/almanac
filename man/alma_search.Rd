@@ -26,7 +26,7 @@ A Date vector of all events between \code{from} and \code{to}.
 \code{alma_search()} retrieves all events between \code{from} and \code{to}.
 }
 \examples{
-on_12th <- monthly() \%>\% recur_on_mday(12)
+on_12th <- monthly() \%>\% recur_on_day_of_month(12)
 on_monday <- weekly() \%>\% recur_on_wday("Monday")
 
 # On the 12th of the month, or on Mondays

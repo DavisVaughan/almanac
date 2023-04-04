@@ -6,7 +6,7 @@ test_that("can create an radjusted rschedule", {
 
 test_that("radjusted adjusts dates", {
   on_christmas <- yearly(since = "2004-01-01", until = "2006-12-31") %>%
-    recur_on_mday(25) %>%
+    recur_on_day_of_month(25) %>%
     recur_on_ymonth("Dec")
 
   on_weekends <- weekly(since = "2004-01-01", until = "2006-12-31") %>%

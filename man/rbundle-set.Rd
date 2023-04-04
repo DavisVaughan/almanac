@@ -50,7 +50,7 @@ on_weekends <- weekly(since = since, until = until) \%>\%
   recur_on_weekends()
 
 on_25th <- monthly(since = since, until = until) \%>\%
-  recur_on_mday(25)
+  recur_on_day_of_month(25)
 
 # On weekends OR the 25th of the month
 ru <- runion() \%>\%

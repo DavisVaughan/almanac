@@ -62,7 +62,7 @@ test_that("yearly - on a interval", {
 test_that("interval is for the frequency, not the number of events", {
   rrule <- monthly(since = "2000-01-01") %>%
     recur_on_interval(2) %>%
-    recur_on_mday(1:2)
+    recur_on_day_of_month(1:2)
 
   expect <- as.Date(c("2000-01-01", "2000-01-02", "2000-03-01", "2000-03-02"))
 

@@ -58,7 +58,7 @@ on_thanksgiving <- yearly() \%>\%
   recur_on_ymonth("Nov")
 
 on_christmas <- yearly() \%>\%
-  recur_on_mday(25) \%>\%
+  recur_on_day_of_month(25) \%>\%
   recur_on_ymonth("Dec")
 
 on_labor_day <- monthly() \%>\%

@@ -82,7 +82,7 @@ on_weekends <- weekly() \%>\%
   recur_on_weekends()
 
 on_christmas <- yearly() \%>\%
-  recur_on_mday(25) \%>\%
+  recur_on_day_of_month(25) \%>\%
   recur_on_ymonth("Dec")
 
 rb <- runion() \%>\%

@@ -28,10 +28,10 @@
 #'
 #' # Note that the frequency is limited to "every other month", but you
 #' # can still have multiple events inside a single month
-#' on_every_other_month_on_mday_25_or_26 <- on_every_other_month %>%
-#'   recur_on_mday(25:26)
+#' on_every_other_month_on_day_25_or_26 <- on_every_other_month %>%
+#'   recur_on_day_of_month(25:26)
 #'
-#' alma_search("1999-01-01", "1999-06-01", on_every_other_month_on_mday_25_or_26)
+#' alma_search("1999-01-01", "1999-06-01", on_every_other_month_on_day_25_or_26)
 #'
 #' @export
 recur_on_interval <- function(x, n) {

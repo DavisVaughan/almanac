@@ -46,7 +46,7 @@ as_js_from_rrule <- function(x) {
     get_ymonth(x),
     get_yweek(x),
     get_yday(x),
-    get_mday(x),
+    get_day_of_month(x),
     get_wday(x),
     get_position(x),
     get_easter(x)
@@ -113,14 +113,14 @@ get_week_start <- function(x) {
   glue("wkst: {week_start}")
 }
 
-get_mday <- function(x) {
-  if (is.null(x$mday)) {
+get_day_of_month <- function(x) {
+  if (is.null(x$day_of_month)) {
     return(NULL)
   }
 
-  mday <- as_js_from_vector(x$mday)
+  day_of_month <- as_js_from_vector(x$day_of_month)
 
-  glue("bymonthday: {mday}")
+  glue("bymonthday: {day_of_month}")
 }
 
 get_ymonth <- function(x) {

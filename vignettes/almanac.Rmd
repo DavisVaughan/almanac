@@ -119,7 +119,7 @@ So far we have worked with the base recurrence rules. Things get _much_ more int
 
 ```{r}
 on_4th_and_16th <- monthly(since = "2000-01-01") %>%
-  recur_on_mday(c(4, 16))
+  recur_on_day_of_month(c(4, 16))
 
 alma_search("2000-01-01", "2000-06-01", on_4th_and_16th)
 ```
@@ -171,7 +171,7 @@ The most useful rbundle is runion, as this allows you construct an event set tha
 ```{r}
 on_christmas <- yearly() %>%
   recur_on_ymonth("Dec") %>%
-  recur_on_mday(25)
+  recur_on_day_of_month(25)
 
 christmas_or_labor_day <- runion() %>%
   add_rschedule(on_christmas) %>%
