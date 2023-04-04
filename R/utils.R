@@ -100,19 +100,23 @@ glue2 <- function(..., .envir = parent.frame()) {
 
 # ------------------------------------------------------------------------------
 
-normalize_day_of_week <- function(x) {
+day_of_week_normalize <- function(x,
+                                  ...,
+                                  arg = caller_arg(x),
+                                  call = caller_env()) {
   if (!is.character(x)) {
     return(x)
   }
 
-  x <- tolower(x)
-
-  where <- match_day_of_week(x)
+  where <- day_of_week_match(x)
 
   misses <- is.na(where)
 
   if (any(misses)) {
-    abort("A character `x` must be a weekday name or abbreviation.")
+    cli::cli_abort(
+      "A character {.arg {arg}} must be a weekday name or abbreviation.",
+      call = call
+    )
   }
 
   out <- day_of_week_int()[where]
@@ -122,8 +126,8 @@ normalize_day_of_week <- function(x) {
   out
 }
 
-match_day_of_week <- function(x) {
-  vec_match(x, day_of_week_names())
+day_of_week_match <- function(x) {
+  vec_match(tolower(x), day_of_week_names())
 }
 
 day_of_week_names <- function() {

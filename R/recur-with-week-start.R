@@ -54,7 +54,7 @@
 recur_with_week_start <- function(x, wday) {
   check_rrule(x)
 
-  wday <- normalize_day_of_week(wday)
+  wday <- day_of_week_normalize(wday)
 
   wday <- vec_cast(wday, integer(), x_arg = "wday")
   vec_assert(wday, size = 1L)

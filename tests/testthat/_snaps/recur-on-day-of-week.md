@@ -3,8 +3,8 @@
     Code
       yearly() %>% recur_on_day_of_week("mond")
     Condition
-      Error in `normalize_day_of_week()`:
-      ! A character `x` must be a weekday name or abbreviation.
+      Error in `recur_on_day_of_week()`:
+      ! A character `day` must be a weekday name or abbreviation.
 
 # cannot use `day > 7` or `day < 1`
 

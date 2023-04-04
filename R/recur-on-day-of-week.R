@@ -89,7 +89,7 @@ recur_on_day_of_week <- function(x, day, ..., nth = NULL) {
     old <- new_list(n = 7L)
   }
 
-  day <- normalize_day_of_week(day)
+  day <- day_of_week_normalize(day)
   day <- vec_cast(day, to = integer())
 
   if (any(day < 1L | day > 7L)) {
