@@ -142,7 +142,7 @@ a list of existing rschedules.</p><ul><li><p><code>new_runion()</code> creates a
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">new_runion</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;runion[0 rschedules / 0 rdates / 0 exdates]&gt;</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> &lt;runion[0]&gt;</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="rrule.html">daily</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="rrule.html">weekly</a></span><span class="op">(</span><span class="op">)</span></span></span>
@@ -150,7 +150,15 @@ a list of existing rschedules.</p><ul><li><p><code>new_runion()</code> creates a
 <span class="r-in"><span><span class="va">rschedules</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">new_runion</span><span class="op">(</span><span class="va">rschedules</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;runion[2 rschedules / 0 rdates / 0 exdates]&gt;</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> &lt;runion[2]&gt;</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>  &lt;rrule&gt;</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>  • frequency: daily</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>  • since: 1900-01-01</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>  • until: 2100-01-01</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>  &lt;rrule&gt;</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>  • frequency: weekly</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>  • since: 1900-01-01</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>  • until: 2100-01-01</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

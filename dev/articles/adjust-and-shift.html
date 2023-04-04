@@ -205,15 +205,19 @@ radjusted.</p>
 <span></span>
 <span><span class="va">on_adjusted_christmas</span></span>
 <span><span class="co">#&gt; &lt;radjusted&gt;</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Adjust:</span></span>
-<span><span class="co">#&gt; &lt;rrule[yearly / 1900-01-01 / 2100-01-01]&gt;</span></span>
-<span><span class="co">#&gt; - ymonth: Dec</span></span>
-<span><span class="co">#&gt; - mday: 25</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Adjust on:</span></span>
-<span><span class="co">#&gt; &lt;rrule[weekly / 1900-01-01 / 2100-01-01]&gt;</span></span>
-<span><span class="co">#&gt; - wday: Sat, Sun</span></span></code></pre></div>
+<span><span class="co">#&gt;  <span style="text-decoration: underline;">adjust:</span></span></span>
+<span><span class="co">#&gt;  &lt;rrule&gt;</span></span>
+<span><span class="co">#&gt;  • frequency: yearly</span></span>
+<span><span class="co">#&gt;  • since: 1900-01-01</span></span>
+<span><span class="co">#&gt;  • until: 2100-01-01</span></span>
+<span><span class="co">#&gt;  • month of year: Dec</span></span>
+<span><span class="co">#&gt;  • day of month: 25</span></span>
+<span><span class="co">#&gt;  <span style="text-decoration: underline;">adjust on:</span></span></span>
+<span><span class="co">#&gt;  &lt;rrule&gt;</span></span>
+<span><span class="co">#&gt;  • frequency: weekly</span></span>
+<span><span class="co">#&gt;  • since: 1900-01-01</span></span>
+<span><span class="co">#&gt;  • until: 2100-01-01</span></span>
+<span><span class="co">#&gt;  • day of week: Sat, and Sun</span></span></code></pre></div>
 <p>This is just another rschedule, so it can be used with all of the
 other <code>alma_*()</code> functions we’ve seen so far. For example, we
 can confirm that Christmas dates that fall on the weekend are adjusted
