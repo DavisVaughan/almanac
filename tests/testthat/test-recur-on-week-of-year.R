@@ -4,9 +4,9 @@
 # 1990 starts the year on a Monday, so these are the most
 # straightforward to create tests for
 
-test_that("daily - on a yweek", {
+test_that("daily - on a week of the year", {
   base <- daily()
-  rrule <- base %>% recur_on_yweek(1)
+  rrule <- base %>% recur_on_week_of_year(1)
 
   start <- "1990-01-01"
   stop <- "1990-01-31"
@@ -18,9 +18,9 @@ test_that("daily - on a yweek", {
   expect_length(x, 7)
 })
 
-test_that("weekly - on a yweek", {
+test_that("weekly - on a week of the year", {
   base <- weekly()
-  rrule <- base %>% recur_on_yweek(1)
+  rrule <- base %>% recur_on_week_of_year(1)
 
   start <- "1990-01-01"
   stop <- "1990-01-31"
@@ -32,9 +32,9 @@ test_that("weekly - on a yweek", {
   expect_length(x, 7)
 })
 
-test_that("monthly - on a yweek", {
+test_that("monthly - on a week of the year", {
   base <- monthly()
-  rrule <- base %>% recur_on_yweek(1)
+  rrule <- base %>% recur_on_week_of_year(1)
 
   start <- "1990-01-01"
   stop <- "1990-01-31"
@@ -46,9 +46,9 @@ test_that("monthly - on a yweek", {
   expect_length(x, 7)
 })
 
-test_that("yearly - on a yweek", {
+test_that("yearly - on a week of the year", {
   base <- yearly()
-  rrule <- base %>% recur_on_yweek(1)
+  rrule <- base %>% recur_on_week_of_year(1)
 
   start <- "1990-01-01"
   stop <- "1990-01-31"
@@ -63,7 +63,7 @@ test_that("yearly - on a yweek", {
 # ------------------------------------------------------------------------------
 
 test_that("first week of the year correctly defaults to use a week start of Monday", {
-  rrule <- daily() %>% recur_on_yweek(1)
+  rrule <- daily() %>% recur_on_week_of_year(1)
 
   # 2017 has a monday on day 2 of the year, so that is where the first week starts
   x <- alma_search("2017-01-01", "2017-01-31", rrule)
@@ -80,7 +80,7 @@ test_that("first week of the year correctly defaults to use a week start of Mond
 })
 
 test_that("logic is correct when selecting from the back", {
-  rrule <- daily() %>% recur_on_yweek(-1)
+  rrule <- daily() %>% recur_on_week_of_year(-1)
 
   # 2018 has a monday on day 1 of the year, so the last week in 2017 must end
   # on the last day of the year
@@ -99,14 +99,14 @@ test_that("logic is correct when selecting from the back", {
 })
 
 test_that("week start option is respected", {
-  rrule <- daily() %>% recur_on_yweek(1) %>% recur_with_week_start("Tuesday")
+  rrule <- daily() %>% recur_on_week_of_year(1) %>% recur_with_week_start("Tuesday")
 
   # 2017 has a tuesday on day 3 of the year, so that is where the first week starts
   x <- alma_search("2017-01-01", "2017-01-31", rrule)
 
   expect_equal(x[1], as.Date("2017-01-03"))
 
-  rrule <- daily() %>% recur_on_yweek(1) %>% recur_with_week_start("Sunday")
+  rrule <- daily() %>% recur_on_week_of_year(1) %>% recur_with_week_start("Sunday")
 
   # 2015 has a sunday on day 4 of the year, so that is where the first week starts
   # (notice this is different from the default of Monday, where the first week would
@@ -119,16 +119,16 @@ test_that("week start option is respected", {
 # ------------------------------------------------------------------------------
 # Error checking
 
-test_that("cannot use `yweek > 53` or `yweek < -53` or `yweek == 0`", {
+test_that("cannot use `week > 53` or `week < -53` or `week == 0`", {
   expect_snapshot({
-    (expect_error(yearly() %>% recur_on_yweek(54)))
-    (expect_error(yearly() %>% recur_on_yweek(-54)))
-    (expect_error(yearly() %>% recur_on_yweek(0)))
+    (expect_error(yearly() %>% recur_on_week_of_year(54)))
+    (expect_error(yearly() %>% recur_on_week_of_year(-54)))
+    (expect_error(yearly() %>% recur_on_week_of_year(0)))
   })
 })
 
-test_that("yweek must be an integer", {
+test_that("`week` must be an integer", {
   expect_snapshot(error = TRUE, {
-    yearly() %>% recur_on_yweek(30.5)
+    yearly() %>% recur_on_week_of_year(30.5)
   })
 })

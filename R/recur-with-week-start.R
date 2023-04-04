@@ -3,7 +3,7 @@
 #' @description
 #'
 #' `recur_with_week_start()` controls the week day that represents the start of
-#' the week. This is important for rules that use [recur_on_yweek()].
+#' the week. This is important for rules that use [recur_on_week_of_year()].
 #'
 #' _The default day of the week to start on is Monday._
 #'
@@ -26,7 +26,7 @@
 #' # with ISO-8601 standards, which require that the first week of the year
 #' # is when there are at least 4 days in that year, and the week starts on
 #' # the week day specified by `recur_with_week_start()` (Monday by default).
-#' on_first_week <- yearly() %>% recur_on_yweek(1)
+#' on_first_week <- yearly() %>% recur_on_week_of_year(1)
 #'
 #' # In 2017:
 #' # - Look at dates 1-4
@@ -47,7 +47,7 @@
 #' # - Look at dates 1-4
 #' # - 2015-01-04 is a Sunday, so start the first week here
 #' on_first_week_sun <- yearly() %>%
-#'   recur_on_yweek(1) %>%
+#'   recur_on_week_of_year(1) %>%
 #'   recur_with_week_start("Sunday")
 #'
 #' alma_search("2014-12-25", "2015-01-25", on_first_week_sun)

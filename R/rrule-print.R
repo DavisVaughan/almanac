@@ -18,7 +18,7 @@ format_body <- function(x) {
     format_interval(x),
     format_week_start(x),
     format_ymonth(x),
-    format_yweek(x),
+    format_week_of_year(x),
     format_day_of_year(x),
     format_day_of_month(x),
     format_day_of_week(x),
@@ -90,13 +90,13 @@ format_ymonth <- function(x) {
   }
 }
 
-format_yweek <- function(x) {
-  yweek <- x$yweek
+format_week_of_year <- function(x) {
+  week_of_year <- x$week_of_year
 
-  if (is.null(yweek)) {
+  if (is.null(week_of_year)) {
     character()
   } else {
-    cli::format_inline("week of year: {yweek}")
+    cli::format_inline("week of year: {week_of_year}")
   }
 }
 

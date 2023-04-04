@@ -270,7 +270,7 @@ Default week start in almanac is on Monday.
 
 ```{r}
 rrule <- yearly("1997-05-12") %>%
-  recur_on_yweek(20) %>%
+  recur_on_week_of_year(20) %>%
   recur_on_day_of_week("Monday")
 
 alma_search("1997-05-12", "2000-01-01", rrule)

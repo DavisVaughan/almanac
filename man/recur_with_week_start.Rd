@@ -22,7 +22,7 @@ An updated rrule.
 }
 \description{
 \code{recur_with_week_start()} controls the week day that represents the start of
-the week. This is important for rules that use \code{\link[=recur_on_yweek]{recur_on_yweek()}}.
+the week. This is important for rules that use \code{\link[=recur_on_week_of_year]{recur_on_week_of_year()}}.
 
 \emph{The default day of the week to start on is Monday.}
 }
@@ -31,7 +31,7 @@ the week. This is important for rules that use \code{\link[=recur_on_yweek]{recu
 # with ISO-8601 standards, which require that the first week of the year
 # is when there are at least 4 days in that year, and the week starts on
 # the week day specified by `recur_with_week_start()` (Monday by default).
-on_first_week <- yearly() \%>\% recur_on_yweek(1)
+on_first_week <- yearly() \%>\% recur_on_week_of_year(1)
 
 # In 2017:
 # - Look at dates 1-4
@@ -52,7 +52,7 @@ alma_search("2014-12-25", "2015-01-25", on_first_week)
 # - Look at dates 1-4
 # - 2015-01-04 is a Sunday, so start the first week here
 on_first_week_sun <- yearly() \%>\%
-  recur_on_yweek(1) \%>\%
+  recur_on_week_of_year(1) \%>\%
   recur_with_week_start("Sunday")
 
 alma_search("2014-12-25", "2015-01-25", on_first_week_sun)

@@ -42,8 +42,8 @@
       * until: 2100-01-01
       * month of year: Feb and Mar
     Code
-      # # can use multiple yweeks
-      recur_on_yweek(daily(), c(5, 9, 12))
+      # # can use multiple weeks of the year
+      recur_on_week_of_year(daily(), c(5, 9, 12))
     Message
       <rrule>
       * frequency: daily
@@ -153,7 +153,7 @@
       * until: 2100-01-01
       * month of year: Feb
     Code
-      recur_on_yweek(daily(), 5)
+      recur_on_week_of_year(daily(), 5)
     Message
       <rrule>
       * frequency: daily

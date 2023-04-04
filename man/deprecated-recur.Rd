@@ -5,6 +5,7 @@
 \alias{recur_on_mday}
 \alias{recur_on_wday}
 \alias{recur_on_yday}
+\alias{recur_on_yweek}
 \title{Deprecated recurrence helpers}
 \usage{
 recur_on_mday(x, mday)
@@ -12,6 +13,8 @@ recur_on_mday(x, mday)
 recur_on_wday(x, wday, nth = NULL)
 
 recur_on_yday(x, yday)
+
+recur_on_yweek(x, yweek)
 }
 \arguments{
 \item{x}{\verb{[rrule]}
@@ -34,12 +37,23 @@ string like \code{"Tuesday"}, or an abbreviation like \code{"Tues"}.}
 Limit to the n-th occurrence of the \code{day} in the base frequency. For
 example, in a monthly frequency, using \code{nth = -1} would limit to the
 last \code{day} in the month. The default of \code{NULL} chooses all occurrences.}
+
+\item{yweek}{\verb{[integer]}
+
+Weeks of the year to recur on. Integer values must be between
+\verb{[1, 53]} or \verb{[-53, -1]}.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 \itemize{
 \item \code{recur_on_mday()} is deprecated as of almanac 1.0.0 in favor of
 \code{\link[=recur_on_day_of_month]{recur_on_day_of_month()}}.
+\item \code{recur_on_wday()} is deprecated as of almanac 1.0.0 in favor of
+\code{\link[=recur_on_day_of_week]{recur_on_day_of_week()}}.
+\item \code{recur_on_yday()} is deprecated as of almanac 1.0.0 in favor of
+\code{\link[=recur_on_day_of_year]{recur_on_day_of_year()}}.
+\item \code{recur_on_yweek()} is deprecated as of almanac 1.0.0 in favor of
+\code{\link[=recur_on_week_of_year]{recur_on_week_of_year()}}.
 }
 }
 \keyword{internal}
