@@ -1,5 +1,17 @@
 # almanac (development version)
 
+* The following functions have been deprecated in favor of more intuitively
+  named alternatives (#83):
+  
+  * `recur_on_mday()` -> `recur_on_day_of_month()`
+  * `recur_on_wday()` -> `recur_on_day_of_week()`
+  * `recur_on_yday()` -> `recur_on_day_of_year()`
+  * `recur_on_yweek()` -> `recur_on_week_of_year()`
+  * `recur_on_ymonth()` -> `recur_on_month_of_year()`
+  
+  These functions are being aggressively deprecated and will be removed in the
+  next minor version of almanac.
+
 * Greatly improved the print methods of all almanac classes using cli (#86).
 
 * Updated internal JavaScript rrule library to version 2.7.2 (#82).
