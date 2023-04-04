@@ -201,7 +201,7 @@ check_since <- function(since) {
     abort("`since` must be a finite date.")
   }
 
-  validate_date_bounds(since, x_arg = "since")
+  check_date_within_bounds(since)
 
   since
 }
@@ -214,7 +214,7 @@ check_until <- function(until) {
     abort("`until` must be a finite date.")
   }
 
-  validate_date_bounds(until, x_arg = "until")
+  check_date_within_bounds(until)
 
   until
 }

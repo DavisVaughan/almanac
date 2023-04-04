@@ -75,36 +75,17 @@ glubort <- function (..., .sep = "", .envir = parent.frame()) {
 
 # ------------------------------------------------------------------------------
 
-validate_date_bounds <- function(x, ..., x_arg = "") {
-  if (nzchar(x_arg)) {
-    x_arg <- glue(" `{x_arg}`")
-  }
-
+check_date_within_bounds <- function(x,
+                                     ...,
+                                     arg = caller_arg(x),
+                                     call = caller_env()) {
   if (any(x > almanac_global_max_date, na.rm = TRUE)) {
-    date <- format(almanac_global_max_date, format = format_ymd())
-    message <- glue("Input{x_arg} cannot be larger than {date}.")
-    stop_date_above_maximum(message)
+    stop_date_above_maximum(arg = arg, call = call)
   }
-
   if (any(x < almanac_global_min_date, na.rm = TRUE)) {
-    date <- format(almanac_global_min_date, format = format_ymd())
-    message <- glue("Input{x_arg} cannot be smaller than {date}.")
-    stop_date_below_minimum(message)
+    stop_date_below_minimum(arg = arg, call = call)
   }
-
   invisible(x)
-}
-
-format_ymd <- function() {
-  if (is_linux()) {
-    # See `?strptime` section `Printing years`
-    "%04Y-%m-%d"
-  } else {
-    "%Y-%m-%d"
-  }
-}
-is_linux <- function() {
-  tolower(Sys.info()[["sysname"]]) == "linux"
 }
 
 # ------------------------------------------------------------------------------

@@ -87,7 +87,7 @@ new_rbundle <- function(rschedules = list(),
   if (any(is_missing_or_infinite(rdates))) {
     abort("`rdates` must be finite.")
   }
-  validate_date_bounds(rdates, x_arg = "rdates")
+  check_date_within_bounds(rdates)
 
   if (!is_date(exdates)) {
     abort("`exdates` must be a Date.")
@@ -95,7 +95,7 @@ new_rbundle <- function(rschedules = list(),
   if (any(is_missing_or_infinite(exdates))) {
     abort("`exdates` must be finite.")
   }
-  validate_date_bounds(exdates, x_arg = "exdates")
+  check_date_within_bounds(exdates)
 
   new_rschedule(
     rschedules = rschedules,

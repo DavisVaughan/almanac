@@ -27,16 +27,16 @@
     Code
       daily(since = since - 1)
     Condition
-      Error in `validate_date_bounds()`:
-      ! Input `since` cannot be smaller than 0100-01-01.
+      Error in `check_since()`:
+      ! `since` must be larger than `0100-01-01`.
 
 ---
 
     Code
       daily(until = until + 1)
     Condition
-      Error in `validate_date_bounds()`:
-      ! Input `until` cannot be larger than 9999-12-31.
+      Error in `check_until()`:
+      ! `until` must be smaller than `9999-12-31`.
 
 # `check_rrule()` works
 
