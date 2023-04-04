@@ -1,7 +1,0 @@
-
-Empty runion
-============
-
-> runion()
-<runion[0 rschedules / 0 rdates / 0 exdates]>
-

@@ -10,9 +10,12 @@ test_that("can create an empty runion()", {
 })
 
 test_that("runion() generates informative output", {
-  verify_output(test_path("output", "test-runion.txt"), {
+  expect_snapshot({
     "# Empty runion"
     runion()
+
+    "# With rschedules"
+    runion() %>% add_rschedule(daily()) %>% add_rschedule(yearly())
   })
 })
 

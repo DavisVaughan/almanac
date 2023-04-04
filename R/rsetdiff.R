@@ -51,15 +51,16 @@ rbundle_restore.rsetdiff <- function(x, to) {
 
 #' @export
 print.rsetdiff <- function(x, ...) {
-  print(format(x))
+  rschedules <- x$rschedules
+  n <- length(rschedules)
+
+  cli::cli_text(cli::format_inline("<rsetdiff[{n}]>"))
+
+  for (i in seq_len(n)) {
+    cli_indented()
+    print(rschedules[[i]])
+    cli::cli_end()
+  }
+
   invisible(x)
-}
-
-#' @export
-format.rsetdiff <- function(x, ...) {
-  n_rschedules <- length(x$rschedules)
-  n_rdates <- length(x$rdates)
-  n_exdates <-length(x$exdates)
-
-  glue("<rsetdiff[{n_rschedules} rschedules / {n_rdates} rdates / {n_exdates} exdates]>")
 }

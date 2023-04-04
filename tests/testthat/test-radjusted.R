@@ -44,7 +44,7 @@ test_that("adjustment is checked", {
 # ------------------------------------------------------------------------------
 
 test_that("radjusted has informative print method", {
-  verify_output(test_path("output", "test-radjusted.txt"), {
+  expect_snapshot({
     "# basic method"
     radjusted(daily(), daily(), adj_none)
 

@@ -17,6 +17,7 @@ BugReports: https://github.com/DavisVaughan/almanac/issues
 Depends: 
     R (>= 3.5.0)
 Imports: 
+    cli (>= 3.6.1),
     glue (>= 1.6.2),
     lubridate (>= 1.9.2),
     magrittr (>= 2.0.3),
