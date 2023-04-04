@@ -19,6 +19,7 @@ Depends:
 Imports: 
     cli (>= 3.6.1),
     glue (>= 1.6.2),
+    lifecycle (>= 1.0.3),
     lubridate (>= 1.9.2),
     magrittr (>= 2.0.3),
     R6 (>= 2.5.1),
