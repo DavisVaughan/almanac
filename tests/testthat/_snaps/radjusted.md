@@ -19,7 +19,7 @@
     Code
       radjusted(daily(), daily(), 1)
     Condition
-      Error in `glubort()`:
+      Error in `validate_adjustment()`:
       ! Input `adjustment` must be a function.
 
 ---
@@ -27,7 +27,7 @@
     Code
       radjusted(daily(), daily(), function(x) x)
     Condition
-      Error in `glubort()`:
+      Error in `validate_adjustment()`:
       ! Input `adjustment` must have two arguments, `x` and `rschedule`.
 
 # radjusted has informative print method

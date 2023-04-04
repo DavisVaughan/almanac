@@ -69,12 +69,6 @@ lossy_to_message <- function(lossy, x_arg) {
 
 # ------------------------------------------------------------------------------
 
-glubort <- function (..., .sep = "", .envir = parent.frame()) {
-  abort(glue::glue(..., .sep = .sep, .envir = .envir))
-}
-
-# ------------------------------------------------------------------------------
-
 check_date_within_bounds <- function(x,
                                      ...,
                                      arg = caller_arg(x),

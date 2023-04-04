@@ -69,12 +69,12 @@ rschedule_events <- function(x) {
 #' @export
 rschedule_events.default <- function(x) {
   cls <- glue::glue_collapse(class(x), sep = "/")
-  glubort("Cannot extract events from an object of class <{cls}>.")
+  cli::cli_abort("Cannot extract events from an object of class <{cls}>.")
 }
 
 #' @export
 rschedule_events.rschedule <- function(x) {
-  glubort("rschedule subclasses must provide their own `rschedule_events()` method.")
+  cli::cli_abort("<rschedule> subclasses must provide their own `rschedule_events()` method.")
 }
 
 # ------------------------------------------------------------------------------

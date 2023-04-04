@@ -71,6 +71,6 @@ validate_frequency_position <- function(frequency, n) {
   )
 
   if (any(n > max)) {
-    glubort("For a '{frequency}' frequency, the absolute value of `n` cannot be larger than {max}.")
+    cli::cli_abort("For a '{frequency}' frequency, the absolute value of `n` cannot be larger than {max}.")
   }
 }

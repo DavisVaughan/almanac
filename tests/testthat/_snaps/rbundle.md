@@ -112,6 +112,6 @@
     Code
       rbundle_restore(x, to)
     Condition
-      Error in `glubort()`:
-      ! rbundle subclasses must provide their own `rbundle_restore()` method.
+      Error in `rbundle_restore()`:
+      ! <rbundle> subclasses must provide their own `rbundle_restore()` method.
 

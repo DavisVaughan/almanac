@@ -117,12 +117,12 @@ rbundle_restore <- function(x, to) {
 #' @export
 rbundle_restore.default <- function(x, to) {
   cls <- glue::glue_collapse(class(to), sep = "/")
-  glubort("Can't restore an rbundle to a <{cls}>.")
+  cli::cli_abort("Can't restore an <rbundle> to a <{cls}>.")
 }
 
 #' @export
 rbundle_restore.rbundle <- function(x, to) {
-  glubort("rbundle subclasses must provide their own `rbundle_restore()` method.")
+  cli::cli_abort("<rbundle> subclasses must provide their own `rbundle_restore()` method.")
 }
 
 # ------------------------------------------------------------------------------

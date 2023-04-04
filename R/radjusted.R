@@ -116,13 +116,13 @@ validate_adjustment <- function(x, x_arg = "") {
   }
 
   if (!is_function(x)) {
-    glubort("Input{x_arg} must be a function.")
+    cli::cli_abort("Input{x_arg} must be a function.")
   }
 
   fmls <- fn_fmls(x)
 
   if (length(fmls) != 2L) {
-    glubort("Input{x_arg} must have two arguments, `x` and `rschedule`.")
+    cli::cli_abort("Input{x_arg} must have two arguments, `x` and `rschedule`.")
   }
 
   invisible(x)
