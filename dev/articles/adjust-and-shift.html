@@ -149,8 +149,8 @@ along with the dates you are interested in adjusting, to an
 <code>adj_*()</code> function.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">on_christmas</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">yearly</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/recur_on_mday.html">recur_on_mday</a></span><span class="op">(</span><span class="fl">25</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/recur_on_ymonth.html">recur_on_ymonth</a></span><span class="op">(</span><span class="st">"Dec"</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="../reference/recur_on_day_of_month.html">recur_on_day_of_month</a></span><span class="op">(</span><span class="fl">25</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/recur_on_month_of_year.html">recur_on_month_of_year</a></span><span class="op">(</span><span class="st">"Dec"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2019-12-24"</span>, <span class="st">"2019-12-25"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
@@ -168,7 +168,7 @@ Sunday.</p>
 <span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2019-12-21"</span>, <span class="st">"2019-12-22"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">on_weekends</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">weekly</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/recur_on_wday.html">recur_on_weekends</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="../reference/recur_on_day_of_week.html">recur_on_weekends</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Roll Saturday backwards and Sunday forwards</span></span>
 <span><span class="fu"><a href="../reference/adjustments.html">adj_nearest</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">on_weekends</span><span class="op">)</span></span>

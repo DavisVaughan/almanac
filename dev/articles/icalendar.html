@@ -182,7 +182,7 @@ being overwhelming.</p>
 </h3>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rrule</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">daily</a></span><span class="op">(</span>since <span class="op">=</span> <span class="st">"1998-01-01"</span>, until <span class="op">=</span> <span class="st">"2000-01-31"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/recur_on_ymonth.html">recur_on_ymonth</a></span><span class="op">(</span><span class="st">"January"</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="../reference/recur_on_month_of_year.html">recur_on_month_of_year</a></span><span class="op">(</span><span class="st">"January"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/alma_search.html">alma_search</a></span><span class="op">(</span><span class="va">since</span>, <span class="va">to</span>, <span class="va">rrule</span><span class="op">)</span></span>
 <span><span class="co">#&gt;  [1] "1998-01-01" "1998-01-02" "1998-01-03" "1998-01-04" "1998-01-05"</span></span>
@@ -243,7 +243,7 @@ being overwhelming.</p>
 </h3>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rrule</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">weekly</a></span><span class="op">(</span><span class="va">since</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/recur_on_wday.html">recur_on_wday</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Tue"</span>, <span class="st">"Thur"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/recur_on_day_of_week.html">recur_on_day_of_week</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Tue"</span>, <span class="st">"Thur"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/recur_for_count.html">recur_for_count</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/alma_search.html">alma_search</a></span><span class="op">(</span><span class="va">since</span>, <span class="va">to</span>, <span class="va">rrule</span><span class="op">)</span></span>
@@ -256,7 +256,7 @@ being overwhelming.</p>
 </h3>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rrule</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">weekly</a></span><span class="op">(</span>since <span class="op">=</span> <span class="st">"1997-09-01"</span>, until <span class="op">=</span> <span class="st">"1997-12-24"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/recur_on_wday.html">recur_on_wday</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Mon"</span>, <span class="st">"Wed"</span>, <span class="st">"Fri"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/recur_on_day_of_week.html">recur_on_day_of_week</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Mon"</span>, <span class="st">"Wed"</span>, <span class="st">"Fri"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/recur_on_interval.html">recur_on_interval</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/alma_search.html">alma_search</a></span><span class="op">(</span><span class="st">"1997-09-01"</span>, <span class="va">to</span>, <span class="va">rrule</span><span class="op">)</span></span>
@@ -272,7 +272,7 @@ being overwhelming.</p>
 </h3>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rrule</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">weekly</a></span><span class="op">(</span><span class="va">since</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/recur_on_wday.html">recur_on_wday</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Tue"</span>, <span class="st">"Thu"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/recur_on_day_of_week.html">recur_on_day_of_week</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Tue"</span>, <span class="st">"Thu"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/recur_on_interval.html">recur_on_interval</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/recur_for_count.html">recur_for_count</a></span><span class="op">(</span><span class="fl">8</span><span class="op">)</span></span>
 <span></span>
@@ -285,7 +285,7 @@ being overwhelming.</p>
 </h3>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rrule</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">monthly</a></span><span class="op">(</span><span class="st">"1997-09-05"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/recur_on_wday.html">recur_on_wday</a></span><span class="op">(</span><span class="st">"Fri"</span>, nth <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/recur_on_day_of_week.html">recur_on_day_of_week</a></span><span class="op">(</span><span class="st">"Fri"</span>, nth <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/recur_for_count.html">recur_for_count</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/alma_search.html">alma_search</a></span><span class="op">(</span><span class="va">since</span>, <span class="va">to</span>, <span class="va">rrule</span><span class="op">)</span></span>
@@ -297,7 +297,7 @@ being overwhelming.</p>
 </h3>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rrule</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">monthly</a></span><span class="op">(</span>since <span class="op">=</span> <span class="st">"1997-09-05"</span>, until <span class="op">=</span> <span class="st">"1997-12-24"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/recur_on_wday.html">recur_on_wday</a></span><span class="op">(</span><span class="st">"Fri"</span>, nth <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="../reference/recur_on_day_of_week.html">recur_on_day_of_week</a></span><span class="op">(</span><span class="st">"Fri"</span>, nth <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/alma_search.html">alma_search</a></span><span class="op">(</span><span class="va">since</span>, <span class="va">to</span>, <span class="va">rrule</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "1997-09-05" "1997-10-03" "1997-11-07" "1997-12-05"</span></span></code></pre></div>
@@ -308,7 +308,7 @@ events<a class="anchor" aria-label="anchor" href="#every-other-month-on-the-firs
 </h3>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rrule</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">monthly</a></span><span class="op">(</span><span class="st">"1997-09-07"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/recur_on_wday.html">recur_on_wday</a></span><span class="op">(</span><span class="st">"Sun"</span>, nth <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/recur_on_day_of_week.html">recur_on_day_of_week</a></span><span class="op">(</span><span class="st">"Sun"</span>, nth <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/recur_on_interval.html">recur_on_interval</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/recur_for_count.html">recur_for_count</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span>
 <span></span>
@@ -321,7 +321,7 @@ events<a class="anchor" aria-label="anchor" href="#every-other-month-on-the-firs
 </h3>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rrule</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">monthly</a></span><span class="op">(</span><span class="st">"1997-09-22"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/recur_on_wday.html">recur_on_wday</a></span><span class="op">(</span><span class="st">"Mon"</span>, nth <span class="op">=</span> <span class="op">-</span><span class="fl">2</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/recur_on_day_of_week.html">recur_on_day_of_week</a></span><span class="op">(</span><span class="st">"Mon"</span>, nth <span class="op">=</span> <span class="op">-</span><span class="fl">2</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/recur_for_count.html">recur_for_count</a></span><span class="op">(</span><span class="fl">6</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/alma_search.html">alma_search</a></span><span class="op">(</span><span class="va">since</span>, <span class="va">to</span>, <span class="va">rrule</span><span class="op">)</span></span>
@@ -333,7 +333,7 @@ events<a class="anchor" aria-label="anchor" href="#every-other-month-on-the-firs
 </h3>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rrule</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">monthly</a></span><span class="op">(</span><span class="st">"1997-09-28"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/recur_on_mday.html">recur_on_mday</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="../reference/recur_on_day_of_month.html">recur_on_day_of_month</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/alma_search.html">alma_search</a></span><span class="op">(</span><span class="va">since</span>, <span class="st">"1997-12-01"</span>, <span class="va">rrule</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "1997-09-28" "1997-10-29" "1997-11-28"</span></span></code></pre></div>
@@ -343,7 +343,7 @@ events<a class="anchor" aria-label="anchor" href="#every-other-month-on-the-firs
 </h3>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rrule</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">monthly</a></span><span class="op">(</span><span class="st">"1997-09-02"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/recur_on_mday.html">recur_on_mday</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">15</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/recur_on_day_of_month.html">recur_on_day_of_month</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">15</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/recur_for_count.html">recur_for_count</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/alma_search.html">alma_search</a></span><span class="op">(</span><span class="va">since</span>, <span class="va">to</span>, <span class="va">rrule</span><span class="op">)</span></span>
@@ -355,7 +355,7 @@ events<a class="anchor" aria-label="anchor" href="#every-other-month-on-the-firs
 </h3>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rrule</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">monthly</a></span><span class="op">(</span><span class="st">"1997-09-30"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/recur_on_mday.html">recur_on_mday</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/recur_on_day_of_month.html">recur_on_day_of_month</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/recur_for_count.html">recur_for_count</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/alma_search.html">alma_search</a></span><span class="op">(</span><span class="va">since</span>, <span class="va">to</span>, <span class="va">rrule</span><span class="op">)</span></span>
@@ -369,7 +369,7 @@ events<a class="anchor" aria-label="anchor" href="#every-18-months-on-the-10th-t
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rrule</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">monthly</a></span><span class="op">(</span><span class="st">"1997-09-10"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/recur_on_interval.html">recur_on_interval</a></span><span class="op">(</span><span class="fl">18</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/recur_on_mday.html">recur_on_mday</a></span><span class="op">(</span><span class="fl">10</span><span class="op">:</span><span class="fl">15</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/recur_on_day_of_month.html">recur_on_day_of_month</a></span><span class="op">(</span><span class="fl">10</span><span class="op">:</span><span class="fl">15</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/recur_for_count.html">recur_for_count</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/alma_search.html">alma_search</a></span><span class="op">(</span><span class="st">"1997-09-10"</span>, <span class="va">to</span>, <span class="va">rrule</span><span class="op">)</span></span>
@@ -382,7 +382,7 @@ events<a class="anchor" aria-label="anchor" href="#every-18-months-on-the-10th-t
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rrule</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">monthly</a></span><span class="op">(</span><span class="va">since</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/recur_on_interval.html">recur_on_interval</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/recur_on_wday.html">recur_on_wday</a></span><span class="op">(</span><span class="st">"Tuesday"</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="../reference/recur_on_day_of_week.html">recur_on_day_of_week</a></span><span class="op">(</span><span class="st">"Tuesday"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/alma_search.html">alma_search</a></span><span class="op">(</span><span class="va">since</span>, <span class="st">"1997-12-01"</span>, <span class="va">rrule</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "1997-09-02" "1997-09-09" "1997-09-16" "1997-09-23" "1997-09-30"</span></span>
@@ -395,7 +395,7 @@ events<a class="anchor" aria-label="anchor" href="#every-18-months-on-the-10th-t
 date, since it is not otherwise specified!</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rrule</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">yearly</a></span><span class="op">(</span><span class="st">"1997-06-10"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/recur_on_ymonth.html">recur_on_ymonth</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"June"</span>, <span class="st">"July"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/recur_on_month_of_year.html">recur_on_month_of_year</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"June"</span>, <span class="st">"July"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/recur_for_count.html">recur_for_count</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/alma_search.html">alma_search</a></span><span class="op">(</span><span class="st">"1997-06-10"</span>, <span class="va">to</span>, <span class="va">rrule</span><span class="op">)</span></span>
@@ -407,7 +407,7 @@ date, since it is not otherwise specified!</p>
 </h3>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rrule</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">yearly</a></span><span class="op">(</span><span class="st">"1997-03-10"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/recur_on_ymonth.html">recur_on_ymonth</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Jan"</span>, <span class="st">"Feb"</span>, <span class="st">"Mar"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/recur_on_month_of_year.html">recur_on_month_of_year</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Jan"</span>, <span class="st">"Feb"</span>, <span class="st">"Mar"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/recur_on_interval.html">recur_on_interval</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/recur_for_count.html">recur_for_count</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span>
 <span></span>
@@ -420,7 +420,7 @@ date, since it is not otherwise specified!</p>
 </h3>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rrule</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">yearly</a></span><span class="op">(</span><span class="st">"1997-01-01"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/recur_on_yday.html">recur_on_yday</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">100</span>, <span class="fl">200</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/recur_on_day_of_year.html">recur_on_day_of_year</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">100</span>, <span class="fl">200</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/recur_on_interval.html">recur_on_interval</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/recur_for_count.html">recur_for_count</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span>
 <span></span>
@@ -433,7 +433,7 @@ date, since it is not otherwise specified!</p>
 </h3>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rrule</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">yearly</a></span><span class="op">(</span><span class="st">"1997-05-19"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/recur_on_wday.html">recur_on_wday</a></span><span class="op">(</span><span class="st">"Monday"</span>, nth <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="../reference/recur_on_day_of_week.html">recur_on_day_of_week</a></span><span class="op">(</span><span class="st">"Monday"</span>, nth <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/alma_search.html">alma_search</a></span><span class="op">(</span><span class="st">"1997-05-19"</span>, <span class="st">"2000-01-01"</span>, <span class="va">rrule</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "1997-05-19" "1998-05-18" "1999-05-17"</span></span></code></pre></div>
@@ -445,8 +445,8 @@ Monday), forever<a class="anchor" aria-label="anchor" href="#monday-of-week-numb
 <p>Default week start in almanac is on Monday.</p>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rrule</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">yearly</a></span><span class="op">(</span><span class="st">"1997-05-12"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/recur_on_yweek.html">recur_on_yweek</a></span><span class="op">(</span><span class="fl">20</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/recur_on_wday.html">recur_on_wday</a></span><span class="op">(</span><span class="st">"Monday"</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="../reference/recur_on_week_of_year.html">recur_on_week_of_year</a></span><span class="op">(</span><span class="fl">20</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/recur_on_day_of_week.html">recur_on_day_of_week</a></span><span class="op">(</span><span class="st">"Monday"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/alma_search.html">alma_search</a></span><span class="op">(</span><span class="st">"1997-05-12"</span>, <span class="st">"2000-01-01"</span>, <span class="va">rrule</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "1997-05-12" "1998-05-11" "1999-05-17"</span></span></code></pre></div>
@@ -456,8 +456,8 @@ Monday), forever<a class="anchor" aria-label="anchor" href="#monday-of-week-numb
 </h3>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rrule</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">yearly</a></span><span class="op">(</span><span class="st">"1997-03-13"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/recur_on_wday.html">recur_on_wday</a></span><span class="op">(</span><span class="st">"Thursday"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/recur_on_ymonth.html">recur_on_ymonth</a></span><span class="op">(</span><span class="st">"March"</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="../reference/recur_on_day_of_week.html">recur_on_day_of_week</a></span><span class="op">(</span><span class="st">"Thursday"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/recur_on_month_of_year.html">recur_on_month_of_year</a></span><span class="op">(</span><span class="st">"March"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/alma_search.html">alma_search</a></span><span class="op">(</span><span class="st">"1997-03-13"</span>, <span class="st">"2000-01-01"</span>, <span class="va">rrule</span><span class="op">)</span></span>
 <span><span class="co">#&gt;  [1] "1997-03-13" "1997-03-20" "1997-03-27" "1998-03-05" "1998-03-12"</span></span>
@@ -469,8 +469,8 @@ Monday), forever<a class="anchor" aria-label="anchor" href="#monday-of-week-numb
 </h3>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rrule</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">yearly</a></span><span class="op">(</span><span class="st">"1997-06-05"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/recur_on_wday.html">recur_on_wday</a></span><span class="op">(</span><span class="st">"Thursday"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/recur_on_ymonth.html">recur_on_ymonth</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Jun"</span>, <span class="st">"July"</span>, <span class="st">"Aug"</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="../reference/recur_on_day_of_week.html">recur_on_day_of_week</a></span><span class="op">(</span><span class="st">"Thursday"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/recur_on_month_of_year.html">recur_on_month_of_year</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Jun"</span>, <span class="st">"July"</span>, <span class="st">"Aug"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/alma_search.html">alma_search</a></span><span class="op">(</span><span class="st">"1997-06-05"</span>, <span class="st">"1999-01-01"</span>, <span class="va">rrule</span><span class="op">)</span></span>
 <span><span class="co">#&gt;  [1] "1997-06-05" "1997-06-12" "1997-06-19" "1997-06-26" "1997-07-03"</span></span>
@@ -485,8 +485,8 @@ Monday), forever<a class="anchor" aria-label="anchor" href="#monday-of-week-numb
 </h3>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rrule</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">yearly</a></span><span class="op">(</span><span class="va">since</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/recur_on_wday.html">recur_on_wday</a></span><span class="op">(</span><span class="st">"Friday"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/recur_on_mday.html">recur_on_mday</a></span><span class="op">(</span><span class="fl">13</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="../reference/recur_on_day_of_week.html">recur_on_day_of_week</a></span><span class="op">(</span><span class="st">"Friday"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/recur_on_day_of_month.html">recur_on_day_of_month</a></span><span class="op">(</span><span class="fl">13</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/alma_search.html">alma_search</a></span><span class="op">(</span><span class="va">since</span>, <span class="st">"2001-01-01"</span>, <span class="va">rrule</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "1998-02-13" "1998-03-13" "1998-11-13" "1999-08-13" "2000-10-13"</span></span></code></pre></div>
@@ -497,8 +497,8 @@ forever<a class="anchor" aria-label="anchor" href="#the-first-saturday-that-foll
 </h3>
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rrule</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">yearly</a></span><span class="op">(</span><span class="st">"1997-09-13"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/recur_on_wday.html">recur_on_wday</a></span><span class="op">(</span><span class="st">"Saturday"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/recur_on_mday.html">recur_on_mday</a></span><span class="op">(</span><span class="fl">7</span><span class="op">:</span><span class="fl">13</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="../reference/recur_on_day_of_week.html">recur_on_day_of_week</a></span><span class="op">(</span><span class="st">"Saturday"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/recur_on_day_of_month.html">recur_on_day_of_month</a></span><span class="op">(</span><span class="fl">7</span><span class="op">:</span><span class="fl">13</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/alma_search.html">alma_search</a></span><span class="op">(</span><span class="st">"1997-09-13"</span>, <span class="st">"1998-06-01"</span>, <span class="va">rrule</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "1997-09-13" "1997-10-11" "1997-11-08" "1997-12-13" "1998-01-10"</span></span>
@@ -510,10 +510,10 @@ forever<a class="anchor" aria-label="anchor" href="#the-first-saturday-that-foll
 </h3>
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rrule</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">yearly</a></span><span class="op">(</span><span class="st">"1996-11-05"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/recur_on_wday.html">recur_on_wday</a></span><span class="op">(</span><span class="st">"Tuesday"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/recur_on_mday.html">recur_on_mday</a></span><span class="op">(</span><span class="fl">2</span><span class="op">:</span><span class="fl">8</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/recur_on_day_of_week.html">recur_on_day_of_week</a></span><span class="op">(</span><span class="st">"Tuesday"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/recur_on_day_of_month.html">recur_on_day_of_month</a></span><span class="op">(</span><span class="fl">2</span><span class="op">:</span><span class="fl">8</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/recur_on_interval.html">recur_on_interval</a></span><span class="op">(</span><span class="fl">4</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/recur_on_ymonth.html">recur_on_ymonth</a></span><span class="op">(</span><span class="st">"November"</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="../reference/recur_on_month_of_year.html">recur_on_month_of_year</a></span><span class="op">(</span><span class="st">"November"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/alma_search.html">alma_search</a></span><span class="op">(</span><span class="st">"1996-11-05"</span>, <span class="st">"2010-12-31"</span>, <span class="va">rrule</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "1996-11-05" "2000-11-07" "2004-11-02" "2008-11-04"</span></span></code></pre></div>
@@ -528,7 +528,7 @@ selects the third element of each monthly set, where the monthly set
 contains all of the Tuesday, Wednesday, and Thursdays of the month.</p>
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rrule</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">monthly</a></span><span class="op">(</span><span class="st">"1997-09-04"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/recur_on_wday.html">recur_on_wday</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Tue"</span>, <span class="st">"Wed"</span>, <span class="st">"Thu"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/recur_on_day_of_week.html">recur_on_day_of_week</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Tue"</span>, <span class="st">"Wed"</span>, <span class="st">"Thu"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/recur_on_position.html">recur_on_position</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/recur_for_count.html">recur_for_count</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span></span>
 <span></span>
@@ -540,7 +540,7 @@ contains all of the Tuesday, Wednesday, and Thursdays of the month.</p>
 </h3>
 <div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rrule</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">monthly</a></span><span class="op">(</span><span class="st">"1997-09-29"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/recur_on_wday.html">recur_on_wday</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/recur_on_day_of_week.html">recur_on_day_of_week</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/recur_on_position.html">recur_on_position</a></span><span class="op">(</span><span class="op">-</span><span class="fl">2</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/alma_search.html">alma_search</a></span><span class="op">(</span><span class="st">"1997-09-29"</span>, <span class="st">"1998-12-01"</span>, <span class="va">rrule</span><span class="op">)</span></span>
@@ -556,7 +556,7 @@ week_start<a class="anchor" aria-label="anchor" href="#an-example-where-the-days
 <code class="sourceCode R"><span><span class="va">rrule</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">weekly</a></span><span class="op">(</span><span class="st">"1997-08-05"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/recur_on_interval.html">recur_on_interval</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/recur_for_count.html">recur_for_count</a></span><span class="op">(</span><span class="fl">4</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/recur_on_wday.html">recur_on_wday</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Tue"</span>, <span class="st">"Sun"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/recur_on_day_of_week.html">recur_on_day_of_week</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Tue"</span>, <span class="st">"Sun"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/recur_with_week_start.html">recur_with_week_start</a></span><span class="op">(</span><span class="st">"Monday"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Week 1: 1997-08-04 -&gt; 1997-08-10</span></span>
@@ -569,7 +569,7 @@ week_start<a class="anchor" aria-label="anchor" href="#an-example-where-the-days
 <code class="sourceCode R"><span><span class="va">rrule</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">weekly</a></span><span class="op">(</span><span class="st">"1997-08-05"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/recur_on_interval.html">recur_on_interval</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/recur_for_count.html">recur_for_count</a></span><span class="op">(</span><span class="fl">4</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/recur_on_wday.html">recur_on_wday</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Tue"</span>, <span class="st">"Sun"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/recur_on_day_of_week.html">recur_on_day_of_week</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Tue"</span>, <span class="st">"Sun"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/recur_with_week_start.html">recur_with_week_start</a></span><span class="op">(</span><span class="st">"Sunday"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Week 1: 1997-08-03 -&gt; 1997-08-09</span></span>
@@ -586,7 +586,7 @@ week_start<a class="anchor" aria-label="anchor" href="#an-example-where-the-days
 <p>Invalid dates do not decrease the total count.</p>
 <div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rrule</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">weekly</a></span><span class="op">(</span><span class="st">"2007-01-15"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/recur_on_mday.html">recur_on_mday</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">15</span>, <span class="fl">30</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/recur_on_day_of_month.html">recur_on_day_of_month</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">15</span>, <span class="fl">30</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/recur_for_count.html">recur_for_count</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/alma_search.html">alma_search</a></span><span class="op">(</span><span class="st">"2007-01-15"</span>, <span class="st">"2007-12-31"</span>, <span class="va">rrule</span><span class="op">)</span></span>

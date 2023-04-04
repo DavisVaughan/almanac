@@ -107,10 +107,10 @@ become "every other month".</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Note that the frequency is limited to "every other month", but you</span></span></span>
 <span class="r-in"><span><span class="co"># can still have multiple events inside a single month</span></span></span>
-<span class="r-in"><span><span class="va">on_every_other_month_on_mday_25_or_26</span> <span class="op">&lt;-</span> <span class="va">on_every_other_month</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="recur_on_mday.html">recur_on_mday</a></span><span class="op">(</span><span class="fl">25</span><span class="op">:</span><span class="fl">26</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">on_every_other_month_on_day_25_or_26</span> <span class="op">&lt;-</span> <span class="va">on_every_other_month</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="recur_on_day_of_month.html">recur_on_day_of_month</a></span><span class="op">(</span><span class="fl">25</span><span class="op">:</span><span class="fl">26</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu"><a href="alma_search.html">alma_search</a></span><span class="op">(</span><span class="st">"1999-01-01"</span>, <span class="st">"1999-06-01"</span>, <span class="va">on_every_other_month_on_mday_25_or_26</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="alma_search.html">alma_search</a></span><span class="op">(</span><span class="st">"1999-01-01"</span>, <span class="st">"1999-06-01"</span>, <span class="va">on_every_other_month_on_day_25_or_26</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "1999-01-25" "1999-01-26" "1999-03-25" "1999-03-26" "1999-05-25"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [6] "1999-05-26"</span>
 <span class="r-in"><span></span></span>

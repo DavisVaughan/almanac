@@ -61,6 +61,9 @@
     <loc>/dev/reference/almanac-vctrs-compat.html</loc>
   </url>
   <url>
+    <loc>/dev/reference/deprecated-recur.html</loc>
+  </url>
+  <url>
     <loc>/dev/reference/index.html</loc>
   </url>
   <url>
@@ -88,28 +91,28 @@
     <loc>/dev/reference/recur_for_count.html</loc>
   </url>
   <url>
+    <loc>/dev/reference/recur_on_day_of_month.html</loc>
+  </url>
+  <url>
+    <loc>/dev/reference/recur_on_day_of_week.html</loc>
+  </url>
+  <url>
+    <loc>/dev/reference/recur_on_day_of_year.html</loc>
+  </url>
+  <url>
     <loc>/dev/reference/recur_on_easter.html</loc>
   </url>
   <url>
     <loc>/dev/reference/recur_on_interval.html</loc>
   </url>
   <url>
-    <loc>/dev/reference/recur_on_mday.html</loc>
+    <loc>/dev/reference/recur_on_month_of_year.html</loc>
   </url>
   <url>
     <loc>/dev/reference/recur_on_position.html</loc>
   </url>
   <url>
-    <loc>/dev/reference/recur_on_wday.html</loc>
-  </url>
-  <url>
-    <loc>/dev/reference/recur_on_yday.html</loc>
-  </url>
-  <url>
-    <loc>/dev/reference/recur_on_ymonth.html</loc>
-  </url>
-  <url>
-    <loc>/dev/reference/recur_on_yweek.html</loc>
+    <loc>/dev/reference/recur_on_week_of_year.html</loc>
   </url>
   <url>
     <loc>/dev/reference/recur_with_week_start.html</loc>

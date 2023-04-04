@@ -134,7 +134,7 @@ default will use a quarterly rule starting in January since the default
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">rrule</span> <span class="op">&lt;-</span> <span class="fu">monthly</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu"><a href="recur_on_mday.html">recur_on_mday</a></span><span class="op">(</span><span class="fl">25</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">rrule</span> <span class="op">&lt;-</span> <span class="fu">monthly</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu"><a href="recur_on_day_of_month.html">recur_on_day_of_month</a></span><span class="op">(</span><span class="fl">25</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="alma_search.html">alma_search</a></span><span class="op">(</span><span class="st">"1970-01-01"</span>, <span class="st">"1971-01-01"</span>, <span class="va">rrule</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "1970-01-25" "1970-02-25" "1970-03-25" "1970-04-25" "1970-05-25"</span>
@@ -148,7 +148,7 @@ default will use a quarterly rule starting in January since the default
 <span class="r-out co"><span class="r-pr">#&gt;</span> [11] "1900-11-25" "1900-12-25"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Adjust the `since` date to get access to these dates</span></span></span>
-<span class="r-in"><span><span class="va">rrule_pre_1900</span> <span class="op">&lt;-</span> <span class="fu">monthly</span><span class="op">(</span>since <span class="op">=</span> <span class="st">"1850-01-01"</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu"><a href="recur_on_mday.html">recur_on_mday</a></span><span class="op">(</span><span class="fl">25</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">rrule_pre_1900</span> <span class="op">&lt;-</span> <span class="fu">monthly</span><span class="op">(</span>since <span class="op">=</span> <span class="st">"1850-01-01"</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu"><a href="recur_on_day_of_month.html">recur_on_day_of_month</a></span><span class="op">(</span><span class="fl">25</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="alma_search.html">alma_search</a></span><span class="op">(</span><span class="st">"1899-01-01"</span>, <span class="st">"1901-01-01"</span>, <span class="va">rrule_pre_1900</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "1899-01-25" "1899-02-25" "1899-03-25" "1899-04-25" "1899-05-25"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [6] "1899-06-25" "1899-07-25" "1899-08-25" "1899-09-25" "1899-10-25"</span>
@@ -160,7 +160,7 @@ default will use a quarterly rule starting in January since the default
 <span class="r-in"><span><span class="co"># `monthly()` and `recur_on_interval()`</span></span></span>
 <span class="r-in"><span><span class="va">on_first_of_the_quarter</span> <span class="op">&lt;-</span> <span class="fu">monthly</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="recur_on_interval.html">recur_on_interval</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="recur_on_mday.html">recur_on_mday</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="recur_on_day_of_month.html">recur_on_day_of_month</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="alma_search.html">alma_search</a></span><span class="op">(</span><span class="st">"1999-01-01"</span>, <span class="st">"2000-04-01"</span>, <span class="va">on_first_of_the_quarter</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "1999-01-01" "1999-04-01" "1999-07-01" "1999-10-01" "2000-01-01"</span>
@@ -169,7 +169,7 @@ default will use a quarterly rule starting in January since the default
 <span class="r-in"><span><span class="co"># Alter the starting quarter by altering the `since` date</span></span></span>
 <span class="r-in"><span><span class="va">on_first_of_the_quarter_starting_in_feb</span> <span class="op">&lt;-</span> <span class="fu">monthly</span><span class="op">(</span>since <span class="op">=</span> <span class="st">"1998-02-01"</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="recur_on_interval.html">recur_on_interval</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="recur_on_mday.html">recur_on_mday</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="recur_on_day_of_month.html">recur_on_day_of_month</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="alma_search.html">alma_search</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="st">"1999-01-01"</span>,</span></span>

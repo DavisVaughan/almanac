@@ -103,7 +103,7 @@ Let’s show it first:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">on_first_day_of_quarter</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">monthly</a></span><span class="op">(</span>since <span class="op">=</span> <span class="st">"2000-01-01"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/recur_on_interval.html">recur_on_interval</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/recur_on_mday.html">recur_on_mday</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="../reference/recur_on_day_of_month.html">recur_on_day_of_month</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/alma_search.html">alma_search</a></span><span class="op">(</span><span class="st">"2000-01-01"</span>, <span class="st">"2002-01-01"</span>, <span class="va">on_first_day_of_quarter</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "2000-01-01" "2000-04-01" "2000-07-01" "2000-10-01" "2001-01-01"</span></span>
@@ -129,7 +129,7 @@ fiscal calendar.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">on_first_day_of_quarter_march_start</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">monthly</a></span><span class="op">(</span>since <span class="op">=</span> <span class="st">"2000-03-01"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/recur_on_interval.html">recur_on_interval</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/recur_on_mday.html">recur_on_mday</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="../reference/recur_on_day_of_month.html">recur_on_day_of_month</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/alma_search.html">alma_search</a></span><span class="op">(</span><span class="st">"2000-01-01"</span>, <span class="st">"2002-01-01"</span>, <span class="va">on_first_day_of_quarter_march_start</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "2000-03-01" "2000-06-01" "2000-09-01" "2000-12-01" "2001-03-01"</span></span>
@@ -150,8 +150,8 @@ Let’s start with a concrete example in Q1. How can we get the 60th day
 of the quarter?</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">on_60th_day_of_q1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">yearly</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/recur_on_ymonth.html">recur_on_ymonth</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/recur_on_mday.html">recur_on_mday</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">31</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/recur_on_month_of_year.html">recur_on_month_of_year</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/recur_on_day_of_month.html">recur_on_day_of_month</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">31</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/recur_on_position.html">recur_on_position</a></span><span class="op">(</span><span class="fl">60</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/alma_search.html">alma_search</a></span><span class="op">(</span><span class="st">"2000-01-01"</span>, <span class="st">"2002-01-01"</span>, <span class="va">on_60th_day_of_q1</span><span class="op">)</span></span>
@@ -174,31 +174,31 @@ the set, <em>within the frequency</em>. So if we had chosen monthly it
 would try and take the 60th position within the monthly set, which isn’t
 what we wanted.</p>
 <p>The rest of the quarterly rules are straightforward from here. We
-just change the ymonth values. To make this more usable, I’ll also wrap
-it in a parameterized function, and go ahead and construct the combined
-runion object from the four pieces.</p>
+just change the month of year values. To make this more usable, I’ll
+also wrap it in a parameterized function, and go ahead and construct the
+combined runion object from the four pieces.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">make_on_nth_doq</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">since</span> <span class="op">=</span> <span class="st">"1970-01-01"</span>, <span class="va">nth</span> <span class="op">=</span> <span class="fl">1L</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">all_days</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">31</span></span>
 <span>  </span>
 <span>  <span class="va">on_nth_day_of_q1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">yearly</a></span><span class="op">(</span>since <span class="op">=</span> <span class="va">since</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>    <span class="fu"><a href="../reference/recur_on_ymonth.html">recur_on_ymonth</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>    <span class="fu"><a href="../reference/recur_on_mday.html">recur_on_mday</a></span><span class="op">(</span><span class="va">all_days</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="../reference/recur_on_month_of_year.html">recur_on_month_of_year</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="../reference/recur_on_day_of_month.html">recur_on_day_of_month</a></span><span class="op">(</span><span class="va">all_days</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>    <span class="fu"><a href="../reference/recur_on_position.html">recur_on_position</a></span><span class="op">(</span><span class="va">nth</span><span class="op">)</span></span>
 <span>  </span>
 <span>  <span class="va">on_nth_day_of_q2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">yearly</a></span><span class="op">(</span>since <span class="op">=</span> <span class="va">since</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>    <span class="fu"><a href="../reference/recur_on_ymonth.html">recur_on_ymonth</a></span><span class="op">(</span><span class="fl">4</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>    <span class="fu"><a href="../reference/recur_on_mday.html">recur_on_mday</a></span><span class="op">(</span><span class="va">all_days</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="../reference/recur_on_month_of_year.html">recur_on_month_of_year</a></span><span class="op">(</span><span class="fl">4</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="../reference/recur_on_day_of_month.html">recur_on_day_of_month</a></span><span class="op">(</span><span class="va">all_days</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>    <span class="fu"><a href="../reference/recur_on_position.html">recur_on_position</a></span><span class="op">(</span><span class="va">nth</span><span class="op">)</span></span>
 <span>  </span>
 <span>  <span class="va">on_nth_day_of_q3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">yearly</a></span><span class="op">(</span>since <span class="op">=</span> <span class="va">since</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>    <span class="fu"><a href="../reference/recur_on_ymonth.html">recur_on_ymonth</a></span><span class="op">(</span><span class="fl">7</span><span class="op">:</span><span class="fl">9</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>    <span class="fu"><a href="../reference/recur_on_mday.html">recur_on_mday</a></span><span class="op">(</span><span class="va">all_days</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="../reference/recur_on_month_of_year.html">recur_on_month_of_year</a></span><span class="op">(</span><span class="fl">7</span><span class="op">:</span><span class="fl">9</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="../reference/recur_on_day_of_month.html">recur_on_day_of_month</a></span><span class="op">(</span><span class="va">all_days</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>    <span class="fu"><a href="../reference/recur_on_position.html">recur_on_position</a></span><span class="op">(</span><span class="va">nth</span><span class="op">)</span></span>
 <span>    </span>
 <span>  <span class="va">on_nth_day_of_q4</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">yearly</a></span><span class="op">(</span>since <span class="op">=</span> <span class="va">since</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>    <span class="fu"><a href="../reference/recur_on_ymonth.html">recur_on_ymonth</a></span><span class="op">(</span><span class="fl">10</span><span class="op">:</span><span class="fl">12</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>    <span class="fu"><a href="../reference/recur_on_mday.html">recur_on_mday</a></span><span class="op">(</span><span class="va">all_days</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="../reference/recur_on_month_of_year.html">recur_on_month_of_year</a></span><span class="op">(</span><span class="fl">10</span><span class="op">:</span><span class="fl">12</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="../reference/recur_on_day_of_month.html">recur_on_day_of_month</a></span><span class="op">(</span><span class="va">all_days</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>    <span class="fu"><a href="../reference/recur_on_position.html">recur_on_position</a></span><span class="op">(</span><span class="va">nth</span><span class="op">)</span></span>
 <span>  </span>
 <span>  <span class="va">on_nth_doq</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rbundle-set.html">runion</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
@@ -225,8 +225,8 @@ last day in the quarter:</p>
 <span><span class="co">#&gt; [1] "2000-03-31" "2000-06-30" "2000-09-30" "2000-12-31" "2001-03-31"</span></span>
 <span><span class="co">#&gt; [6] "2001-06-30" "2001-09-30" "2001-12-31"</span></span></code></pre></div>
 <p>This general strategy of using a base rule of
-<code>yearly() %&gt;% recur_on_ymonth()</code>, plus some usage of
-<code><a href="../reference/recur_on_position.html">recur_on_position()</a></code> is how I have solved most of the
+<code>yearly() %&gt;% recur_on_month_of_year()</code>, plus some usage
+of <code><a href="../reference/recur_on_position.html">recur_on_position()</a></code> is how I have solved most of the
 quarterly problems I can think of.</p>
 </div>
 <div class="section level2">
@@ -237,12 +237,12 @@ week day of the quarter. Again, start with Q1 first, this time computing
 the 6th Monday of Q1.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">since</span> <span class="op">&lt;-</span> <span class="st">"2000-01-01"</span></span>
-<span><span class="va">wday</span> <span class="op">&lt;-</span> <span class="st">"Monday"</span></span>
+<span><span class="va">day</span> <span class="op">&lt;-</span> <span class="st">"Monday"</span></span>
 <span><span class="va">nth</span> <span class="op">&lt;-</span> <span class="fl">6</span></span>
 <span></span>
 <span><span class="va">on_6th_monday_of_q1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">yearly</a></span><span class="op">(</span>since <span class="op">=</span> <span class="va">since</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/recur_on_ymonth.html">recur_on_ymonth</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/recur_on_wday.html">recur_on_wday</a></span><span class="op">(</span><span class="va">wday</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/recur_on_month_of_year.html">recur_on_month_of_year</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/recur_on_day_of_week.html">recur_on_day_of_week</a></span><span class="op">(</span><span class="va">day</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/recur_on_position.html">recur_on_position</a></span><span class="op">(</span><span class="va">nth</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/alma_search.html">alma_search</a></span><span class="op">(</span><span class="st">"2000-01-01"</span>, <span class="st">"2002-01-01"</span>, <span class="va">on_6th_monday_of_q1</span><span class="op">)</span></span>
@@ -250,53 +250,53 @@ the 6th Monday of Q1.</p>
 <p>Multiple week days can be used here.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">since</span> <span class="op">&lt;-</span> <span class="st">"2000-01-01"</span></span>
-<span><span class="va">wday</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Monday"</span>, <span class="st">"Tuesday"</span><span class="op">)</span></span>
+<span><span class="va">day</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Monday"</span>, <span class="st">"Tuesday"</span><span class="op">)</span></span>
 <span><span class="va">nth</span> <span class="op">&lt;-</span> <span class="fl">19</span></span>
 <span></span>
 <span><span class="va">on_19th_monday_or_tuesday_of_q1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">yearly</a></span><span class="op">(</span>since <span class="op">=</span> <span class="va">since</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/recur_on_ymonth.html">recur_on_ymonth</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/recur_on_wday.html">recur_on_wday</a></span><span class="op">(</span><span class="va">wday</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/recur_on_month_of_year.html">recur_on_month_of_year</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/recur_on_day_of_week.html">recur_on_day_of_week</a></span><span class="op">(</span><span class="va">day</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/recur_on_position.html">recur_on_position</a></span><span class="op">(</span><span class="va">nth</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/alma_search.html">alma_search</a></span><span class="op">(</span><span class="st">"2000-01-01"</span>, <span class="st">"2002-01-01"</span>, <span class="va">on_19th_monday_or_tuesday_of_q1</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "2000-03-06" "2001-03-05"</span></span></code></pre></div>
 <p>Now generalize:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">make_on_nth_wday_of_the_quarter</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">since</span> <span class="op">=</span> <span class="st">"1970-01-01"</span>, </span>
-<span>                                            <span class="va">wday</span> <span class="op">=</span> <span class="st">"Monday"</span>, </span>
-<span>                                            <span class="va">nth</span> <span class="op">=</span> <span class="fl">1L</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="va">on_nth_wday_of_q1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">yearly</a></span><span class="op">(</span>since <span class="op">=</span> <span class="va">since</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>    <span class="fu"><a href="../reference/recur_on_ymonth.html">recur_on_ymonth</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>    <span class="fu"><a href="../reference/recur_on_wday.html">recur_on_wday</a></span><span class="op">(</span><span class="va">wday</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">make_on_nth_day_of_week_of_the_quarter</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">since</span> <span class="op">=</span> <span class="st">"1970-01-01"</span>, </span>
+<span>                                                   <span class="va">day</span> <span class="op">=</span> <span class="st">"Monday"</span>, </span>
+<span>                                                   <span class="va">nth</span> <span class="op">=</span> <span class="fl">1L</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">on_nth_of_q1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">yearly</a></span><span class="op">(</span>since <span class="op">=</span> <span class="va">since</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="../reference/recur_on_month_of_year.html">recur_on_month_of_year</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="../reference/recur_on_day_of_week.html">recur_on_day_of_week</a></span><span class="op">(</span><span class="va">day</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>    <span class="fu"><a href="../reference/recur_on_position.html">recur_on_position</a></span><span class="op">(</span><span class="va">nth</span><span class="op">)</span></span>
 <span>  </span>
-<span>  <span class="va">on_nth_wday_of_q2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">yearly</a></span><span class="op">(</span>since <span class="op">=</span> <span class="va">since</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>    <span class="fu"><a href="../reference/recur_on_ymonth.html">recur_on_ymonth</a></span><span class="op">(</span><span class="fl">4</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>    <span class="fu"><a href="../reference/recur_on_wday.html">recur_on_wday</a></span><span class="op">(</span><span class="va">wday</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="va">on_nth_of_q2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">yearly</a></span><span class="op">(</span>since <span class="op">=</span> <span class="va">since</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="../reference/recur_on_month_of_year.html">recur_on_month_of_year</a></span><span class="op">(</span><span class="fl">4</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="../reference/recur_on_day_of_week.html">recur_on_day_of_week</a></span><span class="op">(</span><span class="va">day</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>    <span class="fu"><a href="../reference/recur_on_position.html">recur_on_position</a></span><span class="op">(</span><span class="va">nth</span><span class="op">)</span></span>
 <span>  </span>
-<span>  <span class="va">on_nth_wday_of_q3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">yearly</a></span><span class="op">(</span>since <span class="op">=</span> <span class="va">since</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>    <span class="fu"><a href="../reference/recur_on_ymonth.html">recur_on_ymonth</a></span><span class="op">(</span><span class="fl">7</span><span class="op">:</span><span class="fl">9</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>    <span class="fu"><a href="../reference/recur_on_wday.html">recur_on_wday</a></span><span class="op">(</span><span class="va">wday</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="va">on_nth_of_q3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">yearly</a></span><span class="op">(</span>since <span class="op">=</span> <span class="va">since</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="../reference/recur_on_month_of_year.html">recur_on_month_of_year</a></span><span class="op">(</span><span class="fl">7</span><span class="op">:</span><span class="fl">9</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="../reference/recur_on_day_of_week.html">recur_on_day_of_week</a></span><span class="op">(</span><span class="va">day</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>    <span class="fu"><a href="../reference/recur_on_position.html">recur_on_position</a></span><span class="op">(</span><span class="va">nth</span><span class="op">)</span></span>
 <span>    </span>
-<span>  <span class="va">on_nth_wday_of_q4</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">yearly</a></span><span class="op">(</span>since <span class="op">=</span> <span class="va">since</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>    <span class="fu"><a href="../reference/recur_on_ymonth.html">recur_on_ymonth</a></span><span class="op">(</span><span class="fl">10</span><span class="op">:</span><span class="fl">12</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>    <span class="fu"><a href="../reference/recur_on_wday.html">recur_on_wday</a></span><span class="op">(</span><span class="va">wday</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="va">on_nth_of_q4</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">yearly</a></span><span class="op">(</span>since <span class="op">=</span> <span class="va">since</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="../reference/recur_on_month_of_year.html">recur_on_month_of_year</a></span><span class="op">(</span><span class="fl">10</span><span class="op">:</span><span class="fl">12</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="../reference/recur_on_day_of_week.html">recur_on_day_of_week</a></span><span class="op">(</span><span class="va">day</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>    <span class="fu"><a href="../reference/recur_on_position.html">recur_on_position</a></span><span class="op">(</span><span class="va">nth</span><span class="op">)</span></span>
 <span>  </span>
-<span>  <span class="va">on_nth_wday_of_the_quarter</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rbundle-set.html">runion</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>    <span class="fu"><a href="../reference/rbundle-add.html">add_rschedule</a></span><span class="op">(</span><span class="va">on_nth_wday_of_q1</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>    <span class="fu"><a href="../reference/rbundle-add.html">add_rschedule</a></span><span class="op">(</span><span class="va">on_nth_wday_of_q2</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>    <span class="fu"><a href="../reference/rbundle-add.html">add_rschedule</a></span><span class="op">(</span><span class="va">on_nth_wday_of_q3</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>    <span class="fu"><a href="../reference/rbundle-add.html">add_rschedule</a></span><span class="op">(</span><span class="va">on_nth_wday_of_q4</span><span class="op">)</span></span>
+<span>  <span class="va">on_nth_of_the_quarter</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rbundle-set.html">runion</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="../reference/rbundle-add.html">add_rschedule</a></span><span class="op">(</span><span class="va">on_nth_of_q1</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="../reference/rbundle-add.html">add_rschedule</a></span><span class="op">(</span><span class="va">on_nth_of_q2</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="../reference/rbundle-add.html">add_rschedule</a></span><span class="op">(</span><span class="va">on_nth_of_q3</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="../reference/rbundle-add.html">add_rschedule</a></span><span class="op">(</span><span class="va">on_nth_of_q4</span><span class="op">)</span></span>
 <span>  </span>
-<span>  <span class="va">on_nth_wday_of_the_quarter</span></span>
+<span>  <span class="va">on_nth_of_the_quarter</span></span>
 <span><span class="op">}</span></span></code></pre></div>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">on_last_friday_of_the_quarter</span> <span class="op">&lt;-</span> <span class="fu">make_on_nth_wday_of_the_quarter</span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">on_last_friday_of_the_quarter</span> <span class="op">&lt;-</span> <span class="fu">make_on_nth_day_of_week_of_the_quarter</span><span class="op">(</span></span>
 <span>  since <span class="op">=</span> <span class="st">"2000-01-01"</span>, </span>
-<span>  wday <span class="op">=</span> <span class="st">"Friday"</span>, </span>
+<span>  day <span class="op">=</span> <span class="st">"Friday"</span>, </span>
 <span>  nth <span class="op">=</span> <span class="op">-</span><span class="fl">1</span></span>
 <span><span class="op">)</span></span>
 <span></span>
@@ -318,7 +318,7 @@ strategies. For example, let’s take the “last Friday of the quarter”
 runion and combine it with a rule for “on every Wednesday”.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">on_wednesdays</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">weekly</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/recur_on_wday.html">recur_on_wday</a></span><span class="op">(</span><span class="st">"Wednesday"</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="../reference/recur_on_day_of_week.html">recur_on_day_of_week</a></span><span class="op">(</span><span class="st">"Wednesday"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">on_last_friday_of_quarter_or_wednesdays</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rbundle-set.html">runion</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/rbundle-add.html">add_rschedule</a></span><span class="op">(</span><span class="va">on_wednesdays</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>

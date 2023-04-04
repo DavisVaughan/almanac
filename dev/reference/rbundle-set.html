@@ -133,10 +133,10 @@ on the order that the rschedules were added to the bundle.</p>
 <span class="r-in"><span><span class="va">until</span> <span class="op">&lt;-</span> <span class="st">"2019-05-31"</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">on_weekends</span> <span class="op">&lt;-</span> <span class="fu"><a href="rrule.html">weekly</a></span><span class="op">(</span>since <span class="op">=</span> <span class="va">since</span>, until <span class="op">=</span> <span class="va">until</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="recur_on_wday.html">recur_on_weekends</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="recur_on_day_of_week.html">recur_on_weekends</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">on_25th</span> <span class="op">&lt;-</span> <span class="fu"><a href="rrule.html">monthly</a></span><span class="op">(</span>since <span class="op">=</span> <span class="va">since</span>, until <span class="op">=</span> <span class="va">until</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="recur_on_mday.html">recur_on_mday</a></span><span class="op">(</span><span class="fl">25</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="recur_on_day_of_month.html">recur_on_day_of_month</a></span><span class="op">(</span><span class="fl">25</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># On weekends OR the 25th of the month</span></span></span>
 <span class="r-in"><span><span class="va">ru</span> <span class="op">&lt;-</span> <span class="fu">runion</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>

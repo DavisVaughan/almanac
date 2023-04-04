@@ -127,7 +127,7 @@ is Tuesday.</p>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Make a rrule for weekends</span></span></span>
 <span class="r-in"><span><span class="va">on_weekends</span> <span class="op">&lt;-</span> <span class="fu"><a href="rrule.html">weekly</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="recur_on_wday.html">recur_on_weekends</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="recur_on_day_of_week.html">recur_on_weekends</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># "Step forward by 2 business days"</span></span></span>
 <span class="r-in"><span><span class="co"># 2019-09-13 is a Friday.</span></span></span>
@@ -141,8 +141,8 @@ is Tuesday.</p>
 <span class="r-in"><span><span class="co"># If Monday, 2019-09-16, was a recurring holiday, we could create</span></span></span>
 <span class="r-in"><span><span class="co"># a custom runion and step over that too.</span></span></span>
 <span class="r-in"><span><span class="va">on_09_16</span> <span class="op">&lt;-</span> <span class="fu"><a href="rrule.html">yearly</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="recur_on_ymonth.html">recur_on_ymonth</a></span><span class="op">(</span><span class="fl">9</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="recur_on_mday.html">recur_on_mday</a></span><span class="op">(</span><span class="fl">16</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="recur_on_month_of_year.html">recur_on_month_of_year</a></span><span class="op">(</span><span class="fl">9</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="recur_on_day_of_month.html">recur_on_day_of_month</a></span><span class="op">(</span><span class="fl">16</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">rb</span> <span class="op">&lt;-</span> <span class="fu"><a href="rbundle-set.html">runion</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="rbundle-add.html">add_rschedule</a></span><span class="op">(</span><span class="va">on_09_16</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
