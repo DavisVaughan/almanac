@@ -122,14 +122,14 @@ glue2 <- function(..., .envir = parent.frame()) {
 
 # ------------------------------------------------------------------------------
 
-wday_normalize <- function(x) {
+normalize_day_of_week <- function(x) {
   if (!is.character(x)) {
     return(x)
   }
 
   x <- tolower(x)
 
-  where <- wday_match(x)
+  where <- match_day_of_week(x)
 
   misses <- is.na(where)
 
@@ -137,18 +137,18 @@ wday_normalize <- function(x) {
     abort("A character `x` must be a weekday name or abbreviation.")
   }
 
-  out <- weekday_int()[where]
+  out <- day_of_week_int()[where]
 
   out <- unique(out)
 
   out
 }
 
-wday_match <- function(x) {
-  vec_match(x, weekday_name())
+match_day_of_week <- function(x) {
+  vec_match(x, day_of_week_names())
 }
 
-weekday_name <- function() {
+day_of_week_names <- function() {
   c(
     c("monday", "mon"),
     c("tuesday", "tues", "tu", "tue"),
@@ -162,7 +162,7 @@ weekday_name <- function() {
 
 # rrule.js wants Monday to be 0, Sunday to be 6.
 # We convert to that at the last minute, but otherwise use 1 based integers
-weekday_int <- function() {
+day_of_week_int <- function() {
   c(
     rep(1L, 2L),
     rep(2L, 4L),
@@ -174,7 +174,7 @@ weekday_int <- function() {
   )
 }
 
-weekday_abbr_print <- function() {
+day_of_week_abbr <- function() {
   c("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")
 }
 

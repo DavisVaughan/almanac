@@ -3,7 +3,7 @@
 
 test_that("can adjust forward", {
   x <- as.Date(c("2019-01-01", "2019-01-08"))
-  rrule <- weekly() %>% recur_on_wday("Tuesday")
+  rrule <- weekly() %>% recur_on_day_of_week("Tuesday")
 
   expect_identical(adj_following(x, rrule), x + 1)
 })
@@ -41,7 +41,7 @@ test_that("+/- Inf is allowed", {
 
 test_that("can adjust backwards", {
   x <- as.Date(c("2019-01-01", "2019-01-08"))
-  rrule <- weekly() %>% recur_on_wday("Tuesday")
+  rrule <- weekly() %>% recur_on_day_of_week("Tuesday")
 
   expect_identical(adj_preceding(x, rrule), x - 1)
 })
@@ -79,7 +79,7 @@ test_that("+/- Inf is allowed", {
 
 test_that("adjusts forward normally", {
   x <- as.Date(c("2019-01-01", "2019-01-08"))
-  rrule <- weekly() %>% recur_on_wday("Tuesday")
+  rrule <- weekly() %>% recur_on_day_of_week("Tuesday")
 
   expect_identical(adj_modified_following(x, rrule), x + 1)
 })
@@ -117,7 +117,7 @@ test_that("+/- Inf is allowed", {
 
 test_that("adjusts backwards normally", {
   x <- as.Date(c("2019-01-02", "2019-01-09"))
-  rrule <- weekly() %>% recur_on_wday("Wednesday")
+  rrule <- weekly() %>% recur_on_day_of_week("Wednesday")
 
   expect_identical(adj_modified_preceding(x, rrule), x - 1)
 })

@@ -39,7 +39,7 @@
 #'
 #' @examples
 #' on_thanksgiving <- yearly() %>%
-#'   recur_on_wday("Thurs", 4) %>%
+#'   recur_on_day_of_week("Thurs", nth = 4) %>%
 #'   recur_on_ymonth("Nov")
 #'
 #' on_christmas <- yearly() %>%
@@ -48,7 +48,7 @@
 #'
 #' on_labor_day <- monthly() %>%
 #'   recur_on_ymonth("Sep") %>%
-#'   recur_on_wday("Mon", 1)
+#'   recur_on_day_of_week("Mon", nth = 1)
 #'
 #' rb <- runion() %>%
 #'   add_rschedule(on_thanksgiving) %>%

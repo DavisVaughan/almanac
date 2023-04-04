@@ -50,12 +50,12 @@
 #' # If you want particular days of the week at the end of the month, you
 #' # could use something like this, which checks if the end of the month
 #' # is also a Friday.
-#' on_last_of_month_that_is_also_friday <- on_last_of_month %>% recur_on_wday("Friday")
+#' on_last_of_month_that_is_also_friday <- on_last_of_month %>% recur_on_day_of_week("Friday")
 #' alma_search(start, end, on_last_of_month_that_is_also_friday)
 #'
 #' # But you probably wanted this, which takes the last friday of the month,
 #' # on whatever day that lands on
-#' on_last_friday_of_month <- monthly() %>% recur_on_wday("Friday", -1)
+#' on_last_friday_of_month <- monthly() %>% recur_on_day_of_week("Friday", nth = -1)
 #' alma_search(start, end, on_last_friday_of_month)
 recur_on_day_of_month <- function(x, day) {
   validate_rrule(x, "x")

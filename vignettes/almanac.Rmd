@@ -132,22 +132,22 @@ Recurrence rules can continually be added to further refine your rule. When you 
 
 - Use `recur_on_ymonth()` to hone in on September.
 
-- Use `recur_on_wday()` to hone in on the first Monday of the month.
+- Use `recur_on_day_of_week()` to hone in on the first Monday of the month.
 
 ```{r}
 on_labor_day <- yearly() %>%
   recur_on_ymonth("Sep") %>%
-  recur_on_wday("Monday", nth = 1)
+  recur_on_day_of_week("Monday", nth = 1)
 
 alma_search("2000-01-01", "2005-01-01", on_labor_day)
 ```
 
-The `nth` argument of `recur_on_wday()` is especially useful for selecting from the end of the month. If we wanted the _last_ Monday in September instead, we could do:
+The `nth` argument of `recur_on_day_of_week()` is especially useful for selecting from the end of the month. If we wanted the _last_ Monday in September instead, we could do:
 
 ```{r}
 on_last_monday_in_sept <- yearly(since = "2000-01-01") %>%
   recur_on_ymonth("Sep") %>%
-  recur_on_wday("Monday", nth = -1)
+  recur_on_day_of_week("Monday", nth = -1)
 
 alma_search("2000-01-01", "2005-01-01", on_last_monday_in_sept)
 ```

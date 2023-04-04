@@ -22,10 +22,10 @@ test_that("print method for rrule is informative", {
     "# can use multiple days of the month"
     recur_on_day_of_month(daily(), c(5, 9, 12))
 
-    "# can use wday variations"
-    recur_on_wday(daily(), c("Mon", "Thu"), nth = c(1, 2))
-    recur_on_wday(recur_on_wday(daily(), "Mon", nth = c(1, 2)), "Thu", nth = c(4, 5))
-    recur_on_wday(yearly(), "Mon", nth = c(1, 2, 10, 13, 15, 16))
+    "# can use day of week variations"
+    recur_on_day_of_week(daily(), c("Mon", "Thu"), nth = c(1, 2))
+    recur_on_day_of_week(recur_on_day_of_week(daily(), "Mon", nth = c(1, 2)), "Thu", nth = c(4, 5))
+    recur_on_day_of_week(yearly(), "Mon", nth = c(1, 2, 10, 13, 15, 16))
 
     "# can use multiple positions"
     recur_on_position(weekly(), c(-1, 2, 3, -2))
@@ -42,7 +42,7 @@ test_that("print method for rrule is informative", {
     recur_on_yweek(daily(), 5)
     recur_on_yday(daily(), 5)
     recur_on_day_of_month(daily(), 5)
-    recur_on_wday(daily(), "Wed")
+    recur_on_day_of_week(daily(), "Wed")
     recur_on_position(weekly(), 5)
     recur_on_easter(weekly())
   })

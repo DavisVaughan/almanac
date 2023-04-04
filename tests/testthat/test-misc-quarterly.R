@@ -63,43 +63,43 @@ test_that("can select n-th day of the month of the quarter from the back", {
 
 # ------------------------------------------------------------------------------
 
-make_nth_wday_of_the_quarter <- function(wday, n) {
-  rr_nth_wday_of_q1 <- yearly() %>% # It will be the n-th position in the set, per year
+make_nth_day_of_week_of_the_quarter <- function(day, n) {
+  rr_nth_day_of_week_of_q1 <- yearly() %>% # It will be the n-th position in the set, per year
     recur_on_ymonth(1:3) %>% # On all months in Q1
-    recur_on_wday(wday) %>% # On these weekdays
+    recur_on_day_of_week(day) %>% # On these weekdays
     recur_on_position(n) # The n-th one
 
-  rr_nth_wday_of_q2 <- yearly() %>%
+  rr_nth_day_of_week_of_q2 <- yearly() %>%
     recur_on_ymonth(4:6) %>%
-    recur_on_wday(wday) %>%
+    recur_on_day_of_week(day) %>%
     recur_on_position(n)
 
-  rr_nth_wday_of_q3 <- yearly() %>%
+  rr_nth_day_of_week_of_q3 <- yearly() %>%
     recur_on_ymonth(7:9) %>%
-    recur_on_wday(wday) %>%
+    recur_on_day_of_week(day) %>%
     recur_on_position(n)
 
-  rr_nth_wday_of_q4 <- yearly() %>%
+  rr_nth_day_of_week_of_q4 <- yearly() %>%
     recur_on_ymonth(10:12) %>%
-    recur_on_wday(wday) %>%
+    recur_on_day_of_week(day) %>%
     recur_on_position(n)
 
-  rb_nth_wday_of_quarter <- runion() %>%
-    add_rschedule(rr_nth_wday_of_q1) %>%
-    add_rschedule(rr_nth_wday_of_q2) %>%
-    add_rschedule(rr_nth_wday_of_q3) %>%
-    add_rschedule(rr_nth_wday_of_q4)
+  rb_nth_day_of_week_of_quarter <- runion() %>%
+    add_rschedule(rr_nth_day_of_week_of_q1) %>%
+    add_rschedule(rr_nth_day_of_week_of_q2) %>%
+    add_rschedule(rr_nth_day_of_week_of_q3) %>%
+    add_rschedule(rr_nth_day_of_week_of_q4)
 
-  rb_nth_wday_of_quarter
+  rb_nth_day_of_week_of_quarter
 }
 
-test_that("can construct a runion to select n-th wday of the quarter", {
+test_that("can construct a runion to select n-th day of week of the quarter", {
   n <- 6L
-  wday <- "Monday"
+  day <- "Monday"
   start <- as.Date("2000-01-01")
   stop <- as.Date("2001-12-31")
 
-  rb_6th_monday_of_quarter <- make_nth_wday_of_the_quarter(wday, n)
+  rb_6th_monday_of_quarter <- make_nth_day_of_week_of_the_quarter(day, n)
 
   x <- alma_search(start, stop, rb_6th_monday_of_quarter)
 
@@ -113,9 +113,9 @@ test_that("can construct a runion to select n-th wday of the quarter", {
 
 test_that("not all quarters might have the requested position", {
   n <- 14
-  wday <- "Monday"
+  day <- "Monday"
 
-  rb_14th_monday_of_quarter <- make_nth_wday_of_the_quarter(wday, n)
+  rb_14th_monday_of_quarter <- make_nth_day_of_week_of_the_quarter(day, n)
 
   x <- alma_search("2000-01-01", "2001-12-31", rb_14th_monday_of_quarter)
 
@@ -124,11 +124,11 @@ test_that("not all quarters might have the requested position", {
   expect_equal(x, expect)
 })
 
-test_that("can select n-th wday in the quarter from the back", {
+test_that("can select n-th day of week in the quarter from the back", {
   n <- -2
-  wday <- c("Monday", "Tuesday")
+  day <- c("Monday", "Tuesday")
 
-  rb_neg_2nd_monday_or_tuesday_of_quarter <- make_nth_wday_of_the_quarter(wday, n)
+  rb_neg_2nd_monday_or_tuesday_of_quarter <- make_nth_day_of_week_of_the_quarter(day, n)
 
   x <- alma_search("2000-01-01", "2001-12-31", rb_neg_2nd_monday_or_tuesday_of_quarter)
 

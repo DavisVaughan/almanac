@@ -24,7 +24,7 @@ rschedule.
 }
 \examples{
 rrule <- weekly() \%>\%
-  recur_on_wday("Thursday")
+  recur_on_day_of_week("Thursday")
 
 # A Thursday and Friday
 x <- as.Date("1970-01-01") + 0:1

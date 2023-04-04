@@ -69,8 +69,8 @@
       * until: 2100-01-01
       * day of month: 5, 9, and 12
     Code
-      # # can use wday variations
-      recur_on_wday(daily(), c("Mon", "Thu"), nth = c(1, 2))
+      # # can use day of week variations
+      recur_on_day_of_week(daily(), c("Mon", "Thu"), nth = c(1, 2))
     Message
       <rrule>
       * frequency: daily
@@ -78,7 +78,8 @@
       * until: 2100-01-01
       * day of week: Mon[1, 2], and Thu[1, 2]
     Code
-      recur_on_wday(recur_on_wday(daily(), "Mon", nth = c(1, 2)), "Thu", nth = c(4, 5))
+      recur_on_day_of_week(recur_on_day_of_week(daily(), "Mon", nth = c(1, 2)), "Thu",
+      nth = c(4, 5))
     Message
       <rrule>
       * frequency: daily
@@ -86,7 +87,7 @@
       * until: 2100-01-01
       * day of week: Mon[1, 2], and Thu[4, 5]
     Code
-      recur_on_wday(yearly(), "Mon", nth = c(1, 2, 10, 13, 15, 16))
+      recur_on_day_of_week(yearly(), "Mon", nth = c(1, 2, 10, 13, 15, 16))
     Message
       <rrule>
       * frequency: yearly
@@ -176,7 +177,7 @@
       * until: 2100-01-01
       * day of month: 5
     Code
-      recur_on_wday(daily(), "Wed")
+      recur_on_day_of_week(daily(), "Wed")
     Message
       <rrule>
       * frequency: daily

@@ -3,9 +3,12 @@
 \name{deprecated-recur}
 \alias{deprecated-recur}
 \alias{recur_on_mday}
+\alias{recur_on_wday}
 \title{Deprecated recurrence helpers}
 \usage{
 recur_on_mday(x, mday)
+
+recur_on_wday(x, wday, nth = NULL)
 }
 \arguments{
 \item{x}{\verb{[rrule]}
@@ -16,6 +19,18 @@ A recurrence rule.}
 
 The days of the month on which to recur. Negative values are allowed,
 which specify \code{n} days from the end of the month.}
+
+\item{wday}{\verb{[integer / character]}
+
+Days of the week to recur on. Integer values must be from \code{1} to \code{7}, with
+\code{1 = Monday} and \code{7 = Sunday}. This is also allowed to be a full weekday
+string like \code{"Tuesday"}, or an abbreviation like \code{"Tues"}.}
+
+\item{nth}{\verb{[integer / NULL]}
+
+Limit to the n-th occurrence of the \code{day} in the base frequency. For
+example, in a monthly frequency, using \code{nth = -1} would limit to the
+last \code{day} in the month. The default of \code{NULL} chooses all occurrences.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

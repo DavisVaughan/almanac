@@ -49,7 +49,7 @@
        * until: 2100-01-01
     Code
       # # with runions
-      rrule <- recur_on_wday(weekly(), "Wed")
+      rrule <- recur_on_day_of_week(weekly(), "Wed")
       runion <- add_rschedule(runion(), weekly())
       radjusted(rrule, runion, adj_none)
     Message

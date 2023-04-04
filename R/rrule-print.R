@@ -21,7 +21,7 @@ format_body <- function(x) {
     format_yweek(x),
     format_yday(x),
     format_day_of_month(x),
-    format_wday(x),
+    format_day_of_week(x),
     format_position(x),
     format_easter(x)
   )
@@ -74,7 +74,7 @@ format_week_start <- function(x) {
   if (is.null(week_start)) {
     character()
   } else {
-    week_start <- weekday_abbr_print()[week_start]
+    week_start <- day_of_week_abbr()[week_start]
     cli::format_inline("week start: {week_start}")
   }
 }
@@ -120,29 +120,29 @@ format_day_of_month <- function(x) {
   }
 }
 
-format_wday <- function(x) {
-  wdays <- x$wday
+format_day_of_week <- function(x) {
+  day_of_weeks <- x$day_of_week
 
-  if (is.null(wdays)) {
+  if (is.null(day_of_weeks)) {
     return(character())
   }
 
   out <- character()
 
-  for (i in seq_along(wdays)) {
-    wday <- wdays[[i]]
-    weekday <- weekday_abbr_print()[[i]]
+  for (i in seq_along(day_of_weeks)) {
+    day_of_week <- day_of_weeks[[i]]
+    day_of_week_string <- day_of_week_abbr()[[i]]
 
-    if (is.null(wday)) {
+    if (is.null(day_of_week)) {
       next()
     }
 
-    if (!identical(wday, "all")) {
-      wday <- cli::ansi_collapse(wday, sep = ", ", last = ", ")
-      weekday <- cli::format_inline("{weekday}[{wday}]")
+    if (!identical(day_of_week, "all")) {
+      day_of_week <- cli::ansi_collapse(day_of_week, sep = ", ", last = ", ")
+      day_of_week_string <- cli::format_inline("{day_of_week_string}[{day_of_week}]")
     }
 
-    out <- c(out, weekday)
+    out <- c(out, day_of_week_string)
   }
 
   out <- cli::ansi_collapse(out)

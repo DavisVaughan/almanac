@@ -47,7 +47,7 @@ as_js_from_rrule <- function(x) {
     get_yweek(x),
     get_yday(x),
     get_day_of_month(x),
-    get_wday(x),
+    get_day_of_week(x),
     get_position(x),
     get_easter(x)
   )
@@ -153,40 +153,40 @@ get_yday <- function(x) {
   glue("byyearday: {yday}")
 }
 
-get_wday <- function(x) {
-  if (is.null(x$wday)) {
+get_day_of_week <- function(x) {
+  if (is.null(x$day_of_week)) {
     return(NULL)
   }
 
-  wdays <- x$wday
-  wday_strings <- character()
+  day_of_weeks <- x$day_of_week
+  day_of_week_strings <- character()
 
-  for (i in seq_along(wdays)) {
-    wday <- wdays[[i]]
+  for (i in seq_along(day_of_weeks)) {
+    day_of_week <- day_of_weeks[[i]]
 
-    if (is.null(wday)) {
+    if (is.null(day_of_week)) {
       next
     }
 
-    wday_base <- get_js_wday_base(i)
+    day_of_week_base <- get_js_day_of_week_base(i)
 
-    if (identical(wday, "all")) {
-      wday_strings <- c(wday_strings, wday_base)
+    if (identical(day_of_week, "all")) {
+      day_of_week_strings <- c(day_of_week_strings, day_of_week_base)
       next
     }
 
-    wday_nth <- glue("{wday_base}.nth({wday})")
-    wday_strings <- c(wday_strings, wday_nth)
+    day_of_week_string <- glue("{day_of_week_base}.nth({day_of_week})")
+    day_of_week_strings <- c(day_of_week_strings, day_of_week_string)
   }
 
-  wday_strings <- as_js_from_vector(wday_strings)
+  day_of_week_strings <- as_js_from_vector(day_of_week_strings)
 
-  glue("byweekday: {wday_strings}")
+  glue("byweekday: {day_of_week_strings}")
 }
 
-get_js_wday_base <- function(wday) {
+get_js_day_of_week_base <- function(day) {
   suffix <- switch(
-    wday,
+    day,
     `1` = "MO",
     `2` = "TU",
     `3` = "WE",

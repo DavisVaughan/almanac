@@ -139,7 +139,7 @@ new_rrule <- function(since = as.Date("1900-01-01"),
                       yweek = NULL,
                       yday = NULL,
                       day_of_month = NULL,
-                      wday = NULL,
+                      day_of_week = NULL,
                       position = NULL,
                       easter = NULL) {
   rules <- list(
@@ -153,7 +153,7 @@ new_rrule <- function(since = as.Date("1900-01-01"),
     yweek = yweek,
     yday = yday,
     day_of_month = day_of_month,
-    wday = wday,
+    day_of_week = day_of_week,
     position = position,
     easter = easter
   )

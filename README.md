@@ -43,7 +43,7 @@ Constructing recurrence rules looks like this:
 # Thanksgiving = "The fourth Thursday in November"
 on_thanksgiving <- yearly() %>% 
   recur_on_ymonth("November") %>%
-  recur_on_wday("Thursday", nth = 4)
+  recur_on_day_of_week("Thursday", nth = 4)
 
 on_thanksgiving
 #> <rrule>
