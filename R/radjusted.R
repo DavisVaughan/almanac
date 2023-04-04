@@ -110,6 +110,14 @@ new_radjusted <- function(rschedule, adjust_on, adjustment) {
 
 # ------------------------------------------------------------------------------
 
+adjust_on_weekends <- function(since = "1900-01-01", until = "2100-01-01") {
+  out <- weekly(since = since, until = until)
+  out <- recur_on_weekends(out)
+  out
+}
+
+# ------------------------------------------------------------------------------
+
 validate_adjustment <- function(x, x_arg = "") {
   if (nzchar(x_arg)) {
     x_arg <- glue(" `{x_arg}`")

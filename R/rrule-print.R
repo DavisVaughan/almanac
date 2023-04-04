@@ -1,6 +1,6 @@
 #' @export
 print.rrule <- function(x, ...) {
-  print(format(x))
+  cat_line(format(x))
   invisible(x)
 }
 

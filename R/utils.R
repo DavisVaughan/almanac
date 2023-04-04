@@ -15,6 +15,9 @@ delayedAssign("almanac_global_default_until", as.Date("2100-01-01"))
 delayedAssign("almanac_global_max_date", as.Date("9999-12-31"))
 delayedAssign("almanac_global_min_date", as.Date("0100-01-01"))
 
+delayedAssign("almanac_global_max_year", 9999L)
+delayedAssign("almanac_global_min_year", 0100L)
+
 # ------------------------------------------------------------------------------
 
 vec_cast_date <- function(x, x_arg = "x") {
@@ -68,6 +71,15 @@ lossy_to_message <- function(lossy, x_arg) {
 
 glubort <- function (..., .sep = "", .envir = parent.frame()) {
   abort(glue::glue(..., .sep = .sep, .envir = .envir))
+}
+
+vec_paste0 <- function(...) {
+  args <- vec_recycle_common(...)
+  exec(paste0, !!!args)
+}
+
+cat_line <- function(...) {
+  cat(paste0(..., "\n", collapse = ""))
 }
 
 # ------------------------------------------------------------------------------
@@ -186,4 +198,8 @@ is_missing_or_infinite <- function(x) {
 
 is_date <- function(x) {
   inherits(x, "Date")
+}
+
+date_year <- function(x) {
+  as.POSIXlt(x)$year + 1900L
 }
