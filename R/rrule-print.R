@@ -1,19 +1,8 @@
 #' @export
 print.rrule <- function(x, ...) {
-  print(format(x))
+  cli::cli_text("<rrule>")
+  cli::cli_ul(format_body(x))
   invisible(x)
-}
-
-#' @export
-format.rrule <- function(x, ...) {
-  header <- format_header(x)
-  body <- format_body(x)
-
-  if (is.null(body)) {
-    header
-  } else {
-    glue(header, body, .sep = "\n")
-  }
 }
 
 # ------------------------------------------------------------------------------
@@ -22,6 +11,9 @@ format_body <- function(x) {
   x <- x$rules
 
   info <- c(
+    format_frequency(x),
+    format_since(x),
+    format_until(x),
     format_count(x),
     format_interval(x),
     format_week_start(x),
@@ -34,51 +26,25 @@ format_body <- function(x) {
     format_easter(x)
   )
 
-  if (is.null(info)) {
-    return(NULL)
-  }
-
-  info <- paste0("- ", info)
-  info <- glue::glue_collapse(info, sep = "\n")
-
-  info
-}
-
-format_header <- function(x) {
-  x <- x$rules
-
-  info <- c(
-    format_frequency(x),
-    format_since(x),
-    format_until(x)
-  )
-
-  info <- glue::glue_collapse(info, sep = " / ")
-
-  glue("<rrule[{info}]>")
+  set_names(info, "*")
 }
 
 format_frequency <- function(x) {
-  x$frequency
+  cli::format_inline("frequency: {x$frequency}")
 }
 
 format_since <- function(x) {
-  since <- x$since
-
-  if (is.null(since)) {
-    NULL
-  } else {
-    as.character(since)
-  }
+  cli::format_inline("since: {x$since}")
 }
 
 format_until <- function(x) {
   until <- x$until
 
   if (is.null(until)) {
-    "???"
+    # Can be overriden when setting `count`
+    character()
   } else {
-    as.character(until)
+    cli::format_inline("until: {until}")
   }
 }
 
@@ -86,9 +52,9 @@ format_count <- function(x) {
   count <- x$count
 
   if (is.null(count)) {
-    NULL
+    character()
   } else {
-    glue("count: {count}")
+    cli::format_inline("count: {count}")
   }
 }
 
@@ -96,9 +62,9 @@ format_interval <- function(x) {
   interval <- x$interval
 
   if (is.null(interval)) {
-    NULL
+    character()
   } else {
-    glue("interval: {interval}")
+    cli::format_inline("interval: {interval}")
   }
 }
 
@@ -106,10 +72,10 @@ format_week_start <- function(x) {
   week_start <- x$week_start
 
   if (is.null(week_start)) {
-    NULL
+    character()
   } else {
     week_start <- weekday_abbr_print()[week_start]
-    glue("week start: {week_start}")
+    cli::format_inline("week start: {week_start}")
   }
 }
 
@@ -117,11 +83,10 @@ format_ymonth <- function(x) {
   ymonth <- x$ymonth
 
   if (is.null(ymonth)) {
-    NULL
+    character()
   } else {
     ymonth <- month.abb[ymonth]
-    ymonth <- glue::glue_collapse(ymonth, sep = ", ")
-    glue("ymonth: {ymonth}")
+    cli::format_inline("month of year: {ymonth}")
   }
 }
 
@@ -129,10 +94,9 @@ format_yweek <- function(x) {
   yweek <- x$yweek
 
   if (is.null(yweek)) {
-    NULL
+    character()
   } else {
-    yweek <- glue::glue_collapse(yweek, sep = ", ")
-    glue("yweek: {yweek}")
+    cli::format_inline("week of year: {yweek}")
   }
 }
 
@@ -140,10 +104,9 @@ format_yday <- function(x) {
   yday <- x$yday
 
   if (is.null(yday)) {
-    NULL
+    character()
   } else {
-    yday <- glue::glue_collapse(yday, sep = ", ")
-    glue("yday: {yday}")
+    cli::format_inline("day of year: {yday}")
   }
 }
 
@@ -151,10 +114,9 @@ format_mday <- function(x) {
   mday <- x$mday
 
   if (is.null(mday)) {
-    NULL
+    character()
   } else {
-    mday <- glue::glue_collapse(mday, sep = ", ")
-    glue("mday: {mday}")
+    cli::format_inline("day of month: {mday}")
   }
 }
 
@@ -162,10 +124,10 @@ format_wday <- function(x) {
   wdays <- x$wday
 
   if (is.null(wdays)) {
-    return(NULL)
+    return(character())
   }
 
-  out <- NULL
+  out <- character()
 
   for (i in seq_along(wdays)) {
     wday <- wdays[[i]]
@@ -176,43 +138,34 @@ format_wday <- function(x) {
     }
 
     if (!identical(wday, "all")) {
-      if (length(wday) > 5L) {
-        wday <- c(wday[1:5], "...")
-      }
-      wday <- glue::glue_collapse(wday, sep = ", ")
-      weekday <- glue("{weekday}[{wday}]")
+      wday <- cli::ansi_collapse(wday, sep = ", ", last = ", ")
+      weekday <- cli::format_inline("{weekday}[{wday}]")
     }
 
     out <- c(out, weekday)
   }
 
-  out <- glue::glue_collapse(out, sep = ", ")
+  out <- cli::ansi_collapse(out)
 
-  glue("wday: {out}")
+  cli::format_inline("day of week: {out}")
 }
 
 format_position <- function(x) {
   position <- x$position
 
   if (is.null(position)) {
-    return(NULL)
+    return(character())
   }
 
-  if (length(position) > 5L) {
-    position <- c(position[1:5], "...")
-  }
-
-  position <- glue::glue_collapse(position, sep = ", ")
-
-  glue("position: {position}")
+  cli::format_inline("position: {position}")
 }
 
 format_easter <- function(x) {
   easter <- x$easter
 
   if (is.null(easter)) {
-    return(NULL)
+    return(character())
   }
 
-  glue("easter: offset = {easter}")
+  cli::format_inline("easter: offset = {easter}")
 }

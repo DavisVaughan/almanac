@@ -30,3 +30,40 @@
       Error in `glubort()`:
       ! Input `adjustment` must have two arguments, `x` and `rschedule`.
 
+# radjusted has informative print method
+
+    Code
+      # # basic method
+      radjusted(daily(), daily(), adj_none)
+    Message
+      <radjusted>
+       adjust:
+       <rrule>
+       * frequency: daily
+       * since: 1900-01-01
+       * until: 2100-01-01
+       adjust on:
+       <rrule>
+       * frequency: daily
+       * since: 1900-01-01
+       * until: 2100-01-01
+    Code
+      # # with runions
+      rrule <- recur_on_wday(weekly(), "Wed")
+      runion <- add_rschedule(runion(), weekly())
+      radjusted(rrule, runion, adj_none)
+    Message
+      <radjusted>
+       adjust:
+       <rrule>
+       * frequency: weekly
+       * since: 1900-01-01
+       * until: 2100-01-01
+       * day of week: Wed
+       adjust on:
+       <runion[1]>
+        <rrule>
+        * frequency: weekly
+        * since: 1900-01-01
+        * until: 2100-01-01
+

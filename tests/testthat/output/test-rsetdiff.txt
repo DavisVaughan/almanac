@@ -1,7 +1,0 @@
-
-Empty rsetdiff
-==============
-
-> rsetdiff()
-<rsetdiff[0 rschedules / 0 rdates / 0 exdates]>
-

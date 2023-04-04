@@ -51,15 +51,16 @@ rbundle_restore.rintersect <- function(x, to) {
 
 #' @export
 print.rintersect <- function(x, ...) {
-  print(format(x))
+  rschedules <- x$rschedules
+  n <- length(rschedules)
+
+  cli::cli_text(cli::format_inline("<rintersect[{n}]>"))
+
+  for (i in seq_len(n)) {
+    cli_indented()
+    print(rschedules[[i]])
+    cli::cli_end()
+  }
+
   invisible(x)
-}
-
-#' @export
-format.rintersect <- function(x, ...) {
-  n_rschedules <- length(x$rschedules)
-  n_rdates <- length(x$rdates)
-  n_exdates <-length(x$exdates)
-
-  glue("<rintersect[{n_rschedules} rschedules / {n_rdates} rdates / {n_exdates} exdates]>")
 }

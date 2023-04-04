@@ -180,6 +180,24 @@ weekday_abbr_print <- function() {
 
 # ------------------------------------------------------------------------------
 
+vec_paste0 <- function(...) {
+  args <- vec_recycle_common(...)
+  exec(paste0, !!!args)
+}
+
+# ------------------------------------------------------------------------------
+
+cli_indented <- function(id = NULL, .envir = parent.frame()) {
+  cli::cli_div(
+    id = id,
+    class = "indented",
+    theme = list(".indented" = list("margin-left" = 1L)),
+    .envir = .envir
+  )
+}
+
+# ------------------------------------------------------------------------------
+
 is_missing_or_infinite <- function(x) {
   !is.finite(x)
 }

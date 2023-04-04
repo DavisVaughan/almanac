@@ -64,19 +64,19 @@ radjusted <- function(rschedule, adjust_on, adjustment) {
 
 #' @export
 print.radjusted <- function(x, ...) {
-  print(format(x))
+  cli::cli_text("<radjusted>")
+
+  cli_indented()
+  cli::cli_text(cli::style_underline("adjust:"))
+  print(x$rschedule)
+  cli::cli_end()
+
+  cli_indented()
+  cli::cli_text(cli::style_underline("adjust on:"))
+  print(x$adjust_on)
+  cli::cli_end()
+
   invisible(x)
-}
-
-#' @export
-format.radjusted <- function(x, ...) {
-  rschedule <- format(x$rschedule)
-  adjust_on <- format(x$adjust_on)
-
-  out <- c("<radjusted>\n", "Adjust:", rschedule, "\nAdjust on:", adjust_on)
-  out <- glue::glue_collapse(out, sep = "\n")
-
-  out
 }
 
 # ------------------------------------------------------------------------------

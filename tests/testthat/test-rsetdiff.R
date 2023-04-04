@@ -10,9 +10,12 @@ test_that("can create an empty rsetdiff()", {
 })
 
 test_that("rsetdiff() generates informative output", {
-  verify_output(test_path("output", "test-rsetdiff.txt"), {
+  expect_snapshot({
     "# Empty rsetdiff"
     rsetdiff()
+
+    "# With rschedules"
+    rsetdiff() %>% add_rschedule(daily()) %>% add_rschedule(yearly())
   })
 })
 

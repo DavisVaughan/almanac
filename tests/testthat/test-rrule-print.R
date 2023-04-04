@@ -1,5 +1,5 @@
 test_that("print method for rrule is informative", {
-  verify_output(test_path("output", "test-rrule-print.txt"), {
+  expect_snapshot({
     "# basic method"
     daily()
     yearly()

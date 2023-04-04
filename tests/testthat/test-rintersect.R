@@ -10,9 +10,12 @@ test_that("can create an empty rintersect()", {
 })
 
 test_that("rintersect() generates informative output", {
-  verify_output(test_path("output", "test-rintersect.txt"), {
+  expect_snapshot({
     "# Empty rintersect"
     rintersect()
+
+    "# With rschedules"
+    rintersect() %>% add_rschedule(daily()) %>% add_rschedule(yearly())
   })
 })
 

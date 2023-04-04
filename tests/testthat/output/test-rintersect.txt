@@ -1,7 +1,0 @@
-
-Empty rintersect
-================
-
-> rintersect()
-<rintersect[0 rschedules / 0 rdates / 0 exdates]>
-
