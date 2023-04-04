@@ -38,3 +38,19 @@
       Error in `stop_almanac()`:
       ! Input `until` cannot be larger than 9999-12-31.
 
+# `check_rrule()` works
+
+    Code
+      check_rrule(1)
+    Condition
+      Error:
+      ! `1` must be a <rrule>, not the number 1.
+
+---
+
+    Code
+      check_rrule(1, allow_null = TRUE)
+    Condition
+      Error:
+      ! `1` must be a <rrule> or `NULL`, not the number 1.
+

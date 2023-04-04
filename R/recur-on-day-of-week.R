@@ -82,7 +82,7 @@
 #' @export
 recur_on_day_of_week <- function(x, day, ..., nth = NULL) {
   check_dots_empty0(...)
-  validate_rrule(x, "x")
+  check_rrule(x)
 
   old <- get_rule(x, "day_of_week")
   if (is_null(old)) {

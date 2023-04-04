@@ -52,7 +52,7 @@
 #'
 #' alma_search("2014-12-25", "2015-01-25", on_first_week_sun)
 recur_with_week_start <- function(x, wday) {
-  validate_rrule(x, "x")
+  check_rrule(x)
 
   wday <- normalize_day_of_week(wday)
 

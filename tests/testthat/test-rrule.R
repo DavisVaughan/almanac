@@ -68,3 +68,14 @@ test_that("can detect rrules", {
   expect_true(is_rrule(daily()))
   expect_false(is_rrule(1))
 })
+
+test_that("`check_rrule()` works", {
+  expect_no_error(check_rrule(new_rrule()))
+
+  expect_snapshot(error = TRUE, {
+    check_rrule(1)
+  })
+  expect_snapshot(error = TRUE, {
+    check_rrule(1, allow_null = TRUE)
+  })
+})

@@ -33,7 +33,7 @@
 #'
 #' alma_search(start, end, on_feb_monthly)
 recur_on_month_of_year <- function(x, month) {
-  validate_rrule(x, "x")
+  check_rrule(x)
 
   month <- month_normalize(month)
   month <- vec_cast(month, to = integer())

@@ -177,16 +177,18 @@ all_are_rrules <- function(x) {
   all(map_lgl(x, is_rrule))
 }
 
-validate_rrule <- function(x, x_arg = "") {
-  if (nzchar(x_arg)) {
-    x_arg <- glue(" `{x_arg}`")
-  }
-
-  if (!is_rrule(x)) {
-    glubort("Input{x_arg} must be an rrule.")
-  }
-
-  invisible(x)
+check_rrule <- function(x,
+                        ...,
+                        allow_null = FALSE,
+                        arg = caller_arg(x),
+                        call = caller_env()) {
+  check_inherits(
+    x = x,
+    what = "rrule",
+    allow_null = allow_null,
+    arg = arg,
+    call = call
+  )
 }
 
 # ------------------------------------------------------------------------------

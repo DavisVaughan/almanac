@@ -196,6 +196,30 @@ cli_indented <- function(id = NULL, .envir = parent.frame()) {
   )
 }
 
+check_inherits <- function(x,
+                           what,
+                           ...,
+                           allow_null = FALSE,
+                           arg = caller_arg(x),
+                           call = caller_env()) {
+  if (!missing(x)) {
+    if (inherits(x, what)) {
+      return(invisible(NULL))
+    }
+    if (allow_null && is_null(x)) {
+      return(invisible(NULL))
+    }
+  }
+
+  stop_input_type(
+    x = x,
+    what = cli::format_inline("a <{what}>"),
+    allow_null = allow_null,
+    arg = arg,
+    call = call
+  )
+}
+
 # ------------------------------------------------------------------------------
 
 is_missing_or_infinite <- function(x) {

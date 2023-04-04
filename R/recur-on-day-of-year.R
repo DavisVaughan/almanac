@@ -37,7 +37,7 @@
 #'
 #' @export
 recur_on_day_of_year <- function(x, day) {
-  validate_rrule(x, "x")
+  check_rrule(x)
 
   day <- vec_cast(day, to = integer())
 
