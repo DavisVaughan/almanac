@@ -70,7 +70,7 @@ To use an adjustment function, you'll need an rschedule that contains the event 
 ```{r}
 on_christmas <- yearly() %>%
   recur_on_day_of_month(25) %>%
-  recur_on_ymonth("Dec")
+  recur_on_month_of_year("Dec")
 
 x <- as.Date(c("2019-12-24", "2019-12-25"))
 

@@ -2,22 +2,22 @@
 
 make_nth_day_of_month_of_the_quarter <- function(n) {
   rr_nth_of_q1 <- yearly() %>% # It will be the n-th position in the set, per year
-    recur_on_ymonth(1:3) %>% # On all months in Q1
+    recur_on_month_of_year(1:3) %>% # On all months in Q1
     recur_on_day_of_month(1:31) %>% # On all days of the month
     recur_on_position(n) # The n-th day
 
   rr_nth_of_q2 <- yearly() %>%
-    recur_on_ymonth(4:6) %>%
+    recur_on_month_of_year(4:6) %>%
     recur_on_day_of_month(1:31) %>%
     recur_on_position(n)
 
   rr_nth_of_q3 <- yearly() %>%
-    recur_on_ymonth(7:9) %>%
+    recur_on_month_of_year(7:9) %>%
     recur_on_day_of_month(1:31) %>%
     recur_on_position(n)
 
   rr_nth_of_q4 <- yearly() %>%
-    recur_on_ymonth(10:12) %>%
+    recur_on_month_of_year(10:12) %>%
     recur_on_day_of_month(1:31) %>%
     recur_on_position(n)
 
@@ -65,22 +65,22 @@ test_that("can select n-th day of the month of the quarter from the back", {
 
 make_nth_day_of_week_of_the_quarter <- function(day, n) {
   rr_nth_day_of_week_of_q1 <- yearly() %>% # It will be the n-th position in the set, per year
-    recur_on_ymonth(1:3) %>% # On all months in Q1
+    recur_on_month_of_year(1:3) %>% # On all months in Q1
     recur_on_day_of_week(day) %>% # On these weekdays
     recur_on_position(n) # The n-th one
 
   rr_nth_day_of_week_of_q2 <- yearly() %>%
-    recur_on_ymonth(4:6) %>%
+    recur_on_month_of_year(4:6) %>%
     recur_on_day_of_week(day) %>%
     recur_on_position(n)
 
   rr_nth_day_of_week_of_q3 <- yearly() %>%
-    recur_on_ymonth(7:9) %>%
+    recur_on_month_of_year(7:9) %>%
     recur_on_day_of_week(day) %>%
     recur_on_position(n)
 
   rr_nth_day_of_week_of_q4 <- yearly() %>%
-    recur_on_ymonth(10:12) %>%
+    recur_on_month_of_year(10:12) %>%
     recur_on_day_of_week(day) %>%
     recur_on_position(n)
 

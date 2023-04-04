@@ -91,10 +91,10 @@ test_that("can select the n-th of the year", {
   expect_equal(x, as.Date(c("1990-03-06", "1990-03-20")))
 })
 
-test_that("when a on_ymonth rule is added to yearly, n-th selects intramonth", {
+test_that("when a on_month_of_year rule is added to yearly, n-th selects intramonth", {
   rrule <- yearly() %>%
     recur_on_day_of_week("Tuesday", nth = c(1, 2)) %>%
-    recur_on_ymonth(c("Jan", "Feb"))
+    recur_on_month_of_year(c("Jan", "Feb"))
 
   x <- alma_search("1990-01-01", "1990-03-31", rrule)
 

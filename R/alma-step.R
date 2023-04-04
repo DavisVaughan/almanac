@@ -54,7 +54,7 @@
 #' # If Monday, 2019-09-16, was a recurring holiday, we could create
 #' # a custom runion and step over that too.
 #' on_09_16 <- yearly() %>%
-#'   recur_on_ymonth(9) %>%
+#'   recur_on_month_of_year(9) %>%
 #'   recur_on_day_of_month(16)
 #'
 #' rb <- runion() %>%

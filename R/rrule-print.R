@@ -17,7 +17,7 @@ format_body <- function(x) {
     format_count(x),
     format_interval(x),
     format_week_start(x),
-    format_ymonth(x),
+    format_month_of_year(x),
     format_week_of_year(x),
     format_day_of_year(x),
     format_day_of_month(x),
@@ -79,14 +79,14 @@ format_week_start <- function(x) {
   }
 }
 
-format_ymonth <- function(x) {
-  ymonth <- x$ymonth
+format_month_of_year <- function(x) {
+  month_of_year <- x$month_of_year
 
-  if (is.null(ymonth)) {
+  if (is.null(month_of_year)) {
     character()
   } else {
-    ymonth <- month.abb[ymonth]
-    cli::format_inline("month of year: {ymonth}")
+    month_of_year <- month.abb[month_of_year]
+    cli::format_inline("month of year: {month_of_year}")
   }
 }
 

@@ -25,3 +25,12 @@
       `recur_on_yday()` was deprecated in almanac 1.0.0.
       i Please use `recur_on_day_of_year()` instead.
 
+# `recur_on_ymonth()` is deprecated but works
+
+    Code
+      out <- recur_on_ymonth(yearly(), ymonth = "Jan")
+    Condition
+      Warning:
+      `recur_on_ymonth()` was deprecated in almanac 1.0.0.
+      i Please use `recur_on_month_of_year()` instead.
+

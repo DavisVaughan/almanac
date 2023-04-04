@@ -43,7 +43,7 @@ as_js_from_rrule <- function(x) {
     get_count(x),
     get_interval(x),
     get_week_start(x),
-    get_ymonth(x),
+    get_month_of_year(x),
     get_week_of_year(x),
     get_day_of_year(x),
     get_day_of_month(x),
@@ -123,14 +123,14 @@ get_day_of_month <- function(x) {
   glue("bymonthday: {day_of_month}")
 }
 
-get_ymonth <- function(x) {
-  if (is.null(x$ymonth)) {
+get_month_of_year <- function(x) {
+  if (is.null(x$month_of_year)) {
     return(NULL)
   }
 
-  ymonth <- as_js_from_vector(x$ymonth)
+  month_of_year <- as_js_from_vector(x$month_of_year)
 
-  glue("bymonth: {ymonth}")
+  glue("bymonth: {month_of_year}")
 }
 
 get_week_of_year <- function(x) {

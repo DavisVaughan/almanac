@@ -33,8 +33,8 @@
       * count: 5
       * interval: 2
     Code
-      # # can use multiple ymonths
-      recur_on_ymonth(daily(), c("Feb", "Mar"))
+      # # can use multiple months of the year
+      recur_on_month_of_year(daily(), c("Feb", "Mar"))
     Message
       <rrule>
       * frequency: daily
@@ -145,7 +145,7 @@
       * until: 2100-01-01
       * week start: Tue
     Code
-      recur_on_ymonth(daily(), "Feb")
+      recur_on_month_of_year(daily(), "Feb")
     Message
       <rrule>
       * frequency: daily

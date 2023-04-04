@@ -6,6 +6,7 @@
 \alias{recur_on_wday}
 \alias{recur_on_yday}
 \alias{recur_on_yweek}
+\alias{recur_on_ymonth}
 \title{Deprecated recurrence helpers}
 \usage{
 recur_on_mday(x, mday)
@@ -15,6 +16,8 @@ recur_on_wday(x, wday, nth = NULL)
 recur_on_yday(x, yday)
 
 recur_on_yweek(x, yweek)
+
+recur_on_ymonth(x, ymonth)
 }
 \arguments{
 \item{x}{\verb{[rrule]}
@@ -54,6 +57,8 @@ Weeks of the year to recur on. Integer values must be between
 \code{\link[=recur_on_day_of_year]{recur_on_day_of_year()}}.
 \item \code{recur_on_yweek()} is deprecated as of almanac 1.0.0 in favor of
 \code{\link[=recur_on_week_of_year]{recur_on_week_of_year()}}.
+\item \code{recur_on_ymonth()} is deprecated as of almanac 1.0.0 in favor of
+\code{\link[=recur_on_month_of_year]{recur_on_month_of_year()}}.
 }
 }
 \keyword{internal}

@@ -27,3 +27,13 @@ test_that("`recur_on_yday()` is deprecated but works", {
     recur_on_day_of_year(yearly(), day = 30)
   )
 })
+
+test_that("`recur_on_ymonth()` is deprecated but works", {
+  expect_snapshot({
+    out <- recur_on_ymonth(yearly(), ymonth = "Jan")
+  })
+  expect_identical(
+    out,
+    recur_on_month_of_year(yearly(), month = "Jan")
+  )
+})
