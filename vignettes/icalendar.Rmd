@@ -248,7 +248,7 @@ alma_search("1997-03-10", to, rrule)
 
 ```{r}
 rrule <- yearly("1997-01-01") %>%
-  recur_on_yday(c(1, 100, 200)) %>%
+  recur_on_day_of_year(c(1, 100, 200)) %>%
   recur_on_interval(3) %>%
   recur_for_count(10)
 

@@ -51,8 +51,8 @@
       * until: 2100-01-01
       * week of year: 5, 9, and 12
     Code
-      # # can use multiple ydays
-      recur_on_yday(daily(), c(5, 9, 12))
+      # # can use multiple days of the year
+      recur_on_day_of_year(daily(), c(5, 9, 12))
     Message
       <rrule>
       * frequency: daily
@@ -161,7 +161,7 @@
       * until: 2100-01-01
       * week of year: 5
     Code
-      recur_on_yday(daily(), 5)
+      recur_on_day_of_year(daily(), 5)
     Message
       <rrule>
       * frequency: daily

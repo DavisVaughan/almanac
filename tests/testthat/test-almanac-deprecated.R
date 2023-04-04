@@ -17,3 +17,13 @@ test_that("`recur_on_wday()` is deprecated but works", {
     recur_on_day_of_week(yearly(), day = "Tue", nth = 2)
   )
 })
+
+test_that("`recur_on_yday()` is deprecated but works", {
+  expect_snapshot({
+    out <- recur_on_yday(yearly(), yday = 30)
+  })
+  expect_identical(
+    out,
+    recur_on_day_of_year(yearly(), day = 30)
+  )
+})

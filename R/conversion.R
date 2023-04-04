@@ -45,7 +45,7 @@ as_js_from_rrule <- function(x) {
     get_week_start(x),
     get_ymonth(x),
     get_yweek(x),
-    get_yday(x),
+    get_day_of_year(x),
     get_day_of_month(x),
     get_day_of_week(x),
     get_position(x),
@@ -143,14 +143,14 @@ get_yweek <- function(x) {
   glue("byweekno: {yweek}")
 }
 
-get_yday <- function(x) {
-  if (is.null(x$yday)) {
+get_day_of_year <- function(x) {
+  if (is.null(x$day_of_year)) {
     return(NULL)
   }
 
-  yday <- as_js_from_vector(x$yday)
+  day_of_year <- as_js_from_vector(x$day_of_year)
 
-  glue("byyearday: {yday}")
+  glue("byyearday: {day_of_year}")
 }
 
 get_day_of_week <- function(x) {

@@ -16,3 +16,12 @@
       `recur_on_wday()` was deprecated in almanac 1.0.0.
       i Please use `recur_on_day_of_week()` instead.
 
+# `recur_on_yday()` is deprecated but works
+
+    Code
+      out <- recur_on_yday(yearly(), yday = 30)
+    Condition
+      Warning:
+      `recur_on_yday()` was deprecated in almanac 1.0.0.
+      i Please use `recur_on_day_of_year()` instead.
+

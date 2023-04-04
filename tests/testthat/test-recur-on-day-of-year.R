@@ -1,9 +1,9 @@
 # ------------------------------------------------------------------------------
 # Basic tests with all frequencies
 
-test_that("daily - on a yday", {
+test_that("daily - on a day of the year", {
   base <- daily()
-  rrule <- base %>% recur_on_yday(40)
+  rrule <- base %>% recur_on_day_of_year(40)
 
   expect <- as.Date(c("1990-02-09", "1991-02-09"))
 
@@ -15,9 +15,9 @@ test_that("daily - on a yday", {
   expect_equal(x, expect)
 })
 
-test_that("weekly - on a yday", {
+test_that("weekly - on a day of the year", {
   base <- weekly()
-  rrule <- base %>% recur_on_yday(40)
+  rrule <- base %>% recur_on_day_of_year(40)
 
   expect <- as.Date(c("1990-02-09", "1991-02-09"))
 
@@ -29,9 +29,9 @@ test_that("weekly - on a yday", {
   expect_equal(x, expect)
 })
 
-test_that("monthly - on a yday", {
+test_that("monthly - on a day of the year", {
   base <- monthly()
-  rrule <- base %>% recur_on_yday(40)
+  rrule <- base %>% recur_on_day_of_year(40)
 
   expect <- as.Date(c("1990-02-09", "1991-02-09"))
 
@@ -43,9 +43,9 @@ test_that("monthly - on a yday", {
   expect_equal(x, expect)
 })
 
-test_that("yearly - on a yday", {
+test_that("yearly - on a day of the year", {
   base <- yearly()
-  rrule <- base %>% recur_on_yday(40)
+  rrule <- base %>% recur_on_day_of_year(40)
 
   expect <- as.Date(c("1990-02-09", "1991-02-09"))
 
@@ -59,9 +59,9 @@ test_that("yearly - on a yday", {
 
 # ------------------------------------------------------------------------------
 
-test_that("leap years work correctly with yday", {
+test_that("leap years work correctly with days of the year", {
   base <- yearly()
-  rrule <- base %>% recur_on_yday(60)
+  rrule <- base %>% recur_on_day_of_year(60)
 
   expect <- as.Date(c("2000-02-29", "2001-03-01", "2002-03-01"))
 
@@ -75,7 +75,7 @@ test_that("leap years work correctly with yday", {
 
 test_that("can select from the back", {
   base <- daily()
-  rrule <- base %>% recur_on_yday(-1)
+  rrule <- base %>% recur_on_day_of_year(-1)
 
   expect <- as.Date(c("1990-12-31", "1991-12-31"))
 
@@ -90,16 +90,16 @@ test_that("can select from the back", {
 # ------------------------------------------------------------------------------
 # Error checking
 
-test_that("cannot use `yday > 366` or `yday < -366` or `yday == 0`", {
+test_that("cannot use `day > 366` or `day < -366` or `day == 0`", {
   expect_snapshot({
-    (expect_error(yearly() %>% recur_on_yday(367)))
-    (expect_error(yearly() %>% recur_on_yday(-367)))
-    (expect_error(yearly() %>% recur_on_yday(0)))
+    (expect_error(yearly() %>% recur_on_day_of_year(367)))
+    (expect_error(yearly() %>% recur_on_day_of_year(-367)))
+    (expect_error(yearly() %>% recur_on_day_of_year(0)))
   })
 })
 
-test_that("yday must be an integer", {
+test_that("`day` must be an integer", {
   expect_snapshot(error = TRUE, {
-    yearly() %>% recur_on_yday(367.5)
+    yearly() %>% recur_on_day_of_year(367.5)
   })
 })

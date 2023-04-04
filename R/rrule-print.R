@@ -19,7 +19,7 @@ format_body <- function(x) {
     format_week_start(x),
     format_ymonth(x),
     format_yweek(x),
-    format_yday(x),
+    format_day_of_year(x),
     format_day_of_month(x),
     format_day_of_week(x),
     format_position(x),
@@ -100,13 +100,13 @@ format_yweek <- function(x) {
   }
 }
 
-format_yday <- function(x) {
-  yday <- x$yday
+format_day_of_year <- function(x) {
+  day_of_year <- x$day_of_year
 
-  if (is.null(yday)) {
+  if (is.null(day_of_year)) {
     character()
   } else {
-    cli::format_inline("day of year: {yday}")
+    cli::format_inline("day of year: {day_of_year}")
   }
 }
 

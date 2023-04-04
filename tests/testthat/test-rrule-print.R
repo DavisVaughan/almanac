@@ -16,8 +16,8 @@ test_that("print method for rrule is informative", {
     "# can use multiple yweeks"
     recur_on_yweek(daily(), c(5, 9, 12))
 
-    "# can use multiple ydays"
-    recur_on_yday(daily(), c(5, 9, 12))
+    "# can use multiple days of the year"
+    recur_on_day_of_year(daily(), c(5, 9, 12))
 
     "# can use multiple days of the month"
     recur_on_day_of_month(daily(), c(5, 9, 12))
@@ -40,7 +40,7 @@ test_that("print method for rrule is informative", {
     recur_with_week_start(daily(), "Tuesday")
     recur_on_ymonth(daily(), "Feb")
     recur_on_yweek(daily(), 5)
-    recur_on_yday(daily(), 5)
+    recur_on_day_of_year(daily(), 5)
     recur_on_day_of_month(daily(), 5)
     recur_on_day_of_week(daily(), "Wed")
     recur_on_position(weekly(), 5)

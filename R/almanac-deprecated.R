@@ -47,3 +47,15 @@ recur_on_wday <- function(x, wday, nth = NULL) {
   )
   recur_on_day_of_week(x = x, day = wday, nth = nth)
 }
+
+#' @rdname deprecated-recur
+#' @export
+recur_on_yday <- function(x, yday) {
+  lifecycle::deprecate_warn(
+    when = "1.0.0",
+    what = "recur_on_yday()",
+    with = "recur_on_day_of_year()",
+    always = TRUE
+  )
+  recur_on_day_of_year(x = x, day = yday)
+}
