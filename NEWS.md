@@ -1,5 +1,7 @@
 # almanac (development version)
 
+* Greatly improved the print methods of all almanac classes using cli (#86).
+
 * Updated internal JavaScript rrule library to version 2.7.2 (#82).
 
 * almanac steppers created with `stepper()` now work as `.before` and
