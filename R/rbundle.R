@@ -131,14 +131,16 @@ is_rbundle <- function(x) {
   inherits(x, "rbundle")
 }
 
-validate_rbundle <- function(x, x_arg = "") {
-  if (nzchar(x_arg)) {
-    x_arg <- glue(" `{x_arg}`")
-  }
-
-  if (!is_rbundle(x)) {
-    glubort("Input{x_arg} must be an rbundle.")
-  }
-
-  invisible(x)
+check_rbundle <- function(x,
+                          ...,
+                          allow_null = FALSE,
+                          arg = caller_arg(x),
+                          call = caller_env()) {
+  check_inherits(
+    x = x,
+    what = "rbundle",
+    allow_null = allow_null,
+    arg = arg,
+    call = call
+  )
 }
