@@ -194,7 +194,7 @@ check_rrule <- function(x,
 # ------------------------------------------------------------------------------
 
 check_since <- function(since) {
-  since <- vec_cast_date(since, "since")
+  since <- vec_cast_date(since)
   vec_assert(since, size = 1L)
 
   if (is_missing_or_infinite(since)) {
@@ -207,7 +207,7 @@ check_since <- function(since) {
 }
 
 check_until <- function(until) {
-  until <- vec_cast_date(until, "until")
+  until <- vec_cast_date(until)
   vec_assert(until, size = 1L)
 
   if (is_missing_or_infinite(until)) {

@@ -17,15 +17,18 @@ delayedAssign("almanac_global_min_date", as.Date("0100-01-01"))
 
 # ------------------------------------------------------------------------------
 
-vec_cast_date <- function(x, x_arg = "x") {
+vec_cast_date <- function(x, ..., x_arg = caller_arg(x), call = caller_env()) {
   if (is.character(x)) {
-    vec_cast_date_from_character(x, x_arg)
+    vec_cast_date_from_character(x, x_arg = x_arg, call = call)
   } else {
-    vec_cast(x, almanac_global_empty_date, x_arg = x_arg)
+    vec_cast(x, to = almanac_global_empty_date, ..., x_arg = x_arg, call = call)
   }
 }
 
-vec_cast_date_from_character <- function(x, x_arg) {
+vec_cast_date_from_character <- function(x,
+                                         ...,
+                                         x_arg = caller_arg(x),
+                                         call = caller_env()) {
   # Gives POSIXct with no time component and UTC tz
   out <- lubridate::fast_strptime(x, format = "%Y-%m-%d", tz = "UTC", lt = FALSE)
 
@@ -37,7 +40,7 @@ vec_cast_date_from_character <- function(x, x_arg) {
 
   if (any(lossy)) {
     message <- lossy_to_message(lossy, x_arg)
-    stop_lossy_parse(message)
+    stop_lossy_parse(message, call = call)
   }
 
   out

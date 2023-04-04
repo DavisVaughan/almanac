@@ -27,7 +27,7 @@
     Code
       daily(since = since - 1)
     Condition
-      Error in `stop_almanac()`:
+      Error in `validate_date_bounds()`:
       ! Input `since` cannot be smaller than 0100-01-01.
 
 ---
@@ -35,7 +35,7 @@
     Code
       daily(until = until + 1)
     Condition
-      Error in `stop_almanac()`:
+      Error in `validate_date_bounds()`:
       ! Input `until` cannot be larger than 9999-12-31.
 
 # `check_rrule()` works

@@ -6,7 +6,7 @@
       )
     Output
       <error/almanac_error_date_below_minimum>
-      Error in `stop_almanac()`:
+      Error in `validate_date_bounds()`:
       ! Input `rdates` cannot be smaller than 0100-01-01.
     Code
       expect_error(add_exdates(runion(), lb), NA)
@@ -14,7 +14,7 @@
       )
     Output
       <error/almanac_error_date_below_minimum>
-      Error in `stop_almanac()`:
+      Error in `validate_date_bounds()`:
       ! Input `exdates` cannot be smaller than 0100-01-01.
     Code
       expect_error(add_rdates(runion(), ub), NA)
@@ -22,7 +22,7 @@
       )
     Output
       <error/almanac_error_date_above_maximum>
-      Error in `stop_almanac()`:
+      Error in `validate_date_bounds()`:
       ! Input `rdates` cannot be larger than 9999-12-31.
     Code
       expect_error(add_exdates(runion(), ub), NA)
@@ -30,6 +30,6 @@
       )
     Output
       <error/almanac_error_date_above_maximum>
-      Error in `stop_almanac()`:
+      Error in `validate_date_bounds()`:
       ! Input `exdates` cannot be larger than 9999-12-31.
 

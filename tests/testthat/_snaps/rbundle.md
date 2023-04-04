@@ -75,28 +75,28 @@
       )
     Output
       <error/almanac_error_date_below_minimum>
-      Error in `stop_almanac()`:
+      Error in `validate_date_bounds()`:
       ! Input `rdates` cannot be smaller than 0100-01-01.
     Code
       (expect_error(new_rbundle(rdates = almanac_global_max_date + 1), class = "almanac_error_date_above_maximum")
       )
     Output
       <error/almanac_error_date_above_maximum>
-      Error in `stop_almanac()`:
+      Error in `validate_date_bounds()`:
       ! Input `rdates` cannot be larger than 9999-12-31.
     Code
       (expect_error(new_rbundle(exdates = almanac_global_min_date - 1), class = "almanac_error_date_below_minimum")
       )
     Output
       <error/almanac_error_date_below_minimum>
-      Error in `stop_almanac()`:
+      Error in `validate_date_bounds()`:
       ! Input `exdates` cannot be smaller than 0100-01-01.
     Code
       (expect_error(new_rbundle(exdates = almanac_global_max_date + 1), class = "almanac_error_date_above_maximum")
       )
     Output
       <error/almanac_error_date_above_maximum>
-      Error in `stop_almanac()`:
+      Error in `validate_date_bounds()`:
       ! Input `exdates` cannot be larger than 9999-12-31.
 
 # `...` must be named
