@@ -19,16 +19,16 @@
     Code
       radjusted(daily(), daily(), 1)
     Condition
-      Error in `validate_adjustment()`:
-      ! Input `adjustment` must be a function.
+      Error in `new_radjusted()`:
+      ! `adjustment` must be a function, not the number 1.
 
 ---
 
     Code
       radjusted(daily(), daily(), function(x) x)
     Condition
-      Error in `validate_adjustment()`:
-      ! Input `adjustment` must have two arguments, `x` and `rschedule`.
+      Error in `new_radjusted()`:
+      ! `adjustment` must have two arguments, `x` and `rschedule`.
 
 # radjusted has informative print method
 

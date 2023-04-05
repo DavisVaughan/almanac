@@ -91,7 +91,7 @@ rschedule_events.radjusted <- function(x) {
 new_radjusted <- function(rschedule, adjust_on, adjustment) {
   check_rschedule(rschedule)
   check_rschedule(adjust_on)
-  validate_adjustment(adjustment, "adjustment")
+  check_adjustment(adjustment)
 
   cache <- cache_radjusted$new(
     rschedule = rschedule,
@@ -110,20 +110,20 @@ new_radjusted <- function(rschedule, adjust_on, adjustment) {
 
 # ------------------------------------------------------------------------------
 
-validate_adjustment <- function(x, x_arg = "") {
-  if (nzchar(x_arg)) {
-    x_arg <- glue(" `{x_arg}`")
-  }
-
-  if (!is_function(x)) {
-    cli::cli_abort("Input{x_arg} must be a function.")
-  }
+check_adjustment <- function(x,
+                             ...,
+                             arg = caller_arg(x),
+                             call = caller_env()) {
+  check_function(x, arg = arg, call = call)
 
   fmls <- fn_fmls(x)
 
   if (length(fmls) != 2L) {
-    cli::cli_abort("Input{x_arg} must have two arguments, `x` and `rschedule`.")
+    cli::cli_abort(
+      "{.arg {arg}} must have two arguments, {.arg x} and {.arg rschedule}.",
+      call = call
+    )
   }
 
-  invisible(x)
+  invisible(NULL)
 }
