@@ -4,7 +4,7 @@
       vec_cast_date("2019-02-31")
     Condition
       Error:
-      ! Failed to parse `"2019-02-31"` to Date at location: 1.
+      ! Failed to parse `"2019-02-31"` to <Date> at location: 1.
 
 # cannot cast integer or double to Date
 

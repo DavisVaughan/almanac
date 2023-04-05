@@ -39,32 +39,46 @@ vec_cast_date_from_character <- function(x,
   lossy <- is.na(out) & !is.na(x)
 
   if (any(lossy)) {
-    message <- lossy_to_message(lossy, x_arg)
-    stop_lossy_parse(message, call = call)
+    loc <- which(lossy)
+    stop_lossy_parse(loc, x_arg, call = call)
   }
 
   out
 }
 
-lossy_to_message <- function(lossy, x_arg) {
-  locations <- which(lossy)
-  locations <- as.character(locations)
+stop_lossy_parse <- function(loc, arg, ..., call = caller_env()) {
+  loc <- as.character(loc)
+  n <- length(loc)
 
-  if (length(locations) > 1) {
-    chr_locations <- "locations"
+  if (n > 1) {
+    noun <- "locations"
   } else {
-    chr_locations <- "location"
+    noun <- "location"
   }
 
-  if (length(locations) > 5) {
-    locations <- c(locations[1:5], "etc")
+  if (n > 5) {
+    extra <- cli::format_inline("and {n - 5} more")
+    loc <- c(loc[1:5], extra)
   }
 
-  locations <- glue::glue_collapse(locations, sep = ", ")
+  loc <- cli::ansi_collapse(loc)
 
-  locations
+  message <- cli::format_inline(
+    "Failed to parse {.arg {arg}} to <Date> at {noun}: {loc}."
+  )
 
-  glue::glue("Failed to parse `{x_arg}` to Date at {chr_locations}: {locations}.")
+  stop_almanac(
+    message = message,
+    class = "almanac_error_lossy_parse",
+    ...,
+    call = call
+  )
+}
+
+# ------------------------------------------------------------------------------
+
+stop_almanac <- function(message = NULL, class = NULL, ..., call = caller_env()) {
+  abort(message, class = c(class, "almanac_error"), ..., call = call)
 }
 
 # ------------------------------------------------------------------------------
@@ -81,6 +95,48 @@ check_date_within_bounds <- function(x,
   }
   invisible(x)
 }
+
+stop_date_below_minimum <- function(arg, call) {
+  date <- format(almanac_global_min_date, format = format_ymd())
+
+  message <- cli::format_inline(
+    "{.arg {arg}} must be larger than {.code {date}}."
+  )
+
+  stop_almanac(
+    message = message,
+    class = "almanac_error_date_below_minimum",
+    call = call
+  )
+}
+
+stop_date_above_maximum <- function(arg, call) {
+  date <- format(almanac_global_max_date, format = format_ymd())
+
+  message <- cli::format_inline(
+    "{.arg {arg}} must be smaller than {.code {date}}."
+  )
+
+  stop_almanac(
+    message = message,
+    class = "almanac_error_date_above_maximum",
+    call = call
+  )
+}
+
+format_ymd <- function() {
+  if (is_linux()) {
+    # See `?strptime` section `Printing years`
+    "%04Y-%m-%d"
+  } else {
+    "%Y-%m-%d"
+  }
+}
+is_linux <- function() {
+  tolower(Sys.info()[["sysname"]]) == "linux"
+}
+
+# ------------------------------------------------------------------------------
 
 check_no_missing <- function(x,
                              ...,
