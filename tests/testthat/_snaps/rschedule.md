@@ -20,7 +20,7 @@
       rschedule_events(1)
     Condition
       Error in `rschedule_events()`:
-      ! Cannot extract events from an object of class <numeric>.
+      ! Can't extract events from a <numeric>.
 
 # method is required for subclasses
 

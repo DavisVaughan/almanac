@@ -69,7 +69,7 @@ rschedule_events <- function(x) {
 #' @export
 rschedule_events.default <- function(x) {
   cls <- glue::glue_collapse(class(x), sep = "/")
-  cli::cli_abort("Cannot extract events from an object of class <{cls}>.")
+  cli::cli_abort("Can't extract events from a <{cls}>.")
 }
 
 #' @export

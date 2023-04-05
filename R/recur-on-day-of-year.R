@@ -40,6 +40,7 @@ recur_on_day_of_year <- function(x, day) {
   check_rrule(x)
 
   day <- vec_cast(day, to = integer())
+  check_no_missing(day)
 
   abs_day <- abs(day)
   if (any(abs_day > 366 | abs_day < 1)) {

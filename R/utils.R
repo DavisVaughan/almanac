@@ -243,7 +243,7 @@ day_of_week_normalize <- function(x,
 
   if (any(misses)) {
     cli::cli_abort(
-      "A character {.arg {arg}} must be a weekday name or abbreviation.",
+      "{.arg {arg}} must be a weekday name or abbreviation.",
       call = call
     )
   }

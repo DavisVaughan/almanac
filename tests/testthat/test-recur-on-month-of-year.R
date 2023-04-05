@@ -132,3 +132,9 @@ test_that("`month` must be a character / integer", {
     yearly() %>% recur_on_month_of_year(30.5)
   })
 })
+
+test_that("`month` can't be missing", {
+  expect_snapshot(error = TRUE, {
+    yearly() %>% recur_on_month_of_year(NA_integer_)
+  })
+})
