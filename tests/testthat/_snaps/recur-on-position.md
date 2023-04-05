@@ -4,7 +4,16 @@
       daily() %>% recur_on_position(1) %>% recur_on_position(1)
     Condition
       Error in `recur_on_position()`:
-      ! `position` has already been set for this rrule.
+      ! The position has already been set for this rrule.
+
+# cannot set the position twice within the same call
+
+    Code
+      daily() %>% recur_on_position(c(1, 1))
+    Condition
+      Error in `recur_on_position()`:
+      ! `n` can't contain duplicate values.
+      i Duplicate values were detected at location: 1 and 2.
 
 # position is validated depending on the frequency
 
@@ -57,7 +66,7 @@
       Error in `recur_on_position()`:
       ! For a "yearly" frequency, the absolute value of `n` can't be larger than 366.
 
-# position must be castable to an integer
+# `n` must be castable to an integer
 
     Code
       yearly() %>% recur_on_position(21.5)
@@ -65,4 +74,13 @@
       Error in `recur_on_position()`:
       ! Can't convert from `n` <double> to <integer> due to loss of precision.
       * Locations: 1
+
+# `n` can't be missing
+
+    Code
+      yearly() %>% recur_on_position(NA_integer_)
+    Condition
+      Error in `recur_on_position()`:
+      ! `n` can't contain missing values.
+      i Missing values were detected at locations: 1.
 

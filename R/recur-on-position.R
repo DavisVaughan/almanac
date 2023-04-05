@@ -43,18 +43,15 @@ recur_on_position <- function(x, n) {
   check_rrule(x)
 
   if (is_already_set(x, "position")) {
-    abort("`position` has already been set for this rrule.")
+    abort("The position has already been set for this rrule.")
   }
 
-  n <- vec_cast(n, integer(), x_arg = "n")
-
-  if (any(is.na(n))) {
-    abort("`n` cannot be `NA`.")
-  }
-
+  n <- vec_cast(n, to = integer())
+  check_no_missing(n)
+  check_unique(n)
   check_frequency_position(x$rules$frequency, n)
 
-  n <- sort(n)
+  n <- vec_sort(n)
 
   tweak_rrule(x, position = n)
 }

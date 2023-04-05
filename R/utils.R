@@ -82,6 +82,45 @@ check_date_within_bounds <- function(x,
   invisible(x)
 }
 
+check_no_missing <- function(x,
+                             ...,
+                             arg = caller_arg(x),
+                             call = caller_env()) {
+  missing <- is.na(x)
+
+  if (!any(missing)) {
+    return(invisible(NULL))
+  }
+
+  missing <- which(missing)
+
+  message <- c(
+    "{.arg {arg}} can't contain missing values.",
+    i = "Missing values were detected at locations: {missing}."
+  )
+
+  cli::cli_abort(message, call = call)
+}
+
+check_unique <- function(x,
+                         ...,
+                         arg = caller_arg(x),
+                         call = caller_env()) {
+  if (!vec_duplicate_any(x)) {
+    return(invisible(NULL))
+  }
+
+  loc <- vec_duplicate_detect(x)
+  loc <- which(loc)
+
+  message <- c(
+    "{.arg {arg}} can't contain duplicate values.",
+    i = "Duplicate values were detected at location: {loc}."
+  )
+
+  cli::cli_abort(message, call = call)
+}
+
 # ------------------------------------------------------------------------------
 
 get_rule <- function(x, rule) {
