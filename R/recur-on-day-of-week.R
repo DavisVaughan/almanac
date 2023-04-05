@@ -82,15 +82,16 @@
 #' @export
 recur_on_day_of_week <- function(x, day, ..., nth = NULL) {
   check_dots_empty0(...)
-  validate_rrule(x, "x")
+  check_rrule(x)
 
   old <- get_rule(x, "day_of_week")
   if (is_null(old)) {
     old <- new_list(n = 7L)
   }
 
-  day <- normalize_day_of_week(day)
+  day <- day_of_week_normalize(day)
   day <- vec_cast(day, to = integer())
+  check_no_missing(day)
 
   if (any(day < 1L | day > 7L)) {
     abort("`day` must be in [1, 7].")
@@ -106,6 +107,7 @@ recur_on_day_of_week <- function(x, day, ..., nth = NULL) {
   }
 
   nth <- vec_cast(nth, to = integer())
+  check_no_missing(nth)
 
   is_yearly <- x$rules$frequency == "yearly"
   abs_nth <- abs(nth)

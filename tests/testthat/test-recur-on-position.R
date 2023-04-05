@@ -86,6 +86,12 @@ test_that("cannot set the position twice", {
   })
 })
 
+test_that("cannot set the position twice within the same call", {
+  expect_snapshot(error = TRUE, {
+    daily() %>% recur_on_position(c(1, 1))
+  })
+})
+
 # ------------------------------------------------------------------------------
 
 test_that("position is validated depending on the frequency", {
@@ -104,9 +110,15 @@ test_that("position is validated depending on the frequency", {
   })
 })
 
-test_that("position must be castable to an integer", {
+test_that("`n` must be castable to an integer", {
   expect_snapshot(error = TRUE, {
     yearly() %>% recur_on_position(21.5)
+  })
+})
+
+test_that("`n` can't be missing", {
+  expect_snapshot(error = TRUE, {
+    yearly() %>% recur_on_position(NA_integer_)
   })
 })
 

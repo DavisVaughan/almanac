@@ -40,26 +40,20 @@
 #'
 #' @export
 recur_on_position <- function(x, n) {
-  validate_rrule(x, "x")
+  check_rrule(x)
+  check_rule_not_set(x, "position")
 
-  if (is_already_set(x, "position")) {
-    abort("`position` has already been set for this rrule.")
-  }
+  n <- vec_cast(n, to = integer())
+  check_no_missing(n)
+  check_unique(n)
+  check_frequency_position(x$rules$frequency, n)
 
-  n <- vec_cast(n, integer(), x_arg = "n")
-
-  if (any(is.na(n))) {
-    abort("`n` cannot be `NA`.")
-  }
-
-  validate_frequency_position(x$rules$frequency, n)
-
-  n <- sort(n)
+  n <- vec_sort(n)
 
   tweak_rrule(x, position = n)
 }
 
-validate_frequency_position <- function(frequency, n) {
+check_frequency_position <- function(frequency, n, ..., call = caller_env()) {
   n <- abs(n)
 
   max <- switch(
@@ -70,7 +64,12 @@ validate_frequency_position <- function(frequency, n) {
     yearly = 366L
   )
 
-  if (any(n > max)) {
-    glubort("For a '{frequency}' frequency, the absolute value of `n` cannot be larger than {max}.")
+  if (all(n <= max)) {
+    return(invisible(NULL))
   }
+
+  cli::cli_abort(
+    "For a {.str {frequency}} frequency, the absolute value of {.arg n} can't be larger than {max}.",
+    call = call
+  )
 }

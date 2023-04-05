@@ -217,3 +217,15 @@ test_that("`day` must be a character / integer", {
     yearly() %>% recur_on_day_of_week(30.5)
   })
 })
+
+test_that("`day` can't be missing", {
+  expect_snapshot(error = TRUE, {
+    yearly() %>% recur_on_day_of_week(NA_integer_)
+  })
+})
+
+test_that("`nth` can't be missing", {
+  expect_snapshot(error = TRUE, {
+    yearly() %>% recur_on_day_of_week(1, nth = NA_integer_)
+  })
+})

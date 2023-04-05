@@ -28,22 +28,25 @@ alma_seq <- function(from, to, rschedule, inclusive = TRUE) {
   from <- vec_cast_date(from)
   to <- vec_cast_date(to)
 
-  vec_assert(from, size = 1L)
-  vec_assert(to, size = 1L)
+  vec_check_size(from, size = 1L)
+  vec_check_size(to, size = 1L)
 
-  if (is.na(from) || is.na(to)) {
-    abort("`from` and `to` cannot be `NA`")
-  }
+  check_no_missing(from)
+  check_no_missing(to)
 
+  dates <- date_seq2(from, to)
   events <- alma_search(from, to, rschedule, inclusive = inclusive)
 
-  # Avoid `seq.Date()` error if `from > to`. Use better `seq2()`
+  vec_set_difference(dates, events)
+}
+
+date_seq2 <- function(from, to) {
+  # Avoid `seq.Date()` error if `from > to`. Use better `seq2()`.
   from <- unclass(from)
   to <- unclass(to)
 
-  dates <- seq2(from, to)
-  dates <- as.double(dates)
-  dates <- new_date(dates)
+  out <- seq2(from, to)
+  out <- as.double(out)
 
-  vec_set_difference(dates, events)
+  new_date(out)
 }

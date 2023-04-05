@@ -17,15 +17,18 @@ delayedAssign("almanac_global_min_date", as.Date("0100-01-01"))
 
 # ------------------------------------------------------------------------------
 
-vec_cast_date <- function(x, x_arg = "x") {
+vec_cast_date <- function(x, ..., x_arg = caller_arg(x), call = caller_env()) {
   if (is.character(x)) {
-    vec_cast_date_from_character(x, x_arg)
+    vec_cast_date_from_character(x, x_arg = x_arg, call = call)
   } else {
-    vec_cast(x, almanac_global_empty_date, x_arg = x_arg)
+    vec_cast(x, to = almanac_global_empty_date, ..., x_arg = x_arg, call = call)
   }
 }
 
-vec_cast_date_from_character <- function(x, x_arg) {
+vec_cast_date_from_character <- function(x,
+                                         ...,
+                                         x_arg = caller_arg(x),
+                                         call = caller_env()) {
   # Gives POSIXct with no time component and UTC tz
   out <- lubridate::fast_strptime(x, format = "%Y-%m-%d", tz = "UTC", lt = FALSE)
 
@@ -36,60 +39,89 @@ vec_cast_date_from_character <- function(x, x_arg) {
   lossy <- is.na(out) & !is.na(x)
 
   if (any(lossy)) {
-    message <- lossy_to_message(lossy, x_arg)
-    stop_lossy_parse(message)
+    loc <- which(lossy)
+    stop_lossy_parse(loc, x_arg, call = call)
   }
 
   out
 }
 
-lossy_to_message <- function(lossy, x_arg) {
-  locations <- which(lossy)
-  locations <- as.character(locations)
+stop_lossy_parse <- function(loc, arg, ..., call = caller_env()) {
+  loc <- as.character(loc)
+  n <- length(loc)
 
-  if (length(locations) > 1) {
-    chr_locations <- "locations"
+  if (n > 1) {
+    noun <- "locations"
   } else {
-    chr_locations <- "location"
+    noun <- "location"
   }
 
-  if (length(locations) > 5) {
-    locations <- c(locations[1:5], "etc")
+  if (n > 5) {
+    extra <- cli::format_inline("and {n - 5} more")
+    loc <- c(loc[1:5], extra)
   }
 
-  locations <- glue::glue_collapse(locations, sep = ", ")
+  loc <- cli::ansi_collapse(loc)
 
-  locations
+  message <- cli::format_inline(
+    "Failed to parse {.arg {arg}} to <Date> at {noun}: {loc}."
+  )
 
-  glue::glue("Failed to parse `{x_arg}` to Date at {chr_locations}: {locations}.")
+  stop_almanac(
+    message = message,
+    class = "almanac_error_lossy_parse",
+    ...,
+    call = call
+  )
 }
 
 # ------------------------------------------------------------------------------
 
-glubort <- function (..., .sep = "", .envir = parent.frame()) {
-  abort(glue::glue(..., .sep = .sep, .envir = .envir))
+stop_almanac <- function(message = NULL, class = NULL, ..., call = caller_env()) {
+  abort(message, class = c(class, "almanac_error"), ..., call = call)
 }
 
 # ------------------------------------------------------------------------------
 
-validate_date_bounds <- function(x, ..., x_arg = "") {
-  if (nzchar(x_arg)) {
-    x_arg <- glue(" `{x_arg}`")
-  }
-
+check_date_within_bounds <- function(x,
+                                     ...,
+                                     arg = caller_arg(x),
+                                     call = caller_env()) {
   if (any(x > almanac_global_max_date, na.rm = TRUE)) {
-    date <- format(almanac_global_max_date, format = format_ymd())
-    message <- glue("Input{x_arg} cannot be larger than {date}.")
-    stop_date_above_maximum(message)
+    stop_date_above_maximum(arg = arg, call = call)
   }
-
   if (any(x < almanac_global_min_date, na.rm = TRUE)) {
-    date <- format(almanac_global_min_date, format = format_ymd())
-    message <- glue("Input{x_arg} cannot be smaller than {date}.")
-    stop_date_below_minimum(message)
+    stop_date_below_minimum(arg = arg, call = call)
   }
-
   invisible(x)
+}
+
+stop_date_below_minimum <- function(arg, call) {
+  date <- format(almanac_global_min_date, format = format_ymd())
+
+  message <- cli::format_inline(
+    "{.arg {arg}} must be larger than {.code {date}}."
+  )
+
+  stop_almanac(
+    message = message,
+    class = "almanac_error_date_below_minimum",
+    call = call
+  )
+}
+
+stop_date_above_maximum <- function(arg, call) {
+  date <- format(almanac_global_max_date, format = format_ymd())
+
+  message <- cli::format_inline(
+    "{.arg {arg}} must be smaller than {.code {date}}."
+  )
+
+  stop_almanac(
+    message = message,
+    class = "almanac_error_date_above_maximum",
+    call = call
+  )
 }
 
 format_ymd <- function() {
@@ -106,12 +138,87 @@ is_linux <- function() {
 
 # ------------------------------------------------------------------------------
 
+check_no_missing <- function(x,
+                             ...,
+                             arg = caller_arg(x),
+                             call = caller_env()) {
+  loc <- is.na(x)
+
+  if (!any(loc)) {
+    return(invisible(NULL))
+  }
+
+  loc <- which(loc)
+
+  message <- c(
+    "{.arg {arg}} can't contain missing values.",
+    i = "Missing values were detected at locations: {loc}."
+  )
+
+  cli::cli_abort(message, call = call)
+}
+
+check_finite <- function(x,
+                         ...,
+                         arg = caller_arg(x),
+                         call = caller_env()) {
+  loc <- is.infinite(x)
+
+  if (!any(loc)) {
+    return(invisible(NULL))
+  }
+
+  loc <- which(loc)
+
+  message <- c(
+    "{.arg {arg}} can't contain infinite values.",
+    i = "Infinite values were detected at locations: {loc}."
+  )
+
+  cli::cli_abort(message, call = call)
+}
+
+check_unique <- function(x,
+                         ...,
+                         arg = caller_arg(x),
+                         call = caller_env()) {
+  if (!vec_duplicate_any(x)) {
+    return(invisible(NULL))
+  }
+
+  loc <- vec_duplicate_detect(x)
+  loc <- which(loc)
+
+  message <- c(
+    "{.arg {arg}} can't contain duplicate values.",
+    i = "Duplicate values were detected at location: {loc}."
+  )
+
+  cli::cli_abort(message, call = call)
+}
+
+# ------------------------------------------------------------------------------
+
 get_rule <- function(x, rule) {
   x[["rules"]][[rule]]
 }
 
 is_already_set <- function(x, rule) {
   !is.null(get_rule(x, rule))
+}
+
+check_rule_not_set <- function(x,
+                               rule,
+                               ...,
+                               call = caller_env()) {
+  if (!is_already_set(x, rule)) {
+    return(invisible(NULL))
+  }
+
+  cli::cli_abort(
+    "The {.str {rule}} rule is already set and can't be set twice.",
+    call = call
+  )
 }
 
 # ------------------------------------------------------------------------------
@@ -122,19 +229,23 @@ glue2 <- function(..., .envir = parent.frame()) {
 
 # ------------------------------------------------------------------------------
 
-normalize_day_of_week <- function(x) {
+day_of_week_normalize <- function(x,
+                                  ...,
+                                  arg = caller_arg(x),
+                                  call = caller_env()) {
   if (!is.character(x)) {
     return(x)
   }
 
-  x <- tolower(x)
-
-  where <- match_day_of_week(x)
+  where <- day_of_week_match(x)
 
   misses <- is.na(where)
 
   if (any(misses)) {
-    abort("A character `x` must be a weekday name or abbreviation.")
+    cli::cli_abort(
+      "{.arg {arg}} must be a weekday name or abbreviation.",
+      call = call
+    )
   }
 
   out <- day_of_week_int()[where]
@@ -144,8 +255,8 @@ normalize_day_of_week <- function(x) {
   out
 }
 
-match_day_of_week <- function(x) {
-  vec_match(x, day_of_week_names())
+day_of_week_match <- function(x) {
+  vec_match(tolower(x), day_of_week_names())
 }
 
 day_of_week_names <- function() {
@@ -196,12 +307,40 @@ cli_indented <- function(id = NULL, .envir = parent.frame()) {
   )
 }
 
-# ------------------------------------------------------------------------------
+check_inherits <- function(x,
+                           what,
+                           ...,
+                           allow_null = FALSE,
+                           arg = caller_arg(x),
+                           call = caller_env()) {
+  if (!missing(x)) {
+    if (inherits(x, what)) {
+      return(invisible(NULL))
+    }
+    if (allow_null && is_null(x)) {
+      return(invisible(NULL))
+    }
+  }
 
-is_missing_or_infinite <- function(x) {
-  !is.finite(x)
+  stop_input_type(
+    x = x,
+    what = cli::format_inline("a <{what}>"),
+    allow_null = allow_null,
+    arg = arg,
+    call = call
+  )
 }
 
-is_date <- function(x) {
-  inherits(x, "Date")
+check_date <- function(x,
+                       ...,
+                       allow_null = FALSE,
+                       arg = caller_arg(x),
+                       call = caller_env()) {
+  check_inherits(
+    x = x,
+    what = "Date",
+    allow_null = allow_null,
+    arg = arg,
+    call = call
+  )
 }

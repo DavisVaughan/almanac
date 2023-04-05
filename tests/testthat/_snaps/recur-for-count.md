@@ -4,22 +4,20 @@
       daily() %>% recur_for_count(2) %>% recur_for_count(2)
     Condition
       Error in `recur_for_count()`:
-      ! `count` has already been set for this rrule.
+      ! The "count" rule is already set and can't be set twice.
 
 # `count` must be castable to a scalar integer
 
     Code
-      (expect_error(daily() %>% recur_for_count("a"), class = "vctrs_error_incompatible_type")
-      )
+      (expect_error(daily() %>% recur_for_count("a")))
     Output
-      <error/vctrs_error_cast>
+      <error/rlang_error>
       Error in `recur_for_count()`:
-      ! Can't convert `n` <character> to <integer>.
+      ! `n` must be a whole number, not the string "a".
     Code
-      (expect_error(daily() %>% recur_for_count(c(1, 2)), class = "vctrs_error_assert_size")
-      )
+      (expect_error(daily() %>% recur_for_count(c(1, 2))))
     Output
-      <error/vctrs_error_assert_size>
+      <error/rlang_error>
       Error in `recur_for_count()`:
-      ! `n` must have size 1, not size 2.
+      ! `n` must be a whole number, not a double vector.
 

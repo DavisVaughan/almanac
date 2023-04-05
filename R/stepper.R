@@ -135,7 +135,7 @@ new_stepper <- function(n = integer(), rschedule = daily()) {
     abort("`n` must be an integer.")
   }
 
-  validate_rschedule(rschedule, x_arg = "rschedule")
+  check_rschedule(rschedule)
 
   new_vctr(
     .data = n,

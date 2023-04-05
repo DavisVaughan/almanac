@@ -40,23 +40,11 @@
 #' alma_search("1999-01-01", "2001-01-01", on_easter_back_93_days)
 #' alma_search("1999-01-01", "2001-01-01", on_easter_back_94_days)
 recur_on_easter <- function(x, offset = 0L) {
-  validate_rrule(x, "x")
+  check_rrule(x)
+  check_rule_not_set(x, "easter")
 
-  if (is_already_set(x, "easter")) {
-    abort("The `easter` rule has already been set.")
-  }
-
-  offset <- vec_cast(offset, integer(), x_arg = "offset")
-  vec_assert(offset, size = 1L, arg = "offset")
-
-  if (is.na(offset)) {
-    abort("`offset` cannot be `NA`.")
-  }
-
-  abs_offset <- abs(offset)
-  if (abs_offset > 366) {
-    abort("`offset` can only take values in [-366, 366].")
-  }
+  check_number_whole(offset, min = -366, max = 366)
+  offset <- vec_cast(offset, to = integer())
 
   tweak_rrule(x, easter = offset)
 }

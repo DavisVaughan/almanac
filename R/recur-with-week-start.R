@@ -52,16 +52,11 @@
 #'
 #' alma_search("2014-12-25", "2015-01-25", on_first_week_sun)
 recur_with_week_start <- function(x, wday) {
-  validate_rrule(x, "x")
+  check_rrule(x)
 
-  wday <- normalize_day_of_week(wday)
-
-  wday <- vec_cast(wday, integer(), x_arg = "wday")
-  vec_assert(wday, size = 1L)
-
-  if (wday < 1L || wday > 7L) {
-    abort("`wday` must be an integer between 1 and 7.")
-  }
+  wday <- day_of_week_normalize(wday)
+  check_number_whole(wday, min = 1, max = 7)
+  wday <- vec_cast(wday, to = integer())
 
   tweak_rrule(x, week_start = wday)
 }

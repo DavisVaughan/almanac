@@ -69,8 +69,8 @@ NULL
 #' @rdname rbundle-add
 #' @export
 add_rschedule <- function(x, rschedule) {
-  validate_rbundle(x, "x")
-  validate_rschedule(rschedule, x_arg = "rschedule")
+  check_rbundle(x)
+  check_rschedule(rschedule)
 
   rschedules <- c(x$rschedules, list(rschedule))
 
@@ -86,8 +86,8 @@ add_rschedule <- function(x, rschedule) {
 #' @rdname rbundle-add
 #' @export
 add_rdates <- function(x, rdates) {
-  validate_rbundle(x, "x")
-  rdates <- vec_cast_date(rdates, "rdates")
+  check_rbundle(x)
+  rdates <- vec_cast_date(rdates)
 
   rdates <- vec_c(x$rdates, rdates)
   rdates <- vec_unique(rdates)
@@ -105,8 +105,8 @@ add_rdates <- function(x, rdates) {
 #' @rdname rbundle-add
 #' @export
 add_exdates <- function(x, exdates) {
-  validate_rbundle(x, "x")
-  exdates <- vec_cast_date(exdates, "exdates")
+  check_rbundle(x)
+  exdates <- vec_cast_date(exdates)
 
   exdates <- vec_c(x$exdates, exdates)
   exdates <- vec_unique(exdates)

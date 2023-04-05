@@ -52,7 +52,7 @@
 #'
 #' alma_search("2014-12-25", "2015-01-25", on_first_week_sun)
 recur_on_week_of_year <- function(x, week) {
-  validate_rrule(x, "x")
+  check_rrule(x)
 
   week <- vec_cast(week, to = integer())
 

@@ -103,3 +103,9 @@ test_that("`day` must be an integer", {
     yearly() %>% recur_on_day_of_year(367.5)
   })
 })
+
+test_that("`day` can't be missing", {
+  expect_snapshot(error = TRUE, {
+    yearly() %>% recur_on_day_of_year(NA_integer_)
+  })
+})

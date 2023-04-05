@@ -19,14 +19,14 @@
     Code
       rschedule_events(1)
     Condition
-      Error in `glubort()`:
-      ! Cannot extract events from an object of class <numeric>.
+      Error in `rschedule_events()`:
+      ! Can't extract events from a <numeric>.
 
 # method is required for subclasses
 
     Code
       rschedule_events(x)
     Condition
-      Error in `glubort()`:
-      ! rschedule subclasses must provide their own `rschedule_events()` method.
+      Error in `rschedule_events()`:
+      ! <rschedule> subclasses must provide their own `rschedule_events()` method.
 

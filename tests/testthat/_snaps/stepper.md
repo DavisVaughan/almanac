@@ -20,8 +20,8 @@
     Code
       new_stepper(rschedule = 1)
     Condition
-      Error in `glubort()`:
-      ! Input `rschedule` must be an rschedule, such as an rrule or rbundle.
+      Error in `new_stepper()`:
+      ! `rschedule` must be a <rschedule>, not the number 1.
 
 # default method error is thrown
 

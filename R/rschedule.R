@@ -69,12 +69,12 @@ rschedule_events <- function(x) {
 #' @export
 rschedule_events.default <- function(x) {
   cls <- glue::glue_collapse(class(x), sep = "/")
-  glubort("Cannot extract events from an object of class <{cls}>.")
+  cli::cli_abort("Can't extract events from a <{cls}>.")
 }
 
 #' @export
 rschedule_events.rschedule <- function(x) {
-  glubort("rschedule subclasses must provide their own `rschedule_events()` method.")
+  cli::cli_abort("<rschedule> subclasses must provide their own `rschedule_events()` method.")
 }
 
 # ------------------------------------------------------------------------------
@@ -83,15 +83,16 @@ is_rschedule <- function(x) {
   inherits(x, "rschedule")
 }
 
-validate_rschedule <- function(x, x_arg = "") {
-  if (nzchar(x_arg)) {
-    x_arg <- glue(" `{x_arg}`")
-  }
-
-  if (!is_rschedule(x)) {
-    glubort("Input{x_arg} must be an rschedule, such as an rrule or rbundle.")
-  }
-
-  invisible(x)
+check_rschedule <- function(x,
+                            ...,
+                            allow_null = FALSE,
+                            arg = caller_arg(x),
+                            call = caller_env()) {
+  check_inherits(
+    x = x,
+    what = "rschedule",
+    allow_null = allow_null,
+    arg = arg,
+    call = call
+  )
 }
-

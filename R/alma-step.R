@@ -70,7 +70,7 @@ alma_step <- function(x, n, rschedule) {
   # Get the common size with nice errors, recycled cheaply internally
   size <- vec_size_common(x = x, n = n)
 
-  validate_rschedule(rschedule, "rschedule")
+  check_rschedule(rschedule)
   events <- rschedule_events(rschedule)
 
   alma_step_impl(x, n, events, size)

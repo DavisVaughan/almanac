@@ -40,18 +40,11 @@
 #'
 #' alma_search("2019-01-01", "2020-01-01", on_31_for_5)
 recur_for_count <- function(x, n) {
-  validate_rrule(x, "x")
+  check_rrule(x)
+  check_rule_not_set(x, "count")
 
-  if (is_already_set(x, "count")) {
-    abort("`count` has already been set for this rrule.")
-  }
-
-  n <- vec_cast(n, integer(), x_arg = "n")
-  vec_assert(n, size = 1L)
-
-  if (n <= 0L) {
-    abort("`n` must be greater than 0.")
-  }
+  check_number_whole(n, min = 1)
+  n <- vec_cast(n, to = integer())
 
   # Override `until`
   tweak_rrule(x, until = NULL, count = n)

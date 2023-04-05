@@ -28,3 +28,12 @@
       ! Can't convert from `day` <double> to <integer> due to loss of precision.
       * Locations: 1
 
+# `day` can't be missing
+
+    Code
+      yearly() %>% recur_on_day_of_year(NA_integer_)
+    Condition
+      Error in `recur_on_day_of_year()`:
+      ! `day` can't contain missing values.
+      i Missing values were detected at locations: 1.
+

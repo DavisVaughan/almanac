@@ -30,19 +30,15 @@ alma_search <- function(from, to, rschedule, inclusive = TRUE) {
   from <- vec_cast_date(from)
   to <- vec_cast_date(to)
 
-  vec_assert(from, size = 1L)
-  vec_assert(to, size = 1L)
+  vec_check_size(from, size = 1L)
+  vec_check_size(to, size = 1L)
 
-  if (is.na(from) || is.na(to)) {
-    abort("`from` and `to` cannot be `NA`")
-  }
+  check_no_missing(from)
+  check_no_missing(to)
 
-  vec_assert(inclusive, logical(), 1L)
-  if (is.na(inclusive)) {
-    abort("`inclusive` cannot be `NA`")
-  }
+  check_bool(inclusive)
 
-  validate_rschedule(rschedule, "rschedule")
+  check_rschedule(rschedule)
   events <- rschedule_events(rschedule)
 
   alma_search_impl(events, from, to, inclusive)

@@ -33,10 +33,11 @@
 #'
 #' alma_search(start, end, on_feb_monthly)
 recur_on_month_of_year <- function(x, month) {
-  validate_rrule(x, "x")
+  check_rrule(x)
 
   month <- month_normalize(month)
   month <- vec_cast(month, to = integer())
+  check_no_missing(month)
 
   if (any(month > 12 | month < 1)) {
     abort("`month` can only take values in [1, 12].")
@@ -55,7 +56,10 @@ recur_on_month_of_year <- function(x, month) {
 
 # ------------------------------------------------------------------------------
 
-month_normalize <- function(x) {
+month_normalize <- function(x,
+                            ...,
+                            arg = caller_arg(x),
+                            call = caller_env()) {
   if (!is.character(x)) {
     return(x)
   }
@@ -67,7 +71,10 @@ month_normalize <- function(x) {
   misses <- is.na(where)
 
   if (any(misses)) {
-    abort("A character `x` must be a month name or abbreviation.")
+    cli::cli_abort(
+      "{.arg {arg}} must be a month name or abbreviation.",
+      call = call
+    )
   }
 
   out <- month_int()[where]

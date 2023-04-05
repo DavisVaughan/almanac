@@ -58,7 +58,7 @@
 #' on_last_friday_of_month <- monthly() %>% recur_on_day_of_week("Friday", nth = -1)
 #' alma_search(start, end, on_last_friday_of_month)
 recur_on_day_of_month <- function(x, day) {
-  validate_rrule(x, "x")
+  check_rrule(x)
 
   day <- vec_cast(day, to = integer())
 

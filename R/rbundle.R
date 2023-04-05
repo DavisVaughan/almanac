@@ -73,29 +73,21 @@ new_rbundle <- function(rschedules = list(),
                         exdates = new_date(),
                         ...,
                         class = character()) {
-  if (!is_list(rschedules)) {
-    abort("`rschedules` must be a list.")
-  }
+  vec_check_list(rschedules)
 
   for (i in seq_along(rschedules)) {
-    validate_rschedule(rschedules[[i]], x_arg = glue("rschedules[[{i}]]"))
+    check_rschedule(rschedules[[i]], arg = cli::format_inline("rschedules[[{i}]]"))
   }
 
-  if (!is_date(rdates)) {
-    abort("`rdates` must be a Date.")
-  }
-  if (any(is_missing_or_infinite(rdates))) {
-    abort("`rdates` must be finite.")
-  }
-  validate_date_bounds(rdates, x_arg = "rdates")
+  check_date(rdates)
+  check_no_missing(rdates)
+  check_finite(rdates)
+  check_date_within_bounds(rdates)
 
-  if (!is_date(exdates)) {
-    abort("`exdates` must be a Date.")
-  }
-  if (any(is_missing_or_infinite(exdates))) {
-    abort("`exdates` must be finite.")
-  }
-  validate_date_bounds(exdates, x_arg = "exdates")
+  check_date(exdates)
+  check_no_missing(exdates)
+  check_finite(exdates)
+  check_date_within_bounds(exdates)
 
   new_rschedule(
     rschedules = rschedules,
@@ -117,12 +109,12 @@ rbundle_restore <- function(x, to) {
 #' @export
 rbundle_restore.default <- function(x, to) {
   cls <- glue::glue_collapse(class(to), sep = "/")
-  glubort("Can't restore an rbundle to a <{cls}>.")
+  cli::cli_abort("Can't restore an <rbundle> to a <{cls}>.")
 }
 
 #' @export
 rbundle_restore.rbundle <- function(x, to) {
-  glubort("rbundle subclasses must provide their own `rbundle_restore()` method.")
+  cli::cli_abort("<rbundle> subclasses must provide their own `rbundle_restore()` method.")
 }
 
 # ------------------------------------------------------------------------------
@@ -131,14 +123,16 @@ is_rbundle <- function(x) {
   inherits(x, "rbundle")
 }
 
-validate_rbundle <- function(x, x_arg = "") {
-  if (nzchar(x_arg)) {
-    x_arg <- glue(" `{x_arg}`")
-  }
-
-  if (!is_rbundle(x)) {
-    glubort("Input{x_arg} must be an rbundle.")
-  }
-
-  invisible(x)
+check_rbundle <- function(x,
+                          ...,
+                          allow_null = FALSE,
+                          arg = caller_arg(x),
+                          call = caller_env()) {
+  check_inherits(
+    x = x,
+    what = "rbundle",
+    allow_null = allow_null,
+    arg = arg,
+    call = call
+  )
 }

@@ -84,7 +84,7 @@ NULL
 adj_following <- function(x, rschedule) {
   x <- vec_cast_date(x)
 
-  validate_rschedule(rschedule, "rschedule")
+  check_rschedule(rschedule)
   events <- rschedule_events(rschedule)
 
   adj_following_impl(x, events)
@@ -99,7 +99,7 @@ adj_following_impl <- function(x, events) {
 adj_preceding <- function(x, rschedule) {
   x <- vec_cast_date(x)
 
-  validate_rschedule(rschedule, "rschedule")
+  check_rschedule(rschedule)
   events <- rschedule_events(rschedule)
 
   adj_preceding_impl(x, events)
@@ -114,7 +114,7 @@ adj_preceding_impl <- function(x, events) {
 adj_modified_following <- function(x, rschedule) {
   x <- vec_cast_date(x)
 
-  validate_rschedule(rschedule, "rschedule")
+  check_rschedule(rschedule)
   events <- rschedule_events(rschedule)
 
   adj_modified_following_impl(x, events)
@@ -129,7 +129,7 @@ adj_modified_following_impl <- function(x, events) {
 adj_modified_preceding <- function(x, rschedule) {
   x <- vec_cast_date(x)
 
-  validate_rschedule(rschedule, "rschedule")
+  check_rschedule(rschedule)
   events <- rschedule_events(rschedule)
 
   adj_modified_preceding_impl(x, events)
@@ -144,7 +144,7 @@ adj_modified_preceding_impl <- function(x, events) {
 adj_nearest <- function(x, rschedule) {
   x <- vec_cast_date(x)
 
-  validate_rschedule(rschedule, "rschedule")
+  check_rschedule(rschedule)
   events <- rschedule_events(rschedule)
 
   adj_nearest_impl(x, events)
@@ -158,6 +158,6 @@ adj_nearest_impl <- function(x, events) {
 #' @export
 adj_none <- function(x, rschedule) {
   x <- vec_cast_date(x)
-  validate_rschedule(rschedule, "rschedule")
+  check_rschedule(rschedule)
   x
 }
