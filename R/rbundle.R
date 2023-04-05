@@ -73,28 +73,20 @@ new_rbundle <- function(rschedules = list(),
                         exdates = new_date(),
                         ...,
                         class = character()) {
-  if (!is_list(rschedules)) {
-    abort("`rschedules` must be a list.")
-  }
+  vec_check_list(rschedules)
 
   for (i in seq_along(rschedules)) {
     check_rschedule(rschedules[[i]], arg = cli::format_inline("rschedules[[{i}]]"))
   }
 
-  if (!is_date(rdates)) {
-    abort("`rdates` must be a Date.")
-  }
-  if (any(is_missing_or_infinite(rdates))) {
-    abort("`rdates` must be finite.")
-  }
+  check_date(rdates)
+  check_no_missing(rdates)
+  check_finite(rdates)
   check_date_within_bounds(rdates)
 
-  if (!is_date(exdates)) {
-    abort("`exdates` must be a Date.")
-  }
-  if (any(is_missing_or_infinite(exdates))) {
-    abort("`exdates` must be finite.")
-  }
+  check_date(exdates)
+  check_no_missing(exdates)
+  check_finite(exdates)
   check_date_within_bounds(exdates)
 
   new_rschedule(

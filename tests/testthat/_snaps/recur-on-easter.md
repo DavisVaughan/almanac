@@ -4,7 +4,7 @@
       recur_on_easter(x)
     Condition
       Error in `recur_on_easter()`:
-      ! The `easter` rule has already been set.
+      ! The "easter" rule is already set and can't be set twice.
 
 # offset must be integerish
 
@@ -12,8 +12,7 @@
       recur_on_easter(yearly(), offset = 1.5)
     Condition
       Error in `recur_on_easter()`:
-      ! Can't convert from `offset` <double> to <integer> due to loss of precision.
-      * Locations: 1
+      ! `offset` must be a whole number, not the number 1.5.
 
 # offset cannot be NA
 
@@ -21,7 +20,7 @@
       recur_on_easter(yearly(), offset = NA)
     Condition
       Error in `recur_on_easter()`:
-      ! `offset` cannot be `NA`.
+      ! `offset` must be a whole number, not `NA`.
 
 # offset is bounded
 
@@ -29,7 +28,7 @@
       recur_on_easter(yearly(), offset = 367)
     Condition
       Error in `recur_on_easter()`:
-      ! `offset` can only take values in [-366, 366].
+      ! `offset` must be a whole number between -366 and 366, not the number 367.
 
 ---
 
@@ -37,5 +36,5 @@
       recur_on_easter(yearly(), offset = -367)
     Condition
       Error in `recur_on_easter()`:
-      ! `offset` can only take values in [-366, 366].
+      ! `offset` must be a whole number between -366 and 366, not the number -367.
 

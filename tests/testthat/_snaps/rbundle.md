@@ -4,7 +4,7 @@
       new_rbundle(1)
     Condition
       Error in `new_rbundle()`:
-      ! `rschedules` must be a list.
+      ! `rschedules` must be a list, not the number 1.
 
 ---
 
@@ -21,25 +21,28 @@
     Output
       <error/rlang_error>
       Error in `new_rbundle()`:
-      ! `rdates` must be a Date.
+      ! `rdates` must be a <Date>, not the number 1.
     Code
       (expect_error(new_rbundle(rdates = almanac_global_inf_date)))
     Output
       <error/rlang_error>
       Error in `new_rbundle()`:
-      ! `rdates` must be finite.
+      ! `rdates` can't contain infinite values.
+      i Infinite values were detected at locations: 1.
     Code
       (expect_error(new_rbundle(rdates = almanac_global_neg_inf_date)))
     Output
       <error/rlang_error>
       Error in `new_rbundle()`:
-      ! `rdates` must be finite.
+      ! `rdates` can't contain infinite values.
+      i Infinite values were detected at locations: 1.
     Code
       (expect_error(new_rbundle(rdates = almanac_global_na_date)))
     Output
       <error/rlang_error>
       Error in `new_rbundle()`:
-      ! `rdates` must be finite.
+      ! `rdates` can't contain missing values.
+      i Missing values were detected at locations: 1.
 
 # validates exdates
 
@@ -48,25 +51,28 @@
     Output
       <error/rlang_error>
       Error in `new_rbundle()`:
-      ! `exdates` must be a Date.
+      ! `exdates` must be a <Date>, not the number 1.
     Code
       (expect_error(new_rbundle(exdates = almanac_global_inf_date)))
     Output
       <error/rlang_error>
       Error in `new_rbundle()`:
-      ! `exdates` must be finite.
+      ! `exdates` can't contain infinite values.
+      i Infinite values were detected at locations: 1.
     Code
       (expect_error(new_rbundle(exdates = almanac_global_neg_inf_date)))
     Output
       <error/rlang_error>
       Error in `new_rbundle()`:
-      ! `exdates` must be finite.
+      ! `exdates` can't contain infinite values.
+      i Infinite values were detected at locations: 1.
     Code
       (expect_error(new_rbundle(exdates = almanac_global_na_date)))
     Output
       <error/rlang_error>
       Error in `new_rbundle()`:
-      ! `exdates` must be finite.
+      ! `exdates` can't contain missing values.
+      i Missing values were detected at locations: 1.
 
 # validates date bounds
 

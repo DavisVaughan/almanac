@@ -41,10 +41,7 @@
 #' @export
 recur_on_position <- function(x, n) {
   check_rrule(x)
-
-  if (is_already_set(x, "position")) {
-    abort("The position has already been set for this rrule.")
-  }
+  check_rule_not_set(x, "position")
 
   n <- vec_cast(n, to = integer())
   check_no_missing(n)

@@ -86,17 +86,37 @@ check_no_missing <- function(x,
                              ...,
                              arg = caller_arg(x),
                              call = caller_env()) {
-  missing <- is.na(x)
+  loc <- is.na(x)
 
-  if (!any(missing)) {
+  if (!any(loc)) {
     return(invisible(NULL))
   }
 
-  missing <- which(missing)
+  loc <- which(loc)
 
   message <- c(
     "{.arg {arg}} can't contain missing values.",
-    i = "Missing values were detected at locations: {missing}."
+    i = "Missing values were detected at locations: {loc}."
+  )
+
+  cli::cli_abort(message, call = call)
+}
+
+check_finite <- function(x,
+                         ...,
+                         arg = caller_arg(x),
+                         call = caller_env()) {
+  loc <- is.infinite(x)
+
+  if (!any(loc)) {
+    return(invisible(NULL))
+  }
+
+  loc <- which(loc)
+
+  message <- c(
+    "{.arg {arg}} can't contain infinite values.",
+    i = "Infinite values were detected at locations: {loc}."
   )
 
   cli::cli_abort(message, call = call)
@@ -129,6 +149,20 @@ get_rule <- function(x, rule) {
 
 is_already_set <- function(x, rule) {
   !is.null(get_rule(x, rule))
+}
+
+check_rule_not_set <- function(x,
+                               rule,
+                               ...,
+                               call = caller_env()) {
+  if (!is_already_set(x, rule)) {
+    return(invisible(NULL))
+  }
+
+  cli::cli_abort(
+    "The {.str {rule}} rule is already set and can't be set twice.",
+    call = call
+  )
 }
 
 # ------------------------------------------------------------------------------
@@ -241,12 +275,16 @@ check_inherits <- function(x,
   )
 }
 
-# ------------------------------------------------------------------------------
-
-is_missing_or_infinite <- function(x) {
-  !is.finite(x)
-}
-
-is_date <- function(x) {
-  inherits(x, "Date")
+check_date <- function(x,
+                       ...,
+                       allow_null = FALSE,
+                       arg = caller_arg(x),
+                       call = caller_env()) {
+  check_inherits(
+    x = x,
+    what = "Date",
+    allow_null = allow_null,
+    arg = arg,
+    call = call
+  )
 }

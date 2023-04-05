@@ -30,10 +30,7 @@
 alma_next <- function(x, rschedule, inclusive = FALSE) {
   x <- vec_cast_date(x)
 
-  vec_assert(inclusive, logical(), 1L)
-  if (is.na(inclusive)) {
-    abort("`inclusive` cannot be `NA`")
-  }
+  check_bool(inclusive)
 
   check_rschedule(rschedule)
   events <- rschedule_events(rschedule)
@@ -50,10 +47,7 @@ alma_next_impl <- function(x, events, inclusive) {
 alma_previous <- function(x, rschedule, inclusive = FALSE) {
   x <- vec_cast_date(x)
 
-  vec_assert(inclusive, logical(), 1L)
-  if (is.na(inclusive)) {
-    abort("`inclusive` cannot be `NA`")
-  }
+  check_bool(inclusive)
 
   check_rschedule(rschedule)
   events <- rschedule_events(rschedule)

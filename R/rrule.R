@@ -114,12 +114,21 @@ rschedule_events.rrule <- function(x) {
 
 # ------------------------------------------------------------------------------
 
-rrule <- function(since, until, frequency) {
-  since <- check_since(since)
-  until <- check_until(until)
+rrule <- function(since, until, frequency, ..., call = caller_env()) {
+  since <- vec_cast_date(since, call = call)
+  vec_check_size(since, size = 1L, call = call)
+  check_no_missing(since, call = call)
+  check_finite(since, call = call)
+  check_date_within_bounds(since, call = call)
+
+  until <- vec_cast_date(until, call = call)
+  vec_check_size(until, size = 1L, call = call)
+  check_no_missing(until, call = call)
+  check_finite(until, call = call)
+  check_date_within_bounds(until, call = call)
 
   if (since > until) {
-    abort("`since` must be before `until`.")
+    abort("`since` must be before `until`.", call = call)
   }
 
   new_rrule(
@@ -189,34 +198,6 @@ check_rrule <- function(x,
     arg = arg,
     call = call
   )
-}
-
-# ------------------------------------------------------------------------------
-
-check_since <- function(since) {
-  since <- vec_cast_date(since)
-  vec_assert(since, size = 1L)
-
-  if (is_missing_or_infinite(since)) {
-    abort("`since` must be a finite date.")
-  }
-
-  check_date_within_bounds(since)
-
-  since
-}
-
-check_until <- function(until) {
-  until <- vec_cast_date(until)
-  vec_assert(until, size = 1L)
-
-  if (is_missing_or_infinite(until)) {
-    abort("`until` must be a finite date.")
-  }
-
-  check_date_within_bounds(until)
-
-  until
 }
 
 # ------------------------------------------------------------------------------

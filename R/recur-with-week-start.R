@@ -55,13 +55,8 @@ recur_with_week_start <- function(x, wday) {
   check_rrule(x)
 
   wday <- day_of_week_normalize(wday)
-
-  wday <- vec_cast(wday, integer(), x_arg = "wday")
-  vec_assert(wday, size = 1L)
-
-  if (wday < 1L || wday > 7L) {
-    abort("`wday` must be an integer between 1 and 7.")
-  }
+  check_number_whole(wday, min = 1, max = 7)
+  wday <- vec_cast(wday, to = integer())
 
   tweak_rrule(x, week_start = wday)
 }

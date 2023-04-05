@@ -4,7 +4,8 @@
       alma_search(na, Sys.Date(), daily())
     Condition
       Error in `alma_search()`:
-      ! `from` and `to` cannot be `NA`
+      ! `from` can't contain missing values.
+      i Missing values were detected at locations: 1.
 
 ---
 
@@ -12,5 +13,6 @@
       alma_search(Sys.Date(), na, daily())
     Condition
       Error in `alma_search()`:
-      ! `from` and `to` cannot be `NA`
+      ! `to` can't contain missing values.
+      i Missing values were detected at locations: 1.
 

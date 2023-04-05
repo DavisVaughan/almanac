@@ -4,7 +4,7 @@
       daily() %>% recur_on_position(1) %>% recur_on_position(1)
     Condition
       Error in `recur_on_position()`:
-      ! The position has already been set for this rrule.
+      ! The "position" rule is already set and can't be set twice.
 
 # cannot set the position twice within the same call
 

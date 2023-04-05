@@ -36,17 +36,10 @@
 #' @export
 recur_on_interval <- function(x, n) {
   check_rrule(x)
+  check_rule_not_set(x, "interval")
 
-  if (is_already_set(x, "interval")) {
-    abort("`interval` has already been set for this rrule.")
-  }
-
-  n <- vec_cast(n, integer(), x_arg = "n")
-  vec_assert(n, size = 1L)
-
-  if (n <= 0L) {
-    abort("`n` must be greater than 0.")
-  }
+  check_number_whole(n, min = 1)
+  n <- vec_cast(n, to = integer())
 
   tweak_rrule(x, interval = n)
 }
