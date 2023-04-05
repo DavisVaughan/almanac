@@ -12,50 +12,50 @@
       (expect_error(daily() %>% recur_on_position(2)))
     Output
       <error/rlang_error>
-      Error in `validate_frequency_position()`:
-      ! For a 'daily' frequency, the absolute value of `n` cannot be larger than 1.
+      Error in `recur_on_position()`:
+      ! For a "daily" frequency, the absolute value of `n` can't be larger than 1.
     Code
       (expect_error(daily() %>% recur_on_position(-2)))
     Output
       <error/rlang_error>
-      Error in `validate_frequency_position()`:
-      ! For a 'daily' frequency, the absolute value of `n` cannot be larger than 1.
+      Error in `recur_on_position()`:
+      ! For a "daily" frequency, the absolute value of `n` can't be larger than 1.
     Code
       (expect_error(weekly() %>% recur_on_position(8)))
     Output
       <error/rlang_error>
-      Error in `validate_frequency_position()`:
-      ! For a 'weekly' frequency, the absolute value of `n` cannot be larger than 7.
+      Error in `recur_on_position()`:
+      ! For a "weekly" frequency, the absolute value of `n` can't be larger than 7.
     Code
       (expect_error(weekly() %>% recur_on_position(-8)))
     Output
       <error/rlang_error>
-      Error in `validate_frequency_position()`:
-      ! For a 'weekly' frequency, the absolute value of `n` cannot be larger than 7.
+      Error in `recur_on_position()`:
+      ! For a "weekly" frequency, the absolute value of `n` can't be larger than 7.
     Code
       (expect_error(monthly() %>% recur_on_position(32)))
     Output
       <error/rlang_error>
-      Error in `validate_frequency_position()`:
-      ! For a 'monthly' frequency, the absolute value of `n` cannot be larger than 31.
+      Error in `recur_on_position()`:
+      ! For a "monthly" frequency, the absolute value of `n` can't be larger than 31.
     Code
       (expect_error(monthly() %>% recur_on_position(-32)))
     Output
       <error/rlang_error>
-      Error in `validate_frequency_position()`:
-      ! For a 'monthly' frequency, the absolute value of `n` cannot be larger than 31.
+      Error in `recur_on_position()`:
+      ! For a "monthly" frequency, the absolute value of `n` can't be larger than 31.
     Code
       (expect_error(yearly() %>% recur_on_position(367)))
     Output
       <error/rlang_error>
-      Error in `validate_frequency_position()`:
-      ! For a 'yearly' frequency, the absolute value of `n` cannot be larger than 366.
+      Error in `recur_on_position()`:
+      ! For a "yearly" frequency, the absolute value of `n` can't be larger than 366.
     Code
       (expect_error(yearly() %>% recur_on_position(-367)))
     Output
       <error/rlang_error>
-      Error in `validate_frequency_position()`:
-      ! For a 'yearly' frequency, the absolute value of `n` cannot be larger than 366.
+      Error in `recur_on_position()`:
+      ! For a "yearly" frequency, the absolute value of `n` can't be larger than 366.
 
 # position must be castable to an integer
 

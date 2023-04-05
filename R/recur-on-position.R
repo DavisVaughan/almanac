@@ -52,14 +52,14 @@ recur_on_position <- function(x, n) {
     abort("`n` cannot be `NA`.")
   }
 
-  validate_frequency_position(x$rules$frequency, n)
+  check_frequency_position(x$rules$frequency, n)
 
   n <- sort(n)
 
   tweak_rrule(x, position = n)
 }
 
-validate_frequency_position <- function(frequency, n) {
+check_frequency_position <- function(frequency, n, ..., call = caller_env()) {
   n <- abs(n)
 
   max <- switch(
@@ -70,7 +70,12 @@ validate_frequency_position <- function(frequency, n) {
     yearly = 366L
   )
 
-  if (any(n > max)) {
-    cli::cli_abort("For a '{frequency}' frequency, the absolute value of `n` cannot be larger than {max}.")
+  if (all(n <= max)) {
+    return(invisible(NULL))
   }
+
+  cli::cli_abort(
+    "For a {.str {frequency}} frequency, the absolute value of {.arg n} can't be larger than {max}.",
+    call = call
+  )
 }
