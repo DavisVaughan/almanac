@@ -10,11 +10,12 @@ reference:
   - daily
   - starts_with("recur_")
 
-- title: Recurrence bundles
+- title: Recurrence types
   contents:
   - runion
   - rintersect
   - rsetdiff
+  - rcustom
   - starts_with("add_")
 
 - title: Recurrence utilities
