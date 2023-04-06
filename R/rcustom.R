@@ -22,14 +22,10 @@
 #'   recur_on_day_of_month(4)
 #'
 #' # Remove forcibly excluded day
-#' independence_day <- rsetdiff() %>%
-#'   add_rschedule(independence_day) %>%
-#'   add_rschedule(exclude)
+#' independence_day <- rsetdiff(independence_day, exclude)
 #'
 #' # Add forcibly included day
-#' independence_day <- runion() %>%
-#'   add_rschedule(independence_day) %>%
-#'   add_rschedule(include)
+#' independence_day <- runion(independence_day, include)
 #'
 #' alma_search("2018-01-01", "2020-12-31", independence_day)
 rcustom <- function(events) {

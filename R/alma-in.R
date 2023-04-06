@@ -23,9 +23,7 @@
 #'   recur_on_day_of_month(2)
 #'
 #' # Make a larger rbundle made of multiple rules
-#' rb <- runion() %>%
-#'  add_rschedule(rrule) %>%
-#'  add_rschedule(rrule2)
+#' rb <- runion(rrule, rrule2)
 #'
 #' alma_in(x, rb)
 alma_in <- function(x, rschedule) {

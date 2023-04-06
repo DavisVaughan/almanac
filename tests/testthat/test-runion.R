@@ -22,7 +22,7 @@ test_that("runion() generates informative output", {
     runion()
 
     "# With rschedules"
-    runion() %>% add_rschedule(daily()) %>% add_rschedule(yearly())
+    runion(daily(), yearly())
   })
 })
 
@@ -34,57 +34,29 @@ test_that("runion works with non-rrules in the bundle", {
   rrule1 <- daily(since = "1970-01-01", until = "1970-01-02")
   rrule2 <- daily(since = "1970-01-03", until = "1970-01-04")
 
-  rb <- runion() %>%
-    add_rschedule(rrule1)
+  rb <- runion(rrule1)
 
-  rb2 <- runion() %>%
-    add_rschedule(rb) %>%
-    add_rschedule(rrule2)
+  rb2 <- runion(rb, rrule2)
 
   expect_identical(alma_events(rb2), new_date(c(0, 1, 2, 3)))
 })
 
-test_that("runion rdates work with non-rrules in the bundle", {
-  rrule1 <- daily(since = "1970-01-01", until = "1970-01-02")
-  rrule2 <- daily(since = "1970-01-03", until = "1970-01-04")
-  rdate <- "1970-01-05"
+test_that("can add an rrule to an runion", {
+  a <- daily()
+  b <- weekly()
 
-  rb <- runion() %>%
-    add_rschedule(rrule1)
+  x <- runion(a, b)
 
-  rb2 <- runion() %>%
-    add_rschedule(rb) %>%
-    add_rschedule(rrule2) %>%
-    add_rdates(rdate)
-
-  expect_identical(alma_events(rb2), new_date(c(0, 1, 2, 3, 4)))
+  expect_identical(x$rschedules, list(a, b))
 })
 
-test_that("runion exdates work with non-rrules in the bundle", {
-  rrule1 <- daily(since = "1970-01-01", until = "1970-01-02")
-  rrule2 <- daily(since = "1970-01-03", until = "1970-01-04")
-  exdate <- "1970-01-04"
+test_that("can add an runion to an runion", {
+  rrule <- daily()
+  runion <- runion()
 
-  rb <- runion() %>%
-    add_rschedule(rrule1)
+  x <- runion(rrule, runion)
 
-  rb2 <- runion() %>%
-    add_rschedule(rb) %>%
-    add_rschedule(rrule2) %>%
-    add_exdates(exdate)
-
-  expect_identical(alma_events(rb2), new_date(c(0, 1, 2)))
-})
-
-test_that("runion exdates work with all rrules in the bundle", {
-  rrule1 <- daily(since = "1970-01-03", until = "1970-01-04")
-  exdate <- "1970-01-04"
-
-  rb <- runion() %>%
-    add_rschedule(rrule1) %>%
-    add_exdates(exdate)
-
-  expect_identical(alma_events(rb), new_date(2))
+  expect_equal(x$rschedules, list(rrule, runion))
 })
 
 # ------------------------------------------------------------------------------

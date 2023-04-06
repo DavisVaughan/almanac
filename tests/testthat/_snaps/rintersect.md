@@ -7,7 +7,7 @@
       <rintersect[0]>
     Code
       # # With rschedules
-      rintersect() %>% add_rschedule(daily()) %>% add_rschedule(yearly())
+      rintersect(daily(), yearly())
     Message
       <rintersect[2]>
        <rrule>

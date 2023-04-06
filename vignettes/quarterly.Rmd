@@ -102,11 +102,12 @@ make_on_nth_doq <- function(since = "1970-01-01", nth = 1L) {
     recur_on_day_of_month(all_days) %>%
     recur_on_position(nth)
   
-  on_nth_doq <- runion() %>%
-    add_rschedule(on_nth_day_of_q1) %>%
-    add_rschedule(on_nth_day_of_q2) %>%
-    add_rschedule(on_nth_day_of_q3) %>%
-    add_rschedule(on_nth_day_of_q4)
+  on_nth_doq <- runion(
+    on_nth_day_of_q1,
+    on_nth_day_of_q2,
+    on_nth_day_of_q3,
+    on_nth_day_of_q4
+  )
   
   on_nth_doq
 }
@@ -188,11 +189,12 @@ make_on_nth_day_of_week_of_the_quarter <- function(since = "1970-01-01",
     recur_on_day_of_week(day) %>%
     recur_on_position(nth)
   
-  on_nth_of_the_quarter <- runion() %>%
-    add_rschedule(on_nth_of_q1) %>%
-    add_rschedule(on_nth_of_q2) %>%
-    add_rschedule(on_nth_of_q3) %>%
-    add_rschedule(on_nth_of_q4)
+  on_nth_of_the_quarter <- runion(
+    on_nth_of_q1,
+    on_nth_of_q2,
+    on_nth_of_q3,
+    on_nth_of_q4
+  )
   
   on_nth_of_the_quarter
 }
@@ -219,9 +221,10 @@ Remember that each of these results are just rbundles that can be combined with 
 on_wednesdays <- weekly() %>%
   recur_on_day_of_week("Wednesday")
 
-on_last_friday_of_quarter_or_wednesdays <- runion() %>%
-  add_rschedule(on_wednesdays) %>%
-  add_rschedule(on_last_friday_of_the_quarter)
+on_last_friday_of_quarter_or_wednesdays <- runion(
+  on_wednesdays,
+  on_last_friday_of_the_quarter
+)
 
 last_friday_or_wednesdays <- alma_search(
   "2000-01-01", "2002-01-01", 

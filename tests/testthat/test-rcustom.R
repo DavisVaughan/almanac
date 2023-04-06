@@ -31,10 +31,7 @@ test_that("print method is nice", {
   })
 
   # Nesting
-  z <- runion()
-  z <- add_rschedule(z, x)
-  z <- add_rschedule(z, y)
-  z <- add_rschedule(z, yearly())
+  z <- runion(x, y, yearly())
 
   expect_snapshot({
     z

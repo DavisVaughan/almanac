@@ -22,7 +22,7 @@ test_that("rintersect() generates informative output", {
     rintersect()
 
     "# With rschedules"
-    rintersect() %>% add_rschedule(daily()) %>% add_rschedule(yearly())
+    rintersect(daily(), yearly())
   })
 })
 
@@ -34,37 +34,9 @@ test_that("rintersect takes the intersection", {
   rrule1 <- daily(since = "1970-01-01", until = "1970-01-02")
   rrule2 <- daily(since = "1970-01-02", until = "1970-01-04")
 
-  rb <- rintersect() %>%
-    add_rschedule(rrule1) %>%
-    add_rschedule(rrule2)
+  rb <- rintersect(rrule1, rrule2)
 
   expect_identical(alma_events(rb), new_date(1))
-})
-
-test_that("rintersect rdates work", {
-  rrule1 <- daily(since = "1970-01-01", until = "1970-01-02")
-  rrule2 <- daily(since = "1970-01-02", until = "1970-01-04")
-  rdate <- "1970-01-05"
-
-  rb <- rintersect() %>%
-    add_rschedule(rrule1) %>%
-    add_rschedule(rrule2) %>%
-    add_rdates(rdate)
-
-  expect_identical(alma_events(rb), new_date(c(1, 4)))
-})
-
-test_that("rintersect exdates work", {
-  rrule1 <- daily(since = "1970-01-01", until = "1970-01-02")
-  rrule2 <- daily(since = "1970-01-01", until = "1970-01-04")
-  exdate <- "1970-01-02"
-
-  rb <- rintersect() %>%
-    add_rschedule(rrule1) %>%
-    add_rschedule(rrule2) %>%
-    add_exdates(exdate)
-
-  expect_identical(alma_events(rb), new_date(0))
 })
 
 # ------------------------------------------------------------------------------

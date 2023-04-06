@@ -15,14 +15,6 @@
 #'
 #' - `rsetdiff()` takes the set difference.
 #'
-#' Once you have created a recurrence bundle, you can:
-#'
-#' - Add recurrence rules or other recurrence bundles with [add_rschedule()].
-#'
-#' - Forcibly include dates in its event set with [add_rdates()].
-#'
-#' - Forcibly exclude dates from its event set with [add_exdates()].
-#'
 #' @details
 #' For `rsetdiff()`, the event set is created "from left to right" and depends
 #' on the order that the rschedules were added to the bundle.
@@ -35,7 +27,6 @@
 #' A runion, rintersect, or rsetdiff.
 #'
 #' @name rbundle-set
-#' @seealso [add_rschedule()]
 #' @examples
 #' since <- "2019-04-01"
 #' until <- "2019-05-31"

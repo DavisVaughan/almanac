@@ -34,3 +34,65 @@
       `recur_on_ymonth()` was deprecated in almanac 1.0.0.
       i Please use `recur_on_month_of_year()` instead.
 
+# `add_rschedule()` is deprecated but works
+
+    Code
+      out <- add_rschedule(x, y)
+    Condition
+      Warning:
+      `add_rschedule()` was deprecated in almanac 1.0.0.
+      i Please use the `...` argument of `runion()`, `rintersect()`, or `rsetdiff()` instead.
+
+# `add_rdates()` is deprecated but works
+
+    Code
+      out <- add_rdates(x, y)
+    Condition
+      Warning:
+      `add_rdates()` was deprecated in almanac 1.0.0.
+      i Please use `runion()` in combination with `rcustom()` instead.
+
+# `add_exdates()` is deprecated but works
+
+    Code
+      out <- add_exdates(x, y)
+    Condition
+      Warning:
+      `add_exdates()` was deprecated in almanac 1.0.0.
+      i Please use `rsetdiff()` in combination with `rcustom()` instead.
+
+# errors on max/min rdates and exdates
+
+    Code
+      expect_error(add_rdates(runion(), lb), NA)
+      (expect_error(add_rdates(runion(), lb - 1), class = "almanac_error_date_below_minimum")
+      )
+    Output
+      <error/almanac_error_date_below_minimum>
+      Error in `new_rbundle()`:
+      ! `rdates` must be larger than `0100-01-01`.
+    Code
+      expect_error(add_exdates(runion(), lb), NA)
+      (expect_error(add_exdates(runion(), lb - 1), class = "almanac_error_date_below_minimum")
+      )
+    Output
+      <error/almanac_error_date_below_minimum>
+      Error in `new_rbundle()`:
+      ! `exdates` must be larger than `0100-01-01`.
+    Code
+      expect_error(add_rdates(runion(), ub), NA)
+      (expect_error(add_rdates(runion(), ub + 1), class = "almanac_error_date_above_maximum")
+      )
+    Output
+      <error/almanac_error_date_above_maximum>
+      Error in `new_rbundle()`:
+      ! `rdates` must be smaller than `9999-12-31`.
+    Code
+      expect_error(add_exdates(runion(), ub), NA)
+      (expect_error(add_exdates(runion(), ub + 1), class = "almanac_error_date_above_maximum")
+      )
+    Output
+      <error/almanac_error_date_above_maximum>
+      Error in `new_rbundle()`:
+      ! `exdates` must be smaller than `9999-12-31`.
+

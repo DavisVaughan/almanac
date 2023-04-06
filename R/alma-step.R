@@ -57,9 +57,7 @@
 #'   recur_on_month_of_year(9) %>%
 #'   recur_on_day_of_month(16)
 #'
-#' rb <- runion() %>%
-#'   add_rschedule(on_09_16) %>%
-#'   add_rschedule(on_weekends)
+#' rb <- runion(on_09_16, on_weekends)
 #'
 #' alma_step("2019-09-13", 2, rb)
 #' @export

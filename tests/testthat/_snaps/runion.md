@@ -7,7 +7,7 @@
       <runion[0]>
     Code
       # # With rschedules
-      runion() %>% add_rschedule(daily()) %>% add_rschedule(yearly())
+      runion(daily(), yearly())
     Message
       <runion[2]>
        <rrule>

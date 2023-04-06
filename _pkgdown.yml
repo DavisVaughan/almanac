@@ -16,7 +16,6 @@ reference:
   - rintersect
   - rsetdiff
   - rcustom
-  - starts_with("add_")
 
 - title: Recurrence utilities
   contents:

@@ -85,9 +85,7 @@ on_christmas <- yearly() \%>\%
   recur_on_day_of_month(25) \%>\%
   recur_on_month_of_year("Dec")
 
-rb <- runion() \%>\%
-  add_rschedule(on_weekends) \%>\%
-  add_rschedule(on_christmas)
+rb <- runion(on_weekends, on_christmas)
 
 workday <- stepper(rb)
 
@@ -114,9 +112,7 @@ on_observed_christmas <- radjusted(
 # Note that the "observed" date for Christmas is the 26th
 alma_search("2005-01-01", "2006-01-01", on_observed_christmas)
 
-rb2 <- runion() \%>\%
-  add_rschedule(on_weekends) \%>\%
-  add_rschedule(on_observed_christmas)
+rb2 <- runion(on_weekends, on_observed_christmas)
 
 workday2 <- stepper(rb2)
 

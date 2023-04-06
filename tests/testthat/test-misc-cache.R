@@ -43,15 +43,3 @@ test_that("adjusting `since` results in significant speed ups", {
 
   expect_lt(t2[3], t1[3])
 })
-
-test_that("cache `since` date respects `rdate`s", {
-  rrule <- daily()
-
-  rb <- runion()
-  rb <- add_rschedule(rb, rrule)
-  rb <- add_rdates(rb, "1899-01-05")
-
-  expect <- as.Date(c("1899-01-05", "1900-01-01"))
-
-  expect_equal(alma_search("1899-01-01", "1900-01-01", rb), expect)
-})

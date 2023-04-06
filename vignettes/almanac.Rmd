@@ -164,8 +164,6 @@ An _rbundle_ is a bundle of recurrence schedules. A recurrence schedule, or rsch
 
 - `rsetdiff()` takes the set difference.
 
-rbundles can also contain specialized dates that you want to forcibly include in the event set, called rdates, and ones that you want to forcibly exclude, called exdates.
-
 The most useful rbundle is runion, as this allows you construct an event set that, for example, falls on multiple holidays and all weekends. The following creates an runion from rrules based on Christmas and Labor Day.
 
 ```{r}
@@ -173,14 +171,17 @@ on_christmas <- yearly() %>%
   recur_on_month_of_year("Dec") %>%
   recur_on_day_of_month(25)
 
-christmas_or_labor_day <- runion() %>%
-  add_rschedule(on_christmas) %>%
-  add_rschedule(on_labor_day)
+christmas_or_labor_day <- runion(
+  on_christmas,
+  on_labor_day
+)
 
 alma_search("2000-01-01", "2002-01-01", christmas_or_labor_day)
 
-christmas_or_labor_day_except_2000_labor_day <- christmas_or_labor_day %>%
-  add_exdates("2000-09-04")
+christmas_or_labor_day_except_2000_labor_day <- rsetdiff(
+  christmas_or_labor_day, 
+  rcustom("2000-09-04")
+)
 
 alma_search("2000-01-01", "2002-01-01", christmas_or_labor_day_except_2000_labor_day)
 ```
