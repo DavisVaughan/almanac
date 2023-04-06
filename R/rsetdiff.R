@@ -1,7 +1,9 @@
 #' @rdname rbundle-set
 #' @export
-rsetdiff <- function() {
-  new_rsetdiff()
+rsetdiff <- function(...) {
+  rschedules <- list2(...)
+  list_check_all_rschedules(rschedules)
+  new_rsetdiff(rschedules = rschedules)
 }
 
 # ------------------------------------------------------------------------------

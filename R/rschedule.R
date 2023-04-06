@@ -96,3 +96,18 @@ check_rschedule <- function(x,
     call = call
   )
 }
+
+list_check_all_rschedules <- function(x,
+                                      ...,
+                                      arg = caller_arg(x),
+                                      call = caller_env()) {
+  for (i in seq_along(x)) {
+    check_rschedule(
+      x = x[[i]],
+      arg = cli::format_inline("{arg}[[{i}]]"),
+      call = call
+    )
+  }
+  invisible(NULL)
+}
+

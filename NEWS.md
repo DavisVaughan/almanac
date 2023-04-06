@@ -1,5 +1,9 @@
 # almanac (development version)
 
+* `runion()`, `rintersect()`, and `rsetdiff()` have all gained `...` which
+  allows you to provide the relevant rschedules on creation of these rschedules.
+  This is now the preferred way to create these set-based rschedules (#91).
+
 * New `rcustom()` for creating an rschedule from manually defined event dates
   (#90).
 

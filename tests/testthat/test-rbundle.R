@@ -5,9 +5,6 @@ test_that("validates rschedules", {
   expect_snapshot(error = TRUE, {
     new_rbundle(1)
   })
-  expect_snapshot(error = TRUE, {
-    new_rbundle(list(1))
-  })
 })
 
 test_that("validates rdates", {

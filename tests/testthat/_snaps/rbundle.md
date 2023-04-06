@@ -6,14 +6,6 @@
       Error in `new_rbundle()`:
       ! `rschedules` must be a list, not the number 1.
 
----
-
-    Code
-      new_rbundle(list(1))
-    Condition
-      Error in `new_rbundle()`:
-      ! `rschedules[[1]]` must be a <rschedule>, not the number 1.
-
 # validates rdates
 
     Code

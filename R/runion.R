@@ -1,7 +1,9 @@
 #' @rdname rbundle-set
 #' @export
-runion <- function() {
-  new_runion()
+runion <- function(...) {
+  rschedules <- list2(...)
+  list_check_all_rschedules(rschedules)
+  new_runion(rschedules = rschedules)
 }
 
 # ------------------------------------------------------------------------------

@@ -75,10 +75,6 @@ new_rbundle <- function(rschedules = list(),
                         class = character()) {
   vec_check_list(rschedules)
 
-  for (i in seq_along(rschedules)) {
-    check_rschedule(rschedules[[i]], arg = cli::format_inline("rschedules[[{i}]]"))
-  }
-
   check_date(rdates)
   check_no_missing(rdates)
   check_finite(rdates)

@@ -1,7 +1,9 @@
 #' @rdname rbundle-set
 #' @export
-rintersect <- function() {
-  new_rintersect()
+rintersect <- function(...) {
+  rschedules <- list2(...)
+  list_check_all_rschedules(rschedules)
+  new_rintersect(rschedules = rschedules)
 }
 
 # ------------------------------------------------------------------------------
