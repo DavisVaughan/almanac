@@ -112,15 +112,6 @@
       * until: 2100-01-01
       * position: -2, -1, 2, 3, 10, 12, and 13
     Code
-      # # can change offset
-      recur_on_easter(weekly(), offset = -1)
-    Message
-      <rrule>
-      * frequency: weekly
-      * since: 1900-01-01
-      * until: 2100-01-01
-      * easter: offset = -1
-    Code
       # # each recur_ condition works
       recur_for_count(daily(), 5)
     Message
@@ -199,5 +190,5 @@
       * frequency: weekly
       * since: 1900-01-01
       * until: 2100-01-01
-      * easter: offset = 0
+      * easter
 

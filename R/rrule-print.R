@@ -167,5 +167,9 @@ format_easter <- function(x) {
     return(character())
   }
 
-  cli::format_inline("easter: offset = {easter}")
+  if (identical(easter, 0L)) {
+    cli::format_inline("easter")
+  } else {
+    cli::format_inline("easter: offset = {easter}")
+  }
 }
