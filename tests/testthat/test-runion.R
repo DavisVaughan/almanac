@@ -9,6 +9,13 @@ test_that("can create an empty runion()", {
   expect_identical(x$exdates, new_date())
 })
 
+test_that("can add rschedules directly into an runion()", {
+  x <- yearly()
+  y <- daily()
+  z <- runion(x, y)
+  expect_identical(z$rschedules, list(x, y))
+})
+
 test_that("runion() generates informative output", {
   expect_snapshot({
     "# Empty runion"

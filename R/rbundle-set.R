@@ -27,8 +27,12 @@
 #' For `rsetdiff()`, the event set is created "from left to right" and depends
 #' on the order that the rschedules were added to the bundle.
 #'
+#' @param ... `[rschedules]`
+#'
+#'   rschedule objects to add to the bundle.
+#'
 #' @return
-#' An empty rbundle.
+#' A runion, rintersect, or rsetdiff.
 #'
 #' @name rbundle-set
 #' @seealso [add_rschedule()]
@@ -43,31 +47,19 @@
 #'   recur_on_day_of_month(25)
 #'
 #' # On weekends OR the 25th of the month
-#' ru <- runion() %>%
-#'   add_rschedule(on_weekends) %>%
-#'   add_rschedule(on_25th)
-#'
+#' ru <- runion(on_weekends, on_25th)
 #' alma_events(ru)
 #'
 #' # On weekends AND the 25th of the month
-#' ri <- rintersect() %>%
-#'   add_rschedule(on_weekends) %>%
-#'   add_rschedule(on_25th)
-#'
+#' ri <- rintersect(on_weekends, on_25th)
 #' alma_events(ri)
 #'
 #' # On weekends AND NOT the 25th of the month
-#' rsd1 <- rsetdiff() %>%
-#'   add_rschedule(on_weekends) %>%
-#'   add_rschedule(on_25th)
-#'
+#' rsd1 <- rsetdiff(on_weekends, on_25th)
 #' alma_events(rsd1)
 #'
 #' # On the 25th of the month AND NOT the weekend
-#' rsd2 <- rsetdiff() %>%
-#'   add_rschedule(on_25th) %>%
-#'   add_rschedule(on_weekends)
-#'
+#' rsd2 <- rsetdiff(on_25th, on_weekends)
 #' alma_events(rsd2)
 NULL
 

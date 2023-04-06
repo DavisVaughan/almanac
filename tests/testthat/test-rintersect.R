@@ -9,6 +9,13 @@ test_that("can create an empty rintersect()", {
   expect_identical(x$exdates, new_date())
 })
 
+test_that("can add rschedules directly into an rintersect()", {
+  x <- yearly()
+  y <- daily()
+  z <- rintersect(x, y)
+  expect_identical(z$rschedules, list(x, y))
+})
+
 test_that("rintersect() generates informative output", {
   expect_snapshot({
     "# Empty rintersect"

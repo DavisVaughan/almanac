@@ -8,14 +8,19 @@
 \alias{runion}
 \title{Create a new set-based recurrence bundle}
 \usage{
-rintersect()
+rintersect(...)
 
-rsetdiff()
+rsetdiff(...)
 
-runion()
+runion(...)
+}
+\arguments{
+\item{...}{\verb{[rschedules]}
+
+rschedule objects to add to the bundle.}
 }
 \value{
-An empty rbundle.
+A runion, rintersect, or rsetdiff.
 }
 \description{
 Often, a single rrule will be sufficient. However, more complex
@@ -53,31 +58,19 @@ on_25th <- monthly(since = since, until = until) \%>\%
   recur_on_day_of_month(25)
 
 # On weekends OR the 25th of the month
-ru <- runion() \%>\%
-  add_rschedule(on_weekends) \%>\%
-  add_rschedule(on_25th)
-
+ru <- runion(on_weekends, on_25th)
 alma_events(ru)
 
 # On weekends AND the 25th of the month
-ri <- rintersect() \%>\%
-  add_rschedule(on_weekends) \%>\%
-  add_rschedule(on_25th)
-
+ri <- rintersect(on_weekends, on_25th)
 alma_events(ri)
 
 # On weekends AND NOT the 25th of the month
-rsd1 <- rsetdiff() \%>\%
-  add_rschedule(on_weekends) \%>\%
-  add_rschedule(on_25th)
-
+rsd1 <- rsetdiff(on_weekends, on_25th)
 alma_events(rsd1)
 
 # On the 25th of the month AND NOT the weekend
-rsd2 <- rsetdiff() \%>\%
-  add_rschedule(on_25th) \%>\%
-  add_rschedule(on_weekends)
-
+rsd2 <- rsetdiff(on_25th, on_weekends)
 alma_events(rsd2)
 }
 \seealso{

@@ -9,6 +9,13 @@ test_that("can create an empty rsetdiff()", {
   expect_identical(x$exdates, new_date())
 })
 
+test_that("can add rschedules directly into an rsetdiff()", {
+  x <- yearly()
+  y <- daily()
+  z <- rsetdiff(x, y)
+  expect_identical(z$rschedules, list(x, y))
+})
+
 test_that("rsetdiff() generates informative output", {
   expect_snapshot({
     "# Empty rsetdiff"
