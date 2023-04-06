@@ -105,3 +105,66 @@
       Error in `new_rschedule()`:
       ! `...` must have named elements.
 
+# runion() generates informative output
+
+    Code
+      # # Empty runion
+      runion()
+    Message
+      <runion[0]>
+    Code
+      # # With rschedules
+      runion(daily(), yearly())
+    Message
+      <runion[2]>
+       <rrule>
+       * frequency: daily
+       * since: 1900-01-01
+       * until: 2100-01-01
+       <rrule>
+       * frequency: yearly
+       * since: 1900-01-01
+       * until: 2100-01-01
+
+# rintersect() generates informative output
+
+    Code
+      # # Empty rintersect
+      rintersect()
+    Message
+      <rintersect[0]>
+    Code
+      # # With rschedules
+      rintersect(daily(), yearly())
+    Message
+      <rintersect[2]>
+       <rrule>
+       * frequency: daily
+       * since: 1900-01-01
+       * until: 2100-01-01
+       <rrule>
+       * frequency: yearly
+       * since: 1900-01-01
+       * until: 2100-01-01
+
+# rsetdiff() generates informative output
+
+    Code
+      # # Empty rsetdiff
+      rsetdiff()
+    Message
+      <rsetdiff[0]>
+    Code
+      # # With rschedules
+      rsetdiff(daily(), yearly())
+    Message
+      <rsetdiff[2]>
+       <rrule>
+       * frequency: daily
+       * since: 1900-01-01
+       * until: 2100-01-01
+       <rrule>
+       * frequency: yearly
+       * since: 1900-01-01
+       * until: 2100-01-01
+
