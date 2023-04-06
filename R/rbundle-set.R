@@ -53,34 +53,3 @@
 #' rsd2 <- rsetdiff(on_25th, on_weekends)
 #' alma_events(rsd2)
 NULL
-
-
-#' Constructor for a set-based recurrence bundle
-#'
-#' @description
-#' These constructors are developer focused tools that are not required for
-#' normal usage of almanac. They construct new rbundle subclasses directly from
-#' a list of existing rschedules.
-#'
-#' - `new_runion()` creates an runion.
-#'
-#' - `new_rintersect()` creates an rintersect.
-#'
-#' - `new_rsetdiff()` creates a rsetdiff.
-#'
-#' @inheritParams new_rbundle
-#'
-#' @return
-#' A new rbundle subclass.
-#'
-#' @name new-rbundle-set
-#' @examples
-#' new_runion()
-#'
-#' x <- daily()
-#' y <- weekly()
-#'
-#' rschedules <- list(x, y)
-#'
-#' new_runion(rschedules)
-NULL

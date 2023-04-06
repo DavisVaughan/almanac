@@ -36,10 +36,6 @@ reference:
 - title: Developer tools
   contents:
   - new_rschedule
-  - new_rbundle
-  - new_runion
-  - new_rintersect
-  - new_rsetdiff
 
 - title: Compatibility
   contents:

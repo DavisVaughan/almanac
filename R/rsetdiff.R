@@ -6,10 +6,6 @@ rsetdiff <- function(...) {
   new_rsetdiff(rschedules = rschedules)
 }
 
-# ------------------------------------------------------------------------------
-
-#' @rdname new-rbundle-set
-#' @export
 new_rsetdiff <- function(rschedules = list(),
                          rdates = new_date(),
                          exdates = new_date(),

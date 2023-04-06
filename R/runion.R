@@ -6,10 +6,6 @@ runion <- function(...) {
   new_runion(rschedules = rschedules)
 }
 
-# ------------------------------------------------------------------------------
-
-#' @rdname new-rbundle-set
-#' @export
 new_runion <- function(rschedules = list(),
                        rdates = new_date(),
                        exdates = new_date(),

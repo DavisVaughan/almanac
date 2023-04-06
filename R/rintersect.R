@@ -6,10 +6,6 @@ rintersect <- function(...) {
   new_rintersect(rschedules = rschedules)
 }
 
-# ------------------------------------------------------------------------------
-
-#' @rdname new-rbundle-set
-#' @export
 new_rintersect <- function(rschedules = list(),
                            rdates = new_date(),
                            exdates = new_date(),
