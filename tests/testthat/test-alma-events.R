@@ -11,3 +11,23 @@ test_that("can get events from a runion", {
 
   expect_identical(alma_events(rb), new_date(c(0, 1, 2)))
 })
+
+test_that("can limit events with `year`", {
+  x <- yearly() %>%
+    recur_on_month_of_year("Dec") %>%
+    recur_on_day_of_month(25)
+
+  expect_identical(
+    alma_events(x, year = c(2019, 2023)),
+    as.Date(c("2019-12-25", "2023-12-25"))
+  )
+})
+
+test_that("`year` is validated", {
+  expect_snapshot(error = TRUE, {
+    alma_events(yearly(), year = NA_integer_)
+  })
+  expect_snapshot(error = TRUE, {
+    alma_events(yearly(), year = 1.5)
+  })
+})

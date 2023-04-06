@@ -4,12 +4,18 @@
 \alias{alma_events}
 \title{Get all events}
 \usage{
-alma_events(rschedule)
+alma_events(rschedule, ..., year = NULL)
 }
 \arguments{
 \item{rschedule}{\verb{[rschedule]}
 
 An rschedule, such as an rrule, runion, rintersect, or rsetdiff.}
+
+\item{...}{These dots are for future extensions and must be empty.}
+
+\item{year}{\verb{[NULL / integer]}
+
+An optional integer vector of years to limit the returned events to.}
 }
 \value{
 A Date vector of events.
@@ -23,10 +29,9 @@ rrule <- daily(since = "1970-01-01", until = "1970-01-05")
 
 alma_events(rrule)
 
-rrule_weekly <- weekly(since = "1970-01-01") \%>\%
-  recur_for_count(5)
+on_christmas <- yearly() \%>\%
+  recur_on_month_of_year("Dec") \%>\%
+  recur_on_day_of_month(25)
 
-rb <- runion(rrule, rrule_weekly)
-
-alma_events(rb)
+alma_events(on_christmas, year = c(2020, 2022))
 }

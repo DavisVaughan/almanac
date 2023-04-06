@@ -1,5 +1,8 @@
 # almanac (development version)
 
+* `alma_events()` has gained a `year` argument to limit the returned set of
+  events to specific years.
+
 * New `roffset()` for creating an rschedule with events that are offset from an
   existing rschedule (#94).
   
