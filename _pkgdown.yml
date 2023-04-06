@@ -16,6 +16,7 @@ reference:
   - rintersect
   - rsetdiff
   - rcustom
+  - radjusted
 
 - title: Recurrence utilities
   contents:
@@ -31,7 +32,6 @@ reference:
 - title: Adjustments
   contents:
   - starts_with("adj_")
-  - radjusted
 
 - title: Developer tools
   contents:
