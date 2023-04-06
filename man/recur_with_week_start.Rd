@@ -4,14 +4,14 @@
 \alias{recur_with_week_start}
 \title{Control the start of the week}
 \usage{
-recur_with_week_start(x, wday)
+recur_with_week_start(x, day)
 }
 \arguments{
 \item{x}{\verb{[rrule]}
 
 A recurrence rule.}
 
-\item{wday}{\verb{[integer(1) / character(1)]}
+\item{day}{\verb{[integer(1) / character(1)]}
 
 Day of the week to start the week on. Must be an integer value in
 \verb{[1, 7]}, with \code{1 = Monday} and \code{7 = Sunday}. This is also allowed to be

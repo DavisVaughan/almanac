@@ -11,7 +11,7 @@
 #'
 #'    A recurrence rule.
 #'
-#' @param wday `[integer(1) / character(1)]`
+#' @param day `[integer(1) / character(1)]`
 #'
 #'    Day of the week to start the week on. Must be an integer value in
 #'    `[1, 7]`, with `1 = Monday` and `7 = Sunday`. This is also allowed to be
@@ -51,12 +51,12 @@
 #'   recur_with_week_start("Sunday")
 #'
 #' alma_search("2014-12-25", "2015-01-25", on_first_week_sun)
-recur_with_week_start <- function(x, wday) {
+recur_with_week_start <- function(x, day) {
   check_rrule(x)
 
-  wday <- day_of_week_normalize(wday)
-  check_number_whole(wday, min = 1, max = 7)
-  wday <- vec_cast(wday, to = integer())
+  day <- day_of_week_normalize(day)
+  check_number_whole(day, min = 1, max = 7)
+  day <- vec_cast(day, to = integer())
 
-  tweak_rrule(x, week_start = wday)
+  tweak_rrule(x, week_start = day)
 }

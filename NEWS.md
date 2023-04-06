@@ -1,5 +1,7 @@
 # almanac (development version)
 
+* The `recur_with_week_start()` argument `wday` has been renamed to `day`.
+
 * The following developer facing functions have been removed because they are
   either no longer applicable or provided extension mechanisms that are not
   very useful in practice (#93):
