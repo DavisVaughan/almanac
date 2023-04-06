@@ -12,7 +12,7 @@
 #' that rschedule.
 #'
 #' @details
-#' An rschedule is an abstract class that rrule and rbundle both inherit from.
+#' An rschedule is an abstract class that rrule and rset both inherit from.
 #' The sole functionality of rschedule classes is to provide a method for
 #' `rschedule_events()`.
 #'

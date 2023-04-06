@@ -41,7 +41,7 @@
 #'
 #' @param rschedule `[rschedule]`
 #'
-#'   An rschedule, such as an rrule or rbundle.
+#'   An rschedule, such as an rrule, runion, rintersect, or rsetdiff.
 #'
 #' @return
 #' An adjusted vector of Dates.

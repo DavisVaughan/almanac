@@ -152,11 +152,11 @@ on_last_monday_in_sept <- yearly(since = "2000-01-01") %>%
 alma_search("2000-01-01", "2005-01-01", on_last_monday_in_sept)
 ```
 
-## Recurrence Bundles
+## Recurrence Sets
 
 Recurrence rules are powerful tools on their own, but they aren't enough to solve every task. Say you want to construct a rule that includes both Christmas and Labor Day as events. It would be impossible to construct this kind of event set using a single rule, but if you could _bundle_ multiple rules together, one for Christmas and one for Labor Day, then it would be possible.
 
-An _rbundle_ is a bundle of recurrence schedules. A recurrence schedule, or rschedule, is an overarching term for both rrules and rbundles. There are three types of rbundles in almanac. Each create their event set by performing some kind of set operation on the event sets of the underlying rschedules that you added to the bundle.
+An _rset_ is a bundle of recurrence schedules. A recurrence schedule, or rschedule, is an overarching term for both rrules and rsets. There are three types of rsets in almanac. Each create their event set by performing some kind of set operation on the event sets of the underlying rschedules that you added to the set.
 
 - `runion()` takes the union.
 
@@ -164,7 +164,7 @@ An _rbundle_ is a bundle of recurrence schedules. A recurrence schedule, or rsch
 
 - `rsetdiff()` takes the set difference.
 
-The most useful rbundle is runion, as this allows you construct an event set that, for example, falls on multiple holidays and all weekends. The following creates an runion from rrules based on Christmas and Labor Day.
+The most useful rset is runion, as this allows you construct an event set that, for example, falls on multiple holidays and all weekends. The following creates an runion from rrules based on Christmas and Labor Day.
 
 ```{r}
 on_christmas <- yearly() %>%
@@ -186,4 +186,4 @@ christmas_or_labor_day_except_2000_labor_day <- rsetdiff(
 alma_search("2000-01-01", "2002-01-01", christmas_or_labor_day_except_2000_labor_day)
 ```
 
-A recurrence bundle is a critical data structure in almanac. It serves as a general container to dump all of your company's holiday and weekend recurrence rules.
+A recurrence set is a critical data structure in almanac. It serves as a general container to dump all of your company's holiday and weekend recurrence rules.

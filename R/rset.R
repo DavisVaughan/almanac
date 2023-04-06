@@ -1,13 +1,13 @@
-#' Create a new set-based recurrence bundle
+#' Create a new set-based recurrence schedule
 #'
 #' @description
 #' Often, a single rrule will be sufficient. However, more complex
 #' recurrence objects can be constructed by combining multiple rschedules into
-#' a _recurrence bundle_.
+#' a _recurrence set_.
 #'
-#' There are three types of recurrence bundles provided in almanac, each of
+#' There are three types of recurrence sets provided in almanac, each of
 #' which construct their event sets by performing a set operation on the
-#' underlying event sets of the rschedules in the bundle.
+#' underlying events of the rschedules in the set.
 #'
 #' - `runion()` takes the union.
 #'
@@ -17,16 +17,16 @@
 #'
 #' @details
 #' For `rsetdiff()`, the event set is created "from left to right" and depends
-#' on the order that the rschedules were added to the bundle.
+#' on the order that the rschedules were added to the set.
 #'
 #' @param ... `[rschedules]`
 #'
-#'   rschedule objects to add to the bundle.
+#'   rschedule objects to add to the set.
 #'
 #' @return
 #' A runion, rintersect, or rsetdiff.
 #'
-#' @name rbundle
+#' @name rset
 #' @examples
 #' since <- "2019-04-01"
 #' until <- "2019-05-31"
@@ -56,7 +56,7 @@ NULL
 
 # ------------------------------------------------------------------------------
 
-#' @rdname rbundle
+#' @rdname rset
 #' @export
 runion <- function(...) {
   rschedules <- list2(...)
@@ -75,7 +75,7 @@ new_runion <- function(rschedules = list(),
     exdates = exdates
   )
 
-  new_rbundle(
+  new_rset(
     rschedules = rschedules,
     rdates = rdates,
     exdates = exdates,
@@ -85,7 +85,7 @@ new_runion <- function(rschedules = list(),
   )
 }
 
-#' @rdname rbundle
+#' @rdname rset
 #' @export
 rintersect <- function(...) {
   rschedules <- list2(...)
@@ -104,7 +104,7 @@ new_rintersect <- function(rschedules = list(),
     exdates = exdates
   )
 
-  new_rbundle(
+  new_rset(
     rschedules = rschedules,
     rdates = rdates,
     exdates = exdates,
@@ -114,7 +114,7 @@ new_rintersect <- function(rschedules = list(),
   )
 }
 
-#' @rdname rbundle
+#' @rdname rset
 #' @export
 rsetdiff <- function(...) {
   rschedules <- list2(...)
@@ -133,7 +133,7 @@ new_rsetdiff <- function(rschedules = list(),
     exdates = exdates
   )
 
-  new_rbundle(
+  new_rset(
     rschedules = rschedules,
     rdates = rdates,
     exdates = exdates,
@@ -143,12 +143,12 @@ new_rsetdiff <- function(rschedules = list(),
   )
 }
 
-new_rbundle <- function(rschedules = list(),
-                        rdates = new_date(),
-                        exdates = new_date(),
-                        ...,
-                        class = character(),
-                        call = caller_env()) {
+new_rset <- function(rschedules = list(),
+                     rdates = new_date(),
+                     exdates = new_date(),
+                     ...,
+                     class = character(),
+                     call = caller_env()) {
   vec_check_list(rschedules, call = call)
 
   check_date(rdates, call = call)
@@ -166,7 +166,7 @@ new_rbundle <- function(rschedules = list(),
     rdates = rdates,
     exdates = exdates,
     ...,
-    class = c(class, "rbundle")
+    class = c(class, "rset")
   )
 }
 
@@ -191,20 +191,20 @@ rschedule_events.rsetdiff <- function(x) {
 
 #' @export
 print.runion <- function(x, ...) {
-  print_rbundle(x, "runion")
+  print_rset(x, "runion")
 }
 
 #' @export
 print.rintersect <- function(x, ...) {
-  print_rbundle(x, "rintersect")
+  print_rset(x, "rintersect")
 }
 
 #' @export
 print.rsetdiff <- function(x, ...) {
-  print_rbundle(x, "rsetdiff")
+  print_rset(x, "rsetdiff")
 }
 
-print_rbundle <- function(x, name) {
+print_rset <- function(x, name) {
   rschedules <- x$rschedules
   n <- length(rschedules)
 

@@ -13,7 +13,7 @@ A vector of dates.}
 
 \item{rschedule}{\verb{[rschedule]}
 
-An rschedule, such as an rrule or rbundle.}
+An rschedule, such as an rrule, runion, rintersect, or rsetdiff.}
 }
 \value{
 A logical vector the same size as \code{x}.
@@ -35,7 +35,7 @@ alma_in(x, rrule)
 rrule2 <- monthly() \%>\%
   recur_on_day_of_month(2)
 
-# Make a larger rbundle made of multiple rules
+# Make a larger set of multiple rules
 rb <- runion(rrule, rrule2)
 
 alma_in(x, rb)

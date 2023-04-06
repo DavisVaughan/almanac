@@ -1,43 +1,43 @@
 # ------------------------------------------------------------------------------
-# new_rbundle()
+# new_rset()
 
 test_that("validates rschedules", {
   expect_snapshot(error = TRUE, {
-    new_rbundle(1)
+    new_rset(1)
   })
 })
 
 test_that("validates rdates", {
   expect_snapshot({
-    (expect_error(new_rbundle(rdates = 1)))
-    (expect_error(new_rbundle(rdates = almanac_global_inf_date)))
-    (expect_error(new_rbundle(rdates = almanac_global_neg_inf_date)))
-    (expect_error(new_rbundle(rdates = almanac_global_na_date)))
+    (expect_error(new_rset(rdates = 1)))
+    (expect_error(new_rset(rdates = almanac_global_inf_date)))
+    (expect_error(new_rset(rdates = almanac_global_neg_inf_date)))
+    (expect_error(new_rset(rdates = almanac_global_na_date)))
   })
 })
 
 test_that("validates exdates", {
   expect_snapshot({
-    (expect_error(new_rbundle(exdates = 1)))
-    (expect_error(new_rbundle(exdates = almanac_global_inf_date)))
-    (expect_error(new_rbundle(exdates = almanac_global_neg_inf_date)))
-    (expect_error(new_rbundle(exdates = almanac_global_na_date)))
+    (expect_error(new_rset(exdates = 1)))
+    (expect_error(new_rset(exdates = almanac_global_inf_date)))
+    (expect_error(new_rset(exdates = almanac_global_neg_inf_date)))
+    (expect_error(new_rset(exdates = almanac_global_na_date)))
   })
 })
 
 test_that("validates date bounds", {
   expect_snapshot({
-    (expect_error(new_rbundle(rdates = almanac_global_min_date - 1), class = "almanac_error_date_below_minimum"))
-    (expect_error(new_rbundle(rdates = almanac_global_max_date + 1), class = "almanac_error_date_above_maximum"))
+    (expect_error(new_rset(rdates = almanac_global_min_date - 1), class = "almanac_error_date_below_minimum"))
+    (expect_error(new_rset(rdates = almanac_global_max_date + 1), class = "almanac_error_date_above_maximum"))
 
-    (expect_error(new_rbundle(exdates = almanac_global_min_date - 1), class = "almanac_error_date_below_minimum"))
-    (expect_error(new_rbundle(exdates = almanac_global_max_date + 1), class = "almanac_error_date_above_maximum"))
+    (expect_error(new_rset(exdates = almanac_global_min_date - 1), class = "almanac_error_date_below_minimum"))
+    (expect_error(new_rset(exdates = almanac_global_max_date + 1), class = "almanac_error_date_above_maximum"))
   })
 })
 
 test_that("`...` must be named", {
   expect_snapshot(error = TRUE, {
-    new_rbundle(rschedules = list(), rdates = new_date(), exdates = new_date(), 1)
+    new_rset(rschedules = list(), rdates = new_date(), exdates = new_date(), 1)
   })
 })
 
@@ -73,7 +73,7 @@ test_that("can get the event set with no rschedules", {
   expect_identical(alma_events(runion()), almanac_global_empty_date)
 })
 
-test_that("runion works with non-rrules in the bundle", {
+test_that("runion works with non-rrules in the set", {
   rrule1 <- daily(since = "1970-01-01", until = "1970-01-02")
   rrule2 <- daily(since = "1970-01-03", until = "1970-01-04")
 
@@ -106,12 +106,12 @@ test_that("can add an runion to an runion", {
 # new_runion()
 
 test_that("can construct a new runion", {
-  expect_s3_class(new_runion(), c("runion", "rbundle", "rschedule"))
+  expect_s3_class(new_runion(), c("runion", "rset", "rschedule"))
 })
 
 test_that("can subclass runion", {
   x <- new_runion(foo = 1, class = "rsubclass")
-  expect_s3_class(x, c("rsubclass", "runion", "rbundle", "rschedule"), exact = TRUE)
+  expect_s3_class(x, c("rsubclass", "runion", "rset", "rschedule"), exact = TRUE)
   expect_identical(x$foo, 1)
 })
 
@@ -160,12 +160,12 @@ test_that("rintersect takes the intersection", {
 # new_rintersect()
 
 test_that("can construct a new rintersect", {
-  expect_s3_class(new_rintersect(), c("rintersect", "rbundle", "rschedule"))
+  expect_s3_class(new_rintersect(), c("rintersect", "rset", "rschedule"))
 })
 
 test_that("can subclass rintersect", {
   x <- new_rintersect(foo = 1, class = "rsubclass")
-  expect_s3_class(x, c("rsubclass", "rintersect", "rbundle", "rschedule"), exact = TRUE)
+  expect_s3_class(x, c("rsubclass", "rintersect", "rset", "rschedule"), exact = TRUE)
   expect_identical(x$foo, 1)
 })
 
@@ -217,12 +217,12 @@ test_that("rsetdiff takes the set difference from left to right", {
 # new_rsetdiff()
 
 test_that("can construct a new rsetdiff", {
-  expect_s3_class(new_rsetdiff(), c("rsetdiff", "rbundle", "rschedule"))
+  expect_s3_class(new_rsetdiff(), c("rsetdiff", "rset", "rschedule"))
 })
 
 test_that("can subclass rsetdiff", {
   x <- new_rsetdiff(foo = 1, class = "rsubclass")
-  expect_s3_class(x, c("rsubclass", "rsetdiff", "rbundle", "rschedule"), exact = TRUE)
+  expect_s3_class(x, c("rsubclass", "rsetdiff", "rset", "rschedule"), exact = TRUE)
   expect_identical(x$foo, 1)
 })
 
