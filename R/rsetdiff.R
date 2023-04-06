@@ -41,17 +41,6 @@ rschedule_events.rsetdiff <- function(x) {
 # ------------------------------------------------------------------------------
 
 #' @export
-rbundle_restore.rsetdiff <- function(x, to) {
-  new_rsetdiff(
-    rschedules = x$rschedules,
-    rdates = x$rdates,
-    exdates = x$exdates
-  )
-}
-
-# ------------------------------------------------------------------------------
-
-#' @export
 print.rsetdiff <- function(x, ...) {
   rschedules <- x$rschedules
   n <- length(rschedules)

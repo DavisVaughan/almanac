@@ -105,11 +105,3 @@
       Error in `new_rschedule()`:
       ! `...` must have named elements.
 
-# rbundle_restore() gives developers a way to restore to `to`
-
-    Code
-      rbundle_restore(x, to)
-    Condition
-      Error in `rbundle_restore()`:
-      ! <rbundle> subclasses must provide their own `rbundle_restore()` method.
-

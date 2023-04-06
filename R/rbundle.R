@@ -5,25 +5,6 @@
 #' usage of almanac. It constructs a new rbundle directly from a list of
 #' existing rschedules.
 #'
-#' `rbundle_restore()` is a generic function that rbundle subclasses can provide
-#' a method for. It dispatches off of `to`. Its sole purpose is to restore
-#' classes and fields of the subclass after calling any of the following
-#' functions:
-#'
-#' - `add_rdates()`
-#'
-#' - `add_exdates()`
-#'
-#' - `add_rschedule()`
-#'
-#' @details
-#' An rbundle is an abstract class that rintersect, runion, and rsetdiff all
-#' inherit from. The sole purpose of an rbundle subclass is to implement an
-#' `rbundle_restore()` method that defines how to recover the original
-#' rbundle subclass after adding a new rschedule, rdate, or exdate.
-#' Additionally, because rbundles are also rschedules, a [rschedule_events()]
-#' method must be implemented.
-#'
 #' @param rschedules `[list]`
 #'
 #'   A list of rschedules.
@@ -44,19 +25,8 @@
 #'
 #'   An optional subclass.
 #'
-#' @param x `[rbundle]`
-#'
-#'   An updated rbundle that needs to be restored to the type of `to`.
-#'
-#' @param to `[rbundle subclass]`
-#'
-#'   An rbundle subclass that you are restoring to.
-#'
 #' @return
-#' - `new_rbundle()` returns a new rbundle.
-#'
-#' - `rbundle_restore()` should return an rbundle subclass of the same type
-#'   as `to`.
+#' `new_rbundle()` returns a new rbundle.
 #'
 #' @export
 #' @examples
@@ -91,44 +61,5 @@ new_rbundle <- function(rschedules = list(),
     exdates = exdates,
     ...,
     class = c(class, "rbundle")
-  )
-}
-
-# ------------------------------------------------------------------------------
-
-#' @rdname new_rbundle
-#' @export
-rbundle_restore <- function(x, to) {
-  UseMethod("rbundle_restore", to)
-}
-
-#' @export
-rbundle_restore.default <- function(x, to) {
-  cls <- glue::glue_collapse(class(to), sep = "/")
-  cli::cli_abort("Can't restore an <rbundle> to a <{cls}>.")
-}
-
-#' @export
-rbundle_restore.rbundle <- function(x, to) {
-  cli::cli_abort("<rbundle> subclasses must provide their own `rbundle_restore()` method.")
-}
-
-# ------------------------------------------------------------------------------
-
-is_rbundle <- function(x) {
-  inherits(x, "rbundle")
-}
-
-check_rbundle <- function(x,
-                          ...,
-                          allow_null = FALSE,
-                          arg = caller_arg(x),
-                          call = caller_env()) {
-  check_inherits(
-    x = x,
-    what = "rbundle",
-    allow_null = allow_null,
-    arg = arg,
-    call = call
   )
 }

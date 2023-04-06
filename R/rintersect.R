@@ -41,17 +41,6 @@ rschedule_events.rintersect <- function(x) {
 # ------------------------------------------------------------------------------
 
 #' @export
-rbundle_restore.rintersect <- function(x, to) {
-  new_rintersect(
-    rschedules = x$rschedules,
-    rdates = x$rdates,
-    exdates = x$exdates
-  )
-}
-
-# ------------------------------------------------------------------------------
-
-#' @export
 print.rintersect <- function(x, ...) {
   rschedules <- x$rschedules
   n <- length(rschedules)

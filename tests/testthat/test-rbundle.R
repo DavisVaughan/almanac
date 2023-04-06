@@ -40,24 +40,3 @@ test_that("`...` must be named", {
     new_rbundle(rschedules = list(), rdates = new_date(), exdates = new_date(), 1)
   })
 })
-
-# ------------------------------------------------------------------------------
-# rbundle_restore()
-
-test_that("rbundle_restore() gives developers a way to restore to `to`", {
-  x <- new_rbundle()
-  to <- new_rsubclass()
-
-  # By default, no restore
-  expect_snapshot(error = TRUE, {
-    rbundle_restore(x, to)
-  })
-
-  # Register `rbundle_restore()` method
-  local_rsubclass()
-
-  # Now class and attributes are restored
-  result <- rbundle_restore(x, to)
-  expect_s3_class(result, c("rsubclass", "rbundle", "rschedule"), exact = TRUE)
-  expect_identical(result$foo, numeric())
-})

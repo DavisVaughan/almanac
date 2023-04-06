@@ -252,3 +252,51 @@ add_exdates <- function(x, exdates) {
 
   rbundle_restore(out, x)
 }
+
+check_rbundle <- function(x,
+                          ...,
+                          allow_null = FALSE,
+                          arg = caller_arg(x),
+                          call = caller_env()) {
+  check_inherits(
+    x = x,
+    what = "rbundle",
+    allow_null = allow_null,
+    arg = arg,
+    call = call
+  )
+}
+
+# Internal generic
+rbundle_restore <- function(x, to) {
+  UseMethod("rbundle_restore", to)
+}
+
+#' @export
+rbundle_restore.rintersect <- function(x, to) {
+  new_rintersect(
+    rschedules = x$rschedules,
+    rdates = x$rdates,
+    exdates = x$exdates
+  )
+}
+
+#' @export
+rbundle_restore.runion <- function(x, to) {
+  new_runion(
+    rschedules = x$rschedules,
+    rdates = x$rdates,
+    exdates = x$exdates
+  )
+}
+
+#' @export
+rbundle_restore.rsetdiff <- function(x, to) {
+  new_rsetdiff(
+    rschedules = x$rschedules,
+    rdates = x$rdates,
+    exdates = x$exdates
+  )
+}
+
+# ------------------------------------------------------------------------------

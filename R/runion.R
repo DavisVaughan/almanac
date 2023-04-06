@@ -41,17 +41,6 @@ rschedule_events.runion <- function(x) {
 # ------------------------------------------------------------------------------
 
 #' @export
-rbundle_restore.runion <- function(x, to) {
-  new_runion(
-    rschedules = x$rschedules,
-    rdates = x$rdates,
-    exdates = x$exdates
-  )
-}
-
-# ------------------------------------------------------------------------------
-
-#' @export
 print.runion <- function(x, ...) {
   rschedules <- x$rschedules
   n <- length(rschedules)
