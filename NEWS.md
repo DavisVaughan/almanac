@@ -1,5 +1,11 @@
 # almanac (development version)
 
+* New `roffset()` for creating an rschedule with events that are offset from an
+  existing rschedule (#94).
+  
+* The `offset` argument of `recur_on_easter()` is deprecated in favor of using
+  `roffset()` (#94).
+
 * All almanac class names are now prefixed with `almanac_*` to avoid potential
   clashes with other packages.
 

@@ -4,14 +4,18 @@
 \alias{recur_on_easter}
 \title{Recur on easter}
 \usage{
-recur_on_easter(x, offset = 0L)
+recur_on_easter(x, offset = NULL)
 }
 \arguments{
 \item{x}{\verb{[rrule]}
 
 A recurrence rule.}
 
-\item{offset}{\verb{[integer(1)]}
+\item{offset}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+
+\verb{[integer(1)]}
+
+Deprecated in favor of using \code{\link[=roffset]{roffset()}} directly.
 
 An offset in terms of a number of days on either side of Easter to recur
 on. This offset must still fall within the same year, otherwise the date
@@ -22,26 +26,22 @@ An updated rrule.
 }
 \description{
 \code{recur_on_easter()} is a special helper to recur on Easter. Easter is
-particularly difficult to construct a recurrence rule for. Using \code{offset},
-this can also be used to generate a recurrence rule on Easter Monday or
-Good Friday.
+particularly difficult to construct a recurrence rule for.
 }
 \examples{
 on_easter <- yearly() \%>\% recur_on_easter()
-on_easter_monday <- yearly() \%>\% recur_on_easter(-1)
+
+# Rather than:
+if (FALSE) {
+on_easter_monday <- yearly() \%>\% recur_on_easter(1)
+}
+
+# Please use:
+on_easter_monday <- roffset(on_easter, 1)
 
 alma_search("1999-01-01", "2001-01-01", on_easter)
 
-rb <- runion(on_easter, on_easter_monday)
+both <- runion(on_easter, on_easter_monday)
 
-alma_search("1999-01-01", "2001-01-01", rb)
-
-
-# Note that `offset` must land within the same year, otherwise the date
-# is ignored
-on_easter_back_93_days <- yearly() \%>\% recur_on_easter(-93)
-on_easter_back_94_days <- yearly() \%>\% recur_on_easter(-94)
-
-alma_search("1999-01-01", "2001-01-01", on_easter_back_93_days)
-alma_search("1999-01-01", "2001-01-01", on_easter_back_94_days)
+alma_search("1999-01-01", "2001-01-01", both)
 }

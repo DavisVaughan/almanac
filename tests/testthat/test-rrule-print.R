@@ -31,9 +31,6 @@ test_that("print method for rrule is informative", {
     recur_on_position(weekly(), c(-1, 2, 3, -2))
     recur_on_position(yearly(), c(-1, 2, 3, -2, 10, 12, 13))
 
-    "# can change offset"
-    recur_on_easter(weekly(), offset = -1)
-
     "# each recur_ condition works"
     recur_for_count(daily(), 5)
     recur_on_interval(daily(), 5)

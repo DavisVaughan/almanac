@@ -16,6 +16,7 @@ reference:
   - rintersect
   - rsetdiff
   - rcustom
+  - roffset
   - radjusted
 
 - title: Recurrence utilities
