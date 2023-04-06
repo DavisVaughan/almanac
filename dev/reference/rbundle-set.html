@@ -104,18 +104,25 @@ underlying event sets of the rschedules in the bundle.</p><ul><li><p><code>runio
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">rintersect</span><span class="op">(</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">rintersect</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">rsetdiff</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu">rsetdiff</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">runion</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">runion</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
+    <div class="section level2">
+    <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
+    <dl><dt>...</dt>
+<dd><p><code>[rschedules]</code></p>
+<p>rschedule objects to add to the bundle.</p></dd>
+
+</dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
 
-<p>An empty rbundle.</p>
+<p>A runion, rintersect, or rsetdiff.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -139,10 +146,7 @@ on the order that the rschedules were added to the bundle.</p>
 <span class="r-in"><span>  <span class="fu"><a href="recur_on_day_of_month.html">recur_on_day_of_month</a></span><span class="op">(</span><span class="fl">25</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># On weekends OR the 25th of the month</span></span></span>
-<span class="r-in"><span><span class="va">ru</span> <span class="op">&lt;-</span> <span class="fu">runion</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="rbundle-add.html">add_rschedule</a></span><span class="op">(</span><span class="va">on_weekends</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="rbundle-add.html">add_rschedule</a></span><span class="op">(</span><span class="va">on_25th</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">ru</span> <span class="op">&lt;-</span> <span class="fu">runion</span><span class="op">(</span><span class="va">on_weekends</span>, <span class="va">on_25th</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="alma_events.html">alma_events</a></span><span class="op">(</span><span class="va">ru</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "2019-04-06" "2019-04-07" "2019-04-13" "2019-04-14" "2019-04-20"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [6] "2019-04-21" "2019-04-25" "2019-04-27" "2019-04-28" "2019-05-04"</span>
@@ -150,28 +154,19 @@ on the order that the rschedules were added to the bundle.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [16] "2019-05-25" "2019-05-26"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># On weekends AND the 25th of the month</span></span></span>
-<span class="r-in"><span><span class="va">ri</span> <span class="op">&lt;-</span> <span class="fu">rintersect</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="rbundle-add.html">add_rschedule</a></span><span class="op">(</span><span class="va">on_weekends</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="rbundle-add.html">add_rschedule</a></span><span class="op">(</span><span class="va">on_25th</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">ri</span> <span class="op">&lt;-</span> <span class="fu">rintersect</span><span class="op">(</span><span class="va">on_weekends</span>, <span class="va">on_25th</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="alma_events.html">alma_events</a></span><span class="op">(</span><span class="va">ri</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "2019-05-25"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># On weekends AND NOT the 25th of the month</span></span></span>
-<span class="r-in"><span><span class="va">rsd1</span> <span class="op">&lt;-</span> <span class="fu">rsetdiff</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="rbundle-add.html">add_rschedule</a></span><span class="op">(</span><span class="va">on_weekends</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="rbundle-add.html">add_rschedule</a></span><span class="op">(</span><span class="va">on_25th</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">rsd1</span> <span class="op">&lt;-</span> <span class="fu">rsetdiff</span><span class="op">(</span><span class="va">on_weekends</span>, <span class="va">on_25th</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="alma_events.html">alma_events</a></span><span class="op">(</span><span class="va">rsd1</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "2019-04-06" "2019-04-07" "2019-04-13" "2019-04-14" "2019-04-20"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [6] "2019-04-21" "2019-04-27" "2019-04-28" "2019-05-04" "2019-05-05"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [11] "2019-05-11" "2019-05-12" "2019-05-18" "2019-05-19" "2019-05-26"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># On the 25th of the month AND NOT the weekend</span></span></span>
-<span class="r-in"><span><span class="va">rsd2</span> <span class="op">&lt;-</span> <span class="fu">rsetdiff</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="rbundle-add.html">add_rschedule</a></span><span class="op">(</span><span class="va">on_25th</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="rbundle-add.html">add_rschedule</a></span><span class="op">(</span><span class="va">on_weekends</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">rsd2</span> <span class="op">&lt;-</span> <span class="fu">rsetdiff</span><span class="op">(</span><span class="va">on_25th</span>, <span class="va">on_weekends</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="alma_events.html">alma_events</a></span><span class="op">(</span><span class="va">rsd2</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "2019-04-25"</span>
 </code></pre></div>
