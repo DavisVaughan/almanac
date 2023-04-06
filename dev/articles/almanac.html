@@ -222,12 +222,12 @@ of a recurrence rule is generally slower than repeated uses.</p>
 <span><span class="co"># The first time is "slow"</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/alma_search.html">alma_search</a></span><span class="op">(</span><span class="va">since</span>, <span class="st">"2000-01-01"</span>, <span class="va">on_weekly</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.116   0.000   0.097</span></span>
+<span><span class="co">#&gt;   0.135   0.000   0.112</span></span>
 <span></span>
 <span><span class="co"># Repeated access is fast</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/alma_search.html">alma_search</a></span><span class="op">(</span><span class="va">since</span>, <span class="st">"2000-01-01"</span>, <span class="va">on_weekly</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;       0       0       0</span></span>
+<span><span class="co">#&gt;   0.001   0.000   0.001</span></span>
 <span></span>
 <span><span class="co"># The entire event set is cached, so even if you change the arguments,</span></span>
 <span><span class="co"># the operation is still fast.</span></span>
@@ -290,7 +290,7 @@ wanted the <em>last</em> Monday in September instead, we could do:</p>
 <span><span class="co">#&gt; [1] "2000-09-25" "2001-09-24" "2002-09-30" "2003-09-29" "2004-09-27"</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="recurrence-bundles">Recurrence Bundles<a class="anchor" aria-label="anchor" href="#recurrence-bundles"></a>
+<h2 id="recurrence-sets">Recurrence Sets<a class="anchor" aria-label="anchor" href="#recurrence-sets"></a>
 </h2>
 <p>Recurrence rules are powerful tools on their own, but they aren’t
 enough to solve every task. Say you want to construct a rule that
@@ -298,26 +298,26 @@ includes both Christmas and Labor Day as events. It would be impossible
 to construct this kind of event set using a single rule, but if you
 could <em>bundle</em> multiple rules together, one for Christmas and one
 for Labor Day, then it would be possible.</p>
-<p>An <em>rbundle</em> is a bundle of recurrence schedules. A recurrence
+<p>An <em>rset</em> is a bundle of recurrence schedules. A recurrence
 schedule, or rschedule, is an overarching term for both rrules and
-rbundles. There are three types of rbundles in almanac. Each create
-their event set by performing some kind of set operation on the event
-sets of the underlying rschedules that you added to the bundle.</p>
+rsets. There are three types of rsets in almanac. Each create their
+event set by performing some kind of set operation on the event sets of
+the underlying rschedules that you added to the set.</p>
 <ul>
-<li><p><code><a href="../reference/rbundle-set.html">runion()</a></code> takes the union.</p></li>
-<li><p><code><a href="../reference/rbundle-set.html">rintersect()</a></code> takes the intersection.</p></li>
-<li><p><code><a href="../reference/rbundle-set.html">rsetdiff()</a></code> takes the set difference.</p></li>
+<li><p><code><a href="../reference/rset.html">runion()</a></code> takes the union.</p></li>
+<li><p><code><a href="../reference/rset.html">rintersect()</a></code> takes the intersection.</p></li>
+<li><p><code><a href="../reference/rset.html">rsetdiff()</a></code> takes the set difference.</p></li>
 </ul>
-<p>The most useful rbundle is runion, as this allows you construct an
-event set that, for example, falls on multiple holidays and all
-weekends. The following creates an runion from rrules based on Christmas
-and Labor Day.</p>
+<p>The most useful rset is runion, as this allows you construct an event
+set that, for example, falls on multiple holidays and all weekends. The
+following creates an runion from rrules based on Christmas and Labor
+Day.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">on_christmas</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">yearly</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/recur_on_month_of_year.html">recur_on_month_of_year</a></span><span class="op">(</span><span class="st">"Dec"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/recur_on_day_of_month.html">recur_on_day_of_month</a></span><span class="op">(</span><span class="fl">25</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">christmas_or_labor_day</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rbundle-set.html">runion</a></span><span class="op">(</span></span>
+<span><span class="va">christmas_or_labor_day</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rset.html">runion</a></span><span class="op">(</span></span>
 <span>  <span class="va">on_christmas</span>,</span>
 <span>  <span class="va">on_labor_day</span></span>
 <span><span class="op">)</span></span>
@@ -325,16 +325,16 @@ and Labor Day.</p>
 <span><span class="fu"><a href="../reference/alma_search.html">alma_search</a></span><span class="op">(</span><span class="st">"2000-01-01"</span>, <span class="st">"2002-01-01"</span>, <span class="va">christmas_or_labor_day</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "2000-09-04" "2000-12-25" "2001-09-03" "2001-12-25"</span></span>
 <span></span>
-<span><span class="va">christmas_or_labor_day_except_2000_labor_day</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rbundle-set.html">rsetdiff</a></span><span class="op">(</span></span>
+<span><span class="va">christmas_or_labor_day_except_2000_labor_day</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rset.html">rsetdiff</a></span><span class="op">(</span></span>
 <span>  <span class="va">christmas_or_labor_day</span>, </span>
 <span>  <span class="fu"><a href="../reference/rcustom.html">rcustom</a></span><span class="op">(</span><span class="st">"2000-09-04"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/alma_search.html">alma_search</a></span><span class="op">(</span><span class="st">"2000-01-01"</span>, <span class="st">"2002-01-01"</span>, <span class="va">christmas_or_labor_day_except_2000_labor_day</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "2000-12-25" "2001-09-03" "2001-12-25"</span></span></code></pre></div>
-<p>A recurrence bundle is a critical data structure in almanac. It
-serves as a general container to dump all of your company’s holiday and
-weekend recurrence rules.</p>
+<p>A recurrence set is a critical data structure in almanac. It serves
+as a general container to dump all of your company’s holiday and weekend
+recurrence rules.</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>

@@ -201,7 +201,7 @@ combined runion object from the four pieces.</p>
 <span>    <span class="fu"><a href="../reference/recur_on_day_of_month.html">recur_on_day_of_month</a></span><span class="op">(</span><span class="va">all_days</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>    <span class="fu"><a href="../reference/recur_on_position.html">recur_on_position</a></span><span class="op">(</span><span class="va">nth</span><span class="op">)</span></span>
 <span>  </span>
-<span>  <span class="va">on_nth_doq</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rbundle-set.html">runion</a></span><span class="op">(</span></span>
+<span>  <span class="va">on_nth_doq</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rset.html">runion</a></span><span class="op">(</span></span>
 <span>    <span class="va">on_nth_day_of_q1</span>,</span>
 <span>    <span class="va">on_nth_day_of_q2</span>,</span>
 <span>    <span class="va">on_nth_day_of_q3</span>,</span>
@@ -286,7 +286,7 @@ the 6th Monday of Q1.</p>
 <span>    <span class="fu"><a href="../reference/recur_on_day_of_week.html">recur_on_day_of_week</a></span><span class="op">(</span><span class="va">day</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>    <span class="fu"><a href="../reference/recur_on_position.html">recur_on_position</a></span><span class="op">(</span><span class="va">nth</span><span class="op">)</span></span>
 <span>  </span>
-<span>  <span class="va">on_nth_of_the_quarter</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rbundle-set.html">runion</a></span><span class="op">(</span></span>
+<span>  <span class="va">on_nth_of_the_quarter</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rset.html">runion</a></span><span class="op">(</span></span>
 <span>    <span class="va">on_nth_of_q1</span>,</span>
 <span>    <span class="va">on_nth_of_q2</span>,</span>
 <span>    <span class="va">on_nth_of_q3</span>,</span>
@@ -314,7 +314,7 @@ the 6th Monday of Q1.</p>
 <div class="section level2">
 <h2 id="combining-with-other-rules">Combining with other rules<a class="anchor" aria-label="anchor" href="#combining-with-other-rules"></a>
 </h2>
-<p>Remember that each of these results are just rbundles that can be
+<p>Remember that each of these results are just rsets that can be
 combined with other rules if you need to create more complex quarterly
 strategies. For example, let’s take the “last Friday of the quarter”
 runion and combine it with a rule for “on every Wednesday”.</p>
@@ -322,7 +322,7 @@ runion and combine it with a rule for “on every Wednesday”.</p>
 <code class="sourceCode R"><span><span class="va">on_wednesdays</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">weekly</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/recur_on_day_of_week.html">recur_on_day_of_week</a></span><span class="op">(</span><span class="st">"Wednesday"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">on_last_friday_of_quarter_or_wednesdays</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rbundle-set.html">runion</a></span><span class="op">(</span></span>
+<span><span class="va">on_last_friday_of_quarter_or_wednesdays</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rset.html">runion</a></span><span class="op">(</span></span>
 <span>  <span class="va">on_wednesdays</span>,</span>
 <span>  <span class="va">on_last_friday_of_the_quarter</span></span>
 <span><span class="op">)</span></span>

@@ -87,11 +87,11 @@
     
     
 <p>If you have read the introduction vignette,
-<code><a href="../articles/almanac.html">vignette("almanac")</a></code>, then you’ve seen rrules, rbundles, and
-the functions <code><a href="../reference/alma_search.html">alma_search()</a></code>, <code><a href="../reference/alma_events.html">alma_events()</a></code>,
-and <code><a href="../reference/alma_in.html">alma_in()</a></code>. Additionally included in almanac are a set
-of tools for <em>adjusting</em> and <em>shifting</em> dates. These
-functions are broken down as:</p>
+<code><a href="../articles/almanac.html">vignette("almanac")</a></code>, then you’ve seen rrules, runions,
+rintersects, rsetdiffs, and the functions <code><a href="../reference/alma_search.html">alma_search()</a></code>,
+<code><a href="../reference/alma_events.html">alma_events()</a></code>, and <code><a href="../reference/alma_in.html">alma_in()</a></code>. Additionally
+included in almanac are a set of tools for <em>adjusting</em> and
+<em>shifting</em> dates. These functions are broken down as:</p>
 <ul>
 <li><p>Adjustment functions, such as <code><a href="../reference/adjustments.html">adj_following()</a></code> and
 <code><a href="../reference/adjustments.html">adj_nearest()</a></code></p></li>
@@ -179,8 +179,8 @@ Sunday.</p>
 </h2>
 <p>In the introduction vignette, you were introduced to a number of
 different rschedules. As a reminder, an rschedule is just a general term
-for an rrule or an rbundle. There is actually a third type of rschedule
-in almanac, called radjusted, which is useful when combined with the
+for an rrule or an rset. There is actually a third type of rschedule in
+almanac, called radjusted, which is useful when combined with the
 adjustment functions.</p>
 <p>To motivate it, imagine your company deems Christmas to be a holiday.
 Whenever Christmas rolls around on the 25th of December, you get that
@@ -189,7 +189,7 @@ Sunday? Most corporations will <em>observe</em> a holiday that falls on
 the weekend on the nearest working day instead of on the weekend date
 that it actually occurred on.</p>
 <p>In almanac, it seems like this would pose a problem. You can create
-rrules for Christmas and for weekends, but an rbundle like runion,
+rrules for Christmas and for weekends, but an rset like runion,
 rintersect, or rsetdiff would perform some kind of set operation on
 them. What you really need is a way to say: recur on the dates defined
 by this rschedule, <em>unless</em> it intersects with this second

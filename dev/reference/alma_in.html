@@ -77,7 +77,7 @@ rschedule.</p>
 
 <dt>rschedule</dt>
 <dd><p><code>[rschedule]</code></p>
-<p>An rschedule, such as an rrule or rbundle.</p></dd>
+<p>An rschedule, such as an rrule, runion, rintersect, or rsetdiff.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -102,8 +102,8 @@ rschedule.</p>
 <span class="r-in"><span><span class="va">rrule2</span> <span class="op">&lt;-</span> <span class="fu"><a href="rrule.html">monthly</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="recur_on_day_of_month.html">recur_on_day_of_month</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Make a larger rbundle made of multiple rules</span></span></span>
-<span class="r-in"><span><span class="va">rb</span> <span class="op">&lt;-</span> <span class="fu"><a href="rbundle-set.html">runion</a></span><span class="op">(</span><span class="va">rrule</span>, <span class="va">rrule2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># Make a larger set of multiple rules</span></span></span>
+<span class="r-in"><span><span class="va">rb</span> <span class="op">&lt;-</span> <span class="fu"><a href="rset.html">runion</a></span><span class="op">(</span><span class="va">rrule</span>, <span class="va">rrule2</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">alma_in</span><span class="op">(</span><span class="va">x</span>, <span class="va">rb</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE TRUE</span>

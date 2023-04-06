@@ -114,7 +114,7 @@ double dispatch implementation.</p>
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>rschedule</dt>
 <dd><p><code>[rschedule]</code></p>
-<p>An rschedule, such as an rrule or rbundle.</p></dd>
+<p>An rschedule, such as an rrule, runion, rintersect, or rsetdiff.</p></dd>
 
 
 <dt>x, y</dt>
@@ -175,7 +175,7 @@ use that directly.</p>
 <span class="r-in"><span>  <span class="fu"><a href="recur_on_day_of_month.html">recur_on_day_of_month</a></span><span class="op">(</span><span class="fl">25</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="recur_on_month_of_year.html">recur_on_month_of_year</a></span><span class="op">(</span><span class="st">"Dec"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">rb</span> <span class="op">&lt;-</span> <span class="fu"><a href="rbundle-set.html">runion</a></span><span class="op">(</span><span class="va">on_weekends</span>, <span class="va">on_christmas</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">rb</span> <span class="op">&lt;-</span> <span class="fu"><a href="rset.html">runion</a></span><span class="op">(</span><span class="va">on_weekends</span>, <span class="va">on_christmas</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">workday</span> <span class="op">&lt;-</span> <span class="fu">stepper</span><span class="op">(</span><span class="va">rb</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
@@ -204,7 +204,7 @@ use that directly.</p>
 <span class="r-in"><span><span class="fu"><a href="alma_search.html">alma_search</a></span><span class="op">(</span><span class="st">"2005-01-01"</span>, <span class="st">"2006-01-01"</span>, <span class="va">on_observed_christmas</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "2005-12-26"</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">rb2</span> <span class="op">&lt;-</span> <span class="fu"><a href="rbundle-set.html">runion</a></span><span class="op">(</span><span class="va">on_weekends</span>, <span class="va">on_observed_christmas</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">rb2</span> <span class="op">&lt;-</span> <span class="fu"><a href="rset.html">runion</a></span><span class="op">(</span><span class="va">on_weekends</span>, <span class="va">on_observed_christmas</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">workday2</span> <span class="op">&lt;-</span> <span class="fu">stepper</span><span class="op">(</span><span class="va">rb2</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
