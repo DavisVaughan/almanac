@@ -1,5 +1,8 @@
 # almanac (development version)
 
+* New `rcustom()` for creating an rschedule from manually defined event dates
+  (#90).
+
 * The following functions have been deprecated in favor of more intuitively
   named alternatives (#83):
   
