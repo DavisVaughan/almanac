@@ -1,5 +1,19 @@
 # almanac (development version)
 
+* The family of `add_*()` functions has been deprecated (#92).
+
+  * `add_rschedule()` has been deprecated in favor of using the `...` argument
+    of `runion()`, `rintersect()`, and `rsetdiff()` directly.
+    
+  * `add_rdates()` has been deprecated in favor of using a combination of
+    `runion()` and `rcustom()`.
+    
+  * `add_exdates()` has been deprecated in favor of using a combination of
+    `rsetdiff()` and `rcustom()`.
+    
+  These functions are being aggressively deprecated and will be removed in the
+  next minor version of almanac.
+
 * `runion()`, `rintersect()`, and `rsetdiff()` have all gained `...` which
   allows you to provide the relevant rschedules on creation of these rschedules.
   This is now the preferred way to create these set-based rschedules (#91).

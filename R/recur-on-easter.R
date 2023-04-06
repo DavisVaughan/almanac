@@ -25,9 +25,7 @@
 #'
 #' alma_search("1999-01-01", "2001-01-01", on_easter)
 #'
-#' rb <- runion() %>%
-#'   add_rschedule(on_easter) %>%
-#'   add_rschedule(on_easter_monday)
+#' rb <- runion(on_easter, on_easter_monday)
 #'
 #' alma_search("1999-01-01", "2001-01-01", rb)
 #'

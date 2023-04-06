@@ -17,7 +17,7 @@ test_that("non-event is left untouched", {
 
 test_that("adjustment is applied repeatedly", {
   x <- as.Date("2019-01-01")
-  rb <- runion() %>% add_rdates(c("2019-01-01", "2019-01-02"))
+  rb <- rcustom(c("2019-01-01", "2019-01-02"))
 
   expect_identical(adj_following(x, rb), x + 2)
 })
@@ -55,7 +55,7 @@ test_that("non-event is left untouched", {
 
 test_that("adjustment is applied repeatedly", {
   x <- as.Date("2019-01-02")
-  rb <- runion() %>% add_rdates(c("2019-01-01", "2019-01-02"))
+  rb <- rcustom(c("2019-01-01", "2019-01-02"))
 
   expect_identical(adj_preceding(x, rb), x - 2)
 })
@@ -93,7 +93,7 @@ test_that("adjusts backwards if adjusted date is in a different month", {
 
 test_that("adjustment is applied repeatedly", {
   x <- as.Date("2019-01-31")
-  rb <- runion() %>% add_rdates(c("2019-01-30", "2019-01-31"))
+  rb <- rcustom(c("2019-01-30", "2019-01-31"))
 
   expect_identical(adj_modified_following(x, rb), x - 2)
 })
@@ -131,7 +131,7 @@ test_that("adjusts forward if adjusted date is in a different month", {
 
 test_that("adjustment is applied repeatedly", {
   x <- as.Date("2019-01-01")
-  rb <- runion() %>% add_rdates(c("2019-01-01", "2019-01-02"))
+  rb <- rcustom(c("2019-01-01", "2019-01-02"))
 
   expect_identical(adj_modified_preceding(x, rb), x + 2)
 })
@@ -164,15 +164,14 @@ test_that("adjusts to nearest non-event", {
 
 test_that("equi-distant adjusts forward", {
   x <- as.Date(c("1970-01-03"))
-  rb <- runion() %>% add_rdates(c("1970-01-02", "1970-01-03", "1970-01-04"))
+  rb <- rcustom(c("1970-01-02", "1970-01-03", "1970-01-04"))
 
   expect_identical(adj_nearest(x, rb), x + 2)
 })
 
 test_that("adjustment is applied repeatedly", {
   x <- as.Date("1970-01-03")
-  rdates <- as.Date("1970-01-01") + 0:5
-  rb <- runion() %>% add_rdates(rdates)
+  rb <- rcustom(as.Date("1970-01-01") + 0:5)
 
   expect_identical(adj_nearest(x, rb), x - 3)
 })

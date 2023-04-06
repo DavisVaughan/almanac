@@ -35,13 +35,6 @@ underlying event sets of the rschedules in the bundle.
 \item \code{rintersect()} takes the intersection.
 \item \code{rsetdiff()} takes the set difference.
 }
-
-Once you have created a recurrence bundle, you can:
-\itemize{
-\item Add recurrence rules or other recurrence bundles with \code{\link[=add_rschedule]{add_rschedule()}}.
-\item Forcibly include dates in its event set with \code{\link[=add_rdates]{add_rdates()}}.
-\item Forcibly exclude dates from its event set with \code{\link[=add_exdates]{add_exdates()}}.
-}
 }
 \details{
 For \code{rsetdiff()}, the event set is created "from left to right" and depends
@@ -72,7 +65,4 @@ alma_events(rsd1)
 # On the 25th of the month AND NOT the weekend
 rsd2 <- rsetdiff(on_25th, on_weekends)
 alma_events(rsd2)
-}
-\seealso{
-\code{\link[=add_rschedule]{add_rschedule()}}
 }

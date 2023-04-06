@@ -36,9 +36,7 @@ on_12th <- monthly() \%>\% recur_on_day_of_month(12)
 on_monday <- weekly() \%>\% recur_on_day_of_week("Monday")
 
 # On the 12th of the month, or on Mondays
-rb <- runion() \%>\%
-  add_rschedule(on_12th) \%>\%
-  add_rschedule(on_monday)
+rb <- runion(on_12th, on_monday)
 
 alma_next(c("2019-01-01", "2019-01-11"), rb)
 alma_previous(c("2019-01-01", "2019-01-11"), rb)

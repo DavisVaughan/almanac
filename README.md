@@ -116,10 +116,11 @@ on_christmas <- yearly() %>%
   recur_on_day_of_month(25) %>%
   recur_on_month_of_year("Dec")
 
-bundle <- runion() %>%
-  add_rschedule(on_weekends) %>%
-  add_rschedule(on_christmas) %>%
-  add_rschedule(on_thanksgiving)
+bundle <- runion(
+  on_weekends,
+  on_christmas,
+  on_thanksgiving
+)
 
 bundle
 #> <runion[3]>

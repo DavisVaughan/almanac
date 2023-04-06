@@ -7,7 +7,7 @@
       <rsetdiff[0]>
     Code
       # # With rschedules
-      rsetdiff() %>% add_rschedule(daily()) %>% add_rschedule(yearly())
+      rsetdiff(daily(), yearly())
     Message
       <rsetdiff[2]>
        <rrule>

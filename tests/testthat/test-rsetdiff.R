@@ -22,7 +22,7 @@ test_that("rsetdiff() generates informative output", {
     rsetdiff()
 
     "# With rschedules"
-    rsetdiff() %>% add_rschedule(daily()) %>% add_rschedule(yearly())
+    rsetdiff(daily(), yearly())
   })
 })
 
@@ -34,42 +34,12 @@ test_that("rsetdiff takes the set difference from left to right", {
   rrule1 <- daily(since = "1970-01-01", until = "1970-01-02")
   rrule2 <- daily(since = "1970-01-02", until = "1970-01-03")
 
-  rb1 <- rsetdiff() %>%
-    add_rschedule(rrule1) %>%
-    add_rschedule(rrule2)
+  rb1 <- rsetdiff(rrule1, rrule2)
 
-  rb2 <- rsetdiff() %>%
-    add_rschedule(rrule2) %>%
-    add_rschedule(rrule1)
+  rb2 <- rsetdiff(rrule2, rrule1)
 
   expect_identical(alma_events(rb1), new_date(0))
   expect_identical(alma_events(rb2), new_date(2))
-})
-
-test_that("rsetdiff rdates work", {
-  rrule1 <- daily(since = "1970-01-01", until = "1970-01-02")
-  rrule2 <- daily(since = "1970-01-02", until = "1970-01-03")
-  rdate <- "1970-01-05"
-
-  rb <- rsetdiff() %>%
-    add_rschedule(rrule1) %>%
-    add_rschedule(rrule2) %>%
-    add_rdates(rdate)
-
-  expect_identical(alma_events(rb), new_date(c(0, 4)))
-})
-
-test_that("rsetdiff exdates work", {
-  rrule1 <- daily(since = "1970-01-01", until = "1970-01-02")
-  rrule2 <- daily(since = "1970-01-01", until = "1970-01-03")
-  exdate <- "1970-01-01"
-
-  rb <- rsetdiff() %>%
-    add_rschedule(rrule1) %>%
-    add_rschedule(rrule2) %>%
-    add_exdates(exdate)
-
-  expect_identical(alma_events(rb), new_date())
 })
 
 # ------------------------------------------------------------------------------
