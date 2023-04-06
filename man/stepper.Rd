@@ -18,7 +18,7 @@ workdays(n, since = "1900-01-01", until = "2100-01-01")
 \arguments{
 \item{rschedule}{\verb{[rschedule]}
 
-An rschedule, such as an rrule or rbundle.}
+An rschedule, such as an rrule, runion, rintersect, or rsetdiff.}
 
 \item{x, y}{\verb{[objects]}
 

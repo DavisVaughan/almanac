@@ -97,12 +97,12 @@ wednesday_before_thanksgiving %s+% step_over_thanksgiving(2)
 #> [1] "2000-11-25"
 ```
 
-## Recurrence Bundles
+## Recurrence Sets
 
 The above example just scratches the surface of what almanac can do.
 Practically speaking, you’ll probably have multiple holidays and events
 that you’d like to combine into one big recurrence object. This is known
-as a *recurrence bundle*.
+as a *recurrence set*.
 
 This example creates recurrence rules for weekends and Christmas, and
 bundles them together along with the Thanksgiving rule in such a way
@@ -143,10 +143,9 @@ bundle
 #>  • day of week: Thu[4]
 ```
 
-We can create a stepper that steps over all of the events in the bundle.
-If these two holidays were the only ones that your company celebrated,
-the stepper could be viewed as a way to step forward by a “business
-day”.
+We can create a stepper that steps over all of the events in the set. If
+these two holidays were the only ones that your company celebrated, the
+stepper could be viewed as a way to step forward by a “business day”.
 
 For example, Christmas was on a Monday in 2006. If you wanted to step 1
 business day forward from the Friday before Christmas, you’d probably

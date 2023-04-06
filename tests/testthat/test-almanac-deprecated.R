@@ -83,51 +83,6 @@ test_that("`add_exdates()` is deprecated but works", {
   )
 })
 
-test_that("add_rschedule() uses rbundle_restore()", {
-  local_options(lifecycle_verbosity = "quiet")
-
-  rschedule <- daily()
-
-  x <- new_rsubclass()
-  local_rsubclass()
-
-  result <- add_rschedule(x, rschedule = rschedule)
-
-  expect_s3_class(result, class(x), exact = TRUE)
-  expect_identical(result$foo, numeric())
-  expect_identical(result$rschedules, list(rschedule))
-})
-
-test_that("add_rdates() uses rbundle_restore()", {
-  local_options(lifecycle_verbosity = "quiet")
-
-  rdate <- as.Date("2019-01-01")
-
-  x <- new_rsubclass()
-  local_rsubclass()
-
-  result <- add_rdates(x, rdates = rdate)
-
-  expect_s3_class(result, class(x), exact = TRUE)
-  expect_identical(result$foo, numeric())
-  expect_identical(result$rdates, rdate)
-})
-
-test_that("add_exdates() uses rbundle_restore()", {
-  local_options(lifecycle_verbosity = "quiet")
-
-  exdate <- as.Date("2019-01-01")
-
-  x <- new_rsubclass()
-  local_rsubclass()
-
-  result <- add_exdates(x, exdates = exdate)
-
-  expect_s3_class(result, class(x), exact = TRUE)
-  expect_identical(result$foo, numeric())
-  expect_identical(result$exdates, exdate)
-})
-
 test_that("rintersect rdates work", {
   local_options(lifecycle_verbosity = "quiet")
 

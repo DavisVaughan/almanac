@@ -17,7 +17,7 @@ The number of days to step. Can be negative to step backwards.}
 
 \item{rschedule}{\verb{[rschedule]}
 
-An rschedule, such as an rrule or rbundle.}
+An rschedule, such as an rrule, runion, rintersect, or rsetdiff.}
 }
 \value{
 A Date vector the same size as \code{x} shifted by \code{n} steps.

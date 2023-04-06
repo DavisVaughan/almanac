@@ -105,7 +105,7 @@ recur_on_ymonth <- function(x, ymonth) {
 
 # ------------------------------------------------------------------------------
 
-#' Deprecated rbundle helpers
+#' Deprecated rset helpers
 #'
 #' @description
 #' `r lifecycle::badge("deprecated")`
@@ -121,23 +121,23 @@ recur_on_ymonth <- function(x, ymonth) {
 #'
 #' @inheritParams adj_following
 #'
-#' @param x `[rbundle]`
+#' @param x `[rset]`
 #'
-#'   An rbundle to add to.
+#'   An rset to add to.
 #'
 #' @param rdates `[Date]`
 #'
-#'   Dates to forcibly include in the rbundle.
+#'   Dates to forcibly include in the rset.
 #'
 #' @param exdates `[Date]`
 #'
-#'   Dates to forcibly exclude from the rbundle.
+#'   Dates to forcibly exclude from the rset.
 #'
 #' @return
-#' An updated rbundle.
+#' An updated rset.
 #'
 #' @keywords internal
-#' @name rbundle-add
+#' @name rset-add
 #' @examples
 #' on_thanksgiving <- yearly() %>%
 #'   recur_on_day_of_week("Thurs", nth = 4) %>%
@@ -177,7 +177,7 @@ recur_on_ymonth <- function(x, ymonth) {
 #' alma_search("2019-01-01", "2021-01-01", rb2)
 NULL
 
-#' @rdname rbundle-add
+#' @rdname rset-add
 #' @export
 add_rschedule <- function(x, rschedule) {
   lifecycle::deprecate_warn(
@@ -187,21 +187,21 @@ add_rschedule <- function(x, rschedule) {
     always = TRUE
   )
 
-  check_rbundle(x)
+  check_rset(x)
   check_rschedule(rschedule)
 
   rschedules <- c(x$rschedules, list(rschedule))
 
-  out <- new_rbundle(
+  out <- new_rset(
     rschedules = rschedules,
     rdates = x$rdates,
     exdates = x$exdates
   )
 
-  rbundle_restore(out, x)
+  rset_restore(out, x)
 }
 
-#' @rdname rbundle-add
+#' @rdname rset-add
 #' @export
 add_rdates <- function(x, rdates) {
   lifecycle::deprecate_warn(
@@ -211,23 +211,23 @@ add_rdates <- function(x, rdates) {
     always = TRUE
   )
 
-  check_rbundle(x)
+  check_rset(x)
   rdates <- vec_cast_date(rdates)
 
   rdates <- vec_c(x$rdates, rdates)
   rdates <- vec_unique(rdates)
   rdates <- vec_sort(rdates)
 
-  out <- new_rbundle(
+  out <- new_rset(
     rschedules = x$rschedules,
     rdates = rdates,
     exdates = x$exdates
   )
 
-  rbundle_restore(out, x)
+  rset_restore(out, x)
 }
 
-#' @rdname rbundle-add
+#' @rdname rset-add
 #' @export
 add_exdates <- function(x, exdates) {
   lifecycle::deprecate_warn(
@@ -237,18 +237,66 @@ add_exdates <- function(x, exdates) {
     always = TRUE
   )
 
-  check_rbundle(x)
+  check_rset(x)
   exdates <- vec_cast_date(exdates)
 
   exdates <- vec_c(x$exdates, exdates)
   exdates <- vec_unique(exdates)
   exdates <- vec_sort(exdates)
 
-  out <- new_rbundle(
+  out <- new_rset(
     rschedules = x$rschedules,
     rdates = x$rdates,
     exdates = exdates
   )
 
-  rbundle_restore(out, x)
+  rset_restore(out, x)
 }
+
+check_rset <- function(x,
+                       ...,
+                       allow_null = FALSE,
+                       arg = caller_arg(x),
+                       call = caller_env()) {
+  check_inherits(
+    x = x,
+    what = "rset",
+    allow_null = allow_null,
+    arg = arg,
+    call = call
+  )
+}
+
+# Internal generic
+rset_restore <- function(x, to) {
+  UseMethod("rset_restore", to)
+}
+
+#' @export
+rset_restore.rintersect <- function(x, to) {
+  new_rintersect(
+    rschedules = x$rschedules,
+    rdates = x$rdates,
+    exdates = x$exdates
+  )
+}
+
+#' @export
+rset_restore.runion <- function(x, to) {
+  new_runion(
+    rschedules = x$rschedules,
+    rdates = x$rdates,
+    exdates = x$exdates
+  )
+}
+
+#' @export
+rset_restore.rsetdiff <- function(x, to) {
+  new_rsetdiff(
+    rschedules = x$rschedules,
+    rdates = x$rdates,
+    exdates = x$exdates
+  )
+}
+
+# ------------------------------------------------------------------------------

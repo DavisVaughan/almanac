@@ -9,7 +9,7 @@ alma_events(rschedule)
 \arguments{
 \item{rschedule}{\verb{[rschedule]}
 
-An rschedule, such as an rrule or rbundle.}
+An rschedule, such as an rrule, runion, rintersect, or rsetdiff.}
 }
 \value{
 A Date vector of events.

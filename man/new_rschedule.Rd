@@ -39,7 +39,7 @@ containing the complete ordered set of events in the event set of
 that rschedule.
 }
 \details{
-An rschedule is an abstract class that rrule and rbundle both inherit from.
+An rschedule is an abstract class that rrule and rset both inherit from.
 The sole functionality of rschedule classes is to provide a method for
 \code{rschedule_events()}.
 }

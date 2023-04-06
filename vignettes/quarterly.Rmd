@@ -215,7 +215,7 @@ wday(fridays, label = TRUE)
 
 ## Combining with other rules
 
-Remember that each of these results are just rbundles that can be combined with other rules if you need to create more complex quarterly strategies. For example, let's take the "last Friday of the quarter" runion and combine it with a rule for "on every Wednesday".
+Remember that each of these results are just rsets that can be combined with other rules if you need to create more complex quarterly strategies. For example, let's take the "last Friday of the quarter" runion and combine it with a rule for "on every Wednesday".
 
 ```{r}
 on_wednesdays <- weekly() %>%

@@ -29,7 +29,7 @@ A vector of dates.}
 
 \item{rschedule}{\verb{[rschedule]}
 
-An rschedule, such as an rrule or rbundle.}
+An rschedule, such as an rrule, runion, rintersect, or rsetdiff.}
 }
 \value{
 An adjusted vector of Dates.

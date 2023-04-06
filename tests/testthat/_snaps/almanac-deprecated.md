@@ -69,7 +69,7 @@
       )
     Output
       <error/almanac_error_date_below_minimum>
-      Error in `new_rbundle()`:
+      Error in `add_rdates()`:
       ! `rdates` must be larger than `0100-01-01`.
     Code
       expect_error(add_exdates(runion(), lb), NA)
@@ -77,7 +77,7 @@
       )
     Output
       <error/almanac_error_date_below_minimum>
-      Error in `new_rbundle()`:
+      Error in `add_exdates()`:
       ! `exdates` must be larger than `0100-01-01`.
     Code
       expect_error(add_rdates(runion(), ub), NA)
@@ -85,7 +85,7 @@
       )
     Output
       <error/almanac_error_date_above_maximum>
-      Error in `new_rbundle()`:
+      Error in `add_rdates()`:
       ! `rdates` must be smaller than `9999-12-31`.
     Code
       expect_error(add_exdates(runion(), ub), NA)
@@ -93,6 +93,6 @@
       )
     Output
       <error/almanac_error_date_above_maximum>
-      Error in `new_rbundle()`:
+      Error in `add_exdates()`:
       ! `exdates` must be smaller than `9999-12-31`.
 

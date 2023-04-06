@@ -89,9 +89,9 @@ step_over_thanksgiving <- stepper(on_thanksgiving)
 wednesday_before_thanksgiving %s+% step_over_thanksgiving(2)
 ```
 
-## Recurrence Bundles
+## Recurrence Sets
 
-The above example just scratches the surface of what almanac can do. Practically speaking, you'll probably have multiple holidays and events that you'd like to combine into one big recurrence object. This is known as a _recurrence bundle_.
+The above example just scratches the surface of what almanac can do. Practically speaking, you'll probably have multiple holidays and events that you'd like to combine into one big recurrence object. This is known as a _recurrence set_.
 
 This example creates recurrence rules for weekends and Christmas, and bundles them together along with the Thanksgiving rule in such a way that we get the _union_ of the underlying event sets.
 
@@ -112,7 +112,7 @@ bundle <- runion(
 bundle
 ```
 
-We can create a stepper that steps over all of the events in the bundle. If these two holidays were the only ones that your company celebrated, the stepper could be viewed as a way to step forward by a "business day".
+We can create a stepper that steps over all of the events in the set. If these two holidays were the only ones that your company celebrated, the stepper could be viewed as a way to step forward by a "business day".
 
 For example, Christmas was on a Monday in 2006. If you wanted to step 1 business day forward from the Friday before Christmas, you'd probably like it to step over the weekend and the Christmas Monday to Tuesday. The `bundle` lets you do exactly that!
 
