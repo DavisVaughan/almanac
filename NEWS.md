@@ -1,5 +1,15 @@
 # almanac (development version)
 
+* The following developer facing functions have been removed because they are
+  either no longer applicable or provided extension mechanisms that are not
+  very useful in practice (#93):
+  
+  * `new_rbundle()`
+  * `new_runion()`
+  * `new_rintersect()`
+  * `new_rsetdiff()`
+  * `rbundle_restore()`
+
 * The family of `add_*()` functions has been deprecated (#92).
 
   * `add_rschedule()` has been deprecated in favor of using the `...` argument
