@@ -156,10 +156,11 @@
 <span>  <span class="fu"><a href="reference/recur_on_day_of_month.html">recur_on_day_of_month</a></span><span class="op">(</span><span class="fl">25</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="reference/recur_on_month_of_year.html">recur_on_month_of_year</a></span><span class="op">(</span><span class="st">"Dec"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">bundle</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/rbundle-set.html">runion</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="reference/rbundle-add.html">add_rschedule</a></span><span class="op">(</span><span class="va">on_weekends</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="reference/rbundle-add.html">add_rschedule</a></span><span class="op">(</span><span class="va">on_christmas</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="reference/rbundle-add.html">add_rschedule</a></span><span class="op">(</span><span class="va">on_thanksgiving</span><span class="op">)</span></span>
+<span><span class="va">bundle</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/rbundle-set.html">runion</a></span><span class="op">(</span></span>
+<span>  <span class="va">on_weekends</span>,</span>
+<span>  <span class="va">on_christmas</span>,</span>
+<span>  <span class="va">on_thanksgiving</span></span>
+<span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">bundle</span></span>
 <span><span class="co">#&gt; &lt;runion[3]&gt;</span></span>

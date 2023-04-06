@@ -57,7 +57,14 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="almanac-development-version">almanac (development version)<a class="anchor" aria-label="anchor" href="#almanac-development-version"></a></h2>
-<ul><li><p><code><a href="../reference/rbundle-set.html">runion()</a></code>, <code><a href="../reference/rbundle-set.html">rintersect()</a></code>, and <code><a href="../reference/rbundle-set.html">rsetdiff()</a></code> have all gained <code>...</code> which allows you to provide the relevant rschedules on creation of these rschedules. This is now the preferred way to create these set-based rschedules (<a href="https://github.com/DavisVaughan/almanac/issues/91" class="external-link">#91</a>).</p></li>
+<ul><li>
+<p>The family of <code>add_*()</code> functions has been deprecated (<a href="https://github.com/DavisVaughan/almanac/issues/92" class="external-link">#92</a>).</p>
+<ul><li><p><code><a href="../reference/rbundle-add.html">add_rschedule()</a></code> has been deprecated in favor of using the <code>...</code> argument of <code><a href="../reference/rbundle-set.html">runion()</a></code>, <code><a href="../reference/rbundle-set.html">rintersect()</a></code>, and <code><a href="../reference/rbundle-set.html">rsetdiff()</a></code> directly.</p></li>
+<li><p><code><a href="../reference/rbundle-add.html">add_rdates()</a></code> has been deprecated in favor of using a combination of <code><a href="../reference/rbundle-set.html">runion()</a></code> and <code><a href="../reference/rcustom.html">rcustom()</a></code>.</p></li>
+<li><p><code><a href="../reference/rbundle-add.html">add_exdates()</a></code> has been deprecated in favor of using a combination of <code><a href="../reference/rbundle-set.html">rsetdiff()</a></code> and <code><a href="../reference/rcustom.html">rcustom()</a></code>.</p></li>
+</ul><p>These functions are being aggressively deprecated and will be removed in the next minor version of almanac.</p>
+</li>
+<li><p><code><a href="../reference/rbundle-set.html">runion()</a></code>, <code><a href="../reference/rbundle-set.html">rintersect()</a></code>, and <code><a href="../reference/rbundle-set.html">rsetdiff()</a></code> have all gained <code>...</code> which allows you to provide the relevant rschedules on creation of these rschedules. This is now the preferred way to create these set-based rschedules (<a href="https://github.com/DavisVaughan/almanac/issues/91" class="external-link">#91</a>).</p></li>
 <li><p>New <code><a href="../reference/rcustom.html">rcustom()</a></code> for creating an rschedule from manually defined event dates (<a href="https://github.com/DavisVaughan/almanac/issues/90" class="external-link">#90</a>).</p></li>
 <li>
 <p>The following functions have been deprecated in favor of more intuitively named alternatives (<a href="https://github.com/DavisVaughan/almanac/issues/83" class="external-link">#83</a>):</p>
