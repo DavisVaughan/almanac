@@ -19,7 +19,7 @@ test_that("class is required", {
 
 test_that("can create rschedule subclasses", {
   x <- new_rschedule(x = 1, class = "foobar")
-  expect_identical(x, structure(list(x = 1), class = c("foobar", "rschedule")))
+  expect_identical(x, structure(list(x = 1), class = c("foobar", "almanac_rschedule")))
 })
 
 # ------------------------------------------------------------------------------

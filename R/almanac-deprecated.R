@@ -260,7 +260,7 @@ check_rset <- function(x,
                        call = caller_env()) {
   check_inherits(
     x = x,
-    what = "rset",
+    what = "almanac_rset",
     allow_null = allow_null,
     arg = arg,
     call = call
@@ -273,7 +273,7 @@ rset_restore <- function(x, to) {
 }
 
 #' @export
-rset_restore.rintersect <- function(x, to) {
+rset_restore.almanac_rintersect <- function(x, to) {
   new_rintersect(
     rschedules = x$rschedules,
     rdates = x$rdates,
@@ -282,7 +282,7 @@ rset_restore.rintersect <- function(x, to) {
 }
 
 #' @export
-rset_restore.runion <- function(x, to) {
+rset_restore.almanac_runion <- function(x, to) {
   new_runion(
     rschedules = x$rschedules,
     rdates = x$rdates,
@@ -291,7 +291,7 @@ rset_restore.runion <- function(x, to) {
 }
 
 #' @export
-rset_restore.rsetdiff <- function(x, to) {
+rset_restore.almanac_rsetdiff <- function(x, to) {
   new_rsetdiff(
     rschedules = x$rschedules,
     rdates = x$rdates,

@@ -81,7 +81,7 @@ new_runion <- function(rschedules = list(),
     exdates = exdates,
     cache = cache,
     ...,
-    class = c(class, "runion")
+    class = c(class, "almanac_runion")
   )
 }
 
@@ -110,7 +110,7 @@ new_rintersect <- function(rschedules = list(),
     exdates = exdates,
     cache = cache,
     ...,
-    class = c(class, "rintersect")
+    class = c(class, "almanac_rintersect")
   )
 }
 
@@ -139,7 +139,7 @@ new_rsetdiff <- function(rschedules = list(),
     exdates = exdates,
     cache = cache,
     ...,
-    class = c(class, "rsetdiff")
+    class = c(class, "almanac_rsetdiff")
   )
 }
 
@@ -166,41 +166,41 @@ new_rset <- function(rschedules = list(),
     rdates = rdates,
     exdates = exdates,
     ...,
-    class = c(class, "rset")
+    class = c(class, "almanac_rset")
   )
 }
 
 # ------------------------------------------------------------------------------
 
 #' @export
-rschedule_events.runion <- function(x) {
+rschedule_events.almanac_runion <- function(x) {
   x$cache$get_events()
 }
 
 #' @export
-rschedule_events.rintersect <- function(x) {
+rschedule_events.almanac_rintersect <- function(x) {
   x$cache$get_events()
 }
 
 #' @export
-rschedule_events.rsetdiff <- function(x) {
+rschedule_events.almanac_rsetdiff <- function(x) {
   x$cache$get_events()
 }
 
 # ------------------------------------------------------------------------------
 
 #' @export
-print.runion <- function(x, ...) {
+print.almanac_runion <- function(x, ...) {
   print_rset(x, "runion")
 }
 
 #' @export
-print.rintersect <- function(x, ...) {
+print.almanac_rintersect <- function(x, ...) {
   print_rset(x, "rintersect")
 }
 
 #' @export
-print.rsetdiff <- function(x, ...) {
+print.almanac_rsetdiff <- function(x, ...) {
   print_rset(x, "rsetdiff")
 }
 

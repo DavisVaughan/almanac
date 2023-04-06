@@ -21,7 +21,7 @@
       new_stepper(rschedule = 1)
     Condition
       Error in `new_stepper()`:
-      ! `rschedule` must be a <rschedule>, not the number 1.
+      ! `rschedule` must be a <almanac_rschedule>, not the number 1.
 
 # default method error is thrown
 

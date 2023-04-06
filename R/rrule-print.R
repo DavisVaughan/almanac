@@ -1,5 +1,5 @@
 #' @export
-print.rrule <- function(x, ...) {
+print.almanac_rrule <- function(x, ...) {
   cli::cli_text("<rrule>")
   cli::cli_ul(format_body(x))
   invisible(x)

@@ -46,7 +46,7 @@ test_that("`...` must be named", {
 
 test_that("can create an empty runion()", {
   x <- runion()
-  expect_s3_class(x, "runion")
+  expect_s3_class(x, "almanac_runion")
   expect_identical(x$rschedules, list())
   expect_identical(x$rdates, new_date())
   expect_identical(x$exdates, new_date())
@@ -106,12 +106,12 @@ test_that("can add an runion to an runion", {
 # new_runion()
 
 test_that("can construct a new runion", {
-  expect_s3_class(new_runion(), c("runion", "rset", "rschedule"))
+  expect_s3_class(new_runion(), c("almanac_runion", "almanac_rset", "almanac_rschedule"))
 })
 
 test_that("can subclass runion", {
   x <- new_runion(foo = 1, class = "rsubclass")
-  expect_s3_class(x, c("rsubclass", "runion", "rset", "rschedule"), exact = TRUE)
+  expect_s3_class(x, c("rsubclass", "almanac_runion", "almanac_rset", "almanac_rschedule"), exact = TRUE)
   expect_identical(x$foo, 1)
 })
 
@@ -120,7 +120,7 @@ test_that("can subclass runion", {
 
 test_that("can create an empty rintersect()", {
   x <- rintersect()
-  expect_s3_class(x, "rintersect")
+  expect_s3_class(x, "almanac_rintersect")
   expect_identical(x$rschedules, list())
   expect_identical(x$rdates, new_date())
   expect_identical(x$exdates, new_date())
@@ -160,12 +160,12 @@ test_that("rintersect takes the intersection", {
 # new_rintersect()
 
 test_that("can construct a new rintersect", {
-  expect_s3_class(new_rintersect(), c("rintersect", "rset", "rschedule"))
+  expect_s3_class(new_rintersect(), c("almanac_rintersect", "almanac_rset", "almanac_rschedule"))
 })
 
 test_that("can subclass rintersect", {
   x <- new_rintersect(foo = 1, class = "rsubclass")
-  expect_s3_class(x, c("rsubclass", "rintersect", "rset", "rschedule"), exact = TRUE)
+  expect_s3_class(x, c("rsubclass", "almanac_rintersect", "almanac_rset", "almanac_rschedule"), exact = TRUE)
   expect_identical(x$foo, 1)
 })
 
@@ -174,7 +174,7 @@ test_that("can subclass rintersect", {
 
 test_that("can create an empty rsetdiff()", {
   x <- rsetdiff()
-  expect_s3_class(x, "rsetdiff")
+  expect_s3_class(x, "almanac_rsetdiff")
   expect_identical(x$rschedules, list())
   expect_identical(x$rdates, new_date())
   expect_identical(x$exdates, new_date())
@@ -217,12 +217,12 @@ test_that("rsetdiff takes the set difference from left to right", {
 # new_rsetdiff()
 
 test_that("can construct a new rsetdiff", {
-  expect_s3_class(new_rsetdiff(), c("rsetdiff", "rset", "rschedule"))
+  expect_s3_class(new_rsetdiff(), c("almanac_rsetdiff", "almanac_rset", "almanac_rschedule"))
 })
 
 test_that("can subclass rsetdiff", {
   x <- new_rsetdiff(foo = 1, class = "rsubclass")
-  expect_s3_class(x, c("rsubclass", "rsetdiff", "rset", "rschedule"), exact = TRUE)
+  expect_s3_class(x, c("rsubclass", "almanac_rsetdiff", "almanac_rset", "almanac_rschedule"), exact = TRUE)
   expect_identical(x$foo, 1)
 })
 

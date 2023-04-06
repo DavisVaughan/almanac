@@ -46,7 +46,7 @@
       check_rrule(1)
     Condition
       Error:
-      ! `1` must be a <rrule>, not the number 1.
+      ! `1` must be a <almanac_rrule>, not the number 1.
 
 ---
 
@@ -54,5 +54,5 @@
       check_rrule(1, allow_null = TRUE)
     Condition
       Error:
-      ! `1` must be a <rrule> or `NULL`, not the number 1.
+      ! `1` must be a <almanac_rrule> or `NULL`, not the number 1.
 

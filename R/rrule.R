@@ -108,7 +108,7 @@ yearly <- function(since = "1900-01-01", until = "2100-01-01") {
 # ------------------------------------------------------------------------------
 
 #' @export
-rschedule_events.rrule <- function(x) {
+rschedule_events.almanac_rrule <- function(x) {
   x$cache$get_events()
 }
 
@@ -172,14 +172,14 @@ new_rrule <- function(since = as.Date("1900-01-01"),
   new_rschedule(
     rules = rules,
     cache = cache,
-    class = "rrule"
+    class = "almanac_rrule"
   )
 }
 
 # ------------------------------------------------------------------------------
 
 is_rrule <- function(x) {
-  inherits(x, "rrule")
+  inherits(x, "almanac_rrule")
 }
 
 all_are_rrules <- function(x) {
@@ -193,7 +193,7 @@ check_rrule <- function(x,
                         call = caller_env()) {
   check_inherits(
     x = x,
-    what = "rrule",
+    what = "almanac_rrule",
     allow_null = allow_null,
     arg = arg,
     call = call

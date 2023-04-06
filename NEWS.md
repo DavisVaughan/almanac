@@ -1,5 +1,8 @@
 # almanac (development version)
 
+* All almanac class names are now prefixed with `almanac_*` to avoid potential
+  clashes with other packages.
+
 * The `recur_with_week_start()` argument `wday` has been renamed to `day`.
 
 * The following developer facing functions have been removed because they are

@@ -1,7 +1,7 @@
 
 test_that("can create an radjusted rschedule", {
   x <- radjusted(daily(), daily(), adj_none)
-  expect_s3_class(x, c("radjusted", "rschedule"))
+  expect_s3_class(x, c("almanac_radjusted", "almanac_rschedule"))
 })
 
 test_that("radjusted adjusts dates", {

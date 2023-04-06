@@ -28,5 +28,5 @@
       rschedule_events(x)
     Condition
       Error in `rschedule_events()`:
-      ! <rschedule> subclasses must provide their own `rschedule_events()` method.
+      ! <almanac_rschedule> subclasses must provide their own `rschedule_events()` method.
 

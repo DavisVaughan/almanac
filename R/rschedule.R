@@ -55,7 +55,7 @@ new_rschedule <- function(..., class) {
     abort("`...` must have named elements.")
   }
 
-  structure(data, class = c(class, "rschedule"))
+  structure(data, class = c(class, "almanac_rschedule"))
 }
 
 # ------------------------------------------------------------------------------
@@ -73,14 +73,14 @@ rschedule_events.default <- function(x) {
 }
 
 #' @export
-rschedule_events.rschedule <- function(x) {
-  cli::cli_abort("<rschedule> subclasses must provide their own `rschedule_events()` method.")
+rschedule_events.almanac_rschedule <- function(x) {
+  cli::cli_abort("<almanac_rschedule> subclasses must provide their own `rschedule_events()` method.")
 }
 
 # ------------------------------------------------------------------------------
 
 is_rschedule <- function(x) {
-  inherits(x, "rschedule")
+  inherits(x, "almanac_rschedule")
 }
 
 check_rschedule <- function(x,
@@ -90,7 +90,7 @@ check_rschedule <- function(x,
                             call = caller_env()) {
   check_inherits(
     x = x,
-    what = "rschedule",
+    what = "almanac_rschedule",
     allow_null = allow_null,
     arg = arg,
     call = call

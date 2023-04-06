@@ -63,7 +63,7 @@ radjusted <- function(rschedule, adjust_on, adjustment) {
 # ------------------------------------------------------------------------------
 
 #' @export
-print.radjusted <- function(x, ...) {
+print.almanac_radjusted <- function(x, ...) {
   cli::cli_text("<radjusted>")
 
   cli_indented()
@@ -82,7 +82,7 @@ print.radjusted <- function(x, ...) {
 # ------------------------------------------------------------------------------
 
 #' @export
-rschedule_events.radjusted <- function(x) {
+rschedule_events.almanac_radjusted <- function(x) {
   x$cache$get_events()
 }
 
@@ -104,7 +104,7 @@ new_radjusted <- function(rschedule, adjust_on, adjustment) {
     adjust_on = adjust_on,
     adjustment = adjustment,
     cache = cache,
-    class = "radjusted"
+    class = "almanac_radjusted"
   )
 }
 

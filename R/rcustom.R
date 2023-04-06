@@ -41,11 +41,11 @@ rcustom <- function(events) {
 
 new_rcustom <- function(events, ..., class = character()) {
   check_date(events)
-  new_rschedule(events = events, ..., class = c(class, "rcustom"))
+  new_rschedule(events = events, ..., class = c(class, "almanac_rcustom"))
 }
 
 #' @export
-print.rcustom <- function(x, ...) {
+print.almanac_rcustom <- function(x, ...) {
   events <- rcustom_events(x)
   events <- as.character(events)
 
@@ -63,7 +63,7 @@ print.rcustom <- function(x, ...) {
 }
 
 #' @export
-rschedule_events.rcustom <- function(x) {
+rschedule_events.almanac_rcustom <- function(x) {
   rcustom_events(x)
 }
 
