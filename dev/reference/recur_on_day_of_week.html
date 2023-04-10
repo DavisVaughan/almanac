@@ -123,7 +123,8 @@ days of the week, call <code>recur_on_day_of_week()</code> twice with different 
 values.</p>
 <p>It is particularly important to pay attention to the <code>since</code> date when using
 weekly rules. The day of the week to use comes from the <code>since</code> date, which,
-by default, is a Monday (<code>1900-01-01</code>).</p>
+by default, is a Monday (<code>1900-01-01</code>). See <code><a href="almanac-defaults.html">almanac_since()</a></code> for more
+information.</p>
     </div>
 
     <div class="section level2">
@@ -134,7 +135,7 @@ by default, is a Monday (<code>1900-01-01</code>).</p>
 <span class="r-in"><span><span class="va">start</span> <span class="op">&lt;-</span> <span class="st">"1999-01-01"</span> <span class="co"># &lt;- a Friday</span></span></span>
 <span class="r-in"><span><span class="va">end</span> <span class="op">&lt;-</span> <span class="st">"1999-03-01"</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># This finds the first Thursday, and then continues from there</span></span></span>
+<span class="r-in"><span><span class="co"># This finds the first Monday, and then continues from there</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="alma_search.html">alma_search</a></span><span class="op">(</span><span class="va">start</span>, <span class="va">end</span>, <span class="va">on_weekly_mondays</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "1999-01-04" "1999-01-11" "1999-01-18" "1999-01-25" "1999-02-01"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [6] "1999-02-08" "1999-02-15" "1999-02-22" "1999-03-01"</span>

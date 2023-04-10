@@ -114,8 +114,7 @@
 <span><span class="va">on_thanksgiving</span></span>
 <span><span class="co">#&gt; &lt;rrule&gt;</span></span>
 <span><span class="co">#&gt; • frequency: yearly</span></span>
-<span><span class="co">#&gt; • since: 1900-01-01</span></span>
-<span><span class="co">#&gt; • until: 2100-01-01</span></span>
+<span><span class="co">#&gt; • range: [1900-01-01, 2100-01-01]</span></span>
 <span><span class="co">#&gt; • month of year: Nov</span></span>
 <span><span class="co">#&gt; • day of week: Thu[4]</span></span></code></pre></div>
 <p>After constructing a recurrence rule, it can be used to generate dates that are in the “event set”. For example, you can search for all Thanksgivings between 2000-2006.</p>
@@ -166,19 +165,16 @@
 <span><span class="co">#&gt; &lt;runion[3]&gt;</span></span>
 <span><span class="co">#&gt;  &lt;rrule&gt;</span></span>
 <span><span class="co">#&gt;  • frequency: weekly</span></span>
-<span><span class="co">#&gt;  • since: 1900-01-01</span></span>
-<span><span class="co">#&gt;  • until: 2100-01-01</span></span>
+<span><span class="co">#&gt;  • range: [1900-01-01, 2100-01-01]</span></span>
 <span><span class="co">#&gt;  • day of week: Sat, and Sun</span></span>
 <span><span class="co">#&gt;  &lt;rrule&gt;</span></span>
 <span><span class="co">#&gt;  • frequency: yearly</span></span>
-<span><span class="co">#&gt;  • since: 1900-01-01</span></span>
-<span><span class="co">#&gt;  • until: 2100-01-01</span></span>
+<span><span class="co">#&gt;  • range: [1900-01-01, 2100-01-01]</span></span>
 <span><span class="co">#&gt;  • month of year: Dec</span></span>
 <span><span class="co">#&gt;  • day of month: 25</span></span>
 <span><span class="co">#&gt;  &lt;rrule&gt;</span></span>
 <span><span class="co">#&gt;  • frequency: yearly</span></span>
-<span><span class="co">#&gt;  • since: 1900-01-01</span></span>
-<span><span class="co">#&gt;  • until: 2100-01-01</span></span>
+<span><span class="co">#&gt;  • range: [1900-01-01, 2100-01-01]</span></span>
 <span><span class="co">#&gt;  • month of year: Nov</span></span>
 <span><span class="co">#&gt;  • day of week: Thu[4]</span></span></code></pre></div>
 <p>We can create a stepper that steps over all of the events in the set. If these two holidays were the only ones that your company celebrated, the stepper could be viewed as a way to step forward by a “business day”.</p>

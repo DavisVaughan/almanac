@@ -114,8 +114,7 @@ this will declare that 1 value per year is an event.</p>
 <span><span class="va">on_yearly</span></span>
 <span><span class="co">#&gt; &lt;rrule&gt;</span></span>
 <span><span class="co">#&gt; • frequency: yearly</span></span>
-<span><span class="co">#&gt; • since: 1900-01-01</span></span>
-<span><span class="co">#&gt; • until: 2100-01-01</span></span></code></pre></div>
+<span><span class="co">#&gt; • range: [1900-01-01, 2100-01-01]</span></span></code></pre></div>
 <p>The return value of <code><a href="../reference/rrule.html">yearly()</a></code> is a <em>rrule</em> object,
 short for “recurrence rule”. This base object is all you need to start
 doing something useful. For example, you can pass this rrule to
@@ -133,9 +132,10 @@ date of the recurrence rule, and information such as the month, or the
 day of the month to use if no other conditions have been specified to
 override those.</p>
 <p>The default of <code>since</code> is set to <code>1900-01-01</code>,
-but this is arbitrary. It is because of this default that in the above
-example with <code><a href="../reference/alma_search.html">alma_search()</a></code> we get values on January 1st.
-Let’s change that.</p>
+but this is arbitrary (see <code><a href="../reference/almanac-defaults.html">almanac_since()</a></code>). It is because
+of this default that in the above example with
+<code><a href="../reference/alma_search.html">alma_search()</a></code> we get values on January 1st. Let’s change
+that.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">on_yearly_jan_5</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rrule.html">yearly</a></span><span class="op">(</span>since <span class="op">=</span> <span class="st">"1990-01-05"</span><span class="op">)</span></span>
 <span></span>
@@ -152,7 +152,7 @@ and find yearly dates before 1990, they will not be included.</p>
 <p>There is also an <code>until</code> argument to <code><a href="../reference/rrule.html">yearly()</a></code>
 that controls the upper bound of the range to look in. This is
 arbitrarily set to <code>2100-01-01</code>, but can be expanded or
-contracted as required.</p>
+contracted as required (see <code><a href="../reference/almanac-defaults.html">almanac_until()</a></code>).</p>
 </div>
 <div class="section level2">
 <h2 id="event-set">Event Set<a class="anchor" aria-label="anchor" href="#event-set"></a>
@@ -222,12 +222,12 @@ of a recurrence rule is generally slower than repeated uses.</p>
 <span><span class="co"># The first time is "slow"</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/alma_search.html">alma_search</a></span><span class="op">(</span><span class="va">since</span>, <span class="st">"2000-01-01"</span>, <span class="va">on_weekly</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.105   0.007   0.095</span></span>
+<span><span class="co">#&gt;   0.126   0.000   0.105</span></span>
 <span></span>
 <span><span class="co"># Repeated access is fast</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/alma_search.html">alma_search</a></span><span class="op">(</span><span class="va">since</span>, <span class="st">"2000-01-01"</span>, <span class="va">on_weekly</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;       0       0       0</span></span>
+<span><span class="co">#&gt;   0.001   0.000   0.001</span></span>
 <span></span>
 <span><span class="co"># The entire event set is cached, so even if you change the arguments,</span></span>
 <span><span class="co"># the operation is still fast.</span></span>

@@ -57,7 +57,9 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="almanac-development-version">almanac (development version)<a class="anchor" aria-label="anchor" href="#almanac-development-version"></a></h2>
-<ul><li><p><code><a href="../reference/alma_events.html">alma_events()</a></code> has gained a <code>year</code> argument to limit the returned set of events to specific years.</p></li>
+<ul><li><p><code><a href="../reference/recur_for_count.html">recur_for_count()</a></code> no longer overrides <code>until</code> (<a href="https://github.com/DavisVaughan/almanac/issues/95" class="external-link">#95</a>).</p></li>
+<li><p>New <code><a href="../reference/almanac-defaults.html">almanac_since()</a></code> and <code><a href="../reference/almanac-defaults.html">almanac_until()</a></code> helpers to access the default <code>since</code> and <code>until</code> values used for all rules (<a href="https://github.com/DavisVaughan/almanac/issues/95" class="external-link">#95</a>).</p></li>
+<li><p><code><a href="../reference/alma_events.html">alma_events()</a></code> has gained a <code>year</code> argument to limit the returned set of events to specific years.</p></li>
 <li><p>New <code><a href="../reference/roffset.html">roffset()</a></code> for creating an rschedule with events that are offset from an existing rschedule (<a href="https://github.com/DavisVaughan/almanac/issues/94" class="external-link">#94</a>).</p></li>
 <li><p>The <code>offset</code> argument of <code><a href="../reference/recur_on_easter.html">recur_on_easter()</a></code> is deprecated in favor of using <code><a href="../reference/roffset.html">roffset()</a></code> (<a href="https://github.com/DavisVaughan/almanac/issues/94" class="external-link">#94</a>).</p></li>
 <li><p>All almanac class names are now prefixed with <code>almanac_*</code> to avoid potential clashes with other packages.</p></li>
