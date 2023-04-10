@@ -1,5 +1,10 @@
 # almanac (development version)
 
+* `recur_for_count()` no longer overrides `until` (#95).
+
+* New `almanac_since()` and `almanac_until()` helpers to access the default
+  `since` and `until` values used for all rules (#95).
+
 * `alma_events()` has gained a `year` argument to limit the returned set of
   events to specific years.
 
