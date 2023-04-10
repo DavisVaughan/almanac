@@ -119,12 +119,10 @@
       <runion[2]>
        <rrule>
        * frequency: daily
-       * since: 1900-01-01
-       * until: 2100-01-01
+       * range: [1900-01-01, 2100-01-01]
        <rrule>
        * frequency: yearly
-       * since: 1900-01-01
-       * until: 2100-01-01
+       * range: [1900-01-01, 2100-01-01]
 
 # rintersect() generates informative output
 
@@ -140,12 +138,10 @@
       <rintersect[2]>
        <rrule>
        * frequency: daily
-       * since: 1900-01-01
-       * until: 2100-01-01
+       * range: [1900-01-01, 2100-01-01]
        <rrule>
        * frequency: yearly
-       * since: 1900-01-01
-       * until: 2100-01-01
+       * range: [1900-01-01, 2100-01-01]
 
 # rsetdiff() generates informative output
 
@@ -161,10 +157,8 @@
       <rsetdiff[2]>
        <rrule>
        * frequency: daily
-       * since: 1900-01-01
-       * until: 2100-01-01
+       * range: [1900-01-01, 2100-01-01]
        <rrule>
        * frequency: yearly
-       * since: 1900-01-01
-       * until: 2100-01-01
+       * range: [1900-01-01, 2100-01-01]
 

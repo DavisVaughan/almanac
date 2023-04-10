@@ -48,8 +48,7 @@ on_thanksgiving <- yearly() %>%
 on_thanksgiving
 #> <rrule>
 #> • frequency: yearly
-#> • since: 1900-01-01
-#> • until: 2100-01-01
+#> • range: [1900-01-01, 2100-01-01]
 #> • month of year: Nov
 #> • day of week: Thu[4]
 ```
@@ -126,19 +125,16 @@ bundle
 #> <runion[3]>
 #>  <rrule>
 #>  • frequency: weekly
-#>  • since: 1900-01-01
-#>  • until: 2100-01-01
+#>  • range: [1900-01-01, 2100-01-01]
 #>  • day of week: Sat, and Sun
 #>  <rrule>
 #>  • frequency: yearly
-#>  • since: 1900-01-01
-#>  • until: 2100-01-01
+#>  • range: [1900-01-01, 2100-01-01]
 #>  • month of year: Dec
 #>  • day of month: 25
 #>  <rrule>
 #>  • frequency: yearly
-#>  • since: 1900-01-01
-#>  • until: 2100-01-01
+#>  • range: [1900-01-01, 2100-01-01]
 #>  • month of year: Nov
 #>  • day of week: Thu[4]
 ```

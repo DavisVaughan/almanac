@@ -13,7 +13,7 @@ x \%s+\% y
 
 x \%s-\% y
 
-workdays(n, since = "1900-01-01", until = "2100-01-01")
+workdays(n, since = NULL, until = NULL)
 }
 \arguments{
 \item{rschedule}{\verb{[rschedule]}

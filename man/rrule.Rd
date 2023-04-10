@@ -8,13 +8,13 @@
 \alias{yearly}
 \title{Create a recurrence rule}
 \usage{
-daily(since = "1900-01-01", until = "2100-01-01")
+daily(since = NULL, until = NULL)
 
-weekly(since = "1900-01-01", until = "2100-01-01")
+weekly(since = NULL, until = NULL)
 
-monthly(since = "1900-01-01", until = "2100-01-01")
+monthly(since = NULL, until = NULL)
 
-yearly(since = "1900-01-01", until = "2100-01-01")
+yearly(since = NULL, until = NULL)
 }
 \arguments{
 \item{since}{\verb{[Date(1)]}
@@ -44,7 +44,8 @@ to them, use one of the \verb{recur_*()} functions.
 \details{
 By default, \code{since == "1900-01-01"} and \code{until == "2100-01-01"}, which should
 capture most use cases well while still being performant. You may need to
-adjust these dates if you want events outside this range.
+adjust these dates if you want events outside this range. See
+\code{\link[=almanac_since]{almanac_since()}} and \code{\link[=almanac_until]{almanac_until()}} for more information.
 
 In terms of speed, it is generally more efficient if you adjust the \code{since}
 and \code{until} date to be closer to the first date in the sequence of dates

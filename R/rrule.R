@@ -16,7 +16,8 @@
 #' @details
 #' By default, `since == "1900-01-01"` and `until == "2100-01-01"`, which should
 #' capture most use cases well while still being performant. You may need to
-#' adjust these dates if you want events outside this range.
+#' adjust these dates if you want events outside this range. See
+#' [almanac_since()] and [almanac_until()] for more information.
 #'
 #' In terms of speed, it is generally more efficient if you adjust the `since`
 #' and `until` date to be closer to the first date in the sequence of dates
@@ -83,25 +84,25 @@ NULL
 
 #' @rdname rrule
 #' @export
-daily <- function(since = "1900-01-01", until = "2100-01-01") {
+daily <- function(since = NULL, until = NULL) {
   rrule(since, until, frequency = "daily")
 }
 
 #' @rdname rrule
 #' @export
-weekly <- function(since = "1900-01-01", until = "2100-01-01") {
+weekly <- function(since = NULL, until = NULL) {
   rrule(since, until, frequency = "weekly")
 }
 
 #' @rdname rrule
 #' @export
-monthly <- function(since = "1900-01-01", until = "2100-01-01") {
+monthly <- function(since = NULL, until = NULL) {
   rrule(since, until, frequency = "monthly")
 }
 
 #' @rdname rrule
 #' @export
-yearly <- function(since = "1900-01-01", until = "2100-01-01") {
+yearly <- function(since = NULL, until = NULL) {
   rrule(since, until, frequency = "yearly")
 }
 
@@ -115,6 +116,13 @@ rschedule_events.almanac_rrule <- function(x) {
 # ------------------------------------------------------------------------------
 
 rrule <- function(since, until, frequency, ..., call = caller_env()) {
+  if (is_null(since)) {
+    since <- almanac_since()
+  }
+  if (is_null(until)) {
+    until <- almanac_until()
+  }
+
   since <- vec_cast_date(since, call = call)
   vec_check_size(since, size = 1L, call = call)
   check_no_missing(since, call = call)
@@ -138,8 +146,8 @@ rrule <- function(since, until, frequency, ..., call = caller_env()) {
   )
 }
 
-new_rrule <- function(since = as.Date("1900-01-01"),
-                      until = as.Date("2100-01-01"),
+new_rrule <- function(since = almanac_since(),
+                      until = almanac_until(),
                       frequency = "yearly",
                       count = NULL,
                       interval = NULL,

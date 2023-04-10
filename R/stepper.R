@@ -117,7 +117,7 @@ stepper <- function(rschedule) {
 
 #' @rdname stepper
 #' @export
-workdays <- function(n, since = "1900-01-01", until = "2100-01-01") {
+workdays <- function(n, since = NULL, until = NULL) {
   rschedule <- weekly(since = since, until = until)
   rschedule <- recur_on_weekends(rschedule)
   workdays_stepper <- stepper(rschedule)

@@ -12,8 +12,7 @@ format_body <- function(x) {
 
   info <- c(
     format_frequency(x),
-    format_since(x),
-    format_until(x),
+    format_range(x),
     format_count(x),
     format_interval(x),
     format_week_start(x),
@@ -33,19 +32,8 @@ format_frequency <- function(x) {
   cli::format_inline("frequency: {x$frequency}")
 }
 
-format_since <- function(x) {
-  cli::format_inline("since: {x$since}")
-}
-
-format_until <- function(x) {
-  until <- x$until
-
-  if (is.null(until)) {
-    # Can be overriden when setting `count`
-    character()
-  } else {
-    cli::format_inline("until: {until}")
-  }
+format_range <- function(x) {
+  cli::format_inline("range: [{x$since}, {x$until}]")
 }
 
 format_count <- function(x) {
@@ -172,4 +160,5 @@ format_easter <- function(x) {
   } else {
     cli::format_inline("easter: offset = {easter}")
   }
+
 }

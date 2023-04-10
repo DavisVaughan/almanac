@@ -37,6 +37,7 @@ reference:
 - title: Developer tools
   contents:
   - new_rschedule
+  - starts_with("almanac_")
 
 - title: Compatibility
   contents:
