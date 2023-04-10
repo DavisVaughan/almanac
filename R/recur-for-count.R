@@ -2,11 +2,12 @@
 #'
 #' @description
 #' `recur_for_count()` controls the total number of events in the recurrence
-#' set. Using `recur_for_count()` will override the `until` date of the rule.
+#' set.
 #'
 #' @details
 #' Remember that the number of times the occurrence has occurred is counted
-#' from the `since` date! Adjust it as necessary to get your desired results.
+#' from the `since` date and is limited by the `until` date! Adjust them as
+#' necessary to get your desired results.
 #'
 #' @param x `[rrule]`
 #'
@@ -46,6 +47,5 @@ recur_for_count <- function(x, n) {
   check_number_whole(n, min = 1)
   n <- vec_cast(n, to = integer())
 
-  # Override `until`
-  tweak_rrule(x, until = NULL, count = n)
+  tweak_rrule(x, count = n)
 }

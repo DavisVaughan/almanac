@@ -49,7 +49,8 @@ values.
 
 It is particularly important to pay attention to the \code{since} date when using
 weekly rules. The day of the week to use comes from the \code{since} date, which,
-by default, is a Monday (\code{1900-01-01}).
+by default, is a Monday (\code{1900-01-01}). See \code{\link[=almanac_since]{almanac_since()}} for more
+information.
 }
 \examples{
 # Using default `since` (1900-01-01, a Monday)
@@ -58,7 +59,7 @@ on_weekly_mondays <- weekly()
 start <- "1999-01-01" # <- a Friday
 end <- "1999-03-01"
 
-# This finds the first Thursday, and then continues from there
+# This finds the first Monday, and then continues from there
 alma_search(start, end, on_weekly_mondays)
 
 # We start counting from a Friday here

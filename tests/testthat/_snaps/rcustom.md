@@ -38,8 +38,7 @@
        * and 95 more
        <rrule>
        * frequency: yearly
-       * since: 1900-01-01
-       * until: 2100-01-01
+       * range: [1900-01-01, 2100-01-01]
 
 # `events` can't be missing
 

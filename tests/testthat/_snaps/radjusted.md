@@ -40,13 +40,11 @@
        adjust:
        <rrule>
        * frequency: daily
-       * since: 1900-01-01
-       * until: 2100-01-01
+       * range: [1900-01-01, 2100-01-01]
        adjust on:
        <rrule>
        * frequency: daily
-       * since: 1900-01-01
-       * until: 2100-01-01
+       * range: [1900-01-01, 2100-01-01]
     Code
       # # with runions
       rrule <- recur_on_day_of_week(weekly(), "Wed")
@@ -57,13 +55,11 @@
        adjust:
        <rrule>
        * frequency: weekly
-       * since: 1900-01-01
-       * until: 2100-01-01
+       * range: [1900-01-01, 2100-01-01]
        * day of week: Wed
        adjust on:
        <runion[1]>
         <rrule>
         * frequency: weekly
-        * since: 1900-01-01
-        * until: 2100-01-01
+        * range: [1900-01-01, 2100-01-01]
 

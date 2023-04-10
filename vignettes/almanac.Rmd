@@ -51,7 +51,7 @@ alma_search(from = "1990-01-01", to = "1995-12-31", on_yearly)
 
 What if we want a yearly value, but we want it on January 5th every year, rather than on the 1st? `yearly()` has an important argument called `since` that controls two things: the start date of the recurrence rule, and information such as the month, or the day of the month to use if no other conditions have been specified to override those.
 
-The default of `since` is set to `1900-01-01`, but this is arbitrary. It is because of this default that in the above example with `alma_search()` we get values on January 1st. Let's change that.
+The default of `since` is set to `1900-01-01`, but this is arbitrary (see `almanac_since()`). It is because of this default that in the above example with `alma_search()` we get values on January 1st. Let's change that.
 
 ```{r}
 on_yearly_jan_5 <- yearly(since = "1990-01-05")
@@ -66,7 +66,7 @@ Now that the `since` date has been set to 1990, if we try and find yearly dates 
 alma_search("1988-01-01", "1995-12-31", on_yearly_jan_5)
 ```
 
-There is also an `until` argument to `yearly()` that controls the upper bound of the range to look in. This is arbitrarily set to `2100-01-01`, but can be expanded or contracted as required.
+There is also an `until` argument to `yearly()` that controls the upper bound of the range to look in. This is arbitrarily set to `2100-01-01`, but can be expanded or contracted as required (see `almanac_until()`).
 
 ## Event Set
 

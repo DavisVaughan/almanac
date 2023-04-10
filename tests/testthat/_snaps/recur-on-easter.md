@@ -17,8 +17,7 @@
     Message
       <rrule>
       * frequency: yearly
-      * since: 1900-01-01
-      * until: 2100-01-01
+      * range: [1900-01-01, 2100-01-01]
       * easter: offset = 2
 
 # offset must be integerish

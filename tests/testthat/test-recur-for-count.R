@@ -10,8 +10,16 @@ test_that("events stop after `count` is up", {
   expect_equal(x, expect)
 })
 
-test_that("`count` overrides `until`", {
+test_that("`count` is limited by `until`", {
   rrule <- daily(since = "1970-01-01", until = "1970-01-02") %>%
+    recur_for_count(3)
+
+  expect_identical(
+    alma_search("1970-01-01", "1970-01-05", rrule),
+    new_date(c(0, 1))
+  )
+
+  rrule <- daily(since = "1970-01-01", until = "1970-01-03") %>%
     recur_for_count(3)
 
   expect_identical(
