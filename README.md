@@ -215,6 +215,8 @@ more about how to use almanac.
 
 - `vignette("almanac")`
 
+- `vignette("holidays-calendars")`
+
 - `vignette("adjust-and-shift")`
 
 - `vignette("quarterly")`
