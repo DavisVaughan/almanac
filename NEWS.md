@@ -1,5 +1,25 @@
 # almanac (development version)
 
+* New holiday and calendar API (#96):
+
+  * `rholiday()` creates a new holiday from a holiday name and a
+    rschedule that defines when the holiday occurs. There are a number of
+    pre-created holidays prefixed with `hol_*()`, such as `hol_christmas()`
+    and `hol_us_thanksgiving()`. Holidays are rschedules, so you can use all
+    of the `alma_*()` functions on them.
+    
+  * `hol_observe()`, `hol_offset()`, and `hol_rename()` are three helpers for
+    the holiday API. In particular, `hol_observe()` tweaks a holiday's
+    _observance date_ to align with when your business actually celebrated that
+    holiday.
+    
+  * `rcalendar()` bundles multiple holidays together into a calendar. Calendars
+    are similar to `runion()`s, so you can use all the `alma_*()` functions on
+    these, but they also come with their own specialized API of functions that
+    start with `cal_*()`, such as `cal_match()` to look up the holiday name a
+    date corresponds to, and `cal_events()` to filter for all of the holidays
+    within a particular year.
+
 * `recur_for_count()` no longer overrides `until` (#95).
 
 * New `almanac_since()` and `almanac_until()` helpers to access the default
