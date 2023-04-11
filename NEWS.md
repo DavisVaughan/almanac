@@ -36,11 +36,11 @@
   events to specific years.
   
 * `runion()`, `rintersect()`, and `rsetdiff()` have all gained `...` which
-  allows you to provide the relevant rschedules on creation of these rschedules.
-  This is now the preferred way to create these set-based rschedules (#91).
+  allows you to provide rschedules at creation time. This is now the preferred
+  way to create these set-based rschedules (#91).
   
-* almanac steppers created with `stepper()` now work as `.before` and
-  `.after` arguments of `slider::slide_index()` and friends (#80).
+* Steppers created with `stepper()` now work as `.before` and `.after` arguments
+  of `slider::slide_index()` and friends (#80).
 
 ## Lifecycle changes
 
