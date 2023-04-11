@@ -56,3 +56,14 @@ alma_previous <- function(x, rschedule, inclusive = FALSE) {
 alma_previous_impl <- function(x, events, inclusive) {
   .Call(export_alma_previous_impl, x, events, inclusive)
 }
+
+# ------------------------------------------------------------------------------
+
+alma_locate_next <- function(x, events, inclusive) {
+  .Call(export_alma_locate_next, x, events, inclusive)
+}
+
+alma_locate_previous <- function(x, events, inclusive) {
+  .Call(export_alma_locate_previous, x, events, inclusive)
+}
+

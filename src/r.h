@@ -10,6 +10,7 @@
 #define sexp SEXP
 #define r_type SEXPTYPE
 
+#define r_int_na NA_INTEGER
 #define r_dbl_na NA_REAL
 
 #endif

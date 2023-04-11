@@ -17,6 +17,8 @@ extern "C" sexp export_adj_nearest_impl(sexp x, sexp events);
 
 extern "C" sexp export_alma_next_impl(sexp x, sexp events, sexp inclusive);
 extern "C" sexp export_alma_previous_impl(sexp x, sexp events, sexp inclusive);
+extern "C" sexp export_alma_locate_next(sexp x, sexp events, sexp inclusive);
+extern "C" sexp export_alma_locate_previous(sexp x, sexp events, sexp inclusive);
 
 // -----------------------------------------------------------------------------
 // #include "alma-search.h"
