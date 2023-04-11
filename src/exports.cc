@@ -37,6 +37,16 @@ extern "C" sexp export_alma_previous_impl(sexp x, sexp events, sexp inclusive) {
   return alma_previous_impl(x, events, inclusive_);
 }
 
+extern "C" sexp export_alma_locate_next(sexp x, sexp events, sexp inclusive) {
+  const bool inclusive_ = r_lgl_get(inclusive, 0);
+  return alma_locate_next(x, events, inclusive_);
+}
+
+extern "C" sexp export_alma_locate_previous(sexp x, sexp events, sexp inclusive) {
+  const bool inclusive_ = r_lgl_get(inclusive, 0);
+  return alma_locate_previous(x, events, inclusive_);
+}
+
 // -----------------------------------------------------------------------------
 #include "alma-search.h"
 

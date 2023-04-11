@@ -378,6 +378,69 @@ cal_remove <- function(x, what) {
 
 # ------------------------------------------------------------------------------
 
+#' Calendar locations
+#'
+#' @description
+#' - `cal_next()` generates the next holiday after `x`.
+#'
+#' - `cal_previous()` generates the previous holiday before `x`.
+#'
+#' If no holiday exists before/after `x`, a missing row is generated.
+#'
+#' @inheritParams rlang::args_dots_empty
+#' @inheritParams alma_next
+#'
+#' @param rcalendar `[rcalendar]`
+#'
+#'   An rcalendar.
+#'
+#' @returns
+#' A two column data frame, like `cal_events()`, which is the same size as `x`
+#' and contains either the next or previous holiday relative to `x`.
+#'
+#' @name calendar-locations
+#' @examples
+#' x <- as.Date(c("2023-04-11", "2023-08-10", "2021-05-06"))
+#' cal <- cal_us_federal()
+#'
+#' cal_next(x, cal)
+#' cal_previous(x, cal)
+NULL
+
+#' @export
+#' @rdname calendar-locations
+cal_next <- function(x, rcalendar, ..., inclusive = FALSE) {
+  check_dots_empty0(...)
+  x <- vec_cast_date(x)
+  check_rcalendar(rcalendar)
+  check_bool(inclusive)
+
+  frame <- cal_events(rcalendar)
+  events <- frame$date
+
+  loc <- alma_locate_next(x = x, events = events, inclusive = inclusive)
+
+  vec_slice(frame, loc)
+}
+
+#' @export
+#' @rdname calendar-locations
+cal_previous <- function(x, rcalendar, ..., inclusive = FALSE) {
+  check_dots_empty0(...)
+  x <- vec_cast_date(x)
+  check_rcalendar(rcalendar)
+  check_bool(inclusive)
+
+  frame <- cal_events(rcalendar)
+  events <- frame$date
+
+  loc <- alma_locate_previous(x = x, events = events, inclusive = inclusive)
+
+  vec_slice(frame, loc)
+}
+
+# ------------------------------------------------------------------------------
+
 cal_events_frame <- function(x, ..., observed = TRUE) {
   check_dots_empty0(...)
   x$cache$get_events_frame(observed)
