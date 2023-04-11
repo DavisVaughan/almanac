@@ -64,7 +64,25 @@
     <loc>/dev/reference/almanac-vctrs-compat.html</loc>
   </url>
   <url>
+    <loc>/dev/reference/cal_events.html</loc>
+  </url>
+  <url>
+    <loc>/dev/reference/cal_match.html</loc>
+  </url>
+  <url>
+    <loc>/dev/reference/cal_names.html</loc>
+  </url>
+  <url>
+    <loc>/dev/reference/calendar-add-remove.html</loc>
+  </url>
+  <url>
     <loc>/dev/reference/deprecated-recur.html</loc>
+  </url>
+  <url>
+    <loc>/dev/reference/holiday-utilities.html</loc>
+  </url>
+  <url>
+    <loc>/dev/reference/holidays.html</loc>
   </url>
   <url>
     <loc>/dev/reference/index.html</loc>
@@ -77,6 +95,9 @@
   </url>
   <url>
     <loc>/dev/reference/radjusted.html</loc>
+  </url>
+  <url>
+    <loc>/dev/reference/rcalendar.html</loc>
   </url>
   <url>
     <loc>/dev/reference/rcustom.html</loc>
@@ -110,6 +131,9 @@
   </url>
   <url>
     <loc>/dev/reference/recur_with_week_start.html</loc>
+  </url>
+  <url>
+    <loc>/dev/reference/rholiday.html</loc>
   </url>
   <url>
     <loc>/dev/reference/roffset.html</loc>
