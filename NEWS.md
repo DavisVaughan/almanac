@@ -19,6 +19,9 @@
     start with `cal_*()`, such as `cal_match()` to look up the holiday name a
     date corresponds to, and `cal_events()` to filter for all of the holidays
     within a particular year.
+    
+  * `cal_us_federal()` is an example calendar representing the federal holidays
+    recognized in the United States.
 
 * `recur_for_count()` no longer overrides `until` (#95).
 
