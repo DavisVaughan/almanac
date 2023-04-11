@@ -130,8 +130,17 @@ cal
 #> • New Year's Day
 ```
 
-We can ask for holidays that belong to a particular year with
-`cal_events()`:
+We can ask for the next upcoming holiday with `cal_next()`:
+
+``` r
+x <- as.Date(c("2019-12-05", "2020-02-05"))
+cal_next(x, cal)
+#>              name       date
+#> 1       Christmas 2019-12-25
+#> 2 US Thanksgiving 2020-11-26
+```
+
+Or for holidays that belong to a particular year with `cal_events()`:
 
 ``` r
 events <- cal_events(cal, year = 2028)
