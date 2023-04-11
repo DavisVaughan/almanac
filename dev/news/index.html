@@ -28,6 +28,7 @@
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/adjust-and-shift.html">Adjusting and shifting dates</a>
+    <a class="dropdown-item" href="../articles/holidays-calendars.html">Holidays and calendars</a>
     <a class="dropdown-item" href="../articles/icalendar.html">iCalendar specification</a>
     <a class="dropdown-item" href="../articles/quarterly.html">Quarterly rules</a>
   </div>
@@ -60,7 +61,7 @@
 <div class="section level3">
 <h3 id="new-features-development-version">New features<a class="anchor" aria-label="anchor" href="#new-features-development-version"></a></h3>
 <ul><li>
-<p>New holiday and calendar API (<a href="https://github.com/DavisVaughan/almanac/issues/96" class="external-link">#96</a>):</p>
+<p>New holiday and calendar API and corresponding vignette <code><a href="../articles/holidays-calendars.html">vignette("holidays-calendars")</a></code> (<a href="https://github.com/DavisVaughan/almanac/issues/96" class="external-link">#96</a>):</p>
 <ul><li><p><code><a href="../reference/rholiday.html">rholiday()</a></code> creates a new holiday from a holiday name and a rschedule that defines when the holiday occurs. There are a number of pre-created holidays prefixed with <code>hol_*()</code>, such as <code><a href="../reference/holidays.html">hol_christmas()</a></code> and <code><a href="../reference/holidays.html">hol_us_thanksgiving()</a></code>. Holidays are rschedules, so you can use all of the <code>alma_*()</code> functions on them.</p></li>
 <li><p><code><a href="../reference/holiday-utilities.html">hol_observe()</a></code>, <code><a href="../reference/holiday-utilities.html">hol_offset()</a></code>, and <code><a href="../reference/holiday-utilities.html">hol_rename()</a></code> are three helpers for the holiday API. In particular, <code><a href="../reference/holiday-utilities.html">hol_observe()</a></code> tweaks a holiday’s <em>observance date</em> to align with when your business actually celebrated that holiday.</p></li>
 <li><p><code><a href="../reference/rcalendar.html">rcalendar()</a></code> bundles multiple holidays together into a calendar. Calendars are similar to <code><a href="../reference/rset.html">runion()</a></code>s, so you can use all the <code>alma_*()</code> functions on these, but they also come with their own specialized API of functions that start with <code>cal_*()</code>, such as <code><a href="../reference/cal_match.html">cal_match()</a></code> to look up the holiday name a date corresponds to, and <code><a href="../reference/cal_events.html">cal_events()</a></code> to filter for all of the holidays within a particular year.</p></li>
