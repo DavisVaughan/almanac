@@ -5,6 +5,16 @@ development:
   mode: auto
 
 reference:
+- title: Holidays
+  contents:
+  - rholiday
+  - starts_with("hol_")
+
+- title: Calendars
+  contents:
+  - rcalendar
+  - starts_with("cal_")
+
 - title: Recurrence rules
   contents:
   - daily
