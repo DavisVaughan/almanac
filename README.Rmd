@@ -15,12 +15,12 @@ knitr::opts_chunk$set(
 )
 ```
 
-
 # almanac
 
 <!-- badges: start -->
-[![Codecov test coverage](https://codecov.io/gh/DavisVaughan/almanac/branch/main/graph/badge.svg)](https://app.codecov.io/gh/DavisVaughan/almanac?branch=main)
-[![R-CMD-check](https://github.com/DavisVaughan/almanac/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/DavisVaughan/almanac/actions/workflows/R-CMD-check.yaml)
+
+[![Codecov test coverage](https://codecov.io/gh/DavisVaughan/almanac/branch/main/graph/badge.svg)](https://app.codecov.io/gh/DavisVaughan/almanac?branch=main) [![R-CMD-check](https://github.com/DavisVaughan/almanac/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/DavisVaughan/almanac/actions/workflows/R-CMD-check.yaml)
+
 <!-- badges: end -->
 
 ```{r}
@@ -57,7 +57,8 @@ on_thanksgiving <- yearly() %>%
 on_thanksgiving
 ```
 
-After constructing a recurrence rule, it can be used to generate dates that are in the "event set". For example, you can search for all Thanksgivings between 2000-2006.
+After constructing a recurrence rule, it can be used to generate dates that are in the "event set".
+For example, you can search for all Thanksgivings between 2000-2006.
 
 ```{r}
 alma_search("2000-01-01", "2006-12-31", on_thanksgiving)
@@ -81,7 +82,9 @@ wednesday_before_thanksgiving <- as.Date("2000-11-22")
 alma_step(wednesday_before_thanksgiving, n = 2, on_thanksgiving)
 ```
 
-There is an additional "stepper" object you can create for more intuitive stepping. Combine it with `%s+%` to perform the same step done by `alma_step()`. Create a stepper function with `stepper()`, and then use it by supplying the number of days to step.
+There is an additional "stepper" object you can create for more intuitive stepping.
+Combine it with `%s+%` to perform the same step done by `alma_step()`.
+Create a stepper function with `stepper()`, and then use it by supplying the number of days to step.
 
 ```{r}
 step_over_thanksgiving <- stepper(on_thanksgiving)
@@ -90,9 +93,11 @@ wednesday_before_thanksgiving %s+% step_over_thanksgiving(2)
 
 ## Recurrence Sets
 
-The above example just scratches the surface of what almanac can do. Practically speaking, you'll probably have multiple holidays and events that you'd like to combine into one big recurrence object. This is known as a _recurrence set_.
+The above example just scratches the surface of what almanac can do.
+Practically speaking, you'll probably have multiple holidays and events that you'd like to combine into one big recurrence object.
+This is known as a *recurrence set*.
 
-This example creates recurrence rules for weekends and Christmas, and bundles them together along with the Thanksgiving rule in such a way that we get the _union_ of the underlying event sets.
+This example creates recurrence rules for weekends and Christmas, and bundles them together along with the Thanksgiving rule in such a way that we get the *union* of the underlying event sets.
 
 ```{r}
 on_weekends <- weekly() %>%
@@ -111,9 +116,12 @@ bundle <- runion(
 bundle
 ```
 
-We can create a stepper that steps over all of the events in the set. If these two holidays were the only ones that your company celebrated, the stepper could be viewed as a way to step forward by a "business day".
+We can create a stepper that steps over all of the events in the set.
+If these two holidays were the only ones that your company celebrated, the stepper could be viewed as a way to step forward by a "business day".
 
-For example, Christmas was on a Monday in 2006. If you wanted to step 1 business day forward from the Friday before Christmas, you'd probably like it to step over the weekend and the Christmas Monday to Tuesday. The `bundle` lets you do exactly that!
+For example, Christmas was on a Monday in 2006.
+If you wanted to step 1 business day forward from the Friday before Christmas, you'd probably like it to step over the weekend and the Christmas Monday to Tuesday.
+The `bundle` lets you do exactly that!
 
 ```{r}
 business_day <- stepper(bundle)
@@ -130,23 +138,24 @@ friday %s+% business_day(1)
 
 View the vignettes on [the website](https://davisvaughan.github.io/almanac/index.html) to learn more about how to use almanac.
 
-- `vignette("almanac")`
+-   `vignette("almanac")`
 
-- `vignette("adjust-and-shift")`
+-   `vignette("adjust-and-shift")`
 
-- `vignette("quarterly")`
+-   `vignette("quarterly")`
 
-- `vignette("icalendar")`
+-   `vignette("icalendar")`
 
 ## Acknowledgements
 
 almanac has developed as a composite of ideas from multiple different libraries.
 
-First off, it directly embeds the _amazing_ JavaScript library [rrule](https://github.com/jakubroztocil/rrule) for the core event set calculations. To do this, it uses the equally awesome R package, [V8](https://github.com/jeroen/V8), from Jeroen Ooms.
+First off, it directly embeds the *amazing* JavaScript library [rrule](https://github.com/jakubroztocil/rrule) for the core event set calculations.
+To do this, it uses the equally awesome R package, [V8](https://github.com/jeroen/V8), from Jeroen Ooms.
 
 The date shifting / adjusting functions are modeled after similar functions in [QuantLib](https://github.com/lballabio/QuantLib).
 
 The fast binary search based implementations of `alma_next()` and `alma_step()` are inspired by Pandas and the implementation of Numpy's [busday_offset()](https://numpy.org/doc/stable/reference/generated/numpy.busday_offset.html).
 
-The author of [gs](https://github.com/jameslairdsmith/gs), James Laird-Smith, has been a great collaborator as we have bounced ideas off of each other. gs attempts to solve a similar problem, but with a slightly different implementation.
-
+The author of [gs](https://github.com/jameslairdsmith/gs), James Laird-Smith, has been a great collaborator as we have bounced ideas off of each other.
+gs attempts to solve a similar problem, but with a slightly different implementation.
