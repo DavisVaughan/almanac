@@ -7,8 +7,6 @@
 
 [![Codecov test
 coverage](https://codecov.io/gh/DavisVaughan/almanac/branch/main/graph/badge.svg)](https://app.codecov.io/gh/DavisVaughan/almanac?branch=main)
-[![Lifecycle:
-experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 [![R-CMD-check](https://github.com/DavisVaughan/almanac/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/DavisVaughan/almanac/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
