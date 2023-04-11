@@ -2,7 +2,8 @@
 
 ## New features
 
-* New holiday and calendar API (#96):
+* New holiday and calendar API and corresponding vignette
+  `vignette("holidays-calendars")` (#96):
 
   * `rholiday()` creates a new holiday from a holiday name and a
     rschedule that defines when the holiday occurs. There are a number of
