@@ -1,6 +1,6 @@
 Package: almanac
 Title: Tools for Working with Recurrence Rules
-Version: 1.0.0
+Version: 1.0.0.9000
 Authors@R: c(
     person("Davis", "Vaughan", , "davis@posit.co", role = c("aut", "cre")),
     person("Posit Software, PBC", role = c("cph", "fnd"))
