@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">almanac</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.1.1.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.0.0.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -58,8 +58,11 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="almanac-development-version">almanac (development version)<a class="anchor" aria-label="anchor" href="#almanac-development-version"></a></h2>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.0.0" id="almanac-100">almanac 1.0.0<a class="anchor" aria-label="anchor" href="#almanac-100"></a></h2><p class="text-muted">CRAN release: 2023-04-13</p>
 <div class="section level3">
-<h3 id="new-features-development-version">New features<a class="anchor" aria-label="anchor" href="#new-features-development-version"></a></h3>
+<h3 id="new-features-1-0-0">New features<a class="anchor" aria-label="anchor" href="#new-features-1-0-0"></a></h3>
 <ul><li>
 <p>New holiday and calendar API and corresponding vignette <code><a href="../articles/holidays-calendars.html">vignette("holidays-calendars")</a></code> (<a href="https://github.com/DavisVaughan/almanac/issues/96" class="external-link">#96</a>):</p>
 <ul><li><p><code><a href="../reference/rholiday.html">rholiday()</a></code> creates a new holiday from a holiday name and a rschedule that defines when the holiday occurs. There are a number of pre-created holidays prefixed with <code>hol_*()</code>, such as <code><a href="../reference/holidays.html">hol_christmas()</a></code> and <code><a href="../reference/holidays.html">hol_us_thanksgiving()</a></code>. Holidays are rschedules, so you can use all of the <code>alma_*()</code> functions on them.</p></li>
@@ -74,7 +77,7 @@
 <li><p>Steppers created with <code><a href="../reference/stepper.html">stepper()</a></code> now work as <code>.before</code> and <code>.after</code> arguments of <code><a href="https://slider.r-lib.org/reference/slide_index.html" class="external-link">slider::slide_index()</a></code> and friends (<a href="https://github.com/DavisVaughan/almanac/issues/80" class="external-link">#80</a>).</p></li>
 </ul></div>
 <div class="section level3">
-<h3 id="lifecycle-changes-development-version">Lifecycle changes<a class="anchor" aria-label="anchor" href="#lifecycle-changes-development-version"></a></h3>
+<h3 id="lifecycle-changes-1-0-0">Lifecycle changes<a class="anchor" aria-label="anchor" href="#lifecycle-changes-1-0-0"></a></h3>
 <ul><li>
 <p>The following functions have been deprecated in favor of more intuitively named alternatives (<a href="https://github.com/DavisVaughan/almanac/issues/83" class="external-link">#83</a>):</p>
 <ul><li>
@@ -104,7 +107,7 @@
 <li><p>The <code>offset</code> argument of <code><a href="../reference/recur_on_easter.html">recur_on_easter()</a></code> is deprecated in favor of using <code><a href="../reference/roffset.html">roffset()</a></code> (<a href="https://github.com/DavisVaughan/almanac/issues/94" class="external-link">#94</a>).</p></li>
 </ul></div>
 <div class="section level3">
-<h3 id="breaking-changes-development-version">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-development-version"></a></h3>
+<h3 id="breaking-changes-1-0-0">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-1-0-0"></a></h3>
 <ul><li><p>All almanac class names are now prefixed with <code>almanac_*</code> to avoid potential clashes with other packages.</p></li>
 <li><p>The <code><a href="../reference/recur_with_week_start.html">recur_with_week_start()</a></code> argument <code>wday</code> has been renamed to <code>day</code>.</p></li>
 <li>
@@ -117,7 +120,7 @@
 </ul></li>
 </ul></div>
 <div class="section level3">
-<h3 id="bug-fixes-and-minor-improvements-development-version">Bug fixes and minor improvements<a class="anchor" aria-label="anchor" href="#bug-fixes-and-minor-improvements-development-version"></a></h3>
+<h3 id="bug-fixes-and-minor-improvements-1-0-0">Bug fixes and minor improvements<a class="anchor" aria-label="anchor" href="#bug-fixes-and-minor-improvements-1-0-0"></a></h3>
 <ul><li><p><code><a href="../reference/recur_for_count.html">recur_for_count()</a></code> no longer overrides <code>until</code> (<a href="https://github.com/DavisVaughan/almanac/issues/95" class="external-link">#95</a>).</p></li>
 <li><p>New <code><a href="../reference/almanac-defaults.html">almanac_since()</a></code> and <code><a href="../reference/almanac-defaults.html">almanac_until()</a></code> helpers to access the default <code>since</code> and <code>until</code> values used for all rules (<a href="https://github.com/DavisVaughan/almanac/issues/95" class="external-link">#95</a>).</p></li>
 <li><p>Greatly improved the print methods of all almanac classes using cli (<a href="https://github.com/DavisVaughan/almanac/issues/86" class="external-link">#86</a>).</p></li>
