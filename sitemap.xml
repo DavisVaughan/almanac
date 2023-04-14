@@ -4,6 +4,9 @@
     <loc>/404.html</loc>
   </url>
   <url>
+    <loc>/CODE_OF_CONDUCT.html</loc>
+  </url>
+  <url>
     <loc>/LICENSE-text.html</loc>
   </url>
   <url>
@@ -14,6 +17,9 @@
   </url>
   <url>
     <loc>/articles/almanac.html</loc>
+  </url>
+  <url>
+    <loc>/articles/holidays-calendars.html</loc>
   </url>
   <url>
     <loc>/articles/icalendar.html</loc>
@@ -55,19 +61,43 @@
     <loc>/reference/alma_step.html</loc>
   </url>
   <url>
+    <loc>/reference/almanac-defaults.html</loc>
+  </url>
+  <url>
     <loc>/reference/almanac-package.html</loc>
   </url>
   <url>
     <loc>/reference/almanac-vctrs-compat.html</loc>
   </url>
   <url>
+    <loc>/reference/cal_events.html</loc>
+  </url>
+  <url>
+    <loc>/reference/cal_match.html</loc>
+  </url>
+  <url>
+    <loc>/reference/cal_names.html</loc>
+  </url>
+  <url>
+    <loc>/reference/cal_us_federal.html</loc>
+  </url>
+  <url>
+    <loc>/reference/calendar-add-remove.html</loc>
+  </url>
+  <url>
+    <loc>/reference/calendar-locations.html</loc>
+  </url>
+  <url>
+    <loc>/reference/deprecated-recur.html</loc>
+  </url>
+  <url>
+    <loc>/reference/holiday-utilities.html</loc>
+  </url>
+  <url>
+    <loc>/reference/holidays.html</loc>
+  </url>
+  <url>
     <loc>/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/new-rbundle-set.html</loc>
-  </url>
-  <url>
-    <loc>/reference/new_rbundle.html</loc>
   </url>
   <url>
     <loc>/reference/new_rschedule.html</loc>
@@ -79,13 +109,22 @@
     <loc>/reference/radjusted.html</loc>
   </url>
   <url>
-    <loc>/reference/rbundle-add.html</loc>
+    <loc>/reference/rcalendar.html</loc>
   </url>
   <url>
-    <loc>/reference/rbundle-set.html</loc>
+    <loc>/reference/rcustom.html</loc>
   </url>
   <url>
     <loc>/reference/recur_for_count.html</loc>
+  </url>
+  <url>
+    <loc>/reference/recur_on_day_of_month.html</loc>
+  </url>
+  <url>
+    <loc>/reference/recur_on_day_of_week.html</loc>
+  </url>
+  <url>
+    <loc>/reference/recur_on_day_of_year.html</loc>
   </url>
   <url>
     <loc>/reference/recur_on_easter.html</loc>
@@ -94,28 +133,31 @@
     <loc>/reference/recur_on_interval.html</loc>
   </url>
   <url>
-    <loc>/reference/recur_on_mday.html</loc>
+    <loc>/reference/recur_on_month_of_year.html</loc>
   </url>
   <url>
     <loc>/reference/recur_on_position.html</loc>
   </url>
   <url>
-    <loc>/reference/recur_on_wday.html</loc>
-  </url>
-  <url>
-    <loc>/reference/recur_on_yday.html</loc>
-  </url>
-  <url>
-    <loc>/reference/recur_on_ymonth.html</loc>
-  </url>
-  <url>
-    <loc>/reference/recur_on_yweek.html</loc>
+    <loc>/reference/recur_on_week_of_year.html</loc>
   </url>
   <url>
     <loc>/reference/recur_with_week_start.html</loc>
   </url>
   <url>
+    <loc>/reference/rholiday.html</loc>
+  </url>
+  <url>
+    <loc>/reference/roffset.html</loc>
+  </url>
+  <url>
     <loc>/reference/rrule.html</loc>
+  </url>
+  <url>
+    <loc>/reference/rset-add.html</loc>
+  </url>
+  <url>
+    <loc>/reference/rset.html</loc>
   </url>
   <url>
     <loc>/reference/stepper.html</loc>
