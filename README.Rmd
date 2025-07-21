@@ -19,8 +19,7 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 
-[![Codecov test coverage](https://codecov.io/gh/DavisVaughan/almanac/branch/main/graph/badge.svg)](https://app.codecov.io/gh/DavisVaughan/almanac?branch=main) [![R-CMD-check](https://github.com/DavisVaughan/almanac/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/DavisVaughan/almanac/actions/workflows/R-CMD-check.yaml)
-
+[![Codecov test coverage](https://codecov.io/gh/DavisVaughan/almanac/graph/badge.svg)](https://app.codecov.io/gh/DavisVaughan/almanac) [![R-CMD-check](https://github.com/DavisVaughan/almanac/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/DavisVaughan/almanac/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 ```{r}
