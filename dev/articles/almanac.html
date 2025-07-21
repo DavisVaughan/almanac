@@ -206,7 +206,7 @@ of a recurrence rule is generally slower than repeated uses.</p>
 <span><span class="co"># The first time is "slow"</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/alma_search.html">alma_search</a></span><span class="op">(</span><span class="va">since</span>, <span class="st">"2000-01-01"</span>, <span class="va">on_weekly</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.097   0.002   0.054</span></span>
+<span><span class="co">#&gt;   0.106   0.002   0.062</span></span>
 <span></span>
 <span><span class="co"># Repeated access is fast</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/alma_search.html">alma_search</a></span><span class="op">(</span><span class="va">since</span>, <span class="st">"2000-01-01"</span>, <span class="va">on_weekly</span><span class="op">)</span><span class="op">)</span></span>
@@ -217,7 +217,7 @@ of a recurrence rule is generally slower than repeated uses.</p>
 <span><span class="co"># the operation is still fast.</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/alma_search.html">alma_search</a></span><span class="op">(</span><span class="va">since</span>, <span class="st">"1990-05-01"</span>, <span class="va">on_weekly</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.000   0.000   0.001</span></span></code></pre></div>
+<span><span class="co">#&gt;       0       0       0</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
