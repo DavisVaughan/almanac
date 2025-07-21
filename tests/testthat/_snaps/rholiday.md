@@ -27,7 +27,7 @@
         <rrule>
         * frequency: weekly
         * range: [1900-01-01, 2100-01-01]
-        * day of week: Sat, and Sun
+        * day of week: Sat and Sun
 
 ---
 
@@ -47,7 +47,7 @@
          <rrule>
          * frequency: weekly
          * range: [1900-01-01, 2100-01-01]
-         * day of week: Sat, and Sun
+         * day of week: Sat and Sun
 
 ---
 
@@ -69,12 +69,12 @@
           <rrule>
           * frequency: weekly
           * range: [1900-01-01, 2100-01-01]
-          * day of week: Sat, and Sun
+          * day of week: Sat and Sun
         adjust on:
         <rrule>
         * frequency: weekly
         * range: [1900-01-01, 2100-01-01]
-        * day of week: Sat, and Sun
+        * day of week: Sat and Sun
 
 # `name` is checked
 

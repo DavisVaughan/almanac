@@ -69,7 +69,7 @@
       <rrule>
       * frequency: daily
       * range: [1900-01-01, 2100-01-01]
-      * day of week: Mon[1, 2], and Thu[1, 2]
+      * day of week: Mon[1, 2] and Thu[1, 2]
     Code
       recur_on_day_of_week(recur_on_day_of_week(daily(), "Mon", nth = c(1, 2)), "Thu",
       nth = c(4, 5))
@@ -77,7 +77,7 @@
       <rrule>
       * frequency: daily
       * range: [1900-01-01, 2100-01-01]
-      * day of week: Mon[1, 2], and Thu[4, 5]
+      * day of week: Mon[1, 2] and Thu[4, 5]
     Code
       recur_on_day_of_week(yearly(), "Mon", nth = c(1, 2, 10, 13, 15, 16))
     Message

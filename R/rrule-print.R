@@ -126,7 +126,12 @@ format_day_of_week <- function(x) {
     }
 
     if (!identical(day_of_week, "all")) {
-      day_of_week <- cli::ansi_collapse(day_of_week, sep = ", ", last = ", ")
+      day_of_week <- cli::ansi_collapse(
+        day_of_week,
+        sep = ", ",
+        sep2 = ", ",
+        last = ", "
+      )
       day_of_week_string <- cli::format_inline(
         "{day_of_week_string}[{day_of_week}]"
       )
