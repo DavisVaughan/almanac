@@ -1,6 +1,6 @@
 # Workflow derived from https://github.com/posit-dev/setup-air/tree/main/examples
 on:
-  pull_request:
+  pull_request_target:
 
 name: format-suggest.yaml
 
