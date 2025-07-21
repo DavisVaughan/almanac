@@ -1,5 +1,7 @@
 # almanac (development version)
 
+* R >=4.0.0 is now required, in line with tidyverse standards.
+
 # almanac 1.0.0
 
 ## New features
@@ -12,35 +14,35 @@
     pre-created holidays prefixed with `hol_*()`, such as `hol_christmas()`
     and `hol_us_thanksgiving()`. Holidays are rschedules, so you can use all
     of the `alma_*()` functions on them.
-    
+
   * `hol_observe()`, `hol_offset()`, and `hol_rename()` are three helpers for
     the holiday API. In particular, `hol_observe()` tweaks a holiday's
     _observance date_ to align with when your business actually celebrated that
     holiday.
-    
+
   * `rcalendar()` bundles multiple holidays together into a calendar. Calendars
     are similar to `runion()`s, so you can use all the `alma_*()` functions on
     these, but they also come with their own specialized API of functions that
     start with `cal_*()`, such as `cal_match()` to look up the holiday name a
     date corresponds to, and `cal_events()` to filter for all of the holidays
     within a particular year.
-    
+
   * `cal_us_federal()` is an example calendar representing the federal holidays
     recognized in the United States.
 
 * New `roffset()` for creating an rschedule with events that are offset from an
   existing rschedule (#94).
-  
+
 * New `rcustom()` for creating an rschedule from manually defined event dates
   (#90).
-  
+
 * `alma_events()` has gained a `year` argument to limit the returned set of
   events to specific years.
-  
+
 * `runion()`, `rintersect()`, and `rsetdiff()` have all gained `...` which
   allows you to provide rschedules at creation time. This is now the preferred
   way to create these set-based rschedules (#91).
-  
+
 * Steppers created with `stepper()` now work as `.before` and `.after` arguments
   of `slider::slide_index()` and friends (#80).
 
@@ -48,13 +50,13 @@
 
 * The following functions have been deprecated in favor of more intuitively
   named alternatives (#83):
-  
+
   * `recur_on_mday()` -> `recur_on_day_of_month()`
   * `recur_on_wday()` -> `recur_on_day_of_week()`
   * `recur_on_yday()` -> `recur_on_day_of_year()`
   * `recur_on_yweek()` -> `recur_on_week_of_year()`
   * `recur_on_ymonth()` -> `recur_on_month_of_year()`
-  
+
   These functions are being aggressively deprecated and will be removed in the
   next minor version of almanac.
 
@@ -62,13 +64,13 @@
 
   * `add_rschedule()` has been deprecated in favor of using the `...` argument
     of `runion()`, `rintersect()`, and `rsetdiff()` directly.
-    
+
   * `add_rdates()` has been deprecated in favor of using a combination of
     `runion()` and `rcustom()`.
-    
+
   * `add_exdates()` has been deprecated in favor of using a combination of
     `rsetdiff()` and `rcustom()`.
-    
+
   These functions are being aggressively deprecated and will be removed in the
   next minor version of almanac.
 
@@ -79,13 +81,13 @@
 
 * All almanac class names are now prefixed with `almanac_*` to avoid potential
   clashes with other packages.
-  
+
 * The `recur_with_week_start()` argument `wday` has been renamed to `day`.
 
 * The following developer facing functions have been removed because they are
   either no longer applicable or provided extension mechanisms that are not
   very useful in practice (#93):
-  
+
   * `new_rbundle()`
   * `new_runion()`
   * `new_rintersect()`
