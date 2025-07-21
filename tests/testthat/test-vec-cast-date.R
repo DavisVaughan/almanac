@@ -24,7 +24,10 @@ test_that("cannot cast integer or double to Date", {
 })
 
 test_that("can cast POSIXct with no time to Date", {
-  expect_identical(vec_cast_date(as.POSIXct("2019-01-01", "UTC")), as.Date("2019-01-01"))
+  expect_identical(
+    vec_cast_date(as.POSIXct("2019-01-01", "UTC")),
+    as.Date("2019-01-01")
+  )
 
   expect_snapshot(error = TRUE, {
     vec_cast_date(as.POSIXct("2019-01-01 01:01:01", "UTC"))

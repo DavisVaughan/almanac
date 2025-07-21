@@ -146,19 +146,21 @@ rrule <- function(since, until, frequency, ..., call = caller_env()) {
   )
 }
 
-new_rrule <- function(since = almanac_since(),
-                      until = almanac_until(),
-                      frequency = "yearly",
-                      count = NULL,
-                      interval = NULL,
-                      week_start = NULL,
-                      month_of_year = NULL,
-                      week_of_year = NULL,
-                      day_of_year = NULL,
-                      day_of_month = NULL,
-                      day_of_week = NULL,
-                      position = NULL,
-                      easter = NULL) {
+new_rrule <- function(
+  since = almanac_since(),
+  until = almanac_until(),
+  frequency = "yearly",
+  count = NULL,
+  interval = NULL,
+  week_start = NULL,
+  month_of_year = NULL,
+  week_of_year = NULL,
+  day_of_year = NULL,
+  day_of_month = NULL,
+  day_of_week = NULL,
+  position = NULL,
+  easter = NULL
+) {
   rules <- list(
     since = since,
     until = until,
@@ -194,11 +196,13 @@ all_are_rrules <- function(x) {
   all(map_lgl(x, is_rrule))
 }
 
-check_rrule <- function(x,
-                        ...,
-                        allow_null = FALSE,
-                        arg = caller_arg(x),
-                        call = caller_env()) {
+check_rrule <- function(
+  x,
+  ...,
+  allow_null = FALSE,
+  arg = caller_arg(x),
+  call = caller_env()
+) {
   check_inherits(
     x = x,
     what = "almanac_rrule",

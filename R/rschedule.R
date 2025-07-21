@@ -74,7 +74,9 @@ rschedule_events.default <- function(x) {
 
 #' @export
 rschedule_events.almanac_rschedule <- function(x) {
-  cli::cli_abort("<almanac_rschedule> subclasses must provide their own `rschedule_events()` method.")
+  cli::cli_abort(
+    "<almanac_rschedule> subclasses must provide their own `rschedule_events()` method."
+  )
 }
 
 # ------------------------------------------------------------------------------
@@ -83,11 +85,13 @@ is_rschedule <- function(x) {
   inherits(x, "almanac_rschedule")
 }
 
-check_rschedule <- function(x,
-                            ...,
-                            allow_null = FALSE,
-                            arg = caller_arg(x),
-                            call = caller_env()) {
+check_rschedule <- function(
+  x,
+  ...,
+  allow_null = FALSE,
+  arg = caller_arg(x),
+  call = caller_env()
+) {
   check_inherits(
     x = x,
     what = "almanac_rschedule",
@@ -97,10 +101,12 @@ check_rschedule <- function(x,
   )
 }
 
-list_check_all_rschedules <- function(x,
-                                      ...,
-                                      arg = caller_arg(x),
-                                      call = caller_env()) {
+list_check_all_rschedules <- function(
+  x,
+  ...,
+  arg = caller_arg(x),
+  call = caller_env()
+) {
   for (i in seq_along(x)) {
     check_rschedule(
       x = x[[i]],
@@ -110,4 +116,3 @@ list_check_all_rschedules <- function(x,
   }
   invisible(NULL)
 }
-

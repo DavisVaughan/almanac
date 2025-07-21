@@ -1,24 +1,45 @@
 test_that("can use a runion with no rules", {
   expect_identical(alma_next("2000-01-01", runion()), almanac_global_na_date)
-  expect_identical(alma_next("2000-01-01", runion(), inclusive = TRUE), almanac_global_na_date)
+  expect_identical(
+    alma_next("2000-01-01", runion(), inclusive = TRUE),
+    almanac_global_na_date
+  )
 })
 
 test_that("next works with infinite dates", {
-  expect_identical(alma_next(almanac_global_inf_date, daily()), almanac_global_na_date)
+  expect_identical(
+    alma_next(almanac_global_inf_date, daily()),
+    almanac_global_na_date
+  )
 
-  expect_identical(alma_next(almanac_global_neg_inf_date, daily()), almanac_global_default_since)
-  expect_identical(alma_next(almanac_global_neg_inf_date, daily(since = "1970-01-02")), new_date(1))
+  expect_identical(
+    alma_next(almanac_global_neg_inf_date, daily()),
+    almanac_global_default_since
+  )
+  expect_identical(
+    alma_next(almanac_global_neg_inf_date, daily(since = "1970-01-02")),
+    new_date(1)
+  )
 
   # If a cache already exists...
   rrule <- daily()
   alma_next("1970-01-01", rrule, inclusive = TRUE)
 
-  expect_identical(alma_next(almanac_global_inf_date, rrule), almanac_global_na_date)
-  expect_identical(alma_next(almanac_global_neg_inf_date, rrule), almanac_global_default_since)
+  expect_identical(
+    alma_next(almanac_global_inf_date, rrule),
+    almanac_global_na_date
+  )
+  expect_identical(
+    alma_next(almanac_global_neg_inf_date, rrule),
+    almanac_global_default_since
+  )
 })
 
 test_that("alma_next() works with missing dates", {
-  expect_identical(alma_next(almanac_global_na_date, daily()), almanac_global_na_date)
+  expect_identical(
+    alma_next(almanac_global_na_date, daily()),
+    almanac_global_na_date
+  )
 })
 
 test_that("alma_next() is vectorized", {
@@ -40,7 +61,10 @@ test_that("alma_next() respects `inclusive`", {
   expect_identical(alma_next(x, rrule, inclusive = FALSE), x + 1)
 
   expect_identical(alma_next(y, rrule, inclusive = TRUE), y)
-  expect_identical(alma_next(y, rrule, inclusive = FALSE), almanac_global_na_date)
+  expect_identical(
+    alma_next(y, rrule, inclusive = FALSE),
+    almanac_global_na_date
+  )
 })
 
 test_that("next works when between the last occurrence and the until date", {
@@ -55,28 +79,49 @@ test_that("next works when between the last occurrence and the until date", {
 # ------------------------------------------------------------------------------
 
 test_that("can use a runion with no rules", {
-  expect_identical(alma_previous("2000-01-01", runion()), almanac_global_na_date)
-  expect_identical(alma_previous("2000-01-01", runion(), inclusive = TRUE), almanac_global_na_date)
+  expect_identical(
+    alma_previous("2000-01-01", runion()),
+    almanac_global_na_date
+  )
+  expect_identical(
+    alma_previous("2000-01-01", runion(), inclusive = TRUE),
+    almanac_global_na_date
+  )
 })
 
 test_that("previous works with infinite dates", {
   until <- as.Date("2030-01-01")
-  expect_identical(alma_previous(almanac_global_inf_date, daily(until = until)), until)
+  expect_identical(
+    alma_previous(almanac_global_inf_date, daily(until = until)),
+    until
+  )
 
   # Guarantee a size 1 return value, but no previous events. Returns NA.
-  expect_identical(alma_previous(almanac_global_neg_inf_date, daily()), almanac_global_na_date)
-  expect_identical(alma_previous(almanac_global_neg_inf_date, daily(since = "1970-01-02")), almanac_global_na_date)
+  expect_identical(
+    alma_previous(almanac_global_neg_inf_date, daily()),
+    almanac_global_na_date
+  )
+  expect_identical(
+    alma_previous(almanac_global_neg_inf_date, daily(since = "1970-01-02")),
+    almanac_global_na_date
+  )
 
   # If a cache already exists...
   rrule <- daily(until = until)
   alma_previous("1970-01-01", rrule, inclusive = TRUE)
 
   expect_identical(alma_previous(almanac_global_inf_date, rrule), until)
-  expect_identical(alma_previous(almanac_global_neg_inf_date, rrule), almanac_global_na_date)
+  expect_identical(
+    alma_previous(almanac_global_neg_inf_date, rrule),
+    almanac_global_na_date
+  )
 })
 
 test_that("alma_previous() works with missing dates", {
-  expect_identical(alma_previous(almanac_global_na_date, daily()), almanac_global_na_date)
+  expect_identical(
+    alma_previous(almanac_global_na_date, daily()),
+    almanac_global_na_date
+  )
 })
 
 test_that("alma_previous() is vectorized", {
@@ -95,7 +140,10 @@ test_that("alma_previous() respects `inclusive`", {
   y <- as.Date("1970-01-05")
 
   expect_identical(alma_previous(x, rrule, inclusive = TRUE), x)
-  expect_identical(alma_previous(x, rrule, inclusive = FALSE), almanac_global_na_date)
+  expect_identical(
+    alma_previous(x, rrule, inclusive = FALSE),
+    almanac_global_na_date
+  )
 
   expect_identical(alma_previous(y, rrule, inclusive = TRUE), y)
   expect_identical(alma_previous(y, rrule, inclusive = FALSE), y - 1)

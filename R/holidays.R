@@ -333,4 +333,3 @@ hol_us_veterans_day <- function(since = NULL, until = NULL) {
     name = "US Veterans Day"
   )
 }
-

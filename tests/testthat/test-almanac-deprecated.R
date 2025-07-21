@@ -258,15 +258,27 @@ test_that("errors on max/min rdates and exdates", {
 
   expect_snapshot({
     expect_error(add_rdates(runion(), lb), NA)
-    (expect_error(add_rdates(runion(), lb - 1), class = "almanac_error_date_below_minimum"))
+    (expect_error(
+      add_rdates(runion(), lb - 1),
+      class = "almanac_error_date_below_minimum"
+    ))
 
     expect_error(add_exdates(runion(), lb), NA)
-    (expect_error(add_exdates(runion(), lb - 1), class = "almanac_error_date_below_minimum"))
+    (expect_error(
+      add_exdates(runion(), lb - 1),
+      class = "almanac_error_date_below_minimum"
+    ))
 
     expect_error(add_rdates(runion(), ub), NA)
-    (expect_error(add_rdates(runion(), ub + 1), class = "almanac_error_date_above_maximum"))
+    (expect_error(
+      add_rdates(runion(), ub + 1),
+      class = "almanac_error_date_above_maximum"
+    ))
 
     expect_error(add_exdates(runion(), ub), NA)
-    (expect_error(add_exdates(runion(), ub + 1), class = "almanac_error_date_above_maximum"))
+    (expect_error(
+      add_exdates(runion(), ub + 1),
+      class = "almanac_error_date_above_maximum"
+    ))
   })
 })

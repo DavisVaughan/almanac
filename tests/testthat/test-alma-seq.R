@@ -10,7 +10,10 @@ test_that("can handle NA `from` and `to` values", {
 })
 
 test_that("behavior is like rlang::seq2() when `from` is after `to`", {
-  expect_identical(alma_seq("1999-01-01", "1998-01-01", runion()), almanac_global_empty_date)
+  expect_identical(
+    alma_seq("1999-01-01", "1998-01-01", runion()),
+    almanac_global_empty_date
+  )
 })
 
 test_that("empty runion means no dates are removed", {

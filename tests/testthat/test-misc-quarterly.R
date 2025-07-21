@@ -55,8 +55,14 @@ test_that("can select n-th day of the month of the quarter from the back", {
   x <- alma_search("2000-01-01", "2001-12-31", rb_neg_1th_day_of_quarter)
 
   expect <- as.Date(c(
-    "2000-03-31", "2000-06-30", "2000-09-30", "2000-12-31",
-    "2001-03-31", "2001-06-30", "2001-09-30", "2001-12-31"
+    "2000-03-31",
+    "2000-06-30",
+    "2000-09-30",
+    "2000-12-31",
+    "2001-03-31",
+    "2001-06-30",
+    "2001-09-30",
+    "2001-12-31"
   ))
 
   expect_equal(x, expect)
@@ -106,8 +112,14 @@ test_that("can construct a runion to select n-th day of week of the quarter", {
   x <- alma_search(start, stop, rb_6th_monday_of_quarter)
 
   expect <- as.Date(c(
-    "2000-02-07", "2000-05-08", "2000-08-07", "2000-11-06",
-    "2001-02-05", "2001-05-07", "2001-08-06", "2001-11-05"
+    "2000-02-07",
+    "2000-05-08",
+    "2000-08-07",
+    "2000-11-06",
+    "2001-02-05",
+    "2001-05-07",
+    "2001-08-06",
+    "2001-11-05"
   ))
 
   expect_equal(x, expect)
@@ -130,13 +142,26 @@ test_that("can select n-th day of week in the quarter from the back", {
   n <- -2
   day <- c("Monday", "Tuesday")
 
-  rb_neg_2nd_monday_or_tuesday_of_quarter <- make_nth_day_of_week_of_the_quarter(day, n)
+  rb_neg_2nd_monday_or_tuesday_of_quarter <- make_nth_day_of_week_of_the_quarter(
+    day,
+    n
+  )
 
-  x <- alma_search("2000-01-01", "2001-12-31", rb_neg_2nd_monday_or_tuesday_of_quarter)
+  x <- alma_search(
+    "2000-01-01",
+    "2001-12-31",
+    rb_neg_2nd_monday_or_tuesday_of_quarter
+  )
 
   expect <- as.Date(c(
-    "2000-03-27", "2000-06-26", "2000-09-25", "2000-12-25",
-    "2001-03-26", "2001-06-25", "2001-09-24", "2001-12-25"
+    "2000-03-27",
+    "2000-06-26",
+    "2000-09-25",
+    "2000-12-25",
+    "2001-03-26",
+    "2001-06-25",
+    "2001-09-24",
+    "2001-12-25"
   ))
 
   expect_equal(x, expect)

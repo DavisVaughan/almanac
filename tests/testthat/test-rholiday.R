@@ -242,12 +242,18 @@ test_that("`hol_offset()` generates a new holiday with the right structure", {
   # `robserved` is now an roffset of the previous `robserved`
   expect_s3_class(rholiday_robserved(y), "almanac_roffset")
   expect_identical(roffset_by(rholiday_robserved(y)), 2L)
-  expect_identical(roffset_rschedule(rholiday_robserved(y)), rholiday_robserved(x))
+  expect_identical(
+    roffset_rschedule(rholiday_robserved(y)),
+    rholiday_robserved(x)
+  )
 
   # `runobserved` is now an roffset of the previous `runobserved`
   expect_s3_class(rholiday_runobserved(y), "almanac_roffset")
   expect_identical(roffset_by(rholiday_runobserved(y)), 2L)
-  expect_identical(roffset_rschedule(rholiday_runobserved(y)), rholiday_runobserved(x))
+  expect_identical(
+    roffset_rschedule(rholiday_runobserved(y)),
+    rholiday_runobserved(x)
+  )
 })
 
 test_that("`hol_offset()` validates `x`", {
@@ -279,4 +285,3 @@ test_that("`hol_rename()` validates `name`", {
     hol_rename(hol_christmas(), 1)
   })
 })
-

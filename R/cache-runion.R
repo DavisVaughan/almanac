@@ -4,11 +4,13 @@ cache_runion <- R6::R6Class(
 
   # ----------------------------------------------------------------------------
   public = list(
-    initialize = function(rschedules, rdates, exdates)
-      cache_runion__initialize(self, private, rschedules, rdates, exdates),
+    initialize = function(rschedules, rdates, exdates) {
+      cache_runion__initialize(self, private, rschedules, rdates, exdates)
+    },
 
-    get_events = function()
+    get_events = function() {
       cache_runion__get_events(self, private)
+    }
   ),
 
   # ----------------------------------------------------------------------------
@@ -20,8 +22,9 @@ cache_runion <- R6::R6Class(
     events = NULL,
     built = FALSE,
 
-    cache_build = function()
+    cache_build = function() {
       cache_runion__cache_build(self, private)
+    }
   )
 )
 
@@ -84,28 +87,30 @@ cache_runion__cache_build_rrules <- function(self, private) {
 cache_runion_build_call <- function(rrules, rdates, exdates) {
   body <- cache_runion_build_call_body(rrules, rdates, exdates)
 
-  glue2("
+  glue2(
+    "
     function() {
       [[body]]
       return ruleset.all()
     }
-  ")
+    "
+  )
 }
 
 cache_runion_build_call_body <- function(rrules, rdates, exdates) {
   body <- "var ruleset = new rrule.RRuleSet()"
 
-  for(rrule in rrules) {
+  for (rrule in rrules) {
     rules <- rrule$rules
     body <- append_rrule(body, rules)
   }
 
-  for(i in seq_along(rdates)) {
+  for (i in seq_along(rdates)) {
     rdate <- rdates[i]
     body <- append_rdate(body, rdate)
   }
 
-  for(i in seq_along(exdates)) {
+  for (i in seq_along(exdates)) {
     exdate <- exdates[i]
     body <- append_exdate(body, exdate)
   }
@@ -125,7 +130,13 @@ cache_runion__get_events <- function(self, private) {
 
 # ------------------------------------------------------------------------------
 
-cache_runion__initialize <- function(self, private, rschedules, rdates, exdates) {
+cache_runion__initialize <- function(
+  self,
+  private,
+  rschedules,
+  rdates,
+  exdates
+) {
   private$rschedules <- rschedules
   private$rdates <- rdates
   private$exdates <- exdates
