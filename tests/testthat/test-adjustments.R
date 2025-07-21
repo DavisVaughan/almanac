@@ -23,17 +23,32 @@ test_that("adjustment is applied repeatedly", {
 })
 
 test_that("empty input works", {
-  expect_identical(adj_following(almanac_global_empty_date, daily()), almanac_global_empty_date)
+  expect_identical(
+    adj_following(almanac_global_empty_date, daily()),
+    almanac_global_empty_date
+  )
 })
 
 test_that("NA / NaN is allowed", {
-  expect_identical(adj_following(almanac_global_na_date, yearly()), almanac_global_na_date)
-  expect_identical(adj_following(almanac_global_nan_date, yearly()), almanac_global_nan_date)
+  expect_identical(
+    adj_following(almanac_global_na_date, yearly()),
+    almanac_global_na_date
+  )
+  expect_identical(
+    adj_following(almanac_global_nan_date, yearly()),
+    almanac_global_nan_date
+  )
 })
 
 test_that("+/- Inf is allowed", {
-  expect_identical(adj_following(almanac_global_inf_date, yearly()), almanac_global_inf_date)
-  expect_identical(adj_following(almanac_global_neg_inf_date, yearly()), almanac_global_neg_inf_date)
+  expect_identical(
+    adj_following(almanac_global_inf_date, yearly()),
+    almanac_global_inf_date
+  )
+  expect_identical(
+    adj_following(almanac_global_neg_inf_date, yearly()),
+    almanac_global_neg_inf_date
+  )
 })
 
 # ------------------------------------------------------------------------------
@@ -61,17 +76,32 @@ test_that("adjustment is applied repeatedly", {
 })
 
 test_that("empty input works", {
-  expect_identical(adj_preceding(almanac_global_empty_date, daily()), almanac_global_empty_date)
+  expect_identical(
+    adj_preceding(almanac_global_empty_date, daily()),
+    almanac_global_empty_date
+  )
 })
 
 test_that("NA / NaN is allowed", {
-  expect_identical(adj_preceding(almanac_global_na_date, yearly()), almanac_global_na_date)
-  expect_identical(adj_preceding(almanac_global_nan_date, yearly()), almanac_global_nan_date)
+  expect_identical(
+    adj_preceding(almanac_global_na_date, yearly()),
+    almanac_global_na_date
+  )
+  expect_identical(
+    adj_preceding(almanac_global_nan_date, yearly()),
+    almanac_global_nan_date
+  )
 })
 
 test_that("+/- Inf is allowed", {
-  expect_identical(adj_preceding(almanac_global_inf_date, yearly()), almanac_global_inf_date)
-  expect_identical(adj_preceding(almanac_global_neg_inf_date, yearly()), almanac_global_neg_inf_date)
+  expect_identical(
+    adj_preceding(almanac_global_inf_date, yearly()),
+    almanac_global_inf_date
+  )
+  expect_identical(
+    adj_preceding(almanac_global_neg_inf_date, yearly()),
+    almanac_global_neg_inf_date
+  )
 })
 
 # ------------------------------------------------------------------------------
@@ -99,17 +129,32 @@ test_that("adjustment is applied repeatedly", {
 })
 
 test_that("empty input works", {
-  expect_identical(adj_modified_following(almanac_global_empty_date, daily()), almanac_global_empty_date)
+  expect_identical(
+    adj_modified_following(almanac_global_empty_date, daily()),
+    almanac_global_empty_date
+  )
 })
 
 test_that("NA / NaN is allowed", {
-  expect_identical(adj_modified_following(almanac_global_na_date, yearly()), almanac_global_na_date)
-  expect_identical(adj_modified_following(almanac_global_nan_date, yearly()), almanac_global_nan_date)
+  expect_identical(
+    adj_modified_following(almanac_global_na_date, yearly()),
+    almanac_global_na_date
+  )
+  expect_identical(
+    adj_modified_following(almanac_global_nan_date, yearly()),
+    almanac_global_nan_date
+  )
 })
 
 test_that("+/- Inf is allowed", {
-  expect_identical(adj_modified_following(almanac_global_inf_date, yearly()), almanac_global_inf_date)
-  expect_identical(adj_modified_following(almanac_global_neg_inf_date, yearly()), almanac_global_neg_inf_date)
+  expect_identical(
+    adj_modified_following(almanac_global_inf_date, yearly()),
+    almanac_global_inf_date
+  )
+  expect_identical(
+    adj_modified_following(almanac_global_neg_inf_date, yearly()),
+    almanac_global_neg_inf_date
+  )
 })
 
 # ------------------------------------------------------------------------------
@@ -137,17 +182,32 @@ test_that("adjustment is applied repeatedly", {
 })
 
 test_that("empty input works", {
-  expect_identical(adj_modified_preceding(almanac_global_empty_date, daily()), almanac_global_empty_date)
+  expect_identical(
+    adj_modified_preceding(almanac_global_empty_date, daily()),
+    almanac_global_empty_date
+  )
 })
 
 test_that("NA / NaN is allowed", {
-  expect_identical(adj_modified_preceding(almanac_global_na_date, yearly()), almanac_global_na_date)
-  expect_identical(adj_modified_preceding(almanac_global_nan_date, yearly()), almanac_global_nan_date)
+  expect_identical(
+    adj_modified_preceding(almanac_global_na_date, yearly()),
+    almanac_global_na_date
+  )
+  expect_identical(
+    adj_modified_preceding(almanac_global_nan_date, yearly()),
+    almanac_global_nan_date
+  )
 })
 
 test_that("+/- Inf is allowed", {
-  expect_identical(adj_modified_preceding(almanac_global_inf_date, yearly()), almanac_global_inf_date)
-  expect_identical(adj_modified_preceding(almanac_global_neg_inf_date, yearly()), almanac_global_neg_inf_date)
+  expect_identical(
+    adj_modified_preceding(almanac_global_inf_date, yearly()),
+    almanac_global_inf_date
+  )
+  expect_identical(
+    adj_modified_preceding(almanac_global_neg_inf_date, yearly()),
+    almanac_global_neg_inf_date
+  )
 })
 
 
@@ -189,17 +249,32 @@ test_that("non-event is left untouched", {
 })
 
 test_that("empty input works", {
-  expect_identical(adj_nearest(almanac_global_empty_date, daily()), almanac_global_empty_date)
+  expect_identical(
+    adj_nearest(almanac_global_empty_date, daily()),
+    almanac_global_empty_date
+  )
 })
 
 test_that("NA / NaN is allowed", {
-  expect_identical(adj_nearest(almanac_global_na_date, yearly()), almanac_global_na_date)
-  expect_identical(adj_nearest(almanac_global_nan_date, yearly()), almanac_global_nan_date)
+  expect_identical(
+    adj_nearest(almanac_global_na_date, yearly()),
+    almanac_global_na_date
+  )
+  expect_identical(
+    adj_nearest(almanac_global_nan_date, yearly()),
+    almanac_global_nan_date
+  )
 })
 
 test_that("+/- Inf is allowed", {
-  expect_identical(adj_nearest(almanac_global_inf_date, yearly()), almanac_global_inf_date)
-  expect_identical(adj_nearest(almanac_global_neg_inf_date, yearly()), almanac_global_neg_inf_date)
+  expect_identical(
+    adj_nearest(almanac_global_inf_date, yearly()),
+    almanac_global_inf_date
+  )
+  expect_identical(
+    adj_nearest(almanac_global_neg_inf_date, yearly()),
+    almanac_global_neg_inf_date
+  )
 })
 
 

@@ -55,8 +55,14 @@ test_that("`rschedule` is validated", {
 
 test_that("default method error is thrown", {
   expect_snapshot({
-    (expect_error(vec_arith("+", new_stepper(), 1), class = "vctrs_error_incompatible_op"))
-    (expect_error(vec_arith("+", 1, new_stepper()), class = "vctrs_error_incompatible_op"))
+    (expect_error(
+      vec_arith("+", new_stepper(), 1),
+      class = "vctrs_error_incompatible_op"
+    ))
+    (expect_error(
+      vec_arith("+", 1, new_stepper()),
+      class = "vctrs_error_incompatible_op"
+    ))
   })
 })
 
@@ -149,8 +155,8 @@ test_that("steppers are coercible if from the same rschedule", {
   x <- x_step(1)
   y <- y_step(2)
 
-  expect_identical(vec_cast(x, y),  x)
-  expect_identical(vec_cast(y, x),  y)
+  expect_identical(vec_cast(x, y), x)
+  expect_identical(vec_cast(y, x), y)
 
   expect_snapshot(error = TRUE, {
     vec_cast(x, new_stepper())
@@ -229,7 +235,7 @@ test_that("`slide_index()` works with steppers", {
       3:6, # On Sun, Bounds Fri-Mon
       3:7, # On Mon, Bounds Fri-Tue
       6:8, # On Tue, Bounds Mon-Wed
-      7:8  # On Wed, Bounds Tue-Thu
+      7:8 # On Wed, Bounds Tue-Thu
     )
   )
 })

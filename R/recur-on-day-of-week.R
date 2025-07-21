@@ -115,7 +115,9 @@ recur_on_day_of_week <- function(x, day, ..., nth = NULL) {
 
   if (is_yearly) {
     if (any(abs_nth > 53 | abs_nth < 1)) {
-      abort("`nth` can only take values in [-53, -1] and [1, 53] when the frequency is yearly.")
+      abort(
+        "`nth` can only take values in [-53, -1] and [1, 53] when the frequency is yearly."
+      )
     }
   } else {
     if (any(abs_nth > 5 | abs_nth < 1)) {

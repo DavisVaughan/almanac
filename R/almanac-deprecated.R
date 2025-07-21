@@ -183,7 +183,9 @@ add_rschedule <- function(x, rschedule) {
   lifecycle::deprecate_warn(
     when = "1.0.0",
     what = "add_rschedule()",
-    with = I("the `...` argument of `runion()`, `rintersect()`, or `rsetdiff()`"),
+    with = I(
+      "the `...` argument of `runion()`, `rintersect()`, or `rsetdiff()`"
+    ),
     always = TRUE
   )
 
@@ -253,11 +255,13 @@ add_exdates <- function(x, exdates) {
   rset_restore(out, x)
 }
 
-check_rset <- function(x,
-                       ...,
-                       allow_null = FALSE,
-                       arg = caller_arg(x),
-                       call = caller_env()) {
+check_rset <- function(
+  x,
+  ...,
+  allow_null = FALSE,
+  arg = caller_arg(x),
+  call = caller_env()
+) {
   check_inherits(
     x = x,
     what = "almanac_rset",

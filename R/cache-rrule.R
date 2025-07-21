@@ -4,11 +4,13 @@ cache_rrule <- R6::R6Class(
 
   # ----------------------------------------------------------------------------
   public = list(
-    initialize = function(rules)
-      cache_rrule__initialize(self, private, rules),
+    initialize = function(rules) {
+      cache_rrule__initialize(self, private, rules)
+    },
 
-    get_events = function()
+    get_events = function() {
       cache_rrule__get_events(self, private)
+    }
   ),
 
   # ----------------------------------------------------------------------------
@@ -18,8 +20,9 @@ cache_rrule <- R6::R6Class(
     events = NULL,
     built = FALSE,
 
-    cache_build = function()
+    cache_build = function() {
       cache_rrule__cache_build(self, private)
+    }
   )
 )
 
@@ -42,12 +45,14 @@ cache_rrule__cache_build <- function(self, private) {
 cache_rrule_build_call <- function(rules) {
   body <- cache_rrule_build_call_body(rules)
 
-  glue2("
+  glue2(
+    "
     function() {
       [[body]]
       return rule.all()
     }
-  ")
+    "
+  )
 }
 
 cache_rrule_build_call_body <- function(rules) {
@@ -72,4 +77,3 @@ cache_rrule__initialize <- function(self, private, rules) {
   private$rules <- rules
   self
 }
-

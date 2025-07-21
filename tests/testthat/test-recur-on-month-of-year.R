@@ -65,8 +65,10 @@ test_that("yearly - on a month of the year", {
 # ------------------------------------------------------------------------------
 
 test_that("weekly on month of the year respects `since` week day", {
-  rrule_thursday <- weekly(since = "1970-01-01") %>% recur_on_month_of_year(c(5, 10, 12))
-  rrule_saturday <- weekly(since = "1970-01-03") %>% recur_on_month_of_year(c(5, 10, 12))
+  rrule_thursday <- weekly(since = "1970-01-01") %>%
+    recur_on_month_of_year(c(5, 10, 12))
+  rrule_saturday <- weekly(since = "1970-01-03") %>%
+    recur_on_month_of_year(c(5, 10, 12))
 
   start <- "1990-01-01"
   stop <- "1992-01-01"

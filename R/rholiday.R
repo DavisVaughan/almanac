@@ -39,11 +39,13 @@ rholiday <- function(rschedule, name) {
   )
 }
 
-new_rholiday <- function(name,
-                         robserved,
-                         runobserved,
-                         ...,
-                         class = character()) {
+new_rholiday <- function(
+  name,
+  robserved,
+  runobserved,
+  ...,
+  class = character()
+) {
   new_rschedule(
     name = name,
     robserved = robserved,
@@ -189,11 +191,13 @@ hol_rename <- function(x, name) {
 
 # ------------------------------------------------------------------------------
 
-check_rholiday <- function(x,
-                           ...,
-                           allow_null = FALSE,
-                           arg = caller_arg(x),
-                           call = caller_env()) {
+check_rholiday <- function(
+  x,
+  ...,
+  allow_null = FALSE,
+  arg = caller_arg(x),
+  call = caller_env()
+) {
   check_inherits(
     x = x,
     what = "almanac_rholiday",
@@ -203,10 +207,12 @@ check_rholiday <- function(x,
   )
 }
 
-list_check_all_rholidays <- function(x,
-                                     ...,
-                                     arg = caller_arg(x),
-                                     call = caller_env()) {
+list_check_all_rholidays <- function(
+  x,
+  ...,
+  arg = caller_arg(x),
+  call = caller_env()
+) {
   for (i in seq_along(x)) {
     check_rholiday(
       x = x[[i]],

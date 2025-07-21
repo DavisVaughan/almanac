@@ -99,14 +99,18 @@ test_that("logic is correct when selecting from the back", {
 })
 
 test_that("week start option is respected", {
-  rrule <- daily() %>% recur_on_week_of_year(1) %>% recur_with_week_start("Tuesday")
+  rrule <- daily() %>%
+    recur_on_week_of_year(1) %>%
+    recur_with_week_start("Tuesday")
 
   # 2017 has a tuesday on day 3 of the year, so that is where the first week starts
   x <- alma_search("2017-01-01", "2017-01-31", rrule)
 
   expect_equal(x[1], as.Date("2017-01-03"))
 
-  rrule <- daily() %>% recur_on_week_of_year(1) %>% recur_with_week_start("Sunday")
+  rrule <- daily() %>%
+    recur_on_week_of_year(1) %>%
+    recur_with_week_start("Sunday")
 
   # 2015 has a sunday on day 4 of the year, so that is where the first week starts
   # (notice this is different from the default of Monday, where the first week would

@@ -57,10 +57,12 @@ rcalendar <- function(...) {
   )
 }
 
-new_rcalendar <- function(names = character(),
-                          rholidays = list(),
-                          ...,
-                          class = character()) {
+new_rcalendar <- function(
+  names = character(),
+  rholidays = list(),
+  ...,
+  class = character()
+) {
   check_character(names)
   vec_check_list(rholidays)
 
@@ -452,11 +454,13 @@ cal_rholidays <- function(x) {
 
 # ------------------------------------------------------------------------------
 
-check_rcalendar <- function(x,
-                            ...,
-                            allow_null = FALSE,
-                            arg = caller_arg(x),
-                            call = caller_env()) {
+check_rcalendar <- function(
+  x,
+  ...,
+  allow_null = FALSE,
+  arg = caller_arg(x),
+  call = caller_env()
+) {
   check_inherits(
     x = x,
     what = "almanac_rcalendar",

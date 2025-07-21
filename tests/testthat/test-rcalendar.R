@@ -102,8 +102,14 @@ test_that("`cal_events()` returns events sorted by date", {
   cal <- rcalendar(x, y)
 
   out <- cal_events(cal)
-  expect_identical(out$name, vec_rep(c("Christmas Eve", "Christmas"), times = 2))
-  expect_identical(out$date, as.Date(c("2020-12-24", "2020-12-25", "2021-12-24", "2021-12-25")))
+  expect_identical(
+    out$name,
+    vec_rep(c("Christmas Eve", "Christmas"), times = 2)
+  )
+  expect_identical(
+    out$date,
+    as.Date(c("2020-12-24", "2020-12-25", "2021-12-24", "2021-12-25"))
+  )
 })
 
 test_that("`cal_events()` sorts ties by first appearance in the calendar", {
@@ -319,18 +325,30 @@ test_that("`cal_remove()` validates `what`", {
 # cal_next/previous()
 
 test_that("can use a rcalendar with no holidays", {
-  na_row <- vctrs::data_frame(name = NA_character_, date = almanac_global_na_date)
+  na_row <- vctrs::data_frame(
+    name = NA_character_,
+    date = almanac_global_na_date
+  )
 
   expect_identical(cal_next("2000-01-01", rcalendar()), na_row)
-  expect_identical(cal_next("2000-01-01", rcalendar(), inclusive = TRUE), na_row)
+  expect_identical(
+    cal_next("2000-01-01", rcalendar(), inclusive = TRUE),
+    na_row
+  )
 
   expect_identical(cal_previous("2000-01-01", rcalendar()), na_row)
-  expect_identical(cal_previous("2000-01-01", rcalendar(), inclusive = TRUE), na_row)
+  expect_identical(
+    cal_previous("2000-01-01", rcalendar(), inclusive = TRUE),
+    na_row
+  )
 })
 
 test_that("works with infinite dates", {
   cal <- rcalendar(hol_christmas())
-  na_row <- vctrs::data_frame(name = NA_character_, date = almanac_global_na_date)
+  na_row <- vctrs::data_frame(
+    name = NA_character_,
+    date = almanac_global_na_date
+  )
 
   expect_identical(cal_next(almanac_global_inf_date, cal), na_row)
   expect_identical(cal_previous(almanac_global_neg_inf_date, cal), na_row)
@@ -347,7 +365,10 @@ test_that("works with infinite dates", {
 
 test_that("works with missing dates", {
   cal <- rcalendar(hol_christmas())
-  na_row <- vctrs::data_frame(name = NA_character_, date = almanac_global_na_date)
+  na_row <- vctrs::data_frame(
+    name = NA_character_,
+    date = almanac_global_na_date
+  )
 
   expect_identical(cal_next(almanac_global_na_date, cal), na_row)
   expect_identical(cal_previous(almanac_global_na_date, cal), na_row)
@@ -381,16 +402,25 @@ test_that("respects `inclusive`", {
   }
 
   expect_identical(cal_next(x, cal, inclusive = TRUE), christmas(x))
-  expect_identical(cal_next(x, cal, inclusive = FALSE), christmas(as.Date("1971-12-25")))
+  expect_identical(
+    cal_next(x, cal, inclusive = FALSE),
+    christmas(as.Date("1971-12-25"))
+  )
 
   expect_identical(cal_previous(x, cal, inclusive = TRUE), christmas(x))
-  expect_identical(cal_previous(x, cal, inclusive = FALSE), christmas(as.Date("1969-12-25")))
+  expect_identical(
+    cal_previous(x, cal, inclusive = FALSE),
+    christmas(as.Date("1969-12-25"))
+  )
 })
 
 test_that("next works when between the last occurrence and the until date", {
   # There are no events left, so the result is a size 1 NA date.
   cal <- rcalendar(hol_christmas(since = "2019-01-01", until = "2022-01-01"))
-  na_row <- vctrs::data_frame(name = NA_character_, date = almanac_global_na_date)
+  na_row <- vctrs::data_frame(
+    name = NA_character_,
+    date = almanac_global_na_date
+  )
 
   x <- "2021-12-26"
   expect_identical(cal_next(x, cal), na_row)
@@ -399,7 +429,10 @@ test_that("next works when between the last occurrence and the until date", {
 test_that("previous works when between the first occurrence and the since date", {
   # There are no events left, so the result is a size 1 NA date.
   cal <- rcalendar(hol_christmas(since = "2019-01-01", until = "2022-01-01"))
-  na_row <- vctrs::data_frame(name = NA_character_, date = almanac_global_na_date)
+  na_row <- vctrs::data_frame(
+    name = NA_character_,
+    date = almanac_global_na_date
+  )
 
   x <- "2019-12-24"
   expect_identical(cal_previous(x, cal), na_row)

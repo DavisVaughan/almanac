@@ -66,4 +66,3 @@ alma_locate_next <- function(x, events, inclusive) {
 alma_locate_previous <- function(x, events, inclusive) {
   .Call(export_alma_locate_previous, x, events, inclusive)
 }
-

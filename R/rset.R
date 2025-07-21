@@ -64,11 +64,13 @@ runion <- function(...) {
   new_runion(rschedules = rschedules)
 }
 
-new_runion <- function(rschedules = list(),
-                       rdates = new_date(),
-                       exdates = new_date(),
-                       ...,
-                       class = character()) {
+new_runion <- function(
+  rschedules = list(),
+  rdates = new_date(),
+  exdates = new_date(),
+  ...,
+  class = character()
+) {
   cache <- cache_runion$new(
     rschedules = rschedules,
     rdates = rdates,
@@ -93,11 +95,13 @@ rintersect <- function(...) {
   new_rintersect(rschedules = rschedules)
 }
 
-new_rintersect <- function(rschedules = list(),
-                           rdates = new_date(),
-                           exdates = new_date(),
-                           ...,
-                           class = character()) {
+new_rintersect <- function(
+  rschedules = list(),
+  rdates = new_date(),
+  exdates = new_date(),
+  ...,
+  class = character()
+) {
   cache <- cache_rintersect$new(
     rschedules = rschedules,
     rdates = rdates,
@@ -122,11 +126,13 @@ rsetdiff <- function(...) {
   new_rsetdiff(rschedules = rschedules)
 }
 
-new_rsetdiff <- function(rschedules = list(),
-                         rdates = new_date(),
-                         exdates = new_date(),
-                         ...,
-                         class = character()) {
+new_rsetdiff <- function(
+  rschedules = list(),
+  rdates = new_date(),
+  exdates = new_date(),
+  ...,
+  class = character()
+) {
   cache <- cache_rsetdiff$new(
     rschedules = rschedules,
     rdates = rdates,
@@ -143,12 +149,14 @@ new_rsetdiff <- function(rschedules = list(),
   )
 }
 
-new_rset <- function(rschedules = list(),
-                     rdates = new_date(),
-                     exdates = new_date(),
-                     ...,
-                     class = character(),
-                     call = caller_env()) {
+new_rset <- function(
+  rschedules = list(),
+  rdates = new_date(),
+  exdates = new_date(),
+  ...,
+  class = character(),
+  call = caller_env()
+) {
   vec_check_list(rschedules, call = call)
 
   check_date(rdates, call = call)

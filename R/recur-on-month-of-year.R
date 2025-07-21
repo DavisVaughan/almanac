@@ -56,10 +56,7 @@ recur_on_month_of_year <- function(x, month) {
 
 # ------------------------------------------------------------------------------
 
-month_normalize <- function(x,
-                            ...,
-                            arg = caller_arg(x),
-                            call = caller_env()) {
+month_normalize <- function(x, ..., arg = caller_arg(x), call = caller_env()) {
   if (!is.character(x)) {
     return(x)
   }

@@ -25,12 +25,19 @@ vec_cast_date <- function(x, ..., x_arg = caller_arg(x), call = caller_env()) {
   }
 }
 
-vec_cast_date_from_character <- function(x,
-                                         ...,
-                                         x_arg = caller_arg(x),
-                                         call = caller_env()) {
+vec_cast_date_from_character <- function(
+  x,
+  ...,
+  x_arg = caller_arg(x),
+  call = caller_env()
+) {
   # Gives POSIXct with no time component and UTC tz
-  out <- lubridate::fast_strptime(x, format = "%Y-%m-%d", tz = "UTC", lt = FALSE)
+  out <- lubridate::fast_strptime(
+    x,
+    format = "%Y-%m-%d",
+    tz = "UTC",
+    lt = FALSE
+  )
 
   # Rely on fast behavior of POSIXct->Date when tz="UTC"
   out <- as.Date.POSIXct(out, tz = "UTC")
@@ -77,16 +84,23 @@ stop_lossy_parse <- function(loc, arg, ..., call = caller_env()) {
 
 # ------------------------------------------------------------------------------
 
-stop_almanac <- function(message = NULL, class = NULL, ..., call = caller_env()) {
+stop_almanac <- function(
+  message = NULL,
+  class = NULL,
+  ...,
+  call = caller_env()
+) {
   abort(message, class = c(class, "almanac_error"), ..., call = call)
 }
 
 # ------------------------------------------------------------------------------
 
-check_date_within_bounds <- function(x,
-                                     ...,
-                                     arg = caller_arg(x),
-                                     call = caller_env()) {
+check_date_within_bounds <- function(
+  x,
+  ...,
+  arg = caller_arg(x),
+  call = caller_env()
+) {
   if (any(x > almanac_global_max_date, na.rm = TRUE)) {
     stop_date_above_maximum(arg = arg, call = call)
   }
@@ -138,10 +152,7 @@ is_linux <- function() {
 
 # ------------------------------------------------------------------------------
 
-check_no_missing <- function(x,
-                             ...,
-                             arg = caller_arg(x),
-                             call = caller_env()) {
+check_no_missing <- function(x, ..., arg = caller_arg(x), call = caller_env()) {
   loc <- is.na(x)
 
   if (!any(loc)) {
@@ -158,10 +169,7 @@ check_no_missing <- function(x,
   cli::cli_abort(message, call = call)
 }
 
-check_finite <- function(x,
-                         ...,
-                         arg = caller_arg(x),
-                         call = caller_env()) {
+check_finite <- function(x, ..., arg = caller_arg(x), call = caller_env()) {
   loc <- is.infinite(x)
 
   if (!any(loc)) {
@@ -178,10 +186,7 @@ check_finite <- function(x,
   cli::cli_abort(message, call = call)
 }
 
-check_unique <- function(x,
-                         ...,
-                         arg = caller_arg(x),
-                         call = caller_env()) {
+check_unique <- function(x, ..., arg = caller_arg(x), call = caller_env()) {
   if (!vec_duplicate_any(x)) {
     return(invisible(NULL))
   }
@@ -207,10 +212,7 @@ is_already_set <- function(x, rule) {
   !is.null(get_rule(x, rule))
 }
 
-check_rule_not_set <- function(x,
-                               rule,
-                               ...,
-                               call = caller_env()) {
+check_rule_not_set <- function(x, rule, ..., call = caller_env()) {
   if (!is_already_set(x, rule)) {
     return(invisible(NULL))
   }
@@ -229,10 +231,12 @@ glue2 <- function(..., .envir = parent.frame()) {
 
 # ------------------------------------------------------------------------------
 
-day_of_week_normalize <- function(x,
-                                  ...,
-                                  arg = caller_arg(x),
-                                  call = caller_env()) {
+day_of_week_normalize <- function(
+  x,
+  ...,
+  arg = caller_arg(x),
+  call = caller_env()
+) {
   if (!is.character(x)) {
     return(x)
   }
@@ -307,12 +311,14 @@ cli_indented <- function(id = NULL, .envir = parent.frame()) {
   )
 }
 
-check_inherits <- function(x,
-                           what,
-                           ...,
-                           allow_null = FALSE,
-                           arg = caller_arg(x),
-                           call = caller_env()) {
+check_inherits <- function(
+  x,
+  what,
+  ...,
+  allow_null = FALSE,
+  arg = caller_arg(x),
+  call = caller_env()
+) {
   if (!missing(x)) {
     if (inherits(x, what)) {
       return(invisible(NULL))
@@ -331,11 +337,13 @@ check_inherits <- function(x,
   )
 }
 
-check_date <- function(x,
-                       ...,
-                       allow_null = FALSE,
-                       arg = caller_arg(x),
-                       call = caller_env()) {
+check_date <- function(
+  x,
+  ...,
+  allow_null = FALSE,
+  arg = caller_arg(x),
+  call = caller_env()
+) {
   check_inherits(
     x = x,
     what = "Date",

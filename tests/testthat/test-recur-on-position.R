@@ -121,4 +121,3 @@ test_that("`n` can't be missing", {
     yearly() %>% recur_on_position(NA_integer_)
   })
 })
-

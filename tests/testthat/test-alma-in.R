@@ -8,7 +8,10 @@ test_that("can check if a date is in a runion", {
 test_that("is vectorized", {
   rrule <- monthly(since = "2019-01-01")
 
-  expect_identical(alma_in(c("2019-01-01", "2019-01-02"), rrule), c(TRUE, FALSE))
+  expect_identical(
+    alma_in(c("2019-01-01", "2019-01-02"), rrule),
+    c(TRUE, FALSE)
+  )
 })
 
 test_that("`alma_in()`ness can be determined when NA values are present", {

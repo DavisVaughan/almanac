@@ -4,14 +4,17 @@ cache_rcalendar <- R6::R6Class(
 
   # ----------------------------------------------------------------------------
   public = list(
-    initialize = function(names, rholidays)
-      cache_rcalendar__initialize(self, private, names, rholidays),
+    initialize = function(names, rholidays) {
+      cache_rcalendar__initialize(self, private, names, rholidays)
+    },
 
-    get_events = function(observed)
-      cache_rcalendar__get_events(self, private, observed),
+    get_events = function(observed) {
+      cache_rcalendar__get_events(self, private, observed)
+    },
 
-    get_events_frame = function(observed)
+    get_events_frame = function(observed) {
       cache_rcalendar__get_events_frame(self, private, observed)
+    }
   ),
 
   # ----------------------------------------------------------------------------
@@ -22,8 +25,9 @@ cache_rcalendar <- R6::R6Class(
     observed = list(events = NULL, events_frame = NULL, built = FALSE),
     unobserved = list(events = NULL, events_frame = NULL, built = FALSE),
 
-    cache_build = function(observed)
+    cache_build = function(observed) {
       cache_rcalendar__cache_build(self, private, observed)
+    }
   )
 )
 

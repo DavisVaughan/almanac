@@ -4,11 +4,19 @@ cache_radjusted <- R6::R6Class(
 
   # ----------------------------------------------------------------------------
   public = list(
-    initialize = function(rschedule, adjust_on, adjustment)
-      cache_radjusted__initialize(self, private, rschedule, adjust_on, adjustment),
+    initialize = function(rschedule, adjust_on, adjustment) {
+      cache_radjusted__initialize(
+        self,
+        private,
+        rschedule,
+        adjust_on,
+        adjustment
+      )
+    },
 
-    get_events = function()
+    get_events = function() {
       cache_radjusted__get_events(self, private)
+    }
   ),
 
   # ----------------------------------------------------------------------------
@@ -20,8 +28,9 @@ cache_radjusted <- R6::R6Class(
     events = NULL,
     built = FALSE,
 
-    cache_build = function()
+    cache_build = function() {
       cache_radjusted__cache_build(self, private)
+    }
   )
 )
 
@@ -56,7 +65,13 @@ cache_radjusted__get_events <- function(self, private) {
 
 # ------------------------------------------------------------------------------
 
-cache_radjusted__initialize <- function(self, private, rschedule, adjust_on, adjustment) {
+cache_radjusted__initialize <- function(
+  self,
+  private,
+  rschedule,
+  adjust_on,
+  adjustment
+) {
   private$rschedule <- rschedule
   private$adjust_on <- adjust_on
   private$adjustment <- adjustment

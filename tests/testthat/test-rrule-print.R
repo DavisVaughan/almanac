@@ -24,7 +24,11 @@ test_that("print method for rrule is informative", {
 
     "# can use day of week variations"
     recur_on_day_of_week(daily(), c("Mon", "Thu"), nth = c(1, 2))
-    recur_on_day_of_week(recur_on_day_of_week(daily(), "Mon", nth = c(1, 2)), "Thu", nth = c(4, 5))
+    recur_on_day_of_week(
+      recur_on_day_of_week(daily(), "Mon", nth = c(1, 2)),
+      "Thu",
+      nth = c(4, 5)
+    )
     recur_on_day_of_week(yearly(), "Mon", nth = c(1, 2, 10, 13, 15, 16))
 
     "# can use multiple positions"

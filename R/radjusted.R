@@ -110,10 +110,7 @@ new_radjusted <- function(rschedule, adjust_on, adjustment) {
 
 # ------------------------------------------------------------------------------
 
-check_adjustment <- function(x,
-                             ...,
-                             arg = caller_arg(x),
-                             call = caller_env()) {
+check_adjustment <- function(x, ..., arg = caller_arg(x), call = caller_env()) {
   check_function(x, arg = arg, call = call)
 
   fmls <- fn_fmls(x)

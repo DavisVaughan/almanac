@@ -4,11 +4,13 @@ cache_rintersect <- R6::R6Class(
 
   # ----------------------------------------------------------------------------
   public = list(
-    initialize = function(rschedules, rdates, exdates)
-      cache_rintersect__initialize(self, private, rschedules, rdates, exdates),
+    initialize = function(rschedules, rdates, exdates) {
+      cache_rintersect__initialize(self, private, rschedules, rdates, exdates)
+    },
 
-    get_events = function()
+    get_events = function() {
       cache_rintersect__get_events(self, private)
+    }
   ),
 
   # ----------------------------------------------------------------------------
@@ -20,8 +22,9 @@ cache_rintersect <- R6::R6Class(
     events = NULL,
     built = FALSE,
 
-    cache_build = function()
+    cache_build = function() {
       cache_rintersect__cache_build(self, private)
+    }
   )
 )
 
@@ -97,7 +100,13 @@ cache_rintersect__get_events <- function(self, private) {
 
 # ------------------------------------------------------------------------------
 
-cache_rintersect__initialize <- function(self, private, rschedules, rdates, exdates) {
+cache_rintersect__initialize <- function(
+  self,
+  private,
+  rschedules,
+  rdates,
+  exdates
+) {
   private$rschedules <- rschedules
   private$rdates <- rdates
   private$exdates <- exdates
