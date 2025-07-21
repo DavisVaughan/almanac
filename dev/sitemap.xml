@@ -1,162 +1,56 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>/dev/CODE_OF_CONDUCT.html</loc>
-  </url>
-  <url>
-    <loc>/dev/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>/dev/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>/dev/articles/adjust-and-shift.html</loc>
-  </url>
-  <url>
-    <loc>/dev/articles/almanac.html</loc>
-  </url>
-  <url>
-    <loc>/dev/articles/holidays-calendars.html</loc>
-  </url>
-  <url>
-    <loc>/dev/articles/icalendar.html</loc>
-  </url>
-  <url>
-    <loc>/dev/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>/dev/articles/quarterly.html</loc>
-  </url>
-  <url>
-    <loc>/dev/authors.html</loc>
-  </url>
-  <url>
-    <loc>/dev/index.html</loc>
-  </url>
-  <url>
-    <loc>/dev/news/index.html</loc>
-  </url>
-  <url>
-    <loc>/dev/reference/adjustments.html</loc>
-  </url>
-  <url>
-    <loc>/dev/reference/alma_events.html</loc>
-  </url>
-  <url>
-    <loc>/dev/reference/alma_in.html</loc>
-  </url>
-  <url>
-    <loc>/dev/reference/alma_next.html</loc>
-  </url>
-  <url>
-    <loc>/dev/reference/alma_search.html</loc>
-  </url>
-  <url>
-    <loc>/dev/reference/alma_seq.html</loc>
-  </url>
-  <url>
-    <loc>/dev/reference/alma_step.html</loc>
-  </url>
-  <url>
-    <loc>/dev/reference/almanac-defaults.html</loc>
-  </url>
-  <url>
-    <loc>/dev/reference/almanac-package.html</loc>
-  </url>
-  <url>
-    <loc>/dev/reference/almanac-vctrs-compat.html</loc>
-  </url>
-  <url>
-    <loc>/dev/reference/cal_events.html</loc>
-  </url>
-  <url>
-    <loc>/dev/reference/cal_match.html</loc>
-  </url>
-  <url>
-    <loc>/dev/reference/cal_names.html</loc>
-  </url>
-  <url>
-    <loc>/dev/reference/cal_us_federal.html</loc>
-  </url>
-  <url>
-    <loc>/dev/reference/calendar-add-remove.html</loc>
-  </url>
-  <url>
-    <loc>/dev/reference/calendar-locations.html</loc>
-  </url>
-  <url>
-    <loc>/dev/reference/deprecated-recur.html</loc>
-  </url>
-  <url>
-    <loc>/dev/reference/holiday-utilities.html</loc>
-  </url>
-  <url>
-    <loc>/dev/reference/holidays.html</loc>
-  </url>
-  <url>
-    <loc>/dev/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>/dev/reference/new_rschedule.html</loc>
-  </url>
-  <url>
-    <loc>/dev/reference/pipe.html</loc>
-  </url>
-  <url>
-    <loc>/dev/reference/radjusted.html</loc>
-  </url>
-  <url>
-    <loc>/dev/reference/rcalendar.html</loc>
-  </url>
-  <url>
-    <loc>/dev/reference/rcustom.html</loc>
-  </url>
-  <url>
-    <loc>/dev/reference/recur_for_count.html</loc>
-  </url>
-  <url>
-    <loc>/dev/reference/recur_on_day_of_month.html</loc>
-  </url>
-  <url>
-    <loc>/dev/reference/recur_on_day_of_week.html</loc>
-  </url>
-  <url>
-    <loc>/dev/reference/recur_on_day_of_year.html</loc>
-  </url>
-  <url>
-    <loc>/dev/reference/recur_on_easter.html</loc>
-  </url>
-  <url>
-    <loc>/dev/reference/recur_on_interval.html</loc>
-  </url>
-  <url>
-    <loc>/dev/reference/recur_on_month_of_year.html</loc>
-  </url>
-  <url>
-    <loc>/dev/reference/recur_on_position.html</loc>
-  </url>
-  <url>
-    <loc>/dev/reference/recur_on_week_of_year.html</loc>
-  </url>
-  <url>
-    <loc>/dev/reference/recur_with_week_start.html</loc>
-  </url>
-  <url>
-    <loc>/dev/reference/rholiday.html</loc>
-  </url>
-  <url>
-    <loc>/dev/reference/roffset.html</loc>
-  </url>
-  <url>
-    <loc>/dev/reference/rrule.html</loc>
-  </url>
-  <url>
-    <loc>/dev/reference/rset-add.html</loc>
-  </url>
-  <url>
-    <loc>/dev/reference/rset.html</loc>
-  </url>
-  <url>
-    <loc>/dev/reference/stepper.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>/dev/CODE_OF_CONDUCT.html</loc></url>
+<url><loc>/dev/LICENSE-text.html</loc></url>
+<url><loc>/dev/LICENSE.html</loc></url>
+<url><loc>/dev/articles/adjust-and-shift.html</loc></url>
+<url><loc>/dev/articles/almanac.html</loc></url>
+<url><loc>/dev/articles/holidays-calendars.html</loc></url>
+<url><loc>/dev/articles/icalendar.html</loc></url>
+<url><loc>/dev/articles/index.html</loc></url>
+<url><loc>/dev/articles/quarterly.html</loc></url>
+<url><loc>/dev/authors.html</loc></url>
+<url><loc>/dev/index.html</loc></url>
+<url><loc>/dev/news/index.html</loc></url>
+<url><loc>/dev/reference/adjustments.html</loc></url>
+<url><loc>/dev/reference/alma_events.html</loc></url>
+<url><loc>/dev/reference/alma_in.html</loc></url>
+<url><loc>/dev/reference/alma_next.html</loc></url>
+<url><loc>/dev/reference/alma_search.html</loc></url>
+<url><loc>/dev/reference/alma_seq.html</loc></url>
+<url><loc>/dev/reference/alma_step.html</loc></url>
+<url><loc>/dev/reference/almanac-defaults.html</loc></url>
+<url><loc>/dev/reference/almanac-package.html</loc></url>
+<url><loc>/dev/reference/almanac-vctrs-compat.html</loc></url>
+<url><loc>/dev/reference/cal_events.html</loc></url>
+<url><loc>/dev/reference/cal_match.html</loc></url>
+<url><loc>/dev/reference/cal_names.html</loc></url>
+<url><loc>/dev/reference/cal_us_federal.html</loc></url>
+<url><loc>/dev/reference/calendar-add-remove.html</loc></url>
+<url><loc>/dev/reference/calendar-locations.html</loc></url>
+<url><loc>/dev/reference/deprecated-recur.html</loc></url>
+<url><loc>/dev/reference/holiday-utilities.html</loc></url>
+<url><loc>/dev/reference/holidays.html</loc></url>
+<url><loc>/dev/reference/index.html</loc></url>
+<url><loc>/dev/reference/new_rschedule.html</loc></url>
+<url><loc>/dev/reference/pipe.html</loc></url>
+<url><loc>/dev/reference/radjusted.html</loc></url>
+<url><loc>/dev/reference/rcalendar.html</loc></url>
+<url><loc>/dev/reference/rcustom.html</loc></url>
+<url><loc>/dev/reference/recur_for_count.html</loc></url>
+<url><loc>/dev/reference/recur_on_day_of_month.html</loc></url>
+<url><loc>/dev/reference/recur_on_day_of_week.html</loc></url>
+<url><loc>/dev/reference/recur_on_day_of_year.html</loc></url>
+<url><loc>/dev/reference/recur_on_easter.html</loc></url>
+<url><loc>/dev/reference/recur_on_interval.html</loc></url>
+<url><loc>/dev/reference/recur_on_month_of_year.html</loc></url>
+<url><loc>/dev/reference/recur_on_position.html</loc></url>
+<url><loc>/dev/reference/recur_on_week_of_year.html</loc></url>
+<url><loc>/dev/reference/recur_with_week_start.html</loc></url>
+<url><loc>/dev/reference/rholiday.html</loc></url>
+<url><loc>/dev/reference/roffset.html</loc></url>
+<url><loc>/dev/reference/rrule.html</loc></url>
+<url><loc>/dev/reference/rset-add.html</loc></url>
+<url><loc>/dev/reference/rset.html</loc></url>
+<url><loc>/dev/reference/stepper.html</loc></url>
 </urlset>
+
