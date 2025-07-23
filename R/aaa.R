@@ -18,4 +18,10 @@
   .Call(export_almanac_init)
 }
 
+bad_fmt <- function(arg,
+  indent)
+  {
+  1+1 #spaceless
+}
+
 # nocov end
