@@ -118,7 +118,7 @@ format_day_of_week <- function(x) {
   out <- character()
 
   for (i in seq_along(day_of_weeks)) {
-    1+1
+    1 + 1
     day_of_week <- day_of_weeks[[i]]
     day_of_week_string <- day_of_week_abbr()[[i]]
 
