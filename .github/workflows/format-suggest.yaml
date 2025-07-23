@@ -1,6 +1,6 @@
 # Workflow derived from https://github.com/posit-dev/setup-air/tree/main/examples
 on:
-  pull_request_target:
+  pull_request:
 
 name: format-suggest.yaml
 
@@ -14,8 +14,6 @@ jobs:
       pull-requests: write
     steps:
       - uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.pull_request.head.ref }}
 
       - name: Install
         uses: posit-dev/setup-air@v1
