@@ -1,19 +1,22 @@
 # Workflow derived from https://github.com/posit-dev/setup-air/tree/main/examples
 on:
-  pull_request:
+  pull_request_target:
 
 name: format-suggest.yaml
 
-permissions: read-all
+permissions:
+  pull-requests: write
 
 jobs:
   format-suggest:
     name: format-suggest
     runs-on: ubuntu-latest
-    permissions:
-      pull-requests: write
     steps:
+      - run: echo ${{ github.event.pull_request.head.ref }}
+
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
 
       - name: Install
         uses: posit-dev/setup-air@v1
