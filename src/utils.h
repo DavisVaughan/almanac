@@ -2,6 +2,7 @@
 #define ALMANAC_UTILS_H
 
 #include "r.h"
+#include <algorithm>
 
 // -----------------------------------------------------------------------------
 
@@ -75,6 +76,20 @@ static inline bool r_int_is_missing(int x) {
 
 static inline void r_init_date(sexp x) {
   r_poke_class(x, classes_date);
+}
+
+// -----------------------------------------------------------------------------
+
+/*
+ * `r_copy()` is a wrapper around `std::copy()` that is a no-op when the input
+ * range is empty. Same as `r_memcpy()` in rlang and vctrs.
+ */
+template <typename InputIt, typename OutputIt>
+inline OutputIt r_copy(InputIt first, InputIt last, OutputIt out) {
+  if (first == last) {
+    return out;
+  }
+  return std::copy(first, last, out);
 }
 
 // -----------------------------------------------------------------------------
