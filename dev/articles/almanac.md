@@ -169,12 +169,12 @@ on_weekly <- weekly(since = since)
 # The first time is "slow"
 system.time(alma_search(since, "2000-01-01", on_weekly))
 #>    user  system elapsed 
-#>   0.107   0.001   0.063
+#>   0.079   0.000   0.045
 
 # Repeated access is fast
 system.time(alma_search(since, "2000-01-01", on_weekly))
 #>    user  system elapsed 
-#>   0.000   0.000   0.001
+#>       0       0       0
 
 # The entire event set is cached, so even if you change the arguments,
 # the operation is still fast.
