@@ -1,0 +1,285 @@
+# Adjusting and shifting dates
+
+If you have read the introduction vignette,
+[`vignette("almanac")`](../articles/almanac.md), then you’ve seen
+rrules, runions, rintersects, rsetdiffs, and the functions
+[`alma_search()`](../reference/alma_search.md),
+[`alma_events()`](../reference/alma_events.md), and
+[`alma_in()`](../reference/alma_in.md). Additionally included in almanac
+are a set of tools for *adjusting* and *shifting* dates. These functions
+are broken down as:
+
+- Adjustment functions, such as
+  [`adj_following()`](../reference/adjustments.md) and
+  [`adj_nearest()`](../reference/adjustments.md)
+
+- Adjusted rschedules
+
+- [`alma_step()`](../reference/alma_step.md)
+
+- [`stepper()`](../reference/stepper.md)
+
+``` r
+
+library(almanac)
+library(lubridate, warn.conflicts = FALSE)
+```
+
+## Adjusting
+
+“Adjusting” a date defines the behavior of what happens if a date lands
+on an event in a rschedule’s event set. For example, if you have a date
+that is currently on Christmas, you could adjust forward to the next
+non-event date, adjust backwards to the previous non-event date, or
+adjust to the nearest non-event date. The logic of how to perform these
+adjustments is encoded into the following adjustment functions:
+
+- [`adj_following()`](../reference/adjustments.md)
+
+  Choose the first non-event date after `x`.
+
+- [`adj_preceding()`](../reference/adjustments.md)
+
+  Choose the first non-event date before `x`.
+
+- [`adj_modified_following()`](../reference/adjustments.md)
+
+  Choose the first non-event date after `x`, unless it falls in a
+  different month, in which case the first non-event date before `x` is
+  chosen instead.
+
+- [`adj_modified_preceding()`](../reference/adjustments.md)
+
+  Choose the first non-event date before `x`, unless it falls in a
+  different month, in which case the first non-event date after `x` is
+  chosen instead.
+
+- [`adj_nearest()`](../reference/adjustments.md)
+
+  Choose the nearest non-event date to `x`. If the closest preceding and
+  following non-event dates are equally far away, the following
+  non-event date is chosen.
+
+- [`adj_none()`](../reference/adjustments.md)
+
+  Performs no adjustment and returns `x` unchanged.
+
+To use an adjustment function, you’ll need an rschedule that contains
+the event set you are interested in adjusting around. Then provide that,
+along with the dates you are interested in adjusting, to an `adj_*()`
+function.
+
+``` r
+
+on_christmas <- yearly() %>%
+  recur_on_day_of_month(25) %>%
+  recur_on_month_of_year("Dec")
+
+x <- as.Date(c("2019-12-24", "2019-12-25"))
+
+adj_following(x, on_christmas)
+#> [1] "2019-12-24" "2019-12-26"
+
+adj_preceding(x, on_christmas)
+#> [1] "2019-12-24" "2019-12-24"
+```
+
+The [`adj_nearest()`](../reference/adjustments.md) function is
+particularly useful when you have a date on a weekend and want to roll
+it back to Friday if it falls on Saturday but roll it forward to Monday
+if it falls on Sunday.
+
+``` r
+
+# Saturday / Sunday
+x <- as.Date(c("2019-12-21", "2019-12-22"))
+
+on_weekends <- weekly() %>%
+  recur_on_weekends()
+
+# Roll Saturday backwards and Sunday forwards
+adj_nearest(x, on_weekends)
+#> [1] "2019-12-20" "2019-12-23"
+```
+
+## Adjusted rschedules
+
+In the introduction vignette, you were introduced to a number of
+different rschedules. As a reminder, an rschedule is just a general term
+for an rrule or an rset. There is actually a third type of rschedule in
+almanac, called radjusted, which is useful when combined with the
+adjustment functions.
+
+To motivate it, imagine your company deems Christmas to be a holiday.
+Whenever Christmas rolls around on the 25th of December, you get that
+day off. But what happens when Christmas falls on a Saturday? What about
+Sunday? Most corporations will *observe* a holiday that falls on the
+weekend on the nearest working day instead of on the weekend date that
+it actually occurred on.
+
+In almanac, it seems like this would pose a problem. You can create
+rrules for Christmas and for weekends, but an rset like runion,
+rintersect, or rsetdiff would perform some kind of set operation on
+them. What you really need is a way to say: recur on the dates defined
+by this rschedule, *unless* it intersects with this second rschedule. In
+those cases, apply an *adjustment* to the intersected dates to create
+valid dates. This is the job of radjusted.
+
+``` r
+
+on_adjusted_christmas <- radjusted(
+  rschedule = on_christmas, 
+  adjust_on = on_weekends,
+  adjustment = adj_nearest
+)
+
+on_adjusted_christmas
+#> <radjusted>
+#>  adjust:
+#>  <rrule>
+#>  • frequency: yearly
+#>  • range: [1900-01-01, 2100-01-01]
+#>  • month of year: Dec
+#>  • day of month: 25
+#>  adjust on:
+#>  <rrule>
+#>  • frequency: weekly
+#>  • range: [1900-01-01, 2100-01-01]
+#>  • day of week: Sat and Sun
+```
+
+This is just another rschedule, so it can be used with all of the other
+`alma_*()` functions we’ve seen so far. For example, we can confirm that
+Christmas dates that fall on the weekend are adjusted appropriately by
+searching for a few of them.
+
+``` r
+
+# Note 2004-12-24, which was rolled back from 2004-12-25, a Saturday.
+# Note 2005-12-26, which was rolled forward from 2005-12-25, a Sunday.
+alma_search("2002-01-01", "2008-01-01", on_adjusted_christmas)
+#> [1] "2002-12-25" "2003-12-25" "2004-12-24" "2005-12-26" "2006-12-25"
+#> [6] "2007-12-25"
+```
+
+## Stepping
+
+[`alma_step()`](../reference/alma_step.md) allows you to take an
+existing vector of dates and shift it by a number of days, “stepping
+over” any events in the event set defined by an rschedule. This is
+generally useful for shifting by “N business days”, where the logic for
+a business day is encapsulated in the rschedule.
+
+You can think of [`alma_step()`](../reference/alma_step.md) as a way to
+replace lubridate’s `x + days(5)` with `x + business_days(5)` where
+`business_days()` is specific to your company’s holiday calendar.
+
+In the following example, we shift a Thursday and Friday by 1 working
+day. Notice that Friday is shifted forward to Monday.
+
+``` r
+
+# A Thursday / Friday pair
+x <- as.Date(c("2019-12-19", "2019-12-20"))
+
+# Shift by 1 working day, stepping over weekends
+step <- alma_step(x, n = 1, rschedule = on_weekends)
+
+data.frame(
+  x = x,
+  x_wday = wday(x, label = TRUE),
+  step = step,
+  step_wday = wday(step, label = TRUE)
+)
+#>            x x_wday       step step_wday
+#> 1 2019-12-19    Thu 2019-12-20       Fri
+#> 2 2019-12-20    Fri 2019-12-23       Mon
+```
+
+Internally, `n` is applied 1 day at a time.
+[`adj_following()`](../reference/adjustments.md) is called after each 1
+day shift if `n` is positive, otherwise
+[`adj_preceding()`](../reference/adjustments.md) is called.
+
+To break this down, we’ll analyze the Friday.
+
+- Start on `2019-12-20`, a Friday.
+
+- Step forward 1 day, to `2019-12-21`, a Saturday.
+
+- Apply [`adj_following()`](../reference/adjustments.md), landing us on
+  Monday, `2019-12-23`.
+
+You can shift backwards with a negative `n`. It’s also fully vectorized,
+and you can use different signs of `n` in the same call. For an example,
+let’s consider what happens if you start on a non-event date. Here, we
+start on a Saturday and Sunday, and apply a +1 and -1 day shift to them,
+respectively.
+
+``` r
+
+# A Saturday / Sunday pair
+x <- as.Date(c("2019-12-21", "2019-12-22"))
+
+step <- alma_step(x, c(1, -1), on_weekends)
+
+data.frame(
+  x = x,
+  x_wday = wday(x, label = TRUE),
+  step = step,
+  step_wday = wday(step, label = TRUE)
+)
+#>            x x_wday       step step_wday
+#> 1 2019-12-21    Sat 2019-12-23       Mon
+#> 2 2019-12-22    Sun 2019-12-20       Fri
+```
+
+For Saturday, we apply the 1 day shift, landing on Sunday, and then call
+[`adj_following()`](../reference/adjustments.md), landing on Monday.
+
+For Sunday, we apply the -1 day shift, landing on Saturday, and then
+call [`adj_preceding()`](../reference/adjustments.md), landing on
+Friday.
+
+## Steppers
+
+[`alma_step()`](../reference/alma_step.md) is nice, but it would be
+really nice to have something like lubridate’s `x + days(5)` syntax, but
+relative to an rschedule. Due to some issues with how R’s S3 dispatch
+system works with `+`, this isn’t exactly replicable with almanac, but
+you can get close (lubridate uses R’s S4 object oriented system to get
+it to work, but I don’t want to go there).
+
+First off, you need an object the holds information about how to shift
+relative to an rschedule. You can create one of these with
+[`stepper()`](../reference/stepper.md). The only thing you give
+[`stepper()`](../reference/stepper.md) is the rschedule to step relative
+to. It returns a function of 1 argument, `n`, which you’ll call with the
+desired number of days to shift. The resulting object can be added to or
+subtracted from your vector of dates. It sounds a little complicated,
+but hopefully things will clear up with an example. Let’s reproduce the
+last example from the previous section:
+
+``` r
+
+working_day <- stepper(on_weekends)
+
+x %s+% working_day(c(1, -1))
+#> [1] "2019-12-23" "2019-12-20"
+```
+
+Notice the usage of `%s+%`. This replaces `+`, and allows you to step
+forward. There is also a `%s-%` for stepping backwards.
+
+The nice thing about `working_day` is that you can continue to use it on
+other date vectors.
+
+``` r
+
+# A Wednesday
+wednesday <- as.Date("2019-12-18")
+
+# Returns Thursday, Friday, Monday
+wednesday %s+% working_day(1:3)
+#> [1] "2019-12-19" "2019-12-20" "2019-12-23"
+```

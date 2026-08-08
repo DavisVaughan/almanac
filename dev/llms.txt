@@ -1,0 +1,374 @@
+# almanac
+
+``` r
+
+library(almanac)
+```
+
+almanac provides tools for working with recurrence rules, the
+fundamental building blocks used to identify calendar “events”, such as
+weekends or holidays.
+
+Additionally, it provides a full suite of tools for working with
+holidays and calendars. It includes a number of built in holidays, such
+as [`hol_christmas()`](reference/holidays.md), but you can also add your
+own custom holidays through [`rholiday()`](reference/rholiday.md). Once
+you have a set of holidays specific to your business, you can aggregate
+them into a calendar with [`rcalendar()`](reference/rcalendar.md), which
+has specialized tooling like [`cal_events()`](reference/cal_events.md)
+to generate the holiday dates for a particular year.
+
+## Installation
+
+Install the released version of almanac from CRAN with:
+
+``` r
+
+install.packages("almanac")
+```
+
+Install the development version from [GitHub](https://github.com/) with:
+
+``` r
+
+# install.packages("pak")
+pak::pak("DavisVaughan/almanac")
+```
+
+## Recurrence rules
+
+Constructing recurrence rules looks like this:
+
+``` r
+
+# Thanksgiving = "The fourth Thursday in November"
+on_thanksgiving <- yearly() %>% 
+  recur_on_month_of_year("November") %>%
+  recur_on_day_of_week("Thursday", nth = 4)
+
+on_thanksgiving
+#> <rrule>
+#> • frequency: yearly
+#> • range: [1900-01-01, 2100-01-01]
+#> • month of year: Nov
+#> • day of week: Thu[4]
+```
+
+This is the underlying recurrence rule for the Thanksgiving holiday
+represented by [`hol_us_thanksgiving()`](reference/holidays.md).
+
+After constructing a recurrence rule, it can be used to generate dates
+that are in the “event set”. For example, you can search for all
+Thanksgivings between 2000-2006.
+
+``` r
+
+alma_events(on_thanksgiving, year = 2000:2006)
+#> [1] "2000-11-23" "2001-11-22" "2002-11-28" "2003-11-27" "2004-11-25"
+#> [6] "2005-11-24" "2006-11-23"
+```
+
+Determine if a particular date is a part of the event set with
+[`alma_in()`](reference/alma_in.md).
+
+``` r
+
+# Is this a Thanksgiving?
+alma_in(c("2000-01-01", "2000-11-23"), on_thanksgiving)
+#> [1] FALSE  TRUE
+```
+
+You can also shift an existing sequence of dates, “stepping over” dates
+that are part of the event set.
+
+``` r
+
+wednesday_before_thanksgiving <- as.Date("2000-11-22")
+
+# Thanksgiving was on 2000-11-23.
+# This steps over Thanksgiving to 2000-11-24.
+# Then steps 1 more day to 2000-11-25.
+alma_step(wednesday_before_thanksgiving, n = 2, on_thanksgiving)
+#> [1] "2000-11-25"
+```
+
+There is an additional “stepper” object you can create for more
+intuitive stepping. Combine it with `%s+%` to perform the same step done
+by [`alma_step()`](reference/alma_step.md). Create a stepper function
+with [`stepper()`](reference/stepper.md), and then use it by supplying
+the number of days to step.
+
+``` r
+
+step_over_thanksgiving <- stepper(on_thanksgiving)
+wednesday_before_thanksgiving %s+% step_over_thanksgiving(2)
+#> [1] "2000-11-25"
+```
+
+## Holidays and calendars
+
+The above example just scratches the surface of what almanac can do.
+Practically speaking, you’ll probably have multiple holidays that you’d
+like to combine into one big calendar. almanac provides a full API for
+working with holidays and calendars.
+
+This example creates a calendar containing Christmas, Thanksgiving, and
+New Year’s Day:
+
+``` r
+
+cal <- rcalendar(
+  hol_christmas(),
+  hol_us_thanksgiving(),
+  hol_new_years_day()
+)
+
+cal
+#> <rcalendar[3]>
+#> • Christmas
+#> • US Thanksgiving
+#> • New Year's Day
+```
+
+We can ask for the next upcoming holiday with
+[`cal_next()`](reference/calendar-locations.md):
+
+``` r
+
+x <- as.Date(c("2019-12-05", "2020-02-05"))
+cal_next(x, cal)
+#>              name       date
+#> 1       Christmas 2019-12-25
+#> 2 US Thanksgiving 2020-11-26
+```
+
+Or for holidays that belong to a particular year with
+[`cal_events()`](reference/cal_events.md):
+
+``` r
+
+events <- cal_events(cal, year = 2028)
+events$weekday <- lubridate::wday(events$date, label = TRUE)
+events
+#>              name       date weekday
+#> 1  New Year's Day 2028-01-01     Sat
+#> 2 US Thanksgiving 2028-11-23     Thu
+#> 3       Christmas 2028-12-25     Mon
+```
+
+Note that New Year’s Day occurred on Saturday. If your business
+*observes* New Year’s Day on the nearest weekday, you can adjust the
+holiday to respect that observance rule before adding it into the
+calendar:
+
+``` r
+
+on_weekends <- weekly() %>%
+  recur_on_weekends()
+
+cal <- rcalendar(
+  hol_christmas(),
+  hol_us_thanksgiving(),
+  hol_observe(
+    hol_new_years_day(), 
+    adjust_on = on_weekends, 
+    adjustment = adj_nearest
+  )
+)
+
+# Now it returns the previous Friday for the observed New Year's date.
+# Note that this fell in 2027, but was included in the 2028 set of dates
+# since most people would consider that part of the 2028 holiday calendar.
+events <- cal_events(cal, year = 2028)
+events$weekday <- lubridate::wday(events$date, label = TRUE)
+events
+#>              name       date weekday
+#> 1  New Year's Day 2027-12-31     Fri
+#> 2 US Thanksgiving 2028-11-23     Thu
+#> 3       Christmas 2028-12-25     Mon
+```
+
+We can union our calendar with the `on_weekends` rule to get a
+recurrence set that represents days when our business is closed. Then we
+can create a stepper out of that so we can step forwards by “a business
+day.”
+
+``` r
+
+business_day <- stepper(runion(cal, on_weekends))
+```
+
+For example, Christmas was on a Monday in 2006. If you wanted to step 1
+business day forward from the Friday before Christmas, you’d probably
+like it to step over the weekend and the Christmas Monday to finally
+land on Tuesday:
+
+``` r
+
+# Christmas was on a Monday in 2006.
+# This is the Friday before Christmas
+friday <- as.Date("2006-12-22")
+
+# Step forward 1 business day, going over the weekend and Christmas
+friday %s+% business_day(1)
+#> [1] "2006-12-26"
+```
+
+## Learning more
+
+View the vignettes on [the
+website](https://davisvaughan.github.io/almanac/index.html) to learn
+more about how to use almanac.
+
+- [`vignette("almanac")`](articles/almanac.md)
+
+- [`vignette("holidays-calendars")`](articles/holidays-calendars.md)
+
+- [`vignette("adjust-and-shift")`](articles/adjust-and-shift.md)
+
+- [`vignette("quarterly")`](articles/quarterly.md)
+
+- [`vignette("icalendar")`](articles/icalendar.md)
+
+## Acknowledgements
+
+almanac has developed as a composite of ideas from multiple different
+libraries.
+
+First off, it directly embeds the *amazing* JavaScript library
+[rrule](https://github.com/jakubroztocil/rrule) for the core event set
+calculations. To do this, it uses the equally awesome R package,
+[V8](https://github.com/jeroen/V8), from Jeroen Ooms.
+
+The date shifting / adjusting functions are modeled after similar
+functions in [QuantLib](https://github.com/lballabio/QuantLib).
+
+The fast binary search based implementations of
+[`alma_next()`](reference/alma_next.md) and
+[`alma_step()`](reference/alma_step.md) are inspired by Pandas and the
+implementation of Numpy’s
+[busday_offset()](https://numpy.org/doc/stable/reference/generated/numpy.busday_offset.html).
+
+The author of [gs](https://github.com/jameslairdsmith/gs), James
+Laird-Smith, has been a great collaborator as we have bounced ideas off
+of each other. gs attempts to solve a similar problem, but with a
+slightly different implementation.
+
+# Package index
+
+## Holidays
+
+- [`rholiday()`](rholiday.md) : Create a recurring holiday
+- [`hol_observe()`](holiday-utilities.md)
+  [`hol_offset()`](holiday-utilities.md)
+  [`hol_rename()`](holiday-utilities.md) : Holiday utility functions
+- [`hol_christmas()`](holidays.md) [`hol_christmas_eve()`](holidays.md)
+  [`hol_easter()`](holidays.md) [`hol_good_friday()`](holidays.md)
+  [`hol_halloween()`](holidays.md) [`hol_new_years_day()`](holidays.md)
+  [`hol_new_years_eve()`](holidays.md)
+  [`hol_st_patricks_day()`](holidays.md)
+  [`hol_valentines_day()`](holidays.md)
+  [`hol_us_election_day()`](holidays.md)
+  [`hol_us_fathers_day()`](holidays.md)
+  [`hol_us_independence_day()`](holidays.md)
+  [`hol_us_indigenous_peoples_day()`](holidays.md)
+  [`hol_us_juneteenth()`](holidays.md)
+  [`hol_us_labor_day()`](holidays.md)
+  [`hol_us_martin_luther_king_junior_day()`](holidays.md)
+  [`hol_us_memorial_day()`](holidays.md)
+  [`hol_us_mothers_day()`](holidays.md)
+  [`hol_us_presidents_day()`](holidays.md)
+  [`hol_us_thanksgiving()`](holidays.md)
+  [`hol_us_veterans_day()`](holidays.md) : Holidays
+
+## Calendars
+
+- [`rcalendar()`](rcalendar.md) : Create a recurring calendar
+- [`cal_events()`](cal_events.md) : Calendar events
+- [`cal_match()`](cal_match.md) : Calendar matching
+- [`cal_names()`](cal_names.md) : Calendar names
+- [`cal_us_federal()`](cal_us_federal.md) : US federal calendar
+- [`cal_add()`](calendar-add-remove.md)
+  [`cal_remove()`](calendar-add-remove.md) : Calendar additions and
+  removals
+- [`cal_next()`](calendar-locations.md)
+  [`cal_previous()`](calendar-locations.md) : Calendar locations
+
+## Recurrence rules
+
+- [`daily()`](rrule.md) [`weekly()`](rrule.md) [`monthly()`](rrule.md)
+  [`yearly()`](rrule.md) : Create a recurrence rule
+- [`recur_for_count()`](recur_for_count.md) : Control the number of
+  times to recur
+- [`recur_on_day_of_month()`](recur_on_day_of_month.md) : Recur on a day
+  of the month
+- [`recur_on_day_of_week()`](recur_on_day_of_week.md)
+  [`recur_on_weekdays()`](recur_on_day_of_week.md)
+  [`recur_on_weekends()`](recur_on_day_of_week.md) : Recur on a day of
+  the week
+- [`recur_on_day_of_year()`](recur_on_day_of_year.md) : Recur on a day
+  of the year
+- [`recur_on_easter()`](recur_on_easter.md) : Recur on easter
+- [`recur_on_interval()`](recur_on_interval.md) : Recur on an interval
+- [`recur_on_month_of_year()`](recur_on_month_of_year.md) : Recur on a
+  month of the year
+- [`recur_on_position()`](recur_on_position.md) : Recur on a position
+  within a frequency
+- [`recur_on_week_of_year()`](recur_on_week_of_year.md) : Recur on a
+  week of the year
+- [`recur_with_week_start()`](recur_with_week_start.md) : Control the
+  start of the week
+
+## Recurrence types
+
+- [`runion()`](rset.md) [`rintersect()`](rset.md)
+  [`rsetdiff()`](rset.md) : Create a new set-based recurrence schedule
+- [`rcustom()`](rcustom.md) : Create a custom rschedule
+- [`roffset()`](roffset.md) : Create an offset rschedule
+- [`radjusted()`](radjusted.md) : Create an adjusted rschedule
+
+## Recurrence utilities
+
+- [`alma_in()`](alma_in.md) : Check if dates are in an event set
+- [`alma_search()`](alma_search.md) : Search for events
+- [`alma_seq()`](alma_seq.md) : Generate date sequences
+- [`alma_next()`](alma_next.md) [`alma_previous()`](alma_next.md) :
+  Generate the next or previous event
+- [`alma_events()`](alma_events.md) : Get all events
+- [`alma_step()`](alma_step.md) : Step relative to an rschedule
+- [`stepper()`](stepper.md) [`` `%s+%` ``](stepper.md)
+  [`` `%s-%` ``](stepper.md) [`workdays()`](stepper.md) : Create a new
+  stepper
+
+## Adjustments
+
+- [`adj_following()`](adjustments.md)
+  [`adj_preceding()`](adjustments.md)
+  [`adj_modified_following()`](adjustments.md)
+  [`adj_modified_preceding()`](adjustments.md)
+  [`adj_nearest()`](adjustments.md) [`adj_none()`](adjustments.md) :
+  Date adjustments
+
+## Developer tools
+
+- [`new_rschedule()`](new_rschedule.md)
+  [`rschedule_events()`](new_rschedule.md) : Create a new rschedule
+- [`almanac_since()`](almanac-defaults.md)
+  [`almanac_until()`](almanac-defaults.md) : Default values in almanac
+
+## Compatibility
+
+- [`vec_arith(`*`<almanac_stepper>`*`)`](almanac-vctrs-compat.md)
+  [`vec_ptype2(`*`<almanac_stepper.almanac_stepper>`*`)`](almanac-vctrs-compat.md)
+  [`vec_cast(`*`<almanac_stepper.almanac_stepper>`*`)`](almanac-vctrs-compat.md)
+  : vctrs compatibility functions
+
+# Articles
+
+### All vignettes
+
+- [Adjusting and shifting dates](adjust-and-shift.md):
+- [Introduction to almanac](almanac.md):
+- [Holidays and calendars](holidays-calendars.md):
+- [iCalendar specification](icalendar.md):
+- [Quarterly rules](quarterly.md):

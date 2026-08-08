@@ -1,0 +1,300 @@
+# Quarterly rules
+
+Quarterly rules are the “hardest” to create in almanac because the
+specification that it is built on top of, the [RFC-5545 iCalendar
+Spec](https://www.rfc-editor.org/rfc/rfc5545) does not include quarterly
+as a frequency. The rationale for this is that it can always be built
+from a combination of monthly or yearly rules, if a bit clunky. The goal
+of this vignette is just to show a few examples of quarterly rules.
+
+``` r
+
+library(almanac)
+library(lubridate, warn.conflicts = FALSE)
+```
+
+## First day of the quarter
+
+This one is particularly easy, but the reason is a bit misleading. Let’s
+show it first:
+
+``` r
+
+on_first_day_of_quarter <- monthly(since = "2000-01-01") %>%
+  recur_on_interval(3) %>%
+  recur_on_day_of_month(1)
+
+alma_search("2000-01-01", "2002-01-01", on_first_day_of_quarter)
+#> [1] "2000-01-01" "2000-04-01" "2000-07-01" "2000-10-01" "2001-01-01"
+#> [6] "2001-04-01" "2001-07-01" "2001-10-01" "2002-01-01"
+```
+
+Whenever you need the “first” event per quarter, there is a good chance
+that that event will fall in the first month of the quarter, as is the
+case here. Whenever you have a guarantee that your event falls in the
+first month of the quarter, and can be computed from the start of that
+month, you can probably just use `monthly() %>% recur_on_interval(3)` to
+get your quarterly values.
+
+## Altering the fiscal year start
+
+Before moving on to more complex examples, I want to show the general
+way to change the start of the fiscal year. This means that rather than
+starting the quarter on January, we could start it on March. Remember
+that the `since` date is used as an anchor date for things like
+[`recur_on_interval()`](../reference/recur_on_interval.md), so if we
+chose a `since` date in March, then we could recur with a different
+fiscal calendar.
+
+``` r
+
+on_first_day_of_quarter_march_start <- monthly(since = "2000-03-01") %>%
+  recur_on_interval(3) %>%
+  recur_on_day_of_month(1)
+
+alma_search("2000-01-01", "2002-01-01", on_first_day_of_quarter_march_start)
+#> [1] "2000-03-01" "2000-06-01" "2000-09-01" "2000-12-01" "2001-03-01"
+#> [6] "2001-06-01" "2001-09-01" "2001-12-01"
+```
+
+## N-th day of the quarter
+
+As a more general case of the first example, what happens if we want to
+compute the N-th day of the quarter, from either the front or the back?
+Unlike the first example, we no longer have the guarantee that the date
+will be in the first month, and if we count from the back we really need
+the entire set of 3 months that make up the quarter to count correctly.
+
+The secret here is to break the rule into 4 smaller rules, one per
+quarter, which you can then combine into 1 larger quarterly runion.
+Let’s start with a concrete example in Q1. How can we get the 60th day
+of the quarter?
+
+``` r
+
+on_60th_day_of_q1 <- yearly() %>%
+  recur_on_month_of_year(1:3) %>%
+  recur_on_day_of_month(1:31) %>%
+  recur_on_position(60)
+
+alma_search("2000-01-01", "2002-01-01", on_60th_day_of_q1)
+#> [1] "2000-02-29" "2001-03-01"
+```
+
+This breaks down as follows:
+
+- Use a [`yearly()`](../reference/rrule.md) frequency rather than a
+  [`monthly()`](../reference/rrule.md) one.
+
+- Recur on the 3 months that make up the first quarter.
+
+- Recur on all days of the month (it isn’t a problem if a month doesn’t
+  have day 30 or 31).
+
+- This gives us access to all ~90 days in the quarter (the exact number
+  varies per quarter). With
+  [`recur_on_position()`](../reference/recur_on_position.md) we can take
+  the `nth` day of that set.
+
+Using [`yearly()`](../reference/rrule.md) rather than
+[`monthly()`](../reference/rrule.md) is required for
+[`recur_on_position()`](../reference/recur_on_position.md) to work
+correctly. [`recur_on_position()`](../reference/recur_on_position.md)
+takes the `n-th` position of the set, *within the frequency*. So if we
+had chosen monthly it would try and take the 60th position within the
+monthly set, which isn’t what we wanted.
+
+The rest of the quarterly rules are straightforward from here. We just
+change the month of year values. To make this more usable, I’ll also
+wrap it in a parameterized function, and go ahead and construct the
+combined runion object from the four pieces.
+
+``` r
+
+make_on_nth_doq <- function(since = "1970-01-01", nth = 1L) {
+  all_days <- 1:31
+  
+  on_nth_day_of_q1 <- yearly(since = since) %>%
+    recur_on_month_of_year(1:3) %>%
+    recur_on_day_of_month(all_days) %>%
+    recur_on_position(nth)
+  
+  on_nth_day_of_q2 <- yearly(since = since) %>%
+    recur_on_month_of_year(4:6) %>%
+    recur_on_day_of_month(all_days) %>%
+    recur_on_position(nth)
+  
+  on_nth_day_of_q3 <- yearly(since = since) %>%
+    recur_on_month_of_year(7:9) %>%
+    recur_on_day_of_month(all_days) %>%
+    recur_on_position(nth)
+    
+  on_nth_day_of_q4 <- yearly(since = since) %>%
+    recur_on_month_of_year(10:12) %>%
+    recur_on_day_of_month(all_days) %>%
+    recur_on_position(nth)
+  
+  on_nth_doq <- runion(
+    on_nth_day_of_q1,
+    on_nth_day_of_q2,
+    on_nth_day_of_q3,
+    on_nth_day_of_q4
+  )
+  
+  on_nth_doq
+}
+```
+
+Let’s give it a whirl.
+
+``` r
+
+on_60th_doq <- make_on_nth_doq(since = "2000-01-01", nth = 60)
+
+alma_search("2000-01-01", "2002-01-01", on_60th_doq)
+#> [1] "2000-02-29" "2000-05-30" "2000-08-29" "2000-11-29" "2001-03-01"
+#> [6] "2001-05-30" "2001-08-29" "2001-11-29"
+```
+
+It can also select days from the end of the quarter, for example, the
+last day in the quarter:
+
+``` r
+
+on_last_doq <- make_on_nth_doq(since = "2000-01-01", nth = -1)
+
+alma_search("2000-01-01", "2002-01-01", on_last_doq)
+#> [1] "2000-03-31" "2000-06-30" "2000-09-30" "2000-12-31" "2001-03-31"
+#> [6] "2001-06-30" "2001-09-30" "2001-12-31"
+```
+
+This general strategy of using a base rule of
+`yearly() %>% recur_on_month_of_year()`, plus some usage of
+[`recur_on_position()`](../reference/recur_on_position.md) is how I have
+solved most of the quarterly problems I can think of.
+
+## N-th week day of the quarter
+
+To showcase this strategy again, let’s figure out how to get the nth
+week day of the quarter. Again, start with Q1 first, this time computing
+the 6th Monday of Q1.
+
+``` r
+
+since <- "2000-01-01"
+day <- "Monday"
+nth <- 6
+
+on_6th_monday_of_q1 <- yearly(since = since) %>%
+  recur_on_month_of_year(1:3) %>%
+  recur_on_day_of_week(day) %>%
+  recur_on_position(nth)
+
+alma_search("2000-01-01", "2002-01-01", on_6th_monday_of_q1)
+#> [1] "2000-02-07" "2001-02-05"
+```
+
+Multiple week days can be used here.
+
+``` r
+
+since <- "2000-01-01"
+day <- c("Monday", "Tuesday")
+nth <- 19
+
+on_19th_monday_or_tuesday_of_q1 <- yearly(since = since) %>%
+  recur_on_month_of_year(1:3) %>%
+  recur_on_day_of_week(day) %>%
+  recur_on_position(nth)
+
+alma_search("2000-01-01", "2002-01-01", on_19th_monday_or_tuesday_of_q1)
+#> [1] "2000-03-06" "2001-03-05"
+```
+
+Now generalize:
+
+``` r
+
+make_on_nth_day_of_week_of_the_quarter <- function(since = "1970-01-01", 
+                                                   day = "Monday", 
+                                                   nth = 1L) {
+  on_nth_of_q1 <- yearly(since = since) %>%
+    recur_on_month_of_year(1:3) %>%
+    recur_on_day_of_week(day) %>%
+    recur_on_position(nth)
+  
+  on_nth_of_q2 <- yearly(since = since) %>%
+    recur_on_month_of_year(4:6) %>%
+    recur_on_day_of_week(day) %>%
+    recur_on_position(nth)
+  
+  on_nth_of_q3 <- yearly(since = since) %>%
+    recur_on_month_of_year(7:9) %>%
+    recur_on_day_of_week(day) %>%
+    recur_on_position(nth)
+    
+  on_nth_of_q4 <- yearly(since = since) %>%
+    recur_on_month_of_year(10:12) %>%
+    recur_on_day_of_week(day) %>%
+    recur_on_position(nth)
+  
+  on_nth_of_the_quarter <- runion(
+    on_nth_of_q1,
+    on_nth_of_q2,
+    on_nth_of_q3,
+    on_nth_of_q4
+  )
+  
+  on_nth_of_the_quarter
+}
+```
+
+``` r
+
+on_last_friday_of_the_quarter <- make_on_nth_day_of_week_of_the_quarter(
+  since = "2000-01-01", 
+  day = "Friday", 
+  nth = -1
+)
+
+fridays <- alma_search("2000-01-01", "2002-01-01", on_last_friday_of_the_quarter)
+fridays
+#> [1] "2000-03-31" "2000-06-30" "2000-09-29" "2000-12-29" "2001-03-30"
+#> [6] "2001-06-29" "2001-09-28" "2001-12-28"
+
+wday(fridays, label = TRUE)
+#> [1] Fri Fri Fri Fri Fri Fri Fri Fri
+#> Levels: Sun < Mon < Tue < Wed < Thu < Fri < Sat
+```
+
+## Combining with other rules
+
+Remember that each of these results are just rsets that can be combined
+with other rules if you need to create more complex quarterly
+strategies. For example, let’s take the “last Friday of the quarter”
+runion and combine it with a rule for “on every Wednesday”.
+
+``` r
+
+on_wednesdays <- weekly() %>%
+  recur_on_day_of_week("Wednesday")
+
+on_last_friday_of_quarter_or_wednesdays <- runion(
+  on_wednesdays,
+  on_last_friday_of_the_quarter
+)
+
+last_friday_or_wednesdays <- alma_search(
+  "2000-01-01", "2002-01-01", 
+  on_last_friday_of_quarter_or_wednesdays
+)
+
+last_friday_or_wednesdays[1:15]
+#>  [1] "2000-01-05" "2000-01-12" "2000-01-19" "2000-01-26" "2000-02-02"
+#>  [6] "2000-02-09" "2000-02-16" "2000-02-23" "2000-03-01" "2000-03-08"
+#> [11] "2000-03-15" "2000-03-22" "2000-03-29" "2000-03-31" "2000-04-05"
+
+wday(last_friday_or_wednesdays[1:15], label = TRUE)
+#>  [1] Wed Wed Wed Wed Wed Wed Wed Wed Wed Wed Wed Wed Wed Fri Wed
+#> Levels: Sun < Mon < Tue < Wed < Thu < Fri < Sat
+```
