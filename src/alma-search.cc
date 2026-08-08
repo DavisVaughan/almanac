@@ -24,7 +24,7 @@ sexp alma_search_impl(sexp events, double from, double to, bool inclusive) {
   sexp out = PROTECT(r_new_vector(REALSXP, out_size));
   double* p_out = r_dbl_deref(out);
 
-  std::copy(p_start, p_stop, p_out);
+  r_copy(p_start, p_stop, p_out);
 
   r_init_date(out);
 

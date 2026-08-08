@@ -1,5 +1,7 @@
 # almanac (development version)
 
+* Fixed a zero length vector issue with `std::copy()` (#107).
+
 * R >=4.0.0 is now required, in line with tidyverse standards.
 
 # almanac 1.0.0
