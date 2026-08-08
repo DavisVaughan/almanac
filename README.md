@@ -228,7 +228,7 @@ almanac has developed as a composite of ideas from multiple different
 libraries.
 
 First off, it directly embeds the *amazing* JavaScript library
-[rrule](https://github.com/jakubroztocil/rrule) for the core event set
+[rrule](https://github.com/jkbrzt/rrule) for the core event set
 calculations. To do this, it uses the equally awesome R package,
 [V8](https://github.com/jeroen/V8), from Jeroen Ooms.
 
