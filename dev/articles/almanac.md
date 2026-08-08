@@ -169,7 +169,7 @@ on_weekly <- weekly(since = since)
 # The first time is "slow"
 system.time(alma_search(since, "2000-01-01", on_weekly))
 #>    user  system elapsed 
-#>   0.079   0.000   0.045
+#>   0.104   0.001   0.062
 
 # Repeated access is fast
 system.time(alma_search(since, "2000-01-01", on_weekly))
