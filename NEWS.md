@@ -1,4 +1,4 @@
-# almanac (development version)
+# almanac 1.0.1
 
 * Fixed a zero length vector issue with `std::copy()` (#107).
 
