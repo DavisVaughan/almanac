@@ -2,10 +2,11 @@
 
 Quarterly rules are the “hardest” to create in almanac because the
 specification that it is built on top of, the [RFC-5545 iCalendar
-Spec](https://www.rfc-editor.org/rfc/rfc5545) does not include quarterly
-as a frequency. The rationale for this is that it can always be built
-from a combination of monthly or yearly rules, if a bit clunky. The goal
-of this vignette is just to show a few examples of quarterly rules.
+Spec](https://www.rfc-editor.org/info/rfc5545/) does not include
+quarterly as a frequency. The rationale for this is that it can always
+be built from a combination of monthly or yearly rules, if a bit clunky.
+The goal of this vignette is just to show a few examples of quarterly
+rules.
 
 ``` r
 

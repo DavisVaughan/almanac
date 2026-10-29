@@ -3,8 +3,8 @@
 The Internet Engineering Task Force (IETF) has released an *exhaustive*
 guide about how to design a calendar application. It is known as the
 [iCalendar specification guide,
-RFC-5545](https://www.rfc-editor.org/rfc/rfc5545). Recurrence rules are
-a small subsection of this, and the JavaScript library underlying
+RFC-5545](https://www.rfc-editor.org/info/rfc5545/). Recurrence rules
+are a small subsection of this, and the JavaScript library underlying
 almanac was built to comply with the specification guide. To show that
 almanac also complies with (pretty much all) of the guide as well, this
 vignette will go through the large list of examples that the guide
@@ -14,9 +14,9 @@ wide range of recurrence rules.
 
 The specific section of the iCalendar guide that mentions recurrence
 rules is
-[3.3.10](https://www.rfc-editor.org/rfc/rfc5545#section-3.3.10), and the
-section with all of the examples is
-[3.8.5.3](https://www.rfc-editor.org/rfc/rfc5545#section-3.8.5.3).
+[3.3.10](https://www.rfc-editor.org/info/rfc5545/#section-3.3.10), and
+the section with all of the examples is
+[3.8.5.3](https://www.rfc-editor.org/info/rfc5545/#section-3.8.5.3).
 
 For whatever reason, most examples use a start date of `1997-09-02`. To
 show the results, for terminating recurrence rules (those that have a

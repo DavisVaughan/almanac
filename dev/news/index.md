@@ -2,6 +2,10 @@
 
 ## almanac (development version)
 
+## almanac 1.0.1
+
+CRAN release: 2026-10-27
+
 - Fixed a zero length vector issue with `std::copy()`
   ([\#107](https://github.com/DavisVaughan/almanac/issues/107)).
 
